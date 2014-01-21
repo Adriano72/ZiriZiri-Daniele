@@ -1,4 +1,8 @@
-$.index.open();
+
+
+Alloy.createController("login").getView().open();
+
+//$.index.open();
 
 var timelineList = Alloy.Collections.timeline;
 //todolist.fetch();
