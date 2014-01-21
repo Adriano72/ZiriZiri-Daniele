@@ -1,0 +1,50 @@
+".container": {
+	backgroundColor:"white",
+	layout: "vertical",
+	exitOnClose: true
+},
+
+"Label": {
+	top: 10,
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE,
+	color: "#000"
+},
+
+"TableView": {
+	
+	separatorColor: '#000'
+},
+
+"TableViewRow": {
+	height: Ti.UI.SIZE,
+	className: 'eventRow',
+	hasChild: true
+},
+
+"#rowIcon": {
+	backgroundImage: "/images/todo-list.png",
+	left: 5,
+	top: 5,
+	width: 50,
+	height: 56
+},
+
+"#name": {
+	font: {
+		fontSize: "16dp",
+		fontWeight: "bold"
+	},
+	left: 70,
+	top: 5
+}
+
+"#category": {
+	font: {
+		fontSize: "14dp"
+	},
+	left: 5,
+	top: 63,
+	bottom: 10
+}
+ 

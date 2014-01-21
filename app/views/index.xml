@@ -1,0 +1,16 @@
+<Alloy>
+	
+	<Collection src = "timeline">
+	<Window class="container" title = "Timeline">
+		
+		<TableView id = "timelineTable" dataCollection = "timeline" >
+			<TableViewRow hasChild = "true" onClick = "mostraDettaglioEvento">
+				<Label id = "rowIcon"/>
+				<Label id = "name" text ="{name}"/>
+				<Label id = "category" text ="{category}"/>
+			</TableViewRow>
+		</TableView>
+		
+	</Window>
+	
+</Alloy>
