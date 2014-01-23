@@ -1,4 +1,21 @@
 function Controller() {
+    function do_login() {
+        var user_name = $.username.value || "none";
+        var user_password = $.password.value || "none";
+        Ti.API.info("Username: " + user_name);
+        Ti.API.info("Password: " + user_password);
+        var xhr = Ti.Network.createHTTPClient();
+        xhr.onload = function() {
+            var json = JSON.parse(this.responseText);
+            Ti.API.info("********** FRM XHR: " + JSON.stringify(json));
+            '"SUCCESS"' == JSON.stringify(json.type.code) ? $.login_win.close() : alert("Username o password errati");
+        };
+        xhr.onerror = function() {
+            Ti.API.error(this.status + " - " + this.statusText);
+        };
+        xhr.open("POST", "https://demo.ziriziri.com/cxf/session/session/login/" + user_name + "?_type=JSON");
+        xhr.send(user_password);
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "login";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -6,6 +23,7 @@ function Controller() {
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
+    var __defers = {};
     $.__views.login_win = Ti.UI.createWindow({
         id: "login_win",
         backgroundColor: "white",
@@ -43,9 +61,11 @@ function Controller() {
         height: "80"
     });
     $.__views.login_win.add($.__views.btn_login);
+    do_login ? $.__views.btn_login.addEventListener("click", do_login) : __defers["$.__views.btn_login!click!do_login"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};
+    __defers["$.__views.btn_login!click!do_login"] && $.__views.btn_login.addEventListener("click", do_login);
     _.extend($, exports);
 }
 

@@ -82,6 +82,7 @@ function Controller() {
         __alloyId8.off("fetch destroy change add remove reset", __alloyId9);
     };
     _.extend($, $.__views);
+    $.index.open();
     Alloy.createController("login").getView().open();
     var timelineList = Alloy.Collections.timeline;
     var net = require("net");
