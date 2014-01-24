@@ -1,51 +1,45 @@
 $.index.open();
 
-Alloy.createController("login").getView().open();
+var timelineWin = Alloy.createController("timeline_win").getView();
 
-
-
-var timelineList = Alloy.Collections.timeline;
-//todolist.fetch();
-
-var net = require('net');
-net.getData(function(timelineData) {
+function do_login(e) {
 	
-	//Ti.API.info(JSON.stringify(timelineData));
 	
-	_.each(timelineData.data, function(value, key){
-		
-		//Ti.API.info("VALUE: "+JSON.stringify(value));
-		//Ti.API.info("CATEGORY NAME: "+value.category.name);
-		var timeline = Alloy.createModel("timeline", value);
-		
-		var descrizioneCategoria = (_.isNull(value.category) || _.isUndefined(value.category.name))?"non definita":value.category.name;
-		var aspetti = (_.isNull(value.aspects) || _.isUndefined(value.aspects))?"no aspects":value.aspects;
-		Ti.API.info("aspects: "+descrizioneCategoria);
-		var timeline = Alloy.createModel('timeline', {name: value.name, category: "Categoria: "+descrizioneCategoria, aspects: aspetti});
-		
-		timelineList.add(timeline);
-		
-		
-	});
-	/*
-	for (var i=0; i<feedsWCCM.nodes.length; i++) {
-		var feed = Alloy.createModel("feed", feedsWCCM[i]);
-		feedlist.add(feed.node);
-	}
-	*/
-	//Ti.API.info(timelineList.toJSON());
-});
+	
+	var user_name = $.username.value || 'none';
+	var user_password = $.password.value || 'none';
+	
+	Ti.API.info("Username: "+ user_name);
+	
+	Ti.API.info("Password: "+ user_password);
 
-function mostraDettaglioEvento(e){
+	var xhr = Ti.Network.createHTTPClient();
+
+	xhr.onload = function() {
+		//Ti.API.info(this.responseText);
+		var json = JSON.parse(this.responseText);
+		Ti.API.info("********** FRM XHR: " + JSON.stringify(json));
+		
+		if (JSON.stringify(json.type.code) == "\"SUCCESS\"") {
+				timelineWin.open();
+				//$.index.open();
+				
+		} else {
+			alert("Username o password errati");
+		}
+		
 	
-	/*
-	var feedClicked = feedlist.at(e.index).attributes;
-	//Ti.API.info("EVENT "+feedClicked.body);
-	
-	var dettaglioTestoFeedController = Alloy.createController("dettaglioFeed", {titolo: feedClicked.title, body: feedClicked.body});
-	//dueDateController.setParent($);
-	//dueDateController.setPickerDefaultDate($.dateBtn.title);
-	var dettaglioTestoFeedWindow = dettaglioTestoFeedController.getView();
-	dettaglioTestoFeedWindow.open();
-	*/
-};
+	};
+
+	xhr.onerror = function() {
+		Ti.API.error(this.status + ' - ' + this.statusText);
+	};
+
+	//var cod_servizio = Ti.App.Properties.getString('acipoi_code');
+
+	xhr.open('POST', 'https://demo.ziriziri.com/cxf/session/session/login/' + user_name + '?_type=JSON');
+
+	xhr.send(user_password);
+
+}
+

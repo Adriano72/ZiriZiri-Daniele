@@ -7,7 +7,7 @@ exports.definition = {
 		},
 		adapter: {
 			type: "sql",
-			collection_name: "timeline"
+			collection_name: "events"
 		}
 	},
 	extendModel: function(Model) {
