@@ -39,6 +39,13 @@
 	top: 5
 }
 
+"#awesome": {
+	
+	font: {fontFamily: 'AppIcons', fontSize:'18dp' },
+	left: 70,
+	top: 30
+}
+
 "#category": {
 	font: {
 		fontSize: "14dp"

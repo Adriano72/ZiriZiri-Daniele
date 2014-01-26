@@ -38,16 +38,16 @@ function Controller() {
             });
             __alloyId4.add(__alloyId6);
             var __alloyId7 = Ti.UI.createLabel({
-                top: 30,
+                top: 20,
                 width: Ti.UI.SIZE,
                 height: Ti.UI.SIZE,
                 color: "#000",
                 font: {
                     fontFamily: "AppIcons",
-                    fontSize: "18dp"
+                    fontSize: "24dp"
                 },
                 left: 70,
-                text: "undefined" != typeof __alloyId2.__transform["awesome"] ? __alloyId2.__transform["awesome"] : __alloyId2.get("awesome")
+                text: "icons.camera"
             });
             __alloyId4.add(__alloyId7);
             var __alloyId8 = Ti.UI.createLabel({
@@ -99,40 +99,14 @@ function Controller() {
     var timelineList = Alloy.Collections.events;
     var net = require("net");
     net.getData(function(timelineData) {
-        _.forEach(timelineData.data, function(value) {
+        _.each(timelineData.data, function(value) {
             var timeline = Alloy.createModel("events", value);
             var descrizioneCategoria = _.isNull(value.category) || _.isUndefined(value.category.name) ? "non definita" : value.category.name;
-            var aspectObj = {
-                finance: 0,
-                documents: 0,
-                links: 0,
-                notes: 0
-            };
-            _.isNull(value.aspects) || _.isUndefined(value.aspects) || _.forEach(value.aspects, function(obj) {
-                switch (obj.kind.code) {
-                  case "CASHFLOWDATATYPE_CODE":
-                    aspectObj.finance += 1;
-                    break;
-
-                  case "DOCUMENTDATATYPE_CODE":
-                    aspectObj.documents += 1;
-                    break;
-
-                  case "NOTEDATATYPE_CODE":
-                    aspectObj.notes += 1;
-                    break;
-
-                  case "LINKDATATYPE_CODE":
-                    aspectObj.links += 1;
-                }
-            });
-            Ti.API.info("FINANZA: " + aspectObj.finance + " DOCUMENTI: " + aspectObj.documents + " LINKS: " + aspectObj.links + " NOTE: " + aspectObj.notes);
             var aspetti = _.isNull(value.aspects) || _.isUndefined(value.aspects) ? "no aspects" : value.aspects;
-            Ti.API.info("CATEGORIA: " + descrizioneCategoria);
+            Ti.API.info("aspects: " + descrizioneCategoria);
             var timeline = Alloy.createModel("events", {
                 name: value.name,
                 category: "Categoria: " + descrizioneCategoria,
-                awesome: icons.bar_chart_alt + " " + aspectObj.finance + " " + icons.file_text_alt + " " + aspectObj.documents + " " + icons.link + " " + aspectObj.links + " " + icons.edit_sign + " " + aspectObj.notes,
                 aspects: aspetti
             });
             timelineList.add(timeline);

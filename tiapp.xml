@@ -37,16 +37,16 @@
                 <string>UIStatusBarStyleDefault</string>
             </dict>
         </plist>
-    </ios>   
+    </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-    <tool-api-level>16</tool-api-level>
-    <manifest android:installLocation="preferExternal"
-        android:versionCode="3" android:versionName="1.0.2">
-        <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="16"/>
-        <application android:theme="@android:style/Theme.Holo.Light"/>            
-        <supports-screens android:anyDensity="false"/>
-    </manifest>
-</android>
+        <tool-api-level>16</tool-api-level>
+        <manifest android:installLocation="preferExternal"
+            android:versionCode="3" android:versionName="1.0.2">
+            <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="16"/>
+            <application android:theme="@android:style/Theme.Holo.Light"/>
+            <supports-screens android:anyDensity="false"/>
+        </manifest>
+    </android>
     <mobileweb>
         <precache/>
         <splash>

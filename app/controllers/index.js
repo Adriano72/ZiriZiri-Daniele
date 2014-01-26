@@ -1,6 +1,11 @@
-$.index.open();
-
 var timelineWin = Alloy.createController("timeline_win").getView();
+
+if (Ti.App.Properties.getBool('authenticated',false)){
+	timelineWin.open();
+}else {
+	$.index.open();
+	
+};
 
 function do_login(e) {
 	
@@ -21,6 +26,10 @@ function do_login(e) {
 		Ti.API.info("********** FRM XHR: " + JSON.stringify(json));
 		
 		if (JSON.stringify(json.type.code) == "\"SUCCESS\"") {
+			
+				Ti.App.Properties.setBool('authenticated', true);
+				Ti.App.Properties.setInt('sessionId', json.data.sessionId);
+				//alert(Ti.App.Properties.getInt('sessionId', 0));
 				timelineWin.open();
 				//$.index.open();
 				

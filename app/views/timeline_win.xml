@@ -7,6 +7,7 @@
 			<TableViewRow hasChild = "true" onClick = "mostraDettaglioEvento">
 				<Label id = "rowIcon"/>
 				<Label id = "name" text ="{name}"/>
+				<Label id = "awesome" text="{awesome}"/>
 				<Label id = "category" text ="{category}"/>
 			</TableViewRow>
 		</TableView>

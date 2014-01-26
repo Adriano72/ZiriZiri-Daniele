@@ -8,7 +8,11 @@ function Controller() {
         xhr.onload = function() {
             var json = JSON.parse(this.responseText);
             Ti.API.info("********** FRM XHR: " + JSON.stringify(json));
-            '"SUCCESS"' == JSON.stringify(json.type.code) ? timelineWin.open() : alert("Username o password errati");
+            if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
+                Ti.App.Properties.setBool("authenticated", true);
+                Ti.App.Properties.setInt("sessionId", json.data.sessionId);
+                timelineWin.open();
+            } else alert("Username o password errati");
         };
         xhr.onerror = function() {
             Ti.API.error(this.status + " - " + this.statusText);
@@ -31,41 +35,48 @@ function Controller() {
     });
     $.__views.index && $.addTopLevelView($.__views.index);
     $.__views.username = Ti.UI.createTextField({
-        id: "username",
-        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderColor: "#000000",
         textAlign: "",
         color: "#336699",
-        top: "10",
-        width: "250",
+        top: 10,
+        width: 250,
         height: Ti.UI.SIZE,
-        hintText: "User name"
+        backgroundColor: "#C8DDE8",
+        hintText: "User name",
+        borderRadius: 5,
+        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        id: "username"
     });
     $.__views.index.add($.__views.username);
     $.__views.password = Ti.UI.createTextField({
-        id: "password",
-        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderColor: "#000000",
+        textAlign: "",
         color: "#336699",
-        top: "10",
-        width: "250",
+        top: 10,
+        width: 250,
         height: Ti.UI.SIZE,
+        backgroundColor: "#C8DDE8",
         hintText: "Password",
-        passwordMask: "true"
+        passwordMask: true,
+        borderRadius: 5,
+        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        id: "password"
     });
     $.__views.index.add($.__views.password);
     $.__views.btn_login = Ti.UI.createButton({
-        id: "btn_login",
         title: "Login",
-        top: "20",
+        top: 20,
         width: Ti.UI.SIZE,
-        height: "80"
+        borderRadius: 5,
+        height: 80,
+        id: "btn_login"
     });
     $.__views.index.add($.__views.btn_login);
     do_login ? $.__views.btn_login.addEventListener("click", do_login) : __defers["$.__views.btn_login!click!do_login"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    $.index.open();
     var timelineWin = Alloy.createController("timeline_win").getView();
+    Ti.App.Properties.getBool("authenticated", false) ? timelineWin.open() : $.index.open();
     __defers["$.__views.btn_login!click!do_login"] && $.__views.btn_login.addEventListener("click", do_login);
     _.extend($, exports);
 }
