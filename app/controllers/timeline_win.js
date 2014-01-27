@@ -65,10 +65,10 @@ net.getData(function(timelineData) {
 		Ti.API.info("CATEGORIA: " + descrizioneCategoria);
 
 		var timeline = Alloy.createModel('events', {
+			id: value.id,
 			name : value.name,
 			category : "Categoria: " + descrizioneCategoria,
-			awesome : icons.bar_chart_alt+" "+aspectObj.finance+" "+icons.file_text_alt+" "+aspectObj.documents+" "+icons.link+" "+aspectObj.links+" "+icons.edit_sign+" "+aspectObj.notes,
-			aspects : aspetti
+			aspects : icons.bar_chart_alt+" "+aspectObj.finance+" "+icons.file_text_alt+" "+aspectObj.documents+" "+icons.link+" "+aspectObj.links+" "+icons.edit_sign+" "+aspectObj.notes
 		});
 
 		timelineList.add(timeline);
@@ -84,6 +84,10 @@ net.getData(function(timelineData) {
 });
 
 function mostraDettaglioEvento(e) {
+	
+	var selEvent = timelineList.at(e.index).attributes;
+	
+	Ti.API.info("SELECTED DATA ID: "+selEvent.id);
 
 	/*
 	 var feedClicked = feedlist.at(e.index).attributes;

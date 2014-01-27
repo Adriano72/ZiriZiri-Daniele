@@ -1,6 +1,7 @@
 exports.getData = function(_callback) {
     var xhr = Ti.Network.createHTTPClient();
     var session = Ti.App.Properties.getInt("sessionId", 0);
+    Ti.API.info("SESSION ID: " + session);
     xhr.onload = function() {
         _callback(JSON.parse(xhr.responseText));
     };

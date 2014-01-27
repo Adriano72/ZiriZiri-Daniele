@@ -23,6 +23,7 @@
 },
 
 "#rowIcon": {
+	touchEnabled: false,
 	backgroundImage: "/images/todo-list.png",
 	left: 5,
 	top: 5,
@@ -31,6 +32,7 @@
 },
 
 "#name": {
+	touchEnabled: false,
 	font: {
 		fontSize: "16dp",
 		fontWeight: "bold"
@@ -39,14 +41,15 @@
 	top: 5
 }
 
-"#awesome": {
-	
+"#aspects": {
+	touchEnabled: false,
 	font: {fontFamily: 'AppIcons', fontSize:'18dp' },
 	left: 70,
 	top: 30
 }
 
 "#category": {
+	touchEnabled: false,
 	font: {
 		fontSize: "14dp"
 	},

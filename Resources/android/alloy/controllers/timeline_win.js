@@ -20,6 +20,7 @@ function Controller() {
                 width: 50,
                 height: 56,
                 color: "#000",
+                touchEnabled: false,
                 backgroundImage: "/images/todo-list.png",
                 left: 5
             });
@@ -29,6 +30,7 @@ function Controller() {
                 width: Ti.UI.SIZE,
                 height: Ti.UI.SIZE,
                 color: "#000",
+                touchEnabled: false,
                 font: {
                     fontSize: "16dp",
                     fontWeight: "bold"
@@ -42,12 +44,13 @@ function Controller() {
                 width: Ti.UI.SIZE,
                 height: Ti.UI.SIZE,
                 color: "#000",
+                touchEnabled: false,
                 font: {
                     fontFamily: "AppIcons",
                     fontSize: "18dp"
                 },
                 left: 70,
-                text: "undefined" != typeof __alloyId2.__transform["awesome"] ? __alloyId2.__transform["awesome"] : __alloyId2.get("awesome")
+                text: "undefined" != typeof __alloyId2.__transform["aspects"] ? __alloyId2.__transform["aspects"] : __alloyId2.get("aspects")
             });
             __alloyId4.add(__alloyId7);
             var __alloyId8 = Ti.UI.createLabel({
@@ -55,6 +58,7 @@ function Controller() {
                 width: Ti.UI.SIZE,
                 height: Ti.UI.SIZE,
                 color: "#000",
+                touchEnabled: false,
                 font: {
                     fontSize: "14dp"
                 },
@@ -66,7 +70,10 @@ function Controller() {
         }
         $.__views.timelineTable.setData(rows);
     }
-    function mostraDettaglioEvento() {}
+    function mostraDettaglioEvento(e) {
+        var selEvent = timelineList.at(e.index).attributes;
+        Ti.API.info("SELECTED DATA ID: " + selEvent.id);
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "timeline_win";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -127,13 +134,13 @@ function Controller() {
                 }
             });
             Ti.API.info("FINANZA: " + aspectObj.finance + " DOCUMENTI: " + aspectObj.documents + " LINKS: " + aspectObj.links + " NOTE: " + aspectObj.notes);
-            var aspetti = _.isNull(value.aspects) || _.isUndefined(value.aspects) ? "no aspects" : value.aspects;
+            _.isNull(value.aspects) || _.isUndefined(value.aspects) ? "no aspects" : value.aspects;
             Ti.API.info("CATEGORIA: " + descrizioneCategoria);
             var timeline = Alloy.createModel("events", {
+                id: value.id,
                 name: value.name,
                 category: "Categoria: " + descrizioneCategoria,
-                awesome: icons.bar_chart_alt + " " + aspectObj.finance + " " + icons.file_text_alt + " " + aspectObj.documents + " " + icons.link + " " + aspectObj.links + " " + icons.edit_sign + " " + aspectObj.notes,
-                aspects: aspetti
+                aspects: icons.bar_chart_alt + " " + aspectObj.finance + " " + icons.file_text_alt + " " + aspectObj.documents + " " + icons.link + " " + aspectObj.links + " " + icons.edit_sign + " " + aspectObj.notes
             });
             timelineList.add(timeline);
         });
