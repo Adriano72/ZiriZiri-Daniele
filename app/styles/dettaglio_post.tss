@@ -1,0 +1,74 @@
+
+".container" : {
+  	backgroundColor: '#d8d8d8',
+	layout: "vertical",
+}
+
+"#detailHeader": {
+	layout: 'horizontal',
+	top: 5,
+	width: Ti.UI.FILL
+}
+
+"#aspectsTable":{
+	top: 5
+}
+
+"#dateBox":{
+	
+	width: 50,
+	height: 60,
+	left: 5,
+	top: 5,
+	backgroundColor: 'red',
+	borderRadius: Alloy.Globals.borderRad,
+	layout: 'vertical'
+}
+
+"#dayBox": {
+	
+	width: 50,
+	height: 40,
+	top: 0,
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+	font: {fontFamily: 'AppIcons', fontSize:18, fontWeight: "bold"},
+	
+}
+
+"#monthBox": {
+	
+	width: 50,
+	height: 20,
+	top: 0,
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+	font: {fontFamily: 'AppIcons', fontSize:14},
+	backgroundColor: 'white'
+	
+}
+
+"#headerBox":{
+	
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	left: 5,
+	top: 5
+}
+
+"#name": {
+	font: {
+		fontFamily: 'AppIcons',
+		fontSize: "18dp",
+		fontWeight: "bold"
+	},
+	height: Ti.UI.SIZE,
+
+	left: 5,
+	top: 5
+}
+
+"#tableContainer": {
+    height: Ti.UI.FILL,
+    backgroundColor: 'yellow',
+    width: Ti.UI.FILL,
+   	top: 20
+}

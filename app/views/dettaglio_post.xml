@@ -1,0 +1,19 @@
+<Alloy>
+	<Window class="container" title = "Dettaglio Post">
+		
+		<View id="detailHeader">
+			<View id="dateBox">
+				<Label id="dayBox"/>
+				<Label id="monthBox"/>
+			</View>
+			<View id="headerBox">
+				<Label id = "name"/>
+				<!--<Label id = "category"/>-->
+			</View>
+		</View>
+		<View id="tableContainer">
+			<TableView id="aspectsTable"/>	
+		</View>	
+		
+	</Window>
+</Alloy>

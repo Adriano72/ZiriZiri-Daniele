@@ -1,0 +1,9 @@
+<Alloy>
+	<TableViewRow id="row">
+		<Label id="description"/>
+		<Label id="importo"/>
+		<Label id="dataOperazione"/>
+		<Label id="dataValuta"/>
+		<Label id="codTipoMovimento"/>
+	</TableViewRow>
+</Alloy>

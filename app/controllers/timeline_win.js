@@ -6,6 +6,8 @@ var timelineList = Alloy.Collections.events;
 //todolist.fetch();
 
 var net = require('net');
+//var extentedDate = require('extendedDate');
+//var encoder = require('encoder');
 
 net.getData(function(timelineData) {
 
@@ -18,6 +20,8 @@ net.getData(function(timelineData) {
 		var timeline = Alloy.createModel("events", value);
 
 		var descrizioneCategoria = (_.isNull(value.category) || _.isUndefined(value.category.name)) ? "non definita" : value.category.name;
+		
+		var creationDate = new Date(value.creationTime);
 
 		var aspectObj = {
 
@@ -58,16 +62,20 @@ net.getData(function(timelineData) {
 
 		}
 		
-		Ti.API.info("FINANZA: "+aspectObj.finance+" DOCUMENTI: "+aspectObj.documents+ " LINKS: "+aspectObj.links+" NOTE: "+aspectObj.notes);
+		//Ti.API.info("FINANZA: "+aspectObj.finance+" DOCUMENTI: "+aspectObj.documents+ " LINKS: "+aspectObj.links+" NOTE: "+aspectObj.notes);
 		
 		var aspetti = (_.isNull(value.aspects) || _.isUndefined(value.aspects)) ? "no aspects" : value.aspects;
 
-		Ti.API.info("CATEGORIA: " + descrizioneCategoria);
+		//Ti.API.info("CATEGORIA: " + descrizioneCategoria);
 
 		var timeline = Alloy.createModel('events', {
 			id: value.id,
 			name : value.name,
+			date: creationDate.getCMonth(),
+			day: creationDate.getDate(),
+			month: creationDate.getCMonth().toUpperCase(),
 			category : "Categoria: " + descrizioneCategoria,
+
 			aspects : icons.bar_chart_alt+" "+aspectObj.finance+" "+icons.file_text_alt+" "+aspectObj.documents+" "+icons.link+" "+aspectObj.links+" "+icons.edit_sign+" "+aspectObj.notes
 		});
 
@@ -87,7 +95,13 @@ function mostraDettaglioEvento(e) {
 	
 	var selEvent = timelineList.at(e.index).attributes;
 	
-	Ti.API.info("SELECTED DATA ID: "+selEvent.id);
+	net.getPost(selEvent.id, function(postData) {
+		Alloy.createController("dettaglio_post", postData).getView().open();
+	});
+	
+	//Ti.API.info("SELECTED DATA ID: "+selEvent.id);
+	
+	
 
 	/*
 	 var feedClicked = feedlist.at(e.index).attributes;

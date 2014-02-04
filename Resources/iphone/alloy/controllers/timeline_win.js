@@ -1,31 +1,72 @@
 function Controller() {
-    function __alloyId10(e) {
+    function __alloyId16(e) {
         if (e && e.fromAdapter) return;
-        __alloyId10.opts || {};
-        var models = __alloyId9.models;
+        __alloyId16.opts || {};
+        var models = __alloyId15.models;
         var len = models.length;
         var rows = [];
         for (var i = 0; len > i; i++) {
-            var __alloyId2 = models[i];
-            __alloyId2.__transform = {};
-            var __alloyId4 = Ti.UI.createTableViewRow({
-                height: Ti.UI.SIZE,
-                className: "eventRow",
-                hasChild: "true"
+            var __alloyId4 = models[i];
+            __alloyId4.__transform = {};
+            var __alloyId6 = Ti.UI.createTableViewRow({
+                className: "itemRow"
             });
-            rows.push(__alloyId4);
-            mostraDettaglioEvento ? __alloyId4.addEventListener("click", mostraDettaglioEvento) : __defers["__alloyId4!click!mostraDettaglioEvento"] = true;
-            var __alloyId5 = Ti.UI.createLabel({
-                top: 5,
+            rows.push(__alloyId6);
+            mostraDettaglioEvento ? __alloyId6.addEventListener("click", mostraDettaglioEvento) : __defers["__alloyId6!click!mostraDettaglioEvento"] = true;
+            var __alloyId7 = Ti.UI.createView({
+                height: 90,
+                backgroundColor: "orange",
+                layout: "horizontal"
+            });
+            __alloyId6.add(__alloyId7);
+            var __alloyId8 = Ti.UI.createView({
                 width: 50,
-                height: 56,
-                color: "#000",
-                touchEnabled: false,
-                backgroundImage: "/images/todo-list.png",
-                left: 5
+                height: 60,
+                left: 5,
+                top: 5,
+                backgroundColor: "red",
+                borderRadius: Alloy.Globals.borderRad,
+                layout: "vertical"
             });
-            __alloyId4.add(__alloyId5);
-            var __alloyId6 = Ti.UI.createLabel({
+            __alloyId7.add(__alloyId8);
+            var __alloyId9 = Ti.UI.createLabel({
+                top: 0,
+                width: 50,
+                height: 40,
+                color: "#000",
+                textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+                font: {
+                    fontFamily: "AppIcons",
+                    fontSize: 18,
+                    fontWeight: "bold"
+                },
+                text: "undefined" != typeof __alloyId4.__transform["day"] ? __alloyId4.__transform["day"] : __alloyId4.get("day")
+            });
+            __alloyId8.add(__alloyId9);
+            var __alloyId10 = Ti.UI.createLabel({
+                top: 0,
+                width: 50,
+                height: 20,
+                color: "#000",
+                textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+                font: {
+                    fontFamily: "AppIcons",
+                    fontSize: 14
+                },
+                backgroundColor: "white",
+                text: "undefined" != typeof __alloyId4.__transform["month"] ? __alloyId4.__transform["month"] : __alloyId4.get("month")
+            });
+            __alloyId8.add(__alloyId10);
+            var __alloyId11 = Ti.UI.createView({
+                width: Ti.UI.FILL,
+                height: Ti.UI.SIZE,
+                left: 5,
+                top: 5,
+                layout: "vertical",
+                backgroundColor: "lime"
+            });
+            __alloyId7.add(__alloyId11);
+            var __alloyId12 = Ti.UI.createLabel({
                 top: 5,
                 width: Ti.UI.SIZE,
                 height: Ti.UI.SIZE,
@@ -35,12 +76,13 @@ function Controller() {
                     fontSize: "16dp",
                     fontWeight: "bold"
                 },
-                left: 70,
-                text: "undefined" != typeof __alloyId2.__transform["name"] ? __alloyId2.__transform["name"] : __alloyId2.get("name")
+                backgroundColor: "yellow",
+                left: 5,
+                text: "undefined" != typeof __alloyId4.__transform["name"] ? __alloyId4.__transform["name"] : __alloyId4.get("name")
             });
-            __alloyId4.add(__alloyId6);
-            var __alloyId7 = Ti.UI.createLabel({
-                top: 30,
+            __alloyId11.add(__alloyId12);
+            var __alloyId13 = Ti.UI.createLabel({
+                top: 5,
                 width: Ti.UI.SIZE,
                 height: Ti.UI.SIZE,
                 color: "#000",
@@ -49,12 +91,13 @@ function Controller() {
                     fontFamily: "AppIcons",
                     fontSize: "18dp"
                 },
-                left: 70,
-                text: "undefined" != typeof __alloyId2.__transform["aspects"] ? __alloyId2.__transform["aspects"] : __alloyId2.get("aspects")
+                left: 5,
+                backgroundColor: "pink",
+                text: "undefined" != typeof __alloyId4.__transform["aspects"] ? __alloyId4.__transform["aspects"] : __alloyId4.get("aspects")
             });
-            __alloyId4.add(__alloyId7);
-            var __alloyId8 = Ti.UI.createLabel({
-                top: 63,
+            __alloyId11.add(__alloyId13);
+            var __alloyId14 = Ti.UI.createLabel({
+                top: 5,
                 width: Ti.UI.SIZE,
                 height: Ti.UI.SIZE,
                 color: "#000",
@@ -63,16 +106,16 @@ function Controller() {
                     fontSize: "14dp"
                 },
                 left: 5,
-                bottom: 10,
-                text: "undefined" != typeof __alloyId2.__transform["category"] ? __alloyId2.__transform["category"] : __alloyId2.get("category")
+                backgroundColor: "blue",
+                text: "undefined" != typeof __alloyId4.__transform["category"] ? __alloyId4.__transform["category"] : __alloyId4.get("category")
             });
-            __alloyId4.add(__alloyId8);
+            __alloyId11.add(__alloyId14);
         }
         $.__views.timelineTable.setData(rows);
     }
     function mostraDettaglioEvento(e) {
         var selEvent = timelineList.at(e.index).attributes;
-        Ti.API.info("SELECTED DATA ATTRIBUTES: " + selEvent.name);
+        Ti.API.info("SELECTED DATA ID: " + selEvent.id);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "timeline_win";
@@ -84,7 +127,7 @@ function Controller() {
     var __defers = {};
     Alloy.Collections.instance("events");
     $.__views.timeline_win = Ti.UI.createWindow({
-        backgroundColor: "white",
+        backgroundColor: "#d8d8d8",
         layout: "vertical",
         exitOnClose: true,
         title: "Timeline",
@@ -96,19 +139,21 @@ function Controller() {
         id: "timelineTable"
     });
     $.__views.timeline_win.add($.__views.timelineTable);
-    var __alloyId9 = Alloy.Collections["events"] || events;
-    __alloyId9.on("fetch destroy change add remove reset", __alloyId10);
+    var __alloyId15 = Alloy.Collections["events"] || events;
+    __alloyId15.on("fetch destroy change add remove reset", __alloyId16);
     exports.destroy = function() {
-        __alloyId9.off("fetch destroy change add remove reset", __alloyId10);
+        __alloyId15.off("fetch destroy change add remove reset", __alloyId16);
     };
     _.extend($, $.__views);
     arguments[0] || {};
     var timelineList = Alloy.Collections.events;
     var net = require("net");
+    require("extendedDate");
     net.getData(function(timelineData) {
         _.forEach(timelineData.data, function(value) {
             var timeline = Alloy.createModel("events", value);
             var descrizioneCategoria = _.isNull(value.category) || _.isUndefined(value.category.name) ? "non definita" : value.category.name;
+            var creationDate = new Date(value.creationTime);
             var aspectObj = {
                 finance: 0,
                 documents: 0,
@@ -137,14 +182,18 @@ function Controller() {
             _.isNull(value.aspects) || _.isUndefined(value.aspects) ? "no aspects" : value.aspects;
             Ti.API.info("CATEGORIA: " + descrizioneCategoria);
             var timeline = Alloy.createModel("events", {
+                id: value.id,
                 name: value.name,
+                date: creationDate.getCMonth(),
+                day: creationDate.getDate(),
+                month: creationDate.getCMonth().toUpperCase(),
                 category: "Categoria: " + descrizioneCategoria,
                 aspects: icons.bar_chart_alt + " " + aspectObj.finance + " " + icons.file_text_alt + " " + aspectObj.documents + " " + icons.link + " " + aspectObj.links + " " + icons.edit_sign + " " + aspectObj.notes
             });
             timelineList.add(timeline);
         });
     });
-    __defers["__alloyId4!click!mostraDettaglioEvento"] && __alloyId4.addEventListener("click", mostraDettaglioEvento);
+    __defers["__alloyId6!click!mostraDettaglioEvento"] && __alloyId6.addEventListener("click", mostraDettaglioEvento);
     _.extend($, exports);
 }
 

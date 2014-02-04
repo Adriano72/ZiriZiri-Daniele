@@ -3,6 +3,9 @@ exports.definition = {
         columns: {
             id: "int",
             name: "string",
+            date: "string",
+            month: "string",
+            day: "string",
             category: "string",
             aspects: "string"
         },

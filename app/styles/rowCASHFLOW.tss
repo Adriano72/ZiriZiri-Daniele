@@ -1,0 +1,66 @@
+"#row": {
+	
+	height: 100,
+	width: Ti.UI.FILL,
+	backgroundColor: 'white',
+    className: 'itemRow',
+    layout: 'vertical'
+} 
+
+
+
+"#description": {
+    height: 70,
+    font: {
+    	fontFamily: 'AppIcons',
+    	fontWeight: 'bold',
+        fontSize: 16
+    },
+    left: 5,
+    top: 5,
+    width: Ti.UI.FILL
+}
+
+"#importo": {
+    height: 70,
+    font: {
+    	fontFamily: 'AppIcons',
+        fontSize: 16
+    },
+    left: 5,
+    top: 5,
+   	width: Ti.UI.FILL
+}
+
+"#dataOperazione": {
+    height: 70,
+    font: {
+    	fontFamily: 'AppIcons',
+        fontSize: 16
+    },
+    left: 5,
+    top: 5,
+   	width: Ti.UI.FILL
+}
+
+"#dataValuta": {
+    height: '70dp',
+    font: {
+    	fontFamily: 'AppIcons',
+        fontSize: 16
+    },
+    left: 5,
+    top: 5,
+   	width: Ti.UI.FILL
+}
+
+"#codTipoMovimento": {
+    height: '70dp',
+    font: {
+    	fontFamily: 'AppIcons',
+        fontSize: 16
+    },
+    left: 5,
+    top: 5,
+   	width: Ti.UI.FILL
+}

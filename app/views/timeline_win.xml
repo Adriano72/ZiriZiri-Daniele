@@ -4,11 +4,19 @@
 	<Window class="container" title = "Timeline">
 		
 		<TableView id = "timelineTable" dataCollection = "events" >
-			<TableViewRow hasChild = "true" onClick = "mostraDettaglioEvento">
-				<Label id = "rowIcon"/>
-				<Label id = "name" text ="{name}"/>
-				<Label id = "aspects" text="{aspects}"/>
-				<Label id = "category" text ="{category}"/>
+			<TableViewRow onClick = "mostraDettaglioEvento">
+				<!--<Label id = "rowIcon"/>-->
+				<View id="eventContainer">
+					<View id="dateBox">
+						<Label id="dayBox" text="{day}"/>
+						<Label id="monthBox" text="{month}"/>
+					</View>
+					<View id="headerBox">
+						<Label id = "name" text ="{name}"/>
+						<Label id = "aspects" text="{aspects}"/>
+						<Label id = "category" text ="{category}"/>
+					</View>
+				</View>
 			</TableViewRow>
 		</TableView>
 		
