@@ -12,7 +12,8 @@ function Controller() {
         backgroundColor: "white",
         className: "itemRow",
         layout: "vertical",
-        id: "row"
+        id: "row",
+        title: "Ciao"
     });
     $.__views.row && $.addTopLevelView($.__views.row);
     $.__views.description = Ti.UI.createLabel({
@@ -78,7 +79,8 @@ function Controller() {
     $.__views.row.add($.__views.codTipoMovimento);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    arguments[0] || {};
+    var args = arguments[0] || {};
+    Ti.API.info("VALORE PASSATO: " + args.description);
     $.description.text = "CAZZO";
     $.importo.text = "CAZZO";
     $.dataOperazione.text = "CAZZO";
