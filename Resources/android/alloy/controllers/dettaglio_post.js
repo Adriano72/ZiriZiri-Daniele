@@ -13,70 +13,6 @@ function Controller() {
         id: "dettaglio_post"
     });
     $.__views.dettaglio_post && $.addTopLevelView($.__views.dettaglio_post);
-    $.__views.detailHeader = Ti.UI.createView({
-        layout: "horizontal",
-        top: 5,
-        width: Ti.UI.FILL,
-        id: "detailHeader"
-    });
-    $.__views.dettaglio_post.add($.__views.detailHeader);
-    $.__views.dateBox = Ti.UI.createView({
-        width: 50,
-        height: 60,
-        left: 5,
-        top: 5,
-        backgroundColor: "red",
-        borderRadius: Alloy.Globals.borderRad,
-        layout: "vertical",
-        id: "dateBox"
-    });
-    $.__views.detailHeader.add($.__views.dateBox);
-    $.__views.dayBox = Ti.UI.createLabel({
-        width: 50,
-        height: 40,
-        top: 0,
-        textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
-        font: {
-            fontFamily: "AppIcons",
-            fontSize: 18,
-            fontWeight: "bold"
-        },
-        id: "dayBox"
-    });
-    $.__views.dateBox.add($.__views.dayBox);
-    $.__views.monthBox = Ti.UI.createLabel({
-        width: 50,
-        height: 20,
-        top: 0,
-        textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
-        font: {
-            fontFamily: "AppIcons",
-            fontSize: 14
-        },
-        backgroundColor: "white",
-        id: "monthBox"
-    });
-    $.__views.dateBox.add($.__views.monthBox);
-    $.__views.headerBox = Ti.UI.createView({
-        width: Ti.UI.FILL,
-        height: Ti.UI.SIZE,
-        left: 5,
-        top: 5,
-        id: "headerBox"
-    });
-    $.__views.detailHeader.add($.__views.headerBox);
-    $.__views.name = Ti.UI.createLabel({
-        font: {
-            fontFamily: "AppIcons",
-            fontSize: "18dp",
-            fontWeight: "bold"
-        },
-        height: Ti.UI.SIZE,
-        left: 5,
-        top: 5,
-        id: "name"
-    });
-    $.__views.headerBox.add($.__views.name);
     $.__views.tableContainer = Ti.UI.createView({
         height: Ti.UI.FILL,
         backgroundColor: "yellow",
@@ -94,10 +30,7 @@ function Controller() {
     _.extend($, $.__views);
     var args = arguments[0] || {};
     Ti.API.info("ARGS: " + args.data.id);
-    var creationDate = new Date(args.data.creationTime);
-    $.dayBox.text = creationDate.getDate();
-    $.monthBox.text = creationDate.getCMonth();
-    $.name.text = args.data.name;
+    new Date(args.data.creationTime);
     var rows = [];
     _.forEach(args.data.aspects, function(value) {
         Ti.API.info("ASPECT DATA: " + value.name);

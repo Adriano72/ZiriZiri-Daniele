@@ -78,7 +78,8 @@ function Controller() {
     $.__views.row.add($.__views.codTipoMovimento);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    arguments[0] || {};
+    var args = arguments[0] || {};
+    Ti.API.info("VALORE PASSATO: " + args.description);
     $.description.text = "CAZZO";
     $.importo.text = "CAZZO";
     $.dataOperazione.text = "CAZZO";

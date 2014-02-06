@@ -4,9 +4,11 @@ Ti.API.info("ARGS: " + args.data.id);
 
 var creationDate = new Date(args.data.creationTime);
 
+/*
 $.dayBox.text = creationDate.getDate();
 $.monthBox.text = creationDate.getCMonth();
 $.name.text = args.data.name;
+*/
 
 var rows = [];
 
