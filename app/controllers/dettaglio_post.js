@@ -15,23 +15,25 @@ var rows = [];
 _.forEach(args.data.aspects, function(value) {
 
 	Ti.API.info("ASPECT DATA: " + value.name);
-
+	
 	
 	switch (value.kind.code) {
 
 		case "CASHFLOWDATATYPE_CODE":
 
+			Ti.API.info("CASE SWITCHED");
 			
-			rows.push(Alloy.createController('rowCASHFLOW', {
+			var riga = Alloy.createController('rowCASHFLOW', {
 				
-				description : value.name,
+				description : value.description,
 				importo : value.importo,
 				dataOperazione : value.dataOperazione,
 				dataValuta : value.dataValuta,
 				title: "Ciao",
 				codTipoMovimento : value.data.tipoMovimento.codice
 				
-			}).getView()); 
+			}).getView();
+			rows.push(riga); 
 
 			break;
 
@@ -58,4 +60,4 @@ _.forEach(args.data.aspects, function(value) {
 });
 
 $.aspectsTable.setData(rows);
-Ti.API.info("ROWS NUM: "+$.aspectsTable.data.length);
+Ti.API.info("ROWS NUM: "+JSON.stringify($.aspectsTable.data));

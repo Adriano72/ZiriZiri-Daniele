@@ -36,14 +36,16 @@ function Controller() {
         Ti.API.info("ASPECT DATA: " + value.name);
         switch (value.kind.code) {
           case "CASHFLOWDATATYPE_CODE":
-            rows.push(Alloy.createController("rowCASHFLOW", {
-                description: value.name,
+            Ti.API.info("CASE SWITCHED");
+            var riga = Alloy.createController("rowCASHFLOW", {
+                description: value.description,
                 importo: value.importo,
                 dataOperazione: value.dataOperazione,
                 dataValuta: value.dataValuta,
                 title: "Ciao",
                 codTipoMovimento: value.data.tipoMovimento.codice
-            }).getView());
+            }).getView();
+            rows.push(riga);
             break;
 
           case "DOCUMENTDATATYPE_CODE":
@@ -55,7 +57,7 @@ function Controller() {
           case "LINKDATATYPE_CODE":        }
     });
     $.aspectsTable.setData(rows);
-    Ti.API.info("ROWS NUM: " + $.aspectsTable.data.length);
+    Ti.API.info("ROWS NUM: " + JSON.stringify($.aspectsTable.data));
     _.extend($, exports);
 }
 

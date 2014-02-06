@@ -12,7 +12,8 @@ function Controller() {
         backgroundColor: "white",
         className: "itemRow",
         layout: "vertical",
-        id: "row"
+        id: "row",
+        title: "Ciao"
     });
     $.__views.row && $.addTopLevelView($.__views.row);
     $.__views.description = Ti.UI.createLabel({
