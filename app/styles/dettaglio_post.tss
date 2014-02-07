@@ -1,7 +1,7 @@
 
 ".container" : {
-  	backgroundColor: '#d8d8d8',
-	layout: "vertical",
+  	backgroundColor: '#d8d8d8'
+	//layout: "vertical",
 }
 
 "#detailHeader": {
@@ -11,7 +11,7 @@
 }
 
 "#aspectsTable":{
-	top: 5
+	top: 100
 }
 
 "#dateBox":{

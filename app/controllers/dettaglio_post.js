@@ -4,17 +4,17 @@ Ti.API.info("ARGS: " + args.data.id);
 
 var creationDate = new Date(args.data.creationTime);
 
-/*
+
 $.dayBox.text = creationDate.getDate();
 $.monthBox.text = creationDate.getCMonth();
 $.name.text = args.data.name;
-*/
+
 
 var rows = [];
 
 _.forEach(args.data.aspects, function(value) {
 
-	Ti.API.info("ASPECT DATA: " + value.name);
+	Ti.API.info("ASPECT DATA: " + value.data.description);
 	
 	
 	switch (value.kind.code) {
@@ -26,9 +26,9 @@ _.forEach(args.data.aspects, function(value) {
 			var riga = Alloy.createController('rowCASHFLOW', {
 				
 				description : value.description,
-				importo : value.importo,
-				dataOperazione : value.dataOperazione,
-				dataValuta : value.dataValuta,
+				importo : value.data.importo,
+				dataOperazione : value.data.dataOperazione,
+				dataValuta : value.data.dataValuta,
 				title: "Ciao",
 				codTipoMovimento : value.data.tipoMovimento.codice
 				
@@ -60,4 +60,3 @@ _.forEach(args.data.aspects, function(value) {
 });
 
 $.aspectsTable.setData(rows);
-Ti.API.info("ROWS NUM: "+JSON.stringify($.aspectsTable.data));

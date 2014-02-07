@@ -1,7 +1,7 @@
 <Alloy>
 	<Window class="container" title = "Dettaglio Post">
 		
-		<!--<View id="detailHeader">
+		<View id="detailHeader">
 			<View id="dateBox">
 				<Label id="dayBox"/>
 				<Label id="monthBox"/>
@@ -10,10 +10,10 @@
 				<Label id = "name"/>
 				
 			</View>
-	</View>-->
-		<View id="tableContainer">
-			<TableView id="aspectsTable"/>	
-		</View>	
+		</View>
+		
+		<TableView id="aspectsTable"/>	
+		
 		
 	</Window>
 </Alloy>
