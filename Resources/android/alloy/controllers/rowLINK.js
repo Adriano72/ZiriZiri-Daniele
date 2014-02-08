@@ -28,6 +28,7 @@ function Controller() {
         wordWrap: false,
         backgroundColor: "#ffffff",
         borderRadius: Alloy.Globals.borderRad,
+        touchEnabled: false,
         width: "95%",
         id: "description"
     });
@@ -40,6 +41,7 @@ function Controller() {
         },
         left: 5,
         top: 5,
+        touchEnabled: false,
         width: Ti.UI.FILL,
         id: "title"
     });
@@ -52,6 +54,7 @@ function Controller() {
         },
         left: 5,
         top: 5,
+        touchEnabled: false,
         width: Ti.UI.FILL,
         id: "type"
     });
@@ -64,6 +67,7 @@ function Controller() {
         },
         left: 5,
         top: 5,
+        touchEnabled: false,
         width: Ti.UI.FILL,
         id: "content"
     });
@@ -71,7 +75,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    $.description.text = "  " + icons.link + "  " + args.description;
+    $.row.id_code = args.id_code, $.description.text = "  " + icons.link + "  " + args.description;
     $.title.text = "Titolo: " + args.title;
     $.type.text = "Tipo: " + args.type, $.content.text = "Contenuto: " + args.content;
     _.extend($, exports);

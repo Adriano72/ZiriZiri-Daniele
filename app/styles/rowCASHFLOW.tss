@@ -22,6 +22,7 @@
     wordWrap: false,
     backgroundColor: '#ffffff',
     borderRadius: Alloy.Globals.borderRad,
+    touchEnabled: false,
     width: "95%"
 }
 
@@ -33,6 +34,7 @@
     },
     left: 5,
     top: 5,
+    touchEnabled: false,
    	width: Ti.UI.FILL
 }
 
@@ -44,6 +46,7 @@
     },
     left: 5,
     top: 5,
+    touchEnabled: false,
    	width: Ti.UI.FILL
 }
 
@@ -55,6 +58,7 @@
     },
     left: 5,
     top: 5,
+    touchEnabled: false,
    	width: Ti.UI.FILL
 }
 
@@ -67,5 +71,6 @@
     left: 5,
     top: 5,
     bottom: 10,
+    touchEnabled: false,
    	width: Ti.UI.FILL
 }

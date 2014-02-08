@@ -2,8 +2,8 @@ var args = arguments[0] || {};
 
 //Ti.API.info("VALORE PASSATO: "+args.importo);
 
-
-$.description.text = '  '+icons.edit_sign+"  "+args.title;
+$.row.id_code = args.id_code,
+$.description.text = '  '+icons.edit_sign+"  "+args.description;
 $.data.text = "Data: "+composeDate(args.timestamp);
 
 function composeDate(d_par){

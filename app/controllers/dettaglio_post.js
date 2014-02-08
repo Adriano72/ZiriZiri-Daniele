@@ -12,7 +12,7 @@ $.name.text = args.data.name;
 
 var rows = [];
 
-_.forEach(args.data.aspects, function(value) {
+_.forEach(args.data.aspects, function(value, key) {
 
 	//Ti.API.info("ASPECT DATA: " + value.data.description);
 	
@@ -23,6 +23,7 @@ _.forEach(args.data.aspects, function(value) {
 			
 			var riga = Alloy.createController('rowCASHFLOW', {
 				
+				id_code: key,
 				description : value.description,
 				importo : value.data.importo,
 				dataOperazione : value.data.dataOperazione,
@@ -38,6 +39,7 @@ _.forEach(args.data.aspects, function(value) {
 			
 			var riga = Alloy.createController('rowDOCUMENT', {
 				
+				id_code: key,
 				description : value.description,
 				format: value.data.format.name,
 				type : value.data.format.type,
@@ -54,6 +56,7 @@ _.forEach(args.data.aspects, function(value) {
 
 			var riga = Alloy.createController('rowLINK', {
 				
+				id_code: key,
 				description : value.description,
 				type : value.data.format.type,
 				title: value.data.title,
@@ -68,7 +71,8 @@ _.forEach(args.data.aspects, function(value) {
 
 			var riga = Alloy.createController('rowNOTE', {
 				
-				title : value.data.title,
+				id_code: key,
+				description : value.data.title,
 				timestamp: value.data.timestamp
 				
 			}).getView();
@@ -76,10 +80,13 @@ _.forEach(args.data.aspects, function(value) {
 			break;
 	}
 
-	
-	
-	
-
 });
 
 $.aspectsTable.setData(rows);
+
+function aspectDetail(e){
+	
+	Ti.API.info("CLICKED: "+e.source.id_code);
+	Ti.API.info("ASPETTO SELEZIONATO; "+args.data.aspects[e.source.id_code].kind.code);
+	
+}

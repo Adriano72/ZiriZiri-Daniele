@@ -35,6 +35,7 @@ function Controller() {
         wordWrap: false,
         backgroundColor: "#ffffff",
         borderRadius: Alloy.Globals.borderRad,
+        touchEnabled: false,
         width: "95%",
         id: "description"
     });
@@ -47,6 +48,7 @@ function Controller() {
         },
         left: 5,
         top: 5,
+        touchEnabled: false,
         width: Ti.UI.FILL,
         id: "importo"
     });
@@ -59,6 +61,7 @@ function Controller() {
         },
         left: 5,
         top: 5,
+        touchEnabled: false,
         width: Ti.UI.FILL,
         id: "dataOperazione"
     });
@@ -71,6 +74,7 @@ function Controller() {
         },
         left: 5,
         top: 5,
+        touchEnabled: false,
         width: Ti.UI.FILL,
         id: "dataValuta"
     });
@@ -84,6 +88,7 @@ function Controller() {
         left: 5,
         top: 5,
         bottom: 10,
+        touchEnabled: false,
         width: Ti.UI.FILL,
         id: "codTipoMovimento"
     });
@@ -91,7 +96,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    $.description.text = "  " + icons.bar_chart_alt + "  " + args.description;
+    $.row.id_code = args.id_code, $.description.text = "  " + icons.bar_chart_alt + "  " + args.description;
     $.importo.text = "Importo: € " + args.importo;
     $.dataOperazione.text = "Data operazione: " + composeDate(args.dataOperazione);
     $.dataValuta.text = "Data Valuta: " + composeDate(args.dataValuta);

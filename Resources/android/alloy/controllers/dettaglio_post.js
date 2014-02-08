@@ -1,4 +1,8 @@
 function Controller() {
+    function aspectDetail(e) {
+        Ti.API.info("CLICKED: " + e.source.id_code);
+        Ti.API.info("ASPETTO SELEZIONATO; " + args.data.aspects[e.source.id_code].kind.code);
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dettaglio_post";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -6,6 +10,7 @@ function Controller() {
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
+    var __defers = {};
     $.__views.dettaglio_post = Ti.UI.createWindow({
         backgroundColor: "#d8d8d8",
         title: "Dettaglio Post",
@@ -83,6 +88,7 @@ function Controller() {
         id: "aspectsTable"
     });
     $.__views.dettaglio_post.add($.__views.aspectsTable);
+    aspectDetail ? $.__views.aspectsTable.addEventListener("click", aspectDetail) : __defers["$.__views.aspectsTable!click!aspectDetail"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
@@ -92,10 +98,11 @@ function Controller() {
     $.monthBox.text = creationDate.getCMonth();
     $.name.text = args.data.name;
     var rows = [];
-    _.forEach(args.data.aspects, function(value) {
+    _.forEach(args.data.aspects, function(value, key) {
         switch (value.kind.code) {
           case "CASHFLOWDATATYPE_CODE":
             var riga = Alloy.createController("rowCASHFLOW", {
+                id_code: key,
                 description: value.description,
                 importo: value.data.importo,
                 dataOperazione: value.data.dataOperazione,
@@ -107,6 +114,7 @@ function Controller() {
 
           case "DOCUMENTDATATYPE_CODE":
             var riga = Alloy.createController("rowDOCUMENT", {
+                id_code: key,
                 description: value.description,
                 format: value.data.format.name,
                 type: value.data.format.type,
@@ -117,6 +125,7 @@ function Controller() {
 
           case "LINKDATATYPE_CODE":
             var riga = Alloy.createController("rowLINK", {
+                id_code: key,
                 description: value.description,
                 type: value.data.format.type,
                 title: value.data.title,
@@ -127,13 +136,15 @@ function Controller() {
 
           case "NOTEDATATYPE_CODE":
             var riga = Alloy.createController("rowNOTE", {
-                title: value.data.title,
+                id_code: key,
+                description: value.data.title,
                 timestamp: value.data.timestamp
             }).getView();
             rows.push(riga);
         }
     });
     $.aspectsTable.setData(rows);
+    __defers["$.__views.aspectsTable!click!aspectDetail"] && $.__views.aspectsTable.addEventListener("click", aspectDetail);
     _.extend($, exports);
 }
 

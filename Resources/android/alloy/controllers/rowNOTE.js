@@ -35,6 +35,7 @@ function Controller() {
         wordWrap: false,
         backgroundColor: "#ffffff",
         borderRadius: Alloy.Globals.borderRad,
+        touchEnabled: false,
         width: "95%",
         id: "description"
     });
@@ -47,6 +48,7 @@ function Controller() {
         },
         left: 5,
         top: 5,
+        touchEnabled: false,
         width: Ti.UI.FILL,
         id: "data"
     });
@@ -54,8 +56,8 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    $.description.text = "  " + icons.edit_sign + "  " + args.title;
-    $.data.text = "Data: € " + composeDate(args.timestamp);
+    $.row.id_code = args.id_code, $.description.text = "  " + icons.edit_sign + "  " + args.description;
+    $.data.text = "Data: " + composeDate(args.timestamp);
     _.extend($, exports);
 }
 

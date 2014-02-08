@@ -12,7 +12,7 @@
 			</View>
 		</View>
 		
-		<TableView id="aspectsTable"/>	
+		<TableView id="aspectsTable" onClick = "aspectDetail"/>	
 		
 		
 	</Window>

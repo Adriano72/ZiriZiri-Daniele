@@ -1,8 +1,8 @@
 var args = arguments[0] || {};
 
-//Ti.API.info("VALORE PASSATO: "+args.importo);
+//Ti.API.info("VALORE PASSATO: "+args.id_code);
 
-
+$.row.id_code = args.id_code,
 $.description.text = '  '+icons.bar_chart_alt+"  "+args.description;
 $.importo.text = "Importo: € "+args.importo;
 $.dataOperazione.text = "Data operazione: "+composeDate(args.dataOperazione);
