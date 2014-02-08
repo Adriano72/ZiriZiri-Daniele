@@ -67,10 +67,3 @@
 	left: 5,
 	top: 5
 }
-
-"#tableContainer": {
-    height: Ti.UI.FILL,
-    backgroundColor: 'yellow',
-    width: Ti.UI.FILL,
-   	top: 20
-}

@@ -1,0 +1,17 @@
+
+".container" : {
+  	backgroundColor: '#d8d8d8'
+	//layout: "vertical",
+}
+
+"#itemAspectDetail": {
+	top: 5,
+	height: Ti.UI.FILL,
+	width: Ti.UI.FILL
+}
+
+"#aspectsDetailTable":{
+	top: 5 ,
+	bottom: 5,
+	separatorColor: 'transparent'
+}

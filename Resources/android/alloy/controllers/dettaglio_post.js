@@ -1,7 +1,6 @@
 function Controller() {
     function aspectDetail(e) {
-        Ti.API.info("CLICKED: " + e.source.id_code);
-        Ti.API.info("ASPETTO SELEZIONATO; " + args.data.aspects[e.source.id_code].kind.code);
+        Alloy.createController("aspect_detail", args.data.aspects[e.source.id_code]).getView().open();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dettaglio_post";

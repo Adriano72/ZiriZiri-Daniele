@@ -1,7 +1,7 @@
-var timelineWin = Alloy.createController("timeline_win").getView();
+//var timelineWin = Alloy.createController("timeline_win").getView();
 
 if (Ti.App.Properties.getBool('authenticated',false)){
-	timelineWin.open();
+	Alloy.createController("timeline_win").getView().open();
 }else {
 	$.index.open();
 	
@@ -30,7 +30,7 @@ function do_login(e) {
 				Ti.App.Properties.setBool('authenticated', true);
 				Ti.App.Properties.setInt('sessionId', json.data.sessionId);
 				//alert(Ti.App.Properties.getInt('sessionId', 0));
-				timelineWin.open();
+				Alloy.createController("timeline_win").getView().open();
 				//$.index.open();
 				
 		} else {
