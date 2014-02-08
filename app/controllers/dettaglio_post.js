@@ -14,14 +14,12 @@ var rows = [];
 
 _.forEach(args.data.aspects, function(value) {
 
-	Ti.API.info("ASPECT DATA: " + value.data.description);
+	//Ti.API.info("ASPECT DATA: " + value.data.description);
 	
 	
 	switch (value.kind.code) {
 
 		case "CASHFLOWDATATYPE_CODE":
-
-			Ti.API.info("CASE SWITCHED");
 			
 			var riga = Alloy.createController('rowCASHFLOW', {
 				
@@ -29,7 +27,6 @@ _.forEach(args.data.aspects, function(value) {
 				importo : value.data.importo,
 				dataOperazione : value.data.dataOperazione,
 				dataValuta : value.data.dataValuta,
-				title: "Ciao",
 				codTipoMovimento : value.data.tipoMovimento.codice
 				
 			}).getView();
@@ -38,18 +35,44 @@ _.forEach(args.data.aspects, function(value) {
 			break;
 
 		case "DOCUMENTDATATYPE_CODE":
-
-			//aspectObj.documents += 1;
-			break;
-
-		case "NOTEDATATYPE_CODE":
-
-			//aspectObj.notes += 1;
+			
+			var riga = Alloy.createController('rowDOCUMENT', {
+				
+				description : value.description,
+				format: value.data.format.name,
+				type : value.data.format.type,
+				title : value.data.title
+				
+			}).getView();
+			rows.push(riga);
+			
+			
+			
 			break;
 
 		case "LINKDATATYPE_CODE":
 
-			//aspectObj.links += 1;
+			var riga = Alloy.createController('rowLINK', {
+				
+				description : value.description,
+				type : value.data.format.type,
+				title: value.data.title,
+				content : value.data.content
+				
+			}).getView();
+			rows.push(riga);
+			
+			break;
+
+		case "NOTEDATATYPE_CODE":
+
+			var riga = Alloy.createController('rowNOTE', {
+				
+				title : value.data.title,
+				timestamp: value.data.timestamp
+				
+			}).getView();
+			rows.push(riga);
 			break;
 	}
 

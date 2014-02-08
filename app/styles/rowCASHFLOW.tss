@@ -1,28 +1,32 @@
 "#row": {
 	
-	height: 100,
+	height: Ti.UI.SIZE,
 	width: Ti.UI.FILL,
-	backgroundColor: 'white',
+	backgroundColor: '#d8d8d8',
     className: 'itemRow',
     layout: 'vertical'
+    
 } 
 
-
-
 "#description": {
-    height: 70,
+    height: 40,
     font: {
     	fontFamily: 'AppIcons',
-    	fontWeight: 'bold',
-        fontSize: 16
+    	
+        fontSize: 24
     },
+    color: "#DB4C3F",
     left: 5,
     top: 5,
-    width: Ti.UI.FILL
+    ellipsize: true,
+    wordWrap: false,
+    backgroundColor: '#ffffff',
+    borderRadius: Alloy.Globals.borderRad,
+    width: "95%"
 }
 
 "#importo": {
-    height: 70,
+    height: Ti.UI.SIZE,
     font: {
     	fontFamily: 'AppIcons',
         fontSize: 16
@@ -33,7 +37,7 @@
 }
 
 "#dataOperazione": {
-    height: 70,
+    height: Ti.UI.SIZE,
     font: {
     	fontFamily: 'AppIcons',
         fontSize: 16
@@ -44,7 +48,7 @@
 }
 
 "#dataValuta": {
-    height: '70dp',
+    height: Ti.UI.SIZE,
     font: {
     	fontFamily: 'AppIcons',
         fontSize: 16
@@ -55,12 +59,13 @@
 }
 
 "#codTipoMovimento": {
-    height: '70dp',
+    height: Ti.UI.SIZE,
     font: {
     	fontFamily: 'AppIcons',
         fontSize: 16
     },
     left: 5,
     top: 5,
+    bottom: 10,
    	width: Ti.UI.FILL
 }

@@ -1,4 +1,11 @@
 function Controller() {
+    function composeDate(d_par) {
+        var p_toDate = new Date(d_par);
+        var day = p_toDate.getDate();
+        var month = p_toDate.getCMonth();
+        var year = p_toDate.getFullYear();
+        return day + " " + month + " " + year;
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "rowCASHFLOW";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -7,30 +14,33 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.row = Ti.UI.createTableViewRow({
-        height: 100,
+        height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
-        backgroundColor: "white",
+        backgroundColor: "#d8d8d8",
         className: "itemRow",
         layout: "vertical",
-        id: "row",
-        title: "Ciao"
+        id: "row"
     });
     $.__views.row && $.addTopLevelView($.__views.row);
     $.__views.description = Ti.UI.createLabel({
-        height: 70,
+        height: 40,
         font: {
             fontFamily: "AppIcons",
-            fontWeight: "bold",
-            fontSize: 16
+            fontSize: 24
         },
+        color: "#DB4C3F",
         left: 5,
         top: 5,
-        width: Ti.UI.FILL,
+        ellipsize: true,
+        wordWrap: false,
+        backgroundColor: "#ffffff",
+        borderRadius: Alloy.Globals.borderRad,
+        width: "95%",
         id: "description"
     });
     $.__views.row.add($.__views.description);
     $.__views.importo = Ti.UI.createLabel({
-        height: 70,
+        height: Ti.UI.SIZE,
         font: {
             fontFamily: "AppIcons",
             fontSize: 16
@@ -42,7 +52,7 @@ function Controller() {
     });
     $.__views.row.add($.__views.importo);
     $.__views.dataOperazione = Ti.UI.createLabel({
-        height: 70,
+        height: Ti.UI.SIZE,
         font: {
             fontFamily: "AppIcons",
             fontSize: 16
@@ -54,7 +64,7 @@ function Controller() {
     });
     $.__views.row.add($.__views.dataOperazione);
     $.__views.dataValuta = Ti.UI.createLabel({
-        height: "70dp",
+        height: Ti.UI.SIZE,
         font: {
             fontFamily: "AppIcons",
             fontSize: 16
@@ -66,13 +76,14 @@ function Controller() {
     });
     $.__views.row.add($.__views.dataValuta);
     $.__views.codTipoMovimento = Ti.UI.createLabel({
-        height: "70dp",
+        height: Ti.UI.SIZE,
         font: {
             fontFamily: "AppIcons",
             fontSize: 16
         },
         left: 5,
         top: 5,
+        bottom: 10,
         width: Ti.UI.FILL,
         id: "codTipoMovimento"
     });
@@ -80,12 +91,11 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    Ti.API.info("VALORE PASSATO: " + args.importo);
-    $.description.text = icons.bar_chart_alt + " " + args.description;
-    $.importo.text = args.importo;
-    $.dataOperazione.text = args.dataOperazione;
-    $.dataValuta.text = args.dataValuta;
-    $.codTipoMovimento.text = args.codTipoMovimento;
+    $.description.text = "  " + icons.bar_chart_alt + "  " + args.description;
+    $.importo.text = "Importo: € " + args.importo;
+    $.dataOperazione.text = "Data operazione: " + composeDate(args.dataOperazione);
+    $.dataValuta.text = "Data Valuta: " + composeDate(args.dataValuta);
+    $.codTipoMovimento.text = "Tipo movimento: " + args.codTipoMovimento;
     _.extend($, exports);
 }
 

@@ -1,4 +1,59 @@
+"#row": {
+	
+	height: Ti.UI.SIZE,
+	width: Ti.UI.FILL,
+	backgroundColor: '#d8d8d8',
+    className: 'itemRow',
+    layout: 'vertical'
+    
+} 
 
-".container" : {
-  
+"#description": {
+    height: 40,
+    font: {
+    	fontFamily: 'AppIcons',
+    	
+        fontSize: 24
+    },
+    color: "#F2B32A",
+    left: 5,
+    top: 5,
+    ellipsize: true,
+    wordWrap: false,
+    backgroundColor: '#ffffff',
+    borderRadius: Alloy.Globals.borderRad,
+    width: "95%"
+}
+
+"#format": {
+    height: Ti.UI.SIZE,
+    font: {
+    	fontFamily: 'AppIcons',
+        fontSize: 16
+    },
+    left: 5,
+    top: 5,
+   	width: Ti.UI.FILL
+}
+
+"#type": {
+    height: Ti.UI.SIZE,
+    font: {
+    	fontFamily: 'AppIcons',
+        fontSize: 16
+    },
+    left: 5,
+    top: 5,
+   	width: Ti.UI.FILL
+}
+
+"#titolo": {
+    height: Ti.UI.SIZE,
+    font: {
+    	fontFamily: 'AppIcons',
+        fontSize: 16
+    },
+    left: 5,
+    top: 5,
+   	width: Ti.UI.FILL
 }

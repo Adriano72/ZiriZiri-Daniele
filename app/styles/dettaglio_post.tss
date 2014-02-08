@@ -11,7 +11,9 @@
 }
 
 "#aspectsTable":{
-	top: 100
+	top: 100,
+	bottom: 5,
+	separatorColor: 'transparent'
 }
 
 "#dateBox":{

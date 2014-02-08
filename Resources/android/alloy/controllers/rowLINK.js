@@ -6,25 +6,74 @@ function Controller() {
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
-    $.__views.rowLINK = Ti.UI.createTableViewRow({
-        id: "rowLINK"
+    $.__views.row = Ti.UI.createTableViewRow({
+        height: Ti.UI.SIZE,
+        width: Ti.UI.FILL,
+        backgroundColor: "#d8d8d8",
+        className: "itemRow",
+        layout: "vertical",
+        id: "row"
     });
-    $.__views.rowLINK && $.addTopLevelView($.__views.rowLINK);
-    $.__views.image = Ti.UI.createImageView({
-        id: "image"
+    $.__views.row && $.addTopLevelView($.__views.row);
+    $.__views.description = Ti.UI.createLabel({
+        height: 40,
+        font: {
+            fontFamily: "AppIcons",
+            fontSize: 24
+        },
+        color: "#4682EA",
+        left: 5,
+        top: 5,
+        ellipsize: true,
+        wordWrap: false,
+        backgroundColor: "#ffffff",
+        borderRadius: Alloy.Globals.borderRad,
+        width: "95%",
+        id: "description"
     });
-    $.__views.rowLINK.add($.__views.image);
-    $.__views.date = Ti.UI.createLabel({
-        id: "date"
-    });
-    $.__views.rowLINK.add($.__views.date);
+    $.__views.row.add($.__views.description);
     $.__views.title = Ti.UI.createLabel({
+        height: Ti.UI.SIZE,
+        font: {
+            fontFamily: "AppIcons",
+            fontSize: 16
+        },
+        left: 5,
+        top: 5,
+        width: Ti.UI.FILL,
         id: "title"
     });
-    $.__views.rowLINK.add($.__views.title);
+    $.__views.row.add($.__views.title);
+    $.__views.type = Ti.UI.createLabel({
+        height: Ti.UI.SIZE,
+        font: {
+            fontFamily: "AppIcons",
+            fontSize: 16
+        },
+        left: 5,
+        top: 5,
+        width: Ti.UI.FILL,
+        id: "type"
+    });
+    $.__views.row.add($.__views.type);
+    $.__views.content = Ti.UI.createLabel({
+        height: Ti.UI.SIZE,
+        font: {
+            fontFamily: "AppIcons",
+            fontSize: 16
+        },
+        left: 5,
+        top: 5,
+        width: Ti.UI.FILL,
+        id: "content"
+    });
+    $.__views.row.add($.__views.content);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    arguments[0] || {};
+    var args = arguments[0] || {};
+    $.description.text = "  " + icons.link + "  " + args.description;
+    $.title.text = "Titolo: " + args.title;
+    $.type.text = "Tipo: " + args.type, $.content.text = "Contenuto: " + args.content;
     _.extend($, exports);
 }
 

@@ -1,5 +1,5 @@
 <Alloy>
-	<TableViewRow id="row" title="Ciao">
+	<TableViewRow id="row">
 		<Label id="description"/>
 		<Label id="importo"/>
 		<Label id="dataOperazione"/>
