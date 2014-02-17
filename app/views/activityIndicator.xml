@@ -1,5 +1,5 @@
 <Alloy>
-    <Window class="container" onOpen="showIndicator">
+    <Window class="container" navBarHidden="true" onOpen="showIndicator">
 
         <!-- Define the styling properties in the TSS file -->
         <ActivityIndicator id="spinner" message="  Loading..."/>

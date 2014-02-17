@@ -1,9 +1,21 @@
 <Alloy>
 	<TableViewRow id="row">
 		<Label id="description"/>
-		<Label id="importo"/>
-		<Label id="dataOperazione"/>
-		<Label id="dataValuta"/>
-		<Label id="codTipoMovimento"/>
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Importo: ">
+			<Label class="block_data" id="importo"/>
+		</View>
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Data operazione: ">
+			<Label class="block_data" id="dataOperazione"/>
+		</View>
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Data valuta: ">
+			<Label class="block_data" id="dataValuta"/>
+		</View>
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Tipo movimento: ">
+			<Label class="block_data" id="codTipoMovimento"/>
+		</View>
 	</TableViewRow>
 </Alloy>

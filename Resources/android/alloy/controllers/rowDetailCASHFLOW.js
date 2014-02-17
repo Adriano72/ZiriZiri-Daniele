@@ -16,10 +16,10 @@ function Controller() {
     $.__views.rowDetailCASHFLOW = Ti.UI.createTableViewSection({
         id: "rowDetailCASHFLOW"
     });
-    $.__views.__alloyId0 = Ti.UI.createTableViewRow({
-        id: "__alloyId0"
+    $.__views.__alloyId8 = Ti.UI.createTableViewRow({
+        id: "__alloyId8"
     });
-    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId0);
+    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId8);
     $.__views.description = Ti.UI.createLabel({
         width: "95%",
         height: 40,
@@ -38,11 +38,11 @@ function Controller() {
         touchEnabled: false,
         id: "description"
     });
-    $.__views.__alloyId0.add($.__views.description);
-    $.__views.__alloyId1 = Ti.UI.createTableViewRow({
-        id: "__alloyId1"
+    $.__views.__alloyId8.add($.__views.description);
+    $.__views.__alloyId9 = Ti.UI.createTableViewRow({
+        id: "__alloyId9"
     });
-    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId1);
+    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId9);
     $.__views.category = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -55,11 +55,11 @@ function Controller() {
         },
         id: "category"
     });
-    $.__views.__alloyId1.add($.__views.category);
-    $.__views.__alloyId2 = Ti.UI.createTableViewRow({
-        id: "__alloyId2"
+    $.__views.__alloyId9.add($.__views.category);
+    $.__views.__alloyId10 = Ti.UI.createTableViewRow({
+        id: "__alloyId10"
     });
-    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId2);
+    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId10);
     $.__views.importo = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -72,11 +72,11 @@ function Controller() {
         },
         id: "importo"
     });
-    $.__views.__alloyId2.add($.__views.importo);
-    $.__views.__alloyId3 = Ti.UI.createTableViewRow({
-        id: "__alloyId3"
+    $.__views.__alloyId10.add($.__views.importo);
+    $.__views.__alloyId11 = Ti.UI.createTableViewRow({
+        id: "__alloyId11"
     });
-    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId3);
+    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId11);
     $.__views.dataOperazione = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -89,11 +89,11 @@ function Controller() {
         },
         id: "dataOperazione"
     });
-    $.__views.__alloyId3.add($.__views.dataOperazione);
-    $.__views.__alloyId4 = Ti.UI.createTableViewRow({
-        id: "__alloyId4"
+    $.__views.__alloyId11.add($.__views.dataOperazione);
+    $.__views.__alloyId12 = Ti.UI.createTableViewRow({
+        id: "__alloyId12"
     });
-    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId4);
+    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId12);
     $.__views.dataValuta = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -106,11 +106,11 @@ function Controller() {
         },
         id: "dataValuta"
     });
-    $.__views.__alloyId4.add($.__views.dataValuta);
-    $.__views.__alloyId5 = Ti.UI.createTableViewRow({
-        id: "__alloyId5"
+    $.__views.__alloyId12.add($.__views.dataValuta);
+    $.__views.__alloyId13 = Ti.UI.createTableViewRow({
+        id: "__alloyId13"
     });
-    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId5);
+    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId13);
     $.__views.flagOrdinarioStraordinario = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -123,11 +123,11 @@ function Controller() {
         },
         id: "flagOrdinarioStraordinario"
     });
-    $.__views.__alloyId5.add($.__views.flagOrdinarioStraordinario);
-    $.__views.__alloyId6 = Ti.UI.createTableViewRow({
-        id: "__alloyId6"
+    $.__views.__alloyId13.add($.__views.flagOrdinarioStraordinario);
+    $.__views.__alloyId14 = Ti.UI.createTableViewRow({
+        id: "__alloyId14"
     });
-    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId6);
+    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId14);
     $.__views.category = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -140,11 +140,11 @@ function Controller() {
         },
         id: "category"
     });
-    $.__views.__alloyId6.add($.__views.category);
-    $.__views.__alloyId7 = Ti.UI.createTableViewRow({
-        id: "__alloyId7"
+    $.__views.__alloyId14.add($.__views.category);
+    $.__views.__alloyId15 = Ti.UI.createTableViewRow({
+        id: "__alloyId15"
     });
-    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId7);
+    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId15);
     $.__views.statoMovimento = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -157,11 +157,11 @@ function Controller() {
         },
         id: "statoMovimento"
     });
-    $.__views.__alloyId7.add($.__views.statoMovimento);
-    $.__views.__alloyId8 = Ti.UI.createTableViewRow({
-        id: "__alloyId8"
+    $.__views.__alloyId15.add($.__views.statoMovimento);
+    $.__views.__alloyId16 = Ti.UI.createTableViewRow({
+        id: "__alloyId16"
     });
-    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId8);
+    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId16);
     $.__views.tipoMovimento = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -174,11 +174,11 @@ function Controller() {
         },
         id: "tipoMovimento"
     });
-    $.__views.__alloyId8.add($.__views.tipoMovimento);
-    $.__views.__alloyId9 = Ti.UI.createTableViewRow({
-        id: "__alloyId9"
+    $.__views.__alloyId16.add($.__views.tipoMovimento);
+    $.__views.__alloyId17 = Ti.UI.createTableViewRow({
+        id: "__alloyId17"
     });
-    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId9);
+    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId17);
     $.__views.tipoVariabilita = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -191,11 +191,11 @@ function Controller() {
         },
         id: "tipoVariabilita"
     });
-    $.__views.__alloyId9.add($.__views.tipoVariabilita);
-    $.__views.__alloyId10 = Ti.UI.createTableViewRow({
-        id: "__alloyId10"
+    $.__views.__alloyId17.add($.__views.tipoVariabilita);
+    $.__views.__alloyId18 = Ti.UI.createTableViewRow({
+        id: "__alloyId18"
     });
-    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId10);
+    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId18);
     $.__views.modalitaPagamento = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -208,11 +208,11 @@ function Controller() {
         },
         id: "modalitaPagamento"
     });
-    $.__views.__alloyId10.add($.__views.modalitaPagamento);
-    $.__views.__alloyId11 = Ti.UI.createTableViewRow({
-        id: "__alloyId11"
+    $.__views.__alloyId18.add($.__views.modalitaPagamento);
+    $.__views.__alloyId19 = Ti.UI.createTableViewRow({
+        id: "__alloyId19"
     });
-    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId11);
+    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId19);
     $.__views.strumentoPagamentoIncasso = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -225,11 +225,11 @@ function Controller() {
         },
         id: "strumentoPagamentoIncasso"
     });
-    $.__views.__alloyId11.add($.__views.strumentoPagamentoIncasso);
-    $.__views.__alloyId12 = Ti.UI.createTableViewRow({
-        id: "__alloyId12"
+    $.__views.__alloyId19.add($.__views.strumentoPagamentoIncasso);
+    $.__views.__alloyId20 = Ti.UI.createTableViewRow({
+        id: "__alloyId20"
     });
-    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId12);
+    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId20);
     $.__views.fonteLiquidita = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -242,11 +242,11 @@ function Controller() {
         },
         id: "fonteLiquidita"
     });
-    $.__views.__alloyId12.add($.__views.fonteLiquidita);
-    $.__views.__alloyId13 = Ti.UI.createTableViewRow({
-        id: "__alloyId13"
+    $.__views.__alloyId20.add($.__views.fonteLiquidita);
+    $.__views.__alloyId21 = Ti.UI.createTableViewRow({
+        id: "__alloyId21"
     });
-    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId13);
+    $.__views.rowDetailCASHFLOW.add($.__views.__alloyId21);
     $.__views.tipoFonteLiquidita = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -259,7 +259,7 @@ function Controller() {
         },
         id: "tipoFonteLiquidita"
     });
-    $.__views.__alloyId13.add($.__views.tipoFonteLiquidita);
+    $.__views.__alloyId21.add($.__views.tipoFonteLiquidita);
     $.__views.rowDetailCASHFLOW && $.addTopLevelView($.__views.rowDetailCASHFLOW);
     exports.destroy = function() {};
     _.extend($, $.__views);

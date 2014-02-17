@@ -26,51 +26,29 @@
     width: "95%"
 }
 
-"#importo": {
-    height: Ti.UI.SIZE,
-    font: {
-    	fontFamily: 'AppIcons',
-        fontSize: 16
-    },
-    left: 5,
-    top: 5,
-    touchEnabled: false,
-   	width: Ti.UI.FILL
+".block_container":{
+	height: 40,
+	touchEnabled: false,
 }
 
-"#dataOperazione": {
-    height: Ti.UI.SIZE,
-    font: {
-    	fontFamily: 'AppIcons',
+".block_label":{
+	left: 10,
+	height: 40,
+	font: {    	
         fontSize: 16
     },
-    left: 5,
-    top: 5,
     touchEnabled: false,
-   	width: Ti.UI.FILL
+	color: '#969696'
 }
 
-"#dataValuta": {
-    height: Ti.UI.SIZE,
-    font: {
-    	fontFamily: 'AppIcons',
+".block_data": {
+	height: 40,
+    font: {    	
         fontSize: 16
     },
     left: 5,
-    top: 5,
     touchEnabled: false,
    	width: Ti.UI.FILL
+	
 }
 
-"#codTipoMovimento": {
-    height: Ti.UI.SIZE,
-    font: {
-    	fontFamily: 'AppIcons',
-        fontSize: 16
-    },
-    left: 5,
-    top: 5,
-    bottom: 10,
-    touchEnabled: false,
-   	width: Ti.UI.FILL
-}

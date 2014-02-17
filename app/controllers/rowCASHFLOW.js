@@ -4,10 +4,10 @@ var args = arguments[0] || {};
 
 $.row.id_code = args.id_code,
 $.description.text = '  '+icons.bar_chart_alt+"  "+args.description;
-$.importo.text = "Importo: € "+args.importo;
-$.dataOperazione.text = "Data operazione: "+composeDate(args.dataOperazione);
-$.dataValuta.text = "Data Valuta: "+composeDate(args.dataValuta);
-$.codTipoMovimento.text = "Tipo movimento: "+args.codTipoMovimento;
+$.importo.text = "€ "+args.importo;
+$.dataOperazione.text = composeDate(args.dataOperazione);
+$.dataValuta.text = composeDate(args.dataValuta);
+$.codTipoMovimento.text = args.codTipoMovimento;
 
 function composeDate(d_par){
 	

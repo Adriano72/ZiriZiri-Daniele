@@ -17,6 +17,7 @@ function Controller() {
     $.__views.activityIndicator = Ti.UI.createWindow({
         opacity: .8,
         backgroundColor: "#000000",
+        navBarHidden: "true",
         id: "activityIndicator"
     });
     $.__views.activityIndicator && $.addTopLevelView($.__views.activityIndicator);
