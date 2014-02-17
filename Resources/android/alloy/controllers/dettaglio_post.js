@@ -11,7 +11,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.dettaglio_post = Ti.UI.createWindow({
-        backgroundColor: "#d8d8d8",
+        backgroundColor: "#F2F2F2",
         title: "Dettaglio Post",
         id: "dettaglio_post"
     });
@@ -19,6 +19,7 @@ function Controller() {
     $.__views.detailHeader = Ti.UI.createView({
         layout: "horizontal",
         top: 5,
+        height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         id: "detailHeader"
     });
@@ -28,7 +29,7 @@ function Controller() {
         height: 60,
         left: 5,
         top: 5,
-        backgroundColor: "red",
+        backgroundColor: "#CC3939",
         borderRadius: Alloy.Globals.borderRad,
         layout: "vertical",
         id: "dateBox"
@@ -56,46 +57,113 @@ function Controller() {
             fontFamily: "AppIcons",
             fontSize: 14
         },
-        backgroundColor: "white",
+        backgroundColor: "#E0E0E0",
         id: "monthBox"
     });
     $.__views.dateBox.add($.__views.monthBox);
     $.__views.headerBox = Ti.UI.createView({
         width: Ti.UI.FILL,
-        height: Ti.UI.SIZE,
+        height: 80,
+        layout: "vertical",
         left: 5,
-        top: 5,
+        top: 0,
         id: "headerBox"
     });
     $.__views.detailHeader.add($.__views.headerBox);
     $.__views.name = Ti.UI.createLabel({
         font: {
-            fontFamily: "AppIcons",
+            fontFamily: "Rosario-Regular",
             fontSize: "18dp",
             fontWeight: "bold"
         },
         height: Ti.UI.SIZE,
+        color: "#2C3E52",
         left: 5,
         top: 5,
         id: "name"
     });
     $.__views.headerBox.add($.__views.name);
-    $.__views.aspectsTable = Ti.UI.createTableView({
+    $.__views.category = Ti.UI.createLabel({
+        touchEnabled: false,
+        font: {
+            fontFamily: "AppIcons",
+            fontSize: 12
+        },
+        backgroundColor: "#E3E3E3",
+        borderRadius: Alloy.Globals.borderRad,
+        height: 18,
+        width: Ti.UI.SIZE,
+        color: "#5E5E5E",
+        left: 5,
+        top: 5,
+        id: "category"
+    });
+    $.__views.headerBox.add($.__views.category);
+    $.__views.location = Ti.UI.createLabel({
+        touchEnabled: false,
+        font: {
+            fontFamily: "AppIcons",
+            fontSize: 12
+        },
+        backgroundColor: "#E3E3E3",
+        borderRadius: Alloy.Globals.borderRad,
+        height: 18,
+        width: Ti.UI.SIZE,
+        color: "#5E5E5E",
+        left: 5,
+        top: 5,
+        id: "location"
+    });
+    $.__views.headerBox.add($.__views.location);
+    $.__views.bottom_container = Ti.UI.createView({
+        backgroundColor: "#F2F2F2",
         top: 100,
+        layout: "vertical",
+        id: "bottom_container"
+    });
+    $.__views.dettaglio_post.add($.__views.bottom_container);
+    $.__views.mapview = Alloy.Globals.Map.createView({
+        height: 130,
+        top: 5,
+        width: Ti.UI.FILL,
+        id: "mapview",
+        ns: "Alloy.Globals.Map"
+    });
+    $.__views.bottom_container.add($.__views.mapview);
+    $.__views.aspectsTable = Ti.UI.createTableView({
+        top: 5,
         bottom: 5,
         separatorColor: "transparent",
         id: "aspectsTable"
     });
-    $.__views.dettaglio_post.add($.__views.aspectsTable);
+    $.__views.bottom_container.add($.__views.aspectsTable);
     aspectDetail ? $.__views.aspectsTable.addEventListener("click", aspectDetail) : __defers["$.__views.aspectsTable!click!aspectDetail"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
     Ti.API.info("ARGS: " + args.data.id);
-    var creationDate = new Date(args.data.creationTime);
+    var creationDate = new Date(args.data.referenceTime);
+    var category = _.isNull(args.data.category) || _.isUndefined(args.data.category) ? "categoria non definita" : args.data.category.name;
+    if (_.isNull(args.data.location)) $.mapview.height = 0; else {
+        var location = args.data.location.name;
+        $.location.text = " " + icons.map_marker + " " + location + " ", $.mapview.region = {
+            latitude: args.data.location.latitude,
+            longitude: args.data.location.longitude,
+            latitudeDelta: .01,
+            longitudeDelta: .01
+        };
+        var eventMarker = Alloy.Globals.Map.createAnnotation({
+            latitude: args.data.location.latitude,
+            longitude: args.data.location.longitude,
+            title: args.data.location.name,
+            pincolor: Alloy.Globals.Map.ANNOTATION_RED
+        });
+        $.mapview.addAnnotation(eventMarker);
+    }
     $.dayBox.text = creationDate.getDate();
     $.monthBox.text = creationDate.getCMonth();
     $.name.text = args.data.name;
+    $.category.text = " " + icons.tag + " " + category + " ";
     var rows = [];
     _.forEach(args.data.aspects, function(value, key) {
         switch (value.kind.code) {
@@ -112,11 +180,12 @@ function Controller() {
             break;
 
           case "DOCUMENTDATATYPE_CODE":
+            Ti.API.info("ASPECT DESCRIPTION: " + value.name);
             var riga = Alloy.createController("rowDOCUMENT", {
                 id_code: key,
-                description: value.description,
-                format: value.data.format.name,
-                type: value.data.format.type,
+                description: value.name,
+                format: _.isNull(value.data.format) ? "Non disponibile" : value.data.format.name,
+                type: _.isNull(value.data.format) ? "Non disponibile" : value.data.format.type,
                 title: value.data.title
             }).getView();
             rows.push(riga);

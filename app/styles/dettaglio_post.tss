@@ -1,17 +1,25 @@
 
-".container" : {
-  	backgroundColor: '#d8d8d8'
+".container": {
+  	backgroundColor: '#F2F2F2',
 	//layout: "vertical",
 }
+
+"#bottom_container": {
+  	backgroundColor: '#F2F2F2',
+  	top: 100,
+	layout: "vertical",
+}
+
 
 "#detailHeader": {
 	layout: 'horizontal',
 	top: 5,
+	height: Ti.UI.SIZE,
 	width: Ti.UI.FILL
 }
 
 "#aspectsTable":{
-	top: 100,
+	top: 5,
 	bottom: 5,
 	separatorColor: 'transparent'
 }
@@ -22,7 +30,7 @@
 	height: 60,
 	left: 5,
 	top: 5,
-	backgroundColor: 'red',
+	backgroundColor: '#CC3939',
 	borderRadius: Alloy.Globals.borderRad,
 	layout: 'vertical'
 }
@@ -44,26 +52,64 @@
 	top: 0,
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
 	font: {fontFamily: 'AppIcons', fontSize:14},
-	backgroundColor: 'white'
+	backgroundColor: '#E0E0E0'
 	
 }
 
 "#headerBox":{
 	
 	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
+	height: 80,
+	layout: 'vertical',
 	left: 5,
-	top: 5
+	top: 0
 }
 
 "#name": {
 	font: {
-		fontFamily: 'AppIcons',
+		fontFamily: 'Rosario-Regular',
 		fontSize: "18dp",
 		fontWeight: "bold"
 	},
 	height: Ti.UI.SIZE,
-
+	color: "#2C3E52",
 	left: 5,
 	top: 5
+}
+
+"#category": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'AppIcons',
+		fontSize: 12
+	},
+	backgroundColor: '#E3E3E3',
+	borderRadius: Alloy.Globals.borderRad,
+	height: 18,
+	width: Ti.UI.SIZE,
+	color: "#5E5E5E",
+	left: 5,
+	top: 5
+}
+
+"#location": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'AppIcons',
+		fontSize: 12
+	},
+	backgroundColor: '#E3E3E3',
+	borderRadius: Alloy.Globals.borderRad,
+	height: 18,
+	width: Ti.UI.SIZE,
+	color: "#5E5E5E",
+	left: 5,
+	top: 5
+}
+ 
+
+"#mapview": {
+	height: 130,
+	top: 5,
+	width: Ti.UI.FILL
 }

@@ -11,7 +11,7 @@ function Controller() {
             if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
                 Ti.App.Properties.setBool("authenticated", true);
                 Ti.App.Properties.setInt("sessionId", json.data.sessionId);
-                timelineWin.open();
+                Alloy.createController("timeline_win").getView().open();
             } else alert("Username o password errati");
         };
         xhr.onerror = function() {
@@ -38,7 +38,7 @@ function Controller() {
         borderColor: "#000000",
         textAlign: "",
         color: "#336699",
-        top: 10,
+        top: 20,
         width: 250,
         height: Ti.UI.SIZE,
         backgroundColor: "#C8DDE8",
@@ -66,17 +66,20 @@ function Controller() {
     $.__views.btn_login = Ti.UI.createButton({
         title: "Login",
         top: 20,
+        font: {
+            fontFamily: "AppIcons",
+            fontSize: 18
+        },
         width: Ti.UI.SIZE,
         borderRadius: 5,
-        height: 80,
+        height: Ti.UI.SIZE,
         id: "btn_login"
     });
     $.__views.index.add($.__views.btn_login);
     do_login ? $.__views.btn_login.addEventListener("click", do_login) : __defers["$.__views.btn_login!click!do_login"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var timelineWin = Alloy.createController("timeline_win").getView();
-    Ti.App.Properties.getBool("authenticated", false) ? timelineWin.open() : $.index.open();
+    Ti.App.Properties.getBool("authenticated", false) ? Alloy.createController("timeline_win").getView().open() : $.index.open();
     __defers["$.__views.btn_login!click!do_login"] && $.__views.btn_login.addEventListener("click", do_login);
     _.extend($, exports);
 }

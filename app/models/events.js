@@ -7,6 +7,7 @@ exports.definition = {
 		    "month":"string",
 		    "day":"string",
 		    "category": "string",
+		    "location": "string",
 		    "aspects": "string"
 		},
 		adapter: {

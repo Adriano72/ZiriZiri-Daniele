@@ -1,5 +1,6 @@
 ".container": {
-	backgroundColor: '#d8d8d8',
+	//backgroundColor: '#d8d8d8',
+	backgroundColor: '#F2F2F2',
 	layout: "vertical",
 	exitOnClose: true
 }
@@ -13,35 +14,22 @@
 
 "TableView": {
 	
-	separatorColor: 'transparent'
+	separatorColor: '#BFBFBF'
 }
 
 
 "TableViewRow": {
 	
 	className: 'itemRow',
+	height: 120
 
 }
-
-
-"timelineRow":{
-	height: 100,
-	//className: 'eventRow',	
-	layout: 'vertical'
-}
-
-"#rowIcon": {
-	touchEnabled: false,
-	backgroundImage: "/images/todo-list.png",
-	left: 5,
-	top: 5,
-	width: 50,
-	height: 56
-},
 
 "#eventContainer": {
 	//width: '100%',
-	height: 85,
+	top:10,
+	bottom:10,
+	height: Ti.UI.SIZE,
 	layout: 'horizontal'
 }
 
@@ -51,7 +39,7 @@
 	height: 60,
 	left: 5,
 	top: 5,
-	backgroundColor: 'red',
+	backgroundColor: '#CC3939',
 	borderRadius: Alloy.Globals.borderRad,
 	layout: 'vertical'
 }
@@ -61,10 +49,10 @@
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE,
 	left: 5,
-	top: 5,
+	right: 5,
+	top: 0,
 	layout: 'vertical',
-	borderRadius: Alloy.Globals.borderRad,
-	backgroundColor: '#ffffff'
+	backgroundColor: '#F2F2F2'
 }
 
 "#dayBox": {
@@ -84,16 +72,18 @@
 	top: 0,
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
 	font: {fontFamily: 'AppIcons', fontSize:14},
-	backgroundColor: 'white'
+	backgroundColor: '#E0E0E0'
 	
 }
 
 "#name": {
 	touchEnabled: false,
 	font: {
+		fontFamily: 'Rosario-Regular',
 		fontSize: "16dp",
 		fontWeight: "bold"
 	},
+	color: "#2C3E52",
 	height: Ti.UI.SIZE,
 	ellipsize: true,
 	wordWrap: false,
@@ -105,6 +95,7 @@
 "#aspects": {
 	touchEnabled: false,
 	font: {fontFamily: 'AppIcons', fontSize:'18dp' },
+	color: "#5E5E5E",
 	left: 5,
 	height: Ti.UI.SIZE,
 	top: 5
@@ -113,8 +104,29 @@
 "#category": {
 	touchEnabled: false,
 	font: {
-		fontSize: "14dp"
+		fontFamily: 'AppIcons',
+		fontSize: 12
 	},
+	backgroundColor: '#E3E3E3',
+	borderRadius: Alloy.Globals.borderRad,
+	height: 18,
+	width: Ti.UI.SIZE,
+	color: "#5E5E5E",
+	left: 5,
+	top: 5
+}
+
+"#location": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'AppIcons',
+		fontSize: 12
+	},
+	backgroundColor: '#E3E3E3',
+	borderRadius: Alloy.Globals.borderRad,
+	height: 18,
+	width: Ti.UI.SIZE,
+	color: "#5E5E5E",
 	left: 5,
 	top: 5
 }

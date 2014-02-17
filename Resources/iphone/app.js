@@ -6,4 +6,8 @@ var dFactor = Ti.Platform.displayCaps.logicalDensityFactor ? Ti.Platform.display
 
 Alloy.Globals.borderRad = 4 * dFactor;
 
+Alloy.Globals.extentedDate = require("extendedDate");
+
+Alloy.Globals.Map = require("ti.map");
+
 Alloy.createController("index");

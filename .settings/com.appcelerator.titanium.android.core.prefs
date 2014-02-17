@@ -1,5 +1,6 @@
+android/ATTR_MINIFY=true
 android/ATTR_PROJECT_NAME=ZiriZiri
-android/abi=armeabi
+android/abi=x86
 android/distribute_path=/Users/adrianomassi/Documents/Dropbox/ZiriZiri Resources/Distibution Android
 android/keystore_alias=ziriziri
 android/keystore_password=ziriziri

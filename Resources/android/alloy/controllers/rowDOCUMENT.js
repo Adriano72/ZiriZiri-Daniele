@@ -9,24 +9,24 @@ function Controller() {
     $.__views.row = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
-        backgroundColor: "#d8d8d8",
+        backgroundColor: "#F2F2F2",
         className: "itemRow",
         layout: "vertical",
         id: "row"
     });
     $.__views.row && $.addTopLevelView($.__views.row);
     $.__views.description = Ti.UI.createLabel({
-        height: 40,
+        height: 30,
         font: {
             fontFamily: "AppIcons",
-            fontSize: 24
+            fontSize: 18
         },
         color: "#F2B32A",
         left: 5,
         top: 5,
         ellipsize: true,
         wordWrap: false,
-        backgroundColor: "#ffffff",
+        backgroundColor: "#E3E3E3",
         borderRadius: Alloy.Globals.borderRad,
         touchEnabled: false,
         width: "95%",

@@ -15,6 +15,7 @@
 						<Label id = "name" text ="{name}"/>
 						<Label id = "aspects" text="{aspects}"/>
 						<Label id = "category" text ="{category}"/>
+						<Label id = "location" text ="{location}"/>
 					</View>
 				</View>
 			</TableViewRow>

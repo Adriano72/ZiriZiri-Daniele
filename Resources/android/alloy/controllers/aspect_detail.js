@@ -22,7 +22,6 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    Ti.API.info("ARGS CODE: " + args.kind.code);
     var rows = [];
     switch (args.kind.code) {
       case "CASHFLOWDATATYPE_CODE":
@@ -46,31 +45,37 @@ function Controller() {
 
       case "DOCUMENTDATATYPE_CODE":
         var riga = Alloy.createController("rowDetailDOCUMENT", {
-            id_code: key,
-            description: value.description,
-            format: value.data.format.name,
-            type: value.data.format.type,
-            title: value.data.title
+            description: args.name,
+            category: _.isNull(args.category) ? "Non disponibile" : args.category.name,
+            format: _.isNull(args.data.format) ? "Non disponibile" : args.data.format.name,
+            type: _.isNull(args.data.format) ? "Non disponibile" : args.data.format.type,
+            name: args.data.name,
+            preview: args.data.preview,
+            size: args.data.size,
+            timestamp: args.data.timestamp
         }).getView();
         rows.push(riga);
         break;
 
       case "LINKDATATYPE_CODE":
         var riga = Alloy.createController("rowDetailLINK", {
-            id_code: key,
-            description: value.description,
-            type: value.data.format.type,
-            title: value.data.title,
-            content: value.data.content
+            name: args.name,
+            category: _.isNull(args.category) ? "Non disponibile" : args.category,
+            tags: _.isNull(args.tags) ? null : args.tags,
+            type: _.isNull(args.data.format) ? "Non disponibile" : args.data.format.type,
+            content: args.data.content,
+            preview: args.data.preview
         }).getView();
         rows.push(riga);
         break;
 
       case "NOTEDATATYPE_CODE":
+        Ti.API.info("TESTO NOTA " + args.data.content);
         var riga = Alloy.createController("rowDetailNOTE", {
-            id_code: key,
-            description: value.data.title,
-            timestamp: value.data.timestamp
+            name: args.name,
+            category: _.isNull(args.category) ? "Non disponibile" : args.category.name,
+            timestamp: args.data.timestamp,
+            content: args.data.content
         }).getView();
         rows.push(riga);
     }

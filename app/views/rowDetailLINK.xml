@@ -1,0 +1,22 @@
+<Alloy>
+	<TableViewSection>
+		<TableViewRow class="detailAspectRow">
+			<Label class="rowLabel" id="name"/>		
+		</TableViewRow>
+		<TableViewRow class="detailAspectRow">
+			<Label class="rowLabel" id="category"/>		
+		</TableViewRow>
+		<TableViewRow class="detailAspectRow">
+			<Label class="rowLabel" id="tags"/>		
+		</TableViewRow>
+		<TableViewRow class="detailAspectRow">
+			<Label class="rowLabel" id="type"/>		
+		</TableViewRow>
+		<TableViewRow class="detailAspectRow">
+			<Label class="rowLabel" id="content"/>		
+		</TableViewRow>
+		<TableViewRow class="detailAspectRow">
+			<ImageView id="img_preview"/>
+		</TableViewRow>
+	</TableViewSection>
+</Alloy>

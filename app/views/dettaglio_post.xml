@@ -1,6 +1,6 @@
 <Alloy>
 	<Window class="container" title = "Dettaglio Post">
-		
+
 		<View id="detailHeader">
 			<View id="dateBox">
 				<Label id="dayBox"/>
@@ -8,12 +8,14 @@
 			</View>
 			<View id="headerBox">
 				<Label id = "name"/>
-				
+				<Label id = "category"/>
+				<Label id = "location"/>
 			</View>
 		</View>
-		
-		<TableView id="aspectsTable" onClick = "aspectDetail"/>	
-		
-		
+		<View id="bottom_container">
+			<View id="mapview" ns="Alloy.Globals.Map"/>
+			<TableView id="aspectsTable" onClick = "aspectDetail"/>
+		</View>
+
 	</Window>
 </Alloy>
