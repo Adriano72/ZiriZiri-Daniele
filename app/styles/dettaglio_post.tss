@@ -1,6 +1,6 @@
 
 ".container": {
-  	backgroundColor: '#F2F2F2',
+  	backgroundColor: '#F2F2F2'
 	//layout: "vertical",
 }
 
@@ -59,7 +59,7 @@
 "#headerBox":{
 	
 	width: Ti.UI.FILL,
-	height: 80,
+	height: 100,
 	layout: 'vertical',
 	left: 5,
 	top: 0

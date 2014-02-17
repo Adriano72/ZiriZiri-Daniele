@@ -3,7 +3,7 @@ var args = arguments[0] || {};
 Ti.API.info("ARGS: " + args.data.id);
 
 var creationDate = new Date(args.data.referenceTime);
-var category = (_.isNull(args.data.category) || _.isUndefined(args.data.category)) ? "categoria non definita" : args.data.category.name;
+var category = (_.isNull(args.data.category) || _.isUndefined(args.data.category)) ? "" : " " + icons.tag + " " +args.data.category.name;
 
 if (!(_.isNull(args.data.location))) {
 	
@@ -33,7 +33,7 @@ if (!(_.isNull(args.data.location))) {
 $.dayBox.text = creationDate.getDate();
 $.monthBox.text = creationDate.getCMonth();
 $.name.text = args.data.name;
-$.category.text = " " + icons.tag + " " + category + " ";
+$.category.text = category;
 
 var rows = [];
 

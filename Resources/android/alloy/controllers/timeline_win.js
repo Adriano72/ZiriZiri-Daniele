@@ -180,9 +180,9 @@ function Controller() {
     net.getData(function(timelineData) {
         _.forEach(timelineData.data, function(value) {
             var timeline = Alloy.createModel("events", value);
-            var descrizioneCategoria = _.isNull(value.category) || _.isUndefined(value.category.name) ? "categoria non definita" : value.category.name;
             var creationDate = new Date(value.referenceTime);
-            var location = _.isNull(value.location) ? null : value.location.name;
+            if (!_.isNull(value.location)) var locationRow = " " + icons.map_marker + " " + value.location.name + " ";
+            if (!_.isNull(value.category)) var categoriaRow = " " + icons.tag + " " + value.category.name + " ";
             var aspectObj = {
                 finance: 0,
                 documents: 0,
@@ -208,15 +208,14 @@ function Controller() {
                 }
             });
             _.isNull(value.aspects) || _.isUndefined(value.aspects) ? "no aspects" : value.aspects;
-            Ti.API.info("LOCATIOM: " + location);
             var timeline = Alloy.createModel("events", {
                 id: value.id,
                 name: value.name,
                 date: creationDate.getCMonth(),
                 day: creationDate.getDate(),
                 month: creationDate.getCMonth().toUpperCase(),
-                category: " " + icons.tag + " " + descrizioneCategoria + " ",
-                location: " " + icons.map_marker + " " + location + " ",
+                category: categoriaRow,
+                location: locationRow,
                 aspects: icons.bar_chart_alt + " " + aspectObj.finance + " " + icons.file_text_alt + " " + aspectObj.documents + " " + icons.link + " " + aspectObj.links + " " + icons.edit_sign + " " + aspectObj.notes
             });
             timelineList.add(timeline);
