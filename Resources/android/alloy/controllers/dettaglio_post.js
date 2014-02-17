@@ -1,4 +1,7 @@
 function Controller() {
+    function closeActivityIndicator() {
+        Ti.App.fireEvent("loading_done");
+    }
     function aspectDetail(e) {
         Alloy.createController("aspect_detail", args.data.aspects[e.source.id_code]).getView().open();
     }
@@ -16,6 +19,7 @@ function Controller() {
         id: "dettaglio_post"
     });
     $.__views.dettaglio_post && $.addTopLevelView($.__views.dettaglio_post);
+    closeActivityIndicator ? $.__views.dettaglio_post.addEventListener("open", closeActivityIndicator) : __defers["$.__views.dettaglio_post!open!closeActivityIndicator"] = true;
     $.__views.detailHeader = Ti.UI.createView({
         layout: "horizontal",
         top: 5,
@@ -212,6 +216,7 @@ function Controller() {
         }
     });
     $.aspectsTable.setData(rows);
+    __defers["$.__views.dettaglio_post!open!closeActivityIndicator"] && $.__views.dettaglio_post.addEventListener("open", closeActivityIndicator);
     __defers["$.__views.aspectsTable!click!aspectDetail"] && $.__views.aspectsTable.addEventListener("click", aspectDetail);
     _.extend($, exports);
 }

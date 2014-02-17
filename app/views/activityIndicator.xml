@@ -1,0 +1,7 @@
+<Alloy>
+    <Window class="container" onOpen="showIndicator">
+
+        <!-- Define the styling properties in the TSS file -->
+        <ActivityIndicator id="spinner" message="  Loading..."/>
+    </Window>
+</Alloy>

@@ -1,7 +1,7 @@
 <Alloy>
 	
 	<Collection src = "events">
-	<Window class="container" title = "Timeline">
+	<Window class="container" title = "Timeline" onOpen="showSpinner">
 		
 		<TableView id = "timelineTable" dataCollection = "events" >
 			<TableViewRow onClick = "mostraDettaglioEvento">

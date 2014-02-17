@@ -107,7 +107,13 @@ _.forEach(args.data.aspects, function(value, key) {
 
 $.aspectsTable.setData(rows);
 
+function closeActivityIndicator(){
+	
+	Ti.App.fireEvent("loading_done");
+};
+
 function aspectDetail(e) {
+	
 
 	Alloy.createController('aspect_detail', args.data.aspects[e.source.id_code]).getView().open();
 

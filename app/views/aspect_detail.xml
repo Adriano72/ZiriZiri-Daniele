@@ -1,5 +1,5 @@
 <Alloy>
-	<Window class="container" title = "Dettaglio Aspect">
+	<Window class="container"  title = "Dettaglio Aspect">
 		
 		
 		<TableView id="aspectsDetailTable"/>

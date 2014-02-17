@@ -2,6 +2,10 @@ var args = arguments[0] || {};
 
 //$.index.open();
 
+function showSpinner(){
+	Alloy.Globals.showSpinner();
+};
+
 var timelineList = Alloy.Collections.events;
 //todolist.fetch();
 
@@ -20,10 +24,10 @@ net.getData(function(timelineData) {
 		var timeline = Alloy.createModel("events", value);
 
 		var descrizioneCategoria = (_.isNull(value.category) || _.isUndefined(value.category.name)) ? "categoria non definita" : value.category.name;
-		
+
 		var creationDate = new Date(value.referenceTime);
-		
-		var location = (_.isNull(value.location))?null:value.location.name;
+
+		var location = (_.isNull(value.location)) ? null : value.location.name;
 
 		var aspectObj = {
 
@@ -36,49 +40,49 @@ net.getData(function(timelineData) {
 		if (!(_.isNull(value.aspects) || _.isUndefined(value.aspects))) {
 
 			_.forEach(value.aspects, function(obj, key) {
-				
+
 				switch (obj.kind.code) {
-					
+
 					case "CASHFLOWDATATYPE_CODE":
 
-						aspectObj.finance+=1;
+						aspectObj.finance += 1;
 						break;
 
 					case "DOCUMENTDATATYPE_CODE":
 
-						aspectObj.documents+=1;
+						aspectObj.documents += 1;
 						break;
 
 					case "NOTEDATATYPE_CODE":
 
-						aspectObj.notes+=1;
+						aspectObj.notes += 1;
 						break;
 
 					case "LINKDATATYPE_CODE":
 
-						aspectObj.links+=1;
+						aspectObj.links += 1;
 						break;
 				}
 
 			});
 
 		}
-		
+
 		//Ti.API.info("FINANZA: "+aspectObj.finance+" DOCUMENTI: "+aspectObj.documents+ " LINKS: "+aspectObj.links+" NOTE: "+aspectObj.notes);
-		
+
 		var aspetti = (_.isNull(value.aspects) || _.isUndefined(value.aspects)) ? "no aspects" : value.aspects;
 
 		Ti.API.info("LOCATIOM: " + location);
 
 		var timeline = Alloy.createModel('events', {
-			id: value.id,
+			id : value.id,
 			name : value.name,
-			date: creationDate.getCMonth(),
-			day: creationDate.getDate(),
-			month: creationDate.getCMonth().toUpperCase(),
-			category : " "+icons.tag+" "+ descrizioneCategoria+" ",
-			location: " "+icons.map_marker+" "+location+" ",
-			aspects : icons.bar_chart_alt+" "+aspectObj.finance+" "+icons.file_text_alt+" "+aspectObj.documents+" "+icons.link+" "+aspectObj.links+" "+icons.edit_sign+" "+aspectObj.notes
+			date : creationDate.getCMonth(),
+			day : creationDate.getDate(),
+			month : creationDate.getCMonth().toUpperCase(),
+			category : " " + icons.tag + " " + descrizioneCategoria + " ",
+			location : " " + icons.map_marker + " " + location + " ",
+			aspects : icons.bar_chart_alt + " " + aspectObj.finance + " " + icons.file_text_alt + " " + aspectObj.documents + " " + icons.link + " " + aspectObj.links + " " + icons.edit_sign + " " + aspectObj.notes
 		});
 
 		timelineList.add(timeline);
@@ -94,16 +98,16 @@ net.getData(function(timelineData) {
 });
 
 function mostraDettaglioEvento(e) {
-	
+
+	showSpinner();
+
 	var selEvent = timelineList.at(e.index).attributes;
-	
+
 	net.getPost(selEvent.id, function(postData) {
 		Alloy.createController("dettaglio_post", postData).getView().open();
 	});
-	
+
 	//Ti.API.info("SELECTED DATA ID: "+selEvent.id);
-	
-	
 
 	/*
 	 var feedClicked = feedlist.at(e.index).attributes;

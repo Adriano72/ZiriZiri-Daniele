@@ -82,4 +82,5 @@ switch (args.kind.code) {
 		break;
 };
 
+
 $.aspectsDetailTable.setData(rows);

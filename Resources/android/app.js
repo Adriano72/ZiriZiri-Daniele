@@ -10,6 +10,11 @@ Alloy.Globals.extentedDate = require("extendedDate");
 
 Alloy.Globals.Map = require("ti.map");
 
+Alloy.Globals.showSpinner = function() {
+    var loadingWin = Alloy.createController("activityIndicator").getView();
+    loadingWin.open();
+};
+
 var rc = Alloy.Globals.Map.isGooglePlayServicesAvailable();
 
 switch (rc) {

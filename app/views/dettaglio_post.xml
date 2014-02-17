@@ -1,5 +1,5 @@
 <Alloy>
-	<Window class="container" title = "Dettaglio Post">
+	<Window class="container"  onOpen="closeActivityIndicator" title = "Dettaglio Post">
 
 		<View id="detailHeader">
 			<View id="dateBox">

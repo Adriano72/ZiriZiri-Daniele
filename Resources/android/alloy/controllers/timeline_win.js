@@ -135,7 +135,11 @@ function Controller() {
         }
         $.__views.timelineTable.setData(rows);
     }
+    function showSpinner() {
+        Alloy.Globals.showSpinner();
+    }
     function mostraDettaglioEvento(e) {
+        showSpinner();
         var selEvent = timelineList.at(e.index).attributes;
         net.getPost(selEvent.id, function(postData) {
             Alloy.createController("dettaglio_post", postData).getView().open();
@@ -158,6 +162,7 @@ function Controller() {
         id: "timeline_win"
     });
     $.__views.timeline_win && $.addTopLevelView($.__views.timeline_win);
+    showSpinner ? $.__views.timeline_win.addEventListener("open", showSpinner) : __defers["$.__views.timeline_win!open!showSpinner"] = true;
     $.__views.timelineTable = Ti.UI.createTableView({
         separatorColor: "#BFBFBF",
         id: "timelineTable"
@@ -217,6 +222,7 @@ function Controller() {
             timelineList.add(timeline);
         });
     });
+    __defers["$.__views.timeline_win!open!showSpinner"] && $.__views.timeline_win.addEventListener("open", showSpinner);
     __defers["__alloyId36!click!mostraDettaglioEvento"] && __alloyId36.addEventListener("click", mostraDettaglioEvento);
     _.extend($, exports);
 }
