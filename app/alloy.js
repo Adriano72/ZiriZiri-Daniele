@@ -24,6 +24,7 @@ Alloy.Globals.showSpinner = function(){
     loadingWin.open();
 };
 
+
 var rc = Alloy.Globals.Map.isGooglePlayServicesAvailable();
 
 switch (rc) {
