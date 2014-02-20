@@ -33,51 +33,105 @@ function Controller() {
         id: "description"
     });
     $.__views.row.add($.__views.description);
-    $.__views.title = Ti.UI.createLabel({
-        height: Ti.UI.SIZE,
+    $.__views.__alloyId54 = Ti.UI.createView({
+        height: 40,
+        touchEnabled: false,
+        layout: "horizontal",
+        id: "__alloyId54"
+    });
+    $.__views.row.add($.__views.__alloyId54);
+    $.__views.__alloyId55 = Ti.UI.createLabel({
+        left: 10,
+        height: 40,
         font: {
-            fontFamily: "AppIcons",
+            fontSize: 16
+        },
+        touchEnabled: false,
+        color: "#969696",
+        text: "Titolo: ",
+        id: "__alloyId55"
+    });
+    $.__views.__alloyId54.add($.__views.__alloyId55);
+    $.__views.title = Ti.UI.createLabel({
+        height: 40,
+        font: {
             fontSize: 16
         },
         left: 5,
-        top: 5,
+        right: 5,
         touchEnabled: false,
         width: Ti.UI.FILL,
         id: "title"
     });
-    $.__views.row.add($.__views.title);
-    $.__views.type = Ti.UI.createLabel({
-        height: Ti.UI.SIZE,
+    $.__views.__alloyId54.add($.__views.title);
+    $.__views.__alloyId56 = Ti.UI.createView({
+        height: 40,
+        touchEnabled: false,
+        layout: "horizontal",
+        id: "__alloyId56"
+    });
+    $.__views.row.add($.__views.__alloyId56);
+    $.__views.__alloyId57 = Ti.UI.createLabel({
+        left: 10,
+        height: 40,
         font: {
-            fontFamily: "AppIcons",
+            fontSize: 16
+        },
+        touchEnabled: false,
+        color: "#969696",
+        text: "Tipo: ",
+        id: "__alloyId57"
+    });
+    $.__views.__alloyId56.add($.__views.__alloyId57);
+    $.__views.type = Ti.UI.createLabel({
+        height: 40,
+        font: {
             fontSize: 16
         },
         left: 5,
-        top: 5,
+        right: 5,
         touchEnabled: false,
         width: Ti.UI.FILL,
         id: "type"
     });
-    $.__views.row.add($.__views.type);
-    $.__views.content = Ti.UI.createLabel({
-        height: Ti.UI.SIZE,
+    $.__views.__alloyId56.add($.__views.type);
+    $.__views.__alloyId58 = Ti.UI.createView({
+        height: 40,
+        touchEnabled: false,
+        layout: "horizontal",
+        id: "__alloyId58"
+    });
+    $.__views.row.add($.__views.__alloyId58);
+    $.__views.__alloyId59 = Ti.UI.createLabel({
+        left: 10,
+        height: 40,
         font: {
-            fontFamily: "AppIcons",
+            fontSize: 16
+        },
+        touchEnabled: false,
+        color: "#969696",
+        text: "Contenuto: ",
+        id: "__alloyId59"
+    });
+    $.__views.__alloyId58.add($.__views.__alloyId59);
+    $.__views.content = Ti.UI.createLabel({
+        height: 40,
+        font: {
             fontSize: 16
         },
         left: 5,
-        top: 5,
+        right: 5,
         touchEnabled: false,
         width: Ti.UI.FILL,
         id: "content"
     });
-    $.__views.row.add($.__views.content);
+    $.__views.__alloyId58.add($.__views.content);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
     $.row.id_code = args.id_code, $.description.text = "  " + icons.link + "  " + args.description;
-    $.title.text = "Titolo: " + args.title;
-    $.type.text = "Tipo: " + args.type, $.content.text = "Contenuto: " + args.content;
+    $.title.text = args.title;
+    $.type.text = args.type, $.content.text = args.content;
     _.extend($, exports);
 }
 

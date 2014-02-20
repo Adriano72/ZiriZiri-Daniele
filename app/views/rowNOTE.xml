@@ -1,6 +1,9 @@
 <Alloy>
 	<TableViewRow id="row">
 		<Label id="description"/>
-		<Label id="data"/>
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Data: ">
+			<Label class="block_data" id="data"/>
+		</View>
 	</TableViewRow>
 </Alloy>

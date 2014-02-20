@@ -4,6 +4,6 @@ var args = arguments[0] || {};
 
 $.row.id_code = args.id_code,
 $.description.text = '  '+icons.link+"  "+args.description;
-$.title.text = "Titolo: "+args.title;
-$.type.text = "Tipo: "+ args.type,
-$.content.text = "Contenuto: "+args.content;
+$.title.text = args.title;
+$.type.text = args.type,
+$.content.text = args.content;

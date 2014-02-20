@@ -26,14 +26,29 @@
     width: "95%"
 }
 
-"#data": {
-    height: Ti.UI.SIZE,
-    font: {
-    	fontFamily: 'AppIcons',
+".block_container":{
+	height: 40,
+	touchEnabled: false,
+}
+
+".block_label":{
+	left: 10,
+	height: 40,
+	font: {    	
+        fontSize: 16
+    },
+    touchEnabled: false,
+	color: '#969696'
+}
+
+".block_data": {
+	height: 40,
+    font: {    	
         fontSize: 16
     },
     left: 5,
-    top: 5,
+    right: 5,
     touchEnabled: false,
    	width: Ti.UI.FILL
+	
 }

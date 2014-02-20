@@ -26,38 +26,29 @@
     width: "95%"
 }
 
-"#type": {
-    height: Ti.UI.SIZE,
-    font: {
-    	fontFamily: 'AppIcons',
-        fontSize: 16
-    },
-    left: 5,
-    top: 5,
-    touchEnabled: false,
-   	width: Ti.UI.FILL
+".block_container":{
+	height: 40,
+	touchEnabled: false,
 }
 
-"#title": {
-    height: Ti.UI.SIZE,
-    font: {
-    	fontFamily: 'AppIcons',
+".block_label":{
+	left: 10,
+	height: 40,
+	font: {    	
         fontSize: 16
     },
-    left: 5,
-    top: 5,
     touchEnabled: false,
-   	width: Ti.UI.FILL
+	color: '#969696'
 }
 
-"#content": {
-    height: Ti.UI.SIZE,
-    font: {
-    	fontFamily: 'AppIcons',
+".block_data": {
+	height: 40,
+    font: {    	
         fontSize: 16
     },
     left: 5,
-    top: 5,
+    right: 5,
     touchEnabled: false,
    	width: Ti.UI.FILL
+	
 }

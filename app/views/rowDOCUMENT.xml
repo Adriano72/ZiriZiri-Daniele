@@ -1,8 +1,17 @@
 <Alloy>
 	<TableViewRow id="row">
 		<Label id="description"/>
-		<Label id="titolo"/>
-		<Label id="format"/>
-		<Label id="type"/>		
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Titolo: ">
+			<Label class="block_data" id="titolo"/>
+		</View>
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Formato: ">
+			<Label class="block_data" id="format"/>
+		</View>
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Tipo: ">
+			<Label class="block_data" id="type"/>
+		</View>
 	</TableViewRow>
 </Alloy>

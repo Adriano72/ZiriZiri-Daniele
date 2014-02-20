@@ -1,46 +1,52 @@
 <Alloy>
-	<TableViewSection>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="description"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="category"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="importo"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="dataOperazione"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="dataValuta"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="flagOrdinarioStraordinario"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="category"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="statoMovimento"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="tipoMovimento"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="tipoVariabilita"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="modalitaPagamento"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="strumentoPagamentoIncasso"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="fonteLiquidita"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="tipoFonteLiquidita"/>		
-		</TableViewRow>
-	</TableViewSection>
+	<TableViewRow id="row">
+		<Label id="description"/>
+		<Label id="category"/>
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Importo: ">
+			<Label class="block_data" id="importo"/>
+		</View>
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Data operazione: ">
+			<Label class="block_data" id="dataOperazione"/>
+		</View>
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Data valuta: ">
+			<Label class="block_data" id="dataValuta"/>
+		</View>
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Ord/Straord: ">
+			<Label class="block_data" id="flagOrdinarioStraordinario"/>
+		</View>
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Stato movimento: ">
+			<Label class="block_data" id="statoMovimento"/>
+		</View>
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Tipo movimento: ">
+			<Label class="block_data" id="tipoMovimento"/>
+		</View>
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Tipo variabilità: ">
+			<Label class="block_data" id="tipoVariabilita"/>
+		</View>
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Modalità pagamento: ">
+			<Label class="block_data" id="modalitaPagamento"/>
+		</View>
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Stumento pagamento/incasso: ">
+			<Label class="block_data" id="strumentoPagamentoIncasso"/>
+		</View>
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Fonte liquidità: ">
+			<Label class="block_data" id="fonteLiquidita"/>
+		</View>
+		<View class="block_container" layout="horizontal">
+			<Label class="block_label" text="Tipo fonte Liquidità: ">
+			<Label class="block_data" id="tipoFonteLiquidita"/>
+		</View>
+	</TableViewRow>
 </Alloy>
+
+

@@ -4,7 +4,7 @@ var args = arguments[0] || {};
 
 $.row.id_code = args.id_code,
 $.description.text = '  '+icons.edit_sign+"  "+args.description;
-$.data.text = "Data: "+composeDate(args.timestamp);
+$.data.text = composeDate(args.timestamp);
 
 function composeDate(d_par){
 	

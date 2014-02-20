@@ -65,6 +65,7 @@ function Controller() {
             fontSize: 16
         },
         left: 5,
+        right: 5,
         touchEnabled: false,
         width: Ti.UI.FILL,
         id: "importo"
@@ -95,6 +96,7 @@ function Controller() {
             fontSize: 16
         },
         left: 5,
+        right: 5,
         touchEnabled: false,
         width: Ti.UI.FILL,
         id: "dataOperazione"
@@ -125,6 +127,7 @@ function Controller() {
             fontSize: 16
         },
         left: 5,
+        right: 5,
         touchEnabled: false,
         width: Ti.UI.FILL,
         id: "dataValuta"
@@ -155,6 +158,7 @@ function Controller() {
             fontSize: 16
         },
         left: 5,
+        right: 5,
         touchEnabled: false,
         width: Ti.UI.FILL,
         id: "codTipoMovimento"

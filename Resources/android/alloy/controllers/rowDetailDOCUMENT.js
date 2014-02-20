@@ -16,10 +16,10 @@ function Controller() {
     $.__views.rowDetailDOCUMENT = Ti.UI.createTableViewSection({
         id: "rowDetailDOCUMENT"
     });
-    $.__views.__alloyId22 = Ti.UI.createTableViewRow({
-        id: "__alloyId22"
+    $.__views.__alloyId36 = Ti.UI.createTableViewRow({
+        id: "__alloyId36"
     });
-    $.__views.rowDetailDOCUMENT.add($.__views.__alloyId22);
+    $.__views.rowDetailDOCUMENT.add($.__views.__alloyId36);
     $.__views.description = Ti.UI.createLabel({
         width: "95%",
         height: 40,
@@ -38,11 +38,11 @@ function Controller() {
         touchEnabled: false,
         id: "description"
     });
-    $.__views.__alloyId22.add($.__views.description);
-    $.__views.__alloyId23 = Ti.UI.createTableViewRow({
-        id: "__alloyId23"
+    $.__views.__alloyId36.add($.__views.description);
+    $.__views.__alloyId37 = Ti.UI.createTableViewRow({
+        id: "__alloyId37"
     });
-    $.__views.rowDetailDOCUMENT.add($.__views.__alloyId23);
+    $.__views.rowDetailDOCUMENT.add($.__views.__alloyId37);
     $.__views.category = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -55,11 +55,11 @@ function Controller() {
         },
         id: "category"
     });
-    $.__views.__alloyId23.add($.__views.category);
-    $.__views.__alloyId24 = Ti.UI.createTableViewRow({
-        id: "__alloyId24"
+    $.__views.__alloyId37.add($.__views.category);
+    $.__views.__alloyId38 = Ti.UI.createTableViewRow({
+        id: "__alloyId38"
     });
-    $.__views.rowDetailDOCUMENT.add($.__views.__alloyId24);
+    $.__views.rowDetailDOCUMENT.add($.__views.__alloyId38);
     $.__views.format = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -72,11 +72,11 @@ function Controller() {
         },
         id: "format"
     });
-    $.__views.__alloyId24.add($.__views.format);
-    $.__views.__alloyId25 = Ti.UI.createTableViewRow({
-        id: "__alloyId25"
+    $.__views.__alloyId38.add($.__views.format);
+    $.__views.__alloyId39 = Ti.UI.createTableViewRow({
+        id: "__alloyId39"
     });
-    $.__views.rowDetailDOCUMENT.add($.__views.__alloyId25);
+    $.__views.rowDetailDOCUMENT.add($.__views.__alloyId39);
     $.__views.type = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -89,11 +89,11 @@ function Controller() {
         },
         id: "type"
     });
-    $.__views.__alloyId25.add($.__views.type);
-    $.__views.__alloyId26 = Ti.UI.createTableViewRow({
-        id: "__alloyId26"
+    $.__views.__alloyId39.add($.__views.type);
+    $.__views.__alloyId40 = Ti.UI.createTableViewRow({
+        id: "__alloyId40"
     });
-    $.__views.rowDetailDOCUMENT.add($.__views.__alloyId26);
+    $.__views.rowDetailDOCUMENT.add($.__views.__alloyId40);
     $.__views.name = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -106,11 +106,11 @@ function Controller() {
         },
         id: "name"
     });
-    $.__views.__alloyId26.add($.__views.name);
-    $.__views.__alloyId27 = Ti.UI.createTableViewRow({
-        id: "__alloyId27"
+    $.__views.__alloyId40.add($.__views.name);
+    $.__views.__alloyId41 = Ti.UI.createTableViewRow({
+        id: "__alloyId41"
     });
-    $.__views.rowDetailDOCUMENT.add($.__views.__alloyId27);
+    $.__views.rowDetailDOCUMENT.add($.__views.__alloyId41);
     $.__views.size = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -123,11 +123,11 @@ function Controller() {
         },
         id: "size"
     });
-    $.__views.__alloyId27.add($.__views.size);
-    $.__views.__alloyId28 = Ti.UI.createTableViewRow({
-        id: "__alloyId28"
+    $.__views.__alloyId41.add($.__views.size);
+    $.__views.__alloyId42 = Ti.UI.createTableViewRow({
+        id: "__alloyId42"
     });
-    $.__views.rowDetailDOCUMENT.add($.__views.__alloyId28);
+    $.__views.rowDetailDOCUMENT.add($.__views.__alloyId42);
     $.__views.timestamp = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -140,17 +140,17 @@ function Controller() {
         },
         id: "timestamp"
     });
-    $.__views.__alloyId28.add($.__views.timestamp);
-    $.__views.__alloyId29 = Ti.UI.createTableViewRow({
-        id: "__alloyId29"
+    $.__views.__alloyId42.add($.__views.timestamp);
+    $.__views.__alloyId43 = Ti.UI.createTableViewRow({
+        id: "__alloyId43"
     });
-    $.__views.rowDetailDOCUMENT.add($.__views.__alloyId29);
+    $.__views.rowDetailDOCUMENT.add($.__views.__alloyId43);
     $.__views.img_preview = Ti.UI.createImageView({
         width: "95%",
         height: 300,
         id: "img_preview"
     });
-    $.__views.__alloyId29.add($.__views.img_preview);
+    $.__views.__alloyId43.add($.__views.img_preview);
     $.__views.rowDetailDOCUMENT && $.addTopLevelView($.__views.rowDetailDOCUMENT);
     exports.destroy = function() {};
     _.extend($, $.__views);

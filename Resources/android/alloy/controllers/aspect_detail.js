@@ -7,7 +7,7 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.aspect_detail = Ti.UI.createWindow({
-        backgroundColor: "#d8d8d8",
+        backgroundColor: "#F2F2F2",
         title: "Dettaglio Aspect",
         id: "aspect_detail"
     });

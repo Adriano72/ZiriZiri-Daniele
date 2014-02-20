@@ -47,6 +47,7 @@
         fontSize: 16
     },
     left: 5,
+    right: 5,
     touchEnabled: false,
    	width: Ti.UI.FILL
 	
