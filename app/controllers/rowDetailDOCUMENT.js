@@ -8,12 +8,12 @@ var blobPreview = Ti.Utils.base64decode(args.preview.substr(args.preview.indexOf
 
 //$.row.id_code = args.id_code,
 $.description.text = '  '+icons.file_text_alt+"  "+args.description;
-$.category.text = "Categoria: "+args.category;
-$.format.text = "Formato: "+args.format;
-$.type.text = "Tipo: "+args.type;
-$.name.text = "Nome: "+args.name;
-$.size.text = "Dimensioni: "+args.size;
-$.timestamp.text = "Timestamp: "+ composeDate(args.timestamp);
+$.category.text = " " + icons.tag + " " +args.category;
+$.format.text = args.format;
+$.type.text = args.type;
+$.name.text = args.name;
+$.size.text = args.size;
+$.timestamp.text = composeDate(args.timestamp);
 $.img_preview.setImage(blobPreview);
 
 

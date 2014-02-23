@@ -1,48 +1,84 @@
-"detailAspectRow": {
+"#row": {
 	
 	height: Ti.UI.SIZE,
 	width: Ti.UI.FILL,
-	backgroundColor: '#d8d8d8',
+	backgroundColor: '#F2F2F2',
     className: 'itemRow',
     layout: 'vertical'
     
 } 
 
-".rowLabel": {			
-	
-	width: '100%',
-	height: Ti.UI.SIZE,
-	left: 5,
-	top: 5,
-	bottom: 5,
-	font: {
-    	fontFamily: 'AppIcons',
-    	
-        fontSize: 18
-   }
-   //textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT,
-}
-
 "#description": {
-    height: 40,
+    height: 30,
     font: {
     	fontFamily: 'AppIcons',
     	
-        fontSize: 24
+        fontSize: 18
     },
-    color: "#F2B32A",
+    color: "#DB4C3F",
     left: 5,
+    right: 5,
     top: 5,
     ellipsize: true,
     wordWrap: false,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#E3E3E3',
     borderRadius: Alloy.Globals.borderRad,
     touchEnabled: false,
-    width: "95%"
+    width: Ti.UI.FILL
+}
+
+"#category": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'AppIcons',
+		fontSize: 12
+	},
+	backgroundColor: '#E3E3E3',
+	borderRadius: Alloy.Globals.borderRad,
+	height: 18,
+	width: Ti.UI.SIZE,
+	color: "#5E5E5E",
+	left: 5,
+	top: 5,
+	bottom: 10
+}
+
+".block_container":{
+	height: Ti.UI.SIZE,
+	touchEnabled: false,
+	layout: 'vertical',
+	backgroundColor: '#DEDEDE'
+}
+
+".block_label":{
+	height: 20,
+	width: Ti.UI.FILL,
+	backgroundColor: '#787878',
+	top: 0,
+	font: {    	
+        fontSize: 14,
+        fontFamily: 'Rosario-Regular'
+    },
+    touchEnabled: false,
+	color: '#FFFFFF'
+}
+
+".block_data": {
+	height: Ti.UI.SIZE,
+    font: {    	
+        fontSize: 16
+    },
+    left: 20,
+    right: 5,
+    top:5,
+    bottom: 5,
+    touchEnabled: false,
+   	width: Ti.UI.FILL
+	
 }
 
 "#img_preview": {
-	
+	top: 5,
 	width: "95%",
 	height: 300
 	

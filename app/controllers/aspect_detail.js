@@ -13,7 +13,7 @@ switch (args.kind.code) {
 			
 			
 			description : args.description,
-			category: (_.isNull(args.category))?"Non disponibile":args.category.name,
+			category: (_.isNull(args.category))?null:args.category.name,
 			importo: args.data.importo,
 			dataOperazione : args.data.dataOperazione,
 			dataValuta : args.data.dataValuta,
@@ -36,7 +36,7 @@ switch (args.kind.code) {
 		var riga = Alloy.createController('rowDetailDOCUMENT', {
 			
 			description : args.name,
-			category: (_.isNull(args.category))?"Non disponibile":args.category.name,
+			category: (_.isNull(args.category))?null:args.category.name,
 			format: (_.isNull(args.data.format))?"Non disponibile":args.data.format.name,
 			type: (_.isNull(args.data.format))?"Non disponibile":args.data.format.type,
 			name : args.data.name,
@@ -54,7 +54,7 @@ switch (args.kind.code) {
 		var riga = Alloy.createController('rowDetailLINK', {
 
 			name: args.name,
-			category: (_.isNull(args.category))?"Non disponibile":args.category,
+			category: (_.isNull(args.category))?null:args.category,
 			tags: (_.isNull(args.tags))?null:args.tags,
 			type: (_.isNull(args.data.format))?"Non disponibile":args.data.format.type,
 			content: args.data.content,
@@ -73,7 +73,7 @@ switch (args.kind.code) {
 		var riga = Alloy.createController('rowDetailNOTE', {
 
 			name: args.name,
-			category: (_.isNull(args.category))?"Non disponibile":args.category.name,
+			category: (_.isNull(args.category))?null:args.category.name,
 			timestamp: args.data.timestamp,
 			content: args.data.content
 

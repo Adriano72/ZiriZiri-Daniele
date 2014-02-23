@@ -9,10 +9,10 @@ function Controller() {
     $.__views.rowDetailLINK = Ti.UI.createTableViewSection({
         id: "rowDetailLINK"
     });
-    $.__views.__alloyId44 = Ti.UI.createTableViewRow({
-        id: "__alloyId44"
+    $.__views.__alloyId48 = Ti.UI.createTableViewRow({
+        id: "__alloyId48"
     });
-    $.__views.rowDetailLINK.add($.__views.__alloyId44);
+    $.__views.rowDetailLINK.add($.__views.__alloyId48);
     $.__views.name = Ti.UI.createLabel({
         width: "95%",
         height: 40,
@@ -31,11 +31,11 @@ function Controller() {
         touchEnabled: false,
         id: "name"
     });
-    $.__views.__alloyId44.add($.__views.name);
-    $.__views.__alloyId45 = Ti.UI.createTableViewRow({
-        id: "__alloyId45"
+    $.__views.__alloyId48.add($.__views.name);
+    $.__views.__alloyId49 = Ti.UI.createTableViewRow({
+        id: "__alloyId49"
     });
-    $.__views.rowDetailLINK.add($.__views.__alloyId45);
+    $.__views.rowDetailLINK.add($.__views.__alloyId49);
     $.__views.category = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -48,11 +48,11 @@ function Controller() {
         },
         id: "category"
     });
-    $.__views.__alloyId45.add($.__views.category);
-    $.__views.__alloyId46 = Ti.UI.createTableViewRow({
-        id: "__alloyId46"
+    $.__views.__alloyId49.add($.__views.category);
+    $.__views.__alloyId50 = Ti.UI.createTableViewRow({
+        id: "__alloyId50"
     });
-    $.__views.rowDetailLINK.add($.__views.__alloyId46);
+    $.__views.rowDetailLINK.add($.__views.__alloyId50);
     $.__views.tags = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -65,11 +65,11 @@ function Controller() {
         },
         id: "tags"
     });
-    $.__views.__alloyId46.add($.__views.tags);
-    $.__views.__alloyId47 = Ti.UI.createTableViewRow({
-        id: "__alloyId47"
+    $.__views.__alloyId50.add($.__views.tags);
+    $.__views.__alloyId51 = Ti.UI.createTableViewRow({
+        id: "__alloyId51"
     });
-    $.__views.rowDetailLINK.add($.__views.__alloyId47);
+    $.__views.rowDetailLINK.add($.__views.__alloyId51);
     $.__views.type = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -82,11 +82,11 @@ function Controller() {
         },
         id: "type"
     });
-    $.__views.__alloyId47.add($.__views.type);
-    $.__views.__alloyId48 = Ti.UI.createTableViewRow({
-        id: "__alloyId48"
+    $.__views.__alloyId51.add($.__views.type);
+    $.__views.__alloyId52 = Ti.UI.createTableViewRow({
+        id: "__alloyId52"
     });
-    $.__views.rowDetailLINK.add($.__views.__alloyId48);
+    $.__views.rowDetailLINK.add($.__views.__alloyId52);
     $.__views.content = Ti.UI.createLabel({
         width: "100%",
         height: Ti.UI.SIZE,
@@ -99,17 +99,17 @@ function Controller() {
         },
         id: "content"
     });
-    $.__views.__alloyId48.add($.__views.content);
-    $.__views.__alloyId49 = Ti.UI.createTableViewRow({
-        id: "__alloyId49"
+    $.__views.__alloyId52.add($.__views.content);
+    $.__views.__alloyId53 = Ti.UI.createTableViewRow({
+        id: "__alloyId53"
     });
-    $.__views.rowDetailLINK.add($.__views.__alloyId49);
+    $.__views.rowDetailLINK.add($.__views.__alloyId53);
     $.__views.img_preview = Ti.UI.createImageView({
         width: "95%",
         height: 300,
         id: "img_preview"
     });
-    $.__views.__alloyId49.add($.__views.img_preview);
+    $.__views.__alloyId53.add($.__views.img_preview);
     $.__views.rowDetailLINK && $.addTopLevelView($.__views.rowDetailLINK);
     exports.destroy = function() {};
     _.extend($, $.__views);

@@ -1,28 +1,30 @@
 <Alloy>
-	<TableViewSection>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="description"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="category"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="format"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="type"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="name"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="size"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
-			<Label class="rowLabel" id="timestamp"/>		
-		</TableViewRow>
-		<TableViewRow class="detailAspectRow">
+	<TableViewRow id="row">
+		<Label id="description"/>
+		<Label id="category"/>
+		<View class="block_container">
+			<Label class="block_label" text=" Formato">
+			<Label class="block_data" id="format"/>
+		</View>
+		<View class="block_container">
+			<Label class="block_label" text=" Tipo">
+			<Label class="block_data" id="type"/>
+		</View>
+		<View class="block_container">
+			<Label class="block_label" text=" Nome">
+			<Label class="block_data" id="name"/>
+		</View>
+		<View class="block_container">
+			<Label class="block_label" text=" Dimensioni">
+			<Label class="block_data" id="size"/>
+		</View>
+		<View class="block_container">
+			<Label class="block_label" text=" Timestamp">
+			<Label class="block_data" id="timestamp"/>
+		</View>
+		<View class="block_container">
+			<Label class="block_label" text=" Preview">
 			<ImageView id="img_preview"/>
-		</TableViewRow>
-	</TableViewSection>
+		</View>
+	</TableViewRow>
 </Alloy>

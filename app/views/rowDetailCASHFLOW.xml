@@ -2,48 +2,48 @@
 	<TableViewRow id="row">
 		<Label id="description"/>
 		<Label id="category"/>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Importo: ">
+		<View class="block_container">
+			<Label class="block_label" text=" Importo">
 			<Label class="block_data" id="importo"/>
 		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Data operazione: ">
+		<View class="block_container">
+			<Label class="block_label" text=" Data operazione">
 			<Label class="block_data" id="dataOperazione"/>
 		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Data valuta: ">
+		<View class="block_container">
+			<Label class="block_label" text=" Data valuta">
 			<Label class="block_data" id="dataValuta"/>
 		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Ord/Straord: ">
+		<View class="block_container">
+			<Label class="block_label" text=" Ord/Straord">
 			<Label class="block_data" id="flagOrdinarioStraordinario"/>
 		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Stato movimento: ">
+		<View class="block_container">
+			<Label class="block_label" text=" Stato movimento">
 			<Label class="block_data" id="statoMovimento"/>
 		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Tipo movimento: ">
+		<View class="block_container">
+			<Label class="block_label" text=" Tipo movimento">
 			<Label class="block_data" id="tipoMovimento"/>
 		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Tipo variabilità: ">
+		<View class="block_container">
+			<Label class="block_label" text=" Tipo variabilità">
 			<Label class="block_data" id="tipoVariabilita"/>
 		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Modalità pagamento: ">
+		<View class="block_container">
+			<Label class="block_label" text=" Modalità pagamento">
 			<Label class="block_data" id="modalitaPagamento"/>
 		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Stumento pagamento/incasso: ">
+		<View class="block_container">
+			<Label class="block_label" text=" Stumento pagamento/incasso">
 			<Label class="block_data" id="strumentoPagamentoIncasso"/>
 		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Fonte liquidità: ">
+		<View class="block_container">
+			<Label class="block_label" text=" Fonte liquidità">
 			<Label class="block_data" id="fonteLiquidita"/>
 		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Tipo fonte Liquidità: ">
+		<View class="block_container">
+			<Label class="block_label" text=" Tipo fonte Liquidità">
 			<Label class="block_data" id="tipoFonteLiquidita"/>
 		</View>
 	</TableViewRow>
