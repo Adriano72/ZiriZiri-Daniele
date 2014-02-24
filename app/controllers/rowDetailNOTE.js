@@ -1,9 +1,9 @@
 var args = arguments[0] || {};
 
 //$.row.id_code = args.id_code,
-$.name.text = '  ' + icons.edit_sign + "  " + args.name;
-$.category.text = "Categoria: " + args.category;
-$.timestamp.text = "Timestamp: " + composeDate(args.timestamp);
+$.description.text = '  ' + icons.edit_sign + "  " + args.name;
+$.category.text = (_.isNull(args.category))?null:" " + icons.tag + " " +args.category;
+$.timestamp.text = composeDate(args.timestamp);
 $.content.html = args.content;
 
 function composeDate(d_par) {

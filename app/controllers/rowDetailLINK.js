@@ -6,16 +6,16 @@ if (!_.isNull(args.preview)) {
 };
 
 //$.row.id_code = args.id_code,
-$.name.text = '  ' + icons.link + "  " + args.name;
-$.category.text = "Categoria: "+args.category;
-$.tags.text = args.tags;
+$.description.text = '  ' + icons.link + "  " + args.name;
+$.category.text = (_.isNull(args.category))?null:" " + icons.tag + " " +args.category;
+$.tags.text = (_.isNull(args.tags))?'Nessun tag definito':args.tags;
+$.type.text = args.type;
+$.content.text = args.content;
 
-if(_.isNull(args.tags)){
-	$.tags.height = 0;
-}
-
-$.type.text = "Tipo: " + args.type;
-$.content.text = "Contenuto: " + args.content;
+function openLink(e){
+	Ti.API.info("SPURCE TEXT: "+e.source.text);
+	Ti.Platform.openURL(e.source.text);
+};
 
 function composeDate(d_par) {
 

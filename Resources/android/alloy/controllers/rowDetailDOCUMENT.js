@@ -267,6 +267,7 @@ function Controller() {
     });
     $.__views.__alloyId46.add($.__views.__alloyId47);
     $.__views.img_preview = Ti.UI.createImageView({
+        top: 5,
         width: "95%",
         height: 300,
         id: "img_preview"
@@ -278,7 +279,7 @@ function Controller() {
     Ti.API.info("PREVIEW: " + args.preview.substr(23));
     var blobPreview = Ti.Utils.base64decode(args.preview.substr(args.preview.indexOf(",")));
     $.description.text = "  " + icons.file_text_alt + "  " + args.description;
-    $.category.text = " " + icons.tag + " " + args.category;
+    $.category.text = _.isNull(args.category) ? null : " " + icons.tag + " " + args.category;
     $.format.text = args.format;
     $.type.text = args.type;
     $.name.text = args.name;

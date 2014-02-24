@@ -469,7 +469,7 @@ function Controller() {
     _.extend($, $.__views);
     var args = arguments[0] || {};
     $.description.text = "  " + icons.bar_chart_alt + "  " + args.description;
-    $.category.text = " " + icons.tag + " " + args.category;
+    $.category.text = _.isNull(args.category) ? null : " " + icons.tag + " " + args.category;
     $.importo.text = "€ " + args.importo;
     $.dataOperazione.text = composeDate(args.dataOperazione);
     $.dataValuta.text = composeDate(args.dataValuta);

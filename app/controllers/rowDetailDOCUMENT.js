@@ -8,7 +8,7 @@ var blobPreview = Ti.Utils.base64decode(args.preview.substr(args.preview.indexOf
 
 //$.row.id_code = args.id_code,
 $.description.text = '  '+icons.file_text_alt+"  "+args.description;
-$.category.text = " " + icons.tag + " " +args.category;
+$.category.text = (_.isNull(args.category))?null:" " + icons.tag + " " +args.category;
 $.format.text = args.format;
 $.type.text = args.type;
 $.name.text = args.name;
