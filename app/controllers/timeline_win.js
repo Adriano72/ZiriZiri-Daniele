@@ -1,9 +1,41 @@
 var args = arguments[0] || {};
 
+// to keep track of content size on iOS
+var startIndex=0;
+
+// to know when the table is loading		
+var isLoading=false;		
+
+// to trigger loading on iOS
+var overlap = 50;	
+
+var temp = [];	
+
+// get initial table size for iOS
+$.timelineTable.addEventListener('postlayout', function(){
+	initialTableSize = $.timelineTable.rect.height;	
+});
+
+function loadData(){
+	
+	startIndex+=50;
+
+	setTimeout(function(){
+		// give some time to the previous loop
+		// adjust miliseconds according to your data source speed
+		isLoading=false;
+	},500);
+}
+
+var moment = require('alloy/moment');
+moment.lang('it', Alloy.Globals.Moment_IT);
+moment.lang('it');
+
 //$.index.open();
 
 function showSpinner() {
 	Alloy.Globals.showSpinner();
+	//$.win.invalidateOptionsMenu();
 };
 
 var timelineList = Alloy.Collections.events;
@@ -16,6 +48,8 @@ var net = require('net');
 net.getData(function(timelineData) {
 
 	//Ti.API.info(JSON.stringify(timelineData));
+	
+	
 
 	_.forEach(timelineData.data, function(value, key) {
 
@@ -76,22 +110,30 @@ net.getData(function(timelineData) {
 
 		var aspetti = (_.isNull(value.aspects) || _.isUndefined(value.aspects)) ? "no aspects" : value.aspects;
 
-		//Ti.API.info("LOCATIOM: " + location);
+		//Ti.API.info("MOMENT OUTPUT: " + moment(value.referenceTime).fromNow());
+		
+		//(value.referenceTime, "YYYYMMDD").fromNow());
 
 		var timeline = Alloy.createModel('events', {
 			id : value.id,
 			name : value.name,
-			date : creationDate.getCMonth(),
+			date : moment(value.referenceTime).fromNow(),
 			day : creationDate.getDate(),
 			month : creationDate.getCMonth().toUpperCase(),
 			category : categoriaRow,
 			location : locationRow,
-			aspects : icons.bar_chart_alt + " " + aspectObj.finance + " " + icons.file_text_alt + " " + aspectObj.documents + " " + icons.link + " " + aspectObj.links + " " + icons.edit_sign + " " + aspectObj.notes
+			aspects : icons.bar_chart_alt + " " + aspectObj.finance + "   " + icons.file_text_alt + " " + aspectObj.documents + "   " + icons.link + " " + aspectObj.links + "   " + icons.edit_sign + " " + aspectObj.notes
 		});
+		
+		temp.push(timeline);
 
-		timelineList.add(timeline);
+		//timelineList.add(timeline);
 
 	});
+	
+	Ti.API.info("TEMP: "+JSON.stringify(temp[0]));
+	
+	timelineList.add(temp.slice(0,20));
 	/*
 	for (var i=0; i<feedsWCCM.nodes.length; i++) {
 	var feed = Alloy.createModel("feed", feedsWCCM[i]);
@@ -100,6 +142,26 @@ net.getData(function(timelineData) {
 	*/
 	//Ti.API.info(timelineList.toJSON());
 });
+
+// cross-platform event listener for lazy tableview loading
+function lazyload(_evt){
+	if (OS_IOS){
+		if (startIndex - overlap < _evt.contentOffset.y + initialTableSize){
+			Ti.API.info("CIAOOO");
+			if (isLoading) return;
+			isLoading = true;
+			timelineList.reset(temp.slice(startIndex,startIndex+50));
+		}
+	}else{
+		if (_evt.firstVisibleItem + _evt.visibleItemCount == _evt.totalItemCount){
+			if (isLoading) return;
+			isLoading = true;
+			timelineList.reset(temp.slice(startIndex,startIndex+50));
+		}
+	}
+}
+
+
 
 function mostraDettaglioEvento(e) {
 

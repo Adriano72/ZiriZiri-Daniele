@@ -16,48 +16,66 @@ function Controller() {
     $.__views.row = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
-        backgroundColor: "#d8d8d8",
+        backgroundColor: "#F2F2F2",
         className: "itemRow",
         layout: "vertical",
         id: "row"
     });
     $.__views.row && $.addTopLevelView($.__views.row);
     $.__views.description = Ti.UI.createLabel({
-        height: 40,
+        height: 30,
         font: {
             fontFamily: "AppIcons",
-            fontSize: 24
+            fontSize: 18
         },
         color: "#56A845",
         left: 5,
         top: 5,
         ellipsize: true,
         wordWrap: false,
-        backgroundColor: "#ffffff",
+        backgroundColor: "#E3E3E3",
         borderRadius: Alloy.Globals.borderRad,
         touchEnabled: false,
         width: "95%",
         id: "description"
     });
     $.__views.row.add($.__views.description);
-    $.__views.data = Ti.UI.createLabel({
-        height: Ti.UI.SIZE,
+    $.__views.__alloyId66 = Ti.UI.createView({
+        height: 40,
+        touchEnabled: false,
+        layout: "horizontal",
+        id: "__alloyId66"
+    });
+    $.__views.row.add($.__views.__alloyId66);
+    $.__views.__alloyId67 = Ti.UI.createLabel({
+        left: 10,
+        height: 40,
         font: {
-            fontFamily: "AppIcons",
+            fontSize: 16
+        },
+        touchEnabled: false,
+        color: "#969696",
+        text: "Data: ",
+        id: "__alloyId67"
+    });
+    $.__views.__alloyId66.add($.__views.__alloyId67);
+    $.__views.data = Ti.UI.createLabel({
+        height: 40,
+        font: {
             fontSize: 16
         },
         left: 5,
-        top: 5,
+        right: 5,
         touchEnabled: false,
         width: Ti.UI.FILL,
         id: "data"
     });
-    $.__views.row.add($.__views.data);
+    $.__views.__alloyId66.add($.__views.data);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
     $.row.id_code = args.id_code, $.description.text = "  " + icons.edit_sign + "  " + args.description;
-    $.data.text = "Data: " + composeDate(args.timestamp);
+    $.data.text = composeDate(args.timestamp);
     _.extend($, exports);
 }
 

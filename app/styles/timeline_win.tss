@@ -1,7 +1,7 @@
 ".container": {
 	//backgroundColor: '#d8d8d8',
 	backgroundColor: '#F2F2F2',
-	layout: "vertical",
+	//layout: "vertical",
 	exitOnClose: true
 }
 
@@ -20,85 +20,77 @@
 
 "TableViewRow": {
 	
-	className: 'itemRow',
-	height: 120
+	className: 'itemRow'
 
 }
 
 "#eventContainer": {
 	//width: '100%',
 	top:10,
-	bottom:10,
-	height: Ti.UI.SIZE,
-	layout: 'horizontal'
-}
-
-"#dateBox":{
-	
-	width: 50,
-	height: 60,
-	left: 5,
-	top: 5,
-	backgroundColor: '#CC3939',
-	borderRadius: Alloy.Globals.borderRad,
+	//bottom:10,
+	//height: Ti.UI.SIZE,
 	layout: 'vertical'
 }
 
-"#headerBox":{
+"#topWrapper": {
 	
-	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
+	top: 5,
 	left: 5,
 	right: 5,
-	top: 0,
+	height: 75,
+	layout: "horizontal"
+}
+
+"#postIcon":{
+	image: '/images/android-robot.jpg',
+	width: 70,
+	height: 70
+	//left: 5,
+	//top: 5,
+	
+	//borderRadius: Alloy.Globals.borderRad
+}
+
+"#headerWrapper": {
 	layout: 'vertical',
-	backgroundColor: '#F2F2F2'
+	height: Ti.UI.SIZE,
+	width: Ti.UI.FILL,
+	left: 5
 }
 
-"#dayBox": {
-	
-	width: 50,
-	height: 40,
-	top: 0,
-	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
-	font: {fontFamily: 'AppIcons', fontSize:18, fontWeight: "bold"},
-	
+"#nameDateWrapper": {
+	//layout: 'horizontal',
+	height: Ti.UI.SIZE,
+	width: Ti.UI.FILL
 }
 
-"#monthBox": {
-	
-	width: 50,
-	height: 20,
-	top: 0,
-	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
-	font: {fontFamily: 'AppIcons', fontSize:14},
-	backgroundColor: '#E0E0E0'
-	
-}
 
 "#name": {
 	touchEnabled: false,
 	font: {
-		fontFamily: 'Rosario-Regular',
-		fontSize: "16dp",
+		fontSize: 14,
 		fontWeight: "bold"
 	},
 	color: "#2C3E52",
 	height: Ti.UI.SIZE,
+	width: '70%',
 	ellipsize: true,
 	wordWrap: false,
-	left: 5,
-	top: 5
+	top: 0,
+	left: 5
 }
 
-
-"#aspects": {
+"#date": {
 	touchEnabled: false,
-	font: {fontFamily: 'AppIcons', fontSize:'18dp' },
-	color: "#5E5E5E",
-	left: 5,
+	font: {
+		fontSize: 12
+	},
+	color: "#2C3E52",
 	height: Ti.UI.SIZE,
-	top: 5
+	textAlign: 'right',
+	wordWrap: false,
+	top: 0,
+	right: 5
 }
 
 "#category": {
@@ -131,3 +123,28 @@
 	top: 5
 }
  
+
+
+"#bottomWrapper": {
+	height: Ti.UI.SIZE,
+	width: Ti.UI.FILL,
+	top:5,
+	bottom: 5,
+	right: 5,
+	left: 5,
+}
+
+
+
+
+"#aspects": {
+	touchEnabled: false,
+	font: {fontFamily: 'AppIcons', fontSize:'18dp' },
+	color: "#5E5E5E",
+	width: Ti.UI.FILL,
+	left: 25,
+	height: Ti.UI.SIZE,
+	top: 5
+}
+
+

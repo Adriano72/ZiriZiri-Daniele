@@ -9,76 +9,130 @@ function Controller() {
     $.__views.row = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
-        backgroundColor: "#d8d8d8",
+        backgroundColor: "#F2F2F2",
         className: "itemRow",
         layout: "vertical",
         id: "row"
     });
     $.__views.row && $.addTopLevelView($.__views.row);
     $.__views.description = Ti.UI.createLabel({
-        height: 40,
+        height: 30,
         font: {
             fontFamily: "AppIcons",
-            fontSize: 24
+            fontSize: 18
         },
         color: "#F2B32A",
         left: 5,
         top: 5,
         ellipsize: true,
         wordWrap: false,
-        backgroundColor: "#ffffff",
+        backgroundColor: "#E3E3E3",
         borderRadius: Alloy.Globals.borderRad,
         touchEnabled: false,
         width: "95%",
         id: "description"
     });
     $.__views.row.add($.__views.description);
-    $.__views.titolo = Ti.UI.createLabel({
-        height: Ti.UI.SIZE,
+    $.__views.__alloyId8 = Ti.UI.createView({
+        height: 40,
+        touchEnabled: false,
+        layout: "horizontal",
+        id: "__alloyId8"
+    });
+    $.__views.row.add($.__views.__alloyId8);
+    $.__views.__alloyId9 = Ti.UI.createLabel({
+        left: 10,
+        height: 40,
         font: {
-            fontFamily: "AppIcons",
+            fontSize: 16
+        },
+        touchEnabled: false,
+        color: "#969696",
+        text: "Titolo: ",
+        id: "__alloyId9"
+    });
+    $.__views.__alloyId8.add($.__views.__alloyId9);
+    $.__views.titolo = Ti.UI.createLabel({
+        height: 40,
+        font: {
             fontSize: 16
         },
         left: 5,
-        top: 5,
+        right: 5,
         touchEnabled: false,
         width: Ti.UI.FILL,
         id: "titolo"
     });
-    $.__views.row.add($.__views.titolo);
-    $.__views.format = Ti.UI.createLabel({
-        height: Ti.UI.SIZE,
+    $.__views.__alloyId8.add($.__views.titolo);
+    $.__views.__alloyId10 = Ti.UI.createView({
+        height: 40,
+        touchEnabled: false,
+        layout: "horizontal",
+        id: "__alloyId10"
+    });
+    $.__views.row.add($.__views.__alloyId10);
+    $.__views.__alloyId11 = Ti.UI.createLabel({
+        left: 10,
+        height: 40,
         font: {
-            fontFamily: "AppIcons",
+            fontSize: 16
+        },
+        touchEnabled: false,
+        color: "#969696",
+        text: "Formato: ",
+        id: "__alloyId11"
+    });
+    $.__views.__alloyId10.add($.__views.__alloyId11);
+    $.__views.format = Ti.UI.createLabel({
+        height: 40,
+        font: {
             fontSize: 16
         },
         left: 5,
-        top: 5,
+        right: 5,
         touchEnabled: false,
         width: Ti.UI.FILL,
         id: "format"
     });
-    $.__views.row.add($.__views.format);
-    $.__views.type = Ti.UI.createLabel({
-        height: Ti.UI.SIZE,
+    $.__views.__alloyId10.add($.__views.format);
+    $.__views.__alloyId12 = Ti.UI.createView({
+        height: 40,
+        touchEnabled: false,
+        layout: "horizontal",
+        id: "__alloyId12"
+    });
+    $.__views.row.add($.__views.__alloyId12);
+    $.__views.__alloyId13 = Ti.UI.createLabel({
+        left: 10,
+        height: 40,
         font: {
-            fontFamily: "AppIcons",
+            fontSize: 16
+        },
+        touchEnabled: false,
+        color: "#969696",
+        text: "Tipo: ",
+        id: "__alloyId13"
+    });
+    $.__views.__alloyId12.add($.__views.__alloyId13);
+    $.__views.type = Ti.UI.createLabel({
+        height: 40,
+        font: {
             fontSize: 16
         },
         left: 5,
-        top: 5,
+        right: 5,
         touchEnabled: false,
         width: Ti.UI.FILL,
         id: "type"
     });
-    $.__views.row.add($.__views.type);
+    $.__views.__alloyId12.add($.__views.type);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
     $.row.id_code = args.id_code, $.description.text = "  " + icons.file_text_alt + "  " + args.description;
-    $.format.text = "Formato: " + args.format;
-    $.type.text = "Tipo: " + args.type;
-    $.titolo.text = "Titolo: " + args.title;
+    $.format.text = args.format;
+    $.type.text = args.type;
+    $.titolo.text = args.title;
     _.extend($, exports);
 }
 
