@@ -11,7 +11,7 @@ exports.getData = function(_callback) {
     xhr.onerror = function(e) {
         alert("Error: " + JSON.stringify(e));
     };
-    xhr.open("GET", "https://demo.ziriziri.com/cxf/api/v01/actions/actions/" + session + "?_type=JSON");
+    xhr.open("GET", "https://demo.ziriziri.com/zz/api/v01/actions/actions/" + session + "?_type=JSON");
     xhr.send();
 };
 
@@ -23,6 +23,6 @@ exports.getPost = function(postId, _callback) {
     xhr.onerror = function(e) {
         alert("Error: " + JSON.stringify(e));
     };
-    xhr.open("GET", "https://demo.ziriziri.com/cxf/api/v01/actions/actions/" + session + "/" + postId + "?_type=JSON");
+    xhr.open("GET", "https://demo.ziriziri.com/zz/api/v01/actions/actions/" + session + "/" + postId + "?_type=JSON");
     xhr.send();
 };

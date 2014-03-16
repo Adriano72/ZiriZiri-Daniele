@@ -1,6 +1,7 @@
 //var timelineWin = Alloy.createController("timeline_win").getView();
 
 if (Ti.App.Properties.getBool('authenticated',false)){
+	//$.index.open();
 	Alloy.createController("timeline_win").getView().open();
 }else {
 	$.index.open();
@@ -44,9 +45,12 @@ function do_login(e) {
 		Ti.API.error(this.status + ' - ' + this.statusText);
 	};
 
-	//var cod_servizio = Ti.App.Properties.getString('acipoi_code');
-
-	xhr.open('POST', 'https://demo.ziriziri.com/cxf/session/session/login/' + user_name + '?_type=JSON');
+	
+	//xhr.open('POST', 'https://demo.ziriziri.com/cxf/session/session/login/' + user_name + '?_type=JSON');
+	xhr.open('POST', 'https://demo.ziriziri.com/zz/api/v01/session/login/' + user_name + '?_type=JSON');
+	
+	xhr.setRequestHeader( 'Accept', 'application/json' );
+	xhr.setRequestHeader( 'Content-Type', 'application/json' );
 
 	xhr.send(user_password);
 

@@ -2,8 +2,10 @@ function Controller() {
     function showIndicator(e) {
         $.spinner.show();
         Ti.App.addEventListener("loading_done", function() {
-            e.source.close();
-            $.activityIndicator.hide();
+            setTimeout(function() {
+                $.activityIndicator.hide();
+                e.source.close();
+            }, 500);
         });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));

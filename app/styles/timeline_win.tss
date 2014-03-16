@@ -142,7 +142,7 @@
 	font: {fontFamily: 'AppIcons', fontSize:'18dp' },
 	color: "#5E5E5E",
 	width: Ti.UI.FILL,
-	left: 25,
+	left: 5,
 	height: Ti.UI.SIZE,
 	top: 5
 }

@@ -17,7 +17,9 @@ function Controller() {
         xhr.onerror = function() {
             Ti.API.error(this.status + " - " + this.statusText);
         };
-        xhr.open("POST", "https://demo.ziriziri.com/cxf/session/session/login/" + user_name + "?_type=JSON");
+        xhr.open("POST", "https://demo.ziriziri.com/zz/api/v01/session/login/" + user_name + "?_type=JSON");
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(user_password);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));

@@ -39,7 +39,6 @@
         </plist>
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <tool-api-level>16</tool-api-level>
         <manifest android:installLocation="preferExternal"
             android:versionCode="1" android:versionName="1.0.2">
             <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="11"/>
@@ -58,9 +57,11 @@
             <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
             <!-- Replace it.adrianomassi.ziriziri with your application ID -->
             <uses-permission android:name="it.ziriziri.mobile.permission.MAPS_RECEIVE"/>
-            <permission android:name="it.ziriziri.mobile.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
+            <permission
+                android:name="it.ziriziri.mobile.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
             <application android:theme="@android:style/Theme.Holo.Light">
-            	<meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyAtntp4EecQyWzVgeA6bLCCrSW5AHJYt34"/>
+                <meta-data
+                    android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyAtntp4EecQyWzVgeA6bLCCrSW5AHJYt34"/>
             </application>
         </manifest>
     </android>
@@ -84,7 +85,7 @@
         <target device="mobileweb">false</target>
         <target device="tizen">false</target>
     </deployment-targets>
-    <sdk-version>3.2.1.GA</sdk-version>
+    <sdk-version>3.2.2.GA</sdk-version>
     <plugins>
         <plugin version="1.0">ti.alloy</plugin>
     </plugins>
