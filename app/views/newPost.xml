@@ -6,8 +6,13 @@
 			<TableViewRow id="row">
 				<TextField id="titolo"></TextField>
 			</TableViewRow>
+			
 			<TableViewRow id="row" leftImage="/images/259-list.png">
 				<Picker id="pkrCategoria" selectionIndicator="true"/>
+			</TableViewRow>
+			
+			<TableViewRow id="data" leftImage="/images/83-calendar.png">
+				<TextField id="postDate" onClick="showDatePicker" onFocus="showDatePicker"/>				
 			</TableViewRow>
 			
 			<TableViewRow id="row" leftImage="/images/74-location.png">
