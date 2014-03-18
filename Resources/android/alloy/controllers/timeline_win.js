@@ -1,83 +1,84 @@
 function Controller() {
-    function __alloyId73() {
-        $.__views.win.removeEventListener("open", __alloyId73);
+    function __alloyId74() {
+        $.__views.win.removeEventListener("open", __alloyId74);
         if ($.__views.win.activity) $.__views.win.activity.onCreateOptionsMenu = function(e) {
-            var __alloyId70 = {
+            var __alloyId71 = {
                 id: "scrivi",
                 title: "Scrivi",
-                icon: "/images/187-pencil.png",
+                icon: "/images/216-compose.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
             };
-            $.__views.scrivi = e.menu.add(_.pick(__alloyId70, Alloy.Android.menuItemCreateArgs));
-            $.__views.scrivi.applyProperties(_.omit(__alloyId70, Alloy.Android.menuItemCreateArgs));
-            var __alloyId71 = {
+            $.__views.scrivi = e.menu.add(_.pick(__alloyId71, Alloy.Android.menuItemCreateArgs));
+            $.__views.scrivi.applyProperties(_.omit(__alloyId71, Alloy.Android.menuItemCreateArgs));
+            createNewPost ? $.__views.scrivi.addEventListener("click", createNewPost) : __defers["$.__views.scrivi!click!createNewPost"] = true;
+            var __alloyId72 = {
                 id: "immagine",
                 title: "Immagine",
                 icon: "/images/121-landscape.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
             };
-            $.__views.immagine = e.menu.add(_.pick(__alloyId71, Alloy.Android.menuItemCreateArgs));
-            $.__views.immagine.applyProperties(_.omit(__alloyId71, Alloy.Android.menuItemCreateArgs));
-            var __alloyId72 = {
+            $.__views.immagine = e.menu.add(_.pick(__alloyId72, Alloy.Android.menuItemCreateArgs));
+            $.__views.immagine.applyProperties(_.omit(__alloyId72, Alloy.Android.menuItemCreateArgs));
+            var __alloyId73 = {
                 id: "Foto",
                 title: "Foto",
                 icon: "/images/86-camera.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
             };
-            $.__views.Foto = e.menu.add(_.pick(__alloyId72, Alloy.Android.menuItemCreateArgs));
-            $.__views.Foto.applyProperties(_.omit(__alloyId72, Alloy.Android.menuItemCreateArgs));
+            $.__views.Foto = e.menu.add(_.pick(__alloyId73, Alloy.Android.menuItemCreateArgs));
+            $.__views.Foto.applyProperties(_.omit(__alloyId73, Alloy.Android.menuItemCreateArgs));
         }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
             Ti.API.warn("or other UI component which does not have an Android activity.");
             Ti.API.warn("Android Menus can only be opened on TabGroups and heavyweight Windows.");
         }
     }
-    function __alloyId89(e) {
+    function __alloyId90(e) {
         if (e && e.fromAdapter) return;
-        __alloyId89.opts || {};
-        var models = __alloyId88.models;
+        __alloyId90.opts || {};
+        var models = __alloyId89.models;
         var len = models.length;
         var rows = [];
         for (var i = 0; len > i; i++) {
-            var __alloyId74 = models[i];
-            __alloyId74.__transform = {};
-            var __alloyId76 = Ti.UI.createTableViewRow({
+            var __alloyId75 = models[i];
+            __alloyId75.__transform = {};
+            var __alloyId77 = Ti.UI.createTableViewRow({
                 className: "itemRow"
             });
-            rows.push(__alloyId76);
-            mostraDettaglioEvento ? __alloyId76.addEventListener("click", mostraDettaglioEvento) : __defers["__alloyId76!click!mostraDettaglioEvento"] = true;
-            var __alloyId77 = Ti.UI.createView({
+            rows.push(__alloyId77);
+            mostraDettaglioEvento ? __alloyId77.addEventListener("click", mostraDettaglioEvento) : __defers["__alloyId77!click!mostraDettaglioEvento"] = true;
+            var __alloyId78 = Ti.UI.createView({
                 top: 10,
                 layout: "vertical"
             });
-            __alloyId76.add(__alloyId77);
-            var __alloyId78 = Ti.UI.createView({
+            __alloyId77.add(__alloyId78);
+            var __alloyId79 = Ti.UI.createView({
                 top: 5,
                 left: 5,
                 right: 5,
                 height: 75,
                 layout: "horizontal"
             });
-            __alloyId77.add(__alloyId78);
-            var __alloyId79 = Ti.UI.createImageView({
+            __alloyId78.add(__alloyId79);
+            var __alloyId80 = Ti.UI.createImageView({
                 image: "/images/android-robot.jpg",
                 width: 70,
                 height: 70
             });
-            __alloyId78.add(__alloyId79);
-            var __alloyId80 = Ti.UI.createView({
+            __alloyId79.add(__alloyId80);
+            var __alloyId81 = Ti.UI.createView({
                 layout: "vertical",
                 height: Ti.UI.SIZE,
                 width: Ti.UI.FILL,
                 left: 5
             });
-            __alloyId78.add(__alloyId80);
-            var __alloyId81 = Ti.UI.createView({
+            __alloyId79.add(__alloyId81);
+            var __alloyId82 = Ti.UI.createView({
                 height: Ti.UI.SIZE,
                 width: Ti.UI.FILL
             });
-            __alloyId80.add(__alloyId81);
-            var __alloyId82 = Ti.UI.createLabel({
+            __alloyId81.add(__alloyId82);
+            var __alloyId83 = Ti.UI.createLabel({
                 top: 0,
                 width: "70%",
                 height: Ti.UI.SIZE,
@@ -90,10 +91,10 @@ function Controller() {
                 ellipsize: true,
                 wordWrap: false,
                 left: 5,
-                text: "undefined" != typeof __alloyId74.__transform["name"] ? __alloyId74.__transform["name"] : __alloyId74.get("name")
+                text: "undefined" != typeof __alloyId75.__transform["name"] ? __alloyId75.__transform["name"] : __alloyId75.get("name")
             });
-            __alloyId81.add(__alloyId82);
-            var __alloyId83 = Ti.UI.createLabel({
+            __alloyId82.add(__alloyId83);
+            var __alloyId84 = Ti.UI.createLabel({
                 top: 0,
                 width: Ti.UI.SIZE,
                 height: Ti.UI.SIZE,
@@ -105,25 +106,9 @@ function Controller() {
                 textAlign: "right",
                 wordWrap: false,
                 right: 5,
-                text: "undefined" != typeof __alloyId74.__transform["date"] ? __alloyId74.__transform["date"] : __alloyId74.get("date")
+                text: "undefined" != typeof __alloyId75.__transform["date"] ? __alloyId75.__transform["date"] : __alloyId75.get("date")
             });
-            __alloyId81.add(__alloyId83);
-            var __alloyId84 = Ti.UI.createLabel({
-                top: 5,
-                width: Ti.UI.SIZE,
-                height: 18,
-                color: "#5E5E5E",
-                touchEnabled: false,
-                font: {
-                    fontFamily: "AppIcons",
-                    fontSize: 12
-                },
-                backgroundColor: "#E3E3E3",
-                borderRadius: Alloy.Globals.borderRad,
-                left: 5,
-                text: "undefined" != typeof __alloyId74.__transform["category"] ? __alloyId74.__transform["category"] : __alloyId74.get("category")
-            });
-            __alloyId80.add(__alloyId84);
+            __alloyId82.add(__alloyId84);
             var __alloyId85 = Ti.UI.createLabel({
                 top: 5,
                 width: Ti.UI.SIZE,
@@ -137,10 +122,26 @@ function Controller() {
                 backgroundColor: "#E3E3E3",
                 borderRadius: Alloy.Globals.borderRad,
                 left: 5,
-                text: "undefined" != typeof __alloyId74.__transform["location"] ? __alloyId74.__transform["location"] : __alloyId74.get("location")
+                text: "undefined" != typeof __alloyId75.__transform["category"] ? __alloyId75.__transform["category"] : __alloyId75.get("category")
             });
-            __alloyId80.add(__alloyId85);
-            var __alloyId86 = Ti.UI.createView({
+            __alloyId81.add(__alloyId85);
+            var __alloyId86 = Ti.UI.createLabel({
+                top: 5,
+                width: Ti.UI.SIZE,
+                height: 18,
+                color: "#5E5E5E",
+                touchEnabled: false,
+                font: {
+                    fontFamily: "AppIcons",
+                    fontSize: 12
+                },
+                backgroundColor: "#E3E3E3",
+                borderRadius: Alloy.Globals.borderRad,
+                left: 5,
+                text: "undefined" != typeof __alloyId75.__transform["location"] ? __alloyId75.__transform["location"] : __alloyId75.get("location")
+            });
+            __alloyId81.add(__alloyId86);
+            var __alloyId87 = Ti.UI.createView({
                 height: Ti.UI.SIZE,
                 width: Ti.UI.FILL,
                 top: 5,
@@ -148,8 +149,8 @@ function Controller() {
                 right: 5,
                 left: 5
             });
-            __alloyId77.add(__alloyId86);
-            var __alloyId87 = Ti.UI.createLabel({
+            __alloyId78.add(__alloyId87);
+            var __alloyId88 = Ti.UI.createLabel({
                 top: 5,
                 width: Ti.UI.FILL,
                 height: Ti.UI.SIZE,
@@ -160,9 +161,9 @@ function Controller() {
                     fontSize: "18dp"
                 },
                 left: 5,
-                text: "undefined" != typeof __alloyId74.__transform["aspects"] ? __alloyId74.__transform["aspects"] : __alloyId74.get("aspects")
+                text: "undefined" != typeof __alloyId75.__transform["aspects"] ? __alloyId75.__transform["aspects"] : __alloyId75.get("aspects")
             });
-            __alloyId86.add(__alloyId87);
+            __alloyId87.add(__alloyId88);
         }
         $.__views.timelineTable.setData(rows);
     }
@@ -183,6 +184,9 @@ function Controller() {
             Alloy.createController("dettaglio_post", postData).getView().open();
         });
     }
+    function createNewPost() {
+        Alloy.createController("newPost").getView().open();
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "timeline_win";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -201,16 +205,16 @@ function Controller() {
     $.__views.win && $.addTopLevelView($.__views.win);
     showSpinner ? $.__views.win.addEventListener("open", showSpinner) : __defers["$.__views.win!open!showSpinner"] = true;
     lazyload ? $.__views.win.addEventListener("scroll", lazyload) : __defers["$.__views.win!scroll!lazyload"] = true;
-    $.__views.win.addEventListener("open", __alloyId73);
+    $.__views.win.addEventListener("open", __alloyId74);
     $.__views.timelineTable = Ti.UI.createTableView({
         separatorColor: "#BFBFBF",
         id: "timelineTable"
     });
     $.__views.win.add($.__views.timelineTable);
-    var __alloyId88 = Alloy.Collections["events"] || events;
-    __alloyId88.on("fetch destroy change add remove reset", __alloyId89);
+    var __alloyId89 = Alloy.Collections["events"] || events;
+    __alloyId89.on("fetch destroy change add remove reset", __alloyId90);
     exports.destroy = function() {
-        __alloyId88.off("fetch destroy change add remove reset", __alloyId89);
+        __alloyId89.off("fetch destroy change add remove reset", __alloyId90);
     };
     _.extend($, $.__views);
     arguments[0] || {};
@@ -225,6 +229,17 @@ function Controller() {
     moment.lang("it");
     var timelineList = Alloy.Collections.events;
     var net = require("net");
+    net.getCategories(function(categoriesData) {
+        var objCategorie = [];
+        _.forEach(categoriesData.data, function(value) {
+            objCategorie.push({
+                title: value.name,
+                id: value.id
+            });
+        });
+        Ti.App.Properties.setObject("elencoCategorie", objCategorie);
+        Ti.API.info("OBJ CATEGORIE: " + JSON.stringify(Ti.App.Properties.getObject("elencoCategorie")));
+    });
     net.getData(function(timelineData) {
         _.forEach(timelineData.data, function(value) {
             var timeline = Alloy.createModel("events", value);
@@ -273,7 +288,8 @@ function Controller() {
     });
     __defers["$.__views.win!open!showSpinner"] && $.__views.win.addEventListener("open", showSpinner);
     __defers["$.__views.win!scroll!lazyload"] && $.__views.win.addEventListener("scroll", lazyload);
-    __defers["__alloyId76!click!mostraDettaglioEvento"] && __alloyId76.addEventListener("click", mostraDettaglioEvento);
+    __defers["$.__views.scrivi!click!createNewPost"] && $.__views.scrivi.addEventListener("click", createNewPost);
+    __defers["__alloyId77!click!mostraDettaglioEvento"] && __alloyId77.addEventListener("click", mostraDettaglioEvento);
     _.extend($, exports);
 }
 

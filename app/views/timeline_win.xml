@@ -7,7 +7,7 @@
 		<Menu id="menu" platform="android">
 
 			<!-- Cannot specify node text.  Use attributes only. -->
-			<MenuItem id="scrivi" title="Scrivi" icon="/images/187-pencil.png"  showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
+			<MenuItem id="scrivi" title="Scrivi" icon="/images/216-compose.png"  onClick="createNewPost" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
 			<MenuItem id="immagine" title="Immagine" icon="/images/121-landscape.png"  showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
 			<MenuItem id="Foto" title="Foto" icon="/images/86-camera.png"  showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
 		</Menu>

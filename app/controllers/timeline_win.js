@@ -45,6 +45,26 @@ var net = require('net');
 //var extentedDate = require('extendedDate');
 //var encoder = require('encoder');
 
+// Carico le categorie
+net.getCategories(function(categoriesData){
+	
+	var objCategorie = [];
+	
+	_.forEach(categoriesData.data, function(value, key) {
+		
+		//Ti.API.info("Categoria: "+key+" : "+value.name);
+		
+		objCategorie.push({"title":value.name, "id": value.id});
+		
+		
+	});
+	
+	Ti.App.Properties.setObject("elencoCategorie",objCategorie);
+	
+	Ti.API.info("OBJ CATEGORIE: "+ JSON.stringify(Ti.App.Properties.getObject("elencoCategorie")));
+	
+});
+
 net.getData(function(timelineData) {
 
 	//Ti.API.info(JSON.stringify(timelineData));
@@ -186,3 +206,7 @@ function mostraDettaglioEvento(e) {
 	 dettaglioTestoFeedWindow.open();
 	 */
 };
+
+function createNewPost(){
+	Alloy.createController("newPost").getView().open();
+}
