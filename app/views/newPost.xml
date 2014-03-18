@@ -4,10 +4,14 @@
 		<TableView id="newPostTable">
 
 			<TableViewRow id="row">
-				<TextField id="titolo"></TextField>>
+				<TextField id="titolo"></TextField>
 			</TableViewRow>
 			<TableViewRow id="row" leftImage="/images/259-list.png">
 				<Picker id="pkrCategoria" selectionIndicator="true"/>
+			</TableViewRow>
+			
+			<TableViewRow id="row" leftImage="/images/74-location.png">
+				<TextField id="location"></TextField>
 			</TableViewRow>
 
 		</TableView>

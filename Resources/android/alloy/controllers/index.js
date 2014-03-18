@@ -81,7 +81,10 @@ function Controller() {
     do_login ? $.__views.btn_login.addEventListener("click", do_login) : __defers["$.__views.btn_login!click!do_login"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    Ti.App.Properties.getBool("authenticated", false) ? Alloy.createController("timeline_win").getView().open() : $.index.open();
+    if (Ti.App.Properties.getBool("authenticated", false)) {
+        Ti.API.info("Already Authenticated!");
+        Alloy.createController("timeline_win").getView().open();
+    } else $.index.open();
     __defers["$.__views.btn_login!click!do_login"] && $.__views.btn_login.addEventListener("click", do_login);
     _.extend($, exports);
 }
