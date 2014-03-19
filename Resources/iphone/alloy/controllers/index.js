@@ -17,7 +17,9 @@ function Controller() {
         xhr.onerror = function() {
             Ti.API.error(this.status + " - " + this.statusText);
         };
-        xhr.open("POST", "https://demo.ziriziri.com/cxf/session/session/login/" + user_name + "?_type=JSON");
+        xhr.open("POST", "https://demo.ziriziri.com/zz/api/v01/session/login/" + user_name + "?_type=JSON");
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(user_password);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -79,7 +81,10 @@ function Controller() {
     do_login ? $.__views.btn_login.addEventListener("click", do_login) : __defers["$.__views.btn_login!click!do_login"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    Ti.App.Properties.getBool("authenticated", false) ? Alloy.createController("timeline_win").getView().open() : $.index.open();
+    if (Ti.App.Properties.getBool("authenticated", false)) {
+        Ti.API.info("Already Authenticated!");
+        Alloy.createController("timeline_win").getView().open();
+    } else $.index.open();
     __defers["$.__views.btn_login!click!do_login"] && $.__views.btn_login.addEventListener("click", do_login);
     _.extend($, exports);
 }

@@ -35,8 +35,8 @@ function Controller() {
         borderColor: "#000000",
         color: "#336699",
         top: 5,
-        right: 5,
-        left: 5,
+        right: 15,
+        left: 15,
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         hintText: "Titolo",
@@ -58,8 +58,8 @@ function Controller() {
     });
     __alloyId0.push($.__views.row);
     $.__views.pkrCategoria = Ti.UI.createPicker({
-        right: 5,
-        left: 5,
+        right: 15,
+        left: 15,
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         id: "pkrCategoria",
@@ -75,8 +75,8 @@ function Controller() {
         borderColor: "#000000",
         color: "#336699",
         top: 5,
-        right: 5,
-        left: 5,
+        right: 15,
+        left: 15,
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         editable: false,
@@ -104,8 +104,8 @@ function Controller() {
         color: "#336699",
         ellipsize: true,
         top: 5,
-        right: 5,
-        left: 5,
+        right: 15,
+        left: 15,
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         hintText: "Posizione",
@@ -117,8 +117,6 @@ function Controller() {
     $.__views.newPostTable = Ti.UI.createTableView({
         top: 5,
         bottom: 5,
-        left: 20,
-        right: 20,
         separatorColor: "transparent",
         data: __alloyId0,
         id: "newPostTable"

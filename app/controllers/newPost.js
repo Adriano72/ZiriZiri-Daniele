@@ -22,7 +22,10 @@ $.postDate.value = moment().format('LL');
 
 function showDatePicker(e) {
 
-	var riga = Alloy.createController('datePicker').getView();
+	var riga = Alloy.createController('datePicker', function(p_data){
+		$.postDate.value = moment(p_data).format('LL');
+		Ti.API.info("PARAMETRO: "+p_data);
+	}).getView();
 	
 };
 
