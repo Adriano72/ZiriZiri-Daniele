@@ -107,6 +107,7 @@ function Controller() {
         right: 5,
         left: 5,
         width: Ti.UI.FILL,
+        autocorrect: false,
         height: Ti.UI.SIZE,
         hintText: "Posizione",
         borderRadius: 5,
