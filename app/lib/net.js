@@ -16,7 +16,7 @@ exports.getData = function(_callback) {
 	};
 
 	//xhr.open("GET", "https://demo.ziriziri.com/cxf/api/v01/actions/actions/680?_type=json");
-	xhr.open("GET", "https://demo.ziriziri.com/zz/api/v01/actions/actions/" + session + "?_type=JSON");
+	xhr.open("GET", Alloy.Globals.baseUrl+"/zz/api/v01/actions/actions/" + session + "?_type=JSON");
 	xhr.send();
 };
 
@@ -34,7 +34,7 @@ exports.getPost = function(postId, _callback) {
 	};
 
 	//xhr.open("GET", "https://demo.ziriziri.com/cxf/api/v01/actions/actions/680?_type=json");
-	xhr.open("GET", "https://demo.ziriziri.com/zz/api/v01/actions/actions/" + session + "/" + postId + "?_type=JSON");
+	xhr.open("GET", Alloy.Globals.baseUrl+"/zz/api/v01/actions/actions/" + session + "/" + postId + "?_type=JSON");
 	xhr.send();
 };
 
@@ -52,6 +52,6 @@ exports.getCategories = function(_callback) {
 	};
 
 	//xhr.open("GET", "https://demo.ziriziri.com/cxf/api/v01/actions/actions/680?_type=json");
-	xhr.open("GET", "https://demo.ziriziri.com/zz/api/v01/categories/categories/getLeafs/" + session + "?_type=JSON");
+	xhr.open("GET", Alloy.Globals.baseUrl+"/zz/api/v01/categories/categories/getLeafs/" + session + "?_type=JSON");
 	xhr.send();
 };

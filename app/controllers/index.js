@@ -48,7 +48,7 @@ function do_login(e) {
 
 	
 	//xhr.open('POST', 'https://demo.ziriziri.com/cxf/session/session/login/' + user_name + '?_type=JSON');
-	xhr.open('POST', 'https://demo.ziriziri.com/zz/api/v01/session/login/' + user_name + '?_type=JSON');
+	xhr.open('POST', Alloy.Globals.baseUrl+'/zz/api/v01/session/login/' + user_name + '?_type=JSON');
 	
 	xhr.setRequestHeader( 'Accept', 'application/json' );
 	xhr.setRequestHeader( 'Content-Type', 'application/json' );
