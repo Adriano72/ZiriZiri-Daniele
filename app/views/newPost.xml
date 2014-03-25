@@ -1,25 +1,41 @@
 <Alloy>
 	<Window class="container" title = "Nuovo Post">
+		<Menu id="menu" platform="android">
+			
+			<MenuItem id="salva" title="Scrivi" icon="/images/785-floppy-disk.png"  onClick="savePost" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
+			
+		</Menu>
 
 		<TableView id="newPostTable">
 
-			<TableViewRow id="row">
+			<TableViewRow class="row">
 				<TextField id="titolo"></TextField>
 			</TableViewRow>
 			
-			<TableViewRow id="row" leftImage="/images/259-list.png">
+			<TableViewRow class="row" leftImage="/images/259-list.png">
 				<Picker id="pkrCategoria" selectionIndicator="true"/>
 			</TableViewRow>
 			
-			<TableViewRow id="data" leftImage="/images/83-calendar.png">
+			<TableViewRow class="row" leftImage="/images/83-calendar.png">
 				<TextField id="postDate" onClick="showDatePicker" onFocus="showDatePicker"/>				
 			</TableViewRow>
 			
-			<TableViewRow id="row" leftImage="/images/74-location.png">
+			<TableViewRow class="row" leftImage="/images/74-location.png">
 				<TextField id="location"></TextField>
 			</TableViewRow>
 
 		</TableView>
+		
+		<View id="bottomBar">
+			<Label class="separator"/>
+			<View id="buttonsContainer">
+				<Label class="1_insertAspects" backgroundImage="/images/826-money-1.png" onClick="addCashflow"/>
+				<Label class="insertAspects" backgroundImage="/images/770-paper-clip.png"/>
+				<Label class="insertAspects" backgroundImage="/images/809-clipboard.png"/>
+				<Label class="insertAspects" backgroundImage="/images/843-link.png"/>
+			</View>
+			
+		</View>
 
 	</Window>
 </Alloy>
