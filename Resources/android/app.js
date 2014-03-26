@@ -2,7 +2,7 @@ var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
 var icons = require("/icons");
 
-Alloy.Globals.baseUrl = "http://172.30.113.10:6969";
+Alloy.Globals.baseUrl = "https://demo.ziriziri.com";
 
 var dFactor = Ti.Platform.displayCaps.logicalDensityFactor ? Ti.Platform.displayCaps.logicalDensityFactor : 1;
 
