@@ -1,4 +1,26 @@
 <Alloy>
-	<View class="container">
-	</View>
+	<Window class="container" title = "Nuovo CashFlow">
+		<Menu id="menu" platform="android">
+			
+			<MenuItem id="salva" title="Scrivi" icon="/images/785-floppy-disk.png"  onClick="saveAspect" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
+			
+		</Menu>
+
+		<TableView id="newCashflowTable">
+			
+			<TableViewRow class="row">
+				<Picker id="pkrTipoMovimento" selectionIndicator="true"/>
+			</TableViewRow>
+			
+			<TableViewRow class="row">
+				<TextField id="importo"/>				
+			</TableViewRow>
+			
+			<TableViewRow class="row">
+				<Picker id="pkrPagamentoIncasso" selectionIndicator="true"/>
+			</TableViewRow>
+
+		</TableView>
+
+	</Window>
 </Alloy>

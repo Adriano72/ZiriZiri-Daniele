@@ -2,6 +2,8 @@ var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
 var icons = require("/icons");
 
+var net = require("net");
+
 Alloy.Globals.baseUrl = "https://demo.ziriziri.com";
 
 var dFactor = Ti.Platform.displayCaps.logicalDensityFactor ? Ti.Platform.displayCaps.logicalDensityFactor : 1;
@@ -61,5 +63,51 @@ Alloy.Globals.Moment_IT = {
         doy: 4
     }
 };
+
+net.getCategories(function(categoriesData) {
+    var objCategorie = [];
+    _.forEach(categoriesData.data, function(value) {
+        objCategorie.push({
+            title: value.name,
+            id: value.id,
+            version: value.version
+        });
+    });
+    Ti.App.Properties.setObject("elencoCategorie", objCategorie);
+});
+
+net.getPostTemplate(function(p_postTemplate) {
+    var arrayTemplateIds = [];
+    _.forEach(p_postTemplate.data[0].modules, function(value) {
+        arrayTemplateIds.push(value.id);
+    });
+    Ti.App.Properties.setList("postTemplateIds", arrayTemplateIds);
+    Ti.API.info("ID TEMPLATE ASPECT: " + Ti.App.Properties.getList("postTemplateIds"));
+});
+
+net.getTipoMovimento(function(p_tipoMovimento) {
+    var objTipoMov = [];
+    _.forEach(p_tipoMovimento.data, function(value) {
+        objTipoMov.push({
+            title: value.descrizioneBreve,
+            id: value.id,
+            codice: value.codice,
+            version: value.version
+        });
+    });
+    Ti.App.Properties.setObject("elencoTipoMov", objTipoMov);
+});
+
+net.getPagamentoIncasso(function(p_pagamentoIncasso) {
+    var objPagamIncasso = [];
+    _.forEach(p_pagamentoIncasso.data, function(value) {
+        objPagamIncasso.push({
+            title: value.descrizioneBreve,
+            id: value.id,
+            version: value.version
+        });
+    });
+    Ti.App.Properties.setObject("elencoPagamIncasso", objPagamIncasso);
+});
 
 Alloy.createController("index");
