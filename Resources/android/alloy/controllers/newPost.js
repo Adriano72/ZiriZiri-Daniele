@@ -18,7 +18,7 @@ function Controller() {
         }
     }
     function showDatePicker() {
-        Alloy.createController("datePicker", function(p_data) {
+        Alloy.createController("timePicker", function(p_data) {
             $.postDate.value = moment(p_data).format("LL");
         }).getView();
     }

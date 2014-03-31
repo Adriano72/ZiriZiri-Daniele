@@ -28,8 +28,18 @@ u_location.result(function(locationData) {
 $.postDate.value = moment().format('LL');
 
 function showDatePicker(e) {
-
+	
+	
 	var riga = Alloy.createController('datePicker', function(p_data) {
+		$.postDate.value = moment(p_data).format('LL');
+	}).getView();
+	
+};
+
+function showTimePicker(e) {
+	
+	
+	var riga = Alloy.createController('timePicker', function(p_data) {
 		$.postDate.value = moment(p_data).format('LL');
 	}).getView();
 
