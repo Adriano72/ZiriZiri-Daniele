@@ -25,23 +25,27 @@ u_location.result(function(locationData) {
 
 //moment().format("Do MMM YY")
 
-$.postDate.value = moment().format('LL');
+$.postDate.value = moment().format('LLL');
 
-function showDatePicker(e) {
+function showDatePicker() {
 	
 	
 	var riga = Alloy.createController('datePicker', function(p_data) {
+		
+		Ti.API.info("******** FIRE ********");
 		$.postDate.value = moment(p_data).format('LL');
-	}).getView();
+		
+	});
 	
 };
 
-function showTimePicker(e) {
+function showTimePicker() {
 	
 	
 	var riga = Alloy.createController('timePicker', function(p_data) {
 		$.postDate.value = moment(p_data).format('LL');
-	}).getView();
+		
+	});
 
 };
 

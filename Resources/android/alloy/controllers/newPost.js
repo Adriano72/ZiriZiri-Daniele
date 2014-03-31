@@ -18,9 +18,10 @@ function Controller() {
         }
     }
     function showDatePicker() {
-        Alloy.createController("timePicker", function(p_data) {
+        Alloy.createController("datePicker", function(p_data) {
+            Ti.API.info("******** FIRE ********");
             $.postDate.value = moment(p_data).format("LL");
-        }).getView();
+        });
     }
     function savePost() {
         if ("" !== $.titolo.value && 9999 != $.pkrCategoria.getSelectedRow(0).id) {
@@ -157,7 +158,6 @@ function Controller() {
         id: "postDate"
     });
     $.__views.__alloyId11.add($.__views.postDate);
-    showDatePicker ? $.__views.postDate.addEventListener("click", showDatePicker) : __defers["$.__views.postDate!click!showDatePicker"] = true;
     showDatePicker ? $.__views.postDate.addEventListener("focus", showDatePicker) : __defers["$.__views.postDate!focus!showDatePicker"] = true;
     $.__views.__alloyId12 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
@@ -269,7 +269,7 @@ function Controller() {
         $.location.value = locationData.address;
         Ti.API.info("RESULT LOCATION: " + JSON.stringify(locationData));
     });
-    $.postDate.value = moment().format("LL");
+    $.postDate.value = moment().format("LLL");
     var rowsCat = [ Ti.UI.createPickerRow({
         title: "Selezionare una categoria",
         id: 9999
@@ -280,7 +280,6 @@ function Controller() {
     });
     $.pkrCategoria.add(rowsCat);
     __defers["$.__views.salva!click!savePost"] && $.__views.salva.addEventListener("click", savePost);
-    __defers["$.__views.postDate!click!showDatePicker"] && $.__views.postDate.addEventListener("click", showDatePicker);
     __defers["$.__views.postDate!focus!showDatePicker"] && $.__views.postDate.addEventListener("focus", showDatePicker);
     __defers["$.__views.__alloyId14!click!addCashflow"] && $.__views.__alloyId14.addEventListener("click", addCashflow);
     _.extend($, exports);

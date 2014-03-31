@@ -17,7 +17,7 @@
 			</TableViewRow>
 			
 			<TableViewRow class="row" leftImage="/images/83-calendar.png">
-				<TextField id="postDate" onClick="showDatePicker" onFocus="showDatePicker"/>				
+				<TextField id="postDate"  onFocus="showDatePicker"/>				
 			</TableViewRow>
 			
 			<TableViewRow class="row" leftImage="/images/74-location.png">

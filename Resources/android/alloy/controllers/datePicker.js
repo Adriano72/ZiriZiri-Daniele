@@ -1,4 +1,12 @@
 function Controller() {
+    function showTimePicker(sel_data) {
+        Alloy.createController("timePicker", {
+            par_data: sel_data,
+            _callback: function(p_data) {
+                Ti.API.info("FINAL DATE TIME: " + p_data);
+            }
+        });
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "datePicker";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -18,12 +26,15 @@ function Controller() {
     $.__views.pkrData && $.addTopLevelView($.__views.pkrData);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var args = arguments[0] || {};
+    arguments[0] || {};
+    var bug_flag = 0;
     $.pkrData.showDatePickerDialog({
         value: new Date(),
         callback: function(e) {
-            if (e.cancel) Ti.API.info("User canceled dialog"); else {
-                args(e.value);
+            if (e.cancel) Ti.API.info("*************User canceled dialog"); else if (0 == bug_flag) {
+                bug_flag = 1;
+                Ti.API.info("EVENTO: " + JSON.stringify(e));
+                showTimePicker(e.value);
                 Ti.API.info("User selected date: " + e.value);
             }
         }
