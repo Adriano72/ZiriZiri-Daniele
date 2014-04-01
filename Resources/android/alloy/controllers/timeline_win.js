@@ -120,14 +120,13 @@ function Controller() {
                     fontSize: 12
                 },
                 backgroundColor: "#E3E3E3",
-                borderRadius: Alloy.Globals.borderRad,
                 left: 5,
                 text: "undefined" != typeof __alloyId92.__transform["category"] ? __alloyId92.__transform["category"] : __alloyId92.get("category")
             });
             __alloyId98.add(__alloyId102);
             var __alloyId103 = Ti.UI.createLabel({
                 top: 5,
-                width: Ti.UI.SIZE,
+                width: Ti.UI.FILL,
                 height: 18,
                 color: "#5E5E5E",
                 touchEnabled: false,
@@ -136,7 +135,8 @@ function Controller() {
                     fontSize: 12
                 },
                 backgroundColor: "#E3E3E3",
-                borderRadius: Alloy.Globals.borderRad,
+                wordWrap: false,
+                ellipsize: true,
                 left: 5,
                 text: "undefined" != typeof __alloyId92.__transform["location"] ? __alloyId92.__transform["location"] : __alloyId92.get("location")
             });

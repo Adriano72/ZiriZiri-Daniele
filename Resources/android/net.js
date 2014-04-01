@@ -75,11 +75,18 @@ exports.getCategories = function(_callback) {
     xhr.send();
 };
 
-exports.savePost = function(objPost) {
+exports.savePost = function(objPost, _callback) {
     var xhr = Ti.Network.createHTTPClient();
-    Ti.API.info("OGGETTO DA MANDARE IN POST: " + JSON.stringify(objPost));
     xhr.onload = function() {
-        Ti.API.info("RISPOSTA SERV SALVA POST: " + this.responseText);
+        var json = JSON.parse(this.responseText);
+        Ti.API.info("********** FRM XHR: " + JSON.stringify(json));
+        if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
+            alert("Evento salvato");
+            _callback(json.data.id);
+        } else {
+            Ti.App.Properties.getList("unsavedPosts", []).push(objPost);
+            alert("Errore nella comunicazione col server. L'evento è stato salvato nel dispositivo e sarà possibilie in seguito sincronizzarlo con il server.");
+        }
     };
     xhr.onerror = function() {
         Ti.API.error(this.status + " - " + this.statusText);
@@ -88,4 +95,26 @@ exports.savePost = function(objPost) {
     xhr.setRequestHeader("Accept", "application/json");
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(objPost));
+};
+
+exports.saveAspect = function(objAspect, _callback) {
+    var xhr = Ti.Network.createHTTPClient();
+    xhr.onload = function() {
+        Ti.API.info("RISPOSTA SERV SALVA ASPECT: " + this.responseText);
+        var json = JSON.parse(this.responseText);
+        if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
+            alert("Aspetto salvato");
+            _callback(json.data.id);
+        } else {
+            Ti.App.Properties.getList("unsavedAspects", []).push(objAspect);
+            alert("Errore nella comunicazione col server. L'evento è stato salvato nel dispositivo e sarà possibilie in seguito sincronizzarlo con il server.");
+        }
+    };
+    xhr.onerror = function() {
+        Ti.API.error(this.status + " - " + this.statusText);
+    };
+    xhr.open("POST", Alloy.Globals.baseUrl + "/zz/api/v01/aspects/aspects/" + session + "?_type=JSON");
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(objAspect));
 };

@@ -6,7 +6,6 @@ exports.result = function(_callback) {
                 var latitude = e.coords.latitude;
                 var longitude = e.coords.longitude;
                 Ti.Geolocation.reverseGeocoder(latitude, longitude, function(g) {
-                    Ti.API.info("RISULTATO GEOCODING: " + JSON.stringify(g.places[0].displayAddress));
                     _callback({
                         latitude: latitude,
                         longitude: longitude,

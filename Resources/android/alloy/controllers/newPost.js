@@ -20,7 +20,7 @@ function Controller() {
     function showDatePicker() {
         Alloy.createController("datePicker", function(p_data) {
             Ti.API.info("******** FIRE ********");
-            $.postDate.value = moment(p_data).format("LL");
+            $.postDate.value = moment(p_data).format("LLL");
         });
     }
     function savePost() {
@@ -40,10 +40,20 @@ function Controller() {
                     longitude: location_result.longitude
                 }
             };
-            net.savePost(postObj);
+            net.savePost(postObj, function(post_id) {
+                Ti.API.info("ID POST SALVATO: " + post_id);
+                if (arrayAspetti.length > 0) {
+                    Ti.API.info("SALVA ASPETTI...");
+                    addCashflow(post_id);
+                }
+            });
         } else alert("Il campo Titolo e il campo Categoria sono obbligatori!");
     }
     function addCashflow() {
+        if ("" == $.titolo.value && 9999 == $.pkrCategoria.getSelectedRow(0).id) {
+            alert("Prima di inserire il dettaglio dell'evento è necessario specificare titolo e categoria");
+            return;
+        }
         Alloy.createController("addCashflow", function(objRet) {
             var objAspect = {
                 kind: {
@@ -51,13 +61,13 @@ function Controller() {
                 },
                 data: {}
             };
-            objAspect.data.referenceTime = Date.parse($.postDate.value);
-            objAspect.data.category = {
+            objAspect.name = $.titolo.value;
+            objAspect.referenceTime = Date.parse($.postDate.value);
+            objAspect.category = {
                 id: $.pkrCategoria.getSelectedRow(0).id,
                 version: $.pkrCategoria.getSelectedRow(0).version
             };
-            objAspect.data.name = $.titolo.value;
-            objAspect.data.location = {
+            objAspect.location = {
                 name: $.location.value,
                 description: $.location.value,
                 latitude: location_result.latitude,
@@ -68,6 +78,10 @@ function Controller() {
             objAspect.data.importo = objRet.importo;
             objAspect.data = JSON.stringify(objAspect.data);
             arrayAspetti.push(objAspect);
+            net.saveAspect(objAspect, function() {
+                Ti.API.info("ID ASPETTO SALVATO: " + post_id);
+                arrayAspetti.length > 0 && Ti.API.info("CONSOLIDO RELAZIONI...");
+            });
         }).getView().open();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -159,6 +173,7 @@ function Controller() {
     });
     $.__views.__alloyId11.add($.__views.postDate);
     showDatePicker ? $.__views.postDate.addEventListener("focus", showDatePicker) : __defers["$.__views.postDate!focus!showDatePicker"] = true;
+    showDatePicker ? $.__views.postDate.addEventListener("click", showDatePicker) : __defers["$.__views.postDate!click!showDatePicker"] = true;
     $.__views.__alloyId12 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
@@ -259,7 +274,6 @@ function Controller() {
     arguments[0] || {};
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
-    moment.lang("it");
     var location_result;
     var u_location = require("getUserLocation");
     var net = require("net");
@@ -267,7 +281,6 @@ function Controller() {
     u_location.result(function(locationData) {
         location_result = locationData;
         $.location.value = locationData.address;
-        Ti.API.info("RESULT LOCATION: " + JSON.stringify(locationData));
     });
     $.postDate.value = moment().format("LLL");
     var rowsCat = [ Ti.UI.createPickerRow({
@@ -281,6 +294,7 @@ function Controller() {
     $.pkrCategoria.add(rowsCat);
     __defers["$.__views.salva!click!savePost"] && $.__views.salva.addEventListener("click", savePost);
     __defers["$.__views.postDate!focus!showDatePicker"] && $.__views.postDate.addEventListener("focus", showDatePicker);
+    __defers["$.__views.postDate!click!showDatePicker"] && $.__views.postDate.addEventListener("click", showDatePicker);
     __defers["$.__views.__alloyId14!click!addCashflow"] && $.__views.__alloyId14.addEventListener("click", addCashflow);
     _.extend($, exports);
 }

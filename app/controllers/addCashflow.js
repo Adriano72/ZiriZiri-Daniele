@@ -72,6 +72,7 @@ function saveAspect() {
 	};
 	
 	args(objCashFlow);
+	$.window.close();
 	
 	//Ti.API.info("MOSTRO : "+objCashFlow);
 	/*

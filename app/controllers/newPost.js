@@ -2,7 +2,7 @@ var args = arguments[0] || {};
 
 var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
-moment.lang('it');
+
 
 var location_result;
 
@@ -18,7 +18,7 @@ u_location.result(function(locationData) {
 
 	$.location.value = locationData.address;
 
-	Ti.API.info("RESULT LOCATION: " + JSON.stringify(locationData));
+	//Ti.API.info("RESULT LOCATION: " + JSON.stringify(locationData));
 });
 
 //Ti.API.info("GET LOCATION OUTPUT: "+JSON.stringify(u_location.getUsrLocation()));
@@ -33,20 +33,10 @@ function showDatePicker() {
 	var riga = Alloy.createController('datePicker', function(p_data) {
 		
 		Ti.API.info("******** FIRE ********");
-		$.postDate.value = moment(p_data).format('LL');
+		$.postDate.value = moment(p_data).format('LLL');
 		
 	});
 	
-};
-
-function showTimePicker() {
-	
-	
-	var riga = Alloy.createController('timePicker', function(p_data) {
-		$.postDate.value = moment(p_data).format('LL');
-		
-	});
-
 };
 
 var rowsCat = [Ti.UI.createPickerRow({
@@ -102,15 +92,31 @@ function savePost() {
 
 		};
 		*/
-		net.savePost(postObj);
+		net.savePost(postObj, function(post_id){
+			
+			Ti.API.info("ID POST SALVATO: "+post_id);
+			
+			if(arrayAspetti.length > 0){
+				Ti.API.info("SALVA ASPETTI...");
+				addCashflow(post_id);
+			};
+			
+		});
 
 	} else {
 		alert("Il campo Titolo e il campo Categoria sono obbligatori!");
 	}
 };
 
-function addCashflow() {
+function addCashflow(id_post) {
 	//Ti.API.info("**** INSERT CASHFLOW!");
+	
+	if ($.titolo.value == "" && $.pkrCategoria.getSelectedRow(0).id == 9999) {
+	
+		alert("Prima di inserire il dettaglio dell'evento è necessario specificare titolo e categoria");
+		return;
+	
+	};
 
 	Alloy.createController("addCashflow", function(objRet) {
 
@@ -122,14 +128,16 @@ function addCashflow() {
 			data : {}
 
 		};
+		
+		objAspect.name = $.titolo.value;
 
-		objAspect.data.referenceTime = Date.parse($.postDate.value);
-		objAspect.data.category = {
+		objAspect.referenceTime = Date.parse($.postDate.value);
+		objAspect.category = {
 			id : $.pkrCategoria.getSelectedRow(0).id,
 			version : $.pkrCategoria.getSelectedRow(0).version
 		};
-		objAspect.data.name = $.titolo.value;
-		objAspect.data.location = {
+		
+		objAspect.location = {
 			name : $.location.value,
 			description : $.location.value,
 			latitude : location_result.latitude,
@@ -147,8 +155,24 @@ function addCashflow() {
 		objAspect.data = JSON.stringify(objAspect.data);
 
 		arrayAspetti.push(objAspect);
+		
+		saveAspects()
+		
 
 		//Ti.API.info("FINISHED ASPECT OBJ: "+JSON.stringify(objAspect));
 	}).getView().open();
 };
 
+function saveAspects(p_aspects){
+	
+	var idAspectsToAssociate = [];
+	
+	$.newPostTable.appendRow();
+	
+	net.saveAspect(objAspect, function(aspect_id){
+			
+			Ti.API.info("ID ASPETTO SALVATO: "+aspect_id);
+						
+	});
+	
+}

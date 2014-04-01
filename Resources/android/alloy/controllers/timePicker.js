@@ -19,17 +19,19 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
+    var moment = require("alloy/moment");
+    moment.lang("it", Alloy.Globals.Moment_IT);
     var bug_flag = 0;
-    Ti.API.info("SONO QUIIIIIIII");
     $.pkrTime.showTimePickerDialog({
-        value: new Date(Date.parse(args.par_data)),
+        value: new Date(),
         callback: function(e) {
             if (e.cancel) Ti.API.info("User canceled dialog"); else if (0 == bug_flag) {
                 bug_flag = 1;
-                Ti.API.info("PARSED DATA GOT: " + new Date(Date.parse(args.par_data)));
-                Ti.API.info("NOW DATA GOT: " + new Date());
-                args._callback(e.value);
-                Ti.API.info("User selected time: " + e.value);
+                var soloData = moment(args.par_data).format("YYYY-MM-DD");
+                var soloOra = moment(e.value).format("HH:mm:ss");
+                var dataCompleta = soloData.toString() + "T" + soloOra.toString();
+                var finalData = moment(dataCompleta);
+                args._callback(finalData);
             }
         }
     });

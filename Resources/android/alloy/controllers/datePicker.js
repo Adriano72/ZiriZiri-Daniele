@@ -3,7 +3,8 @@ function Controller() {
         Alloy.createController("timePicker", {
             par_data: sel_data,
             _callback: function(p_data) {
-                Ti.API.info("FINAL DATE TIME: " + p_data);
+                Ti.API.info("FINAL DATE TIME: " + moment(p_data).format("LLL"));
+                args(p_data);
             }
         });
     }
@@ -26,16 +27,16 @@ function Controller() {
     $.__views.pkrData && $.addTopLevelView($.__views.pkrData);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    arguments[0] || {};
+    var args = arguments[0] || {};
+    var moment = require("alloy/moment");
+    moment.lang("it", Alloy.Globals.Moment_IT);
     var bug_flag = 0;
     $.pkrData.showDatePickerDialog({
         value: new Date(),
         callback: function(e) {
-            if (e.cancel) Ti.API.info("*************User canceled dialog"); else if (0 == bug_flag) {
+            if (e.cancel) Ti.API.info("User canceled dialog"); else if (0 == bug_flag) {
                 bug_flag = 1;
-                Ti.API.info("EVENTO: " + JSON.stringify(e));
                 showTimePicker(e.value);
-                Ti.API.info("User selected date: " + e.value);
             }
         }
     });

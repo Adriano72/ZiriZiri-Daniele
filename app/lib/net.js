@@ -113,27 +113,25 @@ exports.savePost = function(objPost, _callback){
 	
 	var xhr = Ti.Network.createHTTPClient();
 	
-	Ti.API.info("OGGETTO DA MANDARE IN POST: "+JSON.stringify(objPost));
+	//Ti.API.info("OGGETTO DA MANDARE IN POST: "+JSON.stringify(objPost));
 
 	xhr.onload = function() {
-		Ti.API.info("RISPOSTA SERV SALVA POST: "+this.responseText);
+		//Ti.API.info("RISPOSTA SERV SALVA POST: "+this.responseText);
 		
-		/*
+		
 		var json = JSON.parse(this.responseText);
 		Ti.API.info("********** FRM XHR: " + JSON.stringify(json));
 		
 		if (JSON.stringify(json.type.code) == "\"SUCCESS\"") {
 			
-				Ti.App.Properties.setBool('authenticated', true);
-				Ti.App.Properties.setInt('sessionId', json.data.sessionId);
-				//alert(Ti.App.Properties.getInt('sessionId', 0));
-				Alloy.createController("timeline_win").getView().open();
-				//$.index.open();
+				alert("Evento salvato");
+				_callback(json.data.id);
 				
 		} else {
-			alert("Username o password errati");
+			Ti.App.Properties.getList('unsavedPosts', []).push(objPost);
+			alert("Errore nella comunicazione col server. L'evento è stato salvato nel dispositivo e sarà possibilie in seguito sincronizzarlo con il server.");
 		}
-		*/
+		
 	
 	};
 
@@ -150,6 +148,50 @@ exports.savePost = function(objPost, _callback){
 	xhr.setRequestHeader( 'Content-Type', 'application/json' );
 
 	xhr.send(JSON.stringify(objPost));
+	
+	
+	
+};
+
+exports.saveAspect = function(objAspect, _callback){
+	
+	var xhr = Ti.Network.createHTTPClient();
+	
+	//Ti.API.info("OGGETTO DA MANDARE IN POST: "+JSON.stringify(objPost));
+
+	xhr.onload = function() {
+		Ti.API.info("RISPOSTA SERV SALVA ASPECT: "+this.responseText);
+		
+		
+		var json = JSON.parse(this.responseText);
+		
+		
+		if (JSON.stringify(json.type.code) == "\"SUCCESS\"") {
+			
+				alert("Aspetto salvato");
+				_callback(json.data.id);
+				
+		} else {
+			Ti.App.Properties.getList('unsavedAspects', []).push(objAspect);
+			alert("Errore nella comunicazione col server. L'evento è stato salvato nel dispositivo e sarà possibilie in seguito sincronizzarlo con il server.");
+		}
+		
+	
+	};
+
+	xhr.onerror = function() {
+		Ti.API.error(this.status + ' - ' + this.statusText);
+	};
+
+	//https://demo.ziriziri.com/zz/api/v01/actions/actions/106?_type=json
+	//xhr.open('POST', 'https://demo.ziriziri.com/cxf/session/session/login/' + user_name + '?_type=JSON');
+	//https://demo.ziriziri.com/zz/api/v01/actions/actions/103?_type=json
+	xhr.open('POST', Alloy.Globals.baseUrl+'/zz/api/v01/aspects/aspects/' + session + '?_type=JSON');
+	
+	xhr.setRequestHeader( 'Accept', 'application/json' );
+	xhr.setRequestHeader( 'Content-Type', 'application/json' );
+
+	xhr.send(JSON.stringify(objAspect));
 	
 	
 	

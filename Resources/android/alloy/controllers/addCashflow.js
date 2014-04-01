@@ -1,7 +1,7 @@
 function Controller() {
     function __alloyId1() {
-        $.__views.addCashflow.removeEventListener("open", __alloyId1);
-        if ($.__views.addCashflow.activity) $.__views.addCashflow.activity.onCreateOptionsMenu = function(e) {
+        $.__views.window.removeEventListener("open", __alloyId1);
+        if ($.__views.window.activity) $.__views.window.activity.onCreateOptionsMenu = function(e) {
             var __alloyId0 = {
                 id: "salva",
                 title: "Scrivi",
@@ -40,6 +40,7 @@ function Controller() {
                 importo: $.importo.value
             };
             args(objCashFlow);
+            $.window.close();
         } else alert("I campi Tipo Movimento e Pagamento Incasso sono obbligatori!");
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -50,13 +51,13 @@ function Controller() {
     var $ = this;
     var exports = {};
     var __defers = {};
-    $.__views.addCashflow = Ti.UI.createWindow({
+    $.__views.window = Ti.UI.createWindow({
         backgroundColor: "#F2F2F2",
-        title: "Nuovo CashFlow",
-        id: "addCashflow"
+        id: "window",
+        title: "Nuovo CashFlow"
     });
-    $.__views.addCashflow && $.addTopLevelView($.__views.addCashflow);
-    $.__views.addCashflow.addEventListener("open", __alloyId1);
+    $.__views.window && $.addTopLevelView($.__views.window);
+    $.__views.window.addEventListener("open", __alloyId1);
     var __alloyId2 = [];
     $.__views.__alloyId3 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
@@ -131,7 +132,7 @@ function Controller() {
         data: __alloyId2,
         id: "newCashflowTable"
     });
-    $.__views.addCashflow.add($.__views.newCashflowTable);
+    $.__views.window.add($.__views.newCashflowTable);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

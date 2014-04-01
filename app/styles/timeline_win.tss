@@ -100,7 +100,7 @@
 		fontSize: 12
 	},
 	backgroundColor: '#E3E3E3',
-	borderRadius: Alloy.Globals.borderRad,
+	//borderRadius: Alloy.Globals.borderRad,
 	height: 18,
 	width: Ti.UI.SIZE,
 	color: "#5E5E5E",
@@ -115,10 +115,12 @@
 		fontSize: 12
 	},
 	backgroundColor: '#E3E3E3',
-	borderRadius: Alloy.Globals.borderRad,
+	//borderRadius: Alloy.Globals.borderRad,
 	height: 18,
-	width: Ti.UI.SIZE,
+	wordWrap: false,
+	width: Ti.UI.FILL,
 	color: "#5E5E5E",
+	ellipsize: true,
 	left: 5,
 	top: 5
 }
