@@ -48,7 +48,7 @@ _.forEach(args.data.aspects, function(value, key) {
 			var riga = Alloy.createController('rowCASHFLOW', {
 
 				id_code : key,
-				description : value.description,
+				description : value.name,
 				importo : value.data.importo,
 				dataOperazione : value.data.dataOperazione,
 				dataValuta : value.data.dataValuta,

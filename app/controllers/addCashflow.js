@@ -43,7 +43,7 @@ _.forEach(Ti.App.Properties.getObject("elencoPagamIncasso"), function(value, key
 
 $.pkrPagamentoIncasso.add(rowsPagamIncasso);
 
-function saveAspect() { 
+function createProtoObj() { 
 	
 	if($.pkrPagamentoIncasso.getSelectedRow(0).id != 9999 && $.pkrTipoMovimento.getSelectedRow(0).id != 9999){
 		

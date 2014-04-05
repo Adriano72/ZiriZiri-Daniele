@@ -174,7 +174,7 @@ function Controller() {
           case "CASHFLOWDATATYPE_CODE":
             var riga = Alloy.createController("rowCASHFLOW", {
                 id_code: key,
-                description: value.description,
+                description: value.name,
                 importo: value.data.importo,
                 dataOperazione: value.data.dataOperazione,
                 dataValuta: value.data.dataValuta,

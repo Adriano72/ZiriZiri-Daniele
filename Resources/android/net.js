@@ -1,4 +1,4 @@
-var session = Ti.App.Properties.getInt("sessionId", 0);
+var session = 132;
 
 Ti.API.info("SESSION ID: " + session);
 
@@ -85,7 +85,7 @@ exports.savePost = function(objPost, _callback) {
             _callback(json.data.id);
         } else {
             Ti.App.Properties.getList("unsavedPosts", []).push(objPost);
-            alert("Errore nella comunicazione col server. L'evento è stato salvato nel dispositivo e sarà possibilie in seguito sincronizzarlo con il server.");
+            alert("Errore nella comunicazione col server. L'evento è stato salvato nel dispositivo e sarà possibilie salvarlo in seguito");
         }
     };
     xhr.onerror = function() {
@@ -97,24 +97,53 @@ exports.savePost = function(objPost, _callback) {
     xhr.send(JSON.stringify(objPost));
 };
 
-exports.saveAspect = function(objAspect, _callback) {
+exports.saveAspect = function(allAspects, _callback) {
+    var arrayIDAspetti = [];
+    var deferredCall = _.after(allAspects.length, function() {
+        _callback(arrayIDAspetti);
+    });
+    _.forEach(allAspects, function(value) {
+        var xhr = Ti.Network.createHTTPClient();
+        xhr.onload = function() {
+            var json = JSON.parse(this.responseText);
+            if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
+                Ti.API.info("ID ASPETTO SALVATO: " + json.data.id);
+                arrayIDAspetti.push(json.data.id);
+                deferredCall();
+            } else alert("Errore nella comunicazione col server.");
+        };
+        xhr.onerror = function() {
+            Ti.API.error(this.status + " - " + this.statusText);
+        };
+        xhr.open("POST", Alloy.Globals.baseUrl + "/zz/api/v01/aspects/aspects/" + session + "?_type=JSON");
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(value));
+    });
+};
+
+exports.linkAspectsToPost = function(p_postId, p_array) {
+    Ti.API.info("ARRAY ****:" + JSON.stringify(p_array));
+    var tmpArr = [];
+    tmpArr.push(p_array);
+    tmpArr = _.flatten(tmpArr);
     var xhr = Ti.Network.createHTTPClient();
     xhr.onload = function() {
-        Ti.API.info("RISPOSTA SERV SALVA ASPECT: " + this.responseText);
+        Ti.API.info("RISPOSTA SERV CREA RELAZIONE: " + this.responseText);
         var json = JSON.parse(this.responseText);
-        if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
-            alert("Aspetto salvato");
-            _callback(json.data.id);
-        } else {
-            Ti.App.Properties.getList("unsavedAspects", []).push(objAspect);
-            alert("Errore nella comunicazione col server. L'evento è stato salvato nel dispositivo e sarà possibilie in seguito sincronizzarlo con il server.");
-        }
+        '"SUCCESS"' == JSON.stringify(json.type.code) ? alert("RELAZIONI CREATE!!!!!") : alert("Errore nella comunicazione col server.");
     };
     xhr.onerror = function() {
-        Ti.API.error(this.status + " - " + this.statusText);
+        Ti.API.error("ERRORE RISPOSTA SERVER: " + this.status + " - " + this.statusText);
     };
-    xhr.open("POST", Alloy.Globals.baseUrl + "/zz/api/v01/aspects/aspects/" + session + "?_type=JSON");
+    xhr.open("PUT", Alloy.Globals.baseUrl + "/zz/api/v01/actions/actions/" + session + "/" + p_postId + "relations?_type=JSON");
+    Ti.API.info("URL PUT CALL: " + Alloy.Globals.baseUrl + "/zz/api/v01/actions/actions/" + session + "/" + p_postId + "/relations?_type=JSON");
     xhr.setRequestHeader("Accept", "application/json");
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify(objAspect));
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.setRequestHeader("X-HTTP-Method-Override", "PUT");
+    "[" + p_array.toString() + "]";
+    tmpArr = JSON.stringify(tmpArr);
+    Ti.API.info("ARRAY INVIATO: " + tmpArr);
+    xhr.send(tmpArr);
 };

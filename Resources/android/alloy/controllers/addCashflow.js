@@ -10,14 +10,14 @@ function Controller() {
             };
             $.__views.salva = e.menu.add(_.pick(__alloyId0, Alloy.Android.menuItemCreateArgs));
             $.__views.salva.applyProperties(_.omit(__alloyId0, Alloy.Android.menuItemCreateArgs));
-            saveAspect ? $.__views.salva.addEventListener("click", saveAspect) : __defers["$.__views.salva!click!saveAspect"] = true;
+            createProtoObj ? $.__views.salva.addEventListener("click", createProtoObj) : __defers["$.__views.salva!click!createProtoObj"] = true;
         }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
             Ti.API.warn("or other UI component which does not have an Android activity.");
             Ti.API.warn("Android Menus can only be opened on TabGroups and heavyweight Windows.");
         }
     }
-    function saveAspect() {
+    function createProtoObj() {
         if (9999 != $.pkrPagamentoIncasso.getSelectedRow(0).id && 9999 != $.pkrTipoMovimento.getSelectedRow(0).id) {
             var tipoMovCodice = $.pkrTipoMovimento.getSelectedRow(0).codice;
             var tipoMovId = $.pkrTipoMovimento.getSelectedRow(0).id;
@@ -154,7 +154,7 @@ function Controller() {
         rowsPagamIncasso.push(pkrRow);
     });
     $.pkrPagamentoIncasso.add(rowsPagamIncasso);
-    __defers["$.__views.salva!click!saveAspect"] && $.__views.salva.addEventListener("click", saveAspect);
+    __defers["$.__views.salva!click!createProtoObj"] && $.__views.salva.addEventListener("click", createProtoObj);
     _.extend($, exports);
 }
 

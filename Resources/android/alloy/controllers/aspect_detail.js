@@ -32,10 +32,10 @@ function Controller() {
             dataOperazione: args.data.dataOperazione,
             dataValuta: args.data.dataValuta,
             flagOrdinarioStraordinario: args.data.flagOrdinarioStraordinario,
-            statoMovimento: args.data.statoMovimento.descrizioneBreve,
+            statoMovimento: _.isNull(args.data.statoMovimento) ? "Non disponibile" : args.data.statoMovimento.descrizioneBreve,
             tipoMovimento: args.data.tipoMovimento.descrizioneBreve,
-            tipoVariabilita: args.data.tipoVariabilita.descrizioneBreve,
-            modalitaPagamento: args.data.modalitaPagamento.descrizioneBreve,
+            tipoVariabilita: _.isNull(args.data.tipoVariabilita) ? "Non disponibile" : args.data.tipoVariabilita.descrizioneBreve,
+            modalitaPagamento: _.isNull(args.data.modalitaPagamento) ? "Non disponibile" : args.data.modalitaPagamento.descrizioneBreve,
             strumentoPagamentoIncasso: _.isNull(args.data.strumentoPagamentoIncasso) ? "Non disponibile" : args.data.strumentoPagamentoIncasso.descrizioneBreve,
             fonteLiquidita: _.isNull(args.data.fonteLiquidita) ? "Non disponibile" : args.data.fonteLiquidita.descrizioneBreve,
             tipoFonteLiquidita: _.isNull(args.data.fonteLiquidita) ? "Non disponibile" : args.data.fonteLiquidita.tipoFonteLiquidita.descrizioneBreve

@@ -42,10 +42,12 @@ function Controller() {
             };
             net.savePost(postObj, function(post_id) {
                 Ti.API.info("ID POST SALVATO: " + post_id);
-                if (arrayAspetti.length > 0) {
-                    Ti.API.info("SALVA ASPETTI...");
-                    addCashflow(post_id);
-                }
+                arrayAspetti.length > 0 && callSaveAspects(function(p_arrayIdAspetti) {
+                    p_arrayIdAspetti.push(Ti.App.Properties.getList("postTemplateIds"));
+                    p_arrayIdAspetti = _.flatten(p_arrayIdAspetti);
+                    Ti.API.info("ARRAY ID ASPETTI DA MANDARE IN ASSOCIAZIONE: " + p_arrayIdAspetti);
+                    net.linkAspectsToPost(post_id, p_arrayIdAspetti);
+                });
             });
         } else alert("Il campo Titolo e il campo Categoria sono obbligatori!");
     }
@@ -74,15 +76,65 @@ function Controller() {
                 longitude: location_result.longitude
             };
             objAspect.data.tipoMovimento = objRet.tipoMovimento;
+            objAspect.data.dataOperazione = Date.parse($.postDate.value);
+            objAspect.data.dataValuta = Date.parse($.postDate.value);
             objAspect.data.pagamentoIncasso = objRet.pagamentoIncasso;
             objAspect.data.importo = objRet.importo;
+            var tempObj = _.clone(objAspect);
             objAspect.data = JSON.stringify(objAspect.data);
             arrayAspetti.push(objAspect);
-            net.saveAspect(objAspect, function() {
-                Ti.API.info("ID ASPETTO SALVATO: " + post_id);
-                arrayAspetti.length > 0 && Ti.API.info("CONSOLIDO RELAZIONI...");
-            });
+            Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
+            switch (objAspect.kind.code) {
+              case "CASHFLOWDATATYPE_CODE":
+                var riga = Alloy.createController("rowCASHFLOW", {
+                    id_code: arrayAspetti.length - 1,
+                    name: objAspect.name,
+                    importo: tempObj.data.importo,
+                    dataOperazione: tempObj.data.dataOperazione,
+                    dataValuta: tempObj.data.dataValuta,
+                    codTipoMovimento: tempObj.data.tipoMovimento.codice
+                }).getView();
+                $.newPostTable.appendRow(riga);
+                break;
+
+              case "DOCUMENTDATATYPE_CODE":
+                Ti.API.info("ASPECT DESCRIPTION: " + value.name);
+                var riga = Alloy.createController("rowDOCUMENT", {
+                    id_code: key,
+                    description: value.name,
+                    format: _.isNull(value.data.format) ? "Non disponibile" : value.data.format.name,
+                    type: _.isNull(value.data.format) ? "Non disponibile" : value.data.format.type,
+                    title: value.data.title
+                }).getView();
+                rows.push(riga);
+                break;
+
+              case "LINKDATATYPE_CODE":
+                var riga = Alloy.createController("rowLINK", {
+                    id_code: key,
+                    description: value.description,
+                    type: value.data.format.type,
+                    title: value.data.title,
+                    content: value.data.content
+                }).getView();
+                rows.push(riga);
+                break;
+
+              case "NOTEDATATYPE_CODE":
+                var riga = Alloy.createController("rowNOTE", {
+                    id_code: key,
+                    description: value.data.title,
+                    timestamp: value.data.timestamp
+                }).getView();
+                rows.push(riga);
+            }
         }).getView().open();
+    }
+    function callSaveAspects(_callback) {
+        net.saveAspect(arrayAspetti, function(id_saved_aspects_array) {
+            Ti.API.info("ARRAY DEGLI ID ASPETTI SALVATI: " + id_saved_aspects_array);
+            _callback(id_saved_aspects_array);
+        });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "newPost";
@@ -205,8 +257,8 @@ function Controller() {
     $.__views.newPostTable = Ti.UI.createTableView({
         top: 5,
         bottom: 50,
-        left: 20,
-        right: 20,
+        left: 10,
+        right: 10,
         separatorColor: "transparent",
         data: __alloyId8,
         id: "newPostTable"
@@ -215,6 +267,7 @@ function Controller() {
     $.__views.bottomBar = Ti.UI.createView({
         backgroundColor: "#EBEBEB",
         width: Ti.UI.FILL,
+        touchEnabled: false,
         height: 50,
         bottom: 0,
         id: "bottomBar"
@@ -223,6 +276,7 @@ function Controller() {
     $.__views.__alloyId13 = Ti.UI.createLabel({
         height: 1,
         top: 0,
+        touchEnabled: false,
         backgroundColor: "#D6D6D6",
         width: "100%",
         id: "__alloyId13"

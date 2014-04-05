@@ -6,8 +6,8 @@
 "#newPostTable":{
 	top: 5 ,
 	bottom: 50,
-	left: 20,
-	right: 20,
+	left: 10,
+	right: 10,
 	separatorColor: 'transparent'
 } 
 
@@ -88,6 +88,7 @@
 "#bottomBar": {
 	backgroundColor: '#EBEBEB',
 	width: Ti.UI.FILL,
+	touchEnabled: false,
 	height: 50,
 	bottom: 0
 }
@@ -95,6 +96,7 @@
 ".separator": {
 	height: 1,
 	top: 0,
+	touchEnabled: false,
 	backgroundColor: '#D6D6D6',
 	width: '100%'
 }
