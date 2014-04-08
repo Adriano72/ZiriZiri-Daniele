@@ -1,3 +1,4 @@
+android/ATTR_MINIFY=true
 android/ATTR_PROJECT_NAME=ZiriZiri
 android/abi=x86
 android/distribute_path=/Users/adrianomassi/Documents/Dropbox/ZiriZiri Resources/Distibution Android

@@ -5,8 +5,8 @@ if (Ti.App.Properties.getBool('authenticated',false)){
 	Ti.API.info("Already Authenticated!");
 	Alloy.createController("timeline_win").getView().open();
 }else {
-	//$.index.open();
-	Alloy.createController("timeline_win").getView().open(); //solo per debug
+	$.index.open();
+	//Alloy.createController("timeline_win").getView().open(); //solo per debug
 	
 };
 

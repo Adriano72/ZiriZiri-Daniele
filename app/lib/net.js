@@ -232,7 +232,7 @@ exports.linkAspectsToPost = function(p_postId, p_array) {
 		Ti.API.error("ERRORE RISPOSTA SERVER: "+this.status + ' - ' + this.statusText);
 	};
 
-	xhr.open('PUT', Alloy.Globals.baseUrl + '/zz/api/v01/actions/actions/' + session + '/' + p_postId + 'relations?_type=JSON');
+	xhr.open('PUT', Alloy.Globals.baseUrl + '/zz/api/v01/actions/actions/' + session + '/' + p_postId + '/relations?_type=JSON');
 	
 	Ti.API.info("URL PUT CALL: "+Alloy.Globals.baseUrl + '/zz/api/v01/actions/actions/' + session + '/' + p_postId + '/relations?_type=JSON');
 	

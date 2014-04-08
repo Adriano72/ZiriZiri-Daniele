@@ -136,11 +136,10 @@ exports.linkAspectsToPost = function(p_postId, p_array) {
     xhr.onerror = function() {
         Ti.API.error("ERRORE RISPOSTA SERVER: " + this.status + " - " + this.statusText);
     };
-    xhr.open("PUT", Alloy.Globals.baseUrl + "/zz/api/v01/actions/actions/" + session + "/" + p_postId + "relations?_type=JSON");
+    xhr.open("PUT", Alloy.Globals.baseUrl + "/zz/api/v01/actions/actions/" + session + "/" + p_postId + "/relations?_type=JSON");
     Ti.API.info("URL PUT CALL: " + Alloy.Globals.baseUrl + "/zz/api/v01/actions/actions/" + session + "/" + p_postId + "/relations?_type=JSON");
     xhr.setRequestHeader("Accept", "application/json");
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.setRequestHeader("X-HTTP-Method-Override", "PUT");
     "[" + p_array.toString() + "]";
     tmpArr = JSON.stringify(tmpArr);
