@@ -230,7 +230,7 @@ function Controller() {
     var timelineList = Alloy.Collections.events;
     var net = require("net");
     net.getData(function(timelineData) {
-        Ti.API.info(JSON.stringify(timelineData));
+        Ti.API.info("DATA FETCHED: " + JSON.stringify(timelineData));
         _.forEach(timelineData.data, function(value) {
             var timeline = Alloy.createModel("events", value);
             var creationDate = new Date(value.referenceTime);
@@ -273,7 +273,6 @@ function Controller() {
             });
             temp.push(timeline);
         });
-        Ti.API.info("TEMP: " + JSON.stringify(temp[0]));
         timelineList.add(temp.slice(0, 20));
     });
     __defers["$.__views.win!open!showSpinner"] && $.__views.win.addEventListener("open", showSpinner);

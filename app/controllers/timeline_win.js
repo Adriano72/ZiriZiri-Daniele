@@ -50,7 +50,7 @@ var net = require('net');
 
 net.getData(function(timelineData) {
 
-	Ti.API.info(JSON.stringify(timelineData));
+	Ti.API.info("DATA FETCHED: "+JSON.stringify(timelineData));
 	
 	
 
@@ -134,7 +134,7 @@ net.getData(function(timelineData) {
 
 	});
 	
-	Ti.API.info("TEMP: "+JSON.stringify(temp[0]));
+	//Ti.API.info("TEMP: "+JSON.stringify(temp[0]));
 	
 	timelineList.add(temp.slice(0,20));
 	/*

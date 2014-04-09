@@ -30,7 +30,7 @@
 			<Label class="separator"/>
 			<View id="buttonsContainer">
 				<Label class="1_insertAspects" backgroundImage="/images/826-money-1.png" onClick="addCashflow"/>
-				<Label class="insertAspects" backgroundImage="/images/770-paper-clip.png"/>
+				<Label class="insertAspects" backgroundImage="/images/770-paper-clip.png" onClick="addDocument"/>
 				<Label class="insertAspects" backgroundImage="/images/809-clipboard.png"/>
 				<Label class="insertAspects" backgroundImage="/images/843-link.png"/>
 			</View>

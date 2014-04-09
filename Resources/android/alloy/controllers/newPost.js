@@ -19,8 +19,8 @@ function Controller() {
     }
     function showDatePicker() {
         Alloy.createController("datePicker", function(p_data) {
-            Ti.API.info("******** FIRE ********");
             $.postDate.value = moment(p_data).format("LLL");
+            Ti.API.info("******** DATE GOT FROM PICKER: " + $.postDate.value);
         });
     }
     function savePost() {
@@ -52,6 +52,86 @@ function Controller() {
         } else alert("Il campo Titolo e il campo Categoria sono obbligatori!");
     }
     function addCashflow() {
+        if ("" == $.titolo.value && 9999 == $.pkrCategoria.getSelectedRow(0).id) {
+            alert("Prima di inserire il dettaglio dell'evento è necessario specificare titolo e categoria");
+            return;
+        }
+        Alloy.createController("addCashflow", function(objRet) {
+            Ti.API.info("POST DATE VALUE: " + Date.parse($.postDate.value));
+            var objAspect = {
+                kind: {
+                    code: "CASHFLOWDATATYPE_CODE"
+                },
+                data: {}
+            };
+            objAspect.name = $.titolo.value;
+            objAspect.referenceTime = Date.parse($.postDate.value);
+            objAspect.category = {
+                id: $.pkrCategoria.getSelectedRow(0).id,
+                version: $.pkrCategoria.getSelectedRow(0).version
+            };
+            objAspect.location = {
+                name: $.location.value,
+                description: $.location.value,
+                latitude: location_result.latitude,
+                longitude: location_result.longitude
+            };
+            objAspect.data.tipoMovimento = objRet.tipoMovimento;
+            objAspect.data.dataOperazione = Date.parse($.postDate.value);
+            objAspect.data.dataValuta = Date.parse($.postDate.value);
+            objAspect.data.pagamentoIncasso = objRet.pagamentoIncasso;
+            objAspect.data.importo = objRet.importo;
+            var tempObj = _.clone(objAspect);
+            objAspect.data = JSON.stringify(objAspect.data);
+            arrayAspetti.push(objAspect);
+            Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
+            switch (objAspect.kind.code) {
+              case "CASHFLOWDATATYPE_CODE":
+                var riga = Alloy.createController("rowCASHFLOW", {
+                    id_code: arrayAspetti.length - 1,
+                    name: objAspect.name,
+                    importo: tempObj.data.importo,
+                    dataOperazione: tempObj.data.dataOperazione,
+                    dataValuta: tempObj.data.dataValuta,
+                    codTipoMovimento: tempObj.data.tipoMovimento.codice
+                }).getView();
+                $.newPostTable.appendRow(riga);
+                break;
+
+              case "DOCUMENTDATATYPE_CODE":
+                Ti.API.info("ASPECT DESCRIPTION: " + value.name);
+                var riga = Alloy.createController("rowDOCUMENT", {
+                    id_code: key,
+                    description: value.name,
+                    format: _.isNull(value.data.format) ? "Non disponibile" : value.data.format.name,
+                    type: _.isNull(value.data.format) ? "Non disponibile" : value.data.format.type,
+                    title: value.data.title
+                }).getView();
+                rows.push(riga);
+                break;
+
+              case "LINKDATATYPE_CODE":
+                var riga = Alloy.createController("rowLINK", {
+                    id_code: key,
+                    description: value.description,
+                    type: value.data.format.type,
+                    title: value.data.title,
+                    content: value.data.content
+                }).getView();
+                rows.push(riga);
+                break;
+
+              case "NOTEDATATYPE_CODE":
+                var riga = Alloy.createController("rowNOTE", {
+                    id_code: key,
+                    description: value.data.title,
+                    timestamp: value.data.timestamp
+                }).getView();
+                rows.push(riga);
+            }
+        }).getView().open();
+    }
+    function addDocument() {
         if ("" == $.titolo.value && 9999 == $.pkrCategoria.getSelectedRow(0).id) {
             alert("Prima di inserire il dettaglio dell'evento è necessario specificare titolo e categoria");
             return;
@@ -307,6 +387,7 @@ function Controller() {
         id: "__alloyId15"
     });
     $.__views.buttonsContainer.add($.__views.__alloyId15);
+    addDocument ? $.__views.__alloyId15.addEventListener("click", addDocument) : __defers["$.__views.__alloyId15!click!addDocument"] = true;
     $.__views.__alloyId16 = Ti.UI.createLabel({
         left: 50,
         width: 20,
@@ -350,6 +431,7 @@ function Controller() {
     __defers["$.__views.postDate!focus!showDatePicker"] && $.__views.postDate.addEventListener("focus", showDatePicker);
     __defers["$.__views.postDate!click!showDatePicker"] && $.__views.postDate.addEventListener("click", showDatePicker);
     __defers["$.__views.__alloyId14!click!addCashflow"] && $.__views.__alloyId14.addEventListener("click", addCashflow);
+    __defers["$.__views.__alloyId15!click!addDocument"] && $.__views.__alloyId15.addEventListener("click", addDocument);
     _.extend($, exports);
 }
 
