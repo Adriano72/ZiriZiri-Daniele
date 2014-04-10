@@ -155,6 +155,8 @@ exports.saveAspect = function(allAspects, _callback) {
 	});
 
 	_.forEach(allAspects, function(value, key) {
+		
+		Ti.API.info("***SAVING ASPECT***");
 
 		var xhr = Ti.Network.createHTTPClient();
 

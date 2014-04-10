@@ -103,6 +103,7 @@ exports.saveAspect = function(allAspects, _callback) {
         _callback(arrayIDAspetti);
     });
     _.forEach(allAspects, function(value) {
+        Ti.API.info("***SAVING ASPECT***");
         var xhr = Ti.Network.createHTTPClient();
         xhr.onload = function() {
             var json = JSON.parse(this.responseText);

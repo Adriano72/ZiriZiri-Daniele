@@ -27,13 +27,15 @@ u_location.result(function(locationData) {
 $.postDate.value = moment().format('LLL');
 
 function showDatePicker() {
+	
+	Ti.API.info("111111111 DATE GOT FROM PICKER: "+$.postDate.value);
 
 	var riga = Alloy.createController('datePicker', function(p_data) {
 
 		
 		$.postDate.value = moment(p_data).format('LLL');
 		
-		Ti.API.info("******** DATE GOT FROM PICKER: "+$.postDate.value);
+		Ti.API.info("22222222 DATE GOT FROM PICKER: "+$.postDate.value);
 
 	});
 
@@ -56,6 +58,9 @@ _.forEach(Ti.App.Properties.getObject("elencoCategorie"), function(value, key) {
 $.pkrCategoria.add(rowsCat);
 
 function savePost() {
+	
+	Ti.API.info("POST DATE VALUE AT BEGINNING; "+$.postDate.value);
+	Ti.API.info("POST DATE PARSED AT BEGINNING; "+Date.parse($.postDate.value));
 
 	if ($.titolo.value !== "" && $.pkrCategoria.getSelectedRow(0).id != 9999) {
 
@@ -129,7 +134,7 @@ function addCashflow(id_post) {
 
 	Alloy.createController("addCashflow", function(objRet) {
 		
-		Ti.API.info("POST DATE VALUE: "+Date.parse($.postDate.value));
+		Ti.API.info("POST DATE VALUE: "+$.postDate.value);
 		
 		var objAspect = {
 
@@ -250,7 +255,7 @@ function addDocument(id_post) {
 
 	};
 
-	Alloy.createController("addCashflow", function(objRet) {
+	Alloy.createController("addDocument", function(objRet) {
 
 		var objAspect = {
 
