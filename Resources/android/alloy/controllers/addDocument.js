@@ -36,10 +36,20 @@ function Controller() {
         } else alert("I campi Tipo Movimento e Pagamento Incasso sono obbligatori!");
     }
     function openCamera() {
-        Titanium.Media.showCamera({
+        Ti.Media.showCamera({
             success: function(event) {
-                Ti.API.debug("Our type was: " + event.mediaType);
-                event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO ? $.preview.image = event.media : alert("got the wrong type back =" + event.mediaType);
+                event.cropRect;
+                var image = event.media;
+                Ti.API.info("Our type was: " + event.mediaType);
+                if (event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
+                    $.preview.image = image;
+                    var hashedImage = Ti.Utils.base64encode(image).toString();
+                    Ti.API.info("HASHED IMAGE : " + hashedImage);
+                    Ti.API.info("HASHED IMAGE MIME TYPE: " + image.getMimeType());
+                    var tempFile = Ti.Filesystem.createTempFile();
+                    tempFile.write(image);
+                    Ti.API.info("HASHED IMAGE SIZE: " + tempFile.size);
+                } else alert("got the wrong type back =" + event.mediaType);
             },
             cancel: function() {},
             error: function(error) {
@@ -57,23 +67,27 @@ function Controller() {
     function openGallery() {
         Titanium.Media.openPhotoGallery({
             success: function(event) {
-                Ti.API.debug("Our type was: " + event.mediaType);
+                var cropRect = event.cropRect;
+                var image = event.media;
+                Ti.API.info("Our type was: " + event.mediaType);
                 if (event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
-                    $.preview.image = event.media;
-                    var hashedImage = Ti.Utils.base64encode(event.media).toString();
-                    Ti.API.info("HASHED IMAGE: " + hashedImage);
-                } else alert("got the wrong type back =" + event.mediaType);
+                    $.preview.setWidth(cropRect.width);
+                    $.preview.setHeight(cropRect.height);
+                    $.preview.image = image;
+                    Ti.API.info("HASHED IMAGE: " + image.getFile());
+                    Ti.API.info("HASHED IMAGE MIME TYPE: " + image.getMimeType());
+                    var tempFile = Ti.Filesystem.createTempFile();
+                    tempFile.write(image);
+                    var content = tempFile.read();
+                    Ti.API.info("HASHED IMAGE SIZE: " + tempFile.size);
+                    var hashedImage = Ti.Utils.base64encode(content).toString();
+                    Ti.API.info("HASHED IMAGE : " + hashedImage);
+                }
+                Titanium.API.info("PHOTO GALLERY SUCCESS cropRect.x " + cropRect.x + " cropRect.y " + cropRect.y + " cropRect.height " + cropRect.height + " cropRect.width " + cropRect.width);
             },
             cancel: function() {},
-            error: function(error) {
-                var a = Titanium.UI.createAlertDialog({
-                    title: "Camera"
-                });
-                error.code == Titanium.Media.NO_CAMERA ? a.setMessage("Impossibile attivare la funzione foto su questo dispositivo") : a.setMessage("Unexpected error: " + error.code);
-                a.show();
-            },
-            saveToPhotoGallery: true,
-            allowEditing: false,
+            error: function() {},
+            allowEditing: true,
             mediaTypes: [ Ti.Media.MEDIA_TYPE_PHOTO ]
         });
     }
@@ -195,7 +209,7 @@ function Controller() {
         right: 5,
         left: 5,
         width: "95%",
-        height: 300,
+        height: 200,
         id: "preview"
     });
     $.__views.__alloyId13.add($.__views.preview);

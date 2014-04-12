@@ -46,13 +46,24 @@ function createProtoObj() {
 
 function openCamera() {
 
-	Titanium.Media.showCamera({
+	Ti.Media.showCamera({
 		success : function(event) {
-			// called when media returned from the camera
-			Ti.API.debug('Our type was: ' + event.mediaType);
-			if (event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
-				$.preview.image = event.media;
 
+			var cropRect = event.cropRect;
+			var image = event.media;
+
+			// called when media returned from the camera
+			Ti.API.info('Our type was: ' + event.mediaType);
+			if (event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
+				$.preview.image = image;
+				var hashedImage = Ti.Utils.base64encode(image).toString();
+				Ti.API.info("HASHED IMAGE : " + hashedImage);
+				Ti.API.info("HASHED IMAGE MIME TYPE: " + image.getMimeType());
+				
+				var tempFile = Ti.Filesystem.createTempFile();
+				tempFile.write(image);				
+				Ti.API.info("HASHED IMAGE SIZE: " + tempFile.size);
+				
 			} else {
 				alert("got the wrong type back =" + event.mediaType);
 			}
@@ -83,37 +94,46 @@ function openCamera() {
 function openGallery() {
 
 	Titanium.Media.openPhotoGallery({
-		success : function(event) {
-			// called when media returned from the camera
-			Ti.API.debug('Our type was: ' + event.mediaType);
-			if (event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
-				$.preview.image = event.media;
-				var hashedImage = Ti.Utils.base64encode(event.media).toString();
-				Ti.API.info("HASHED IMAGE: "+hashedImage);
 
+		success : function(event) {
+			var cropRect = event.cropRect;
+			var image = event.media;
+
+			// set image view
+			Ti.API.info('Our type was: ' + event.mediaType);
+			if (event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
+				$.preview.setWidth(cropRect.width);
+				$.preview.setHeight(cropRect.height);
+				$.preview.image = image;
+				//var hashedImage = Ti.Utils.base64encode(image).toString();
+				Ti.API.info("HASHED IMAGE: " + image.getFile());
+				Ti.API.info("HASHED IMAGE MIME TYPE: " + image.getMimeType());
+				
+				var tempFile = Ti.Filesystem.createTempFile();
+				tempFile.write(image);
+				
+				var content = tempFile.read();
+				Ti.API.info("HASHED IMAGE SIZE: " + tempFile.size);
+				var hashedImage = Ti.Utils.base64encode(content).toString();
+				
+				Ti.API.info("HASHED IMAGE : " + hashedImage);
+				
+				
 			} else {
-				alert("got the wrong type back =" + event.mediaType);
+				// is this necessary?
 			}
+
+			Titanium.API.info('PHOTO GALLERY SUCCESS cropRect.x ' + cropRect.x + ' cropRect.y ' + cropRect.y + ' cropRect.height ' + cropRect.height + ' cropRect.width ' + cropRect.width);
+
 		},
 		cancel : function() {
-			// called when user cancels taking a picture
+
 		},
 		error : function(error) {
-			// called when there's an error
-			var a = Titanium.UI.createAlertDialog({
-				title : 'Camera'
-			});
-			if (error.code == Titanium.Media.NO_CAMERA) {
-				a.setMessage('Impossibile attivare la funzione foto su questo dispositivo');
-			} else {
-				a.setMessage('Unexpected error: ' + error.code);
-			}
-			a.show();
 		},
-		saveToPhotoGallery : true,
-		// allowEditing and mediaTypes are iOS-only settings
-		allowEditing : false,
+		allowEditing : true,
+
 		mediaTypes : [Ti.Media.MEDIA_TYPE_PHOTO]
 	});
-
 };
+
