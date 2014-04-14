@@ -3,14 +3,12 @@ var args = arguments[0] || {};
 Ti.API.info("ARGS: " + args.data.id);
 
 var creationDate = new Date(args.data.referenceTime);
-var category = (_.isNull(args.data.category) || _.isUndefined(args.data.category)) ? "" : " " + icons.tag + " " +args.data.category.name;
+var category = (_.isNull(args.data.category) || _.isUndefined(args.data.category)) ? "" : " " + icons.tag + " " + args.data.category.name;
 
 if (!(_.isNull(args.data.location))) {
-	
-	var location = args.data.location.name;
-	$.location.text = " "+icons.map_marker+" "+location+" ",
 
-	$.mapview.region = {
+	var location = args.data.location.name;
+	$.location.text = " " + icons.map_marker + " " + location + " ", $.mapview.region = {
 		latitude : args.data.location.latitude,
 		longitude : args.data.location.longitude,
 		latitudeDelta : 0.01,
@@ -39,8 +37,6 @@ var rows = [];
 
 _.forEach(args.data.aspects, function(value, key) {
 
-	//Ti.API.info("ASPECT DATA: " + value.data.description);
-
 	switch (value.kind.code) {
 
 		case "CASHFLOWDATATYPE_CODE":
@@ -60,15 +56,16 @@ _.forEach(args.data.aspects, function(value, key) {
 			break;
 
 		case "DOCUMENTDATATYPE_CODE":
-		Ti.API.info("ASPECT DESCRIPTION: " + value.name);
+
+			Ti.API.info("ASPECT DESCRIPTION: " + JSON.stringify(value));
 
 			var riga = Alloy.createController('rowDOCUMENT', {
 
 				id_code : key,
-				description : value.name,
-				format : (_.isNull(value.data.format)) ? "Non disponibile" : value.data.format.name,
-				type : (_.isNull(value.data.format)) ? "Non disponibile" : value.data.format.type,
-				title : value.data.title
+				titolo : value.name,
+				descrizione : value.description,
+				size : value.data.size,
+				name : value.data.name
 
 			}).getView();
 			rows.push(riga);
@@ -101,19 +98,17 @@ _.forEach(args.data.aspects, function(value, key) {
 			}).getView();
 			rows.push(riga);
 			break;
-	}
-
+	};
 });
 
 $.aspectsTable.setData(rows);
 
-function closeActivityIndicator(){
-	
+function closeActivityIndicator() {
+
 	Ti.App.fireEvent("loading_done");
 };
 
 function aspectDetail(e) {
-	
 
 	Alloy.createController('aspect_detail', args.data.aspects[e.source.id_code]).getView().open();
 

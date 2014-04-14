@@ -101,7 +101,9 @@
 	backgroundColor: '#E3E3E3',
 	borderRadius: Alloy.Globals.borderRad,
 	height: 18,
-	width: Ti.UI.SIZE,
+	wordWrap: false,
+	ellipsize: true,
+	width: Ti.UI.FILL,
 	color: "#5E5E5E",
 	left: 5,
 	top: 5

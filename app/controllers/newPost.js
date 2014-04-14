@@ -27,15 +27,14 @@ u_location.result(function(locationData) {
 $.postDate.value = moment().format('LLL');
 
 function showDatePicker() {
-	
-	Ti.API.info("111111111 DATE GOT FROM PICKER: "+$.postDate.value);
+
+	Ti.API.info("111111111 DATE GOT FROM PICKER: " + $.postDate.value);
 
 	var riga = Alloy.createController('datePicker', function(p_data) {
 
-		
 		$.postDate.value = moment(p_data).format('LLL');
-		
-		Ti.API.info("22222222 DATE GOT FROM PICKER: "+$.postDate.value);
+
+		Ti.API.info("22222222 DATE GOT FROM PICKER: " + $.postDate.value);
 
 	});
 
@@ -58,9 +57,9 @@ _.forEach(Ti.App.Properties.getObject("elencoCategorie"), function(value, key) {
 $.pkrCategoria.add(rowsCat);
 
 function savePost() {
-	
-	Ti.API.info("POST DATE VALUE AT BEGINNING; "+$.postDate.value);
-	Ti.API.info("POST DATE PARSED AT BEGINNING; "+Date.parse($.postDate.value));
+
+	Ti.API.info("POST DATE VALUE AT BEGINNING; " + $.postDate.value);
+	Ti.API.info("POST DATE PARSED AT BEGINNING; " + Date.parse($.postDate.value));
 
 	if ($.titolo.value !== "" && $.pkrCategoria.getSelectedRow(0).id != 9999) {
 
@@ -99,6 +98,8 @@ function savePost() {
 		 */
 		net.savePost(postObj, function(post_id) {
 
+			Alloy.Globals.showSpinner();
+
 			Ti.API.info("ID POST SALVATO: " + post_id);
 
 			if (arrayAspetti.length > 0) {// Se ci sono aspetti nel post li salvo e poi li collego al post
@@ -111,8 +112,20 @@ function savePost() {
 
 					Ti.API.info("ARRAY ID ASPETTI DA MANDARE IN ASSOCIAZIONE: " + p_arrayIdAspetti);
 
-					net.linkAspectsToPost(post_id, p_arrayIdAspetti);
+					net.linkAspectsToPost(post_id, p_arrayIdAspetti, function() {
+						$.window.close();
+					});
 				});
+			} else {
+				
+				$.window.close();
+				alert("Post salvato");
+
+				setTimeout(function() {
+
+					Ti.App.fireEvent("loading_done");
+				}, 500);
+
 			};
 
 		});
@@ -133,9 +146,9 @@ function addCashflow(id_post) {
 	};
 
 	Alloy.createController("addCashflow", function(objRet) {
-		
-		Ti.API.info("POST DATE VALUE: "+$.postDate.value);
-		
+
+		Ti.API.info("POST DATE VALUE: " + $.postDate.value);
+
 		var objAspect = {
 
 			kind : {
@@ -243,7 +256,6 @@ function addCashflow(id_post) {
 		//Ti.API.info("FINISHED ASPECT OBJ: "+JSON.stringify(objAspect));
 	}).getView().open();
 };
-
 
 function addDocument(id_post) {
 	//Ti.API.info("**** INSERT CASHFLOW!");
@@ -260,37 +272,36 @@ function addDocument(id_post) {
 		var objAspect = {
 
 			kind : {
-				code : "CASHFLOWDATATYPE_CODE"
+				code : "DOCUMENTDATATYPE_CODE",
+				name : "DOCUMENTDATATYPE_NAME",
+				description : "DOCUMENTDATATYPE_DESCRIPTION"
 			},
 			data : {}
 
 		};
 
-		objAspect.name = $.titolo.value;
-
+		objAspect.name = objRet.name;
+		objAspect.description = objRet.description;
 		objAspect.referenceTime = Date.parse($.postDate.value);
 		objAspect.category = {
 			id : $.pkrCategoria.getSelectedRow(0).id,
 			version : $.pkrCategoria.getSelectedRow(0).version
 		};
 
-		objAspect.location = {
-			name : $.location.value,
-			description : $.location.value,
-			latitude : location_result.latitude,
-			longitude : location_result.longitude
-
-		};
-		objAspect.data.tipoMovimento = objRet.tipoMovimento;
-		objAspect.data.dataOperazione = Date.parse($.postDate.value);
-		objAspect.data.dataValuta = Date.parse($.postDate.value);
-		objAspect.data.pagamentoIncasso = objRet.pagamentoIncasso;
-		objAspect.data.importo = objRet.importo;
+		objAspect.data.title = objRet.name;
+		;
+		objAspect.data.description = objRet.description;
+		objAspect.data.name = objRet.fileName;
+		objAspect.data.size = objRet.fileSize;
+		objAspect.data.timestamp = moment();
+		objAspect.data.content = objRet.content;
 
 		/*
 		 "kind":{"code":"CASHFLOWDATATYPE_CODE"},
 		 "data": "{\"tipoMovimento\":{\"codice\":\""+tipoMovCodice+"\",\"id\":"+tipoMovId+",\"version\":"+tipoMovVersion+"},\"pagamentoIncasso\":{\"descrizioneBreve\":\""+pagamIncDescBreve+"\",\"id\":"+tipoMovId+",\"version\":"+tipoMovVersion+"},\"dataOperazione\":1393066568000,\"descrizioneBreve\":\"\",\"importo\":"+$.importo.value+"}"
 		 */
+
+		Ti.API.info("OBJ ASPECT: " + JSON.stringify(objAspect));
 
 		var tempObj = _.clone(objAspect);
 		objAspect.data = JSON.stringify(objAspect.data);
@@ -299,67 +310,16 @@ function addDocument(id_post) {
 
 		Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
 
-		switch (objAspect.kind.code) {
+		var riga = Alloy.createController('rowDOCUMENT', {
 
-			case "CASHFLOWDATATYPE_CODE":
+			id_code : arrayAspetti.length - 1,
+			titolo : tempObj.name,
+			descrizione : tempObj.description,
+			size : tempObj.data.size,
+			name : tempObj.data.name
 
-				var riga = Alloy.createController('rowCASHFLOW', {
-
-					id_code : arrayAspetti.length - 1,
-					name : objAspect.name,
-					importo : tempObj.data.importo,
-					dataOperazione : tempObj.data.dataOperazione,
-					dataValuta : tempObj.data.dataValuta,
-					codTipoMovimento : tempObj.data.tipoMovimento.codice
-
-				}).getView();
-				$.newPostTable.appendRow(riga);
-
-				break;
-
-			case "DOCUMENTDATATYPE_CODE":
-				Ti.API.info("ASPECT DESCRIPTION: " + value.name);
-
-				var riga = Alloy.createController('rowDOCUMENT', {
-
-					id_code : key,
-					description : value.name,
-					format : (_.isNull(value.data.format)) ? "Non disponibile" : value.data.format.name,
-					type : (_.isNull(value.data.format)) ? "Non disponibile" : value.data.format.type,
-					title : value.data.title
-
-				}).getView();
-				rows.push(riga);
-
-				break;
-
-			case "LINKDATATYPE_CODE":
-
-				var riga = Alloy.createController('rowLINK', {
-
-					id_code : key,
-					description : value.description,
-					type : value.data.format.type,
-					title : value.data.title,
-					content : value.data.content
-
-				}).getView();
-				rows.push(riga);
-
-				break;
-
-			case "NOTEDATATYPE_CODE":
-
-				var riga = Alloy.createController('rowNOTE', {
-
-					id_code : key,
-					description : value.data.title,
-					timestamp : value.data.timestamp
-
-				}).getView();
-				rows.push(riga);
-				break;
-		}
+		}).getView();
+		$.newPostTable.appendRow(riga);
 
 		//Ti.API.info("FINISHED ASPECT OBJ: "+JSON.stringify(objAspect));
 	}).getView().open();
@@ -368,7 +328,6 @@ function addDocument(id_post) {
 function callSaveAspects(_callback) {
 
 	net.saveAspect(arrayAspetti, function(id_saved_aspects_array) {
-
 
 		//arrayIdAspetti.push(id_aspect);
 

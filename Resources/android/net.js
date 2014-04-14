@@ -80,10 +80,7 @@ exports.savePost = function(objPost, _callback) {
     xhr.onload = function() {
         var json = JSON.parse(this.responseText);
         Ti.API.info("********** FRM XHR: " + JSON.stringify(json));
-        if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
-            alert("Evento salvato");
-            _callback(json.data.id);
-        } else {
+        if ('"SUCCESS"' == JSON.stringify(json.type.code)) _callback(json.data.id); else {
             Ti.App.Properties.getList("unsavedPosts", []).push(objPost);
             alert("Errore nella comunicazione col server. L'evento è stato salvato nel dispositivo e sarà possibilie salvarlo in seguito");
         }
@@ -123,7 +120,7 @@ exports.saveAspect = function(allAspects, _callback) {
     });
 };
 
-exports.linkAspectsToPost = function(p_postId, p_array) {
+exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
     Ti.API.info("ARRAY ****:" + JSON.stringify(p_array));
     var tmpArr = [];
     tmpArr.push(p_array);
@@ -132,7 +129,11 @@ exports.linkAspectsToPost = function(p_postId, p_array) {
     xhr.onload = function() {
         Ti.API.info("RISPOSTA SERV CREA RELAZIONE: " + this.responseText);
         var json = JSON.parse(this.responseText);
-        '"SUCCESS"' == JSON.stringify(json.type.code) ? alert("RELAZIONI CREATE!!!!!") : alert("Errore nella comunicazione col server.");
+        if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
+            Ti.App.fireEvent("loading_done");
+            alert("Post salvato");
+            _callback();
+        } else alert("Errore nella comunicazione col server.");
     };
     xhr.onerror = function() {
         Ti.API.error("ERRORE RISPOSTA SERVER: " + this.status + " - " + this.statusText);

@@ -25,9 +25,6 @@ function Controller() {
             var pagamIncID = $.pkrPagamentoIncasso.getSelectedRow(0).id;
             var pagamIncVersion = $.pkrPagamentoIncasso.getSelectedRow(0).version;
             var objCashFlow = {
-                kind: {
-                    code: "CASHFLOWDATATYPE_CODE"
-                },
                 tipoMovimento: {
                     codice: tipoMovCodice,
                     id: tipoMovId,

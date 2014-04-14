@@ -60,7 +60,7 @@ function createProtoObj() {
 	
 	var objCashFlow = {
 		
-		kind:{code:"CASHFLOWDATATYPE_CODE"},
+		//kind:{code:"CASHFLOWDATATYPE_CODE"},
 		tipoMovimento: {codice: tipoMovCodice, id: tipoMovId, version: tipoMovVersion},
 		pagamentoIncasso: {id: pagamIncID, version: pagamIncVersion},
 		importo: $.importo.value

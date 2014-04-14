@@ -1,11 +1,4 @@
 function Controller() {
-    function composeDate(d_par) {
-        var p_toDate = new Date(d_par);
-        var day = p_toDate.getDate();
-        var month = p_toDate.getCMonth();
-        var year = p_toDate.getFullYear();
-        return day + " " + month + " " + year;
-    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "rowCASHFLOW";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -110,7 +103,7 @@ function Controller() {
     var args = arguments[0] || {};
     $.row.id_code = args.id_code, $.description.text = "  " + icons.money;
     $.importo.text = "€ " + args.importo;
-    $.dataOperazione.text = composeDate(args.dataOperazione);
+    $.dataOperazione.text = moment(args.dataOperazione).format("LLL");
     $.codTipoMovimento.text = args.codTipoMovimento;
     _.extend($, exports);
 }

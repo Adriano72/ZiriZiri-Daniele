@@ -18,22 +18,19 @@ function Controller() {
         }
     }
     function createProtoObj() {
-        if (9999 != $.pkrPagamentoIncasso.getSelectedRow(0).id && 9999 != $.pkrTipoMovimento.getSelectedRow(0).id) {
+        if ("" != $.titolo.value && "" != $.descrizione.value && "" != imageContent) {
             $.titolo.value;
             $.descrizione.value;
-            $.pkrTipoMovimento.getSelectedRow(0).version;
-            $.pkrPagamentoIncasso.getSelectedRow(0).id;
-            $.pkrPagamentoIncasso.getSelectedRow(0).version;
             var objDocument = {
-                kind: {
-                    code: "DOCUMENTDATATYPE_CODE",
-                    name: "DOCUMENTDATATYPE_NAME",
-                    description: "DOCUMENTDATATYPE_DESCRIPTION"
-                }
+                name: $.titolo.value,
+                description: $.descrizione.value,
+                fileName: fileName,
+                fileSize: fileSize,
+                content: imageContent
             };
             args(objDocument);
             $.window.close();
-        } else alert("I campi Tipo Movimento e Pagamento Incasso sono obbligatori!");
+        } else alert("E' necessario scattare una foto o selezionarla dalla galleria, i campi titolo e descrizione sono obbligatori");
     }
     function openCamera() {
         Ti.Media.showCamera({
@@ -43,12 +40,15 @@ function Controller() {
                 Ti.API.info("Our type was: " + event.mediaType);
                 if (event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
                     $.preview.image = image;
-                    var hashedImage = Ti.Utils.base64encode(image).toString();
-                    Ti.API.info("HASHED IMAGE : " + hashedImage);
-                    Ti.API.info("HASHED IMAGE MIME TYPE: " + image.getMimeType());
+                    var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(image).toString();
                     var tempFile = Ti.Filesystem.createTempFile();
                     tempFile.write(image);
-                    Ti.API.info("HASHED IMAGE SIZE: " + tempFile.size);
+                    Ti.API.info("HASHED IMAGE MIME TYPE: " + image.getMimeType());
+                    Ti.API.info("IMAGE FILE SIZE: " + tempFile.size);
+                    Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
+                    imageContent = hashedImage;
+                    fileSize = tempFile.size;
+                    fileName = tempFile.name;
                 } else alert("got the wrong type back =" + event.mediaType);
             },
             cancel: function() {},
@@ -74,14 +74,16 @@ function Controller() {
                     $.preview.setWidth(cropRect.width);
                     $.preview.setHeight(cropRect.height);
                     $.preview.image = image;
-                    Ti.API.info("HASHED IMAGE: " + image.getFile());
-                    Ti.API.info("HASHED IMAGE MIME TYPE: " + image.getMimeType());
+                    Ti.API.info("IMAGE MIME TYPE: " + image.getMimeType());
                     var tempFile = Ti.Filesystem.createTempFile();
                     tempFile.write(image);
                     var content = tempFile.read();
-                    Ti.API.info("HASHED IMAGE SIZE: " + tempFile.size);
-                    var hashedImage = Ti.Utils.base64encode(content).toString();
-                    Ti.API.info("HASHED IMAGE : " + hashedImage);
+                    Ti.API.info("IMAGE FILE SIZE: " + tempFile.size);
+                    Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
+                    var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(content).toString();
+                    imageContent = hashedImage;
+                    fileSize = tempFile.size;
+                    fileName = tempFile.name;
                 }
                 Titanium.API.info("PHOTO GALLERY SUCCESS cropRect.x " + cropRect.x + " cropRect.y " + cropRect.y + " cropRect.height " + cropRect.height + " cropRect.width " + cropRect.width);
             },
@@ -225,7 +227,9 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    var args = arguments[0] || {};
+    var imageContent;
+    var fileName;
+    var fileSize;
     __defers["$.__views.salva!click!createProtoObj"] && $.__views.salva.addEventListener("click", createProtoObj);
     __defers["$.__views.foto!click!openCamera"] && $.__views.foto.addEventListener("click", openCamera);
     __defers["$.__views.gallery!click!openGallery"] && $.__views.gallery.addEventListener("click", openGallery);

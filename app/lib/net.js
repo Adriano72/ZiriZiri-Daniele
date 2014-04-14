@@ -120,7 +120,7 @@ exports.savePost = function(objPost, _callback) {
 
 		if (JSON.stringify(json.type.code) == "\"SUCCESS\"") {
 
-			alert("Evento salvato");
+			//alert("Evento salvato");
 			_callback(json.data.id);
 
 		} else {
@@ -200,7 +200,7 @@ exports.saveAspect = function(allAspects, _callback) {
 
 };
 
-exports.linkAspectsToPost = function(p_postId, p_array) {
+exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
 	
 	Ti.API.info("ARRAY ****:" + JSON.stringify(p_array));
 	
@@ -220,8 +220,10 @@ exports.linkAspectsToPost = function(p_postId, p_array) {
 		var json = JSON.parse(this.responseText);
 
 		if (JSON.stringify(json.type.code) == "\"SUCCESS\"") {
-
-			alert("RELAZIONI CREATE!!!!!");
+	
+			Ti.App.fireEvent("loading_done");
+			alert("Post salvato");
+			_callback();
 			//_callback(json.data.id);
 
 		} else {

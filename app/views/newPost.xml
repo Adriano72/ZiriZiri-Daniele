@@ -1,5 +1,5 @@
 <Alloy>
-	<Window class="container" title = "Nuovo Post">
+	<Window id="window" class="container" title = "Nuovo Post">
 		<Menu id="menu" platform="android">
 			
 			<MenuItem id="salva" title="Scrivi" icon="/images/785-floppy-disk.png"  onClick="savePost" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />

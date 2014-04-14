@@ -1,7 +1,7 @@
 function Controller() {
     function __alloyId15() {
-        $.__views.newPost.removeEventListener("open", __alloyId15);
-        if ($.__views.newPost.activity) $.__views.newPost.activity.onCreateOptionsMenu = function(e) {
+        $.__views.window.removeEventListener("open", __alloyId15);
+        if ($.__views.window.activity) $.__views.window.activity.onCreateOptionsMenu = function(e) {
             var __alloyId14 = {
                 id: "salva",
                 title: "Scrivi",
@@ -44,13 +44,22 @@ function Controller() {
                 }
             };
             net.savePost(postObj, function(post_id) {
+                Alloy.Globals.showSpinner();
                 Ti.API.info("ID POST SALVATO: " + post_id);
-                arrayAspetti.length > 0 && callSaveAspects(function(p_arrayIdAspetti) {
+                if (arrayAspetti.length > 0) callSaveAspects(function(p_arrayIdAspetti) {
                     p_arrayIdAspetti.push(Ti.App.Properties.getList("postTemplateIds"));
                     p_arrayIdAspetti = _.flatten(p_arrayIdAspetti);
                     Ti.API.info("ARRAY ID ASPETTI DA MANDARE IN ASSOCIAZIONE: " + p_arrayIdAspetti);
-                    net.linkAspectsToPost(post_id, p_arrayIdAspetti);
-                });
+                    net.linkAspectsToPost(post_id, p_arrayIdAspetti, function() {
+                        $.window.close();
+                    });
+                }); else {
+                    $.window.close();
+                    alert("Post salvato");
+                    setTimeout(function() {
+                        Ti.App.fireEvent("loading_done");
+                    }, 500);
+                }
             });
         } else alert("Il campo Titolo e il campo Categoria sono obbligatori!");
     }
@@ -142,75 +151,38 @@ function Controller() {
         Alloy.createController("addDocument", function(objRet) {
             var objAspect = {
                 kind: {
-                    code: "CASHFLOWDATATYPE_CODE"
+                    code: "DOCUMENTDATATYPE_CODE",
+                    name: "DOCUMENTDATATYPE_NAME",
+                    description: "DOCUMENTDATATYPE_DESCRIPTION"
                 },
                 data: {}
             };
-            objAspect.name = $.titolo.value;
+            objAspect.name = objRet.name;
+            objAspect.description = objRet.description;
             objAspect.referenceTime = Date.parse($.postDate.value);
             objAspect.category = {
                 id: $.pkrCategoria.getSelectedRow(0).id,
                 version: $.pkrCategoria.getSelectedRow(0).version
             };
-            objAspect.location = {
-                name: $.location.value,
-                description: $.location.value,
-                latitude: location_result.latitude,
-                longitude: location_result.longitude
-            };
-            objAspect.data.tipoMovimento = objRet.tipoMovimento;
-            objAspect.data.dataOperazione = Date.parse($.postDate.value);
-            objAspect.data.dataValuta = Date.parse($.postDate.value);
-            objAspect.data.pagamentoIncasso = objRet.pagamentoIncasso;
-            objAspect.data.importo = objRet.importo;
+            objAspect.data.title = objRet.name;
+            objAspect.data.description = objRet.description;
+            objAspect.data.name = objRet.fileName;
+            objAspect.data.size = objRet.fileSize;
+            objAspect.data.timestamp = moment();
+            objAspect.data.content = objRet.content;
+            Ti.API.info("OBJ ASPECT: " + JSON.stringify(objAspect));
             var tempObj = _.clone(objAspect);
             objAspect.data = JSON.stringify(objAspect.data);
             arrayAspetti.push(objAspect);
             Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
-            switch (objAspect.kind.code) {
-              case "CASHFLOWDATATYPE_CODE":
-                var riga = Alloy.createController("rowCASHFLOW", {
-                    id_code: arrayAspetti.length - 1,
-                    name: objAspect.name,
-                    importo: tempObj.data.importo,
-                    dataOperazione: tempObj.data.dataOperazione,
-                    dataValuta: tempObj.data.dataValuta,
-                    codTipoMovimento: tempObj.data.tipoMovimento.codice
-                }).getView();
-                $.newPostTable.appendRow(riga);
-                break;
-
-              case "DOCUMENTDATATYPE_CODE":
-                Ti.API.info("ASPECT DESCRIPTION: " + value.name);
-                var riga = Alloy.createController("rowDOCUMENT", {
-                    id_code: key,
-                    description: value.name,
-                    format: _.isNull(value.data.format) ? "Non disponibile" : value.data.format.name,
-                    type: _.isNull(value.data.format) ? "Non disponibile" : value.data.format.type,
-                    title: value.data.title
-                }).getView();
-                rows.push(riga);
-                break;
-
-              case "LINKDATATYPE_CODE":
-                var riga = Alloy.createController("rowLINK", {
-                    id_code: key,
-                    description: value.description,
-                    type: value.data.format.type,
-                    title: value.data.title,
-                    content: value.data.content
-                }).getView();
-                rows.push(riga);
-                break;
-
-              case "NOTEDATATYPE_CODE":
-                var riga = Alloy.createController("rowNOTE", {
-                    id_code: key,
-                    description: value.data.title,
-                    timestamp: value.data.timestamp
-                }).getView();
-                rows.push(riga);
-            }
+            var riga = Alloy.createController("rowDOCUMENT", {
+                id_code: arrayAspetti.length - 1,
+                titolo: tempObj.name,
+                descrizione: tempObj.description,
+                size: tempObj.data.size,
+                name: tempObj.data.name
+            }).getView();
+            $.newPostTable.appendRow(riga);
         }).getView().open();
     }
     function callSaveAspects(_callback) {
@@ -227,13 +199,13 @@ function Controller() {
     var $ = this;
     var exports = {};
     var __defers = {};
-    $.__views.newPost = Ti.UI.createWindow({
+    $.__views.window = Ti.UI.createWindow({
         backgroundColor: "#F2F2F2",
-        title: "Nuovo Post",
-        id: "newPost"
+        id: "window",
+        title: "Nuovo Post"
     });
-    $.__views.newPost && $.addTopLevelView($.__views.newPost);
-    $.__views.newPost.addEventListener("open", __alloyId15);
+    $.__views.window && $.addTopLevelView($.__views.window);
+    $.__views.window.addEventListener("open", __alloyId15);
     var __alloyId16 = [];
     $.__views.__alloyId17 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
@@ -346,7 +318,7 @@ function Controller() {
         data: __alloyId16,
         id: "newPostTable"
     });
-    $.__views.newPost.add($.__views.newPostTable);
+    $.__views.window.add($.__views.newPostTable);
     $.__views.bottomBar = Ti.UI.createView({
         backgroundColor: "#EBEBEB",
         width: Ti.UI.FILL,
@@ -355,7 +327,7 @@ function Controller() {
         bottom: 0,
         id: "bottomBar"
     });
-    $.__views.newPost.add($.__views.bottomBar);
+    $.__views.window.add($.__views.bottomBar);
     $.__views.__alloyId21 = Ti.UI.createLabel({
         height: 1,
         top: 0,

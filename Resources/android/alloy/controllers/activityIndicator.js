@@ -31,6 +31,7 @@ function Controller() {
     $.__views.activityIndicator.add($.__views.spinner);
     exports.destroy = function() {};
     _.extend($, $.__views);
+    arguments[0] || {};
     __defers["$.__views.activityIndicator!open!showIndicator"] && $.__views.activityIndicator.addEventListener("open", showIndicator);
     _.extend($, exports);
 }

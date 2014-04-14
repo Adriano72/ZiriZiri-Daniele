@@ -47,16 +47,6 @@
 	layout: 'horizontal'
 }
 
-".block_label":{
-	left: 10,
-	height: 40,
-	font: {    	
-        fontSize: 16
-    },
-    touchEnabled: false,
-	color: '#969696'
-}
-
 ".block_data": {
 	height: 40,
     font: {    	

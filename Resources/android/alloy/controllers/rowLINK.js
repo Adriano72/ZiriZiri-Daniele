@@ -33,6 +33,68 @@ function Controller() {
         id: "description"
     });
     $.__views.row.add($.__views.description);
+    $.__views.__alloyId76 = Ti.UI.createView({
+        height: 40,
+        touchEnabled: false,
+        layout: "horizontal",
+        id: "__alloyId76"
+    });
+    $.__views.row.add($.__views.__alloyId76);
+    $.__views.__alloyId77 = Ti.UI.createLabel({
+        left: 10,
+        height: 40,
+        font: {
+            fontSize: 16
+        },
+        touchEnabled: false,
+        color: "#969696",
+        text: "Titolo: ",
+        id: "__alloyId77"
+    });
+    $.__views.__alloyId76.add($.__views.__alloyId77);
+    $.__views.title = Ti.UI.createLabel({
+        height: 40,
+        font: {
+            fontSize: 16
+        },
+        left: 5,
+        right: 5,
+        touchEnabled: false,
+        width: Ti.UI.FILL,
+        id: "title"
+    });
+    $.__views.__alloyId76.add($.__views.title);
+    $.__views.__alloyId78 = Ti.UI.createView({
+        height: 40,
+        touchEnabled: false,
+        layout: "horizontal",
+        id: "__alloyId78"
+    });
+    $.__views.row.add($.__views.__alloyId78);
+    $.__views.__alloyId79 = Ti.UI.createLabel({
+        left: 10,
+        height: 40,
+        font: {
+            fontSize: 16
+        },
+        touchEnabled: false,
+        color: "#969696",
+        text: "Tipo: ",
+        id: "__alloyId79"
+    });
+    $.__views.__alloyId78.add($.__views.__alloyId79);
+    $.__views.type = Ti.UI.createLabel({
+        height: 40,
+        font: {
+            fontSize: 16
+        },
+        left: 5,
+        right: 5,
+        touchEnabled: false,
+        width: Ti.UI.FILL,
+        id: "type"
+    });
+    $.__views.__alloyId78.add($.__views.type);
     $.__views.__alloyId80 = Ti.UI.createView({
         height: 40,
         touchEnabled: false,
@@ -48,72 +110,10 @@ function Controller() {
         },
         touchEnabled: false,
         color: "#969696",
-        text: "Titolo: ",
+        text: "Contenuto: ",
         id: "__alloyId81"
     });
     $.__views.__alloyId80.add($.__views.__alloyId81);
-    $.__views.title = Ti.UI.createLabel({
-        height: 40,
-        font: {
-            fontSize: 16
-        },
-        left: 5,
-        right: 5,
-        touchEnabled: false,
-        width: Ti.UI.FILL,
-        id: "title"
-    });
-    $.__views.__alloyId80.add($.__views.title);
-    $.__views.__alloyId82 = Ti.UI.createView({
-        height: 40,
-        touchEnabled: false,
-        layout: "horizontal",
-        id: "__alloyId82"
-    });
-    $.__views.row.add($.__views.__alloyId82);
-    $.__views.__alloyId83 = Ti.UI.createLabel({
-        left: 10,
-        height: 40,
-        font: {
-            fontSize: 16
-        },
-        touchEnabled: false,
-        color: "#969696",
-        text: "Tipo: ",
-        id: "__alloyId83"
-    });
-    $.__views.__alloyId82.add($.__views.__alloyId83);
-    $.__views.type = Ti.UI.createLabel({
-        height: 40,
-        font: {
-            fontSize: 16
-        },
-        left: 5,
-        right: 5,
-        touchEnabled: false,
-        width: Ti.UI.FILL,
-        id: "type"
-    });
-    $.__views.__alloyId82.add($.__views.type);
-    $.__views.__alloyId84 = Ti.UI.createView({
-        height: 40,
-        touchEnabled: false,
-        layout: "horizontal",
-        id: "__alloyId84"
-    });
-    $.__views.row.add($.__views.__alloyId84);
-    $.__views.__alloyId85 = Ti.UI.createLabel({
-        left: 10,
-        height: 40,
-        font: {
-            fontSize: 16
-        },
-        touchEnabled: false,
-        color: "#969696",
-        text: "Contenuto: ",
-        id: "__alloyId85"
-    });
-    $.__views.__alloyId84.add($.__views.__alloyId85);
     $.__views.content = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -125,7 +125,7 @@ function Controller() {
         width: Ti.UI.FILL,
         id: "content"
     });
-    $.__views.__alloyId84.add($.__views.content);
+    $.__views.__alloyId80.add($.__views.content);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

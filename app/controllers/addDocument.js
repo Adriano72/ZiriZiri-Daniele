@@ -1,30 +1,31 @@
 var args = arguments[0] || {};
-var args = arguments[0] || {};
 
 //Ti.API.info("PARAMETRI: "+JSON.stringify(args));
 
+var imageContent;
+var fileName;
+var fileSize;
+
+
+
 function createProtoObj() {
 
-	if ($.pkrPagamentoIncasso.getSelectedRow(0).id != 9999 && $.pkrTipoMovimento.getSelectedRow(0).id != 9999) {
+	if ($.titolo.value != "" && $.descrizione.value != "" && imageContent != "") {
 
 		//Ti.API.info("TIPO MOVIM OBJ: "+JSON.stringify($.pkrTipoMovimento.getSelectedRow(0)));
 		//Ti.API.info("PAGAM INCASSO OBJ: "+JSON.stringify($.pkrPagamentoIncasso.getSelectedRow(0)));
 
 		var titolo = $.titolo.value;
 		var descrizione = $.descrizione.value;
-		var tipoMovVersion = $.pkrTipoMovimento.getSelectedRow(0).version;
-
-		//var pagamIncDescBreve = $.pkrPagamentoIncasso.getSelectedRow(0).title;
-		var pagamIncID = $.pkrPagamentoIncasso.getSelectedRow(0).id;
-		var pagamIncVersion = $.pkrPagamentoIncasso.getSelectedRow(0).version;
 
 		var objDocument = {
 
-			kind : {
-				code : "DOCUMENTDATATYPE_CODE",
-				name : "DOCUMENTDATATYPE_NAME",
-				description : "DOCUMENTDATATYPE_DESCRIPTION"
-			}
+			name : $.titolo.value,
+			description : $.descrizione.value,
+			fileName: fileName,
+			fileSize: fileSize,
+			content: imageContent
+
 		};
 
 		args(objDocument);
@@ -39,7 +40,7 @@ function createProtoObj() {
 		 */
 
 	} else {
-		alert("I campi Tipo Movimento e Pagamento Incasso sono obbligatori!");
+		alert("E' necessario scattare una foto o selezionarla dalla galleria, i campi titolo e descrizione sono obbligatori");
 	}
 
 };
@@ -56,14 +57,21 @@ function openCamera() {
 			Ti.API.info('Our type was: ' + event.mediaType);
 			if (event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
 				$.preview.image = image;
-				var hashedImage = Ti.Utils.base64encode(image).toString();
-				Ti.API.info("HASHED IMAGE : " + hashedImage);
-				Ti.API.info("HASHED IMAGE MIME TYPE: " + image.getMimeType());
-				
+				var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(image).toString();
 				var tempFile = Ti.Filesystem.createTempFile();
-				tempFile.write(image);				
-				Ti.API.info("HASHED IMAGE SIZE: " + tempFile.size);
+				tempFile.write(image);
 				
+				//Ti.API.info("HASHED IMAGE : " + hashedImage);
+				Ti.API.info("HASHED IMAGE MIME TYPE: " + image.getMimeType());
+				Ti.API.info("IMAGE FILE SIZE: " + tempFile.size);
+				Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
+
+				imageContent = hashedImage;
+				fileSize = tempFile.size;
+				fileName = tempFile.name;
+				
+				
+
 			} else {
 				alert("got the wrong type back =" + event.mediaType);
 			}
@@ -106,19 +114,23 @@ function openGallery() {
 				$.preview.setHeight(cropRect.height);
 				$.preview.image = image;
 				//var hashedImage = Ti.Utils.base64encode(image).toString();
-				Ti.API.info("HASHED IMAGE: " + image.getFile());
-				Ti.API.info("HASHED IMAGE MIME TYPE: " + image.getMimeType());
-				
+				//Ti.API.info("HASHED IMAGE: " + image.getFile());
+				Ti.API.info("IMAGE MIME TYPE: " + image.getMimeType());
+
 				var tempFile = Ti.Filesystem.createTempFile();
 				tempFile.write(image);
-				
+
 				var content = tempFile.read();
-				Ti.API.info("HASHED IMAGE SIZE: " + tempFile.size);
-				var hashedImage = Ti.Utils.base64encode(content).toString();
+				Ti.API.info("IMAGE FILE SIZE: " + tempFile.size);
+				Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
+				//Ti.API.info("HASHED IMAGE : " + hashedImage);
 				
-				Ti.API.info("HASHED IMAGE : " + hashedImage);
+				var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(content).toString();
+				imageContent = hashedImage;
+				fileSize = tempFile.size;
+				fileName = tempFile.name;
 				
-				
+
 			} else {
 				// is this necessary?
 			}
