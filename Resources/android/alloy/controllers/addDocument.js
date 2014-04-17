@@ -33,12 +33,12 @@ function Controller() {
         } else alert("E' necessario scattare una foto o selezionarla dalla galleria, i campi titolo e descrizione sono obbligatori");
     }
     function openCamera() {
-        Ti.Media.showCamera({
-            success: function(event) {
-                event.cropRect;
-                var image = event.media;
-                Ti.API.info("Our type was: " + event.mediaType);
-                if (event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
+        try {
+            Ti.Media.showCamera({
+                success: function(event) {
+                    event.cropRect;
+                    var image = event.media;
+                    Ti.API.info("Our type was: " + event.mediaType);
                     $.preview.image = image;
                     var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(image).toString();
                     var tempFile = Ti.Filesystem.createTempFile();
@@ -49,20 +49,22 @@ function Controller() {
                     imageContent = hashedImage;
                     fileSize = tempFile.size;
                     fileName = tempFile.name;
-                } else alert("got the wrong type back =" + event.mediaType);
-            },
-            cancel: function() {},
-            error: function(error) {
-                var a = Titanium.UI.createAlertDialog({
-                    title: "Camera"
-                });
-                error.code == Titanium.Media.NO_CAMERA ? a.setMessage("Impossibile attivare la funzione foto su questo dispositivo") : a.setMessage("Unexpected error: " + error.code);
-                a.show();
-            },
-            saveToPhotoGallery: true,
-            allowEditing: false,
-            mediaTypes: [ Ti.Media.MEDIA_TYPE_PHOTO ]
-        });
+                },
+                cancel: function() {},
+                error: function(error) {
+                    var a = Titanium.UI.createAlertDialog({
+                        title: "Camera"
+                    });
+                    error.code == Titanium.Media.NO_CAMERA ? a.setMessage("Impossibile attivare la funzione foto su questo dispositivo") : a.setMessage("Unexpected error: " + error.code);
+                    a.show();
+                },
+                saveToPhotoGallery: true,
+                allowEditing: false,
+                mediaTypes: [ Ti.Media.MEDIA_TYPE_PHOTO ]
+            });
+        } catch (error) {
+            Ti.API.info("CATCHED ERROR: " + error);
+        }
     }
     function openGallery() {
         Titanium.Media.openPhotoGallery({
@@ -70,26 +72,28 @@ function Controller() {
                 var cropRect = event.cropRect;
                 var image = event.media;
                 Ti.API.info("Our type was: " + event.mediaType);
-                if (event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
-                    $.preview.setWidth(cropRect.width);
-                    $.preview.setHeight(cropRect.height);
-                    $.preview.image = image;
-                    Ti.API.info("IMAGE MIME TYPE: " + image.getMimeType());
-                    var tempFile = Ti.Filesystem.createTempFile();
-                    tempFile.write(image);
-                    var content = tempFile.read();
-                    Ti.API.info("IMAGE FILE SIZE: " + tempFile.size);
-                    Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
-                    var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(content).toString();
-                    imageContent = hashedImage;
-                    fileSize = tempFile.size;
-                    fileName = tempFile.name;
-                }
+                Ti.API.info("*** UNO ***");
+                $.preview.image = image;
+                Ti.API.info("*** DUE ***");
+                Ti.API.info("IMAGE MIME TYPE: " + image.getMimeType());
+                Ti.API.info("*** TRE ***");
+                var tempFile = Ti.Filesystem.createTempFile();
+                tempFile.write(image);
+                Ti.API.info("*** QUATTRO ***");
+                var content = tempFile.read();
+                Ti.API.info("IMAGE FILE SIZE: " + tempFile.size);
+                Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
+                var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(content).toString();
+                imageContent = hashedImage;
+                fileSize = tempFile.size;
+                fileName = tempFile.name;
                 Titanium.API.info("PHOTO GALLERY SUCCESS cropRect.x " + cropRect.x + " cropRect.y " + cropRect.y + " cropRect.height " + cropRect.height + " cropRect.width " + cropRect.width);
             },
             cancel: function() {},
-            error: function() {},
-            allowEditing: true,
+            error: function(error) {
+                Ti.API.info("ERROR: " + error);
+            },
+            allowEditing: false,
             mediaTypes: [ Ti.Media.MEDIA_TYPE_PHOTO ]
         });
     }

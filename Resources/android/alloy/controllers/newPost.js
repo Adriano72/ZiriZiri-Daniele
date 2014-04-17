@@ -402,6 +402,7 @@ function Controller() {
         rowsCat.push(pkrRow);
     });
     $.pkrCategoria.add(rowsCat);
+    $.window.open();
     __defers["$.__views.salva!click!savePost"] && $.__views.salva.addEventListener("click", savePost);
     __defers["$.__views.postDate!focus!showDatePicker"] && $.__views.postDate.addEventListener("focus", showDatePicker);
     __defers["$.__views.postDate!click!showDatePicker"] && $.__views.postDate.addEventListener("click", showDatePicker);

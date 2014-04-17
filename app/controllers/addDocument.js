@@ -6,8 +6,6 @@ var imageContent;
 var fileName;
 var fileSize;
 
-
-
 function createProtoObj() {
 
 	if ($.titolo.value != "" && $.descrizione.value != "" && imageContent != "") {
@@ -22,9 +20,9 @@ function createProtoObj() {
 
 			name : $.titolo.value,
 			description : $.descrizione.value,
-			fileName: fileName,
-			fileSize: fileSize,
-			content: imageContent
+			fileName : fileName,
+			fileSize : fileSize,
+			content : imageContent
 
 		};
 
@@ -46,6 +44,10 @@ function createProtoObj() {
 };
 
 function openCamera() {
+	
+	try{
+		
+	
 
 	Ti.Media.showCamera({
 		success : function(event) {
@@ -55,26 +57,21 @@ function openCamera() {
 
 			// called when media returned from the camera
 			Ti.API.info('Our type was: ' + event.mediaType);
-			if (event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
-				$.preview.image = image;
-				var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(image).toString();
-				var tempFile = Ti.Filesystem.createTempFile();
-				tempFile.write(image);
-				
-				//Ti.API.info("HASHED IMAGE : " + hashedImage);
-				Ti.API.info("HASHED IMAGE MIME TYPE: " + image.getMimeType());
-				Ti.API.info("IMAGE FILE SIZE: " + tempFile.size);
-				Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
 
-				imageContent = hashedImage;
-				fileSize = tempFile.size;
-				fileName = tempFile.name;
-				
-				
+			$.preview.image = image;
+			var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(image).toString();
+			var tempFile = Ti.Filesystem.createTempFile();
+			tempFile.write(image);
 
-			} else {
-				alert("got the wrong type back =" + event.mediaType);
-			}
+			//Ti.API.info("HASHED IMAGE : " + hashedImage);
+			Ti.API.info("HASHED IMAGE MIME TYPE: " + image.getMimeType());
+			Ti.API.info("IMAGE FILE SIZE: " + tempFile.size);
+			Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
+
+			imageContent = hashedImage;
+			fileSize = tempFile.size;
+			fileName = tempFile.name;
+
 		},
 		cancel : function() {
 			// called when user cancels taking a picture
@@ -96,6 +93,9 @@ function openCamera() {
 		allowEditing : false,
 		mediaTypes : [Ti.Media.MEDIA_TYPE_PHOTO]
 	});
+	}catch(error){
+		Ti.API.info("CATCHED ERROR: "+error);
+	}
 
 };
 
@@ -109,31 +109,30 @@ function openGallery() {
 
 			// set image view
 			Ti.API.info('Our type was: ' + event.mediaType);
-			if (event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
-				$.preview.setWidth(cropRect.width);
-				$.preview.setHeight(cropRect.height);
-				$.preview.image = image;
-				//var hashedImage = Ti.Utils.base64encode(image).toString();
-				//Ti.API.info("HASHED IMAGE: " + image.getFile());
-				Ti.API.info("IMAGE MIME TYPE: " + image.getMimeType());
 
-				var tempFile = Ti.Filesystem.createTempFile();
-				tempFile.write(image);
+			//$.preview.setWidth(cropRect.width);
+			//$.preview.setHeight(cropRect.height);
+			Ti.API.info("*** UNO ***");
+			$.preview.image = image;
+			Ti.API.info("*** DUE ***");
+			//var hashedImage = Ti.Utils.base64encode(image).toString();
+			//Ti.API.info("HASHED IMAGE: " + image.getFile());
+			Ti.API.info("IMAGE MIME TYPE: " + image.getMimeType());
+			Ti.API.info("*** TRE ***");
 
-				var content = tempFile.read();
-				Ti.API.info("IMAGE FILE SIZE: " + tempFile.size);
-				Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
-				//Ti.API.info("HASHED IMAGE : " + hashedImage);
-				
-				var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(content).toString();
-				imageContent = hashedImage;
-				fileSize = tempFile.size;
-				fileName = tempFile.name;
-				
+			var tempFile = Ti.Filesystem.createTempFile();
+			tempFile.write(image);
+			Ti.API.info("*** QUATTRO ***");
 
-			} else {
-				// is this necessary?
-			}
+			var content = tempFile.read();
+			Ti.API.info("IMAGE FILE SIZE: " + tempFile.size);
+			Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
+			//Ti.API.info("HASHED IMAGE : " + hashedImage);
+
+			var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(content).toString();
+			imageContent = hashedImage;
+			fileSize = tempFile.size;
+			fileName = tempFile.name;
 
 			Titanium.API.info('PHOTO GALLERY SUCCESS cropRect.x ' + cropRect.x + ' cropRect.y ' + cropRect.y + ' cropRect.height ' + cropRect.height + ' cropRect.width ' + cropRect.width);
 
@@ -142,8 +141,9 @@ function openGallery() {
 
 		},
 		error : function(error) {
+			Ti.API.info("ERROR: "+error);
 		},
-		allowEditing : true,
+		allowEditing : false,
 
 		mediaTypes : [Ti.Media.MEDIA_TYPE_PHOTO]
 	});

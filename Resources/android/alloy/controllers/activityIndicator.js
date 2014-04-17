@@ -1,12 +1,6 @@
 function Controller() {
-    function showIndicator(e) {
+    function showIndicator() {
         $.spinner.show();
-        Ti.App.addEventListener("loading_done", function() {
-            setTimeout(function() {
-                $.activityIndicator.hide();
-                e.source.close();
-            }, 500);
-        });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "activityIndicator";

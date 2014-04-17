@@ -14,9 +14,15 @@ Alloy.Globals.extentedDate = require("extendedDate");
 
 Alloy.Globals.Map = require("ti.map");
 
-Alloy.Globals.showSpinner = function() {
-    var loadingWin = Alloy.createController("activityIndicator").getView();
-    loadingWin.open();
+Alloy.Globals.showSpinner = {
+    openSpinner: function() {
+        Ti.API.info("Ciao");
+        var spinner = Alloy.createController("activityIndicator").getView();
+        spinner.open();
+    },
+    openSpinner: function() {
+        Alloy.createController("activityIndicator").getView().close();
+    }
 };
 
 Alloy.Globals.Moment_IT = {

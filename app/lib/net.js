@@ -1,5 +1,5 @@
-//var session = Ti.App.Properties.getInt('sessionId', 0);
-var session = 132;
+var session = Ti.App.Properties.getInt('sessionId', 0);
+//var session = 132;
 Ti.API.info("SESSION ID: " + session);
 
 exports.getData = function(_callback) {
@@ -15,6 +15,8 @@ exports.getData = function(_callback) {
 	xhr.onerror = function(e) {
 		alert("Error: " + JSON.stringify(e));
 	};
+	
+	session = Ti.App.Properties.getInt('sessionId', 0);
 
 	//xhr.open("GET", "https://demo.ziriziri.com/cxf/api/v01/actions/actions/680?_type=json");
 	xhr.open("GET", Alloy.Globals.baseUrl + "/zz/api/v01/actions/actions/" + session + "?_type=JSON");

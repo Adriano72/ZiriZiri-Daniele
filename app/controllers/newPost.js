@@ -337,4 +337,6 @@ function callSaveAspects(_callback) {
 
 	});
 
-}
+};
+
+$.window.open();

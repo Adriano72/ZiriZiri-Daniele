@@ -83,7 +83,7 @@ function Controller() {
     _.extend($, $.__views);
     if (Ti.App.Properties.getBool("authenticated", false)) {
         Ti.API.info("Already Authenticated!");
-        Alloy.createController("timeline_win").getView().open();
+        Alloy.createController("timeline_win").getView();
     } else $.index.open();
     __defers["$.__views.btn_login!click!do_login"] && $.__views.btn_login.addEventListener("click", do_login);
     _.extend($, exports);

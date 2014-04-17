@@ -19,6 +19,7 @@ function Controller() {
             };
             $.__views.immagine = e.menu.add(_.pick(__alloyId87, Alloy.Android.menuItemCreateArgs));
             $.__views.immagine.applyProperties(_.omit(__alloyId87, Alloy.Android.menuItemCreateArgs));
+            populateTable ? $.__views.immagine.addEventListener("click", populateTable) : __defers["$.__views.immagine!click!populateTable"] = true;
             var __alloyId88 = {
                 id: "Foto",
                 title: "Foto",
@@ -168,7 +169,54 @@ function Controller() {
         $.__views.timelineTable.setData(rows);
     }
     function showSpinner() {
-        Alloy.Globals.showSpinner();
+        Alloy.Globals.showSpinner.openSpinner();
+    }
+    function populateTable() {
+        timelineList.reset();
+        net.getData(function(timelineData) {
+            _.forEach(timelineData.data, function(value) {
+                var creationDate = new Date(value.referenceTime);
+                if (!_.isNull(value.location)) var locationRow = " " + icons.map_marker + " " + value.location.name + " ";
+                if (!_.isNull(value.category)) var categoriaRow = " " + icons.tag + " " + value.category.name + " ";
+                var aspectObj = {
+                    finance: 0,
+                    documents: 0,
+                    links: 0,
+                    notes: 0
+                };
+                _.isNull(value.aspects) || _.isUndefined(value.aspects) || _.forEach(value.aspects, function(obj) {
+                    switch (obj.kind.code) {
+                      case "CASHFLOWDATATYPE_CODE":
+                        aspectObj.finance += 1;
+                        break;
+
+                      case "DOCUMENTDATATYPE_CODE":
+                        aspectObj.documents += 1;
+                        break;
+
+                      case "NOTEDATATYPE_CODE":
+                        aspectObj.notes += 1;
+                        break;
+
+                      case "LINKDATATYPE_CODE":
+                        aspectObj.links += 1;
+                    }
+                });
+                _.isNull(value.aspects) || _.isUndefined(value.aspects) ? "no aspects" : value.aspects;
+                var timeline = Alloy.createModel("events", {
+                    id: value.id,
+                    name: value.name,
+                    date: moment(value.referenceTime).fromNow(),
+                    day: creationDate.getDate(),
+                    month: creationDate.getCMonth().toUpperCase(),
+                    category: categoriaRow,
+                    location: locationRow,
+                    aspects: icons.bar_chart_alt + " " + aspectObj.finance + "   " + icons.file_text_alt + " " + aspectObj.documents + "   " + icons.link + " " + aspectObj.links + "   " + icons.edit_sign + " " + aspectObj.notes
+                });
+                temp.push(timeline);
+            });
+            timelineList.add(temp.slice(0, 20));
+        });
     }
     function lazyload(_evt) {
         if (_evt.firstVisibleItem + _evt.visibleItemCount == _evt.totalItemCount) {
@@ -185,7 +233,7 @@ function Controller() {
         });
     }
     function createNewPost() {
-        Alloy.createController("newPost").getView().open();
+        Alloy.createController("newPost").getView();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "timeline_win";
@@ -229,55 +277,12 @@ function Controller() {
     moment.lang("it");
     var timelineList = Alloy.Collections.events;
     var net = require("net");
-    net.getData(function(timelineData) {
-        Ti.API.info("DATA FETCHED: " + JSON.stringify(timelineData));
-        _.forEach(timelineData.data, function(value) {
-            var timeline = Alloy.createModel("events", value);
-            var creationDate = new Date(value.referenceTime);
-            if (!_.isNull(value.location)) var locationRow = " " + icons.map_marker + " " + value.location.name + " ";
-            if (!_.isNull(value.category)) var categoriaRow = " " + icons.tag + " " + value.category.name + " ";
-            var aspectObj = {
-                finance: 0,
-                documents: 0,
-                links: 0,
-                notes: 0
-            };
-            _.isNull(value.aspects) || _.isUndefined(value.aspects) || _.forEach(value.aspects, function(obj) {
-                switch (obj.kind.code) {
-                  case "CASHFLOWDATATYPE_CODE":
-                    aspectObj.finance += 1;
-                    break;
-
-                  case "DOCUMENTDATATYPE_CODE":
-                    aspectObj.documents += 1;
-                    break;
-
-                  case "NOTEDATATYPE_CODE":
-                    aspectObj.notes += 1;
-                    break;
-
-                  case "LINKDATATYPE_CODE":
-                    aspectObj.links += 1;
-                }
-            });
-            _.isNull(value.aspects) || _.isUndefined(value.aspects) ? "no aspects" : value.aspects;
-            var timeline = Alloy.createModel("events", {
-                id: value.id,
-                name: value.name,
-                date: moment(value.referenceTime).fromNow(),
-                day: creationDate.getDate(),
-                month: creationDate.getCMonth().toUpperCase(),
-                category: categoriaRow,
-                location: locationRow,
-                aspects: icons.bar_chart_alt + " " + aspectObj.finance + "   " + icons.file_text_alt + " " + aspectObj.documents + "   " + icons.link + " " + aspectObj.links + "   " + icons.edit_sign + " " + aspectObj.notes
-            });
-            temp.push(timeline);
-        });
-        timelineList.add(temp.slice(0, 20));
-    });
+    populateTable();
+    $.win.open();
     __defers["$.__views.win!open!showSpinner"] && $.__views.win.addEventListener("open", showSpinner);
     __defers["$.__views.win!scroll!lazyload"] && $.__views.win.addEventListener("scroll", lazyload);
     __defers["$.__views.scrivi!click!createNewPost"] && $.__views.scrivi.addEventListener("click", createNewPost);
+    __defers["$.__views.immagine!click!populateTable"] && $.__views.immagine.addEventListener("click", populateTable);
     __defers["__alloyId92!click!mostraDettaglioEvento"] && __alloyId92.addEventListener("click", mostraDettaglioEvento);
     _.extend($, exports);
 }
