@@ -22,10 +22,8 @@ moment.lang('it');
 
 //$.index.open();
 
-
-
 function showSpinner() {
-	Alloy.Globals.showSpinner.openSpinner();
+	Alloy.Globals.showSpinner();
 	//$.win.invalidateOptionsMenu();
 };
 
@@ -43,9 +41,19 @@ var net = require('net');
  var timelineData = f.read();
  */
 
+function refreshTable(){
+	
+	showSpinner();
+	populateTable();
+	
+}
+
 function populateTable() {
 
+	temp = [];
+	
 	timelineList.reset();
+	
 
 	net.getData(function(timelineData) {
 
@@ -194,7 +202,7 @@ function mostraDettaglioEvento(e) {
 };
 
 function createNewPost() {
-	Alloy.createController("newPost").getView();
+	Alloy.createController("newPost",function(){refreshTable();}).getView();
 }
 
 $.win.open();

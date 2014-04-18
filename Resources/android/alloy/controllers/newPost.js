@@ -52,12 +52,14 @@ function Controller() {
                     Ti.API.info("ARRAY ID ASPETTI DA MANDARE IN ASSOCIAZIONE: " + p_arrayIdAspetti);
                     net.linkAspectsToPost(post_id, p_arrayIdAspetti, function() {
                         $.window.close();
+                        args();
                     });
                 }); else {
                     $.window.close();
                     alert("Post salvato");
                     setTimeout(function() {
                         Ti.App.fireEvent("loading_done");
+                        args();
                     }, 500);
                 }
             });
@@ -381,7 +383,7 @@ function Controller() {
     $.__views.buttonsContainer.add($.__views.__alloyId25);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    arguments[0] || {};
+    var args = arguments[0] || {};
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     var location_result;

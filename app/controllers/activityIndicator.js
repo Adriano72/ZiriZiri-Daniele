@@ -5,4 +5,13 @@ function showIndicator(e) {
 	// do some work that takes 6 seconds
 	// ie. replace the following setTimeout block with your code
 
+	Ti.App.addEventListener("loading_done", function() {
+		
+		setTimeout(function() {
+			$.spinner.hide();
+			e.source.close();
+		}, 500);
+
+	});
+
 }

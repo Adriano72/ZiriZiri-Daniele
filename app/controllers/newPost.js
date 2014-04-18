@@ -114,6 +114,7 @@ function savePost() {
 
 					net.linkAspectsToPost(post_id, p_arrayIdAspetti, function() {
 						$.window.close();
+						args();
 					});
 				});
 			} else {
@@ -124,6 +125,7 @@ function savePost() {
 				setTimeout(function() {
 
 					Ti.App.fireEvent("loading_done");
+					args();
 				}, 500);
 
 			};
