@@ -19,8 +19,6 @@ function Controller() {
     }
     function createProtoObj() {
         if ("" != $.titolo.value && "" != $.descrizione.value && "" != imageContent) {
-            $.titolo.value;
-            $.descrizione.value;
             var objDocument = {
                 name: $.titolo.value,
                 description: $.descrizione.value,
@@ -108,7 +106,7 @@ function Controller() {
     $.__views.window = Ti.UI.createWindow({
         backgroundColor: "#F2F2F2",
         id: "window",
-        title: "Nuovo CashFlow"
+        title: "Nuovo Documento"
     });
     $.__views.window && $.addTopLevelView($.__views.window);
     $.__views.window.addEventListener("open", __alloyId7);

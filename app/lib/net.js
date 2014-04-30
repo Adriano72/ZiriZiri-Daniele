@@ -13,7 +13,7 @@ exports.getData = function(_callback) {
 	};
 
 	xhr.onerror = function(e) {
-		alert("Error: " + JSON.stringify(e));
+		alert("Errore nella comunicazione con il server. Accertarsi che il dispositivo sia collegato alla rete e riprovare");
 	};
 	
 	session = Ti.App.Properties.getInt('sessionId', 0);

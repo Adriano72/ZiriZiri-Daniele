@@ -8,8 +8,8 @@ exports.getData = function(_callback) {
         _callback(JSON.parse(xhr.responseText));
         Ti.App.fireEvent("loading_done");
     };
-    xhr.onerror = function(e) {
-        alert("Error: " + JSON.stringify(e));
+    xhr.onerror = function() {
+        alert("Errore nella comunicazione con il server. Accertarsi che il dispositivo sia collegato alla rete e riprovare");
     };
     session = Ti.App.Properties.getInt("sessionId", 0);
     xhr.open("GET", Alloy.Globals.baseUrl + "/zz/api/v01/actions/actions/" + session + "?_type=JSON");

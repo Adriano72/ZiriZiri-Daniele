@@ -95,6 +95,7 @@ function Controller() {
         left: 5,
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
+        keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD,
         hintText: "Importo",
         borderRadius: 5,
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,

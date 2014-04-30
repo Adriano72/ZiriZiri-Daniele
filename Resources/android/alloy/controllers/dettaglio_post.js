@@ -34,7 +34,6 @@ function Controller() {
         left: 5,
         top: 5,
         backgroundColor: "#CC3939",
-        borderRadius: Alloy.Globals.borderRad,
         layout: "vertical",
         id: "dateBox"
     });
@@ -94,8 +93,8 @@ function Controller() {
             fontSize: 12
         },
         backgroundColor: "#E3E3E3",
-        borderRadius: Alloy.Globals.borderRad,
         height: 18,
+        wordWrap: false,
         width: Ti.UI.SIZE,
         color: "#5E5E5E",
         left: 5,
@@ -110,11 +109,10 @@ function Controller() {
             fontSize: 12
         },
         backgroundColor: "#E3E3E3",
-        borderRadius: Alloy.Globals.borderRad,
         height: 18,
         wordWrap: false,
         ellipsize: true,
-        width: Ti.UI.FILL,
+        width: Ti.UI.SIZE,
         color: "#5E5E5E",
         left: 5,
         top: 5,

@@ -15,30 +15,29 @@ function Controller() {
         id: "row"
     });
     $.__views.row && $.addTopLevelView($.__views.row);
-    $.__views.__alloyId28 = Ti.UI.createView({
+    $.__views.__alloyId34 = Ti.UI.createView({
         height: 40,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId28"
+        id: "__alloyId34"
     });
-    $.__views.row.add($.__views.__alloyId28);
+    $.__views.row.add($.__views.__alloyId34);
     $.__views.description = Ti.UI.createLabel({
         height: 30,
         font: {
             fontFamily: "AppIcons",
             fontSize: 18
         },
-        color: "green",
+        color: "#5C5C5C",
         left: 5,
         top: 5,
         ellipsize: true,
         wordWrap: false,
-        borderRadius: Alloy.Globals.borderRad,
         touchEnabled: false,
         width: 55,
         id: "description"
     });
-    $.__views.__alloyId28.add($.__views.description);
+    $.__views.__alloyId34.add($.__views.description);
     $.__views.titolo = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -50,7 +49,7 @@ function Controller() {
         width: Ti.UI.SIZE,
         id: "titolo"
     });
-    $.__views.__alloyId28.add($.__views.titolo);
+    $.__views.__alloyId34.add($.__views.titolo);
     $.__views.descrizione = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -62,14 +61,14 @@ function Controller() {
         width: Ti.UI.SIZE,
         id: "descrizione"
     });
-    $.__views.__alloyId28.add($.__views.descrizione);
-    $.__views.__alloyId29 = Ti.UI.createView({
+    $.__views.__alloyId34.add($.__views.descrizione);
+    $.__views.__alloyId35 = Ti.UI.createView({
         height: 40,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId29"
+        id: "__alloyId35"
     });
-    $.__views.row.add($.__views.__alloyId29);
+    $.__views.row.add($.__views.__alloyId35);
     $.__views.fileSize = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -81,7 +80,7 @@ function Controller() {
         width: Ti.UI.SIZE,
         id: "fileSize"
     });
-    $.__views.__alloyId29.add($.__views.fileSize);
+    $.__views.__alloyId35.add($.__views.fileSize);
     $.__views.fileName = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -93,7 +92,7 @@ function Controller() {
         width: Ti.UI.SIZE,
         id: "fileName"
     });
-    $.__views.__alloyId29.add($.__views.fileName);
+    $.__views.__alloyId35.add($.__views.fileName);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

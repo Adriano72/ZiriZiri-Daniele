@@ -118,7 +118,7 @@ function savePost() {
 					});
 				});
 			} else {
-				
+
 				$.window.close();
 				alert("Post salvato");
 
@@ -291,7 +291,6 @@ function addDocument(id_post) {
 		};
 
 		objAspect.data.title = objRet.name;
-		;
 		objAspect.data.description = objRet.description;
 		objAspect.data.name = objRet.fileName;
 		objAspect.data.size = objRet.fileSize;
@@ -319,6 +318,82 @@ function addDocument(id_post) {
 			descrizione : tempObj.description,
 			size : tempObj.data.size,
 			name : tempObj.data.name
+
+		}).getView();
+		$.newPostTable.appendRow(riga);
+
+		//Ti.API.info("FINISHED ASPECT OBJ: "+JSON.stringify(objAspect));
+	}).getView().open();
+};
+
+function addLink(id_post) {
+	//Ti.API.info("**** INSERT CASHFLOW!");
+
+	if ($.titolo.value == "" && $.pkrCategoria.getSelectedRow(0).id == 9999) {
+
+		alert("Prima di inserire il dettaglio dell'evento è necessario specificare titolo e categoria");
+		return;
+
+	};
+
+	Alloy.createController("addLink", function(objRet) {
+
+		var objAspect = {
+
+			kind : {
+				code : "LINKDATATYPE_CODE",
+				name : "LINKDATATYPE_NAME",
+				description : "LINKDATATYPE_DESCRIPTION"
+
+			},
+			data : {}
+
+		};
+
+		objAspect.name = objRet.name;
+		objAspect.description = objRet.description;
+		objAspect.referenceTime = Date.parse($.postDate.value);
+		objAspect.category = {
+			id : $.pkrCategoria.getSelectedRow(0).id,
+			version : $.pkrCategoria.getSelectedRow(0).version
+		};
+
+		objAspect.tags = [{
+			name : "ARTICOLO",
+			description : "ARTICOLO",
+		}];
+
+		objAspect.data.format = {
+			name : "LINK",
+			description : "HTML LINK",
+			type : "LINK"
+		};
+
+		objAspect.data.title = objRet.name;
+		objAspect.data.description = objRet.description;
+		objAspect.data.content = objRet.content;
+		objAspect.data.preview = null;
+
+		/*
+		 "kind":{"code":"CASHFLOWDATATYPE_CODE"},
+		 "data": "{\"tipoMovimento\":{\"codice\":\""+tipoMovCodice+"\",\"id\":"+tipoMovId+",\"version\":"+tipoMovVersion+"},\"pagamentoIncasso\":{\"descrizioneBreve\":\""+pagamIncDescBreve+"\",\"id\":"+tipoMovId+",\"version\":"+tipoMovVersion+"},\"dataOperazione\":1393066568000,\"descrizioneBreve\":\"\",\"importo\":"+$.importo.value+"}"
+		 */
+
+		Ti.API.info("OBJ ASPECT: " + JSON.stringify(objAspect));
+
+		var tempObj = _.clone(objAspect);
+		objAspect.data = JSON.stringify(objAspect.data);
+
+		arrayAspetti.push(objAspect);
+
+		Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
+
+		var riga = Alloy.createController('rowLINK', {
+
+			id_code : arrayAspetti.length - 1,
+			titolo : tempObj.name,
+			descrizione : tempObj.description,
+			content : tempObj.data.content
 
 		}).getView();
 		$.newPostTable.appendRow(riga);

@@ -1,12 +1,12 @@
 <Alloy>
-	<Window id="window" class="container" title = "Nuovo Documento">
+	<Window id="window" class="container" title = "Nuovo Link">
 		<Menu id="menu" platform="android">
 			
 			<MenuItem id="salva" title="Scrivi" icon="/images/785-floppy-disk.png"  onClick="createProtoObj" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
 			
 		</Menu>
 
-		<TableView id="newDocumentTable">
+		<TableView id="newLinkTable">
 			
 			<TableViewRow class="row">
 				<TextField id="titolo"/>				
@@ -17,13 +17,7 @@
 			</TableViewRow>
 			
 			<TableViewRow class="row">
-				<Button id="foto" title= 'Scatta foto' onClick="openCamera" />
-			</TableViewRow>
-			<TableViewRow class="row">
-				<Button id="gallery" title= "Scegli foto esistente" onClick="openGallery"/>
-			</TableViewRow>
-			<TableViewRow class="row">
-				<ImageView id="preview" />
+				<TextField id="content"/>
 			</TableViewRow>
 
 		</TableView>

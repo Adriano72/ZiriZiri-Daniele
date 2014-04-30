@@ -13,8 +13,7 @@ function createProtoObj() {
 		//Ti.API.info("TIPO MOVIM OBJ: "+JSON.stringify($.pkrTipoMovimento.getSelectedRow(0)));
 		//Ti.API.info("PAGAM INCASSO OBJ: "+JSON.stringify($.pkrPagamentoIncasso.getSelectedRow(0)));
 
-		var titolo = $.titolo.value;
-		var descrizione = $.descrizione.value;
+		
 
 		var objDocument = {
 
