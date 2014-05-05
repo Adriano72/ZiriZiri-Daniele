@@ -26,8 +26,8 @@ u_location.result(function(locationData) {
 
 $.postDate.value = moment().format('LLL');
 $.postDate.dataRaw = moment();
-Ti.API.info("Date PRE CONVERSION: "+$.postDate.value);
-Ti.API.info("RAW DATE: "+$.postDate.dataRaw);
+Ti.API.info("Date PRE CONVERSION: " + $.postDate.value);
+Ti.API.info("RAW DATE: " + $.postDate.dataRaw);
 
 function showDatePicker() {
 
@@ -100,14 +100,13 @@ function savePost() {
 
 		 };
 		 */
-		
-		Ti.API.info("JSON POST: "+JSON.stringify(postObj));
+
+		Ti.API.info("JSON POST: " + JSON.stringify(postObj));
 		net.savePost(postObj, function(post_id) {
 
 			Alloy.Globals.showSpinner();
 
 			Ti.API.info("ID POST SALVATO: " + post_id);
-			
 
 			if (arrayAspetti.length > 0) {// Se ci sono aspetti nel post li salvo e poi li collego al post
 
@@ -161,7 +160,9 @@ function addCashflow(id_post) {
 		var objAspect = {
 
 			kind : {
-				code : "CASHFLOWDATATYPE_CODE"
+				code : "CASHFLOWDATATYPE_CODE",
+				name : "CASHFLOWDATATYPE_NAME",
+				description : "CASHFLOWDATATYPE_DESCRIPTION"
 			},
 			data : {}
 
@@ -200,67 +201,17 @@ function addCashflow(id_post) {
 
 		Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
 
-		switch (objAspect.kind.code) {
+		var riga = Alloy.createController('rowCASHFLOW', {
 
-			case "CASHFLOWDATATYPE_CODE":
+			id_code : arrayAspetti.length - 1,
+			name : objAspect.name,
+			importo : tempObj.data.importo,
+			dataOperazione : tempObj.data.dataOperazione,
+			dataValuta : tempObj.data.dataValuta,
+			codTipoMovimento : tempObj.data.tipoMovimento.codice
 
-				var riga = Alloy.createController('rowCASHFLOW', {
-
-					id_code : arrayAspetti.length - 1,
-					name : objAspect.name,
-					importo : tempObj.data.importo,
-					dataOperazione : tempObj.data.dataOperazione,
-					dataValuta : tempObj.data.dataValuta,
-					codTipoMovimento : tempObj.data.tipoMovimento.codice
-
-				}).getView();
-				$.newPostTable.appendRow(riga);
-
-				break;
-
-			case "DOCUMENTDATATYPE_CODE":
-				Ti.API.info("ASPECT DESCRIPTION: " + value.name);
-
-				var riga = Alloy.createController('rowDOCUMENT', {
-
-					id_code : key,
-					description : value.name,
-					format : (_.isNull(value.data.format)) ? "Non disponibile" : value.data.format.name,
-					type : (_.isNull(value.data.format)) ? "Non disponibile" : value.data.format.type,
-					title : value.data.title
-
-				}).getView();
-				rows.push(riga);
-
-				break;
-
-			case "LINKDATATYPE_CODE":
-
-				var riga = Alloy.createController('rowLINK', {
-
-					id_code : key,
-					description : value.description,
-					type : value.data.format.type,
-					title : value.data.title,
-					content : value.data.content
-
-				}).getView();
-				rows.push(riga);
-
-				break;
-
-			case "NOTEDATATYPE_CODE":
-
-				var riga = Alloy.createController('rowNOTE', {
-
-					id_code : key,
-					description : value.data.title,
-					timestamp : value.data.timestamp
-
-				}).getView();
-				rows.push(riga);
-				break;
-		}
+		}).getView();
+		$.newPostTable.appendRow(riga);
 
 		//Ti.API.info("FINISHED ASPECT OBJ: "+JSON.stringify(objAspect));
 	}).getView().open();
@@ -364,13 +315,13 @@ function addLink(id_post) {
 			id : $.pkrCategoria.getSelectedRow(0).id,
 			version : $.pkrCategoria.getSelectedRow(0).version
 		};
-		
+
 		/*
-		objAspect.tags = [{
-			name : "ARTICOLO",
-			description : "ARTICOLO",
-		}];
-		*/
+		 objAspect.tags = [{
+		 name : "ARTICOLO",
+		 description : "ARTICOLO",
+		 }];
+		 */
 
 		objAspect.data.format = {
 			name : "LINK",
@@ -379,8 +330,9 @@ function addLink(id_post) {
 		};
 
 		objAspect.data.title = objRet.name;
+		objAspect.data.name = objRet.name;
 		objAspect.data.description = objRet.description;
-		objAspect.data.content = (objRet.content.indexOf("http://") == -1)?"http://"+objRet.content:objRet.content;
+		objAspect.data.content = (objRet.content.indexOf("http://") == -1) ? "http://" + objRet.content : objRet.content;
 		objAspect.data.preview = null;
 
 		/*
@@ -402,6 +354,77 @@ function addLink(id_post) {
 			id_code : arrayAspetti.length - 1,
 			titolo : tempObj.name,
 			descrizione : tempObj.description,
+			content : tempObj.data.content
+
+		}).getView();
+		$.newPostTable.appendRow(riga);
+
+		//Ti.API.info("FINISHED ASPECT OBJ: "+JSON.stringify(objAspect));
+	}).getView().open();
+};
+
+function addNote(id_post) {
+	Ti.API.info("**** INSERT NOTE!");
+
+	if ($.titolo.value == "" && $.pkrCategoria.getSelectedRow(0).id == 9999) {
+
+		alert("Prima di inserire il dettaglio dell'evento è necessario specificare titolo e categoria");
+		return;
+
+	};
+
+	Alloy.createController("addNote", function(objRet) {
+
+		var objAspect = {
+
+			kind : {
+				code : "NOTEDATATYPE_CODE",
+				name : "NOTEDATATYPE_NAME",
+				description : "NOTEDATATYPE_DESCRIPTION"
+
+			},
+			data : {}
+
+		};
+
+		objAspect.name = objRet.name;
+		objAspect.description = objRet.description;
+		objAspect.referenceTime = $.postDate.dataRaw;
+		objAspect.category = {
+			id : $.pkrCategoria.getSelectedRow(0).id,
+			version : $.pkrCategoria.getSelectedRow(0).version
+		};
+
+		/*
+		 objAspect.tags = [{
+		 name : "ARTICOLO",
+		 description : "ARTICOLO",
+		 }];
+		 */
+
+		
+		objAspect.data.title = objRet.titolo;
+		objAspect.data.description = objRet.description;
+		objAspect.data.content = objRet.content;
+
+		/*
+		 "kind":{"code":"CASHFLOWDATATYPE_CODE"},
+		 "data": "{\"tipoMovimento\":{\"codice\":\""+tipoMovCodice+"\",\"id\":"+tipoMovId+",\"version\":"+tipoMovVersion+"},\"pagamentoIncasso\":{\"descrizioneBreve\":\""+pagamIncDescBreve+"\",\"id\":"+tipoMovId+",\"version\":"+tipoMovVersion+"},\"dataOperazione\":1393066568000,\"descrizioneBreve\":\"\",\"importo\":"+$.importo.value+"}"
+		 */
+
+		Ti.API.info("OBJ ASPECT: " + JSON.stringify(objAspect));
+
+		var tempObj = _.clone(objAspect);
+		objAspect.data = JSON.stringify(objAspect.data);
+
+		arrayAspetti.push(objAspect);
+
+		Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
+
+		var riga = Alloy.createController('rowNOTE', {
+
+			id_code : arrayAspetti.length - 1,
+			titolo : tempObj.data.title,
 			content : tempObj.data.content
 
 		}).getView();

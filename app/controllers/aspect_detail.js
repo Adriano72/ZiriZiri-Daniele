@@ -55,7 +55,7 @@ switch (args.kind.code) {
 		var riga = Alloy.createController('rowDetailLINK', {
 
 			name: args.name,
-			category: (_.isNull(args.category))?null:args.category,
+			category: (_.isNull(args.category))?null:args.category.name,
 			tags: (_.isNull(args.tags))?null:args.tags,
 			type: (_.isNull(args.data.format))?"Non disponibile":args.data.format.type,
 			content: args.data.content,

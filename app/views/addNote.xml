@@ -1,0 +1,22 @@
+<Alloy>
+	<Window id="window" class="container" title = "Nuova Nota">
+		<Menu id="menu" platform="android">
+			
+			<MenuItem id="salva" title="Scrivi" icon="/images/785-floppy-disk.png"  onClick="createProtoObj" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
+			
+		</Menu>
+
+		<TableView id="titolo">
+			
+			<TableViewRow class="row">
+				<TextField id="titolo"/>				
+			</TableViewRow>
+			
+			<TableViewRow class="row">
+				<TextArea id="content"/>
+			</TableViewRow>
+
+		</TableView>
+
+	</Window>
+</Alloy>

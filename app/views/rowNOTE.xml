@@ -1,9 +1,21 @@
-<Alloy>
+<!--
+	<Alloy>
 	<TableViewRow id="row">
 		<Label id="description"/>
 		<View class="block_container" layout="horizontal">
 			<Label class="block_label" text="Data: ">
 			<Label class="block_data" id="data"/>
+		</View>
+	</TableViewRow>
+</Alloy>
+-->
+
+<Alloy>
+	<TableViewRow id="row">
+		
+		<View class="block_container" layout="horizontal">
+			<Label id="description"/>
+			<Label class="block_data" id="titolo"/>
 		</View>
 	</TableViewRow>
 </Alloy>
