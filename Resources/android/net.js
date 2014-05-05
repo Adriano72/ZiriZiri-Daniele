@@ -1,4 +1,4 @@
-var session = 132;
+var session = Ti.App.Properties.getInt("sessionId", 0);
 
 Ti.API.info("SESSION ID: " + session);
 
@@ -8,9 +8,10 @@ exports.getData = function(_callback) {
         _callback(JSON.parse(xhr.responseText));
         Ti.App.fireEvent("loading_done");
     };
-    xhr.onerror = function(e) {
-        alert("Error: " + JSON.stringify(e));
+    xhr.onerror = function() {
+        alert("Errore nella comunicazione con il server. Accertarsi che il dispositivo sia collegato alla rete e riprovare");
     };
+    session = Ti.App.Properties.getInt("sessionId", 0);
     xhr.open("GET", Alloy.Globals.baseUrl + "/zz/api/v01/actions/actions/" + session + "?_type=JSON");
     xhr.send();
 };
@@ -80,10 +81,7 @@ exports.savePost = function(objPost, _callback) {
     xhr.onload = function() {
         var json = JSON.parse(this.responseText);
         Ti.API.info("********** FRM XHR: " + JSON.stringify(json));
-        if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
-            alert("Evento salvato");
-            _callback(json.data.id);
-        } else {
+        if ('"SUCCESS"' == JSON.stringify(json.type.code)) _callback(json.data.id); else {
             Ti.App.Properties.getList("unsavedPosts", []).push(objPost);
             alert("Errore nella comunicazione col server. L'evento è stato salvato nel dispositivo e sarà possibilie salvarlo in seguito");
         }
@@ -103,6 +101,7 @@ exports.saveAspect = function(allAspects, _callback) {
         _callback(arrayIDAspetti);
     });
     _.forEach(allAspects, function(value) {
+        Ti.API.info("***SAVING ASPECT***");
         var xhr = Ti.Network.createHTTPClient();
         xhr.onload = function() {
             var json = JSON.parse(this.responseText);
@@ -122,7 +121,7 @@ exports.saveAspect = function(allAspects, _callback) {
     });
 };
 
-exports.linkAspectsToPost = function(p_postId, p_array) {
+exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
     Ti.API.info("ARRAY ****:" + JSON.stringify(p_array));
     var tmpArr = [];
     tmpArr.push(p_array);
@@ -131,7 +130,11 @@ exports.linkAspectsToPost = function(p_postId, p_array) {
     xhr.onload = function() {
         Ti.API.info("RISPOSTA SERV CREA RELAZIONE: " + this.responseText);
         var json = JSON.parse(this.responseText);
-        '"SUCCESS"' == JSON.stringify(json.type.code) ? alert("RELAZIONI CREATE!!!!!") : alert("Errore nella comunicazione col server.");
+        if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
+            Ti.App.fireEvent("loading_done");
+            alert("Post salvato");
+            _callback();
+        } else alert("Errore nella comunicazione col server.");
     };
     xhr.onerror = function() {
         Ti.API.error("ERRORE RISPOSTA SERVER: " + this.status + " - " + this.statusText);

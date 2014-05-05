@@ -3,7 +3,7 @@
 	//layout: "vertical",
 }
 
-"#newCashflowTable":{
+"#newDocumentTable":{
 	top: 5 ,
 	left: 20,
 	right: 20,
@@ -22,7 +22,7 @@
     
 } 
 
-"#importo": {
+"#titolo": {
 	
 	borderColor: "#000000",
 	color: "#336699",
@@ -31,32 +31,39 @@
 	left: 5,
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE,
-	keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD,
 	//backgroundColor: '#C8DDE8',
-	hintText: "Importo",
+	hintText: "Titolo",
 	borderRadius: 5,
 	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
 
 }
 
-"#pkrTipoMovimento": {
+"#descrizione": {
 	
-	//top: 20,
+	borderColor: "#000000",
+	color: "#336699",
+	top: 5,
 	right: 5,
 	left: 5,
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE,
-	//backgroundColor: '#C8DD
+	//backgroundColor: '#C8DDE8',
+	hintText: "Descrizione",
+	borderRadius: 5,
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
 
 }
 
-"#pkrPagamentoIncasso": {
+"#preview": {
 	
-	//top: 20,
+	borderColor: "#000000",
+	color: "#336699",
+	top: 5,
 	right: 5,
 	left: 5,
-	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
-	//backgroundColor: '#C8DD
+	width: "95%",
+	height: 200
+	//backgroundColor: '#C8DDE8',
+	
 
 }

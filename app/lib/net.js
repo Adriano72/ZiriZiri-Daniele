@@ -1,5 +1,5 @@
-//var session = Ti.App.Properties.getInt('sessionId', 0);
-var session = 132;
+var session = Ti.App.Properties.getInt('sessionId', 0);
+//var session = 132;
 Ti.API.info("SESSION ID: " + session);
 
 exports.getData = function(_callback) {
@@ -13,8 +13,10 @@ exports.getData = function(_callback) {
 	};
 
 	xhr.onerror = function(e) {
-		alert("Error: " + JSON.stringify(e));
+		alert("Errore nella comunicazione con il server. Accertarsi che il dispositivo sia collegato alla rete e riprovare");
 	};
+	
+	session = Ti.App.Properties.getInt('sessionId', 0);
 
 	//xhr.open("GET", "https://demo.ziriziri.com/cxf/api/v01/actions/actions/680?_type=json");
 	xhr.open("GET", Alloy.Globals.baseUrl + "/zz/api/v01/actions/actions/" + session + "?_type=JSON");
@@ -120,7 +122,7 @@ exports.savePost = function(objPost, _callback) {
 
 		if (JSON.stringify(json.type.code) == "\"SUCCESS\"") {
 
-			alert("Evento salvato");
+			//alert("Evento salvato");
 			_callback(json.data.id);
 
 		} else {
@@ -155,6 +157,8 @@ exports.saveAspect = function(allAspects, _callback) {
 	});
 
 	_.forEach(allAspects, function(value, key) {
+		
+		Ti.API.info("***SAVING ASPECT***");
 
 		var xhr = Ti.Network.createHTTPClient();
 
@@ -198,7 +202,7 @@ exports.saveAspect = function(allAspects, _callback) {
 
 };
 
-exports.linkAspectsToPost = function(p_postId, p_array) {
+exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
 	
 	Ti.API.info("ARRAY ****:" + JSON.stringify(p_array));
 	
@@ -218,8 +222,10 @@ exports.linkAspectsToPost = function(p_postId, p_array) {
 		var json = JSON.parse(this.responseText);
 
 		if (JSON.stringify(json.type.code) == "\"SUCCESS\"") {
-
-			alert("RELAZIONI CREATE!!!!!");
+	
+			Ti.App.fireEvent("loading_done");
+			alert("Post salvato");
+			_callback();
 			//_callback(json.data.id);
 
 		} else {

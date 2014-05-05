@@ -34,7 +34,6 @@ function Controller() {
         left: 5,
         top: 5,
         backgroundColor: "#CC3939",
-        borderRadius: Alloy.Globals.borderRad,
         layout: "vertical",
         id: "dateBox"
     });
@@ -94,8 +93,8 @@ function Controller() {
             fontSize: 12
         },
         backgroundColor: "#E3E3E3",
-        borderRadius: Alloy.Globals.borderRad,
         height: 18,
+        wordWrap: false,
         width: Ti.UI.SIZE,
         color: "#5E5E5E",
         left: 5,
@@ -110,8 +109,9 @@ function Controller() {
             fontSize: 12
         },
         backgroundColor: "#E3E3E3",
-        borderRadius: Alloy.Globals.borderRad,
         height: 18,
+        wordWrap: false,
+        ellipsize: true,
         width: Ti.UI.SIZE,
         color: "#5E5E5E",
         left: 5,
@@ -184,13 +184,13 @@ function Controller() {
             break;
 
           case "DOCUMENTDATATYPE_CODE":
-            Ti.API.info("ASPECT DESCRIPTION: " + value.name);
+            Ti.API.info("ASPECT DESCRIPTION: " + JSON.stringify(value));
             var riga = Alloy.createController("rowDOCUMENT", {
                 id_code: key,
-                description: value.name,
-                format: _.isNull(value.data.format) ? "Non disponibile" : value.data.format.name,
-                type: _.isNull(value.data.format) ? "Non disponibile" : value.data.format.type,
-                title: value.data.title
+                titolo: value.name,
+                descrizione: value.description,
+                size: value.data.size,
+                name: value.data.name
             }).getView();
             rows.push(riga);
             break;

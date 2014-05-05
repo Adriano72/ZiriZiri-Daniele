@@ -1,3 +1,5 @@
+var args = arguments[0] || {};
+
 function showIndicator(e) {
 	$.spinner.show();
 	// do some work that takes 6 seconds
@@ -6,7 +8,7 @@ function showIndicator(e) {
 	Ti.App.addEventListener("loading_done", function() {
 		
 		setTimeout(function() {
-			$.activityIndicator.hide();
+			$.spinner.hide();
 			e.source.close();
 		}, 500);
 

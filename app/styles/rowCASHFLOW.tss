@@ -16,15 +16,16 @@
     	
         fontSize: 18
     },
-    color: "#DB4C3F",
+    color: "#5C5C5C",
     left: 5,
     top: 5,
     ellipsize: true,
     wordWrap: false,
-    //backgroundColor: '#E3E3E3',
-    borderRadius: Alloy.Globals.borderRad,
+    //backgroundColor: '#BABABA',
+    //borderRadius: Alloy.Globals.borderRad,
     touchEnabled: false,
-    width: 55
+    width: 55,
+    //height: 55
 }
 "#codTipoMovimento": {
     height: 30,
@@ -45,16 +46,6 @@
 	height: 40,
 	touchEnabled: false,
 	layout: 'horizontal'
-}
-
-".block_label":{
-	left: 10,
-	height: 40,
-	font: {    	
-        fontSize: 16
-    },
-    touchEnabled: false,
-	color: '#969696'
 }
 
 ".block_data": {

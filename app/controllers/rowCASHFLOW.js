@@ -5,10 +5,11 @@ var args = arguments[0] || {};
 $.row.id_code = args.id_code,
 $.description.text = '  '+icons.money;
 $.importo.text = "€ "+args.importo;
-$.dataOperazione.text = composeDate(args.dataOperazione);
+$.dataOperazione.text = moment(args.dataOperazione).format('LLL');
+//$.dataOperazione.text = composeDate(args.dataOperazione);
 //$.dataValuta.text = composeDate(args.dataValuta);
 $.codTipoMovimento.text = args.codTipoMovimento;
-
+/*
 function composeDate(d_par){
 	
 	var p_toDate = new Date(d_par);
@@ -20,3 +21,4 @@ function composeDate(d_par){
 	return day+" "+month+" "+year; 
 	
 }
+*/

@@ -14,7 +14,7 @@ function showTimePicker(sel_data) {
 		
 	var riga = Alloy.createController('timePicker', {par_data: sel_data, _callback: function(p_data) {
 		
-		Ti.API.info("FINAL DATE TIME: "+moment(p_data).format('LLL'));
+		Ti.API.info("FINAL DATE TIME: "+p_data);
 		args(p_data);
 		
 	}});
