@@ -42,6 +42,7 @@ function Controller() {
             mostraDettaglioEvento ? __alloyId93.addEventListener("click", mostraDettaglioEvento) : __defers["__alloyId93!click!mostraDettaglioEvento"] = true;
             var __alloyId94 = Ti.UI.createView({
                 top: 10,
+                touchEnabled: false,
                 layout: "vertical"
             });
             __alloyId93.add(__alloyId94);
@@ -50,11 +51,13 @@ function Controller() {
                 left: 5,
                 right: 5,
                 height: 75,
+                touchEnabled: false,
                 layout: "horizontal"
             });
             __alloyId94.add(__alloyId95);
             var __alloyId96 = Ti.UI.createImageView({
                 image: "/images/android-robot.jpg",
+                touchEnabled: false,
                 width: 70,
                 height: 70
             });
@@ -63,10 +66,12 @@ function Controller() {
                 layout: "vertical",
                 height: Ti.UI.SIZE,
                 width: Ti.UI.FILL,
+                touchEnabled: false,
                 left: 5
             });
             __alloyId95.add(__alloyId97);
             var __alloyId98 = Ti.UI.createView({
+                touchEnabled: false,
                 height: Ti.UI.SIZE,
                 width: Ti.UI.FILL
             });
@@ -137,6 +142,7 @@ function Controller() {
             var __alloyId103 = Ti.UI.createView({
                 height: Ti.UI.SIZE,
                 width: Ti.UI.FILL,
+                touchEnabled: false,
                 top: 5,
                 bottom: 5,
                 right: 5,
@@ -223,11 +229,17 @@ function Controller() {
         }
     }
     function mostraDettaglioEvento(e) {
-        showSpinner();
-        var selEvent = timelineList.at(e.index).attributes;
-        net.getPost(selEvent.id, function(postData) {
-            Alloy.createController("dettaglio_post", postData).getView().open();
-        });
+        Ti.API.info("INDEX RIGA CLICCATA: " + JSON.stringify(e));
+        try {
+            showSpinner();
+            var selEvent = timelineList.at(e.index).attributes;
+            net.getPost(selEvent.id, function(postData) {
+                Alloy.createController("dettaglio_post", postData).getView().open();
+            });
+        } catch (error) {
+            Ti.App.fireEvent("loading_done");
+            Ti.API.info("ERRORE: " + error);
+        }
     }
     function createNewPost() {
         Alloy.createController("newPost", function() {

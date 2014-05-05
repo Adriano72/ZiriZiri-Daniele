@@ -21,17 +21,16 @@ function Controller() {
         Ti.API.info("111111111 DATE GOT FROM PICKER: " + $.postDate.value);
         Alloy.createController("datePicker", function(p_data) {
             $.postDate.value = moment(p_data).format("LLL");
-            Ti.API.info("22222222 DATE GOT FROM PICKER: " + $.postDate.value);
+            $.postDate.dataRaw = moment(p_data);
+            Ti.API.info("22222222 DATE GOT FROM PICKER: " + $.postDate.dataRaw);
         });
     }
     function savePost() {
-        Ti.API.info("POST DATE VALUE AT BEGINNING; " + $.postDate.value);
-        Ti.API.info("POST DATE PARSED AT BEGINNING; " + Date.parse($.postDate.value));
-        if ("" !== $.titolo.value) {
+        if ("" !== $.titolo.value && 9999 != $.pkrCategoria.getSelectedRow(0).id) {
             var postObj = {
                 name: $.titolo.value,
                 description: "DATAPOST-TEMPLATE-DEFAULT-DESC",
-                referenceTime: Date.parse($.postDate.value),
+                referenceTime: $.postDate.dataRaw,
                 category: {
                     id: $.pkrCategoria.getSelectedRow(0).id,
                     version: $.pkrCategoria.getSelectedRow(0).version
@@ -43,6 +42,7 @@ function Controller() {
                     longitude: location_result.longitude
                 }
             };
+            Ti.API.info("JSON POST: " + JSON.stringify(postObj));
             net.savePost(postObj, function(post_id) {
                 Alloy.Globals.showSpinner();
                 Ti.API.info("ID POST SALVATO: " + post_id);
@@ -71,7 +71,7 @@ function Controller() {
             return;
         }
         Alloy.createController("addCashflow", function(objRet) {
-            Ti.API.info("POST DATE VALUE: " + $.postDate.value);
+            Ti.API.info("POST DATE VALUE: " + $.postDate.dataRaw);
             var objAspect = {
                 kind: {
                     code: "CASHFLOWDATATYPE_CODE"
@@ -79,7 +79,7 @@ function Controller() {
                 data: {}
             };
             objAspect.name = $.titolo.value;
-            objAspect.referenceTime = Date.parse($.postDate.value);
+            objAspect.referenceTime = $.postDate.dataRaw;
             objAspect.category = {
                 id: $.pkrCategoria.getSelectedRow(0).id,
                 version: $.pkrCategoria.getSelectedRow(0).version
@@ -91,8 +91,8 @@ function Controller() {
                 longitude: location_result.longitude
             };
             objAspect.data.tipoMovimento = objRet.tipoMovimento;
-            objAspect.data.dataOperazione = Date.parse($.postDate.value);
-            objAspect.data.dataValuta = Date.parse($.postDate.value);
+            objAspect.data.dataOperazione = $.postDate.dataRaw;
+            objAspect.data.dataValuta = $.postDate.dataRaw;
             objAspect.data.pagamentoIncasso = objRet.pagamentoIncasso;
             objAspect.data.importo = objRet.importo;
             var tempObj = _.clone(objAspect);
@@ -146,7 +146,7 @@ function Controller() {
         }).getView().open();
     }
     function addDocument() {
-        if ("" == $.titolo.value) {
+        if ("" == $.titolo.value && 9999 == $.pkrCategoria.getSelectedRow(0).id) {
             alert("Prima di inserire il dettaglio dell'evento è necessario specificare titolo e categoria");
             return;
         }
@@ -161,7 +161,7 @@ function Controller() {
             };
             objAspect.name = objRet.name;
             objAspect.description = objRet.description;
-            objAspect.referenceTime = Date.parse($.postDate.value);
+            objAspect.referenceTime = $.postDate.dataRaw;
             objAspect.category = {
                 id: $.pkrCategoria.getSelectedRow(0).id,
                 version: $.pkrCategoria.getSelectedRow(0).version
@@ -188,7 +188,7 @@ function Controller() {
         }).getView().open();
     }
     function addLink() {
-        if ("" == $.titolo.value) {
+        if ("" == $.titolo.value && 9999 == $.pkrCategoria.getSelectedRow(0).id) {
             alert("Prima di inserire il dettaglio dell'evento è necessario specificare titolo e categoria");
             return;
         }
@@ -203,15 +203,13 @@ function Controller() {
             };
             objAspect.name = objRet.name;
             objAspect.description = objRet.description;
-            objAspect.referenceTime = Date.parse($.postDate.value);
+            Ti.API.info("DATA JUST BEFORE ***** :" + $.postDate.dataRaw);
+            objAspect.referenceTime = moment($.postDate.dataRaw);
+            Ti.API.info("DATA JUST AFTER ***** :" + objAspect.referenceTime);
             objAspect.category = {
                 id: $.pkrCategoria.getSelectedRow(0).id,
                 version: $.pkrCategoria.getSelectedRow(0).version
             };
-            objAspect.tags = [ {
-                name: "ARTICOLO",
-                description: "ARTICOLO"
-            } ];
             objAspect.data.format = {
                 name: "LINK",
                 description: "HTML LINK",
@@ -219,7 +217,7 @@ function Controller() {
             };
             objAspect.data.title = objRet.name;
             objAspect.data.description = objRet.description;
-            objAspect.data.content = objRet.content;
+            objAspect.data.content = -1 == objRet.content.indexOf("http://") ? "http://" + objRet.content : objRet.content;
             objAspect.data.preview = null;
             Ti.API.info("OBJ ASPECT: " + JSON.stringify(objAspect));
             var tempObj = _.clone(objAspect);
@@ -326,7 +324,8 @@ function Controller() {
         editable: false,
         borderRadius: 5,
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        id: "postDate"
+        id: "postDate",
+        dataRaw: ""
     });
     $.__views.__alloyId25.add($.__views.postDate);
     showDatePicker ? $.__views.postDate.addEventListener("focus", showDatePicker) : __defers["$.__views.postDate!focus!showDatePicker"] = true;
@@ -444,6 +443,9 @@ function Controller() {
         $.location.value = locationData.address;
     });
     $.postDate.value = moment().format("LLL");
+    $.postDate.dataRaw = moment();
+    Ti.API.info("Date PRE CONVERSION: " + $.postDate.value);
+    Ti.API.info("RAW DATE: " + $.postDate.dataRaw);
     var rowsCat = [ Ti.UI.createPickerRow({
         title: "Selezionare una categoria",
         id: 9999

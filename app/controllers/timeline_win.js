@@ -178,14 +178,23 @@ function lazyload(_evt) {
 }
 
 function mostraDettaglioEvento(e) {
+	
+	Ti.API.info("INDEX RIGA CLICCATA: "+JSON.stringify(e));
+	
+	try{
+		showSpinner();
 
-	showSpinner();
+		var selEvent = timelineList.at(e.index).attributes;
+	
+		net.getPost(selEvent.id, function(postData) {
+			Alloy.createController("dettaglio_post", postData).getView().open();
+		});
+	}catch(error){
+		Ti.App.fireEvent("loading_done");
+		Ti.API.info("ERRORE: "+error);
+	}
 
-	var selEvent = timelineList.at(e.index).attributes;
-
-	net.getPost(selEvent.id, function(postData) {
-		Alloy.createController("dettaglio_post", postData).getView().open();
-	});
+	
 
 	//Ti.API.info("SELECTED DATA ID: "+selEvent.id);
 

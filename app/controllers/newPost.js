@@ -25,6 +25,9 @@ u_location.result(function(locationData) {
 //moment().format("Do MMM YY")
 
 $.postDate.value = moment().format('LLL');
+$.postDate.dataRaw = moment();
+Ti.API.info("Date PRE CONVERSION: "+$.postDate.value);
+Ti.API.info("RAW DATE: "+$.postDate.dataRaw);
 
 function showDatePicker() {
 
@@ -33,8 +36,9 @@ function showDatePicker() {
 	var riga = Alloy.createController('datePicker', function(p_data) {
 
 		$.postDate.value = moment(p_data).format('LLL');
+		$.postDate.dataRaw = moment(p_data);
 
-		Ti.API.info("22222222 DATE GOT FROM PICKER: " + $.postDate.value);
+		Ti.API.info("22222222 DATE GOT FROM PICKER: " + $.postDate.dataRaw);
 
 	});
 
@@ -58,8 +62,8 @@ $.pkrCategoria.add(rowsCat);
 
 function savePost() {
 
-	Ti.API.info("POST DATE VALUE AT BEGINNING; " + $.postDate.value);
-	Ti.API.info("POST DATE PARSED AT BEGINNING; " + Date.parse($.postDate.value));
+	//Ti.API.info("POST DATE VALUE AT BEGINNING; " + $.postDate.value);
+	//Ti.API.info("POST DATE PARSED AT BEGINNING; " + Date.parse($.postDate.value));
 
 	if ($.titolo.value !== "" && $.pkrCategoria.getSelectedRow(0).id != 9999) {
 
@@ -67,7 +71,7 @@ function savePost() {
 
 			name : $.titolo.value,
 			description : "DATAPOST-TEMPLATE-DEFAULT-DESC",
-			referenceTime : Date.parse($.postDate.value),
+			referenceTime : $.postDate.dataRaw,
 			category : {
 				id : $.pkrCategoria.getSelectedRow(0).id,
 				version : $.pkrCategoria.getSelectedRow(0).version
@@ -82,7 +86,7 @@ function savePost() {
 		};
 		/*
 		 var name = $.titolo.value;
-		 var referenceTime = Date.parse($.postDate.value);
+		 var referenceTime = $.postDate.dataRaw
 		 Ti.API.info("SELECTED ROW: " + JSON.stringify($.pkrCategoria.getSelectedRow(0).id));
 		 var category = {
 		 id : $.pkrCategoria.getSelectedRow(0).id,
@@ -96,11 +100,14 @@ function savePost() {
 
 		 };
 		 */
+		
+		Ti.API.info("JSON POST: "+JSON.stringify(postObj));
 		net.savePost(postObj, function(post_id) {
 
 			Alloy.Globals.showSpinner();
 
 			Ti.API.info("ID POST SALVATO: " + post_id);
+			
 
 			if (arrayAspetti.length > 0) {// Se ci sono aspetti nel post li salvo e poi li collego al post
 
@@ -149,7 +156,7 @@ function addCashflow(id_post) {
 
 	Alloy.createController("addCashflow", function(objRet) {
 
-		Ti.API.info("POST DATE VALUE: " + $.postDate.value);
+		Ti.API.info("POST DATE VALUE: " + $.postDate.dataRaw);
 
 		var objAspect = {
 
@@ -162,7 +169,7 @@ function addCashflow(id_post) {
 
 		objAspect.name = $.titolo.value;
 
-		objAspect.referenceTime = Date.parse($.postDate.value);
+		objAspect.referenceTime = $.postDate.dataRaw;
 		objAspect.category = {
 			id : $.pkrCategoria.getSelectedRow(0).id,
 			version : $.pkrCategoria.getSelectedRow(0).version
@@ -176,8 +183,8 @@ function addCashflow(id_post) {
 
 		};
 		objAspect.data.tipoMovimento = objRet.tipoMovimento;
-		objAspect.data.dataOperazione = Date.parse($.postDate.value);
-		objAspect.data.dataValuta = Date.parse($.postDate.value);
+		objAspect.data.dataOperazione = $.postDate.dataRaw;
+		objAspect.data.dataValuta = $.postDate.dataRaw;
 		objAspect.data.pagamentoIncasso = objRet.pagamentoIncasso;
 		objAspect.data.importo = objRet.importo;
 
@@ -284,7 +291,7 @@ function addDocument(id_post) {
 
 		objAspect.name = objRet.name;
 		objAspect.description = objRet.description;
-		objAspect.referenceTime = Date.parse($.postDate.value);
+		objAspect.referenceTime = $.postDate.dataRaw;
 		objAspect.category = {
 			id : $.pkrCategoria.getSelectedRow(0).id,
 			version : $.pkrCategoria.getSelectedRow(0).version
@@ -352,16 +359,18 @@ function addLink(id_post) {
 
 		objAspect.name = objRet.name;
 		objAspect.description = objRet.description;
-		objAspect.referenceTime = Date.parse($.postDate.value);
+		objAspect.referenceTime = $.postDate.dataRaw;
 		objAspect.category = {
 			id : $.pkrCategoria.getSelectedRow(0).id,
 			version : $.pkrCategoria.getSelectedRow(0).version
 		};
-
+		
+		/*
 		objAspect.tags = [{
 			name : "ARTICOLO",
 			description : "ARTICOLO",
 		}];
+		*/
 
 		objAspect.data.format = {
 			name : "LINK",
@@ -371,7 +380,7 @@ function addLink(id_post) {
 
 		objAspect.data.title = objRet.name;
 		objAspect.data.description = objRet.description;
-		objAspect.data.content = objRet.content;
+		objAspect.data.content = (objRet.content.indexOf("http://") == -1)?"http://"+objRet.content:objRet.content;
 		objAspect.data.preview = null;
 
 		/*

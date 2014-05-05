@@ -186,7 +186,7 @@ exports.saveAspect = function(allAspects, _callback) {
 		};
 
 		xhr.onerror = function() {
-			Ti.API.error(this.status + ' - ' + this.statusText);
+			Ti.API.error("ERRORE SALVATAGGIO ASPETTO: "+this.status + ' - ' + this.statusText);
 		};
 
 		//https://demo.ziriziri.com/zz/api/v01/actions/actions/106?_type=json
@@ -196,6 +196,8 @@ exports.saveAspect = function(allAspects, _callback) {
 
 		xhr.setRequestHeader('Accept', 'application/json');
 		xhr.setRequestHeader('Content-Type', 'application/json');
+		
+		Ti.API.info("JSON ASPETTO DA SALVARE: "+JSON.stringify(value));
 
 		xhr.send(JSON.stringify(value));
 	});

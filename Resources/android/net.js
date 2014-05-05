@@ -112,11 +112,12 @@ exports.saveAspect = function(allAspects, _callback) {
             } else alert("Errore nella comunicazione col server.");
         };
         xhr.onerror = function() {
-            Ti.API.error(this.status + " - " + this.statusText);
+            Ti.API.error("ERRORE SALVATAGGIO ASPETTO: " + this.status + " - " + this.statusText);
         };
         xhr.open("POST", Alloy.Globals.baseUrl + "/zz/api/v01/aspects/aspects/" + session + "?_type=JSON");
         xhr.setRequestHeader("Accept", "application/json");
         xhr.setRequestHeader("Content-Type", "application/json");
+        Ti.API.info("JSON ASPETTO DA SALVARE: " + JSON.stringify(value));
         xhr.send(JSON.stringify(value));
     });
 };
