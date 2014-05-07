@@ -221,7 +221,7 @@ function Controller() {
                 id: $.pkrCategoria.getSelectedRow(0).id,
                 version: $.pkrCategoria.getSelectedRow(0).version
             };
-            objAspect.data.title = objRet.titolo;
+            objAspect.data.title = objRet.name;
             objAspect.data.description = objRet.description;
             objAspect.data.content = objRet.content;
             Ti.API.info("OBJ ASPECT: " + JSON.stringify(objAspect));

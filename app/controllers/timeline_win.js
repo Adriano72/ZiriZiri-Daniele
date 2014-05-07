@@ -161,7 +161,7 @@ populateTable();
 function lazyload(_evt) {
 	if (OS_IOS) {
 		if (startIndex - overlap < _evt.contentOffset.y + initialTableSize) {
-			Ti.API.info("CIAOOO");
+			//Ti.API.info("CIAOOO");
 			if (isLoading)
 				return;
 			isLoading = true;

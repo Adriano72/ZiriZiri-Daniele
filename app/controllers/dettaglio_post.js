@@ -88,11 +88,15 @@ _.forEach(args.data.aspects, function(value, key) {
 			break;
 
 		case "NOTEDATATYPE_CODE":
+		
+		Ti.API.info("VALUE: "+JSON.stringify(value));
 
 			var riga = Alloy.createController('rowNOTE', {
+				
+				
 
 				id_code : key,
-				description : value.data.title,
+				titolo : value.name,
 				timestamp : value.data.timestamp
 
 			}).getView();

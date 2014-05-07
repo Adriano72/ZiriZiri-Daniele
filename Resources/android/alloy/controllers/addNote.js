@@ -20,11 +20,11 @@ function Controller() {
     function createProtoObj() {
         if ("" != $.titolo.value && "" != $.content.value) {
             var objNote = {
-                titolo: $.titolo.value,
+                name: $.title.value,
                 description: $.titolo.value,
                 content: $.content.value
             };
-            Ti.API.info("********** Titolo : " + $.titolo.value);
+            Ti.API.info("********** Titolo : " + $.title.value);
             args(objNote);
             $.window.close();
         } else alert("I campi titolo e testo sono obbligatori");
@@ -56,7 +56,7 @@ function Controller() {
         id: "__alloyId23"
     });
     __alloyId22.push($.__views.__alloyId23);
-    $.__views.titolo = Ti.UI.createTextField({
+    $.__views.title = Ti.UI.createTextField({
         borderColor: "#000000",
         color: "#336699",
         top: 5,
@@ -64,12 +64,12 @@ function Controller() {
         left: 5,
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        hintText: "Titolo",
+        hintText: "Titolo nota",
         borderRadius: 5,
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        id: "titolo"
+        id: "title"
     });
-    $.__views.__alloyId23.add($.__views.titolo);
+    $.__views.__alloyId23.add($.__views.title);
     $.__views.__alloyId24 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,

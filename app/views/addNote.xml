@@ -9,7 +9,7 @@
 		<TableView id="titolo">
 			
 			<TableViewRow class="row">
-				<TextField id="titolo"/>				
+				<TextField id="title"/>				
 			</TableViewRow>
 			
 			<TableViewRow class="row">

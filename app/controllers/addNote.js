@@ -13,13 +13,13 @@ function createProtoObj() {
 		
 		var objNote = {
 
-			titolo : $.titolo.value,
+			name : $.title.value,
 			description : $.titolo.value,
 			content : $.content.value
 
 		};
 		
-		Ti.API.info("********** Titolo : "+$.titolo.value);
+		Ti.API.info("********** Titolo : "+$.title.value);
 
 		args(objNote);
 		$.window.close();

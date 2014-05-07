@@ -403,7 +403,7 @@ function addNote(id_post) {
 		 */
 
 		
-		objAspect.data.title = objRet.titolo;
+		objAspect.data.title = objRet.name;
 		objAspect.data.description = objRet.description;
 		objAspect.data.content = objRet.content;
 
