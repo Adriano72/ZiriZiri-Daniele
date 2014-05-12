@@ -3,46 +3,20 @@ var args = arguments[0] || {};
 var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
 
-var location_result;
-
-var u_location = require('getUserLocation');
-
 var net = require('net');
+
+var location = null;
+
+var dataFrom, dataTo = null;
+
+var timeNow = moment();
 
 var arrayAspetti = [];
 
-u_location.result(function(locationData) {
-
-	location_result = locationData;
-
-	$.location.value = locationData.address;
-
-	//Ti.API.info("RESULT LOCATION: " + JSON.stringify(locationData));
-});
-
-//Ti.API.info("GET LOCATION OUTPUT: "+JSON.stringify(u_location.getUsrLocation()));
+Ti.API.info("**** timeNow: "+timeNow);
 
 //moment().format("Do MMM YY")
 
-$.postDate.value = moment().format('LLL');
-$.postDate.dataRaw = moment();
-Ti.API.info("Date PRE CONVERSION: " + $.postDate.value);
-Ti.API.info("RAW DATE: " + $.postDate.dataRaw);
-
-function showDatePicker() {
-
-	Ti.API.info("111111111 DATE GOT FROM PICKER: " + $.postDate.value);
-
-	var riga = Alloy.createController('datePicker', function(p_data) {
-
-		$.postDate.value = moment(p_data).format('LLL');
-		$.postDate.dataRaw = moment(p_data);
-
-		Ti.API.info("22222222 DATE GOT FROM PICKER: " + $.postDate.dataRaw);
-
-	});
-
-};
 
 var rowsCat = [Ti.UI.createPickerRow({
 	title : "Selezionare una categoria",
@@ -60,6 +34,8 @@ _.forEach(Ti.App.Properties.getObject("elencoCategorie"), function(value, key) {
 
 $.pkrCategoria.add(rowsCat);
 
+
+
 function savePost() {
 
 	//Ti.API.info("POST DATE VALUE AT BEGINNING; " + $.postDate.value);
@@ -71,18 +47,14 @@ function savePost() {
 
 			name : $.titolo.value,
 			description : "DATAPOST-TEMPLATE-DEFAULT-DESC",
-			referenceTime : $.postDate.dataRaw,
+			referenceTime : timeNow,
 			category : {
 				id : $.pkrCategoria.getSelectedRow(0).id,
 				version : $.pkrCategoria.getSelectedRow(0).version
 			},
-			location : {
-				name : $.location.value,
-				description : $.location.value,
-				latitude : location_result.latitude,
-				longitude : location_result.longitude
-
-			}
+			location : location,
+			startTime: dataFrom,
+			endTime: dataTo
 		};
 		/*
 		 var name = $.titolo.value;
@@ -143,6 +115,84 @@ function savePost() {
 	}
 };
 
+function addEvent() {
+	
+	if ($.titolo.value == "" && $.pkrCategoria.getSelectedRow(0).id == 9999) {
+
+		alert("Prima di inserire il dettaglio dell'evento è necessario specificare titolo e categoria");
+		return;
+
+	};
+
+	Alloy.createController("addEvent", function(p_retLocation, p_dataFrom, p_dataTo) {
+		
+		location = p_retLocation;
+		
+		dataFrom = p_dataFrom;
+		
+		dataTo = p_dataTo;
+		
+		Ti.API.info("LOCATION: "+JSON.stringify(location));
+		Ti.API.info("DATA DA: "+dataFrom);
+		Ti.API.info("DATA A: "+dataTo);
+		/*
+		var objAspect = {
+
+			kind : {
+				code : "LINKDATATYPE_CODE",
+				name : "LINKDATATYPE_NAME",
+				description : "LINKDATATYPE_DESCRIPTION"
+
+			},
+			data : {}
+
+		};
+
+		objAspect.name = objRet.name;
+		objAspect.description = objRet.description;
+		objAspect.referenceTime = $.postDate.dataRaw;
+		objAspect.category = {
+			id : $.pkrCategoria.getSelectedRow(0).id,
+			version : $.pkrCategoria.getSelectedRow(0).version
+		};
+
+		objAspect.data.format = {
+			name : "LINK",
+			description : "HTML LINK",
+			type : "LINK"
+		};
+
+		objAspect.data.title = objRet.name;
+		objAspect.data.name = objRet.name;
+		objAspect.data.description = objRet.description;
+		objAspect.data.content = (objRet.content.indexOf("http://") == -1) ? "http://" + objRet.content : objRet.content;
+		objAspect.data.preview = null;
+
+
+		Ti.API.info("OBJ ASPECT: " + JSON.stringify(objAspect));
+
+		var tempObj = _.clone(objAspect);
+		objAspect.data = JSON.stringify(objAspect.data);
+
+		arrayAspetti.push(objAspect);
+
+		Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
+
+		var riga = Alloy.createController('rowLINK', {
+
+			id_code : arrayAspetti.length - 1,
+			titolo : tempObj.name,
+			descrizione : tempObj.description,
+			content : tempObj.data.content
+
+		}).getView();
+		$.newPostTable.appendRow(riga);
+		*/
+
+		//Ti.API.info("FINISHED ASPECT OBJ: "+JSON.stringify(objAspect));
+	}).getView().open();
+};
+
 function addCashflow(id_post) {
 	//Ti.API.info("**** INSERT CASHFLOW!");
 
@@ -155,7 +205,7 @@ function addCashflow(id_post) {
 
 	Alloy.createController("addCashflow", function(objRet) {
 
-		Ti.API.info("POST DATE VALUE: " + $.postDate.dataRaw);
+		
 
 		var objAspect = {
 
@@ -170,7 +220,7 @@ function addCashflow(id_post) {
 
 		objAspect.name = $.titolo.value;
 
-		objAspect.referenceTime = $.postDate.dataRaw;
+		objAspect.referenceTime = timeNow;
 		objAspect.category = {
 			id : $.pkrCategoria.getSelectedRow(0).id,
 			version : $.pkrCategoria.getSelectedRow(0).version
@@ -184,8 +234,8 @@ function addCashflow(id_post) {
 
 		};
 		objAspect.data.tipoMovimento = objRet.tipoMovimento;
-		objAspect.data.dataOperazione = $.postDate.dataRaw;
-		objAspect.data.dataValuta = $.postDate.dataRaw;
+		objAspect.data.dataOperazione = timeNow;
+		objAspect.data.dataValuta = timeNow;
 		objAspect.data.pagamentoIncasso = objRet.pagamentoIncasso;
 		objAspect.data.importo = objRet.importo;
 
@@ -242,7 +292,7 @@ function addDocument(id_post) {
 
 		objAspect.name = objRet.name;
 		objAspect.description = objRet.description;
-		objAspect.referenceTime = $.postDate.dataRaw;
+		objAspect.referenceTime = timeNow;
 		objAspect.category = {
 			id : $.pkrCategoria.getSelectedRow(0).id,
 			version : $.pkrCategoria.getSelectedRow(0).version
@@ -310,7 +360,7 @@ function addLink(id_post) {
 
 		objAspect.name = objRet.name;
 		objAspect.description = objRet.description;
-		objAspect.referenceTime = $.postDate.dataRaw;
+		objAspect.referenceTime = timeNow;
 		objAspect.category = {
 			id : $.pkrCategoria.getSelectedRow(0).id,
 			version : $.pkrCategoria.getSelectedRow(0).version
@@ -389,7 +439,7 @@ function addNote(id_post) {
 
 		objAspect.name = objRet.name;
 		objAspect.description = objRet.description;
-		objAspect.referenceTime = $.postDate.dataRaw;
+		objAspect.referenceTime = timeNow;
 		objAspect.category = {
 			id : $.pkrCategoria.getSelectedRow(0).id,
 			version : $.pkrCategoria.getSelectedRow(0).version
@@ -402,7 +452,6 @@ function addNote(id_post) {
 		 }];
 		 */
 
-		
 		objAspect.data.title = objRet.name;
 		objAspect.data.description = objRet.description;
 		objAspect.data.content = objRet.content;

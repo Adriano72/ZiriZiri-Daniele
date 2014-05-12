@@ -179,7 +179,7 @@ function lazyload(_evt) {
 
 function mostraDettaglioEvento(e) {
 	
-	Ti.API.info("INDEX RIGA CLICCATA: "+JSON.stringify(e));
+	//Ti.API.info("INDEX RIGA CLICCATA: "+JSON.stringify(e));
 	
 	try{
 		showSpinner();
@@ -187,6 +187,7 @@ function mostraDettaglioEvento(e) {
 		var selEvent = timelineList.at(e.index).attributes;
 	
 		net.getPost(selEvent.id, function(postData) {
+			Ti.API.info("DETTAGLIO POST: "+JSON.stringify(postData));
 			Alloy.createController("dettaglio_post", postData).getView().open();
 		});
 	}catch(error){

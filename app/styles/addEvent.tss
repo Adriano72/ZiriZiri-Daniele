@@ -1,0 +1,75 @@
+".container": {
+  	backgroundColor: '#F2F2F2'
+	//layout: "vertical",
+}
+
+"#newEventTable":{
+	top: 5 ,
+	left: 20,
+	right: 20,
+	separatorColor: 'transparent'
+} 
+
+".row": {
+	
+	height: Ti.UI.SIZE,
+	width: Ti.UI.FILL,
+	backgroundColor: '#F2F2F2',
+    className: 'itemRow',
+    layout: 'horizontal',
+    left: 5,
+    right: 5
+    
+} 
+
+"#dataFrom": {
+	
+	borderColor: "#000000",
+	color: "#336699",
+	top: 5,
+	right: 5,
+	left: 5,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	//backgroundColor: '#C8DDE8',
+	
+	editable: false,
+	borderRadius: 5,
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
+
+}
+
+"#dataTo": {
+	
+	borderColor: "#000000",
+	color: "#336699",
+	top: 5,
+	right: 5,
+	left: 5,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	//backgroundColor: '#C8DDE8',
+	
+	editable: false,
+	borderRadius: 5,
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
+
+}
+
+"#location": {
+	
+	borderColor: "#000000",
+	color: "#336699",
+	ellipsize: true,
+	top: 5,
+	right: 5,
+	left: 5,
+	width: Ti.UI.FILL,
+	autocorrect: false,
+	height: Ti.UI.SIZE,
+	//backgroundColor: '#C8DDE8',
+	hintText: "Posizione",
+	borderRadius: 5,
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
+
+}

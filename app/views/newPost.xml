@@ -15,21 +15,14 @@
 			<TableViewRow class="row" leftImage="/images/259-list.png">
 				<Picker id="pkrCategoria" selectionIndicator="true"/>
 			</TableViewRow>
-			
-			<TableViewRow class="row" leftImage="/images/83-calendar.png">
-				<TextField id="postDate"  dataRaw="" onFocus="showDatePicker" onClick="showDatePicker"/>				
-			</TableViewRow>
-			
-			<TableViewRow class="row" leftImage="/images/74-location.png">
-				<TextField id="location"></TextField>
-			</TableViewRow>
 
 		</TableView>
 		
 		<View id="bottomBar">
 			<Label class="separator"/>
 			<View id="buttonsContainer">
-				<Label class="1_insertAspects" backgroundImage="/images/826-money-1.png" onClick="addCashflow"/>
+				<Label class="1_insertAspects" backgroundImage="/images/851-calendar.png" onClick="addEvent"/>
+				<Label class="insertAspects" backgroundImage="/images/826-money-1.png" onClick="addCashflow"/>
 				<Label class="insertAspects" backgroundImage="/images/770-paper-clip.png" onClick="addDocument"/>
 				<Label class="insertAspects" backgroundImage="/images/809-clipboard.png" onClick="addNote"/>
 				<Label class="insertAspects" backgroundImage="/images/843-link.png" onClick="addLink"/>

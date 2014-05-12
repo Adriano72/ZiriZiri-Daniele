@@ -1,0 +1,48 @@
+"#row": {
+	
+	height: Ti.UI.SIZE,
+	width: Ti.UI.FILL,
+	//backgroundColor: '#F2F2F2',
+	backgroundColor: '#E3E3E3',
+    className: 'itemRow',
+    layout: 'vertical'
+    
+} 
+
+"#description": {
+    height: 30,
+    font: {
+    	fontFamily: 'AppIcons',
+    	
+        fontSize: 18
+    },
+    color: "#5C5C5C",
+    left: 5,
+    top: 5,
+    ellipsize: true,
+    wordWrap: false,
+    //backgroundColor: '#E3E3E3',
+    //borderRadius: Alloy.Globals.borderRad,
+    touchEnabled: false,
+    width: 55,
+    //height: 55
+}
+
+".block_container":{
+	height: 40,
+	touchEnabled: false,
+	layout: 'horizontal'
+}
+
+".block_data": {
+	height: 40,
+    font: {    	
+        fontSize: 16
+    },
+    left: 5,
+    right: 5,
+    touchEnabled: false,
+   	width: Ti.UI.SIZE
+	
+}
+

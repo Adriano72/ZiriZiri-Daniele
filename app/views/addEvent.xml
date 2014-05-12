@@ -1,0 +1,26 @@
+<Alloy>
+	<Window id="window" class="container" title = "Nuovo Evento">
+		<Menu id="menu" platform="android">
+			
+			<MenuItem id="salva" title="Scrivi" icon="/images/785-floppy-disk.png"  onClick="saveEvent" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
+			
+		</Menu>
+
+		<TableView id="newEventTable">
+			
+			<TableViewRow class="row" leftImage="/images/83-calendar.png">
+				<TextField id="dataFrom"  dataRaw="" onFocus="showDatePicker" onClick="showDatePicker"/>				
+			</TableViewRow>
+			
+			<TableViewRow class="row" leftImage="/images/83-calendar.png">
+				<TextField id="dataTo"  dataRaw="" onFocus="showDatePicker" onClick="showDatePicker"/>				
+			</TableViewRow>
+			
+			<TableViewRow class="row" leftImage="/images/74-location.png" onClick = "getLocation">
+				<TextField id="location"/>
+			</TableViewRow>
+
+		</TableView>
+
+	</Window>
+</Alloy>

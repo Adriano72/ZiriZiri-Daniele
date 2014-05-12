@@ -1,6 +1,6 @@
 function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
-    this.__controllerPath = "rowLINK";
+    this.__controllerPath = "rowEvent";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
@@ -15,13 +15,13 @@ function Controller() {
         id: "row"
     });
     $.__views.row && $.addTopLevelView($.__views.row);
-    $.__views.__alloyId94 = Ti.UI.createView({
+    $.__views.__alloyId92 = Ti.UI.createView({
         height: 40,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId94"
+        id: "__alloyId92"
     });
-    $.__views.row.add($.__views.__alloyId94);
+    $.__views.row.add($.__views.__alloyId92);
     $.__views.description = Ti.UI.createLabel({
         height: 30,
         font: {
@@ -37,7 +37,7 @@ function Controller() {
         width: 55,
         id: "description"
     });
-    $.__views.__alloyId94.add($.__views.description);
+    $.__views.__alloyId92.add($.__views.description);
     $.__views.titolo = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -49,7 +49,7 @@ function Controller() {
         width: Ti.UI.SIZE,
         id: "titolo"
     });
-    $.__views.__alloyId94.add($.__views.titolo);
+    $.__views.__alloyId92.add($.__views.titolo);
     $.__views.descrizione = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -61,14 +61,14 @@ function Controller() {
         width: Ti.UI.SIZE,
         id: "descrizione"
     });
-    $.__views.__alloyId94.add($.__views.descrizione);
-    $.__views.__alloyId95 = Ti.UI.createView({
+    $.__views.__alloyId92.add($.__views.descrizione);
+    $.__views.__alloyId93 = Ti.UI.createView({
         height: 40,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId95"
+        id: "__alloyId93"
     });
-    $.__views.row.add($.__views.__alloyId95);
+    $.__views.row.add($.__views.__alloyId93);
     $.__views.content = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -80,7 +80,7 @@ function Controller() {
         width: Ti.UI.SIZE,
         id: "content"
     });
-    $.__views.__alloyId95.add($.__views.content);
+    $.__views.__alloyId93.add($.__views.content);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
