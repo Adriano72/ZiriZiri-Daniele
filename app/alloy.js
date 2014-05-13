@@ -16,6 +16,8 @@ var net = require('net');
 
 //Alloy.Globals.baseUrl = 'http://172.30.113.10:6969';
 
+Titanium.Geolocation.purpose = 'Get Current Location';
+
 Alloy.Globals.baseUrl = 'https://demo.ziriziri.com';
 
 var dFactor = (Ti.Platform.displayCaps.logicalDensityFactor?Ti.Platform.displayCaps.logicalDensityFactor : 1);

@@ -9,17 +9,12 @@ $.dataFrom.dataRaw = moment();
 var location_result = null;
 
 function getLocation() {
+	
+	var loc = Alloy.createController('getLocation', function(locationData) {
 
-	var u_location = require('getUserLocation');
-
-	u_location.result(function(locationData) {
-
-		location_result = locationData;
-
-		$.location.value = locationData.address;
-
-		//Ti.API.info("RESULT LOCATION: " + JSON.stringify(locationData));
-	});
+		$.location.text = locationData.address;
+		
+	}).getView().open();;
 
 };
 

@@ -4,6 +4,8 @@ var icons = require("/icons");
 
 var net = require("net");
 
+Titanium.Geolocation.purpose = "Get Current Location";
+
 Alloy.Globals.baseUrl = "https://demo.ziriziri.com";
 
 var dFactor = Ti.Platform.displayCaps.logicalDensityFactor ? Ti.Platform.displayCaps.logicalDensityFactor : 1;

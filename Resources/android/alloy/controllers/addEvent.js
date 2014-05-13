@@ -18,11 +18,9 @@ function Controller() {
         }
     }
     function getLocation() {
-        var u_location = require("getUserLocation");
-        u_location.result(function(locationData) {
-            location_result = locationData;
-            $.location.value = locationData.address;
-        });
+        Alloy.createController("getLocation", function(locationData) {
+            $.location.text = locationData.address;
+        }).getView().open();
     }
     function showDatePicker(e) {
         Alloy.createController("datePicker", function(p_data) {
@@ -128,17 +126,18 @@ function Controller() {
     });
     __alloyId16.push($.__views.__alloyId19);
     getLocation ? $.__views.__alloyId19.addEventListener("click", getLocation) : __defers["$.__views.__alloyId19!click!getLocation"] = true;
-    $.__views.location = Ti.UI.createTextField({
+    $.__views.location = Ti.UI.createLabel({
         borderColor: "#000000",
         color: "#336699",
         ellipsize: true,
+        wordWrap: false,
         top: 5,
         right: 5,
         left: 5,
         width: Ti.UI.FILL,
         autocorrect: false,
-        height: Ti.UI.SIZE,
-        hintText: "Posizione",
+        height: 70,
+        text: "    Posizione",
         borderRadius: 5,
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "location"

@@ -8,7 +8,9 @@ var category = (_.isNull(args.data.category) || _.isUndefined(args.data.category
 if (!(_.isNull(args.data.location))) {
 
 	var location = args.data.location.name;
-	$.location.text = " " + icons.map_marker + " " + location + " ", $.mapview.region = {
+	$.location.text = " " + icons.map_marker + " " + location + " ";
+	
+	$.mapview.region = {
 		latitude : args.data.location.latitude,
 		longitude : args.data.location.longitude,
 		latitudeDelta : 0.01,

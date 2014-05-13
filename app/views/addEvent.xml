@@ -17,7 +17,7 @@
 			</TableViewRow>
 			
 			<TableViewRow class="row" leftImage="/images/74-location.png" onClick = "getLocation">
-				<TextField id="location"/>
+				<Label id="location"/>
 			</TableViewRow>
 
 		</TableView>
