@@ -45,7 +45,7 @@
 	right: 5,
 	left: 5,
 	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
+	height: 50,
 	//backgroundColor: '#C8DD
 
 }

@@ -42,7 +42,7 @@ function forwardGeocoding(){
 	
 	var searchAddress = require('getUserLocation');
 	
-	searchAddress.forwardGeo(function(locationData) {
+	searchAddress.forwardGeo($.indirizzo.value,function(locationData) {
 
 		//args(locationData);
 		/*

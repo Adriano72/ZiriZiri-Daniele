@@ -64,7 +64,7 @@ exports.getTipoMovimento = function(_callback) {
 	var xhr = Ti.Network.createHTTPClient();
 
 	xhr.onload = function() {
-		//Ti.API.info("RESPONSE: "+xhr.responseText);
+		//Ti.API.info("RESPONSE CATEGORY: "+xhr.responseText);
 		_callback(JSON.parse(xhr.responseText));
 	};
 
@@ -95,7 +95,7 @@ exports.getCategories = function(_callback) {
 	var xhr = Ti.Network.createHTTPClient();
 
 	xhr.onload = function() {
-		//Ti.API.info("RESPONSE: "+xhr.responseText);
+		Ti.API.info("RESPONSE CATEGORY: "+xhr.responseText);
 		_callback(JSON.parse(xhr.responseText));
 	};
 

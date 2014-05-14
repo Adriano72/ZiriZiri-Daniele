@@ -12,11 +12,9 @@
 
 var icons = require('/icons');
 
-var net = require('net');
+//var net = require('net');
 
 //Alloy.Globals.baseUrl = 'http://172.30.113.10:6969';
-
-Titanium.Geolocation.purpose = 'Get Current Location';
 
 Alloy.Globals.baseUrl = 'https://demo.ziriziri.com';
 
@@ -78,81 +76,8 @@ Alloy.Globals.Moment_IT = {
 	}
 };
 
-net.getCategories(function(categoriesData){
-	
-	var objCategorie = [];
-	
-	_.forEach(categoriesData.data, function(value, key) {
-		
-		//Ti.API.info("Categoria: "+key+" : "+value.name);
-		
-		objCategorie.push({"title":value.name, "id": value.id, "version": value.version});
-		
-		
-	});
-	
-	Ti.App.Properties.setObject("elencoCategorie",objCategorie);
-	
-	//Ti.API.info("OBJ CATEGORIE: "+ JSON.stringify(Ti.App.Properties.getObject("elencoCategorie")));
-	
-});
 
-net.getPostTemplate(function(p_postTemplate){
-	
-	//Ti.API.info("POST TEMPLATE: "+JSON.stringify(p_postTemplate));
-	
-	var arrayTemplateIds = [];
-	
-	_.forEach(p_postTemplate.data[0].modules, function(value, key) {
-		//Ti.API.info("ID TEMPLATE ASPECT: "+value.id);
-		arrayTemplateIds.push(value.id);
-	});
-	
-	Ti.App.Properties.setList("postTemplateIds",arrayTemplateIds);
-	
-	Ti.API.info("ID TEMPLATE ASPECT: "+Ti.App.Properties.getList("postTemplateIds"));
-	
-});
 
-net.getTipoMovimento(function(p_tipoMovimento){
-	
-	var objTipoMov = [];
-	
-	_.forEach(p_tipoMovimento.data, function(value, key) {
-		
-		//Ti.API.info("Categoria: "+key+" : "+value.name);
-		
-		objTipoMov.push({"title":value.descrizioneBreve, "id": value.id, "codice": value.codice, "version":value.version});
-		
-		
-	});
-	
-	Ti.App.Properties.setObject("elencoTipoMov", objTipoMov);
-	
-	//Ti.API.info("OBJ TIPO MOVIMENTO: "+JSON.stringify(Ti.App.Properties.getObject("elencoTipoMov")));
-	
-});
-
-net.getPagamentoIncasso(function(p_pagamentoIncasso){
-	
-	//Ti.API.info("OBJ PAGAMENTO INCASSO: "+JSON.stringify(p_pagamentoIncasso));
-	var objPagamIncasso = [];
-	
-	_.forEach(p_pagamentoIncasso.data, function(value, key) {
-		
-		//Ti.API.info("Categoria: "+key+" : "+value.name);
-		
-		objPagamIncasso.push({"title":value.descrizioneBreve, "id": value.id, "version":value.version});
-		
-		
-	});
-	
-	Ti.App.Properties.setObject("elencoPagamIncasso", objPagamIncasso);
-	
-	//Ti.API.info("OBJ PAGAM INCASSO: "+JSON.stringify(Ti.App.Properties.getObject("elencoPagamIncasso")));
-});
-
-/*
 var rc = Alloy.Globals.Map.isGooglePlayServicesAvailable();
 
 switch (rc) {
@@ -175,4 +100,3 @@ switch (rc) {
         alert('Unknown error.');
         break;
 }
-*/

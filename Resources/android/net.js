@@ -67,6 +67,7 @@ exports.getPagamentoIncasso = function(_callback) {
 exports.getCategories = function(_callback) {
     var xhr = Ti.Network.createHTTPClient();
     xhr.onload = function() {
+        Ti.API.info("RESPONSE CATEGORY: " + xhr.responseText);
         _callback(JSON.parse(xhr.responseText));
     };
     xhr.onerror = function(e) {

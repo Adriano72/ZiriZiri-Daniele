@@ -1,8 +1,8 @@
 <Alloy>
-	<Window id="window" class="container" title = "Nuovo Post">
+	<Window id="window" class="container" title = "Nuovo Post" onOpen="populateCategories">
 		<Menu id="menu" platform="android">
 			
-			<MenuItem id="salva" title="Scrivi" icon="/images/785-floppy-disk.png"  onClick="savePost" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
+			<MenuItem id="salva" title="Scrivi" icon="/images/floppy-disk.png"  onClick="savePost" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
 			
 		</Menu>
 
@@ -12,7 +12,7 @@
 				<TextField id="titolo"></TextField>
 			</TableViewRow>
 			
-			<TableViewRow class="row" leftImage="/images/259-list.png">
+			<TableViewRow class="row" leftImage="/images/list.png">
 				<Picker id="pkrCategoria" selectionIndicator="true"/>
 			</TableViewRow>
 
@@ -21,11 +21,11 @@
 		<View id="bottomBar">
 			<Label class="separator"/>
 			<View id="buttonsContainer">
-				<Label class="1_insertAspects" backgroundImage="/images/851-calendar.png" onClick="addEvent"/>
-				<Label class="insertAspects" backgroundImage="/images/826-money-1.png" onClick="addCashflow"/>
-				<Label class="insertAspects" backgroundImage="/images/770-paper-clip.png" onClick="addDocument"/>
-				<Label class="insertAspects" backgroundImage="/images/809-clipboard.png" onClick="addNote"/>
-				<Label class="insertAspects" backgroundImage="/images/843-link.png" onClick="addLink"/>
+				<Label class="1_insertAspects" backgroundImage="/images/851-calendar@2x.png" onClick="addEvent"/>
+				<Label class="insertAspects" backgroundImage="/images/826-money-1@2x.png" onClick="addCashflow"/>
+				<Label class="insertAspects" backgroundImage="/images/770-paper-clip@2x.png" onClick="addDocument"/>
+				<Label class="insertAspects" backgroundImage="/images/809-clipboard@2x.png" onClick="addNote"/>
+				<Label class="insertAspects" backgroundImage="/images/843-link@2x.png" onClick="addLink"/>
 			</View>
 			
 		</View>

@@ -32,7 +32,7 @@ function do_login(e) {
 			
 				Ti.App.Properties.setBool('authenticated', true);
 				Ti.App.Properties.setInt('sessionId', json.data.sessionId);
-				//alert(Ti.App.Properties.getInt('sessionId', 0));
+				Ti.API.info("SESSIONE: "+Ti.App.Properties.getInt('sessionId', 0));
 				Alloy.createController("timeline_win").getView().open();
 				//$.index.open();
 				

@@ -13,28 +13,29 @@ var timeNow = moment();
 
 var arrayAspetti = [];
 
-Ti.API.info("**** timeNow: "+timeNow);
+Ti.API.info("**** timeNow: " + timeNow);
 
 //moment().format("Do MMM YY")
 
+function populateCategories() {
 
-var rowsCat = [Ti.UI.createPickerRow({
-	title : "Selezionare una categoria",
-	id : 9999
-})];
+	var rowsCat = [Ti.UI.createPickerRow({
+		title : "Selezionare una categoria",
+		id : 9999
+	})];
 
-_.forEach(Ti.App.Properties.getObject("elencoCategorie"), function(value, key) {
-	//Ti.API.info("CAT: "+JSON.stringify(value));
+	_.forEach(Ti.App.Properties.getObject("elencoCategorie"), function(value, key) {
+		Ti.API.info("CAT: " + JSON.stringify(value));
 
-	var pkrRow = Ti.UI.createPickerRow(value);
+		var pkrRow = Ti.UI.createPickerRow(value);
 
-	rowsCat.push(pkrRow);
+		rowsCat.push(pkrRow);
 
-});
+	});
 
-$.pkrCategoria.add(rowsCat);
+	$.pkrCategoria.add(rowsCat);
 
-
+}
 
 function savePost() {
 
@@ -53,8 +54,8 @@ function savePost() {
 				version : $.pkrCategoria.getSelectedRow(0).version
 			},
 			location : location,
-			startTime: dataFrom,
-			endTime: dataTo
+			startTime : dataFrom,
+			endTime : dataTo
 		};
 		/*
 		 var name = $.titolo.value;
@@ -116,7 +117,7 @@ function savePost() {
 };
 
 function addEvent() {
-	
+
 	if ($.titolo.value == "" && $.pkrCategoria.getSelectedRow(0).id == 9999) {
 
 		alert("Prima di inserire il dettaglio dell'evento è necessario specificare titolo e categoria");
@@ -125,26 +126,26 @@ function addEvent() {
 	};
 
 	Alloy.createController("addEvent", function(p_retLocation, p_dataFrom, p_dataTo) {
-		
+
 		location = p_retLocation;
-		
+
 		dataFrom = p_dataFrom;
-		
+
 		dataTo = p_dataTo;
-		
-		Ti.API.info("LOCATION: "+JSON.stringify(location));
-		Ti.API.info("DATA DA: "+dataFrom);
-		Ti.API.info("DATA A: "+dataTo);
+
+		Ti.API.info("LOCATION: " + JSON.stringify(location));
+		Ti.API.info("DATA DA: " + dataFrom);
+		Ti.API.info("DATA A: " + dataTo);
 		/*
 		var objAspect = {
 
-			kind : {
-				code : "LINKDATATYPE_CODE",
-				name : "LINKDATATYPE_NAME",
-				description : "LINKDATATYPE_DESCRIPTION"
+		kind : {
+		code : "LINKDATATYPE_CODE",
+		name : "LINKDATATYPE_NAME",
+		description : "LINKDATATYPE_DESCRIPTION"
 
-			},
-			data : {}
+		},
+		data : {}
 
 		};
 
@@ -152,14 +153,14 @@ function addEvent() {
 		objAspect.description = objRet.description;
 		objAspect.referenceTime = $.postDate.dataRaw;
 		objAspect.category = {
-			id : $.pkrCategoria.getSelectedRow(0).id,
-			version : $.pkrCategoria.getSelectedRow(0).version
+		id : $.pkrCategoria.getSelectedRow(0).id,
+		version : $.pkrCategoria.getSelectedRow(0).version
 		};
 
 		objAspect.data.format = {
-			name : "LINK",
-			description : "HTML LINK",
-			type : "LINK"
+		name : "LINK",
+		description : "HTML LINK",
+		type : "LINK"
 		};
 
 		objAspect.data.title = objRet.name;
@@ -167,7 +168,6 @@ function addEvent() {
 		objAspect.data.description = objRet.description;
 		objAspect.data.content = (objRet.content.indexOf("http://") == -1) ? "http://" + objRet.content : objRet.content;
 		objAspect.data.preview = null;
-
 
 		Ti.API.info("OBJ ASPECT: " + JSON.stringify(objAspect));
 
@@ -180,10 +180,10 @@ function addEvent() {
 
 		var riga = Alloy.createController('rowLINK', {
 
-			id_code : arrayAspetti.length - 1,
-			titolo : tempObj.name,
-			descrizione : tempObj.description,
-			content : tempObj.data.content
+		id_code : arrayAspetti.length - 1,
+		titolo : tempObj.name,
+		descrizione : tempObj.description,
+		content : tempObj.data.content
 
 		}).getView();
 		$.newPostTable.appendRow(riga);
@@ -204,8 +204,6 @@ function addCashflow(id_post) {
 	};
 
 	Alloy.createController("addCashflow", function(objRet) {
-
-		
 
 		var objAspect = {
 

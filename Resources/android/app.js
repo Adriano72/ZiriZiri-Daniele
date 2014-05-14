@@ -2,10 +2,6 @@ var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
 var icons = require("/icons");
 
-var net = require("net");
-
-Titanium.Geolocation.purpose = "Get Current Location";
-
 Alloy.Globals.baseUrl = "https://demo.ziriziri.com";
 
 var dFactor = Ti.Platform.displayCaps.logicalDensityFactor ? Ti.Platform.displayCaps.logicalDensityFactor : 1;
@@ -66,50 +62,31 @@ Alloy.Globals.Moment_IT = {
     }
 };
 
-net.getCategories(function(categoriesData) {
-    var objCategorie = [];
-    _.forEach(categoriesData.data, function(value) {
-        objCategorie.push({
-            title: value.name,
-            id: value.id,
-            version: value.version
-        });
-    });
-    Ti.App.Properties.setObject("elencoCategorie", objCategorie);
-});
+var rc = Alloy.Globals.Map.isGooglePlayServicesAvailable();
 
-net.getPostTemplate(function(p_postTemplate) {
-    var arrayTemplateIds = [];
-    _.forEach(p_postTemplate.data[0].modules, function(value) {
-        arrayTemplateIds.push(value.id);
-    });
-    Ti.App.Properties.setList("postTemplateIds", arrayTemplateIds);
-    Ti.API.info("ID TEMPLATE ASPECT: " + Ti.App.Properties.getList("postTemplateIds"));
-});
+switch (rc) {
+  case Alloy.Globals.Map.SUCCESS:
+    Ti.API.info("Google Play services is installed.");
+    break;
 
-net.getTipoMovimento(function(p_tipoMovimento) {
-    var objTipoMov = [];
-    _.forEach(p_tipoMovimento.data, function(value) {
-        objTipoMov.push({
-            title: value.descrizioneBreve,
-            id: value.id,
-            codice: value.codice,
-            version: value.version
-        });
-    });
-    Ti.App.Properties.setObject("elencoTipoMov", objTipoMov);
-});
+  case Alloy.Globals.Map.SERVICE_MISSING:
+    alert("Google Play services is missing. Please install Google Play services from the Google Play store.");
+    break;
 
-net.getPagamentoIncasso(function(p_pagamentoIncasso) {
-    var objPagamIncasso = [];
-    _.forEach(p_pagamentoIncasso.data, function(value) {
-        objPagamIncasso.push({
-            title: value.descrizioneBreve,
-            id: value.id,
-            version: value.version
-        });
-    });
-    Ti.App.Properties.setObject("elencoPagamIncasso", objPagamIncasso);
-});
+  case Alloy.Globals.Map.SERVICE_VERSION_UPDATE_REQUIRED:
+    alert("Google Play services is out of date. Please update Google Play services.");
+    break;
+
+  case Alloy.Globals.Map.SERVICE_DISABLED:
+    alert("Google Play services is disabled. Please enable Google Play services.");
+    break;
+
+  case Alloy.Globals.Map.SERVICE_INVALID:
+    alert("Google Play services cannot be authenticated. Reinstall Google Play services.");
+    break;
+
+  default:
+    alert("Unknown error.");
+}
 
 Alloy.createController("index");

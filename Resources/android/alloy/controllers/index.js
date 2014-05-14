@@ -11,6 +11,7 @@ function Controller() {
             if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
                 Ti.App.Properties.setBool("authenticated", true);
                 Ti.App.Properties.setInt("sessionId", json.data.sessionId);
+                Ti.API.info("SESSIONE: " + Ti.App.Properties.getInt("sessionId", 0));
                 Alloy.createController("timeline_win").getView().open();
             } else alert("Username o password errati");
         };

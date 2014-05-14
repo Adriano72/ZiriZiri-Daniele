@@ -1,4 +1,8 @@
+
+
 exports.reverseGeo = function(_callback) {
+	
+	Titanium.Geolocation.purpose = 'Get User Location';
 
 	if (Ti.Geolocation.locationServicesEnabled) {
 
@@ -7,11 +11,16 @@ exports.reverseGeo = function(_callback) {
 				Ti.API.error('Error: ' + e.error);
 			} else {
 
-				var latitude = e.coords.latitude;
+				var latitude = e.coords.latitude;				
 				var longitude = e.coords.longitude;
+				
+				//Ti.API.info("LAT: "+latitude);
+				//Ti.API.info("LON: "+longitude);
 
 				Ti.Geolocation.reverseGeocoder(latitude, longitude, function(g) {
-					Ti.API.info("RISULTATO REV GEOCODING: " + JSON.stringify(g.places));
+					
+					Ti.API.info("RISULTATO REV GEOCODING: " + JSON.stringify(g));
+					
 					if (!_.isUndefined(g.places)) {
 						_callback({
 							latitude : latitude,
@@ -38,13 +47,13 @@ exports.reverseGeo = function(_callback) {
 
 };
 
-exports.forwardGeo = function(_callback) {
+exports.forwardGeo = function(address, _callback) {
 
 	if (Ti.Geolocation.locationServicesEnabled) {
 
 		
-		Ti.Geolocation.forwardGeocoder($.indirizzo.value, function(g) {
-					Ti.API.info("RISULTATO FORW GEOCODING: " + JSON.stringify(g.places));
+		Ti.Geolocation.forwardGeocoder(address, function(g) {
+					Ti.API.info("RISULTATO FORW GEOCODING: " + JSON.stringify(g));
 					/*
 					 _callback({
 					 latitude : latitude,

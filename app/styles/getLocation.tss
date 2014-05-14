@@ -3,10 +3,9 @@
 	layout: "vertical",
 }
 
-"#getLocationTable":{
+"#disambiguazioneTable":{
 	top: 5 ,
-	left: 20,
-	right: 20,
+	
 	separatorColor: 'transparent'
 } 
 
@@ -16,9 +15,7 @@
 	width: Ti.UI.FILL,
 	backgroundColor: '#F2F2F2',
     className: 'itemRow',
-    layout: 'horizontal',
-    left: 5,
-    right: 5
+    layout: 'horizontal'
     
 } 
 
@@ -28,25 +25,12 @@
 	width: Ti.UI.FILL
 }
 
-"#indirizzo": {
+"#topContainer": {
 	
-	borderColor: "#000000",
-	color: "#336699",
-	top: 5,
-	left: 5,
-	width: "85%",
+	layout: 'horizontal',
 	height: Ti.UI.SIZE,
-	//backgroundColor: '#C8DDE8',
-	hintText: "Cerca Indirizzo"
-
-}
-
-"#cerca": {
+	width: Ti.UI.SIZE
 	
-	backgroundImage: "/images/708-search.png",
-    left: 5, 
-    width: 30,
-    height: 30
 }
 
 "#location": {
@@ -61,9 +45,7 @@
 	autocorrect: false,
 	height: Ti.UI.SIZE,
 	//backgroundColor: '#C8DDE8',
-	hintText: "Posizione",
-	borderRadius: 5,
-	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
+	hintText: "Posizione"
 
 }
 
@@ -73,4 +55,12 @@
     left: 5, 
     width: 30,
     height: 30
+}
+
+"#searchAddress": {
+	showCancel: true,
+	hintText : 'Cerca indirizzo',
+	height: 50,
+	top: 5
+	
 }

@@ -5,7 +5,7 @@ function Controller() {
             var __alloyId31 = {
                 id: "salva",
                 title: "Scrivi",
-                icon: "/images/1040-checkmark.png",
+                icon: "/images/1040-checkmark@2x.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
             };
             $.__views.salva = e.menu.add(_.pick(__alloyId31, Alloy.Android.menuItemCreateArgs));
@@ -37,10 +37,6 @@ function Controller() {
             location_result = locationData;
         });
     }
-    function forwardGeocoding() {
-        var searchAddress = require("getUserLocation");
-        searchAddress.forwardGeo(function() {});
-    }
     function storeLocation() {
         args(location_result);
         $.window.close();
@@ -70,18 +66,13 @@ function Controller() {
         ns: "Alloy.Globals.Map"
     });
     $.__views.window.add($.__views.mapview);
-    var __alloyId33 = [];
-    $.__views.__alloyId34 = Ti.UI.createTableViewRow({
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL,
-        backgroundColor: "#F2F2F2",
-        className: "itemRow",
+    $.__views.topContainer = Ti.UI.createView({
         layout: "horizontal",
-        left: 5,
-        right: 5,
-        id: "__alloyId34"
+        height: Ti.UI.SIZE,
+        width: Ti.UI.SIZE,
+        id: "topContainer"
     });
-    __alloyId33.push($.__views.__alloyId34);
+    $.__views.window.add($.__views.topContainer);
     $.__views.location = Ti.UI.createTextField({
         borderColor: "#000000",
         color: "#336699",
@@ -93,11 +84,9 @@ function Controller() {
         autocorrect: false,
         height: Ti.UI.SIZE,
         hintText: "Posizione",
-        borderRadius: 5,
-        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "location"
     });
-    $.__views.__alloyId34.add($.__views.location);
+    $.__views.topContainer.add($.__views.location);
     $.__views.centra = Ti.UI.createButton({
         backgroundImage: "/images/845-location-target.png",
         left: 5,
@@ -105,48 +94,22 @@ function Controller() {
         height: 30,
         id: "centra"
     });
-    $.__views.__alloyId34.add($.__views.centra);
+    $.__views.topContainer.add($.__views.centra);
     reverseGeocoding ? $.__views.centra.addEventListener("click", reverseGeocoding) : __defers["$.__views.centra!click!reverseGeocoding"] = true;
-    $.__views.__alloyId35 = Ti.UI.createTableViewRow({
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL,
-        backgroundColor: "#F2F2F2",
-        className: "itemRow",
-        layout: "horizontal",
-        left: 5,
-        right: 5,
-        id: "__alloyId35"
-    });
-    __alloyId33.push($.__views.__alloyId35);
-    $.__views.indirizzo = Ti.UI.createTextField({
-        borderColor: "#000000",
-        color: "#336699",
+    $.__views.searchAddress = Ti.UI.createSearchBar({
+        showCancel: true,
+        hintText: "Cerca indirizzo",
+        height: 50,
         top: 5,
-        left: 5,
-        width: "85%",
-        height: Ti.UI.SIZE,
-        hintText: "Cerca Indirizzo",
-        id: "indirizzo"
+        id: "searchAddress"
     });
-    $.__views.__alloyId35.add($.__views.indirizzo);
-    $.__views.cerca = Ti.UI.createButton({
-        backgroundImage: "/images/708-search.png",
-        left: 5,
-        width: 30,
-        height: 30,
-        id: "cerca"
-    });
-    $.__views.__alloyId35.add($.__views.cerca);
-    forwardGeocoding ? $.__views.cerca.addEventListener("click", forwardGeocoding) : __defers["$.__views.cerca!click!forwardGeocoding"] = true;
-    $.__views.getLocationTable = Ti.UI.createTableView({
+    $.__views.window.add($.__views.searchAddress);
+    $.__views.disambiguazioneTable = Ti.UI.createTableView({
         top: 5,
-        left: 20,
-        right: 20,
         separatorColor: "transparent",
-        data: __alloyId33,
-        id: "getLocationTable"
+        id: "disambiguazioneTable"
     });
-    $.__views.window.add($.__views.getLocationTable);
+    $.__views.window.add($.__views.disambiguazioneTable);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
@@ -154,7 +117,6 @@ function Controller() {
     __defers["$.__views.window!open!reverseGeocoding"] && $.__views.window.addEventListener("open", reverseGeocoding);
     __defers["$.__views.salva!click!storeLocation"] && $.__views.salva.addEventListener("click", storeLocation);
     __defers["$.__views.centra!click!reverseGeocoding"] && $.__views.centra.addEventListener("click", reverseGeocoding);
-    __defers["$.__views.cerca!click!forwardGeocoding"] && $.__views.cerca.addEventListener("click", forwardGeocoding);
     _.extend($, exports);
 }
 
