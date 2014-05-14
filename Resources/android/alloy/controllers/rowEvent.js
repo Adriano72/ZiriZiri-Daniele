@@ -38,7 +38,7 @@ function Controller() {
         id: "description"
     });
     $.__views.__alloyId94.add($.__views.description);
-    $.__views.titolo = Ti.UI.createLabel({
+    $.__views.dateFrom = Ti.UI.createLabel({
         height: 40,
         font: {
             fontSize: 16
@@ -47,10 +47,10 @@ function Controller() {
         right: 5,
         touchEnabled: false,
         width: Ti.UI.SIZE,
-        id: "titolo"
+        id: "dateFrom"
     });
-    $.__views.__alloyId94.add($.__views.titolo);
-    $.__views.descrizione = Ti.UI.createLabel({
+    $.__views.__alloyId94.add($.__views.dateFrom);
+    $.__views.dateTo = Ti.UI.createLabel({
         height: 40,
         font: {
             fontSize: 16
@@ -59,9 +59,9 @@ function Controller() {
         right: 5,
         touchEnabled: false,
         width: Ti.UI.SIZE,
-        id: "descrizione"
+        id: "dateTo"
     });
-    $.__views.__alloyId94.add($.__views.descrizione);
+    $.__views.__alloyId94.add($.__views.dateTo);
     $.__views.__alloyId95 = Ti.UI.createView({
         height: 40,
         touchEnabled: false,
@@ -69,7 +69,7 @@ function Controller() {
         id: "__alloyId95"
     });
     $.__views.row.add($.__views.__alloyId95);
-    $.__views.content = Ti.UI.createLabel({
+    $.__views.location = Ti.UI.createLabel({
         height: 40,
         font: {
             fontSize: 16
@@ -78,15 +78,15 @@ function Controller() {
         right: 5,
         touchEnabled: false,
         width: Ti.UI.SIZE,
-        id: "content"
+        id: "location"
     });
-    $.__views.__alloyId95.add($.__views.content);
+    $.__views.__alloyId95.add($.__views.location);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    $.row.id_code = args.id_code, $.description.text = "  " + icons.link;
-    $.titolo.text = args.titolo;
-    $.descrizione.text = args.descrizione, $.content.text = args.content;
+    $.row.id_code = args.id_code, $.description.text = "  " + icons.calendar;
+    $.dateFrom.text = args.dataDa;
+    $.dateTo.text = args.dataA, $.location.text = args.posizione;
     _.extend($, exports);
 }
 

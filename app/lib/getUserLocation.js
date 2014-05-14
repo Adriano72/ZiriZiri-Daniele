@@ -1,8 +1,74 @@
+Titanium.Geolocation.purpose = 'Get User Location';
 
+function stringify(obj) {
+
+	var arr = [], itm;
+	for (itm in obj) {
+		arr.push(itm + "=" + escape(obj[itm]));
+	};
+	return arr.join("&");
+};
+
+function download(obj) {
+
+	var xhr = Ti.Network.createHTTPClient();
+	var strMode = (obj.method || 'POST');
+	if (obj.success) {
+		xhr.onload = function(e) {
+			json = JSON.parse(this.responseText);
+			obj.success(json);
+		};
+	};
+	if (obj.error) {
+		xhr.onerror = function(e) {
+			obj.error(e);
+		};
+	};
+
+	if (strMode === 'POST') {
+		xhr.open(strMode, obj.url);
+		xhr.send(obj.param);
+	} else {
+		xhr.open(strMode, obj.url + '?' + stringify(obj.param));
+		xhr.send();
+	}
+};
+
+function lookup(obj) {
+
+	download({
+		url : "http://maps.google.com/maps/api/geocode/json",
+		method : 'GET',
+		param : {
+			address : obj.address,
+			region : obj.region || 'it',
+			language : 'it',
+			sensor : true
+		},
+		success : function(json) {
+			if (json.results.length > 0) {
+				if (obj.success) {
+					obj.success({
+						lat : json.results[0].geometry.location.lat,
+						lon : json.results[0].geometry.location.lng,
+						address : json.results[0].formatted_address
+					});
+				}
+			} else {
+				if (obj.error) {
+					obj.error();
+				}
+			}
+		},
+		error : function(json) {
+			if (obj.error) {
+				obj.error();
+			}
+		}
+	});
+};
 
 exports.reverseGeo = function(_callback) {
-	
-	Titanium.Geolocation.purpose = 'Get User Location';
 
 	if (Ti.Geolocation.locationServicesEnabled) {
 
@@ -11,28 +77,47 @@ exports.reverseGeo = function(_callback) {
 				Ti.API.error('Error: ' + e.error);
 			} else {
 
-				var latitude = e.coords.latitude;				
+				var latitude = e.coords.latitude;
 				var longitude = e.coords.longitude;
-				
-				//Ti.API.info("LAT: "+latitude);
-				//Ti.API.info("LON: "+longitude);
 
-				Ti.Geolocation.reverseGeocoder(latitude, longitude, function(g) {
-					
-					Ti.API.info("RISULTATO REV GEOCODING: " + JSON.stringify(g));
-					
-					if (!_.isUndefined(g.places)) {
+				Ti.API.info("LAT: " + latitude);
+				Ti.API.info("LON: " + longitude);
+
+				lookup({
+					address : latitude + "," + longitude,
+					success : function(e) {
 						_callback({
-							latitude : latitude,
-							longitude : longitude,
-							address : g.places[0].displayAddress
+							latitude : e.lat,
+							longitude : e.lon,
+							address : e.address
 
 						});
-					} else {
-						
-						alert("Errore nel rilevamento della posizione");
+						Ti.API.info('Rev Geocoding Success: ' + JSON.stringify(e));
+					},
+					error : function(e) {
+						alert('Error');
 					}
 				});
+
+				/*
+
+				Ti.Geolocation.reverseGeocoder(latitude, longitude, function(g) {
+
+				Ti.API.info("RISULTATO REV GEOCODING: " + JSON.stringify(g));
+
+				if (!_.isUndefined(g.places)) {
+				_callback({
+				latitude : latitude,
+				longitude : longitude,
+				address : g.places[0].displayAddress
+
+				});
+				} else {
+
+				alert("Errore nel rilevamento della posizione");
+				}
+				});
+				*/
 
 				//Alloy.Globals.usr_longitude = e.coords.longitude;
 				//Alloy.Globals.usr_latitude = e.coords.latitude;
@@ -51,18 +136,22 @@ exports.forwardGeo = function(address, _callback) {
 
 	if (Ti.Geolocation.locationServicesEnabled) {
 
-		
-		Ti.Geolocation.forwardGeocoder(address, function(g) {
-					Ti.API.info("RISULTATO FORW GEOCODING: " + JSON.stringify(g));
-					/*
-					 _callback({
-					 latitude : latitude,
-					 longitude: longitude,
-					 address: g.places[0].displayAddress
+		lookup({
+			address : address,
+			region : 'it',
+			success : function(e) {
+				_callback({
+					latitude : e.lat,
+					longitude : e.lon,
+					address : e.address
 
-					 });
-					 */
 				});
+				Ti.API.info('Frwrd Geocoding Success: ' + JSON.stringify(e));
+			},
+			error : function(e) {
+				alert('Error');
+			}
+		});
 
 	} else {
 		alert('Servizi di localizzazione non abilitati!');

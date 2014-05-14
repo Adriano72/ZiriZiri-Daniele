@@ -129,9 +129,9 @@ function addEvent() {
 
 		location = p_retLocation;
 
-		dataFrom = p_dataFrom;
+		dataFrom = moment(p_dataFrom).format('LLL');;
 
-		dataTo = p_dataTo;
+		dataTo = moment(p_dataTo).format('LLL');;
 
 		Ti.API.info("LOCATION: " + JSON.stringify(location));
 		Ti.API.info("DATA DA: " + dataFrom);
@@ -177,17 +177,17 @@ function addEvent() {
 		arrayAspetti.push(objAspect);
 
 		Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
+		*/
+		var riga = Alloy.createController('rowEvent', {
 
-		var riga = Alloy.createController('rowLINK', {
-
-		id_code : arrayAspetti.length - 1,
-		titolo : tempObj.name,
-		descrizione : tempObj.description,
-		content : tempObj.data.content
+		//id_code : arrayAspetti.length - 1,
+		dataDa : dataFrom,
+		dataA : dataTo,
+		posizione : location.name
 
 		}).getView();
 		$.newPostTable.appendRow(riga);
-		*/
+		
 
 		//Ti.API.info("FINISHED ASPECT OBJ: "+JSON.stringify(objAspect));
 	}).getView().open();

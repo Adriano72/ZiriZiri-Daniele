@@ -73,11 +73,17 @@ function Controller() {
         }
         Alloy.createController("addEvent", function(p_retLocation, p_dataFrom, p_dataTo) {
             location = p_retLocation;
-            dataFrom = p_dataFrom;
-            dataTo = p_dataTo;
+            dataFrom = moment(p_dataFrom).format("LLL");
+            dataTo = moment(p_dataTo).format("LLL");
             Ti.API.info("LOCATION: " + JSON.stringify(location));
             Ti.API.info("DATA DA: " + dataFrom);
             Ti.API.info("DATA A: " + dataTo);
+            var riga = Alloy.createController("rowEvent", {
+                dataDa: dataFrom,
+                dataA: dataTo,
+                posizione: location.name
+            }).getView();
+            $.newPostTable.appendRow(riga);
         }).getView().open();
     }
     function addCashflow() {

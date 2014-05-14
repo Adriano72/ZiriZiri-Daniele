@@ -19,6 +19,7 @@ function Controller() {
     }
     function getLocation() {
         Alloy.createController("getLocation", function(locationData) {
+            location_result = locationData;
             $.location.text = locationData.address;
         }).getView().open();
     }
@@ -31,8 +32,8 @@ function Controller() {
     function saveEvent() {
         var retLocation = null;
         null != location_result && (retLocation = {
-            name: $.location.value,
-            description: $.location.value,
+            name: $.location.text,
+            description: $.location.text,
             latitude: location_result.latitude,
             longitude: location_result.longitude
         });

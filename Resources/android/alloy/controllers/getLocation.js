@@ -5,7 +5,7 @@ function Controller() {
             var __alloyId31 = {
                 id: "salva",
                 title: "Scrivi",
-                icon: "/images/1040-checkmark@2x.png",
+                icon: "/images/1040-checkmark.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
             };
             $.__views.salva = e.menu.add(_.pick(__alloyId31, Alloy.Android.menuItemCreateArgs));
@@ -20,22 +20,32 @@ function Controller() {
     function reverseGeocoding() {
         var u_location = require("getUserLocation");
         u_location.reverseGeo(function(locationData) {
-            var eventMarker = Alloy.Globals.Map.createAnnotation({
-                latitude: locationData.latitude,
-                longitude: locationData.longitude,
-                title: locationData.address,
-                pincolor: Alloy.Globals.Map.ANNOTATION_RED
-            });
-            $.mapview.region = {
-                latitude: locationData.latitude,
-                longitude: locationData.longitude,
-                latitudeDelta: .01,
-                longitudeDelta: .01
-            };
-            $.mapview.addAnnotation(eventMarker);
-            $.location.value = locationData.address;
-            location_result = locationData;
+            updateDisplay(locationData);
         });
+    }
+    function forwardGeocoding() {
+        var searchAddress = require("getUserLocation");
+        searchAddress.forwardGeo($.searchAddress.value, function(locationData) {
+            updateDisplay(locationData);
+        });
+    }
+    function updateDisplay(locationData) {
+        $.mapview.removeAllAnnotations();
+        var eventMarker = Alloy.Globals.Map.createAnnotation({
+            latitude: locationData.latitude,
+            longitude: locationData.longitude,
+            title: locationData.address,
+            pincolor: Alloy.Globals.Map.ANNOTATION_RED
+        });
+        $.mapview.region = {
+            latitude: locationData.latitude,
+            longitude: locationData.longitude,
+            latitudeDelta: .01,
+            longitudeDelta: .01
+        };
+        $.mapview.addAnnotation(eventMarker);
+        $.location.value = locationData.address;
+        location_result = locationData;
     }
     function storeLocation() {
         args(location_result);
@@ -104,6 +114,7 @@ function Controller() {
         id: "searchAddress"
     });
     $.__views.window.add($.__views.searchAddress);
+    forwardGeocoding ? $.__views.searchAddress.addEventListener("return", forwardGeocoding) : __defers["$.__views.searchAddress!return!forwardGeocoding"] = true;
     $.__views.disambiguazioneTable = Ti.UI.createTableView({
         top: 5,
         separatorColor: "transparent",
@@ -117,6 +128,7 @@ function Controller() {
     __defers["$.__views.window!open!reverseGeocoding"] && $.__views.window.addEventListener("open", reverseGeocoding);
     __defers["$.__views.salva!click!storeLocation"] && $.__views.salva.addEventListener("click", storeLocation);
     __defers["$.__views.centra!click!reverseGeocoding"] && $.__views.centra.addEventListener("click", reverseGeocoding);
+    __defers["$.__views.searchAddress!return!forwardGeocoding"] && $.__views.searchAddress.addEventListener("return", forwardGeocoding);
     _.extend($, exports);
 }
 

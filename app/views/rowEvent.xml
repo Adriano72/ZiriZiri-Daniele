@@ -3,11 +3,11 @@
 		
 		<View class="block_container" layout="horizontal">
 			<Label id="description"/>
-			<Label class="block_data" id="titolo"/>
-			<Label class="block_data" id="descrizione"/>
+			<Label class="block_data" id="dateFrom"/>
+			<Label class="block_data" id="dateTo"/>
 		</View>
 		<View class="block_container" layout="horizontal">
-			<Label class="block_data" id="content"/>			
+			<Label class="block_data" id="location"/>			
 		</View>
 	</TableViewRow>
 </Alloy>

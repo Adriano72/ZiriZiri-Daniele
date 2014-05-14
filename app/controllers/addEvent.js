@@ -11,6 +11,8 @@ var location_result = null;
 function getLocation() {
 	
 	var loc = Alloy.createController('getLocation', function(locationData) {
+		
+		location_result = locationData;
 
 		$.location.text = locationData.address;
 		
@@ -38,8 +40,8 @@ function saveEvent() {
 	if (location_result != null) {
 		
 		retLocation = {
-			name : $.location.value,
-			description : $.location.value,
+			name : $.location.text,
+			description : $.location.text,
 			latitude : location_result.latitude,
 			longitude : location_result.longitude
 
