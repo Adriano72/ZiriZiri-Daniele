@@ -8,15 +8,15 @@
 
 		<TableView id="newEventTable">
 			
-			<TableViewRow class="row" leftImage="/images/83-calendar.png">
+			<TableViewRow class="row" leftImage="/images/calendar.png">
 				<TextField id="dataFrom"  dataRaw="" onFocus="showDatePicker" onClick="showDatePicker"/>				
 			</TableViewRow>
 			
-			<TableViewRow class="row" leftImage="/images/83-calendar.png">
+			<TableViewRow class="row" leftImage="/images/calendar.png">
 				<TextField id="dataTo"  dataRaw="" onFocus="showDatePicker" onClick="showDatePicker"/>				
 			</TableViewRow>
 			
-			<TableViewRow class="row" leftImage="/images/74-location.png" onClick = "getLocation">
+			<TableViewRow class="row" leftImage="/images/location.png" onClick = "getLocation">
 				<Label id="location"/>
 			</TableViewRow>
 

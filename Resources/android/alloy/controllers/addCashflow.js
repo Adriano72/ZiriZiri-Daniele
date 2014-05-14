@@ -5,7 +5,7 @@ function Controller() {
             var __alloyId0 = {
                 id: "salva",
                 title: "Scrivi",
-                icon: "/images/785-floppy-disk.png",
+                icon: "/images/floppy-disk.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
             };
             $.__views.salva = e.menu.add(_.pick(__alloyId0, Alloy.Android.menuItemCreateArgs));

@@ -51,7 +51,7 @@
 
 "#centra": {
 	
-	backgroundImage: "/images/845-location-target.png",
+	backgroundImage: "/images/location-target.png",
     left: 5, 
     width: 30,
     height: 30

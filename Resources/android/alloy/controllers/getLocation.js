@@ -88,7 +88,7 @@ function Controller() {
     });
     $.__views.topContainer.add($.__views.location);
     $.__views.centra = Ti.UI.createButton({
-        backgroundImage: "/images/845-location-target.png",
+        backgroundImage: "/images/location-target.png",
         left: 5,
         width: 30,
         height: 30,

@@ -2,7 +2,7 @@
 	<Window id="window" class="container" title = "Nuovo CashFlow">
 		<Menu id="menu" platform="android">
 			
-			<MenuItem id="salva" title="Scrivi" icon="/images/785-floppy-disk.png"  onClick="createProtoObj" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
+			<MenuItem id="salva" title="Scrivi" icon="/images/floppy-disk.png"  onClick="createProtoObj" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
 			
 		</Menu>
 

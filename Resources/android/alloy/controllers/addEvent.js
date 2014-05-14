@@ -63,7 +63,7 @@ function Controller() {
         layout: "horizontal",
         left: 5,
         right: 5,
-        leftImage: "/images/83-calendar.png",
+        leftImage: "/images/calendar.png",
         id: "__alloyId17"
     });
     __alloyId16.push($.__views.__alloyId17);
@@ -92,7 +92,7 @@ function Controller() {
         layout: "horizontal",
         left: 5,
         right: 5,
-        leftImage: "/images/83-calendar.png",
+        leftImage: "/images/calendar.png",
         id: "__alloyId18"
     });
     __alloyId16.push($.__views.__alloyId18);
@@ -121,7 +121,7 @@ function Controller() {
         layout: "horizontal",
         left: 5,
         right: 5,
-        leftImage: "/images/74-location.png",
+        leftImage: "/images/location.png",
         id: "__alloyId19"
     });
     __alloyId16.push($.__views.__alloyId19);
