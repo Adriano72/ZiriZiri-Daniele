@@ -29,9 +29,9 @@
 }
 
 ".block_container":{
-	height: 40,
+	height: 80,
 	touchEnabled: false,
-	layout: 'horizontal'
+	layout: 'vertical'
 }
 
 ".block_data": {

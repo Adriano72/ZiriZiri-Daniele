@@ -128,6 +128,7 @@ function Controller() {
                 height: 18,
                 color: "#5E5E5E",
                 touchEnabled: false,
+                visible: false,
                 font: {
                     fontFamily: "AppIcons",
                     fontSize: 12
@@ -179,7 +180,10 @@ function Controller() {
         net.getData(function(timelineData) {
             _.forEach(timelineData.data, function(value) {
                 var creationDate = new Date(value.referenceTime);
-                if (!_.isNull(value.location)) var locationRow = " " + icons.map_marker + " " + value.location.name + " ";
+                if (!_.isNull(value.location)) {
+                    $.location.visible = true;
+                    var locationRow = " " + icons.map_marker + " " + value.location.name + " ";
+                }
                 if (!_.isNull(value.category)) var categoriaRow = " " + icons.tag + " " + value.category.name + " ";
                 var aspectObj = {
                     finance: 0,

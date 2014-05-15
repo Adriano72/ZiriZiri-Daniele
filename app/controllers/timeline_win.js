@@ -147,6 +147,7 @@ function populateTable() {
 			var creationDate = new Date(value.referenceTime);
 
 			if (!(_.isNull(value.location))) {
+				$.location.visible = true;
 				var locationRow = " " + icons.map_marker + " " + value.location.name + " ";
 			};
 

@@ -16,7 +16,7 @@ function Controller() {
     });
     $.__views.row && $.addTopLevelView($.__views.row);
     $.__views.__alloyId94 = Ti.UI.createView({
-        height: 40,
+        height: 80,
         touchEnabled: false,
         layout: "horizontal",
         id: "__alloyId94"
@@ -63,7 +63,7 @@ function Controller() {
     });
     $.__views.__alloyId94.add($.__views.dateTo);
     $.__views.__alloyId95 = Ti.UI.createView({
-        height: 40,
+        height: 80,
         touchEnabled: false,
         layout: "horizontal",
         id: "__alloyId95"
