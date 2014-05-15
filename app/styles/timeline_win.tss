@@ -14,8 +14,20 @@
 
 "TableView": {
 	
-	separatorColor: '#BFBFBF'
+	separatorColor: '#BFBFBF',
+	bottom: 60
 }
+
+"#mn_notify": {
+	icon: "/images/top-notifiche.png",
+	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+}
+
+"#mn_search": {
+	icon: "/images/top-search.png",
+	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+}
+
 
 
 "TableViewRow": {
@@ -155,4 +167,100 @@
 	top: 5
 }
 
+"#bottomBar": {
+	backgroundColor: '#5EAEE3',
+	width: Ti.UI.FILL,
+	touchEnabled: false,
+	height: 60,
+	bottom: 0
+}
+
+".separator": {
+	height: 1,
+	top: 0,
+	touchEnabled: false,
+	backgroundColor: '#D6D6D6',
+	width: '100%'
+}
+
+"#buttonsContainer": {
+	layout: 'horizontal',
+	width: Ti.UI.SIZE,
+	top: 5,
+	
+	height: Ti.UI.SIZE
+}
+
+".icon_container": {
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	layout: "vertical",
+	left: 70
+	
+}
+
+".first": {
+	left: 0
+	
+}
+
+".btn_text": {
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIE,
+	color: "#fff",
+	font: {
+		
+		fontSize: 8
+	},
+	top: 1
+}
+
+".icon": {
+	width: 64,
+	height: 64,
+	top:0
+	
+}
+
+"#bottom_sync": {
+	backgroundImage: "/images/bottom-refresh.png",
+	
+	left: 0,
+	width: 40,
+	height: 40
+	
+}
+
+"#txt_sync": {
+	text: "SYNC"
+	
+}
+
+"#bottom_new": {
+	backgroundImage: "/images/bottom-new-post.png",
+	
+	left: 0,
+	width: 40,
+	height: 40
+	
+}
+
+"#txt_new": {
+	text: "NEW POST"
+	
+}
+
+"#bottom_today": {
+	backgroundImage: "/images/bottom-today.png",
+	
+	left: 0,
+	width: 40,
+	height: 40
+	
+}
+
+"#txt_today": {
+	text: "TODAY"
+	
+}
 

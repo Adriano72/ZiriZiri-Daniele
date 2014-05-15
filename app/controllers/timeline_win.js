@@ -11,6 +11,8 @@ var overlap = 50;
 
 var temp = [];
 
+var theActionBar = null;
+
 // get initial table size for iOS
 $.timelineTable.addEventListener('postlayout', function() {
 	initialTableSize = $.timelineTable.rect.height;
@@ -24,6 +26,17 @@ moment.lang('it');
 
 function showSpinner() {
 	Alloy.Globals.showSpinner();
+	theActionBar = $.win.activity.actionBar;
+
+	if (theActionBar != undefined) {
+		theActionBar.displayHomeAsUp = false;
+		theActionBar.setIcon('images/logo-test.png');
+		/*
+		 theActionBar.onHomeIconItemSelected = function() {
+		 clickUpdate.text = 'Home Clicked';
+		 };
+		 */
+	}
 	//$.win.invalidateOptionsMenu();
 };
 
@@ -32,79 +45,89 @@ var timelineList = Alloy.Collections.events;
 
 var net = require('net');
 
-net.getCategories(function(categoriesData){
-	
+net.getCategories(function(categoriesData) {
+
 	var objCategorie = [];
-	
+
 	//Ti.API.info("INIZIO, DATI RIC "+JSON.stringify(categoriesData));
-	
+
 	_.forEach(categoriesData.data, function(value, key) {
-		
+
 		//Ti.API.info("Categoria: "+key+" : "+value.name);
-		
-		objCategorie.push({"title":value.name, "id": value.id, "version": value.version});
-		
-		
+
+		objCategorie.push({
+			"title" : value.name,
+			"id" : value.id,
+			"version" : value.version
+		});
+
 	});
-	
-	Ti.App.Properties.setObject("elencoCategorie",objCategorie);
-	
+
+	Ti.App.Properties.setObject("elencoCategorie", objCategorie);
+
 	//Ti.API.info("OBJ CATEGORIE: "+ JSON.stringify(Ti.App.Properties.getObject("elencoCategorie")));
-	
+
 });
 
-net.getPostTemplate(function(p_postTemplate){
-	
+net.getPostTemplate(function(p_postTemplate) {
+
 	//Ti.API.info("POST TEMPLATE: "+JSON.stringify(p_postTemplate));
-	
+
 	var arrayTemplateIds = [];
-	
+
 	_.forEach(p_postTemplate.data[0].modules, function(value, key) {
 		//Ti.API.info("ID TEMPLATE ASPECT: "+value.id);
 		arrayTemplateIds.push(value.id);
 	});
-	
-	Ti.App.Properties.setList("postTemplateIds",arrayTemplateIds);
-	
-	Ti.API.info("ID TEMPLATE ASPECT: "+Ti.App.Properties.getList("postTemplateIds"));
-	
+
+	Ti.App.Properties.setList("postTemplateIds", arrayTemplateIds);
+
+	Ti.API.info("ID TEMPLATE ASPECT: " + Ti.App.Properties.getList("postTemplateIds"));
+
 });
 
-net.getTipoMovimento(function(p_tipoMovimento){
-	
+net.getTipoMovimento(function(p_tipoMovimento) {
+
 	var objTipoMov = [];
-	
+
 	_.forEach(p_tipoMovimento.data, function(value, key) {
-		
+
 		//Ti.API.info("Categoria: "+key+" : "+value.name);
-		
-		objTipoMov.push({"title":value.descrizioneBreve, "id": value.id, "codice": value.codice, "version":value.version});
-		
-		
+
+		objTipoMov.push({
+			"title" : value.descrizioneBreve,
+			"id" : value.id,
+			"codice" : value.codice,
+			"version" : value.version
+		});
+
 	});
-	
+
 	Ti.App.Properties.setObject("elencoTipoMov", objTipoMov);
-	
+
 	//Ti.API.info("OBJ TIPO MOVIMENTO: "+JSON.stringify(Ti.App.Properties.getObject("elencoTipoMov")));
-	
+
 });
 
-net.getPagamentoIncasso(function(p_pagamentoIncasso){
-	
+net.getPagamentoIncasso(function(p_pagamentoIncasso) {
+
 	//Ti.API.info("OBJ PAGAMENTO INCASSO: "+JSON.stringify(p_pagamentoIncasso));
 	var objPagamIncasso = [];
-	
+
 	_.forEach(p_pagamentoIncasso.data, function(value, key) {
-		
+
 		//Ti.API.info("Categoria: "+key+" : "+value.name);
-		
-		objPagamIncasso.push({"title":value.descrizioneBreve, "id": value.id, "version":value.version});
-		
-		
+
+		objPagamIncasso.push({
+			"title" : value.descrizioneBreve,
+			"id" : value.id,
+			"version" : value.version
+		});
+
 	});
-	
+
 	Ti.App.Properties.setObject("elencoPagamIncasso", objPagamIncasso);
-	
+
 	//Ti.API.info("OBJ PAGAM INCASSO: "+JSON.stringify(Ti.App.Properties.getObject("elencoPagamIncasso")));
 });
 
@@ -118,19 +141,18 @@ net.getPagamentoIncasso(function(p_pagamentoIncasso){
  var timelineData = f.read();
  */
 
-function refreshTable(){
-	
+function refreshTable() {
+
 	showSpinner();
 	populateTable();
-	
+
 }
 
 function populateTable() {
 
 	temp = [];
-	
+
 	timelineList.reset();
-	
 
 	net.getData(function(timelineData) {
 
@@ -143,9 +165,9 @@ function populateTable() {
 			//Ti.API.info("VALUE: "+JSON.stringify(value));
 			//Ti.API.info("CATEGORY NAME: "+value.category.name);
 			//var timeline = Alloy.createModel("events", value);
-			
+
 			var aspectObj = {
-				evento: 0,	
+				evento : 0,
 				finance : 0,
 				documents : 0,
 				links : 0,
@@ -162,8 +184,6 @@ function populateTable() {
 			if (!(_.isNull(value.category))) {
 				var categoriaRow = " " + icons.tag + " " + value.category.name + " ";
 			}
-
-			
 
 			if (!(_.isNull(value.aspects) || _.isUndefined(value.aspects))) {
 
@@ -258,24 +278,22 @@ function lazyload(_evt) {
 }
 
 function mostraDettaglioEvento(e) {
-	
+
 	//Ti.API.info("INDEX RIGA CLICCATA: "+JSON.stringify(e));
-	
-	try{
+
+	try {
 		showSpinner();
 
 		var selEvent = timelineList.at(e.index).attributes;
-	
+
 		net.getPost(selEvent.id, function(postData) {
-			Ti.API.info("DETTAGLIO POST: "+JSON.stringify(postData));
+			Ti.API.info("DETTAGLIO POST: " + JSON.stringify(postData));
 			Alloy.createController("dettaglio_post", postData).getView().open();
 		});
-	}catch(error){
+	} catch(error) {
 		Ti.App.fireEvent("loading_done");
-		Ti.API.info("ERRORE: "+error);
+		Ti.API.info("ERRORE: " + error);
 	}
-
-	
 
 	//Ti.API.info("SELECTED DATA ID: "+selEvent.id);
 
@@ -292,7 +310,9 @@ function mostraDettaglioEvento(e) {
 };
 
 function createNewPost() {
-	Alloy.createController("newPost",function(){refreshTable();}).getView();
+	Alloy.createController("newPost", function() {
+		refreshTable();
+	}).getView();
 }
 
 $.win.open();

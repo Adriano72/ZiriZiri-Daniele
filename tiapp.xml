@@ -59,7 +59,8 @@
             <!-- Replace <com.domain.appid> with your application ID -->
             <uses-permission android:name="it.ziriziri.mobile.permission.MAPS_RECEIVE"/>
             <permission android:name="it.ziriziri.mobile.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
-            <application android:theme="@android:style/Theme.Holo.Light">
+            <application android:theme="@style/Theme.Action">
+            	<activity android:name="org.appcelerator.titanium.TiTranslucentActivity"/>
             	<!--<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />-->
                 <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyBy40Xya43EQmG6j-kIu5Q76IW3CE_53Yc"/>
             </application>

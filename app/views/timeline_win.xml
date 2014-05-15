@@ -7,8 +7,8 @@
 		<Menu id="menu" platform="android">
 
 			<!-- Cannot specify node text.  Use attributes only. -->
-			<MenuItem id="scrivi" title="Scrivi" icon="/images/compose.png"  onClick="createNewPost" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
-			<MenuItem id="immagine" title="Immagine" icon="/images/refresh-1.png" onClick="refreshTable" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
+			<MenuItem id="mn_notify" title="Scrivi" />
+			<MenuItem id="mn_search" title="Immagine" onClick="refreshTable"/>
 			<!--<MenuItem id="Foto" title="Foto" icon="/images/86-camera.png"  showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />-->
 		</Menu>
 		<TableView id = "timelineTable" dataCollection = "events" >
@@ -42,6 +42,29 @@
 
 			</TableViewRow>
 		</TableView>
+		
+		<View id="bottomBar">
+			<!--<Label class="separator"/>-->
+			<View id="buttonsContainer">
+				
+				<View class="icon_container first" onClick="refreshTable">
+					<Label class="icon" id="bottom_sync"/>
+					<Label class="btn_text" id="txt_sync"/>					
+				</View>
+				
+				<View class="icon_container" onClick="createNewPost">
+					<Label class="icon" id="bottom_new"/>
+					<Label class="btn_text" id="txt_new"/>					
+				</View>
+				
+				<View class="icon_container">
+					<Label class="icon" id="bottom_today"/>
+					<Label class="btn_text" id="txt_today"/>					
+				</View>
+				
+			</View>
+
+		</View>
 
 	</Window>
 

@@ -3,23 +3,22 @@ function Controller() {
         $.__views.win.removeEventListener("open", __alloyId103);
         if ($.__views.win.activity) $.__views.win.activity.onCreateOptionsMenu = function(e) {
             var __alloyId101 = {
-                id: "scrivi",
-                title: "Scrivi",
-                icon: "/images/compose.png",
-                showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
+                icon: "/images/top-notifiche.png",
+                showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
+                id: "mn_notify",
+                title: "Scrivi"
             };
-            $.__views.scrivi = e.menu.add(_.pick(__alloyId101, Alloy.Android.menuItemCreateArgs));
-            $.__views.scrivi.applyProperties(_.omit(__alloyId101, Alloy.Android.menuItemCreateArgs));
-            createNewPost ? $.__views.scrivi.addEventListener("click", createNewPost) : __defers["$.__views.scrivi!click!createNewPost"] = true;
+            $.__views.mn_notify = e.menu.add(_.pick(__alloyId101, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_notify.applyProperties(_.omit(__alloyId101, Alloy.Android.menuItemCreateArgs));
             var __alloyId102 = {
-                id: "immagine",
-                title: "Immagine",
-                icon: "/images/refresh-1.png",
-                showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
+                icon: "/images/top-search.png",
+                showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
+                id: "mn_search",
+                title: "Immagine"
             };
-            $.__views.immagine = e.menu.add(_.pick(__alloyId102, Alloy.Android.menuItemCreateArgs));
-            $.__views.immagine.applyProperties(_.omit(__alloyId102, Alloy.Android.menuItemCreateArgs));
-            refreshTable ? $.__views.immagine.addEventListener("click", refreshTable) : __defers["$.__views.immagine!click!refreshTable"] = true;
+            $.__views.mn_search = e.menu.add(_.pick(__alloyId102, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_search.applyProperties(_.omit(__alloyId102, Alloy.Android.menuItemCreateArgs));
+            refreshTable ? $.__views.mn_search.addEventListener("click", refreshTable) : __defers["$.__views.mn_search!click!refreshTable"] = true;
         }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
             Ti.API.warn("or other UI component which does not have an Android activity.");
@@ -128,7 +127,6 @@ function Controller() {
                 height: 18,
                 color: "#5E5E5E",
                 touchEnabled: false,
-                visible: false,
                 font: {
                     fontFamily: "AppIcons",
                     fontSize: 12
@@ -169,6 +167,11 @@ function Controller() {
     }
     function showSpinner() {
         Alloy.Globals.showSpinner();
+        theActionBar = $.win.activity.actionBar;
+        if (void 0 != theActionBar) {
+            theActionBar.displayHomeAsUp = false;
+            theActionBar.setIcon("images/logo-test.png");
+        }
     }
     function refreshTable() {
         showSpinner();
@@ -179,18 +182,19 @@ function Controller() {
         timelineList.reset();
         net.getData(function(timelineData) {
             _.forEach(timelineData.data, function(value) {
-                var creationDate = new Date(value.referenceTime);
-                if (!_.isNull(value.location)) {
-                    $.location.visible = true;
-                    var locationRow = " " + icons.map_marker + " " + value.location.name + " ";
-                }
-                if (!_.isNull(value.category)) var categoriaRow = " " + icons.tag + " " + value.category.name + " ";
                 var aspectObj = {
+                    evento: 0,
                     finance: 0,
                     documents: 0,
                     links: 0,
                     notes: 0
                 };
+                var creationDate = new Date(value.referenceTime);
+                if (!_.isNull(value.location)) {
+                    aspectObj.evento = 1;
+                    var locationRow = " " + icons.map_marker + " " + value.location.name + " ";
+                }
+                if (!_.isNull(value.category)) var categoriaRow = " " + icons.tag + " " + value.category.name + " ";
                 _.isNull(value.aspects) || _.isUndefined(value.aspects) || _.forEach(value.aspects, function(obj) {
                     switch (obj.kind.code) {
                       case "CASHFLOWDATATYPE_CODE":
@@ -271,11 +275,121 @@ function Controller() {
     $.__views.win.addEventListener("open", __alloyId103);
     $.__views.timelineTable = Ti.UI.createTableView({
         separatorColor: "#BFBFBF",
+        bottom: 60,
         id: "timelineTable"
     });
     $.__views.win.add($.__views.timelineTable);
     var __alloyId118 = Alloy.Collections["events"] || events;
     __alloyId118.on("fetch destroy change add remove reset", __alloyId119);
+    $.__views.bottomBar = Ti.UI.createView({
+        backgroundColor: "#5EAEE3",
+        width: Ti.UI.FILL,
+        touchEnabled: false,
+        height: 60,
+        bottom: 0,
+        id: "bottomBar"
+    });
+    $.__views.win.add($.__views.bottomBar);
+    $.__views.buttonsContainer = Ti.UI.createView({
+        layout: "horizontal",
+        width: Ti.UI.SIZE,
+        top: 5,
+        height: Ti.UI.SIZE,
+        id: "buttonsContainer"
+    });
+    $.__views.bottomBar.add($.__views.buttonsContainer);
+    $.__views.__alloyId120 = Ti.UI.createView({
+        height: Ti.UI.SIZE,
+        width: Ti.UI.SIZE,
+        layout: "vertical",
+        left: 0,
+        id: "__alloyId120"
+    });
+    $.__views.buttonsContainer.add($.__views.__alloyId120);
+    refreshTable ? $.__views.__alloyId120.addEventListener("click", refreshTable) : __defers["$.__views.__alloyId120!click!refreshTable"] = true;
+    $.__views.bottom_sync = Ti.UI.createLabel({
+        top: 0,
+        width: 40,
+        height: 40,
+        color: "#000",
+        backgroundImage: "/images/bottom-refresh.png",
+        left: 0,
+        id: "bottom_sync"
+    });
+    $.__views.__alloyId120.add($.__views.bottom_sync);
+    $.__views.txt_sync = Ti.UI.createLabel({
+        top: 1,
+        width: Ti.UI.SIE,
+        height: Ti.UI.SIZE,
+        color: "#fff",
+        font: {
+            fontSize: 8
+        },
+        text: "SYNC",
+        id: "txt_sync"
+    });
+    $.__views.__alloyId120.add($.__views.txt_sync);
+    $.__views.__alloyId121 = Ti.UI.createView({
+        height: Ti.UI.SIZE,
+        width: Ti.UI.SIZE,
+        layout: "vertical",
+        left: 70,
+        id: "__alloyId121"
+    });
+    $.__views.buttonsContainer.add($.__views.__alloyId121);
+    createNewPost ? $.__views.__alloyId121.addEventListener("click", createNewPost) : __defers["$.__views.__alloyId121!click!createNewPost"] = true;
+    $.__views.bottom_new = Ti.UI.createLabel({
+        top: 0,
+        width: 40,
+        height: 40,
+        color: "#000",
+        backgroundImage: "/images/bottom-new-post.png",
+        left: 0,
+        id: "bottom_new"
+    });
+    $.__views.__alloyId121.add($.__views.bottom_new);
+    $.__views.txt_new = Ti.UI.createLabel({
+        top: 1,
+        width: Ti.UI.SIE,
+        height: Ti.UI.SIZE,
+        color: "#fff",
+        font: {
+            fontSize: 8
+        },
+        text: "NEW POST",
+        id: "txt_new"
+    });
+    $.__views.__alloyId121.add($.__views.txt_new);
+    $.__views.__alloyId122 = Ti.UI.createView({
+        height: Ti.UI.SIZE,
+        width: Ti.UI.SIZE,
+        layout: "vertical",
+        left: 70,
+        id: "__alloyId122"
+    });
+    $.__views.buttonsContainer.add($.__views.__alloyId122);
+    $.__views.bottom_today = Ti.UI.createLabel({
+        top: 0,
+        width: 40,
+        height: 40,
+        color: "#000",
+        backgroundImage: "/images/bottom-today.png",
+        left: 0,
+        id: "bottom_today"
+    });
+    $.__views.__alloyId122.add($.__views.bottom_today);
+    $.__views.txt_today = Ti.UI.createLabel({
+        top: 1,
+        width: Ti.UI.SIE,
+        height: Ti.UI.SIZE,
+        color: "#fff",
+        font: {
+            fontSize: 8
+        },
+        text: "TODAY",
+        id: "txt_today"
+    });
+    $.__views.__alloyId122.add($.__views.txt_today);
     exports.destroy = function() {
         __alloyId118.off("fetch destroy change add remove reset", __alloyId119);
     };
@@ -284,6 +398,7 @@ function Controller() {
     var startIndex = 0;
     var isLoading = false;
     var temp = [];
+    var theActionBar = null;
     $.timelineTable.addEventListener("postlayout", function() {
         initialTableSize = $.timelineTable.rect.height;
     });
@@ -338,9 +453,10 @@ function Controller() {
     $.win.open();
     __defers["$.__views.win!open!showSpinner"] && $.__views.win.addEventListener("open", showSpinner);
     __defers["$.__views.win!scroll!lazyload"] && $.__views.win.addEventListener("scroll", lazyload);
-    __defers["$.__views.scrivi!click!createNewPost"] && $.__views.scrivi.addEventListener("click", createNewPost);
-    __defers["$.__views.immagine!click!refreshTable"] && $.__views.immagine.addEventListener("click", refreshTable);
+    __defers["$.__views.mn_search!click!refreshTable"] && $.__views.mn_search.addEventListener("click", refreshTable);
     __defers["__alloyId106!click!mostraDettaglioEvento"] && __alloyId106.addEventListener("click", mostraDettaglioEvento);
+    __defers["$.__views.__alloyId120!click!refreshTable"] && $.__views.__alloyId120.addEventListener("click", refreshTable);
+    __defers["$.__views.__alloyId121!click!createNewPost"] && $.__views.__alloyId121.addEventListener("click", createNewPost);
     _.extend($, exports);
 }
 
