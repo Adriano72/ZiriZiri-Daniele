@@ -143,11 +143,19 @@ function populateTable() {
 			//Ti.API.info("VALUE: "+JSON.stringify(value));
 			//Ti.API.info("CATEGORY NAME: "+value.category.name);
 			//var timeline = Alloy.createModel("events", value);
+			
+			var aspectObj = {
+				evento: 0,	
+				finance : 0,
+				documents : 0,
+				links : 0,
+				notes : 0
+			};
 
 			var creationDate = new Date(value.referenceTime);
 
 			if (!(_.isNull(value.location))) {
-				$.location.visible = true;
+				aspectObj.evento = 1;
 				var locationRow = " " + icons.map_marker + " " + value.location.name + " ";
 			};
 
@@ -155,13 +163,7 @@ function populateTable() {
 				var categoriaRow = " " + icons.tag + " " + value.category.name + " ";
 			}
 
-			var aspectObj = {
-
-				finance : 0,
-				documents : 0,
-				links : 0,
-				notes : 0
-			};
+			
 
 			if (!(_.isNull(value.aspects) || _.isUndefined(value.aspects))) {
 
