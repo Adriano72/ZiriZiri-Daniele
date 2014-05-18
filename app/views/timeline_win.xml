@@ -13,27 +13,67 @@
 		</Menu>
 		<TableView id = "timelineTable" dataCollection = "events" >
 
-			<TableViewRow onClick = "mostraDettaglioEvento">
+			<TableViewRow class="row" onClick = "mostraDettaglioEvento">
 
-				<View id="eventContainer">
+				<View class="eventContainer" onSwipe="slideRow">
 
 					<View id="topWrapper">
 
-						<ImageView id="postIcon"></ImageView>
-						<View id="headerWrapper">
-							<View id="nameDateWrapper">
-								<Label id = "name" text ="{name}"/>
+						<ImageView id="postIcon"/>
+						<View id="innerWrapper">
+							<View id="date_rating">
 								<Label id = "date" text ="{date}"/>
+								<Label id = "rating" text ="********"/>
 							</View>
-							<Label id = "category" text ="{category}"/>
-							<Label id = "location" text ="{location}"/>
+							<Label id = "name" text ="{name}"/>
 
 						</View>
 
-					</View>
-					<View id="bottomWrapper">
+						<!-->
+						<View id="headerWrapper">
+						<View id="nameDateWrapper">
+						<Label id = "name" text ="{name}"/>
+						<Label id = "date" text ="{date}"/>
+						</View>
+						<Label id = "category" text ="{category}"/>
+						<Label id = "location" text ="{location}"/>
 
-						<Label id = "aspects" text="{aspects}"/>
+						</View>
+						<-->
+
+					</View>
+					<View id="middleWrapper">
+						<View class="post_icons_container first" >
+							<Label class="post_icon" id="cat_icon"/>
+							<Label class="btn_text" id="category" text ="{category}"/>
+						</View>
+						<View class="post_icons_container">
+							<Label class="post_icon" id="tag_icon"/>
+							<Label class="btn_text" id="tags"/>
+						</View>
+						<View class="post_icons_container">
+							<Label class="post_icon" id="stories_icon"/>
+							<Label class="btn_text" id="stories"/>
+						</View>
+
+					</View>
+					<View class="separator"/>
+					<View id="bottomWrapper">
+						<Label class="aspects_icons first" id="event_icon"/>
+						<Label class="aspects_icons" id="cashflow_icon"/>
+						<Label class="aspects_icons" id="document_icon"/>
+						<Label class="aspects_icons" id="note_icon"/>
+						<Label class="aspects_icons" id="link_icon"/>
+						<Label class="aspects_icons" id="communication_icon"/>
+						<!--<Label id = "aspects" text="{aspects}"/>-->
+						<View class="show_all_container">
+
+							<View class="push_to_right">
+								<Label  id="show_all_text"/>
+								<Label  id="show_all_icon"/>
+							</View>
+
+						</View>
 
 					</View>
 				</View>
@@ -42,26 +82,23 @@
 
 			</TableViewRow>
 		</TableView>
-		
 		<View id="bottomBar">
 			<!--<Label class="separator"/>-->
 			<View id="buttonsContainer">
-				
+
 				<View class="icon_container first" onClick="refreshTable">
 					<Label class="icon" id="bottom_sync"/>
-					<Label class="btn_text" id="txt_sync"/>					
+					<Label class="btn_text" id="txt_sync"/>
 				</View>
-				
 				<View class="icon_container" onClick="createNewPost">
 					<Label class="icon" id="bottom_new"/>
-					<Label class="btn_text" id="txt_new"/>					
+					<Label class="btn_text" id="txt_new"/>
 				</View>
-				
 				<View class="icon_container">
 					<Label class="icon" id="bottom_today"/>
-					<Label class="btn_text" id="txt_today"/>					
+					<Label class="btn_text" id="txt_today"/>
 				</View>
-				
+
 			</View>
 
 		</View>

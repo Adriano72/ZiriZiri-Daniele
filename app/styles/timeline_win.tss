@@ -14,7 +14,7 @@
 
 "TableView": {
 	
-	separatorColor: '#BFBFBF',
+	separatorColor: '#transparent',
 	bottom: 60
 }
 
@@ -30,57 +30,96 @@
 
 
 
-"TableViewRow": {
+".row": {
 	
 	className: 'itemRow'
 
 }
 
-"#eventContainer": {
+".eventContainer": {
 	//width: '100%',
-	top:10,
+	left: 5,
+	right: 5,
+	top: 5,
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	
 	//bottom:10,
 	//height: Ti.UI.SIZE,
-	touchEnabled: false,
+	touchEnabled: true,
 	layout: 'vertical'
 }
 
 "#topWrapper": {
 	
-	top: 5,
-	left: 5,
-	right: 5,
-	height: 75,
+	height: Ti.UI.SIZE,
+	left:10,
+	right:10,
+	top: 10,
 	touchEnabled: false,
 	layout: "horizontal"
 }
 
+"#innerWrapper": {
+	left: 10,
+	//backgroundColor: "red",
+	top: 0,
+	width: Ti.UI.SIZE,
+	height: 70,
+	touchEnabled: false,
+	layout: "vertical"
+}
+
 "#postIcon":{
+	//backgroundColor: "navy",
+	left: 0,
+	top:0,
 	image: '/images/android-robot.jpg',
 	touchEnabled: false,
 	width: 70,
-	height: 70
+	height: 70,
 	//left: 5,
 	//top: 5,
 	
-	//borderRadius: Alloy.Globals.borderRad
+	borderRadius: 4
 }
 
-"#headerWrapper": {
-	layout: 'vertical',
+"#date_rating": {
+	//backgroundColor: "yellow",
+	top:0,
+	left:0,
+	width: Ti.UI.SIZE,
 	height: Ti.UI.SIZE,
-	width: Ti.UI.FILL,
 	touchEnabled: false,
-	left: 5
+	layout: "horizontal"
 }
 
-"#nameDateWrapper": {
-	//layout: 'horizontal',
+
+"#date": {
 	touchEnabled: false,
+	font: {
+		fontSize: 12
+	},
+	color: "#999999",
+	//height: Ti.UI.SIZE,
+	textAlign: 'right',
+	wordWrap: false,
+	left:0,
+	top: 0
+}
+
+"#rating": {
+	touchEnabled: false,
+	font: {
+		fontSize: 12
+	},
+	color: "#999999",
 	height: Ti.UI.SIZE,
-	width: Ti.UI.FILL
+	textAlign: 'right',
+	left: 20,
+	top: 0
 }
-
 
 "#name": {
 	touchEnabled: false,
@@ -88,41 +127,70 @@
 		fontSize: 14,
 		fontWeight: "bold"
 	},
-	color: "#2C3E52",
+	color: "#434343",
 	height: Ti.UI.SIZE,
-	width: '70%',
+	//width: '70%',
+	left: 0,
 	ellipsize: true,
-	wordWrap: false,
-	top: 0,
-	left: 5
+	wordWrap: true,
+	top: 0
 }
 
-"#date": {
-	touchEnabled: false,
-	font: {
-		fontSize: 12
-	},
-	color: "#2C3E52",
-	height: Ti.UI.SIZE,
-	textAlign: 'right',
-	wordWrap: false,
-	top: 0,
-	right: 5
+".separator": {
+	height: 1,
+	width: Ti.UI.FILL,
+	backgroundColor: "#CCCCCC",
+	touchEnabled: false
 }
+
+
+"#middleWrapper": {
+	left: 10,
+	//backgroundColor: "lime",
+	top: 0,
+	width: Ti.UI.FILL,
+	height: 40,
+	touchEnabled: false,
+	layout: "horizontal"
+}
+
+".post_icons_container": {
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	layout: "horizontal",
+	left: 40
+	
+}
+
+".post_icon": {
+	width: 44,
+	height: 44,
+	top:0
+	
+}
+
+"#cat_icon": {
+	backgroundImage: "/images/head-category.png",
+	
+	left: 0,
+	width: 20,
+	height: 20
+	
+}
+
 
 "#category": {
 	touchEnabled: false,
 	font: {
-		fontFamily: 'AppIcons',
-		fontSize: 12
+		
+		fontSize: 14
 	},
-	backgroundColor: '#E3E3E3',
+	//backgroundColor: '#E3E3E3',
 	//borderRadius: Alloy.Globals.borderRad,
 	height: 18,
 	width: Ti.UI.SIZE,
 	color: "#5E5E5E",
-	left: 5,
-	top: 5
+	left: 5
 }
 
 "#location": {
@@ -141,30 +209,97 @@
 	left: 5,
 	top: 5
 }
- 
 
 
 "#bottomWrapper": {
-	height: Ti.UI.SIZE,
+	//backgroundColor: "pink",
+	height: 45,
 	width: Ti.UI.FILL,
 	touchEnabled: false,
-	top:5,
-	bottom: 5,
-	right: 5,
+	layout: "horizontal",
 	left: 5,
 }
 
 
-
-
-"#aspects": {
+".aspects_icons":{
+	//backgroundColor: "navy",
+	left: 15,
+	top:10,
+	bottom: 10,
+	image: '/images/android-robot.jpg',
 	touchEnabled: false,
-	font: {fontFamily: 'AppIcons', fontSize:'18dp' },
-	color: "#5E5E5E",
-	width: Ti.UI.FILL,
+	center: 45,
+	width: 25,
+	height: 25
+
+}
+
+"#event_icon": {
+	backgroundImage: '/images/kernel-event-off.png',
 	left: 5,
+}
+
+"#cashflow_icon": {
+	backgroundImage: '/images/kernel-finance-off.png',
+}
+
+"#document_icon": {
+	backgroundImage: '/images/kernel-document-off.png',
+}
+
+"#note_icon": {
+	backgroundImage: '/images/kernel-note-off.png',
+}
+
+"#link_icon": {
+	backgroundImage: '/images/kernel-link-off.png',
+}
+
+"#communication_icon": {
+	backgroundImage: '/images/kernel-comunicazioni-off.png',
+}
+
+".show_all_container": {
+	//backgroundColor: "yellow",
+	height: 25,
+	
 	height: Ti.UI.SIZE,
-	top: 5
+	width: Ti.UI.FILL,
+	touchEnabled: false,
+	layout: "horizontal",
+	
+	
+	left: 5
+}
+
+".push_to_right": {
+	//backgroundColor: "yellow",
+	height: 25,
+	left:0,	
+	height: Ti.UI.SIZE,
+	width: Ti.UI.FILL
+}
+
+"#show_all_text": {
+	//backgroundColor: "red",
+	color: "#5EAEE3",
+	right: 30,
+	top:10,
+	bottom: 10,
+	height: 25,
+	
+	text: "Show All"
+}
+
+"#show_all_icon": {
+	right: 0,
+	
+	top:10,
+	bottom: 10,
+	backgroundImage: '/images/kernel-show-all.png',
+	touchEnabled: false,
+	width: 25,
+	height: 25
 }
 
 "#bottomBar": {
@@ -216,47 +351,33 @@
 }
 
 ".icon": {
-	width: 64,
-	height: 64,
+	width: 35,
+	height: 35,
 	top:0
 	
 }
 
 "#bottom_sync": {
-	backgroundImage: "/images/bottom-refresh.png",
-	
-	left: 0,
-	width: 40,
-	height: 40
-	
+	backgroundImage: "/images/bottom-refresh.png",	
+	left: 0	
 }
 
 "#txt_sync": {
-	text: "SYNC"
-	
+	text: "SYNC"	
 }
 
 "#bottom_new": {
-	backgroundImage: "/images/bottom-new-post.png",
-	
-	left: 0,
-	width: 40,
-	height: 40
-	
+	backgroundImage: "/images/bottom-new-post.png",	
+	left: 0	
 }
 
 "#txt_new": {
-	text: "NEW POST"
-	
+	text: "NEW POST"	
 }
 
 "#bottom_today": {
-	backgroundImage: "/images/bottom-today.png",
-	
-	left: 0,
-	width: 40,
-	height: 40
-	
+	backgroundImage: "/images/bottom-today.png",	
+	left: 0	
 }
 
 "#txt_today": {

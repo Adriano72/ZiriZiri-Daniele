@@ -182,7 +182,8 @@ function populateTable() {
 			};
 
 			if (!(_.isNull(value.category))) {
-				var categoriaRow = " " + icons.tag + " " + value.category.name + " ";
+				//var categoriaRow = " " + icons.tag + " " + value.category.name + " ";
+				var categoriaRow = value.category.name;
 			}
 
 			if (!(_.isNull(value.aspects) || _.isUndefined(value.aspects))) {
@@ -308,6 +309,12 @@ function mostraDettaglioEvento(e) {
 	 dettaglioTestoFeedWindow.open();
 	 */
 };
+
+function slideRow(e){
+	Ti.API.info("SLIDE****");
+	e.source.left -= 50;
+	e.source.right += 50;
+}
 
 function createNewPost() {
 	Alloy.createController("newPost", function() {

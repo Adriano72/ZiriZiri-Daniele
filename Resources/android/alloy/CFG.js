@@ -1,1 +1,1 @@
-module.exports={"dependencies":{}};
+module.exports={"dependencies":{"starrating":"1.0"}};

@@ -42,7 +42,7 @@
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <manifest android:installLocation="preferExternal"
             android:versionCode="1" android:versionName="1.0.2" package="it.ziriziri.mobile">
-            <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="11"/>
+            <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="18"/>
             <supports-screens android:anyDensity="true"/>
            <!-- Allows the API to download data from Google Map servers -->
             <uses-permission android:name="android.permission.INTERNET"/>
@@ -59,7 +59,7 @@
             <!-- Replace <com.domain.appid> with your application ID -->
             <uses-permission android:name="it.ziriziri.mobile.permission.MAPS_RECEIVE"/>
             <permission android:name="it.ziriziri.mobile.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
-            <application android:theme="@style/Theme.Action">
+            <application android:theme="@style/Theme.ZiriZiriTheme">
             	<activity android:name="org.appcelerator.titanium.TiTranslucentActivity"/>
             	<!--<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />-->
                 <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyBy40Xya43EQmG6j-kIu5Q76IW3CE_53Yc"/>

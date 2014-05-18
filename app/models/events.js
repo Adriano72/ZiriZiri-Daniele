@@ -4,6 +4,7 @@ exports.definition = {
 			"id": "int",
 		    "name": "string",
 		    "date": "string",
+		    "rating": "int",
 		    "month":"string",
 		    "day":"string",
 		    "category": "string",
