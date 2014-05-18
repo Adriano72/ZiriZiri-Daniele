@@ -11,13 +11,14 @@ function Controller() {
             if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
                 Ti.App.Properties.setBool("authenticated", true);
                 Ti.App.Properties.setInt("sessionId", json.data.sessionId);
+                Ti.API.info("SESSIONE: " + Ti.App.Properties.getInt("sessionId", 0));
                 Alloy.createController("timeline_win").getView().open();
             } else alert("Username o password errati");
         };
         xhr.onerror = function() {
             Ti.API.error(this.status + " - " + this.statusText);
         };
-        xhr.open("POST", "https://demo.ziriziri.com/zz/api/v01/session/login/" + user_name + "?_type=JSON");
+        xhr.open("POST", Alloy.Globals.baseUrl + "/zz/api/v01/session/login/" + user_name + "?_type=JSON");
         xhr.setRequestHeader("Accept", "application/json");
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(user_password);
@@ -83,7 +84,7 @@ function Controller() {
     _.extend($, $.__views);
     if (Ti.App.Properties.getBool("authenticated", false)) {
         Ti.API.info("Already Authenticated!");
-        Alloy.createController("timeline_win").getView().open();
+        Alloy.createController("timeline_win").getView();
     } else $.index.open();
     __defers["$.__views.btn_login!click!do_login"] && $.__views.btn_login.addEventListener("click", do_login);
     _.extend($, exports);

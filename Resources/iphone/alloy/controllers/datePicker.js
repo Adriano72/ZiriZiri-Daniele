@@ -1,4 +1,13 @@
 function Controller() {
+    function showTimePicker(sel_data) {
+        Alloy.createController("timePicker", {
+            par_data: sel_data,
+            _callback: function(p_data) {
+                Ti.API.info("FINAL DATE TIME: " + p_data);
+                args(p_data);
+            }
+        });
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "datePicker";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -19,15 +28,15 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    $.pkrData.minDate = new Date(2009, 0, 1);
-    $.pkrData.maxDate = new Date(2014, 11, 31);
-    $.pkrData.value = new Date();
+    var moment = require("alloy/moment");
+    moment.lang("it", Alloy.Globals.Moment_IT);
+    var bug_flag = 0;
     $.pkrData.showDatePickerDialog({
-        value: new Date(2010, 8, 1),
+        value: new Date(),
         callback: function(e) {
-            if (e.cancel) Ti.API.info("User canceled dialog"); else {
-                args(e.value);
-                Ti.API.info("User selected date: " + e.value);
+            if (e.cancel) Ti.API.info("User canceled dialog"); else if (0 == bug_flag) {
+                bug_flag = 1;
+                showTimePicker(e.value);
             }
         }
     });

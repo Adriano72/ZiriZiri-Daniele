@@ -3,7 +3,7 @@ function Controller() {
         $.spinner.show();
         Ti.App.addEventListener("loading_done", function() {
             setTimeout(function() {
-                $.activityIndicator.hide();
+                $.spinner.hide();
                 e.source.close();
             }, 500);
         });
@@ -31,6 +31,7 @@ function Controller() {
     $.__views.activityIndicator.add($.__views.spinner);
     exports.destroy = function() {};
     _.extend($, $.__views);
+    arguments[0] || {};
     __defers["$.__views.activityIndicator!open!showIndicator"] && $.__views.activityIndicator.addEventListener("open", showIndicator);
     _.extend($, exports);
 }
