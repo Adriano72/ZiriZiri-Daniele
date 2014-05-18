@@ -1,0 +1,12 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">  
+   <style name="Theme.ZiriZiriTheme" parent="android:style/Theme.Holo.Light">
+         <item name="android:actionBarStyle">@style/Theme.ZiriZiriTheme.ActionBar</item>
+   </style>         
+   <style name="Theme.ZiriZiriTheme.ActionBar" parent="android:style/Widget.Holo.Light.ActionBar">
+        <!--<item name="android:background">#256cbc</item>-->
+         <item name="android:titleTextStyle">@style/Theme.ZiriZiriTheme.ActionBar.TitleTextStyle</item>
+    </style>        
+   <style name="Theme.ZiriZiriTheme.ActionBar.TitleTextStyle" parent="android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">#5EAEE3</item>
+    </style>           
+</resources>
