@@ -32,8 +32,8 @@
 
 ".row": {
 	
-	className: 'itemRow'
-
+	className: 'itemRow',
+	height: 170
 }
 
 ".eventContainer": {

@@ -1,7 +1,7 @@
 <Alloy>
 
-	<Collection src = "events"/>
-	<Window id="win" class="container" title = "Diario"  onScroll="lazyload">
+	<Collection src = "events" id="subsetEvents" instance="true"/>
+	<Window id="win" class="container" title = "Diario" >
 
 		<!-- The Menu tag adds the Android menu. -->
 		<Menu id="menu" platform="android">
@@ -11,7 +11,7 @@
 			<MenuItem id="mn_search" title="Immagine" onClick="refreshTable"/>
 			<!--<MenuItem id="Foto" title="Foto" icon="/images/86-camera.png"  showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />-->
 		</Menu>
-		<TableView id = "timelineTable" dataCollection = "events" >
+		<TableView id = "timelineTable" dataCollection = "$.subsetEvents" >
 
 			<TableViewRow class="row" onClick = "mostraDettaglioEvento">
 

@@ -16,6 +16,10 @@ var theActionBar = null;
 // get initial table size for iOS
 $.timelineTable.addEventListener('postlayout', function() {
 	initialTableSize = $.timelineTable.rect.height;
+	if ($.subsetEvents.length == 0) {
+		showSpinner();
+		populateTable();
+	};
 });
 
 var moment = require('alloy/moment');
@@ -40,10 +44,17 @@ function showSpinner() {
 	//$.win.invalidateOptionsMenu();
 };
 
-var timelineList = Alloy.Collections.events;
+var subsetEvents = $.subsetEvents;
+subsetEvents.reset();
 
-timelineList.fetch();
-Ti.API.info("Collection LENGTH: "+timelineList.length);
+//var subsetEvents = Alloy.Collections.events;
+
+var table = $.subsetEvents.config.adapter.collection_name;
+Ti.API.info("Collection TABLE name: " + table);
+
+//subsetEvents.fetch({ query: 'select * from ' + table + ' where alloy_id = ' + 1});
+subsetEvents.fetch();
+Ti.API.info("Collection LENGTH: " + $.subsetEvents.length);
 
 var net = require('net');
 
@@ -154,7 +165,7 @@ function populateTable() {
 
 	temp = [];
 
-	timelineList.reset();
+	subsetEvents.reset();
 
 	net.getData(function(timelineData) {
 
@@ -240,15 +251,15 @@ function populateTable() {
 
 			//temp.push(post);
 
-			timelineList.add(post);
-			
+			subsetEvents.add(post);
+
 			post.save();
-			
+
 		});
 
 		//Ti.API.info("TEMP: "+JSON.stringify(temp[0]));
 
-		//timelineList.add(temp.slice(0, 20));
+		//subsetEvents.add(temp.slice(0, 20));
 		// prende solo gli ultimi 20 posts
 		/*
 		for (var i=0; i<feedsWCCM.nodes.length; i++) {
@@ -256,13 +267,8 @@ function populateTable() {
 		feedlist.add(feed.node);
 		}
 		*/
-		//Ti.API.info(timelineList.toJSON());
+		//Ti.API.info(subsetEvents.toJSON());
 	});
-};
-
-if (timelineList.length == 0){
-	showSpinner();
-	populateTable();
 };
 
 // cross-platform event listener for lazy tableview loading
@@ -273,14 +279,14 @@ function lazyload(_evt) {
 			if (isLoading)
 				return;
 			isLoading = true;
-			timelineList.reset(_.toArray(timelineList).slice(startIndex, startIndex + 50));
+			subsetEvents.reset(temp.slice(startIndex, startIndex + 50));
 		}
 	} else {
 		if (_evt.firstVisibleItem + _evt.visibleItemCount == _evt.totalItemCount) {
 			if (isLoading)
 				return;
 			isLoading = true;
-			timelineList.reset(_.toArray(timelineList).slice(startIndex, startIndex + 50));
+			subsetEvents.reset(temp.slice(startIndex, startIndex + 50));
 		}
 	}
 }
@@ -292,7 +298,7 @@ function mostraDettaglioEvento(e) {
 	try {
 		showSpinner();
 
-		var selEvent = timelineList.at(e.index).attributes;
+		var selEvent = subsetEvents.at(e.index).attributes;
 
 		net.getPost(selEvent.id, function(postData) {
 			Ti.API.info("DETTAGLIO POST: " + JSON.stringify(postData));
@@ -317,7 +323,7 @@ function mostraDettaglioEvento(e) {
 	 */
 };
 
-function slideRow(e){
+function slideRow(e) {
 	Ti.API.info("SLIDE****");
 	e.source.left -= 50;
 	e.source.right += 50;
@@ -331,6 +337,6 @@ function createNewPost() {
 
 $.win.open();
 
-$.win.addEventListener("close", function(){
-    $.destroy();
+$.win.addEventListener("close", function() {
+	$.destroy();
 });
