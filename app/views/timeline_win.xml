@@ -1,7 +1,7 @@
 <Alloy>
 
 	<Collection src = "events"/>
-	<Window id="win" class="container" title = "Diario" onOpen="showSpinner" onScroll="lazyload">
+	<Window id="win" class="container" title = "Diario"  onScroll="lazyload">
 
 		<!-- The Menu tag adds the Android menu. -->
 		<Menu id="menu" platform="android">

@@ -41,7 +41,9 @@ function showSpinner() {
 };
 
 var timelineList = Alloy.Collections.events;
-//todolist.fetch();
+
+timelineList.fetch();
+Ti.API.info("Collection LENGTH: "+timelineList.length);
 
 var net = require('net');
 
@@ -225,7 +227,7 @@ function populateTable() {
 
 			//(value.referenceTime, "YYYYMMDD").fromNow());
 
-			var timeline = Alloy.createModel('events', {
+			var post = Alloy.createModel('events', {
 				id : value.id,
 				name : value.name,
 				date : moment(value.referenceTime).fromNow(),
@@ -236,15 +238,17 @@ function populateTable() {
 				aspects : icons.bar_chart_alt + " " + aspectObj.finance + "   " + icons.file_text_alt + " " + aspectObj.documents + "   " + icons.link + " " + aspectObj.links + "   " + icons.edit_sign + " " + aspectObj.notes
 			});
 
-			temp.push(timeline);
+			//temp.push(post);
 
-			//timelineList.add(timeline);
-
+			timelineList.add(post);
+			
+			post.save();
+			
 		});
 
 		//Ti.API.info("TEMP: "+JSON.stringify(temp[0]));
 
-		timelineList.add(temp.slice(0, 20));
+		//timelineList.add(temp.slice(0, 20));
 		// prende solo gli ultimi 20 posts
 		/*
 		for (var i=0; i<feedsWCCM.nodes.length; i++) {
@@ -256,7 +260,10 @@ function populateTable() {
 	});
 };
 
-populateTable();
+if (timelineList.length == 0){
+	showSpinner();
+	populateTable();
+};
 
 // cross-platform event listener for lazy tableview loading
 function lazyload(_evt) {
@@ -266,14 +273,14 @@ function lazyload(_evt) {
 			if (isLoading)
 				return;
 			isLoading = true;
-			timelineList.reset(temp.slice(startIndex, startIndex + 50));
+			timelineList.reset(_.toArray(timelineList).slice(startIndex, startIndex + 50));
 		}
 	} else {
 		if (_evt.firstVisibleItem + _evt.visibleItemCount == _evt.totalItemCount) {
 			if (isLoading)
 				return;
 			isLoading = true;
-			timelineList.reset(temp.slice(startIndex, startIndex + 50));
+			timelineList.reset(_.toArray(timelineList).slice(startIndex, startIndex + 50));
 		}
 	}
 }
@@ -323,3 +330,7 @@ function createNewPost() {
 }
 
 $.win.open();
+
+$.win.addEventListener("close", function(){
+    $.destroy();
+});

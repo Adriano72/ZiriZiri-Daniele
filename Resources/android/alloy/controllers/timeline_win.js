@@ -400,7 +400,7 @@ function Controller() {
                     }
                 });
                 _.isNull(value.aspects) || _.isUndefined(value.aspects) ? "no aspects" : value.aspects;
-                var timeline = Alloy.createModel("events", {
+                var post = Alloy.createModel("events", {
                     id: value.id,
                     name: value.name,
                     date: moment(value.referenceTime).fromNow(),
@@ -410,16 +410,16 @@ function Controller() {
                     location: locationRow,
                     aspects: icons.bar_chart_alt + " " + aspectObj.finance + "   " + icons.file_text_alt + " " + aspectObj.documents + "   " + icons.link + " " + aspectObj.links + "   " + icons.edit_sign + " " + aspectObj.notes
                 });
-                temp.push(timeline);
+                timelineList.add(post);
+                post.save();
             });
-            timelineList.add(temp.slice(0, 20));
         });
     }
     function lazyload(_evt) {
         if (_evt.firstVisibleItem + _evt.visibleItemCount == _evt.totalItemCount) {
             if (isLoading) return;
             isLoading = true;
-            timelineList.reset(temp.slice(startIndex, startIndex + 50));
+            timelineList.reset(_.toArray(timelineList).slice(startIndex, startIndex + 50));
         }
     }
     function mostraDettaglioEvento(e) {
@@ -461,7 +461,6 @@ function Controller() {
         title: "Diario"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
-    showSpinner ? $.__views.win.addEventListener("open", showSpinner) : __defers["$.__views.win!open!showSpinner"] = true;
     lazyload ? $.__views.win.addEventListener("scroll", lazyload) : __defers["$.__views.win!scroll!lazyload"] = true;
     $.__views.win.addEventListener("open", __alloyId103);
     $.__views.timelineTable = Ti.UI.createTableView({
@@ -597,6 +596,8 @@ function Controller() {
     moment.lang("it", Alloy.Globals.Moment_IT);
     moment.lang("it");
     var timelineList = Alloy.Collections.events;
+    timelineList.fetch();
+    Ti.API.info("Collection LENGTH: " + timelineList.length);
     var net = require("net");
     net.getCategories(function(categoriesData) {
         var objCategorie = [];
@@ -640,9 +641,14 @@ function Controller() {
         });
         Ti.App.Properties.setObject("elencoPagamIncasso", objPagamIncasso);
     });
-    populateTable();
+    if (0 == timelineList.length) {
+        showSpinner();
+        populateTable();
+    }
     $.win.open();
-    __defers["$.__views.win!open!showSpinner"] && $.__views.win.addEventListener("open", showSpinner);
+    $.win.addEventListener("close", function() {
+        $.destroy();
+    });
     __defers["$.__views.win!scroll!lazyload"] && $.__views.win.addEventListener("scroll", lazyload);
     __defers["$.__views.mn_search!click!refreshTable"] && $.__views.mn_search.addEventListener("click", refreshTable);
     __defers["__alloyId106!click!mostraDettaglioEvento"] && __alloyId106.addEventListener("click", mostraDettaglioEvento);
