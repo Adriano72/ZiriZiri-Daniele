@@ -6,7 +6,6 @@ exports.getData = function(_callback) {
     var xhr = Ti.Network.createHTTPClient();
     xhr.onload = function() {
         _callback(JSON.parse(xhr.responseText));
-        Ti.App.fireEvent("loading_done");
     };
     xhr.onerror = function() {
         alert("Errore nella comunicazione con il server. Accertarsi che il dispositivo sia collegato alla rete e riprovare");

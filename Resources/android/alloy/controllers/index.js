@@ -12,7 +12,14 @@ function Controller() {
                 Ti.App.Properties.setBool("authenticated", true);
                 Ti.App.Properties.setInt("sessionId", json.data.sessionId);
                 Ti.API.info("SESSIONE: " + Ti.App.Properties.getInt("sessionId", 0));
-                Alloy.createController("timeline_win").getView().open();
+                Alloy.Globals.loading.show("Sincronizzazione...", false);
+                _.isNull(Ti.App.Properties.getObject("timelineProp")) && net.getData(function(timeline_obj) {
+                    Ti.API.info("RETURN CODE: " + timeline_obj.type.code);
+                    Ti.App.Properties.setObject("timelineProp", timeline_obj);
+                    Ti.API.info("OBJ_TMLINE: " + Ti.App.Properties.getObject("timelineProp"));
+                    Alloy.createController("timeline_win").getView().open();
+                });
+                $.index.close();
             } else alert("Username o password errati");
         };
         xhr.onerror = function() {
@@ -82,9 +89,15 @@ function Controller() {
     do_login ? $.__views.btn_login.addEventListener("click", do_login) : __defers["$.__views.btn_login!click!do_login"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
+    var net = require("net");
     if (Ti.App.Properties.getBool("authenticated", false)) {
         Ti.API.info("Already Authenticated!");
-        Alloy.createController("timeline_win").getView();
+        _.isNull(Ti.App.Properties.getObject("timelineProp")) && net.getData(function(timeline_obj) {
+            Ti.API.info("RETURN CODE: " + timeline_obj.type.code);
+            Ti.App.Properties.setObject("timelineProp", timeline_obj);
+            Ti.API.info("OBJ_TMLINE: " + Ti.App.Properties.getObject("timelineProp"));
+        });
+        Alloy.createController("timeline_win").getView().open();
     } else $.index.open();
     __defers["$.__views.btn_login!click!do_login"] && $.__views.btn_login.addEventListener("click", do_login);
     _.extend($, exports);

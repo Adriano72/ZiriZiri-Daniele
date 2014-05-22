@@ -354,11 +354,6 @@ function Controller() {
     }
     function showSpinner() {
         Alloy.Globals.showSpinner();
-        theActionBar = $.win.activity.actionBar;
-        if (void 0 != theActionBar) {
-            theActionBar.displayHomeAsUp = false;
-            theActionBar.setIcon("images/logo-test.png");
-        }
     }
     function refreshTable() {
         showSpinner();
@@ -367,53 +362,35 @@ function Controller() {
     function populateTable() {
         temp = [];
         subsetEvents.reset();
-        net.getData(function(timelineData) {
-            _.forEach(timelineData.data, function(value) {
-                var aspectObj = {
-                    evento: 0,
-                    finance: 0,
-                    documents: 0,
-                    links: 0,
-                    notes: 0
-                };
-                var creationDate = new Date(value.referenceTime);
-                if (!_.isNull(value.location)) {
-                    aspectObj.evento = 1;
-                    var locationRow = " " + icons.map_marker + " " + value.location.name + " ";
-                }
-                if (!_.isNull(value.category)) var categoriaRow = value.category.name;
-                _.isNull(value.aspects) || _.isUndefined(value.aspects) || _.forEach(value.aspects, function(obj) {
-                    switch (obj.kind.code) {
-                      case "CASHFLOWDATATYPE_CODE":
-                        aspectObj.finance += 1;
-                        break;
-
-                      case "DOCUMENTDATATYPE_CODE":
-                        aspectObj.documents += 1;
-                        break;
-
-                      case "NOTEDATATYPE_CODE":
-                        aspectObj.notes += 1;
-                        break;
-
-                      case "LINKDATATYPE_CODE":
-                        aspectObj.links += 1;
-                    }
-                });
-                _.isNull(value.aspects) || _.isUndefined(value.aspects) ? "no aspects" : value.aspects;
-                var post = Alloy.createModel("events", {
-                    id: value.id,
-                    name: value.name,
-                    date: moment(value.referenceTime).fromNow(),
-                    day: creationDate.getDate(),
-                    month: creationDate.getCMonth().toUpperCase(),
-                    category: categoriaRow,
-                    location: locationRow,
-                    aspects: icons.bar_chart_alt + " " + aspectObj.finance + "   " + icons.file_text_alt + " " + aspectObj.documents + "   " + icons.link + " " + aspectObj.links + "   " + icons.edit_sign + " " + aspectObj.notes
-                });
-                subsetEvents.add(post);
-                post.save();
+        Ti.API.info("OBJ_TMLINE STRINGHIFIZZATO: " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
+        var timelineDataObj = Ti.App.Properties.getObject("timelineProp");
+        _.forEach(timelineDataObj.data, function(value) {
+            var aspectObj = {
+                evento: 0,
+                finance: 0,
+                documents: 0,
+                links: 0,
+                notes: 0
+            };
+            var creationDate = new Date(value.referenceTime);
+            if (!_.isNull(value.location)) {
+                aspectObj.evento = 1;
+                var locationRow = " " + icons.map_marker + " " + value.location.name + " ";
+            }
+            if (!_.isNull(value.category)) var categoriaRow = value.category.name;
+            _.isNull(value.aspects) || _.isUndefined(value.aspects) ? "no aspects" : value.aspects;
+            var post = Alloy.createModel("events", {
+                id: value.id,
+                name: value.name,
+                date: moment(value.referenceTime).fromNow(),
+                day: creationDate.getDate(),
+                month: creationDate.getCMonth().toUpperCase(),
+                category: categoriaRow,
+                location: locationRow,
+                aspects: icons.bar_chart_alt + " " + aspectObj.finance + "   " + icons.file_text_alt + " " + aspectObj.documents + "   " + icons.link + " " + aspectObj.links + "   " + icons.edit_sign + " " + aspectObj.notes
             });
+            subsetEvents.add(post);
+            post.save();
         });
     }
     function mostraDettaglioEvento(e) {
@@ -578,14 +555,22 @@ function Controller() {
     };
     _.extend($, $.__views);
     arguments[0] || {};
-    var temp = [];
+    var net = require("net");
     var theActionBar = null;
+    var temp = [];
+    $.win.addEventListener("open", function() {
+        theActionBar = $.win.activity.actionBar;
+        $.win.activity.invalidateOptionsMenu();
+        theActionBar = $.win.activity.actionBar;
+        if (void 0 != theActionBar) {
+            theActionBar.displayHomeAsUp = false;
+            theActionBar.setIcon("images/logo-test.png");
+        }
+    });
+    Ti.API.info("OBJ_TMLINE: " + Ti.App.Properties.getObject("timelineProp"));
     $.timelineTable.addEventListener("postlayout", function() {
         initialTableSize = $.timelineTable.rect.height;
-        if (0 == $.subsetEvents.length) {
-            showSpinner();
-            populateTable();
-        }
+        Alloy.Globals.loading.hide();
     });
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
@@ -596,7 +581,6 @@ function Controller() {
     Ti.API.info("Collection TABLE name: " + table);
     subsetEvents.fetch();
     Ti.API.info("Collection LENGTH: " + $.subsetEvents.length);
-    var net = require("net");
     net.getCategories(function(categoriesData) {
         var objCategorie = [];
         _.forEach(categoriesData.data, function(value) {
@@ -609,6 +593,7 @@ function Controller() {
         Ti.App.Properties.setObject("elencoCategorie", objCategorie);
     });
     net.getPostTemplate(function(p_postTemplate) {
+        Ti.API.info("POST TEMPLATE: " + JSON.stringify(p_postTemplate));
         var arrayTemplateIds = [];
         _.forEach(p_postTemplate.data[0].modules, function(value) {
             arrayTemplateIds.push(value.id);
@@ -639,7 +624,7 @@ function Controller() {
         });
         Ti.App.Properties.setObject("elencoPagamIncasso", objPagamIncasso);
     });
-    $.win.open();
+    populateTable();
     $.win.addEventListener("close", function() {
         $.destroy();
     });

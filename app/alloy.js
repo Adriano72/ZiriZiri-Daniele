@@ -18,6 +18,8 @@ var icons = require('/icons');
 
 Alloy.Globals.baseUrl = 'https://demo.ziriziri.com';
 
+Alloy.Globals.loading = Alloy.createWidget("nl.fokkezb.loading");
+
 var dFactor = (Ti.Platform.displayCaps.logicalDensityFactor?Ti.Platform.displayCaps.logicalDensityFactor : 1);
 
 Alloy.Globals.borderRad = 4 * dFactor;

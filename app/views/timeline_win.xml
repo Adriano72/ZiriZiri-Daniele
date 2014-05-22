@@ -7,7 +7,7 @@
 		<Menu id="menu" platform="android">
 
 			<!-- Cannot specify node text.  Use attributes only. -->
-			<MenuItem id="mn_notify" title="Scrivi" />
+			<MenuItem id="mn_notify" title="Scrivi"/>
 			<MenuItem id="mn_search" title="Immagine" onClick="refreshTable"/>
 			<!--<MenuItem id="Foto" title="Foto" icon="/images/86-camera.png"  showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />-->
 		</Menu>

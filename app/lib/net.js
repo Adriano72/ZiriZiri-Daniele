@@ -8,8 +8,10 @@ exports.getData = function(_callback) {
 
 	xhr.onload = function() {
 		//Ti.API.info("RESPONSE: "+xhr.responseText);
+		//Ti.App.fireEvent("loading_done");
+		
 		_callback(JSON.parse(xhr.responseText));
-		Ti.App.fireEvent("loading_done");
+		
 	};
 
 	xhr.onerror = function(e) {

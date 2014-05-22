@@ -1,5 +1,7 @@
 var args = arguments[0] || {};
 
+var net = require('net');
+
 // to keep track of content size on iOS
 var startIndex = 0;
 
@@ -9,17 +11,43 @@ var isLoading = false;
 // to trigger loading on iOS
 var overlap = 50;
 
+var theActionBar = null;
+
 var temp = [];
 
-var theActionBar = null;
+$.win.addEventListener('open', function() {
+
+	theActionBar = $.win.activity.actionBar;
+
+	$.win.activity.invalidateOptionsMenu();
+
+	theActionBar = $.win.activity.actionBar;
+	if (theActionBar != undefined) {
+		theActionBar.displayHomeAsUp = false;
+		theActionBar.setIcon('images/logo-test.png');
+		//theActionBar.setTitle(self.title);
+
+	};
+	
+});
+
+/*
+$.win.addEventListener('open', function() {
+
+	Alloy.Globals.loading.show('Sincronizzazione...', false);
+
+});
+*/
+
+Ti.API.info("OBJ_TMLINE: " + Ti.App.Properties.getObject('timelineProp'));
+
 
 // get initial table size for iOS
 $.timelineTable.addEventListener('postlayout', function() {
 	initialTableSize = $.timelineTable.rect.height;
-	if ($.subsetEvents.length == 0) {
-		showSpinner();
-		populateTable();
-	};
+	Alloy.Globals.loading.hide();
+	
+	
 });
 
 var moment = require('alloy/moment');
@@ -30,17 +58,14 @@ moment.lang('it');
 
 function showSpinner() {
 	Alloy.Globals.showSpinner();
-	theActionBar = $.win.activity.actionBar;
-
+	
+	/*
 	if (theActionBar != undefined) {
-		theActionBar.displayHomeAsUp = false;
-		theActionBar.setIcon('images/logo-test.png');
-		/*
-		 theActionBar.onHomeIconItemSelected = function() {
-		 clickUpdate.text = 'Home Clicked';
-		 };
-		 */
+	theActionBar.displayHomeAsUp = false;
+	theActionBar.setIcon('/images/logo-test.png');
+
 	}
+	*/
 	//$.win.invalidateOptionsMenu();
 };
 
@@ -55,8 +80,6 @@ Ti.API.info("Collection TABLE name: " + table);
 //subsetEvents.fetch({ query: 'select * from ' + table + ' where alloy_id = ' + 1});
 subsetEvents.fetch();
 Ti.API.info("Collection LENGTH: " + $.subsetEvents.length);
-
-var net = require('net');
 
 net.getCategories(function(categoriesData) {
 
@@ -84,7 +107,7 @@ net.getCategories(function(categoriesData) {
 
 net.getPostTemplate(function(p_postTemplate) {
 
-	//Ti.API.info("POST TEMPLATE: "+JSON.stringify(p_postTemplate));
+	Ti.API.info("POST TEMPLATE: "+JSON.stringify(p_postTemplate));
 
 	var arrayTemplateIds = [];
 
@@ -166,110 +189,103 @@ function populateTable() {
 	temp = [];
 
 	subsetEvents.reset();
+	
+	Ti.API.info("OBJ_TMLINE STRINGHIFIZZATO: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
 
-	net.getData(function(timelineData) {
+	var timelineDataObj = Ti.App.Properties.getObject('timelineProp');
 
-		//Ti.API.info("DATA FETCHED: "+JSON.stringify(timelineData));
-		//var f = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory,'timeline.txt');
-		//f.write(JSON.stringify(timelineData)); // write to the file
+	//Ti.API.info("DATA FETCHED: "+JSON.stringify(timelineData));
+	//var f = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory,'timeline.txt');
+	//f.write(JSON.stringify(timelineData)); // write to the file
 
-		_.forEach(timelineData.data, function(value, key) {
+	_.forEach(timelineDataObj.data, function(value, key) {
 
-			//Ti.API.info("VALUE: "+JSON.stringify(value));
-			//Ti.API.info("CATEGORY NAME: "+value.category.name);
-			//var timeline = Alloy.createModel("events", value);
+		//Ti.API.info("VALUE: "+JSON.stringify(value));
+		//Ti.API.info("CATEGORY NAME: "+value.category.name);
+		//var timeline = Alloy.createModel("events", value);
 
-			var aspectObj = {
-				evento : 0,
-				finance : 0,
-				documents : 0,
-				links : 0,
-				notes : 0
-			};
+		var aspectObj = {
+			evento : 0,
+			finance : 0,
+			documents : 0,
+			links : 0,
+			notes : 0
+		};
 
-			var creationDate = new Date(value.referenceTime);
+		var creationDate = new Date(value.referenceTime);
 
-			if (!(_.isNull(value.location))) {
-				aspectObj.evento = 1;
-				var locationRow = " " + icons.map_marker + " " + value.location.name + " ";
-			};
+		if (!(_.isNull(value.location))) {
+			aspectObj.evento = 1;
+			var locationRow = " " + icons.map_marker + " " + value.location.name + " ";
+		};
 
-			if (!(_.isNull(value.category))) {
-				//var categoriaRow = " " + icons.tag + " " + value.category.name + " ";
-				var categoriaRow = value.category.name;
-			}
+		if (!(_.isNull(value.category))) {
+			//var categoriaRow = " " + icons.tag + " " + value.category.name + " ";
+			var categoriaRow = value.category.name;
+		}
+		
+		/*
+		if (!(_.isNull(value.aspects) || _.isUndefined(value.aspects))) {
 
-			if (!(_.isNull(value.aspects) || _.isUndefined(value.aspects))) {
+			_.forEach(value.aspects, function(obj, key) {
 
-				_.forEach(value.aspects, function(obj, key) {
+				switch (obj.kind.code) {
 
-					switch (obj.kind.code) {
+					case "CASHFLOWDATATYPE_CODE":
 
-						case "CASHFLOWDATATYPE_CODE":
+						aspectObj.finance += 1;
+						break;
 
-							aspectObj.finance += 1;
-							break;
+					case "DOCUMENTDATATYPE_CODE":
 
-						case "DOCUMENTDATATYPE_CODE":
+						aspectObj.documents += 1;
+						break;
 
-							aspectObj.documents += 1;
-							break;
+					case "NOTEDATATYPE_CODE":
 
-						case "NOTEDATATYPE_CODE":
+						aspectObj.notes += 1;
+						break;
 
-							aspectObj.notes += 1;
-							break;
+					case "LINKDATATYPE_CODE":
 
-						case "LINKDATATYPE_CODE":
+						aspectObj.links += 1;
+						break;
+				}
 
-							aspectObj.links += 1;
-							break;
-					}
-
-				});
-
-			}
-
-			//Ti.API.info("FINANZA: "+aspectObj.finance+" DOCUMENTI: "+aspectObj.documents+ " LINKS: "+aspectObj.links+" NOTE: "+aspectObj.notes);
-
-			var aspetti = (_.isNull(value.aspects) || _.isUndefined(value.aspects)) ? "no aspects" : value.aspects;
-
-			//Ti.API.info("MOMENT OUTPUT: " + moment(value.referenceTime).fromNow());
-
-			//(value.referenceTime, "YYYYMMDD").fromNow());
-
-			var post = Alloy.createModel('events', {
-				id : value.id,
-				name : value.name,
-				date : moment(value.referenceTime).fromNow(),
-				day : creationDate.getDate(),
-				month : creationDate.getCMonth().toUpperCase(),
-				category : categoriaRow,
-				location : locationRow,
-				aspects : icons.bar_chart_alt + " " + aspectObj.finance + "   " + icons.file_text_alt + " " + aspectObj.documents + "   " + icons.link + " " + aspectObj.links + "   " + icons.edit_sign + " " + aspectObj.notes
 			});
 
-			//temp.push(post);
+		}
 
-			subsetEvents.add(post);
+		//Ti.API.info("FINANZA: "+aspectObj.finance+" DOCUMENTI: "+aspectObj.documents+ " LINKS: "+aspectObj.links+" NOTE: "+aspectObj.notes);
+		*/
+		var aspetti = (_.isNull(value.aspects) || _.isUndefined(value.aspects)) ? "no aspects" : value.aspects;
 
-			post.save();
+		//Ti.API.info("MOMENT OUTPUT: " + moment(value.referenceTime).fromNow());
 
+		//(value.referenceTime, "YYYYMMDD").fromNow());
+
+		var post = Alloy.createModel('events', {
+			id : value.id,
+			name : value.name,
+			date : moment(value.referenceTime).fromNow(),
+			day : creationDate.getDate(),
+			month : creationDate.getCMonth().toUpperCase(),
+			category : categoriaRow,
+			location : locationRow,
+			aspects : icons.bar_chart_alt + " " + aspectObj.finance + "   " + icons.file_text_alt + " " + aspectObj.documents + "   " + icons.link + " " + aspectObj.links + "   " + icons.edit_sign + " " + aspectObj.notes
 		});
 
-		//Ti.API.info("TEMP: "+JSON.stringify(temp[0]));
+		//temp.push(post);
 
-		//subsetEvents.add(temp.slice(0, 20));
-		// prende solo gli ultimi 20 posts
-		/*
-		for (var i=0; i<feedsWCCM.nodes.length; i++) {
-		var feed = Alloy.createModel("feed", feedsWCCM[i]);
-		feedlist.add(feed.node);
-		}
-		*/
-		//Ti.API.info(subsetEvents.toJSON());
+		subsetEvents.add(post);
+
+		post.save();
+
 	});
+
 };
+
+populateTable();
 
 // cross-platform event listener for lazy tableview loading
 function lazyload(_evt) {
@@ -335,7 +351,7 @@ function createNewPost() {
 	}).getView();
 }
 
-$.win.open();
+//$.win.open();
 
 $.win.addEventListener("close", function() {
 	$.destroy();
