@@ -28,26 +28,24 @@ $.win.addEventListener('open', function() {
 		//theActionBar.setTitle(self.title);
 
 	};
-	
+
 });
 
 /*
-$.win.addEventListener('open', function() {
+ $.win.addEventListener('open', function() {
 
-	Alloy.Globals.loading.show('Sincronizzazione...', false);
+ Alloy.Globals.loading.show('Sincronizzazione...', false);
 
-});
-*/
+ });
+ */
 
-Ti.API.info("OBJ_TMLINE: " + Ti.App.Properties.getObject('timelineProp'));
-
+Ti.API.info("OBJ_TMLINE: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
 
 // get initial table size for iOS
 $.timelineTable.addEventListener('postlayout', function() {
 	initialTableSize = $.timelineTable.rect.height;
 	Alloy.Globals.loading.hide();
-	
-	
+
 });
 
 var moment = require('alloy/moment');
@@ -58,19 +56,11 @@ moment.lang('it');
 
 function showSpinner() {
 	Alloy.Globals.showSpinner();
-	
-	/*
-	if (theActionBar != undefined) {
-	theActionBar.displayHomeAsUp = false;
-	theActionBar.setIcon('/images/logo-test.png');
 
-	}
-	*/
-	//$.win.invalidateOptionsMenu();
 };
 
 var subsetEvents = $.subsetEvents;
-subsetEvents.reset();
+//subsetEvents.reset();
 
 //var subsetEvents = Alloy.Collections.events;
 
@@ -107,7 +97,7 @@ net.getCategories(function(categoriesData) {
 
 net.getPostTemplate(function(p_postTemplate) {
 
-	Ti.API.info("POST TEMPLATE: "+JSON.stringify(p_postTemplate));
+	Ti.API.info("POST TEMPLATE: " + JSON.stringify(p_postTemplate));
 
 	var arrayTemplateIds = [];
 
@@ -179,18 +169,23 @@ net.getPagamentoIncasso(function(p_pagamentoIncasso) {
 
 function refreshTable() {
 
-	showSpinner();
-	populateTable();
+	Alloy.Globals.loading.show('Sincronizzazione...', false);
+	setTimeout(populateTable(),5000);
+	
 
 }
 
 function populateTable() {
 
-	temp = [];
-
-	subsetEvents.reset();
+	Ti.API.info("POLULATE TABLE CALLED***");
 	
-	Ti.API.info("OBJ_TMLINE STRINGHIFIZZATO: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
+	temp = [];
+	events.reset();
+
+	$.subsetEvents.reset();
+	
+
+	//Ti.API.info("OBJ_TMLINE STRINGHIFIZZATO: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
 
 	var timelineDataObj = Ti.App.Properties.getObject('timelineProp');
 
@@ -223,41 +218,41 @@ function populateTable() {
 			//var categoriaRow = " " + icons.tag + " " + value.category.name + " ";
 			var categoriaRow = value.category.name;
 		}
-		
+
 		/*
-		if (!(_.isNull(value.aspects) || _.isUndefined(value.aspects))) {
+		 if (!(_.isNull(value.aspects) || _.isUndefined(value.aspects))) {
 
-			_.forEach(value.aspects, function(obj, key) {
+		 _.forEach(value.aspects, function(obj, key) {
 
-				switch (obj.kind.code) {
+		 switch (obj.kind.code) {
 
-					case "CASHFLOWDATATYPE_CODE":
+		 case "CASHFLOWDATATYPE_CODE":
 
-						aspectObj.finance += 1;
-						break;
+		 aspectObj.finance += 1;
+		 break;
 
-					case "DOCUMENTDATATYPE_CODE":
+		 case "DOCUMENTDATATYPE_CODE":
 
-						aspectObj.documents += 1;
-						break;
+		 aspectObj.documents += 1;
+		 break;
 
-					case "NOTEDATATYPE_CODE":
+		 case "NOTEDATATYPE_CODE":
 
-						aspectObj.notes += 1;
-						break;
+		 aspectObj.notes += 1;
+		 break;
 
-					case "LINKDATATYPE_CODE":
+		 case "LINKDATATYPE_CODE":
 
-						aspectObj.links += 1;
-						break;
-				}
+		 aspectObj.links += 1;
+		 break;
+		 }
 
-			});
+		 });
 
-		}
+		 }
 
-		//Ti.API.info("FINANZA: "+aspectObj.finance+" DOCUMENTI: "+aspectObj.documents+ " LINKS: "+aspectObj.links+" NOTE: "+aspectObj.notes);
-		*/
+		 //Ti.API.info("FINANZA: "+aspectObj.finance+" DOCUMENTI: "+aspectObj.documents+ " LINKS: "+aspectObj.links+" NOTE: "+aspectObj.notes);
+		 */
 		var aspetti = (_.isNull(value.aspects) || _.isUndefined(value.aspects)) ? "no aspects" : value.aspects;
 
 		//Ti.API.info("MOMENT OUTPUT: " + moment(value.referenceTime).fromNow());
@@ -285,7 +280,11 @@ function populateTable() {
 
 };
 
-populateTable();
+if (subsetEvents.length == 0) {
+
+	populateTable();
+
+};
 
 // cross-platform event listener for lazy tableview loading
 function lazyload(_evt) {
@@ -351,7 +350,7 @@ function createNewPost() {
 	}).getView();
 }
 
-//$.win.open();
+$.win.open();
 
 $.win.addEventListener("close", function() {
 	$.destroy();

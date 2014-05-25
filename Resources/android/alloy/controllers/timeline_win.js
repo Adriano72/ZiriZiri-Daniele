@@ -356,13 +356,14 @@ function Controller() {
         Alloy.Globals.showSpinner();
     }
     function refreshTable() {
-        showSpinner();
-        populateTable();
+        Alloy.Globals.loading.show("Sincronizzazione...", false);
+        setTimeout(populateTable(), 5e3);
     }
     function populateTable() {
+        Ti.API.info("POLULATE TABLE CALLED***");
         temp = [];
-        subsetEvents.reset();
-        Ti.API.info("OBJ_TMLINE STRINGHIFIZZATO: " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
+        events.reset();
+        $.subsetEvents.reset();
         var timelineDataObj = Ti.App.Properties.getObject("timelineProp");
         _.forEach(timelineDataObj.data, function(value) {
             var aspectObj = {
@@ -567,7 +568,7 @@ function Controller() {
             theActionBar.setIcon("images/logo-test.png");
         }
     });
-    Ti.API.info("OBJ_TMLINE: " + Ti.App.Properties.getObject("timelineProp"));
+    Ti.API.info("OBJ_TMLINE: " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
     $.timelineTable.addEventListener("postlayout", function() {
         initialTableSize = $.timelineTable.rect.height;
         Alloy.Globals.loading.hide();
@@ -576,7 +577,6 @@ function Controller() {
     moment.lang("it", Alloy.Globals.Moment_IT);
     moment.lang("it");
     var subsetEvents = $.subsetEvents;
-    subsetEvents.reset();
     var table = $.subsetEvents.config.adapter.collection_name;
     Ti.API.info("Collection TABLE name: " + table);
     subsetEvents.fetch();
@@ -624,7 +624,8 @@ function Controller() {
         });
         Ti.App.Properties.setObject("elencoPagamIncasso", objPagamIncasso);
     });
-    populateTable();
+    0 == subsetEvents.length && populateTable();
+    $.win.open();
     $.win.addEventListener("close", function() {
         $.destroy();
     });

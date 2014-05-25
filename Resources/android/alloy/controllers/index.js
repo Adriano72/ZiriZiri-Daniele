@@ -97,7 +97,7 @@ function Controller() {
             Ti.App.Properties.setObject("timelineProp", timeline_obj);
             Ti.API.info("OBJ_TMLINE: " + Ti.App.Properties.getObject("timelineProp"));
         });
-        Alloy.createController("timeline_win").getView().open();
+        Alloy.createController("timeline_win").getView();
     } else $.index.open();
     __defers["$.__views.btn_login!click!do_login"] && $.__views.btn_login.addEventListener("click", do_login);
     _.extend($, exports);

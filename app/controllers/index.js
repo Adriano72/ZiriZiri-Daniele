@@ -15,7 +15,7 @@ if (Ti.App.Properties.getBool('authenticated', false)) {
 
 		});
 	};
-	Alloy.createController("timeline_win").getView().open();
+	Alloy.createController("timeline_win").getView();
 } else {
 
 	$.index.open();
