@@ -65,9 +65,11 @@ var Timeline = Alloy.Collections.Timeline;
 
 //Ti.API.info("COLLECTION LENGTH: " + Alloy.Collections.post_timeline.length);
 
+///////////////////////////////////////// CARICAMENTO TIMELINE /////////////////////////////////////
+
 if (_.isNull(Alloy.Globals.cachedTimeline)) {
 
-	net.getData(function(timelineObj) {
+	net.getData(0, 20, function(timelineObj) {
 
 		Ti.API.info("OGGETTO TIMELINE; " + JSON.stringify(timelineObj));
 
@@ -87,6 +89,8 @@ if (_.isNull(Alloy.Globals.cachedTimeline)) {
 	Ti.API.info("LENGTH COLLECTION: " + Alloy.Collections.Timeline.length);
 
 };
+
+///////////////////////////////////////// FINE CARICAMENTO TIMELINE ////////////////////////////////
 
 function checkAspects(node, target) {
 	

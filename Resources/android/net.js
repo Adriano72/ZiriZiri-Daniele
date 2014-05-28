@@ -2,8 +2,10 @@ var session = Ti.App.Properties.getInt("sessionId", 0);
 
 Ti.API.info("SESSION ID: " + session);
 
-exports.getData = function(_callback) {
+exports.getData = function(page, max, _callback) {
+    Ti.API.info("PARAMETRI: " + page + " " + max);
     var xhr = Ti.Network.createHTTPClient();
+    var pagination = max > 0 ? "&page=" + page + "&max=" + max : "";
     xhr.onload = function() {
         _callback(JSON.parse(xhr.responseText));
     };
@@ -11,7 +13,7 @@ exports.getData = function(_callback) {
         alert("Errore nella comunicazione con il server. Accertarsi che il dispositivo sia collegato alla rete e riprovare");
     };
     session = Ti.App.Properties.getInt("sessionId", 0);
-    xhr.open("GET", Alloy.Globals.baseUrl + "/zz/api/v01/actions/actions/" + session + "?_type=JSON");
+    xhr.open("GET", Alloy.Globals.baseUrl + "/zz/api/v01/actions/actions/" + session + "?_type=JSON" + pagination);
     xhr.send();
 };
 
