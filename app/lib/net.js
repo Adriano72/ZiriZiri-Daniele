@@ -2,9 +2,13 @@ var session = Ti.App.Properties.getInt('sessionId', 0);
 //var session = 132;
 Ti.API.info("SESSION ID: " + session);
 
-exports.getData = function(_callback) {
+exports.getData = function(page, max, _callback) {
+	
+	Ti.API.info("PARAMETRI: "+page+" "+max);
 
 	var xhr = Ti.Network.createHTTPClient();
+	
+	var pagination = (max > 0)?"&page="+page+"&max="+max:"";
 
 	xhr.onload = function() {
 		//Ti.API.info("RESPONSE: "+xhr.responseText);
@@ -21,7 +25,7 @@ exports.getData = function(_callback) {
 	session = Ti.App.Properties.getInt('sessionId', 0);
 
 	//xhr.open("GET", "https://demo.ziriziri.com/cxf/api/v01/actions/actions/680?_type=json");
-	xhr.open("GET", Alloy.Globals.baseUrl + "/zz/api/v01/actions/actions/" + session + "?_type=JSON");
+	xhr.open("GET", Alloy.Globals.baseUrl + "/zz/api/v01/actions/actions/" + session + "?_type=JSON"+pagination);
 	xhr.send();
 };
 

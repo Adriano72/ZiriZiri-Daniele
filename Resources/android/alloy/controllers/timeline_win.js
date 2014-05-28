@@ -372,45 +372,38 @@ function Controller() {
         Alloy.Globals.showSpinner();
     }
     function checkAspects(node, target) {
-        Ti.API.info("NODE: " + JSON.stringify(node));
         if (_.isUndefined(node) || _.isUndefined(_.find(node, function(value) {
             return value.kind.code == target;
-        }))) {
-            Ti.API.info("IS UNDEFINED");
-            switch (target) {
-              case "CASHFLOWDATATYPE_CODE":
-                return "/images/kernel-finance-off.png";
+        }))) switch (target) {
+          case "CASHFLOWDATATYPE_CODE":
+            return "/images/kernel-finance-off.png";
 
-              case "DOCUMENTDATATYPE_CODE":
-                return "/images/kernel-document-off.png";
+          case "DOCUMENTDATATYPE_CODE":
+            return "/images/kernel-document-off.png";
 
-              case "NOTEDATATYPE_CODE":
-                return "/images/kernel-note-off.png";
+          case "NOTEDATATYPE_CODE":
+            return "/images/kernel-note-off.png";
 
-              case "LINKDATATYPE_CODE":
-                return "/images/kernel-link-off.png";
+          case "LINKDATATYPE_CODE":
+            return "/images/kernel-link-off.png";
 
-              default:
-                return;
-            }
-        } else {
-            Ti.API.info("IS DEFINED");
-            switch (target) {
-              case "CASHFLOWDATATYPE_CODE":
-                return "/images/kernel-finance-on.png";
+          default:
+            return;
+        } else switch (target) {
+          case "CASHFLOWDATATYPE_CODE":
+            return "/images/kernel-finance-on.png";
 
-              case "DOCUMENTDATATYPE_CODE":
-                return "/images/kernel-document-on.png";
+          case "DOCUMENTDATATYPE_CODE":
+            return "/images/kernel-document-on.png";
 
-              case "NOTEDATATYPE_CODE":
-                return "/images/kernel-note-on.png";
+          case "NOTEDATATYPE_CODE":
+            return "/images/kernel-note-on.png";
 
-              case "LINKDATATYPE_CODE":
-                return "/images/kernel-link-on.png";
+          case "LINKDATATYPE_CODE":
+            return "/images/kernel-link-on.png";
 
-              default:
-                return;
-            }
+          default:
+            return;
         }
     }
     function transformData(model) {
@@ -612,7 +605,7 @@ function Controller() {
         Alloy.Globals.loading.hide();
     });
     var Timeline = Alloy.Collections.Timeline;
-    if (_.isNull(Alloy.Globals.cachedTimeline)) net.getData(function(timelineObj) {
+    if (_.isNull(Alloy.Globals.cachedTimeline)) net.getData(0, 20, function(timelineObj) {
         Ti.API.info("OGGETTO TIMELINE; " + JSON.stringify(timelineObj));
         Alloy.Collections.Timeline.reset(timelineObj.data);
         Ti.App.Properties.setObject("cachedTimeline", timelineObj);
