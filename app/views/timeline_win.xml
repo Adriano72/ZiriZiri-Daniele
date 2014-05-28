@@ -1,6 +1,6 @@
 <Alloy>
 
-	<Collection src = "events" id="subsetEvents" instance="true"/>
+	<!--<Collection src = "events" id="subsetEvents" instance="true"/>-->
 	<Window id="win" class="container" title = "Diario" >
 
 		<!-- The Menu tag adds the Android menu. -->
@@ -11,7 +11,7 @@
 			<MenuItem id="mn_search" title="Immagine" onClick="refreshTable"/>
 			<!--<MenuItem id="Foto" title="Foto" icon="/images/86-camera.png"  showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />-->
 		</Menu>
-		<TableView id = "timelineTable" dataCollection = "$.subsetEvents" >
+		<TableView id = "timelineTable" dataCollection="Timeline" dataFunction="syncTimeline" dataTransform="transformData">
 
 			<TableViewRow class="row" onClick = "mostraDettaglioEvento">
 
@@ -22,7 +22,7 @@
 						<ImageView id="postIcon"/>
 						<View id="innerWrapper">
 							<View id="date_rating">
-								<Label id = "date" text ="{date}"/>
+								<Label id = "date" text ="{postDate}"/>
 								<Label id = "rating" text ="********"/>
 							</View>
 							<Label id = "name" text ="{name}"/>
@@ -45,25 +45,25 @@
 					<View id="middleWrapper">
 						<View class="post_icons_container first" >
 							<Label class="post_icon" id="cat_icon"/>
-							<Label class="btn_text" id="category" text ="{category}"/>
+							<Label class="btn_text" id="category" text ="{categoria}"/>
 						</View>
 						<View class="post_icons_container">
 							<Label class="post_icon" id="tag_icon"/>
-							<Label class="btn_text" id="tags"/>
+							<Label class="btn_text" id="tags" text="tags"/>
 						</View>
 						<View class="post_icons_container">
 							<Label class="post_icon" id="stories_icon"/>
-							<Label class="btn_text" id="stories"/>
+							<Label class="btn_text" id="stories" text="storie"/>
 						</View>
 
 					</View>
 					<View class="separator"/>
 					<View id="bottomWrapper">
 						<Label class="aspects_icons first" id="event_icon"/>
-						<Label class="aspects_icons" id="cashflow_icon"/>
-						<Label class="aspects_icons" id="document_icon"/>
-						<Label class="aspects_icons" id="note_icon"/>
-						<Label class="aspects_icons" id="link_icon"/>
+						<Label class="aspects_icons" id="cashflow_icon" backgroundImage="{iconCashFlow}"/>
+						<Label class="aspects_icons" id="document_icon" backgroundImage="{iconDocument}"/>/>
+						<Label class="aspects_icons" id="note_icon" backgroundImage="{iconNote}"/>/>
+						<Label class="aspects_icons" id="link_icon" backgroundImage="{iconLink}"/>/>
 						<Label class="aspects_icons" id="communication_icon"/>
 						<!--<Label id = "aspects" text="{aspects}"/>-->
 						<View class="show_all_container">

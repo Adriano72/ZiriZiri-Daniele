@@ -156,21 +156,39 @@
 
 ".post_icons_container": {
 	height: Ti.UI.SIZE,
+	//backgroundColor: "yellow",
 	width: Ti.UI.SIZE,
 	layout: "horizontal",
-	left: 40
+	left: 50
 	
 }
 
 ".post_icon": {
 	width: 44,
 	height: 44,
-	top:0
+	//backgroundColor: "red"
 	
 }
 
 "#cat_icon": {
 	backgroundImage: "/images/head-category.png",
+	left: 0,
+	width: 20,
+	height: 20
+	
+}
+
+"#tag_icon": {
+	backgroundImage: "/images/head-tag.png",
+	
+	left: 0,
+	width: 20,
+	height: 20
+	
+}
+
+"#stories_icon": {
+	backgroundImage: "/images/head-story.png",
 	
 	left: 0,
 	width: 20,
@@ -180,6 +198,33 @@
 
 
 "#category": {
+	touchEnabled: false,
+	font: {
+		
+		fontSize: 14
+	},
+	//backgroundColor: '#E3E3E3',
+	//borderRadius: Alloy.Globals.borderRad,
+	height: 18,
+	color: "#5E5E5E",
+	left: 5
+}
+
+"#tags": {
+	touchEnabled: false,
+	font: {
+		
+		fontSize: 14
+	},
+	//backgroundColor: '#E3E3E3',
+	//borderRadius: Alloy.Globals.borderRad,
+	height: 18,
+	width: Ti.UI.SIZE,
+	color: "#5E5E5E",
+	left: 5
+}
+
+"#stories": {
 	touchEnabled: false,
 	font: {
 		
@@ -239,21 +284,7 @@
 	left: 5,
 }
 
-"#cashflow_icon": {
-	backgroundImage: '/images/kernel-finance-off.png',
-}
 
-"#document_icon": {
-	backgroundImage: '/images/kernel-document-off.png',
-}
-
-"#note_icon": {
-	backgroundImage: '/images/kernel-note-off.png',
-}
-
-"#link_icon": {
-	backgroundImage: '/images/kernel-link-off.png',
-}
 
 "#communication_icon": {
 	backgroundImage: '/images/kernel-comunicazioni-off.png',
@@ -341,13 +372,14 @@
 
 ".btn_text": {
 	height: Ti.UI.SIZE,
-	width: Ti.UI.SIE,
+	width: 70,
 	color: "#fff",
+	ellipsize: true,
+	wordWrap: false,
 	font: {
 		
 		fontSize: 8
-	},
-	top: 1
+	}
 }
 
 ".icon": {

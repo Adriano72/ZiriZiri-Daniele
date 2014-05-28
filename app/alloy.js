@@ -10,7 +10,23 @@
 //
 // Alloy.Globals.someGlobalFunction = function(){};
 
+////////////////////////////////// Gestione Collection e Cache //////////////////
+
 var icons = require('/icons');
+var net = require('net');
+
+Alloy.Globals.cachedTimeline = Ti.App.Properties.getObject("cachedTimeline", null);
+Ti.API.info("TIMELINE CACHEATA: "+JSON.stringify(Alloy.Globals.cachedTimeline));
+
+var Post = Backbone.Model.extend();
+
+var Timeline = Backbone.Collection.extend({
+	model : Post
+});
+
+Alloy.Collections.Timeline = new Timeline();
+
+///////////////////////////// FIne Gestione Collection e Cache ////////////////
 
 //var net = require('net');
 

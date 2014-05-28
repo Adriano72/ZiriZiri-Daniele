@@ -2,6 +2,20 @@ var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
 var icons = require("/icons");
 
+var net = require("net");
+
+Alloy.Globals.cachedTimeline = Ti.App.Properties.getObject("cachedTimeline", null);
+
+Ti.API.info("TIMELINE CACHEATA: " + JSON.stringify(Alloy.Globals.cachedTimeline));
+
+var Post = Backbone.Model.extend();
+
+var Timeline = Backbone.Collection.extend({
+    model: Post
+});
+
+Alloy.Collections.Timeline = new Timeline();
+
 Alloy.Globals.baseUrl = "https://demo.ziriziri.com";
 
 Alloy.Globals.loading = Alloy.createWidget("nl.fokkezb.loading");

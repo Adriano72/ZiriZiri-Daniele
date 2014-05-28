@@ -2,6 +2,10 @@ var args = arguments[0] || {};
 
 var net = require('net');
 
+var moment = require('alloy/moment');
+moment.lang('it', Alloy.Globals.Moment_IT);
+moment.lang('it');
+
 // to keep track of content size on iOS
 var startIndex = 0;
 
@@ -48,10 +52,6 @@ $.timelineTable.addEventListener('postlayout', function() {
 
 });
 
-var moment = require('alloy/moment');
-moment.lang('it', Alloy.Globals.Moment_IT);
-moment.lang('it');
-
 //$.index.open();
 
 function showSpinner() {
@@ -59,17 +59,97 @@ function showSpinner() {
 
 };
 
-var subsetEvents = $.subsetEvents;
+var Timeline = Alloy.Collections.Timeline;
+
+//eventsCollection.fetch();
+
+//Ti.API.info("COLLECTION LENGTH: " + Alloy.Collections.post_timeline.length);
+
+if (_.isNull(Alloy.Globals.cachedTimeline)) {
+
+	net.getData(function(timelineObj) {
+
+		Ti.API.info("OGGETTO TIMELINE; " + JSON.stringify(timelineObj));
+
+		Alloy.Collections.Timeline.reset(timelineObj.data);
+
+		Ti.App.Properties.setObject("cachedTimeline", timelineObj);
+
+	});
+
+} else {
+
+	var timeTemp = Ti.App.Properties.getObject("cachedTimeline");
+	Ti.API.info("RETRIVING CACHED DATA");
+	Ti.API.info("LENGTH OGGETTO TIMELINE; " + JSON.stringify(timeTemp));
+
+	Alloy.Collections.Timeline.reset(timeTemp.data);
+	Ti.API.info("LENGTH COLLECTION: " + Alloy.Collections.Timeline.length);
+
+};
+
+function checkAspects(node, target) {
+	
+	if (_.isUndefined(node) || _.isUndefined(_.find(node, function(value) {
+		return value.kind.code == target;
+	}))) {
+
+		switch(target) {
+			case "CASHFLOWDATATYPE_CODE":
+				return ('/images/kernel-finance-off.png');
+				break;
+			case "DOCUMENTDATATYPE_CODE":
+				return ('/images/kernel-document-off.png');
+				break;
+			case "NOTEDATATYPE_CODE":
+				return ('/images/kernel-note-off.png');
+				break;
+			case "LINKDATATYPE_CODE":
+				return ('/images/kernel-link-off.png');
+			default:
+				return;
+		}
+
+	} else {
+		
+		switch(target) {
+			case "CASHFLOWDATATYPE_CODE":
+				return ('/images/kernel-finance-on.png');
+				break;
+			case "DOCUMENTDATATYPE_CODE":
+				return ('/images/kernel-document-on.png');
+				break;
+			case "NOTEDATATYPE_CODE":
+				return ('/images/kernel-note-on.png');
+				break;
+			case "LINKDATATYPE_CODE":
+				return ('/images/kernel-link-on.png');
+			default:
+				return;
+		}
+	}
+
+};
+
+function transformData(model) {
+	var attrs = model.toJSON();
+	//attrs.imageUrl = '/' + attrs.direction + '.png';
+	attrs.postDate = moment(attrs.referenceTime).fromNow(), attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
+	attrs.iconCashFlow = checkAspects(attrs.aspects, "CASHFLOWDATATYPE_CODE");
+	attrs.iconDocument = checkAspects(attrs.aspects, "DOCUMENTDATATYPE_CODE");
+	attrs.iconNote = checkAspects(attrs.aspects, "NOTEDATATYPE_CODE");
+	attrs.iconLink = checkAspects(attrs.aspects, "LINKDATATYPE_CODE");
+	return attrs;
+}
+
 //subsetEvents.reset();
 
 //var subsetEvents = Alloy.Collections.events;
 
-var table = $.subsetEvents.config.adapter.collection_name;
-Ti.API.info("Collection TABLE name: " + table);
+//var table = $.subsetEvents.config.adapter.collection_name;
+//Ti.API.info("Collection TABLE name: " + table);
 
 //subsetEvents.fetch({ query: 'select * from ' + table + ' where alloy_id = ' + 1});
-subsetEvents.fetch();
-Ti.API.info("Collection LENGTH: " + $.subsetEvents.length);
 
 net.getCategories(function(categoriesData) {
 
@@ -170,20 +250,17 @@ net.getPagamentoIncasso(function(p_pagamentoIncasso) {
 function refreshTable() {
 
 	Alloy.Globals.loading.show('Sincronizzazione...', false);
-	setTimeout(populateTable(),5000);
-	
 
 }
 
 function populateTable() {
 
 	Ti.API.info("POLULATE TABLE CALLED***");
-	
-	temp = [];
-	events.reset();
 
-	$.subsetEvents.reset();
-	
+	temp = [];
+	//events.reset();
+
+	//$.subsetEvents.reset();
 
 	//Ti.API.info("OBJ_TMLINE STRINGHIFIZZATO: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
 
@@ -277,12 +354,6 @@ function populateTable() {
 		post.save();
 
 	});
-
-};
-
-if (subsetEvents.length == 0) {
-
-	populateTable();
 
 };
 
