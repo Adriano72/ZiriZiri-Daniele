@@ -2,9 +2,9 @@ var session = Ti.App.Properties.getInt('sessionId', 0);
 //var session = 132;
 Ti.API.info("SESSION ID: " + session);
 
-exports.getData = function(page, max, _callback) {
+exports.getData = function(p_page, p_max, _callback) {
 
-	Ti.API.info("PARAMETRI: "+page+" "+max);
+	Ti.API.info("PARAMETRI: "+p_page+" "+p_max);
 
 	var xhr = Ti.Network.createHTTPClient();
 
