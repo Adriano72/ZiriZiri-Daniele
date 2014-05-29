@@ -1,1 +1,1 @@
-module.exports={"dependencies":{"starrating":"1.0","nl.fokkezb.loading":"1.6"}};
+module.exports={"dependencies":{"starrating":"1.0","nl.fokkezb.loading":"1.6","nl.fokkezb.infiniteScroll":"1.3.2"}};

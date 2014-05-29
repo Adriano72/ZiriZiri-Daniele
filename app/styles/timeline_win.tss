@@ -382,6 +382,17 @@
 	}
 }
 
+".bottom_bar_text": {
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIE,
+	color: "#fff",
+	font: {
+
+		fontSize: 8
+	},
+	top: 1
+}
+
 ".icon": {
 	width: 35,
 	height: 35,

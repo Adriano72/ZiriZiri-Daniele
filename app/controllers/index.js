@@ -8,7 +8,7 @@ if (Ti.App.Properties.getBool('authenticated', false)) {
 
 	if (_.isNull(Ti.App.Properties.getObject('timelineProp'))) {
 
-		net.getData(function(timeline_obj) {
+		net.getData(0,0,function(timeline_obj) {
 			Ti.API.info("RETURN CODE: " + timeline_obj.type.code);
 			Ti.App.Properties.setObject('timelineProp', timeline_obj);
 			Ti.API.info("OBJ_TMLINE: " + Ti.App.Properties.getObject('timelineProp'));
@@ -45,9 +45,10 @@ function do_login(e) {
 			Ti.App.Properties.setInt('sessionId', json.data.sessionId);
 			Ti.API.info("SESSIONE: " + Ti.App.Properties.getInt('sessionId', 0));
 			Alloy.Globals.loading.show('Sincronizzazione...', false);
+			
 			if (_.isNull(Ti.App.Properties.getObject('timelineProp'))) {
 
-				net.getData(function(timeline_obj) {
+				net.getData(0,0,function(timeline_obj) {
 					Ti.API.info("RETURN CODE: " + timeline_obj.type.code);
 					Ti.App.Properties.setObject('timelineProp', timeline_obj);
 					Ti.API.info("OBJ_TMLINE: " + Ti.App.Properties.getObject('timelineProp'));

@@ -19,8 +19,20 @@ var theActionBar = null;
 
 var temp = [];
 
-$.win.addEventListener('open', function() {
+$.is.init($.timelineTable);
 
+/*
+ $.win.addEventListener('open', function() {
+
+ Alloy.Globals.loading.show('Sincronizzazione...', false);
+
+ });
+ */
+
+Ti.API.info("OBJ_TMLINE: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
+
+function openEvent() {
+	Ti.API.info("WINDOW OPEN");
 	theActionBar = $.win.activity.actionBar;
 
 	$.win.activity.invalidateOptionsMenu();
@@ -33,24 +45,31 @@ $.win.addEventListener('open', function() {
 
 	};
 
-});
+	setTimeout(function() {
 
-/*
- $.win.addEventListener('open', function() {
+		net.getData(0, 0, function(timelineObj) {
 
- Alloy.Globals.loading.show('Sincronizzazione...', false);
+			//Ti.API.info("OGGETTO TIMELINE; " + JSON.stringify(timelineObj));
 
- });
- */
+			//Alloy.Collections.Timeline.reset(timelineObj.data);
 
-Ti.API.info("OBJ_TMLINE: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
+			Ti.App.Properties.setObject("cachedTimeline", timelineObj);
 
-// get initial table size for iOS
-$.timelineTable.addEventListener('postlayout', function() {
-	initialTableSize = $.timelineTable.rect.height;
+		});
+
+	}, 2000);
+
+}
+
+function postLayout(e) {
+	e.cancelBubble = true;
+	Ti.API.info("WINDOW POSTLAYOUT");
+}
+
+function tablePostlayout(e) {
+
 	Alloy.Globals.loading.hide();
-
-});
+}
 
 //$.index.open();
 
@@ -69,11 +88,11 @@ var Timeline = Alloy.Collections.Timeline;
 
 if (_.isNull(Alloy.Globals.cachedTimeline)) {
 
-	net.getData(0, 20, function(timelineObj) {
+	net.getData(0, 0, function(timelineObj) {
 
 		Ti.API.info("OGGETTO TIMELINE; " + JSON.stringify(timelineObj));
 
-		Alloy.Collections.Timeline.reset(timelineObj.data);
+		Alloy.Collections.Timeline.reset(timelineObj.data.slice(0,10));
 
 		Ti.App.Properties.setObject("cachedTimeline", timelineObj);
 
@@ -85,7 +104,7 @@ if (_.isNull(Alloy.Globals.cachedTimeline)) {
 	Ti.API.info("RETRIVING CACHED DATA");
 	Ti.API.info("LENGTH OGGETTO TIMELINE; " + JSON.stringify(timeTemp));
 
-	Alloy.Collections.Timeline.reset(timeTemp.data);
+	Alloy.Collections.Timeline.reset(timeTemp.data.slice(0,10));
 	Ti.API.info("LENGTH COLLECTION: " + Alloy.Collections.Timeline.length);
 
 };
@@ -93,7 +112,7 @@ if (_.isNull(Alloy.Globals.cachedTimeline)) {
 ///////////////////////////////////////// FINE CARICAMENTO TIMELINE ////////////////////////////////
 
 function checkAspects(node, target) {
-	
+
 	if (_.isUndefined(node) || _.isUndefined(_.find(node, function(value) {
 		return value.kind.code == target;
 	}))) {
@@ -115,7 +134,7 @@ function checkAspects(node, target) {
 		}
 
 	} else {
-		
+
 		switch(target) {
 			case "CASHFLOWDATATYPE_CODE":
 				return ('/images/kernel-finance-on.png');
@@ -300,40 +319,6 @@ function populateTable() {
 			var categoriaRow = value.category.name;
 		}
 
-		/*
-		 if (!(_.isNull(value.aspects) || _.isUndefined(value.aspects))) {
-
-		 _.forEach(value.aspects, function(obj, key) {
-
-		 switch (obj.kind.code) {
-
-		 case "CASHFLOWDATATYPE_CODE":
-
-		 aspectObj.finance += 1;
-		 break;
-
-		 case "DOCUMENTDATATYPE_CODE":
-
-		 aspectObj.documents += 1;
-		 break;
-
-		 case "NOTEDATATYPE_CODE":
-
-		 aspectObj.notes += 1;
-		 break;
-
-		 case "LINKDATATYPE_CODE":
-
-		 aspectObj.links += 1;
-		 break;
-		 }
-
-		 });
-
-		 }
-
-		 //Ti.API.info("FINANZA: "+aspectObj.finance+" DOCUMENTI: "+aspectObj.documents+ " LINKS: "+aspectObj.links+" NOTE: "+aspectObj.notes);
-		 */
 		var aspetti = (_.isNull(value.aspects) || _.isUndefined(value.aspects)) ? "no aspects" : value.aspects;
 
 		//Ti.API.info("MOMENT OUTPUT: " + moment(value.referenceTime).fromNow());
@@ -361,6 +346,29 @@ function populateTable() {
 
 };
 
+function loadMoreRows(e) {
+
+	
+		var timelineDataObj = Ti.App.Properties.getObject('timelineProp');
+		
+		//Ti.API.info("OGGETTO PROPERTY LENGTH: " + timelineDataObj.data.length);
+		
+		//Ti.API.info("COLLECTION LENGTH PRIMA: " + Alloy.Collections.Timeline.length);
+		
+		var begin = Alloy.Collections.Timeline.length;
+		
+		var end = Alloy.Collections.Timeline.length+10;
+		
+		var slice = timelineDataObj.data.slice(begin, end);
+
+		Alloy.Collections.Timeline.add(slice, {silent: true});
+		
+		syncTimeline();
+
+		//Ti.API.info("COLLECTION LENGTH DOPO: " + Alloy.Collections.Timeline.length);
+		e.done();
+
+};
 // cross-platform event listener for lazy tableview loading
 function lazyload(_evt) {
 	if (OS_IOS) {

@@ -2,9 +2,9 @@ var session = Ti.App.Properties.getInt('sessionId', 0);
 //var session = 132;
 Ti.API.info("SESSION ID: " + session);
 
-exports.getData = function(p_page, p_max, _callback) {
+exports.getData = function(page, max, _callback) {
 
-	Ti.API.info("PARAMETRI: "+p_page+" "+p_max);
+	Ti.API.info("PARAMETRI: "+page+" "+max);
 
 	var xhr = Ti.Network.createHTTPClient();
 
@@ -26,7 +26,7 @@ exports.getData = function(p_page, p_max, _callback) {
 
 	//xhr.open("GET", "https://demo.ziriziri.com/cxf/api/v01/actions/actions/680?_type=json");
 	xhr.open("GET", Alloy.Globals.baseUrl + "/zz/api/v01/actions/actions/" + session + "?_type=JSON"+pagination);
-	xhr.send();
+	xhr.send(); 
 };
 
 exports.getPost = function(postId, _callback) {
