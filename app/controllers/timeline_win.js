@@ -346,6 +346,14 @@ function populateTable() {
 
 };
 
+function gotoToday(){
+	
+	//Alloy.Collections.Timeline.first
+	
+	$.timelineTable.scrollToTop(0);
+	
+};
+
 function loadMoreRows(e) {
 
 
@@ -390,9 +398,16 @@ function lazyload(_evt) {
 }
 
 function mostraDettaglioEvento(e) {
+	
+	Ti.API.info("SOURCE CLICKED: "+e.source);
+	
+	
+	var selEvent = Alloy.Collections.Timeline.at(e.index);
+	
+	Alloy.createController("dettaglio_post", selEvent).getView().open();
 
 	//Ti.API.info("INDEX RIGA CLICCATA: "+JSON.stringify(e));
-
+	/*
 	try {
 		showSpinner();
 
@@ -406,6 +421,7 @@ function mostraDettaglioEvento(e) {
 		Ti.App.fireEvent("loading_done");
 		Ti.API.info("ERRORE: " + error);
 	}
+	*/
 
 	//Ti.API.info("SELECTED DATA ID: "+selEvent.id);
 

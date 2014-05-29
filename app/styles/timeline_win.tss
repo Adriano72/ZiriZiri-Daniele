@@ -47,7 +47,7 @@
 
 	//bottom:10,
 	//height: Ti.UI.SIZE,
-	touchEnabled: true,
+	touchEnabled: false,
 	layout: 'vertical'
 }
 
@@ -99,9 +99,10 @@
 "#date": {
 	touchEnabled: false,
 	font: {
-		fontSize: 12
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 14,
 	},
-	color: "#999999",
+	color: "#999",
 	//height: Ti.UI.SIZE,
 	textAlign: 'right',
 	wordWrap: false,
@@ -124,12 +125,12 @@
 "#name": {
 	touchEnabled: false,
 	font: {
-		fontSize: 14,
-		fontWeight: "bold"
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
 	},
-	color: "#434343",
-	height: Ti.UI.SIZE,
-	//width: '70%',
+	color: "#444",
+	height: 100,
+	width: '70%',
 	left: 0,
 	ellipsize: true,
 	wordWrap: true,
@@ -158,6 +159,7 @@
 	height: Ti.UI.SIZE,
 	//backgroundColor: "yellow",
 	width: Ti.UI.SIZE,
+	touchEnabled: false,
 	layout: "horizontal",
 	left: 50
 
@@ -166,12 +168,14 @@
 ".post_icon": {
 	width: 44,
 	height: 44,
+	touchEnabled: false,
 	//backgroundColor: "red"
 
 }
 
 "#cat_icon": {
 	backgroundImage: "/images/head-category.png",
+	touchEnabled: false,
 	left: 0,
 	width: 20,
 	height: 20
@@ -180,7 +184,7 @@
 
 "#tag_icon": {
 	backgroundImage: "/images/head-tag.png",
-
+	touchEnabled: false,
 	left: 0,
 	width: 20,
 	height: 20
@@ -189,7 +193,7 @@
 
 "#stories_icon": {
 	backgroundImage: "/images/head-story.png",
-
+	touchEnabled: false,
 	left: 0,
 	width: 20,
 	height: 20
@@ -200,41 +204,41 @@
 "#category": {
 	touchEnabled: false,
 	font: {
-
-		fontSize: 14
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 14,
 	},
 	//backgroundColor: '#E3E3E3',
 	//borderRadius: Alloy.Globals.borderRad,
 	height: 18,
-	color: "#5E5E5E",
+	color: "#999",
 	left: 5
 }
 
 "#tags": {
 	touchEnabled: false,
 	font: {
-
-		fontSize: 14
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 14,
 	},
 	//backgroundColor: '#E3E3E3',
 	//borderRadius: Alloy.Globals.borderRad,
 	height: 18,
 	width: Ti.UI.SIZE,
-	color: "#5E5E5E",
+	color: "#999",
 	left: 5
 }
 
 "#stories": {
 	touchEnabled: false,
 	font: {
-
-		fontSize: 14
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 14,
 	},
 	//backgroundColor: '#E3E3E3',
 	//borderRadius: Alloy.Globals.borderRad,
 	height: 18,
 	width: Ti.UI.SIZE,
-	color: "#5E5E5E",
+	color: "#999",
 	left: 5
 }
 
@@ -312,8 +316,11 @@
 }
 
 "#show_all_text": {
-	//backgroundColor: "red",
-	color: "#5EAEE3",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 14,
+	},
+	color: "#5FAEE3",
 	right: 30,
 	top:10,
 	bottom: 10,
@@ -334,7 +341,7 @@
 }
 
 "#bottomBar": {
-	backgroundColor: '#5EAEE3',
+	backgroundColor: '#5FAEE3',
 	width: Ti.UI.FILL,
 	touchEnabled: false,
 	height: 60,

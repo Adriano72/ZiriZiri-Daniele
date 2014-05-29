@@ -95,7 +95,7 @@
 					<Label class="icon" id="bottom_new"/>
 					<Label class="bottom_bar_text" id="txt_new"/>
 				</View>
-				<View class="icon_container">
+				<View class="icon_container" onClick="gotoToday">
 					<Label class="icon" id="bottom_today"/>
 					<Label class="bottom_bar_text" id="txt_today"/>
 				</View>

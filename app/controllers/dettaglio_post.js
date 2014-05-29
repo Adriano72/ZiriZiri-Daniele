@@ -1,6 +1,6 @@
 var args = arguments[0] || {};
 
-Ti.API.info("ARGS: " + args.data.id);
+Ti.API.info("ARGS: " + JSON.stringify(args));
 
 var creationDate = new Date(args.data.referenceTime);
 var category = (_.isNull(args.data.category) || _.isUndefined(args.data.category)) ? "" : " " + icons.tag + " " + args.data.category.name;

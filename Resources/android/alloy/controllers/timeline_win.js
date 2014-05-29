@@ -47,7 +47,7 @@ function Controller() {
                 borderRadius: 5,
                 borderWidth: 1,
                 borderColor: "#CCCCCC",
-                touchEnabled: true,
+                touchEnabled: false,
                 layout: "vertical"
             });
             __alloyId104.add(__alloyId106);
@@ -93,10 +93,11 @@ function Controller() {
                 top: 0,
                 width: Ti.UI.SIZE,
                 height: Ti.UI.SIZE,
-                color: "#999999",
+                color: "#999",
                 touchEnabled: false,
                 font: {
-                    fontSize: 12
+                    fontFamily: "SourceSansPro-Regular",
+                    fontSize: 14
                 },
                 textAlign: "right",
                 wordWrap: false,
@@ -120,13 +121,13 @@ function Controller() {
             __alloyId110.add(__alloyId112);
             var __alloyId113 = Ti.UI.createLabel({
                 top: 0,
-                width: Ti.UI.SIZE,
-                height: Ti.UI.SIZE,
-                color: "#434343",
+                width: "70%",
+                height: 100,
+                color: "#444",
                 touchEnabled: false,
                 font: {
-                    fontSize: 14,
-                    fontWeight: "bold"
+                    fontFamily: "SourceSansPro-Regular",
+                    fontSize: 18
                 },
                 left: 0,
                 ellipsize: true,
@@ -146,6 +147,7 @@ function Controller() {
             var __alloyId116 = Ti.UI.createView({
                 height: Ti.UI.SIZE,
                 width: Ti.UI.SIZE,
+                touchEnabled: false,
                 layout: "horizontal",
                 left: 0
             });
@@ -155,6 +157,7 @@ function Controller() {
                 width: 20,
                 height: 20,
                 color: "#000",
+                touchEnabled: false,
                 backgroundImage: "/images/head-category.png",
                 left: 0
             });
@@ -163,10 +166,11 @@ function Controller() {
                 top: 10,
                 width: 70,
                 height: 18,
-                color: "#5E5E5E",
+                color: "#999",
                 ellipsize: true,
                 wordWrap: false,
                 font: {
+                    fontFamily: "SourceSansPro-Regular",
                     fontSize: 14
                 },
                 touchEnabled: false,
@@ -177,6 +181,7 @@ function Controller() {
             var __alloyId120 = Ti.UI.createView({
                 height: Ti.UI.SIZE,
                 width: Ti.UI.SIZE,
+                touchEnabled: false,
                 layout: "horizontal",
                 left: 50
             });
@@ -186,6 +191,7 @@ function Controller() {
                 width: 20,
                 height: 20,
                 color: "#000",
+                touchEnabled: false,
                 backgroundImage: "/images/head-tag.png",
                 left: 0
             });
@@ -194,10 +200,11 @@ function Controller() {
                 top: 10,
                 width: Ti.UI.SIZE,
                 height: 18,
-                color: "#5E5E5E",
+                color: "#999",
                 ellipsize: true,
                 wordWrap: false,
                 font: {
+                    fontFamily: "SourceSansPro-Regular",
                     fontSize: 14
                 },
                 touchEnabled: false,
@@ -208,6 +215,7 @@ function Controller() {
             var __alloyId124 = Ti.UI.createView({
                 height: Ti.UI.SIZE,
                 width: Ti.UI.SIZE,
+                touchEnabled: false,
                 layout: "horizontal",
                 left: 50
             });
@@ -217,6 +225,7 @@ function Controller() {
                 width: 20,
                 height: 20,
                 color: "#000",
+                touchEnabled: false,
                 backgroundImage: "/images/head-story.png",
                 left: 0
             });
@@ -225,10 +234,11 @@ function Controller() {
                 top: 10,
                 width: Ti.UI.SIZE,
                 height: 18,
-                color: "#5E5E5E",
+                color: "#999",
                 ellipsize: true,
                 wordWrap: false,
                 font: {
+                    fontFamily: "SourceSansPro-Regular",
                     fontSize: 14
                 },
                 touchEnabled: false,
@@ -348,7 +358,11 @@ function Controller() {
                 top: 10,
                 width: Ti.UI.SIZE,
                 height: 25,
-                color: "#5EAEE3",
+                color: "#5FAEE3",
+                font: {
+                    fontFamily: "SourceSansPro-Regular",
+                    fontSize: 14
+                },
                 right: 30,
                 bottom: 10,
                 text: "Show All"
@@ -382,9 +396,6 @@ function Controller() {
                 Ti.App.Properties.setObject("cachedTimeline", timelineObj);
             });
         }, 2e3);
-    }
-    function showSpinner() {
-        Alloy.Globals.showSpinner();
     }
     function checkAspects(node, target) {
         if (_.isUndefined(node) || _.isUndefined(_.find(node, function(value) {
@@ -433,6 +444,9 @@ function Controller() {
     function refreshTable() {
         Alloy.Globals.loading.show("Sincronizzazione...", false);
     }
+    function gotoToday() {
+        $.timelineTable.scrollToTop(0);
+    }
     function loadMoreRows(e) {
         var timelineDataObj = Ti.App.Properties.getObject("timelineProp");
         Ti.API.info("OGGETTO PROPERTY: " + JSON.stringify(timelineDataObj));
@@ -446,17 +460,9 @@ function Controller() {
         e.done();
     }
     function mostraDettaglioEvento(e) {
-        try {
-            showSpinner();
-            var selEvent = subsetEvents.at(e.index).attributes;
-            net.getPost(selEvent.id, function(postData) {
-                Ti.API.info("DETTAGLIO POST: " + JSON.stringify(postData));
-                Alloy.createController("dettaglio_post", postData).getView().open();
-            });
-        } catch (error) {
-            Ti.App.fireEvent("loading_done");
-            Ti.API.info("ERRORE: " + error);
-        }
+        Ti.API.info("SOURCE CLICKED: " + e.source);
+        var selEvent = Alloy.Collections.Timeline.at(e.index);
+        Alloy.createController("dettaglio_post", selEvent).getView().open();
     }
     function slideRow(e) {
         Ti.API.info("SLIDE****");
@@ -503,7 +509,7 @@ function Controller() {
     var __alloyId144 = Alloy.Collections["Timeline"] || Timeline;
     __alloyId144.on("fetch destroy change add remove reset", syncTimeline);
     $.__views.bottomBar = Ti.UI.createView({
-        backgroundColor: "#5EAEE3",
+        backgroundColor: "#5FAEE3",
         width: Ti.UI.FILL,
         touchEnabled: false,
         height: 60,
@@ -589,6 +595,7 @@ function Controller() {
         id: "__alloyId147"
     });
     $.__views.buttonsContainer.add($.__views.__alloyId147);
+    gotoToday ? $.__views.__alloyId147.addEventListener("click", gotoToday) : __defers["$.__views.__alloyId147!click!gotoToday"] = true;
     $.__views.bottom_today = Ti.UI.createLabel({
         top: 0,
         width: 35,
@@ -689,6 +696,7 @@ function Controller() {
     __defers["$.__views.is!end!loadMoreRows"] && $.__views.is.on("end", loadMoreRows);
     __defers["$.__views.__alloyId145!click!refreshTable"] && $.__views.__alloyId145.addEventListener("click", refreshTable);
     __defers["$.__views.__alloyId146!click!createNewPost"] && $.__views.__alloyId146.addEventListener("click", createNewPost);
+    __defers["$.__views.__alloyId147!click!gotoToday"] && $.__views.__alloyId147.addEventListener("click", gotoToday);
     _.extend($, exports);
 }
 
