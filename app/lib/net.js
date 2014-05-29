@@ -3,30 +3,30 @@ var session = Ti.App.Properties.getInt('sessionId', 0);
 Ti.API.info("SESSION ID: " + session);
 
 exports.getData = function(page, max, _callback) {
-	
+
 	Ti.API.info("PARAMETRI: "+page+" "+max);
 
 	var xhr = Ti.Network.createHTTPClient();
-	
+
 	var pagination = (max > 0)?"&page="+page+"&max="+max:"";
 
 	xhr.onload = function() {
 		//Ti.API.info("RESPONSE: "+xhr.responseText);
 		//Ti.App.fireEvent("loading_done");
-		
+
 		_callback(JSON.parse(xhr.responseText));
-		
+
 	};
 
 	xhr.onerror = function(e) {
 		alert("Errore nella comunicazione con il server. Accertarsi che il dispositivo sia collegato alla rete e riprovare");
 	};
-	
+
 	session = Ti.App.Properties.getInt('sessionId', 0);
 
 	//xhr.open("GET", "https://demo.ziriziri.com/cxf/api/v01/actions/actions/680?_type=json");
 	xhr.open("GET", Alloy.Globals.baseUrl + "/zz/api/v01/actions/actions/" + session + "?_type=JSON"+pagination);
-	xhr.send();
+	xhr.send(); 
 };
 
 exports.getPost = function(postId, _callback) {
@@ -163,7 +163,7 @@ exports.saveAspect = function(allAspects, _callback) {
 	});
 
 	_.forEach(allAspects, function(value, key) {
-		
+
 		Ti.API.info("***SAVING ASPECT***");
 
 		var xhr = Ti.Network.createHTTPClient();
@@ -202,7 +202,7 @@ exports.saveAspect = function(allAspects, _callback) {
 
 		xhr.setRequestHeader('Accept', 'application/json');
 		xhr.setRequestHeader('Content-Type', 'application/json');
-		
+
 		Ti.API.info("JSON ASPETTO DA SALVARE: "+JSON.stringify(value));
 
 		xhr.send(JSON.stringify(value));
@@ -211,15 +211,15 @@ exports.saveAspect = function(allAspects, _callback) {
 };
 
 exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
-	
+
 	Ti.API.info("ARRAY ****:" + JSON.stringify(p_array));
-	
+
 	var tmpArr = [];
-	
+
 	tmpArr.push(p_array);
-	
+
 	tmpArr = _.flatten(tmpArr);
-	
+
 
 	var xhr = Ti.Network.createHTTPClient();
 
@@ -230,7 +230,7 @@ exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
 		var json = JSON.parse(this.responseText);
 
 		if (JSON.stringify(json.type.code) == "\"SUCCESS\"") {
-	
+
 			Ti.App.fireEvent("loading_done");
 			alert("Post salvato");
 			_callback();
@@ -247,19 +247,19 @@ exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
 	};
 
 	xhr.open('PUT', Alloy.Globals.baseUrl + '/zz/api/v01/actions/actions/' + session + '/' + p_postId + '/relations?_type=JSON');
-	
+
 	Ti.API.info("URL PUT CALL: "+Alloy.Globals.baseUrl + '/zz/api/v01/actions/actions/' + session + '/' + p_postId + '/relations?_type=JSON');
-	
+
 	xhr.setRequestHeader('Accept', 'application/json');
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	//xhr.setRequestHeader('data', p_array);
 	xhr.setRequestHeader('X-HTTP-Method-Override', 'PUT');
-	
+
 	var arrIdAspects = "["+p_array.toString()+"]";
-	
-	
+
+
 	tmpArr = JSON.stringify(tmpArr);
-	
+
 	Ti.API.info("ARRAY INVIATO: "+tmpArr);
 
 	xhr.send(tmpArr);

@@ -13,7 +13,6 @@
 ////////////////////////////////// Gestione Collection e Cache //////////////////
 
 var icons = require('/icons');
-var net = require('net');
 
 Alloy.Globals.cachedTimeline = Ti.App.Properties.getObject("cachedTimeline", null);
 Ti.API.info("TIMELINE CACHEATA: "+JSON.stringify(Alloy.Globals.cachedTimeline));

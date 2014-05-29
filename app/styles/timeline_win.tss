@@ -13,7 +13,7 @@
 }
 
 "TableView": {
-	
+
 	separatorColor: '#transparent',
 	bottom: 60
 }
@@ -31,7 +31,7 @@
 
 
 ".row": {
-	
+
 	className: 'itemRow',
 	height: 170
 }
@@ -44,7 +44,7 @@
 	borderRadius: 5,
 	borderWidth: 1,
 	borderColor: "#CCCCCC",
-	
+
 	//bottom:10,
 	//height: Ti.UI.SIZE,
 	touchEnabled: true,
@@ -52,7 +52,7 @@
 }
 
 "#topWrapper": {
-	
+
 	height: Ti.UI.SIZE,
 	left:10,
 	right:10,
@@ -81,7 +81,7 @@
 	height: 70,
 	//left: 5,
 	//top: 5,
-	
+
 	borderRadius: 4
 }
 
@@ -160,14 +160,14 @@
 	width: Ti.UI.SIZE,
 	layout: "horizontal",
 	left: 50
-	
+
 }
 
 ".post_icon": {
 	width: 44,
 	height: 44,
 	//backgroundColor: "red"
-	
+
 }
 
 "#cat_icon": {
@@ -175,32 +175,32 @@
 	left: 0,
 	width: 20,
 	height: 20
-	
+
 }
 
 "#tag_icon": {
 	backgroundImage: "/images/head-tag.png",
-	
+
 	left: 0,
 	width: 20,
 	height: 20
-	
+
 }
 
 "#stories_icon": {
 	backgroundImage: "/images/head-story.png",
-	
+
 	left: 0,
 	width: 20,
 	height: 20
-	
+
 }
 
 
 "#category": {
 	touchEnabled: false,
 	font: {
-		
+
 		fontSize: 14
 	},
 	//backgroundColor: '#E3E3E3',
@@ -213,7 +213,7 @@
 "#tags": {
 	touchEnabled: false,
 	font: {
-		
+
 		fontSize: 14
 	},
 	//backgroundColor: '#E3E3E3',
@@ -227,7 +227,7 @@
 "#stories": {
 	touchEnabled: false,
 	font: {
-		
+
 		fontSize: 14
 	},
 	//backgroundColor: '#E3E3E3',
@@ -293,13 +293,13 @@
 ".show_all_container": {
 	//backgroundColor: "yellow",
 	height: 25,
-	
+
 	height: Ti.UI.SIZE,
 	width: Ti.UI.FILL,
 	touchEnabled: false,
 	layout: "horizontal",
-	
-	
+
+
 	left: 5
 }
 
@@ -318,13 +318,13 @@
 	top:10,
 	bottom: 10,
 	height: 25,
-	
+
 	text: "Show All"
 }
 
 "#show_all_icon": {
 	right: 0,
-	
+
 	top:10,
 	bottom: 10,
 	backgroundImage: '/images/kernel-show-all.png',
@@ -353,7 +353,7 @@
 	layout: 'horizontal',
 	width: Ti.UI.SIZE,
 	top: 5,
-	
+
 	height: Ti.UI.SIZE
 }
 
@@ -362,12 +362,12 @@
 	width: Ti.UI.SIZE,
 	layout: "vertical",
 	left: 70
-	
+
 }
 
 ".first": {
 	left: 0
-	
+
 }
 
 ".btn_text": {
@@ -377,16 +377,27 @@
 	ellipsize: true,
 	wordWrap: false,
 	font: {
-		
+
 		fontSize: 8
 	}
+}
+
+".bottom_bar_text": {
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIE,
+	color: "#fff",
+	font: {
+
+		fontSize: 8
+	},
+	top: 1
 }
 
 ".icon": {
 	width: 35,
 	height: 35,
 	top:0
-	
+
 }
 
 "#bottom_sync": {
@@ -414,6 +425,5 @@
 
 "#txt_today": {
 	text: "TODAY"
-	
-}
 
+}
