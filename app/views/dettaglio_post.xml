@@ -24,6 +24,7 @@
 							<Label id = "rating" text ="********"/>
 						</View>
 						<Label id = "name" text="{name}"/>
+						
 
 					</View>
 				</View>
