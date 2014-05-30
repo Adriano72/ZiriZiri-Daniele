@@ -2,6 +2,13 @@ var args = arguments[0] || {};
 
 Ti.API.info("ARGS: " + JSON.stringify(args));
 
+//Alloy.Models.Post = Alloy.createModel("post", Alloy.Collections.Timeline.at(args));
+
+//var post = Alloy.createModel("post", Alloy.Collections.Timeline.at(args));
+
+Alloy.Models.singlePost = Alloy.Collections.Timeline.at(args);
+
+/*
 var creationDate = new Date(args.data.referenceTime);
 var category = (_.isNull(args.data.category) || _.isUndefined(args.data.category)) ? "" : " " + icons.tag + " " + args.data.category.name;
 
@@ -121,4 +128,9 @@ function aspectDetail(e) {
 	//Ti.API.info("CLICKED: "+e.source.id_code);
 	//Ti.API.info("ASPETTO SELEZIONATO; "+args.data.aspects[e.source.id_code].kind.code);
 
-}
+};
+*/
+
+$.win.addEventListener("close", function(){
+    $.destroy();
+});

@@ -1,20 +1,36 @@
 <Alloy>
-	<Window id="win" title="Post" class="container"  onOpen="closeActivityIndicator" title = "Dettaglio Post">
-		
+	
+	
+	<Window id="win" title="Post" class="container">
+
 		<!-- The Menu tag adds the Android menu. -->
 		<Menu id="menu" platform="android">
 
 			<!-- Cannot specify node text.  Use attributes only. -->
 			<MenuItem id="mn_notify" title="Scrivi"/>
-			<MenuItem id="mn_search" title="Immagine" onClick="refreshTable"/>
+			<MenuItem id="mn_search" title="Immagine"/>
 			<!--<MenuItem id="Foto" title="Foto" icon="/images/86-camera.png"  showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />-->
 		</Menu>
-		
-		<TableView id = "postTable"  dataCollection="Timeline" dataFunction="syncTimeline" dataTransform="transformData">
+		<TableView id="postTable">
 
-			<TableViewRow class="row" onClick = "mostraDettaglioEvento">
-		
-		
+			<TableViewRow class="row">
+
+				<View id="topWrapper">
+
+					<ImageView id="postIcon"/>
+					<View id="innerWrapper">
+						<View id="date_rating">
+							<Label id = "date"/>
+							<Label id = "rating" text ="********"/>
+						</View>
+						<Label id = "name" text="{name}"/>
+
+					</View>
+				</View>
+
+			</TableViewRow>
+			
+		</TableView>
 		
 		
 		<View id="detailHeader">
@@ -30,7 +46,7 @@
 		</View>
 		<View id="bottom_container">
 			<View id="mapview" ns="Alloy.Globals.Map"/>
-			<TableView id="aspectsTable" onClick = "aspectDetail"/>
+			<TableView id="aspectsTable"/>
 		</View>
 
 	</Window>

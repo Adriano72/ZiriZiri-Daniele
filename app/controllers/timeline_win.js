@@ -404,7 +404,7 @@ function mostraDettaglioEvento(e) {
 	
 	var selEvent = Alloy.Collections.Timeline.at(e.index);
 	
-	Alloy.createController("dettaglio_post", selEvent).getView().open();
+	Alloy.createController("dettaglio_post", e.index).getView().open();
 
 	//Ti.API.info("INDEX RIGA CLICCATA: "+JSON.stringify(e));
 	/*

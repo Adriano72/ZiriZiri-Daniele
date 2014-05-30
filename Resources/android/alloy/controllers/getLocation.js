@@ -1,15 +1,15 @@
 function Controller() {
-    function __alloyId38() {
-        $.__views.window.removeEventListener("open", __alloyId38);
+    function __alloyId37() {
+        $.__views.window.removeEventListener("open", __alloyId37);
         if ($.__views.window.activity) $.__views.window.activity.onCreateOptionsMenu = function(e) {
-            var __alloyId37 = {
+            var __alloyId36 = {
                 id: "salva",
                 title: "Scrivi",
                 icon: "/images/1040-checkmark.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
             };
-            $.__views.salva = e.menu.add(_.pick(__alloyId37, Alloy.Android.menuItemCreateArgs));
-            $.__views.salva.applyProperties(_.omit(__alloyId37, Alloy.Android.menuItemCreateArgs));
+            $.__views.salva = e.menu.add(_.pick(__alloyId36, Alloy.Android.menuItemCreateArgs));
+            $.__views.salva.applyProperties(_.omit(__alloyId36, Alloy.Android.menuItemCreateArgs));
             storeLocation ? $.__views.salva.addEventListener("click", storeLocation) : __defers["$.__views.salva!click!storeLocation"] = true;
         }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
@@ -67,7 +67,7 @@ function Controller() {
     });
     $.__views.window && $.addTopLevelView($.__views.window);
     reverseGeocoding ? $.__views.window.addEventListener("open", reverseGeocoding) : __defers["$.__views.window!open!reverseGeocoding"] = true;
-    $.__views.window.addEventListener("open", __alloyId38);
+    $.__views.window.addEventListener("open", __alloyId37);
     $.__views.mapview = Alloy.Globals.Map.createView({
         height: 130,
         top: 5,

@@ -14,58 +14,80 @@ function Controller() {
             };
             $.__views.mn_search = e.menu.add(_.pick(__alloyId32, Alloy.Android.menuItemCreateArgs));
             $.__views.mn_search.applyProperties(_.omit(__alloyId32, Alloy.Android.menuItemCreateArgs));
-            refreshTable ? $.__views.mn_search.addEventListener("click", refreshTable) : __defers["$.__views.mn_search!click!refreshTable"] = true;
         }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
             Ti.API.warn("or other UI component which does not have an Android activity.");
             Ti.API.warn("Android Menus can only be opened on TabGroups and heavyweight Windows.");
         }
     }
-    function syncTimeline(e) {
-        if (e && e.fromAdapter) return;
-        syncTimeline.opts || {};
-        var models = __alloyId35.models;
-        var len = models.length;
-        var rows = [];
-        for (var i = 0; len > i; i++) {
-            var __alloyId34 = models[i];
-            __alloyId34.__transform = transformData(__alloyId34);
-        }
-        $.__views.postTable.setData(rows);
-    }
-    function closeActivityIndicator() {
-        Ti.App.fireEvent("loading_done");
-    }
-    function aspectDetail(e) {
-        Alloy.createController("aspect_detail", args.data.aspects[e.source.id_code]).getView().open();
-    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dettaglio_post";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
+    var $model = arguments[0] ? arguments[0]["$model"] : null;
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
-    var __defers = {};
     $.__views.win = Ti.UI.createWindow({
         backgroundColor: "#F2F2F2",
         id: "win",
-        title: "Dettaglio Post"
+        title: "Post"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
-    closeActivityIndicator ? $.__views.win.addEventListener("open", closeActivityIndicator) : __defers["$.__views.win!open!closeActivityIndicator"] = true;
     $.__views.win.addEventListener("open", __alloyId33);
+    var __alloyId34 = [];
+    $.__views.__alloyId35 = Ti.UI.createTableViewRow({
+        className: "itemRow",
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: "#CCCCCC",
+        height: Ti.UI.SIZE,
+        id: "__alloyId35"
+    });
+    __alloyId34.push($.__views.__alloyId35);
+    $.__views.topWrapper = Ti.UI.createView({
+        id: "topWrapper"
+    });
+    $.__views.__alloyId35.add($.__views.topWrapper);
+    $.__views.postIcon = Ti.UI.createImageView({
+        id: "postIcon"
+    });
+    $.__views.topWrapper.add($.__views.postIcon);
+    $.__views.innerWrapper = Ti.UI.createView({
+        id: "innerWrapper"
+    });
+    $.__views.topWrapper.add($.__views.innerWrapper);
+    $.__views.date_rating = Ti.UI.createView({
+        id: "date_rating"
+    });
+    $.__views.innerWrapper.add($.__views.date_rating);
+    $.__views.date = Ti.UI.createLabel({
+        id: "date"
+    });
+    $.__views.date_rating.add($.__views.date);
+    $.__views.rating = Ti.UI.createLabel({
+        id: "rating",
+        text: "********"
+    });
+    $.__views.date_rating.add($.__views.rating);
+    $.__views.name = Ti.UI.createLabel({
+        font: {
+            fontFamily: "Rosario-Regular",
+            fontSize: "18dp",
+            fontWeight: "bold"
+        },
+        height: Ti.UI.SIZE,
+        color: "#2C3E52",
+        left: 5,
+        top: 5,
+        id: "name",
+        text: "undefined" != typeof $model.__transform["name"] ? $model.__transform["name"] : $model.get("name")
+    });
+    $.__views.innerWrapper.add($.__views.name);
     $.__views.postTable = Ti.UI.createTableView({
+        data: __alloyId34,
         id: "postTable"
     });
     $.__views.win.add($.__views.postTable);
-    var __alloyId35 = Alloy.Collections["Timeline"] || Timeline;
-    __alloyId35.on("fetch destroy change add remove reset", syncTimeline);
-    $.__views.__alloyId36 = Ti.UI.createTableViewRow({
-        id: "__alloyId36"
-    });
-    $.__views.win.add($.__views.__alloyId36);
-    mostraDettaglioEvento ? $.__views.__alloyId36.addEventListener("click", mostraDettaglioEvento) : __defers["$.__views.__alloyId36!click!mostraDettaglioEvento"] = true;
     $.__views.detailHeader = Ti.UI.createView({
         layout: "horizontal",
         top: 5,
@@ -187,89 +209,14 @@ function Controller() {
         id: "aspectsTable"
     });
     $.__views.bottom_container.add($.__views.aspectsTable);
-    aspectDetail ? $.__views.aspectsTable.addEventListener("click", aspectDetail) : __defers["$.__views.aspectsTable!click!aspectDetail"] = true;
-    exports.destroy = function() {
-        __alloyId35.off("fetch destroy change add remove reset", syncTimeline);
-    };
+    exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
     Ti.API.info("ARGS: " + JSON.stringify(args));
-    var creationDate = new Date(args.data.referenceTime);
-    var category = _.isNull(args.data.category) || _.isUndefined(args.data.category) ? "" : " " + icons.tag + " " + args.data.category.name;
-    if (_.isNull(args.data.location)) $.mapview.height = 0; else {
-        var location = args.data.location.name;
-        $.location.text = " " + icons.map_marker + " " + location + " ";
-        $.mapview.region = {
-            latitude: args.data.location.latitude,
-            longitude: args.data.location.longitude,
-            latitudeDelta: .01,
-            longitudeDelta: .01
-        };
-        var eventMarker = Alloy.Globals.Map.createAnnotation({
-            latitude: args.data.location.latitude,
-            longitude: args.data.location.longitude,
-            title: args.data.location.name,
-            pincolor: Alloy.Globals.Map.ANNOTATION_RED
-        });
-        $.mapview.addAnnotation(eventMarker);
-    }
-    $.dayBox.text = creationDate.getDate();
-    $.monthBox.text = creationDate.getCMonth();
-    $.name.text = args.data.name;
-    $.category.text = category;
-    var rows = [];
-    _.forEach(args.data.aspects, function(value, key) {
-        switch (value.kind.code) {
-          case "CASHFLOWDATATYPE_CODE":
-            var riga = Alloy.createController("rowCASHFLOW", {
-                id_code: key,
-                description: value.name,
-                importo: value.data.importo,
-                dataOperazione: value.data.dataOperazione,
-                dataValuta: value.data.dataValuta,
-                codTipoMovimento: value.data.tipoMovimento.codice
-            }).getView();
-            rows.push(riga);
-            break;
-
-          case "DOCUMENTDATATYPE_CODE":
-            Ti.API.info("ASPECT DESCRIPTION: " + JSON.stringify(value));
-            var riga = Alloy.createController("rowDOCUMENT", {
-                id_code: key,
-                titolo: value.name,
-                descrizione: value.description,
-                size: value.data.size,
-                name: value.data.name
-            }).getView();
-            rows.push(riga);
-            break;
-
-          case "LINKDATATYPE_CODE":
-            var riga = Alloy.createController("rowLINK", {
-                id_code: key,
-                description: value.description,
-                type: value.data.format.type,
-                title: value.data.title,
-                content: value.data.content
-            }).getView();
-            rows.push(riga);
-            break;
-
-          case "NOTEDATATYPE_CODE":
-            Ti.API.info("VALUE: " + JSON.stringify(value));
-            var riga = Alloy.createController("rowNOTE", {
-                id_code: key,
-                titolo: value.name,
-                timestamp: value.data.timestamp
-            }).getView();
-            rows.push(riga);
-        }
+    Alloy.Models.singlePost = Alloy.Collections.Timeline.at(args);
+    $.win.addEventListener("close", function() {
+        $.destroy();
     });
-    $.aspectsTable.setData(rows);
-    __defers["$.__views.win!open!closeActivityIndicator"] && $.__views.win.addEventListener("open", closeActivityIndicator);
-    __defers["$.__views.mn_search!click!refreshTable"] && $.__views.mn_search.addEventListener("click", refreshTable);
-    __defers["$.__views.__alloyId36!click!mostraDettaglioEvento"] && $.__views.__alloyId36.addEventListener("click", mostraDettaglioEvento);
-    __defers["$.__views.aspectsTable!click!aspectDetail"] && $.__views.aspectsTable.addEventListener("click", aspectDetail);
     _.extend($, exports);
 }
 

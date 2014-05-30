@@ -10,12 +10,18 @@
 //
 // Alloy.Globals.someGlobalFunction = function(){};
 
-////////////////////////////////// Gestione Collection e Cache //////////////////
+
+
+Alloy.Globals.winTop = (OS_IOS && parseInt(Ti.Platform.version, 10) >= 7) ? 20 : 0;
 
 var icons = require('/icons');
 
+////////////////////////////////// Gestione Collection e Cache //////////////////
+
 Alloy.Globals.cachedTimeline = Ti.App.Properties.getObject("cachedTimeline", null);
 Ti.API.info("TIMELINE CACHEATA: "+JSON.stringify(Alloy.Globals.cachedTimeline));
+
+Alloy.Models.singlePost = new Backbone.Model();
 
 var Post = Backbone.Model.extend();
 

@@ -1,10 +1,14 @@
 var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
+Alloy.Globals.winTop = 0;
+
 var icons = require("/icons");
 
 Alloy.Globals.cachedTimeline = Ti.App.Properties.getObject("cachedTimeline", null);
 
 Ti.API.info("TIMELINE CACHEATA: " + JSON.stringify(Alloy.Globals.cachedTimeline));
+
+Alloy.Models.singlePost = new Backbone.Model();
 
 var Post = Backbone.Model.extend();
 

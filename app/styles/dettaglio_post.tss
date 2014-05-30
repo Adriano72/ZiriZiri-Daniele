@@ -4,6 +4,28 @@
 	//layout: "vertical",
 }
 
+".row": {
+	className: 'itemRow',
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	height: Ti.UI.SIZE
+}
+
+
+".separator": {
+	height: 1,
+	width: Ti.UI.FILL,
+	backgroundColor: "#CCCCCC",
+	touchEnabled: false
+}
+
+
+
+
+
+
+
 "#bottom_container": {
   	backgroundColor: '#F2F2F2',
   	top: 100,
