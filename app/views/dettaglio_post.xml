@@ -1,5 +1,5 @@
 <Alloy>
-	
+	<Model src="Post" instance="true" id="postDetail"> 
 	
 	<Window id="win" title="Post" class="container">
 
@@ -23,7 +23,7 @@
 							<Label id = "date"/>
 							<Label id = "rating" text ="********"/>
 						</View>
-						<Label id = "name" text="{name}"/>
+						<Label id = "name" text="{Post.name}"/>
 						
 
 					</View>

@@ -21,13 +21,13 @@ var icons = require('/icons');
 Alloy.Globals.cachedTimeline = Ti.App.Properties.getObject("cachedTimeline", null);
 Ti.API.info("TIMELINE CACHEATA: "+JSON.stringify(Alloy.Globals.cachedTimeline));
 
-Alloy.Models.singlePost = new Backbone.Model();
+
 
 var Post = Backbone.Model.extend();
 
-var Timeline = Backbone.Collection.extend({
-	model : Post
-});
+Alloy.Models.Post = new Post();
+
+var Timeline = Backbone.Collection.extend();
 
 Alloy.Collections.Timeline = new Timeline();
 

@@ -6,7 +6,7 @@ Ti.API.info("ARGS: " + JSON.stringify(args));
 
 //var post = Alloy.createModel("post", Alloy.Collections.Timeline.at(args));
 
-Alloy.Models.singlePost = Alloy.Collections.Timeline.at(args);
+Alloy.Models.Post = Alloy.Collections.Timeline.at(args);
 
 /*
 var creationDate = new Date(args.data.referenceTime);
