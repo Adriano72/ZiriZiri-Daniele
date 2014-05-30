@@ -399,7 +399,7 @@ function lazyload(_evt) {
 
 function mostraDettaglioEvento(e) {
 	
-	Ti.API.info("SOURCE CLICKED: "+e.source);
+	
 	
 	
 	var selEvent = Alloy.Collections.Timeline.at(e.index);

@@ -1,4 +1,38 @@
 function Controller() {
+    function __alloyId33() {
+        $.__views.win.removeEventListener("open", __alloyId33);
+        if ($.__views.win.activity) $.__views.win.activity.onCreateOptionsMenu = function(e) {
+            var __alloyId31 = {
+                id: "mn_notify",
+                title: "Scrivi"
+            };
+            $.__views.mn_notify = e.menu.add(_.pick(__alloyId31, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_notify.applyProperties(_.omit(__alloyId31, Alloy.Android.menuItemCreateArgs));
+            var __alloyId32 = {
+                id: "mn_search",
+                title: "Immagine"
+            };
+            $.__views.mn_search = e.menu.add(_.pick(__alloyId32, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_search.applyProperties(_.omit(__alloyId32, Alloy.Android.menuItemCreateArgs));
+            refreshTable ? $.__views.mn_search.addEventListener("click", refreshTable) : __defers["$.__views.mn_search!click!refreshTable"] = true;
+        }; else {
+            Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
+            Ti.API.warn("or other UI component which does not have an Android activity.");
+            Ti.API.warn("Android Menus can only be opened on TabGroups and heavyweight Windows.");
+        }
+    }
+    function syncTimeline(e) {
+        if (e && e.fromAdapter) return;
+        syncTimeline.opts || {};
+        var models = __alloyId35.models;
+        var len = models.length;
+        var rows = [];
+        for (var i = 0; len > i; i++) {
+            var __alloyId34 = models[i];
+            __alloyId34.__transform = transformData(__alloyId34);
+        }
+        $.__views.postTable.setData(rows);
+    }
     function closeActivityIndicator() {
         Ti.App.fireEvent("loading_done");
     }
@@ -13,13 +47,25 @@ function Controller() {
     var $ = this;
     var exports = {};
     var __defers = {};
-    $.__views.dettaglio_post = Ti.UI.createWindow({
+    $.__views.win = Ti.UI.createWindow({
         backgroundColor: "#F2F2F2",
-        title: "Dettaglio Post",
-        id: "dettaglio_post"
+        id: "win",
+        title: "Dettaglio Post"
     });
-    $.__views.dettaglio_post && $.addTopLevelView($.__views.dettaglio_post);
-    closeActivityIndicator ? $.__views.dettaglio_post.addEventListener("open", closeActivityIndicator) : __defers["$.__views.dettaglio_post!open!closeActivityIndicator"] = true;
+    $.__views.win && $.addTopLevelView($.__views.win);
+    closeActivityIndicator ? $.__views.win.addEventListener("open", closeActivityIndicator) : __defers["$.__views.win!open!closeActivityIndicator"] = true;
+    $.__views.win.addEventListener("open", __alloyId33);
+    $.__views.postTable = Ti.UI.createTableView({
+        id: "postTable"
+    });
+    $.__views.win.add($.__views.postTable);
+    var __alloyId35 = Alloy.Collections["Timeline"] || Timeline;
+    __alloyId35.on("fetch destroy change add remove reset", syncTimeline);
+    $.__views.__alloyId36 = Ti.UI.createTableViewRow({
+        id: "__alloyId36"
+    });
+    $.__views.win.add($.__views.__alloyId36);
+    mostraDettaglioEvento ? $.__views.__alloyId36.addEventListener("click", mostraDettaglioEvento) : __defers["$.__views.__alloyId36!click!mostraDettaglioEvento"] = true;
     $.__views.detailHeader = Ti.UI.createView({
         layout: "horizontal",
         top: 5,
@@ -27,7 +73,7 @@ function Controller() {
         width: Ti.UI.FILL,
         id: "detailHeader"
     });
-    $.__views.dettaglio_post.add($.__views.detailHeader);
+    $.__views.win.add($.__views.detailHeader);
     $.__views.dateBox = Ti.UI.createView({
         width: 50,
         height: 60,
@@ -125,7 +171,7 @@ function Controller() {
         layout: "vertical",
         id: "bottom_container"
     });
-    $.__views.dettaglio_post.add($.__views.bottom_container);
+    $.__views.win.add($.__views.bottom_container);
     $.__views.mapview = Alloy.Globals.Map.createView({
         height: 130,
         top: 5,
@@ -142,7 +188,9 @@ function Controller() {
     });
     $.__views.bottom_container.add($.__views.aspectsTable);
     aspectDetail ? $.__views.aspectsTable.addEventListener("click", aspectDetail) : __defers["$.__views.aspectsTable!click!aspectDetail"] = true;
-    exports.destroy = function() {};
+    exports.destroy = function() {
+        __alloyId35.off("fetch destroy change add remove reset", syncTimeline);
+    };
     _.extend($, $.__views);
     var args = arguments[0] || {};
     Ti.API.info("ARGS: " + JSON.stringify(args));
@@ -218,7 +266,9 @@ function Controller() {
         }
     });
     $.aspectsTable.setData(rows);
-    __defers["$.__views.dettaglio_post!open!closeActivityIndicator"] && $.__views.dettaglio_post.addEventListener("open", closeActivityIndicator);
+    __defers["$.__views.win!open!closeActivityIndicator"] && $.__views.win.addEventListener("open", closeActivityIndicator);
+    __defers["$.__views.mn_search!click!refreshTable"] && $.__views.mn_search.addEventListener("click", refreshTable);
+    __defers["$.__views.__alloyId36!click!mostraDettaglioEvento"] && $.__views.__alloyId36.addEventListener("click", mostraDettaglioEvento);
     __defers["$.__views.aspectsTable!click!aspectDetail"] && $.__views.aspectsTable.addEventListener("click", aspectDetail);
     _.extend($, exports);
 }
