@@ -1,6 +1,5 @@
 <Alloy>
-	<Model src="Post" instance="true" id="postDetail"> 
-	
+
 	<Window id="win" title="Post" class="container">
 
 		<!-- The Menu tag adds the Android menu. -->
@@ -15,40 +14,40 @@
 
 			<TableViewRow class="row">
 
-				<View id="topWrapper">
+				<View class="eventContainer">
 
-					<ImageView id="postIcon"/>
-					<View id="innerWrapper">
-						<View id="date_rating">
-							<Label id = "date"/>
-							<Label id = "rating" text ="********"/>
+					<View id="topWrapper">
+
+						<ImageView id="postIcon"/>
+						<View id="innerWrapper">
+							<View id="date_rating">
+								<Label id = "date" text="{Post.referenceTime}"/>
+								<Label id = "rating" text ="*****"/>
+							</View>
+							<Label id = "name" text="{Post.name}"/>
 						</View>
-						<Label id = "name" text="{Post.name}"/>
-						
+
+					</View>
+					<View id="middleWrapper">
+						<View class="post_icons_container first" >
+							<Label class="post_icon" id="cat_icon"/>
+							<Label class="btn_text" id="category" text ="{Post.categoria}"/>
+						</View>
+						<View class="post_icons_container">
+							<Label class="post_icon" id="tag_icon"/>
+							<Label class="btn_text" id="tags" text="tags"/>
+						</View>
+						<View class="post_icons_container">
+							<Label class="post_icon" id="stories_icon"/>
+							<Label class="btn_text" id="stories" text="storie"/>
+						</View>
 
 					</View>
 				</View>
 
 			</TableViewRow>
-			
+
 		</TableView>
-		
-		
-		<View id="detailHeader">
-			<View id="dateBox">
-				<Label id="dayBox"/>
-				<Label id="monthBox"/>
-			</View>
-			<View id="headerBox">
-				<Label id = "name"/>
-				<Label id = "category"/>
-				<Label id = "location"/>
-			</View>
-		</View>
-		<View id="bottom_container">
-			<View id="mapview" ns="Alloy.Globals.Map"/>
-			<TableView id="aspectsTable"/>
-		</View>
 
 	</Window>
 </Alloy>

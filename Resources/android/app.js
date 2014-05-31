@@ -8,11 +8,13 @@ Alloy.Globals.cachedTimeline = Ti.App.Properties.getObject("cachedTimeline", nul
 
 Ti.API.info("TIMELINE CACHEATA: " + JSON.stringify(Alloy.Globals.cachedTimeline));
 
-var Post = Backbone.Model.extend();
+Alloy.Models.Post = new Backbone.Model();
 
-Alloy.Models.Post = new Post();
-
-var Timeline = Backbone.Collection.extend();
+var Timeline = Backbone.Collection.extend({
+    comparator: function(model) {
+        return -model.get("referenceTime");
+    }
+});
 
 Alloy.Collections.Timeline = new Timeline();
 

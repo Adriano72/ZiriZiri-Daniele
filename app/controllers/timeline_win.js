@@ -157,7 +157,8 @@ function checkAspects(node, target) {
 function transformData(model) {
 	var attrs = model.toJSON();
 	//attrs.imageUrl = '/' + attrs.direction + '.png';
-	attrs.postDate = moment(attrs.referenceTime).fromNow(), attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
+	attrs.postDate = moment(attrs.referenceTime).fromNow(); 
+	attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
 	attrs.iconCashFlow = checkAspects(attrs.aspects, "CASHFLOWDATATYPE_CODE");
 	attrs.iconDocument = checkAspects(attrs.aspects, "DOCUMENTDATATYPE_CODE");
 	attrs.iconNote = checkAspects(attrs.aspects, "NOTEDATATYPE_CODE");
@@ -402,9 +403,9 @@ function mostraDettaglioEvento(e) {
 	
 	
 	
-	var selEvent = Alloy.Collections.Timeline.at(e.index);
+	Alloy.Models.Post.set(Alloy.Collections.Timeline.at(e.index));
 	
-	Alloy.createController("dettaglio_post", e.index).getView().open();
+	Alloy.createController("dettaglio_post").getView();
 
 	//Ti.API.info("INDEX RIGA CLICCATA: "+JSON.stringify(e));
 	/*

@@ -20,52 +20,6 @@ function Controller() {
             Ti.API.warn("Android Menus can only be opened on TabGroups and heavyweight Windows.");
         }
     }
-    function __alloyId45(e) {
-        if (e && e.fromAdapter) return;
-        __alloyId45.opts || {};
-        var models = __alloyId44.models;
-        var len = models.length;
-        var rows = [];
-        for (var i = 0; len > i; i++) {
-            var __alloyId34 = models[i];
-            __alloyId34.__transform = {};
-            var __alloyId36 = Ti.UI.createTableViewRow({
-                className: "itemRow",
-                borderRadius: 5,
-                borderWidth: 1,
-                borderColor: "#CCCCCC",
-                height: Ti.UI.SIZE
-            });
-            rows.push(__alloyId36);
-            var __alloyId37 = Ti.UI.createView({});
-            __alloyId36.add(__alloyId37);
-            var __alloyId38 = Ti.UI.createImageView({});
-            __alloyId37.add(__alloyId38);
-            var __alloyId39 = Ti.UI.createView({});
-            __alloyId37.add(__alloyId39);
-            var __alloyId40 = Ti.UI.createView({});
-            __alloyId39.add(__alloyId40);
-            var __alloyId41 = Ti.UI.createLabel({});
-            __alloyId40.add(__alloyId41);
-            var __alloyId42 = Ti.UI.createLabel({
-                text: "********"
-            });
-            __alloyId40.add(__alloyId42);
-            var __alloyId43 = Ti.UI.createLabel({
-                font: {
-                    fontFamily: "Rosario-Regular",
-                    fontSize: "18dp",
-                    fontWeight: "bold"
-                },
-                height: Ti.UI.SIZE,
-                color: "#2C3E52",
-                left: 5,
-                top: 5
-            });
-            __alloyId39.add(__alloyId43);
-        }
-        $.__views.postTable.setData(rows);
-    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dettaglio_post";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -80,146 +34,253 @@ function Controller() {
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     $.__views.win.addEventListener("open", __alloyId33);
-    $.__views.postTable = Ti.UI.createTableView({
-        id: "postTable"
+    var __alloyId34 = [];
+    $.__views.__alloyId35 = Ti.UI.createTableViewRow({
+        className: "itemRow",
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: "#CCCCCC",
+        height: 170,
+        id: "__alloyId35"
     });
-    $.__views.win.add($.__views.postTable);
-    var __alloyId44 = Alloy.Collections["Post"] || Post;
-    __alloyId44.on("fetch destroy change add remove reset", __alloyId45);
-    $.__views.detailHeader = Ti.UI.createView({
-        layout: "horizontal",
-        top: 5,
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL,
-        id: "detailHeader"
-    });
-    $.__views.win.add($.__views.detailHeader);
-    $.__views.dateBox = Ti.UI.createView({
-        width: 50,
-        height: 60,
+    __alloyId34.push($.__views.__alloyId35);
+    $.__views.__alloyId36 = Ti.UI.createView({
         left: 5,
+        right: 5,
         top: 5,
-        backgroundColor: "#CC3939",
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: "#CCCCCC",
+        touchEnabled: false,
         layout: "vertical",
-        id: "dateBox"
+        id: "__alloyId36"
     });
-    $.__views.detailHeader.add($.__views.dateBox);
-    $.__views.dayBox = Ti.UI.createLabel({
-        width: 50,
-        height: 40,
-        top: 0,
-        textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
-        font: {
-            fontFamily: "AppIcons",
-            fontSize: 18,
-            fontWeight: "bold"
-        },
-        id: "dayBox"
+    $.__views.__alloyId35.add($.__views.__alloyId36);
+    $.__views.topWrapper = Ti.UI.createView({
+        height: Ti.UI.SIZE,
+        left: 10,
+        right: 10,
+        top: 10,
+        touchEnabled: false,
+        layout: "horizontal",
+        id: "topWrapper"
     });
-    $.__views.dateBox.add($.__views.dayBox);
-    $.__views.monthBox = Ti.UI.createLabel({
-        width: 50,
-        height: 20,
+    $.__views.__alloyId36.add($.__views.topWrapper);
+    $.__views.postIcon = Ti.UI.createImageView({
+        left: 0,
         top: 0,
-        textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+        image: "/images/android-robot.jpg",
+        touchEnabled: false,
+        width: 70,
+        height: 70,
+        borderRadius: 4,
+        id: "postIcon"
+    });
+    $.__views.topWrapper.add($.__views.postIcon);
+    $.__views.innerWrapper = Ti.UI.createView({
+        left: 10,
+        top: 0,
+        width: Ti.UI.SIZE,
+        height: 70,
+        touchEnabled: false,
+        layout: "vertical",
+        id: "innerWrapper"
+    });
+    $.__views.topWrapper.add($.__views.innerWrapper);
+    $.__views.date_rating = Ti.UI.createView({
+        top: 0,
+        left: 0,
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE,
+        touchEnabled: false,
+        layout: "horizontal",
+        id: "date_rating"
+    });
+    $.__views.innerWrapper.add($.__views.date_rating);
+    $.__views.date = Ti.UI.createLabel({
+        touchEnabled: false,
         font: {
-            fontFamily: "AppIcons",
+            fontFamily: "SourceSansPro-Regular",
             fontSize: 14
         },
-        backgroundColor: "#E0E0E0",
-        id: "monthBox"
-    });
-    $.__views.dateBox.add($.__views.monthBox);
-    $.__views.headerBox = Ti.UI.createView({
-        width: Ti.UI.FILL,
-        height: 100,
-        layout: "vertical",
-        left: 5,
+        color: "#999",
+        textAlign: "right",
+        wordWrap: false,
+        left: 0,
         top: 0,
-        id: "headerBox"
+        id: "date"
     });
-    $.__views.detailHeader.add($.__views.headerBox);
-    $.__views.name = Ti.UI.createLabel({
+    $.__views.date_rating.add($.__views.date);
+    $.__views.rating = Ti.UI.createLabel({
+        touchEnabled: false,
         font: {
-            fontFamily: "Rosario-Regular",
-            fontSize: "18dp",
-            fontWeight: "bold"
+            fontSize: 12
         },
+        color: "#999999",
         height: Ti.UI.SIZE,
-        color: "#2C3E52",
-        left: 5,
-        top: 5,
+        textAlign: "right",
+        left: 20,
+        top: 0,
+        id: "rating",
+        text: "*****"
+    });
+    $.__views.date_rating.add($.__views.rating);
+    $.__views.name = Ti.UI.createLabel({
+        touchEnabled: false,
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
+        },
+        color: "#444",
+        height: 100,
+        width: "70%",
+        left: 0,
+        ellipsize: true,
+        wordWrap: true,
+        top: 0,
         id: "name"
     });
-    $.__views.headerBox.add($.__views.name);
+    $.__views.innerWrapper.add($.__views.name);
+    $.__views.middleWrapper = Ti.UI.createView({
+        left: 10,
+        top: 10,
+        width: Ti.UI.FILL,
+        height: 40,
+        touchEnabled: false,
+        layout: "horizontal",
+        id: "middleWrapper"
+    });
+    $.__views.__alloyId36.add($.__views.middleWrapper);
+    $.__views.__alloyId37 = Ti.UI.createView({
+        height: Ti.UI.SIZE,
+        width: Ti.UI.SIZE,
+        touchEnabled: false,
+        layout: "horizontal",
+        left: 0,
+        id: "__alloyId37"
+    });
+    $.__views.middleWrapper.add($.__views.__alloyId37);
+    $.__views.cat_icon = Ti.UI.createLabel({
+        width: 20,
+        height: 20,
+        touchEnabled: false,
+        backgroundImage: "/images/head-category.png",
+        left: 0,
+        id: "cat_icon"
+    });
+    $.__views.__alloyId37.add($.__views.cat_icon);
     $.__views.category = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
-            fontFamily: "AppIcons",
-            fontSize: 12
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 14
         },
-        backgroundColor: "#E3E3E3",
         height: 18,
-        wordWrap: false,
-        width: Ti.UI.SIZE,
-        color: "#5E5E5E",
+        color: "#999",
         left: 5,
-        top: 5,
         id: "category"
     });
-    $.__views.headerBox.add($.__views.category);
-    $.__views.location = Ti.UI.createLabel({
+    $.__views.__alloyId37.add($.__views.category);
+    $.__views.__alloyId38 = Ti.UI.createView({
+        height: Ti.UI.SIZE,
+        width: Ti.UI.SIZE,
+        touchEnabled: false,
+        layout: "horizontal",
+        left: 50,
+        id: "__alloyId38"
+    });
+    $.__views.middleWrapper.add($.__views.__alloyId38);
+    $.__views.tag_icon = Ti.UI.createLabel({
+        width: 20,
+        height: 20,
+        touchEnabled: false,
+        backgroundImage: "/images/head-tag.png",
+        left: 0,
+        id: "tag_icon"
+    });
+    $.__views.__alloyId38.add($.__views.tag_icon);
+    $.__views.tags = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
-            fontFamily: "AppIcons",
-            fontSize: 12
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 14
         },
-        backgroundColor: "#E3E3E3",
         height: 18,
-        wordWrap: false,
-        ellipsize: true,
         width: Ti.UI.SIZE,
-        color: "#5E5E5E",
+        color: "#999",
         left: 5,
-        top: 5,
-        id: "location"
+        id: "tags",
+        text: "tags"
     });
-    $.__views.headerBox.add($.__views.location);
-    $.__views.bottom_container = Ti.UI.createView({
-        backgroundColor: "#F2F2F2",
-        top: 100,
-        layout: "vertical",
-        id: "bottom_container"
+    $.__views.__alloyId38.add($.__views.tags);
+    $.__views.__alloyId39 = Ti.UI.createView({
+        height: Ti.UI.SIZE,
+        width: Ti.UI.SIZE,
+        touchEnabled: false,
+        layout: "horizontal",
+        left: 50,
+        id: "__alloyId39"
     });
-    $.__views.win.add($.__views.bottom_container);
-    $.__views.mapview = Alloy.Globals.Map.createView({
-        height: 130,
-        top: 5,
-        width: Ti.UI.FILL,
-        id: "mapview",
-        ns: "Alloy.Globals.Map"
+    $.__views.middleWrapper.add($.__views.__alloyId39);
+    $.__views.stories_icon = Ti.UI.createLabel({
+        width: 20,
+        height: 20,
+        touchEnabled: false,
+        backgroundImage: "/images/head-story.png",
+        left: 0,
+        id: "stories_icon"
     });
-    $.__views.bottom_container.add($.__views.mapview);
-    $.__views.aspectsTable = Ti.UI.createTableView({
-        top: 5,
-        bottom: 5,
-        separatorColor: "transparent",
-        id: "aspectsTable"
+    $.__views.__alloyId39.add($.__views.stories_icon);
+    $.__views.stories = Ti.UI.createLabel({
+        touchEnabled: false,
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 14
+        },
+        height: 18,
+        width: Ti.UI.SIZE,
+        color: "#999",
+        left: 5,
+        id: "stories",
+        text: "storie"
     });
-    $.__views.bottom_container.add($.__views.aspectsTable);
-    var __alloyId46 = function() {
+    $.__views.__alloyId39.add($.__views.stories);
+    $.__views.postTable = Ti.UI.createTableView({
+        data: __alloyId34,
+        id: "postTable"
+    });
+    $.__views.win.add($.__views.postTable);
+    var __alloyId40 = function() {
+        $.date.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["referenceTime"] : Alloy.Models.Post.get("referenceTime");
+        $.date.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["referenceTime"] : Alloy.Models.Post.get("referenceTime");
         $.name.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["name"] : Alloy.Models.Post.get("name");
         $.name.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["name"] : Alloy.Models.Post.get("name");
+        $.category.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["categoria"] : Alloy.Models.Post.get("categoria");
+        $.category.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["categoria"] : Alloy.Models.Post.get("categoria");
     };
-    Alloy.Models.Post.on("fetch change destroy", __alloyId46);
+    Alloy.Models.Post.on("fetch change destroy", __alloyId40);
     exports.destroy = function() {
-        __alloyId44.off("fetch destroy change add remove reset", __alloyId45);
-        Alloy.Models.Post.off("fetch change destroy", __alloyId46);
+        Alloy.Models.Post.off("fetch change destroy", __alloyId40);
     };
     _.extend($, $.__views);
-    var args = arguments[0] || {};
-    Ti.API.info("ARGS: " + JSON.stringify(args));
-    Alloy.Models.Post = Alloy.Collections.Timeline.at(args);
+    arguments[0] || {};
+    var moment = require("alloy/moment");
+    moment.lang("it", Alloy.Globals.Moment_IT);
+    moment.lang("it");
+    Ti.API.info("MODEL: " + JSON.stringify(Alloy.Models.Post));
+    Ti.API.info("NULL CATEG: " + _.isNull(Alloy.Models.Post.get("category")));
+    var modJson = Alloy.Models.Post.toJSON();
+    Ti.API.info("MODEL JSON: " + JSON.stringify(modJson));
+    Ti.API.info("MODEL CATEGORY: " + modJson.category.name);
+    Alloy.Models.Post.set("referenceTime", moment(Alloy.Models.Post.get("referenceTime")).fromNow(), {
+        silent: true
+    });
+    Alloy.Models.Post.set("categoria", _.isNull(modJson.category) ? "" : modJson.category.name, {
+        silent: true
+    });
+    Ti.API.info("TRASF CATEGORY: " + Alloy.Models.Post.get("categoria"));
+    Alloy.Models.Post.trigger("change");
+    $.win.open();
     $.win.addEventListener("close", function() {
         $.destroy();
     });

@@ -61,9 +61,12 @@
 					<View id="bottomWrapper">
 						<Label class="aspects_icons first" id="event_icon"/>
 						<Label class="aspects_icons" id="cashflow_icon" backgroundImage="{iconCashFlow}"/>
-						<Label class="aspects_icons" id="document_icon" backgroundImage="{iconDocument}"/>/>
-						<Label class="aspects_icons" id="note_icon" backgroundImage="{iconNote}"/>/>
-						<Label class="aspects_icons" id="link_icon" backgroundImage="{iconLink}"/>/>
+						<Label class="aspects_icons" id="document_icon" backgroundImage="{iconDocument}"/>
+						/>
+						<Label class="aspects_icons" id="note_icon" backgroundImage="{iconNote}"/>
+						/>
+						<Label class="aspects_icons" id="link_icon" backgroundImage="{iconLink}"/>
+						/>
 						<Label class="aspects_icons" id="communication_icon"/>
 						<!--<Label id = "aspects" text="{aspects}"/>-->
 						<View class="show_all_container">
