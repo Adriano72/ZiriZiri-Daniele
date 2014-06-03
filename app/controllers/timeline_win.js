@@ -1,5 +1,7 @@
 var args = arguments[0] || {};
 
+$.win.open();
+
 var net = require('net');
 
 var moment = require('alloy/moment');
@@ -29,10 +31,8 @@ $.is.init($.timelineTable);
  });
  */
 
-Ti.API.info("OBJ_TMLINE: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
-
 function openEvent() {
-	Ti.API.info("WINDOW OPEN");
+	//Ti.API.info("WINDOW OPEN");
 	theActionBar = $.win.activity.actionBar;
 
 	$.win.activity.invalidateOptionsMenu();
@@ -45,40 +45,15 @@ function openEvent() {
 
 	};
 
-	setTimeout(function() {
+};
 
-		net.getData(0, 0, function(timelineObj) {
-
-			//Ti.API.info("OGGETTO TIMELINE; " + JSON.stringify(timelineObj));
-
-			//Alloy.Collections.Timeline.reset(timelineObj.data);
-
-			Ti.App.Properties.setObject("cachedTimeline", timelineObj);
-
-		});
-
-	}, 2000);
-
-}
-
-function postLayout(e) {
-	e.cancelBubble = true;
-	Ti.API.info("WINDOW POSTLAYOUT");
-}
-
-function tablePostlayout(e) {
+function closeSpinner() {
 
 	Alloy.Globals.loading.hide();
 }
 
-//$.index.open();
 
-function showSpinner() {
-	Alloy.Globals.showSpinner();
-
-};
-
-var Timeline = Alloy.Collections.Timeline;
+//var Timeline = Alloy.Collections.Timeline;
 
 //eventsCollection.fetch();
 
@@ -86,28 +61,16 @@ var Timeline = Alloy.Collections.Timeline;
 
 ///////////////////////////////////////// CARICAMENTO TIMELINE /////////////////////////////////////
 
-if (_.isNull(Alloy.Globals.cachedTimeline)) {
+var timeTemp = Ti.App.Properties.getObject("timelineProp");
+Ti.API.info("RETRIVING CACHED DATA, LENGTH STORED PROPERTY: " + timeTemp.length);
+Ti.API.info("OGGETTO PROPERTY TIMELINE; " + JSON.stringify(timeTemp));
 
-	net.getData(0, 0, function(timelineObj) {
+//timeTemp = timeTemp.slice(0,10), {silent: true};
 
-		Ti.API.info("OGGETTO TIMELINE; " + JSON.stringify(timelineObj));
+Alloy.Collections.Timeline.reset(timeTemp.slice(0,10), {silent: true});
+syncTimeline();
+Ti.API.info("LENGTH COLLECTION: " + Alloy.Collections.Timeline.length);
 
-		Alloy.Collections.Timeline.reset(timelineObj.data.slice(0,10));
-
-		Ti.App.Properties.setObject("cachedTimeline", timelineObj);
-
-	});
-
-} else {
-
-	var timeTemp = Ti.App.Properties.getObject("cachedTimeline");
-	Ti.API.info("RETRIVING CACHED DATA");
-	Ti.API.info("LENGTH OGGETTO TIMELINE; " + JSON.stringify(timeTemp));
-
-	Alloy.Collections.Timeline.reset(timeTemp.data.slice(0,10));
-	Ti.API.info("LENGTH COLLECTION: " + Alloy.Collections.Timeline.length);
-
-};
 
 ///////////////////////////////////////// FINE CARICAMENTO TIMELINE ////////////////////////////////
 
@@ -116,36 +79,47 @@ function checkAspects(node, target) {
 	if (_.isUndefined(node) || _.isUndefined(_.find(node, function(value) {
 		return value.kind.code == target;
 	}))) {
+		
+		Ti.API.info("TARGET OFF ****** "+target);
 
 		switch(target) {
+			
+			case "EVENTDATATYPE_CODE":
+				return ('/images/kernel-event-off.png');
+				break;
 			case "CASHFLOWDATATYPE_CODE":
 				return ('/images/kernel-finance-off.png');
 				break;
-			case "DOCUMENTDATATYPE_CODE":
+			case "FILEDOCUMENTDATATYPE_CODE":
 				return ('/images/kernel-document-off.png');
 				break;
 			case "NOTEDATATYPE_CODE":
 				return ('/images/kernel-note-off.png');
 				break;
-			case "LINKDATATYPE_CODE":
+			case "FILELINKDATATYPE_CODE":
 				return ('/images/kernel-link-off.png');
 			default:
 				return;
 		}
 
 	} else {
+		
+		Ti.API.info("TARGET ON ****** "+target);
 
 		switch(target) {
+			case "EVENTDATATYPE_CODE":
+				return ('/images/kernel-event-on.png');
+				break;
 			case "CASHFLOWDATATYPE_CODE":
 				return ('/images/kernel-finance-on.png');
 				break;
-			case "DOCUMENTDATATYPE_CODE":
+			case "FILEDOCUMENTDATATYPE_CODE":
 				return ('/images/kernel-document-on.png');
 				break;
 			case "NOTEDATATYPE_CODE":
 				return ('/images/kernel-note-on.png');
 				break;
-			case "LINKDATATYPE_CODE":
+			case "FILELINKDATATYPE_CODE":
 				return ('/images/kernel-link-on.png');
 			default:
 				return;
@@ -157,12 +131,19 @@ function checkAspects(node, target) {
 function transformData(model) {
 	var attrs = model.toJSON();
 	//attrs.imageUrl = '/' + attrs.direction + '.png';
-	attrs.postDate = moment(attrs.referenceTime).fromNow(); 
+	attrs.postDate = moment(attrs.referenceTime).fromNow();
 	attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
+	attrs.iconEvent = checkAspects(attrs.aspects, "EVENTDATATYPE_CODE");
 	attrs.iconCashFlow = checkAspects(attrs.aspects, "CASHFLOWDATATYPE_CODE");
-	attrs.iconDocument = checkAspects(attrs.aspects, "DOCUMENTDATATYPE_CODE");
+	attrs.iconDocument = checkAspects(attrs.aspects, "FILEDOCUMENTDATATYPE_CODE");
 	attrs.iconNote = checkAspects(attrs.aspects, "NOTEDATATYPE_CODE");
-	attrs.iconLink = checkAspects(attrs.aspects, "LINKDATATYPE_CODE");
+	attrs.iconLink = checkAspects(attrs.aspects, "FILELINKDATATYPE_CODE");
+	attrs.rating_1 = (attrs.rating > 0)?"/images/star-small.png":"";
+	attrs.rating_2 = (attrs.rating > 1)?"/images/star-small.png":"";
+	attrs.rating_3 = (attrs.rating > 2)?"/images/star-small.png":"";
+	attrs.rating_4 = (attrs.rating > 3)?"/images/star-small.png":"";
+	attrs.rating_5 = (attrs.rating > 4)?"/images/star-small.png":"";
+	attrs.tag = (_.isNull(attrs.tags))?"":attrs.tags[0].name;
 	return attrs;
 }
 
@@ -199,7 +180,7 @@ net.getCategories(function(categoriesData) {
 
 });
 
-net.getPostTemplate(function(p_postTemplate) {
+net.getPostTemplate(0,1,function(p_postTemplate) {
 
 	Ti.API.info("POST TEMPLATE: " + JSON.stringify(p_postTemplate));
 
@@ -274,108 +255,50 @@ net.getPagamentoIncasso(function(p_pagamentoIncasso) {
 function refreshTable() {
 
 	Alloy.Globals.loading.show('Sincronizzazione...', false);
+	net.getData(0, 100, function(timeline_obj) {
 
-}
-
-function populateTable() {
-
-	Ti.API.info("POLULATE TABLE CALLED***");
-
-	temp = [];
-	//events.reset();
-
-	//$.subsetEvents.reset();
-
-	//Ti.API.info("OBJ_TMLINE STRINGHIFIZZATO: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
-
-	var timelineDataObj = Ti.App.Properties.getObject('timelineProp');
-
-	//Ti.API.info("DATA FETCHED: "+JSON.stringify(timelineData));
-	//var f = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory,'timeline.txt');
-	//f.write(JSON.stringify(timelineData)); // write to the file
-
-	_.forEach(timelineDataObj.data, function(value, key) {
-
-		//Ti.API.info("VALUE: "+JSON.stringify(value));
-		//Ti.API.info("CATEGORY NAME: "+value.category.name);
-		//var timeline = Alloy.createModel("events", value);
-
-		var aspectObj = {
-			evento : 0,
-			finance : 0,
-			documents : 0,
-			links : 0,
-			notes : 0
-		};
-
-		var creationDate = new Date(value.referenceTime);
-
-		if (!(_.isNull(value.location))) {
-			aspectObj.evento = 1;
-			var locationRow = " " + icons.map_marker + " " + value.location.name + " ";
-		};
-
-		if (!(_.isNull(value.category))) {
-			//var categoriaRow = " " + icons.tag + " " + value.category.name + " ";
-			var categoriaRow = value.category.name;
-		}
-
-		var aspetti = (_.isNull(value.aspects) || _.isUndefined(value.aspects)) ? "no aspects" : value.aspects;
-
-		//Ti.API.info("MOMENT OUTPUT: " + moment(value.referenceTime).fromNow());
-
-		//(value.referenceTime, "YYYYMMDD").fromNow());
-
-		var post = Alloy.createModel('events', {
-			id : value.id,
-			name : value.name,
-			date : moment(value.referenceTime).fromNow(),
-			day : creationDate.getDate(),
-			month : creationDate.getCMonth().toUpperCase(),
-			category : categoriaRow,
-			location : locationRow,
-			aspects : icons.bar_chart_alt + " " + aspectObj.finance + "   " + icons.file_text_alt + " " + aspectObj.documents + "   " + icons.link + " " + aspectObj.links + "   " + icons.edit_sign + " " + aspectObj.notes
+		Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
+		Alloy.Collections.Timeline.reset(timeTemp.slice(0, 10), {
+			silent : true
 		});
-
-		//temp.push(post);
-
-		subsetEvents.add(post);
-
-		post.save();
+		syncTimeline();
 
 	});
 
-};
+}
 
-function gotoToday(){
-	
+
+
+function gotoToday() {
+
 	//Alloy.Collections.Timeline.first
-	
+
 	$.timelineTable.scrollToTop(0);
-	
+
 };
 
 function loadMoreRows(e) {
 
+	var timelineDataObj = Ti.App.Properties.getObject('timelineProp');
 
-		var timelineDataObj = Ti.App.Properties.getObject('timelineProp');
+	Ti.API.info("OGGETTO PROPERTY: " + JSON.stringify(timelineDataObj));
 
-		Ti.API.info("OGGETTO PROPERTY: " + JSON.stringify(timelineDataObj));
+	//Ti.API.info("COLLECTION LENGTH PRIMA: " + Alloy.Collections.Timeline.length);
 
-		//Ti.API.info("COLLECTION LENGTH PRIMA: " + Alloy.Collections.Timeline.length);
+	var begin = Alloy.Collections.Timeline.length;
 
-		var begin = Alloy.Collections.Timeline.length;
+	var end = Alloy.Collections.Timeline.length + 10;
 
-		var end = Alloy.Collections.Timeline.length+10;
+	var slice = timelineDataObj.slice(begin, end);
 
-		var slice = timelineDataObj.data.slice(begin, end);
+	Alloy.Collections.Timeline.add(slice, {
+		silent : true
+	});
 
-		Alloy.Collections.Timeline.add(slice, {silent: true});
+	syncTimeline();
 
-		syncTimeline();
-
-		//Ti.API.info("COLLECTION LENGTH DOPO: " + Alloy.Collections.Timeline.length);
-		e.done();
+	//Ti.API.info("COLLECTION LENGTH DOPO: " + Alloy.Collections.Timeline.length);
+	e.done();
 
 };
 // cross-platform event listener for lazy tableview loading
@@ -399,28 +322,25 @@ function lazyload(_evt) {
 }
 
 function mostraDettaglioEvento(e) {
-	
-	
-	
-	
+
 	Alloy.Models.Post.set(Alloy.Collections.Timeline.at(e.index));
-	
+
 	Alloy.createController("dettaglio_post").getView();
 
 	//Ti.API.info("INDEX RIGA CLICCATA: "+JSON.stringify(e));
 	/*
 	try {
-		showSpinner();
+	showSpinner();
 
-		var selEvent = subsetEvents.at(e.index).attributes;
+	var selEvent = subsetEvents.at(e.index).attributes;
 
-		net.getPost(selEvent.id, function(postData) {
-			Ti.API.info("DETTAGLIO POST: " + JSON.stringify(postData));
-			Alloy.createController("dettaglio_post", postData).getView().open();
-		});
+	net.getPost(selEvent.id, function(postData) {
+	Ti.API.info("DETTAGLIO POST: " + JSON.stringify(postData));
+	Alloy.createController("dettaglio_post", postData).getView().open();
+	});
 	} catch(error) {
-		Ti.App.fireEvent("loading_done");
-		Ti.API.info("ERRORE: " + error);
+	Ti.App.fireEvent("loading_done");
+	Ti.API.info("ERRORE: " + error);
 	}
 	*/
 
@@ -448,10 +368,10 @@ function createNewPost() {
 	Alloy.createController("newPost", function() {
 		refreshTable();
 	}).getView();
-}
+};
 
-$.win.open();
+//$.win.open();
 
 $.win.addEventListener("close", function() {
-	$.destroy();
+	$.win.destroy();
 });

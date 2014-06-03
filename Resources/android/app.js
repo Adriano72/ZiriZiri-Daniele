@@ -4,10 +4,6 @@ Alloy.Globals.winTop = 0;
 
 var icons = require("/icons");
 
-Alloy.Globals.cachedTimeline = Ti.App.Properties.getObject("cachedTimeline", null);
-
-Ti.API.info("TIMELINE CACHEATA: " + JSON.stringify(Alloy.Globals.cachedTimeline));
-
 Alloy.Models.Post = new Backbone.Model();
 
 var Timeline = Backbone.Collection.extend({
@@ -18,7 +14,7 @@ var Timeline = Backbone.Collection.extend({
 
 Alloy.Collections.Timeline = new Timeline();
 
-Alloy.Globals.baseUrl = "https://demo.ziriziri.com";
+Alloy.Globals.baseUrl = "http://172.30.113.10:10010/zz/api/v02";
 
 Alloy.Globals.loading = Alloy.createWidget("nl.fokkezb.loading");
 

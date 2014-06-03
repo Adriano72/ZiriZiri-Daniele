@@ -1,5 +1,9 @@
-var session = Ti.App.Properties.getInt('sessionId', 0);
+var session = Ti.App.Properties.getString('sessionId', 0);
 //var session = 132;
+var moment = require('alloy/moment');
+moment.lang('it', Alloy.Globals.Moment_IT);
+moment.lang('it');
+
 Ti.API.info("SESSION ID: " + session);
 
 exports.getData = function(page, max, _callback) {
@@ -11,7 +15,7 @@ exports.getData = function(page, max, _callback) {
 	var pagination = (max > 0)?"&page="+page+"&max="+max:"";
 
 	xhr.onload = function() {
-		//Ti.API.info("RESPONSE: "+xhr.responseText);
+		Ti.API.info("RESPONSE FROM GET DATA: "+xhr.responseText);
 		//Ti.App.fireEvent("loading_done");
 
 		_callback(JSON.parse(xhr.responseText));
@@ -22,10 +26,13 @@ exports.getData = function(page, max, _callback) {
 		alert("Errore nella comunicazione con il server. Accertarsi che il dispositivo sia collegato alla rete e riprovare");
 	};
 
-	session = Ti.App.Properties.getInt('sessionId', 0);
+	session = Ti.App.Properties.getString('sessionId', 0);
+	
+	var today = moment().format("YYYY-MM-DD");
 
 	//xhr.open("GET", "https://demo.ziriziri.com/cxf/api/v01/actions/actions/680?_type=json");
-	xhr.open("GET", Alloy.Globals.baseUrl + "/zz/api/v01/actions/actions/" + session + "?_type=JSON"+pagination);
+	Ti.API.info("################CALL:"+"GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON&from=2014-01-01&to="+today+""+pagination+"&cached=true");
+	xhr.open("GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON&from=2014-01-01&to="+today+""+pagination+"&cached=true");
 	xhr.send(); 
 };
 
@@ -39,15 +46,17 @@ exports.getPost = function(postId, _callback) {
 	};
 
 	xhr.onerror = function(e) {
-		alert("Error: " + JSON.stringify(e));
+		alert("Error gettin Timeline: " + JSON.stringify(e));
 	};
 
 	//xhr.open("GET", "https://demo.ziriziri.com/cxf/api/v01/actions/actions/680?_type=json");
-	xhr.open("GET", Alloy.Globals.baseUrl + "/zz/api/v01/actions/actions/" + session + "/" + postId + "?_type=JSON");
+	xhr.open("GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "/" + postId + "?_type=JSON");
 	xhr.send();
 };
 
-exports.getPostTemplate = function(_callback) {
+exports.getPostTemplate = function(page, max, _callback) {
+	
+	var pagination = (max > 0)?"&page="+page+"&max="+max:"";
 
 	var xhr = Ti.Network.createHTTPClient();
 
@@ -57,11 +66,11 @@ exports.getPostTemplate = function(_callback) {
 	};
 
 	xhr.onerror = function(e) {
-		alert("Error: " + JSON.stringify(e));
+		alert("Error getting Template " + JSON.stringify(e));
 	};
 
 	//xhr.open("GET", "https://demo.ziriziri.com/cxf/api/v01/actions/actions/680?_type=json");
-	xhr.open("GET", Alloy.Globals.baseUrl + "/zz/api/v01/actions/actions/templates/" + session + "?_type=JSON");
+	xhr.open("GET", Alloy.Globals.baseUrl + "/actions/actions/templates/" + session + "?_type=JSON"+pagination);
 	xhr.send();
 };
 
@@ -75,9 +84,9 @@ exports.getTipoMovimento = function(_callback) {
 	};
 
 	xhr.onerror = function(e) {
-		alert("Error: " + JSON.stringify(e));
+		alert("Error getting Tipo Movimento " + JSON.stringify(e));
 	}; https://demo.ziriziri.com/zz/api/v0/financial/financial/tipomovimento/103?_type=json
-	xhr.open("GET", Alloy.Globals.baseUrl + "/zz/api/v0/financial/financial/tipomovimento/" + session + "?_type=JSON");
+	xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/tipomovimento/" + session + "?_type=JSON");
 	xhr.send();
 };
 
@@ -91,9 +100,9 @@ exports.getPagamentoIncasso = function(_callback) {
 	};
 
 	xhr.onerror = function(e) {
-		alert("Error: " + JSON.stringify(e));
+		alert("Error getting Pagamento Incasso: " + JSON.stringify(e));
 	}; https://demo.ziriziri.com/zz/api/v0/financial/financial/tipomovimento/103?_type=json
-	xhr.open("GET", Alloy.Globals.baseUrl + "/zz/api/v0/financial/financial/pagamentoincasso/" + session + "?_type=JSON");
+	xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/aliasstrumentopagamentoincasso/" + session + "?_type=JSON");
 	xhr.send();
 };
 exports.getCategories = function(_callback) {
@@ -106,11 +115,11 @@ exports.getCategories = function(_callback) {
 	};
 
 	xhr.onerror = function(e) {
-		alert("Error: " + JSON.stringify(e));
+		alert("Error getting Categories " + JSON.stringify(e));
 	};
 
 	//xhr.open("GET", "https://demo.ziriziri.com/cxf/api/v01/actions/actions/680?_type=json");
-	xhr.open("GET", Alloy.Globals.baseUrl + "/zz/api/v01/categories/categories/getLeafs/" + session + "?_type=JSON");
+	xhr.open("GET", Alloy.Globals.baseUrl + "/categories/categories/getLeafs/" + session + "?_type=JSON");
 	xhr.send();
 };
 
@@ -145,7 +154,7 @@ exports.savePost = function(objPost, _callback) {
 	//https://demo.ziriziri.com/zz/api/v01/actions/actions/106?_type=json
 	//xhr.open('POST', 'https://demo.ziriziri.com/cxf/session/session/login/' + user_name + '?_type=JSON');
 	//https://demo.ziriziri.com/zz/api/v01/actions/actions/103?_type=json
-	xhr.open('POST', Alloy.Globals.baseUrl + '/zz/api/v01/actions/actions/' + session + '?_type=JSON');
+	xhr.open('POST', Alloy.Globals.baseUrl + '/actions/actions/' + session + '?_type=JSON');
 
 	xhr.setRequestHeader('Accept', 'application/json');
 	xhr.setRequestHeader('Content-Type', 'application/json');
@@ -198,7 +207,7 @@ exports.saveAspect = function(allAspects, _callback) {
 		//https://demo.ziriziri.com/zz/api/v01/actions/actions/106?_type=json
 		//xhr.open('POST', 'https://demo.ziriziri.com/cxf/session/session/login/' + user_name + '?_type=JSON');
 		//https://demo.ziriziri.com/zz/api/v01/actions/actions/103?_type=json
-		xhr.open('POST', Alloy.Globals.baseUrl + '/zz/api/v01/aspects/aspects/' + session + '?_type=JSON');
+		xhr.open('POST', Alloy.Globals.baseUrl + '/aspects/aspects/' + session + '?_type=JSON');
 
 		xhr.setRequestHeader('Accept', 'application/json');
 		xhr.setRequestHeader('Content-Type', 'application/json');
@@ -246,9 +255,9 @@ exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
 		Ti.API.error("ERRORE RISPOSTA SERVER: "+this.status + ' - ' + this.statusText);
 	};
 
-	xhr.open('PUT', Alloy.Globals.baseUrl + '/zz/api/v01/actions/actions/' + session + '/' + p_postId + '/relations?_type=JSON');
+	xhr.open('PUT', Alloy.Globals.baseUrl + '/actions/actions/' + session + '/' + p_postId + '/relations?_type=JSON');
 
-	Ti.API.info("URL PUT CALL: "+Alloy.Globals.baseUrl + '/zz/api/v01/actions/actions/' + session + '/' + p_postId + '/relations?_type=JSON');
+	Ti.API.info("URL PUT CALL: "+Alloy.Globals.baseUrl + '/actions/actions/' + session + '/' + p_postId + '/relations?_type=JSON');
 
 	xhr.setRequestHeader('Accept', 'application/json');
 	xhr.setRequestHeader('Content-Type', 'application/json');

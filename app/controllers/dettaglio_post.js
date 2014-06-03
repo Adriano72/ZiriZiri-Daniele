@@ -29,7 +29,20 @@ Alloy.Models.Post.set("referenceTime", moment(Alloy.Models.Post.get("referenceTi
 
 Alloy.Models.Post.set("categoria", (!_.isNull(modJson.category) ? modJson.category.name : ""), {silent: true});
 
-Ti.API.info("TRASF CATEGORY: "+Alloy.Models.Post.get("categoria"));
+var rating = Alloy.Models.Post.get("rating");
+
+Alloy.Models.Post.set("rating_1", (rating > 0)?"/images/star-small.png":"");
+Alloy.Models.Post.set("rating_2", (rating > 1)?"/images/star-small.png":"");
+Alloy.Models.Post.set("rating_3", (rating > 2)?"/images/star-small.png":"");
+Alloy.Models.Post.set("rating_4", (rating > 3)?"/images/star-small.png":"");
+Alloy.Models.Post.set("rating_5", (rating > 4)?"/images/star-small.png":"");
+
+Alloy.Models.Post.set("tag", (_.isNull(modJson.tags))?"":modJson.tags[0].name);
+
+var aspects = modJson.aspects;
+
+Ti.API.info("ASPETTI JSON: "+JSON.stringify(aspects));
+
 
 Alloy.Models.Post.trigger('change');
 

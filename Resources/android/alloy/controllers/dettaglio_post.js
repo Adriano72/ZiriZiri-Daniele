@@ -111,20 +111,56 @@ function Controller() {
         id: "date"
     });
     $.__views.date_rating.add($.__views.date);
-    $.__views.rating = Ti.UI.createLabel({
+    $.__views.ratingContainer = Ti.UI.createView({
         touchEnabled: false,
-        font: {
-            fontSize: 12
-        },
-        color: "#999999",
         height: Ti.UI.SIZE,
-        textAlign: "right",
+        layout: "horizontal",
+        width: 100,
         left: 20,
         top: 0,
-        id: "rating",
-        text: "*****"
+        id: "ratingContainer"
     });
-    $.__views.date_rating.add($.__views.rating);
+    $.__views.date_rating.add($.__views.ratingContainer);
+    $.__views.rating_1 = Ti.UI.createImageView({
+        width: 15,
+        height: 15,
+        left: 5,
+        top: 0,
+        id: "rating_1"
+    });
+    $.__views.ratingContainer.add($.__views.rating_1);
+    $.__views.rating_2 = Ti.UI.createImageView({
+        width: 15,
+        height: 15,
+        left: 5,
+        top: 0,
+        id: "rating_2"
+    });
+    $.__views.ratingContainer.add($.__views.rating_2);
+    $.__views.rating_3 = Ti.UI.createImageView({
+        width: 15,
+        height: 15,
+        left: 5,
+        top: 0,
+        id: "rating_3"
+    });
+    $.__views.ratingContainer.add($.__views.rating_3);
+    $.__views.rating_4 = Ti.UI.createImageView({
+        width: 15,
+        height: 15,
+        left: 5,
+        top: 0,
+        id: "rating_4"
+    });
+    $.__views.ratingContainer.add($.__views.rating_4);
+    $.__views.rating_5 = Ti.UI.createImageView({
+        width: 15,
+        height: 15,
+        left: 5,
+        top: 0,
+        id: "rating_5"
+    });
+    $.__views.ratingContainer.add($.__views.rating_5);
     $.__views.name = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -209,8 +245,7 @@ function Controller() {
         width: Ti.UI.SIZE,
         color: "#999",
         left: 5,
-        id: "tags",
-        text: "tags"
+        id: "tags"
     });
     $.__views.__alloyId38.add($.__views.tags);
     $.__views.__alloyId39 = Ti.UI.createView({
@@ -253,10 +288,22 @@ function Controller() {
     var __alloyId40 = function() {
         $.date.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["referenceTime"] : Alloy.Models.Post.get("referenceTime");
         $.date.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["referenceTime"] : Alloy.Models.Post.get("referenceTime");
+        $.rating_1.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["rating_1"] : Alloy.Models.Post.get("rating_1");
+        $.rating_1.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["rating_1"] : Alloy.Models.Post.get("rating_1");
+        $.rating_2.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["rating_2"] : Alloy.Models.Post.get("rating_2");
+        $.rating_2.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["rating_2"] : Alloy.Models.Post.get("rating_2");
+        $.rating_3.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["rating_3"] : Alloy.Models.Post.get("rating_3");
+        $.rating_3.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["rating_3"] : Alloy.Models.Post.get("rating_3");
+        $.rating_4.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["rating_4"] : Alloy.Models.Post.get("rating_4");
+        $.rating_4.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["rating_4"] : Alloy.Models.Post.get("rating_4");
+        $.rating_5.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["rating_5"] : Alloy.Models.Post.get("rating_5");
+        $.rating_5.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["rating_5"] : Alloy.Models.Post.get("rating_5");
         $.name.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["name"] : Alloy.Models.Post.get("name");
         $.name.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["name"] : Alloy.Models.Post.get("name");
         $.category.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["categoria"] : Alloy.Models.Post.get("categoria");
         $.category.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["categoria"] : Alloy.Models.Post.get("categoria");
+        $.tags.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["tag"] : Alloy.Models.Post.get("tag");
+        $.tags.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["tag"] : Alloy.Models.Post.get("tag");
     };
     Alloy.Models.Post.on("fetch change destroy", __alloyId40);
     exports.destroy = function() {
@@ -278,7 +325,15 @@ function Controller() {
     Alloy.Models.Post.set("categoria", _.isNull(modJson.category) ? "" : modJson.category.name, {
         silent: true
     });
-    Ti.API.info("TRASF CATEGORY: " + Alloy.Models.Post.get("categoria"));
+    var rating = Alloy.Models.Post.get("rating");
+    Alloy.Models.Post.set("rating_1", rating > 0 ? "/images/star-small.png" : "");
+    Alloy.Models.Post.set("rating_2", rating > 1 ? "/images/star-small.png" : "");
+    Alloy.Models.Post.set("rating_3", rating > 2 ? "/images/star-small.png" : "");
+    Alloy.Models.Post.set("rating_4", rating > 3 ? "/images/star-small.png" : "");
+    Alloy.Models.Post.set("rating_5", rating > 4 ? "/images/star-small.png" : "");
+    Alloy.Models.Post.set("tag", _.isNull(modJson.tags) ? "" : modJson.tags[0].name);
+    var aspects = modJson.aspects;
+    Ti.API.info("ASPETTI JSON: " + JSON.stringify(aspects));
     Alloy.Models.Post.trigger("change");
     $.win.open();
     $.win.addEventListener("close", function() {

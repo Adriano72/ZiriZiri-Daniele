@@ -16,8 +16,8 @@ var icons = require('/icons');
 
 ////////////////////////////////// Gestione Collection e Cache //////////////////
 
-Alloy.Globals.cachedTimeline = Ti.App.Properties.getObject("cachedTimeline", null);
-Ti.API.info("TIMELINE CACHEATA: " + JSON.stringify(Alloy.Globals.cachedTimeline));
+//Alloy.Globals.cachedTimeline = Ti.App.Properties.getObject("timelineProp", null);
+//Ti.API.info("TIMELINE CACHEATA: " + JSON.stringify(Alloy.Globals.cachedTimeline));
 
 Alloy.Models.Post = new Backbone.Model;
 
@@ -36,7 +36,10 @@ Alloy.Collections.Timeline = new Timeline();
 
 //Alloy.Globals.baseUrl = 'http://172.30.113.10:6969';
 
-Alloy.Globals.baseUrl = 'https://demo.ziriziri.com';
+//Alloy.Globals.baseUrl = 'https://demo.ziriziri.com';
+//Alloy.Globals.baseUrl = 'http://172.30.123.10:6969';
+Alloy.Globals.baseUrl = 'http://172.30.113.10:10010/zz/api/v02'; //SVILUPPO
+//Alloy.Globals.baseUrl = 'https://beta.ziriziri.com/zz/api/v02'; //PRODUZIONE
 
 Alloy.Globals.loading = Alloy.createWidget("nl.fokkezb.loading");
 
