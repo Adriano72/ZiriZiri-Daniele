@@ -1,0 +1,13 @@
+<Alloy>
+
+	<View class="aspectContainer">
+		<View class="separator"/>
+		<Label id="cashFlowIcon" class="aspectIcon"/>
+		<View class="dataWrapper">
+			<Label class="dataDisplay first" id="importo" text="{Aspetto.importo}"/>
+			<Label class="dataDisplay" id="tipoMovimento" text="{Aspetto.tipoMovimento}"/>
+			<Label class="dataDisplay" id="modalitaPagamento" text="{Aspetto.modalitaPagamento}"/>
+		</View>
+	</View>
+
+</Alloy>

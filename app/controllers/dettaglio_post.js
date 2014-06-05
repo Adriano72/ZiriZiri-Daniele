@@ -11,40 +11,59 @@ moment.lang('it');
 //var post = Alloy.createModel("post", Alloy.Collections.Timeline.at(args));
 
 //Alloy.Models.Post = args;
-Ti.API.info("MODEL: "+JSON.stringify(Alloy.Models.Post));
+Ti.API.info("MODEL: " + JSON.stringify(Alloy.Models.Post));
 
-Ti.API.info("NULL CATEG: "+ _.isNull(Alloy.Models.Post.get("category")));
+Ti.API.info("NULL CATEG: " + _.isNull(Alloy.Models.Post.get("category")));
 
 //Alloy.Models.Post.trigger('change', Alloy.Models.Post);
 
 //Alloy.Models.Post.set("name", "TestTransformName", {silent: true});
 
-var modJson  = Alloy.Models.Post.toJSON();
+var modJson = Alloy.Models.Post.toJSON();
 
-Ti.API.info("MODEL JSON: "+JSON.stringify(modJson));
-Ti.API.info("MODEL CATEGORY: "+modJson.category.name);
+Ti.API.info("MODEL JSON: " + JSON.stringify(modJson));
+Ti.API.info("MODEL CATEGORY: " + modJson.category.name);
 
+Alloy.Models.Post.set("referenceTime", moment(Alloy.Models.Post.get("referenceTime")).fromNow(), {
+	silent : true
+});
 
-Alloy.Models.Post.set("referenceTime", moment(Alloy.Models.Post.get("referenceTime")).fromNow(), {silent: true});
-
-Alloy.Models.Post.set("categoria", (!_.isNull(modJson.category) ? modJson.category.name : ""), {silent: true});
+Alloy.Models.Post.set("categoria", (!_.isNull(modJson.category) ? modJson.category.name : ""), {
+	silent : true
+});
 
 var rating = Alloy.Models.Post.get("rating");
 
-Alloy.Models.Post.set("rating_1", (rating > 0)?"/images/star-small.png":"");
-Alloy.Models.Post.set("rating_2", (rating > 1)?"/images/star-small.png":"");
-Alloy.Models.Post.set("rating_3", (rating > 2)?"/images/star-small.png":"");
-Alloy.Models.Post.set("rating_4", (rating > 3)?"/images/star-small.png":"");
-Alloy.Models.Post.set("rating_5", (rating > 4)?"/images/star-small.png":"");
+Alloy.Models.Post.set("rating_1", (rating > 0) ? "/images/star-small.png" : "");
+Alloy.Models.Post.set("rating_2", (rating > 1) ? "/images/star-small.png" : "");
+Alloy.Models.Post.set("rating_3", (rating > 2) ? "/images/star-small.png" : "");
+Alloy.Models.Post.set("rating_4", (rating > 3) ? "/images/star-small.png" : "");
+Alloy.Models.Post.set("rating_5", (rating > 4) ? "/images/star-small.png" : "");
 
-Alloy.Models.Post.set("tag", (_.isNull(modJson.tags))?"":modJson.tags[0].name);
+Alloy.Models.Post.set("tag", (_.isNull(modJson.tags)) ? "" : modJson.tags[0].name);
 
 var aspects = modJson.aspects;
 
-Ti.API.info("ASPETTI JSON: "+JSON.stringify(aspects));
-
+Ti.API.info("ASPETTI JSON: " + JSON.stringify(aspects));
 
 Alloy.Models.Post.trigger('change');
+
+var arrayAspettiCashflow = [];
+
+_.each(aspects, function(value) {
+
+	if (value.kind.code == "CASHFLOWDATATYPE_CODE") {
+		
+		Alloy.Models.Aspetto = new Backbone.Model;
+		Alloy.Models.Aspetto.set(value);
+		$.aspectsWrapper.add(Alloy.createController('briefCashflow').getView());
+	}
+
+});
+
+var arrayAspettiCashflow = _.where(aspects.kind, {
+	code : "CASHFLOWDATATYPE_CODE"
+});
 
 //Alloy.Models.Post.trigger('change');
 /*
@@ -171,4 +190,4 @@ $.win.open();
 
 $.win.addEventListener("close", function() {
 	$.destroy();
-}); 
+});

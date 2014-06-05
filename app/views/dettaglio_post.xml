@@ -49,6 +49,7 @@
 						</View>
 
 					</View>
+					<View id="aspectsWrapper"/>
 				</View>
 
 			</TableViewRow>

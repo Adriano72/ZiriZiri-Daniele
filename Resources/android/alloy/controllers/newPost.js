@@ -1,15 +1,15 @@
 function Controller() {
-    function __alloyId44() {
-        $.__views.window.removeEventListener("open", __alloyId44);
+    function __alloyId47() {
+        $.__views.window.removeEventListener("open", __alloyId47);
         if ($.__views.window.activity) $.__views.window.activity.onCreateOptionsMenu = function(e) {
-            var __alloyId43 = {
+            var __alloyId46 = {
                 id: "salva",
                 title: "Scrivi",
                 icon: "/images/floppy-disk.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
             };
-            $.__views.salva = e.menu.add(_.pick(__alloyId43, Alloy.Android.menuItemCreateArgs));
-            $.__views.salva.applyProperties(_.omit(__alloyId43, Alloy.Android.menuItemCreateArgs));
+            $.__views.salva = e.menu.add(_.pick(__alloyId46, Alloy.Android.menuItemCreateArgs));
+            $.__views.salva.applyProperties(_.omit(__alloyId46, Alloy.Android.menuItemCreateArgs));
             savePost ? $.__views.salva.addEventListener("click", savePost) : __defers["$.__views.salva!click!savePost"] = true;
         }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
@@ -278,9 +278,9 @@ function Controller() {
     });
     $.__views.window && $.addTopLevelView($.__views.window);
     populateCategories ? $.__views.window.addEventListener("open", populateCategories) : __defers["$.__views.window!open!populateCategories"] = true;
-    $.__views.window.addEventListener("open", __alloyId44);
-    var __alloyId45 = [];
-    $.__views.__alloyId46 = Ti.UI.createTableViewRow({
+    $.__views.window.addEventListener("open", __alloyId47);
+    var __alloyId48 = [];
+    $.__views.__alloyId49 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F2F2F2",
@@ -288,9 +288,9 @@ function Controller() {
         layout: "horizontal",
         left: 5,
         right: 5,
-        id: "__alloyId46"
+        id: "__alloyId49"
     });
-    __alloyId45.push($.__views.__alloyId46);
+    __alloyId48.push($.__views.__alloyId49);
     $.__views.titolo = Ti.UI.createTextField({
         borderColor: "#000000",
         color: "#336699",
@@ -304,8 +304,8 @@ function Controller() {
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "titolo"
     });
-    $.__views.__alloyId46.add($.__views.titolo);
-    $.__views.__alloyId47 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId49.add($.__views.titolo);
+    $.__views.__alloyId50 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F2F2F2",
@@ -314,9 +314,9 @@ function Controller() {
         left: 5,
         right: 5,
         leftImage: "/images/list.png",
-        id: "__alloyId47"
+        id: "__alloyId50"
     });
-    __alloyId45.push($.__views.__alloyId47);
+    __alloyId48.push($.__views.__alloyId50);
     $.__views.pkrCategoria = Ti.UI.createPicker({
         right: 5,
         left: 5,
@@ -325,14 +325,14 @@ function Controller() {
         id: "pkrCategoria",
         selectionIndicator: "true"
     });
-    $.__views.__alloyId47.add($.__views.pkrCategoria);
+    $.__views.__alloyId50.add($.__views.pkrCategoria);
     $.__views.newPostTable = Ti.UI.createTableView({
         top: 5,
         bottom: 50,
         left: 10,
         right: 10,
         separatorColor: "transparent",
-        data: __alloyId45,
+        data: __alloyId48,
         id: "newPostTable"
     });
     $.__views.window.add($.__views.newPostTable);
@@ -345,15 +345,15 @@ function Controller() {
         id: "bottomBar"
     });
     $.__views.window.add($.__views.bottomBar);
-    $.__views.__alloyId48 = Ti.UI.createLabel({
+    $.__views.__alloyId51 = Ti.UI.createLabel({
         height: 1,
         top: 0,
         touchEnabled: false,
         backgroundColor: "#D6D6D6",
         width: "100%",
-        id: "__alloyId48"
+        id: "__alloyId51"
     });
-    $.__views.bottomBar.add($.__views.__alloyId48);
+    $.__views.bottomBar.add($.__views.__alloyId51);
     $.__views.buttonsContainer = Ti.UI.createView({
         layout: "horizontal",
         width: Ti.UI.SIZE,
@@ -362,51 +362,51 @@ function Controller() {
         id: "buttonsContainer"
     });
     $.__views.bottomBar.add($.__views.buttonsContainer);
-    $.__views.__alloyId49 = Ti.UI.createLabel({
+    $.__views.__alloyId52 = Ti.UI.createLabel({
         left: 0,
         width: 20,
         height: 20,
         backgroundImage: "/images/851-calendar@2x.png",
-        id: "__alloyId49"
-    });
-    $.__views.buttonsContainer.add($.__views.__alloyId49);
-    addEvent ? $.__views.__alloyId49.addEventListener("click", addEvent) : __defers["$.__views.__alloyId49!click!addEvent"] = true;
-    $.__views.__alloyId50 = Ti.UI.createLabel({
-        left: 50,
-        width: 20,
-        height: 20,
-        backgroundImage: "/images/826-money-1@2x.png",
-        id: "__alloyId50"
-    });
-    $.__views.buttonsContainer.add($.__views.__alloyId50);
-    addCashflow ? $.__views.__alloyId50.addEventListener("click", addCashflow) : __defers["$.__views.__alloyId50!click!addCashflow"] = true;
-    $.__views.__alloyId51 = Ti.UI.createLabel({
-        left: 50,
-        width: 20,
-        height: 20,
-        backgroundImage: "/images/770-paper-clip@2x.png",
-        id: "__alloyId51"
-    });
-    $.__views.buttonsContainer.add($.__views.__alloyId51);
-    addDocument ? $.__views.__alloyId51.addEventListener("click", addDocument) : __defers["$.__views.__alloyId51!click!addDocument"] = true;
-    $.__views.__alloyId52 = Ti.UI.createLabel({
-        left: 50,
-        width: 20,
-        height: 20,
-        backgroundImage: "/images/809-clipboard@2x.png",
         id: "__alloyId52"
     });
     $.__views.buttonsContainer.add($.__views.__alloyId52);
-    addNote ? $.__views.__alloyId52.addEventListener("click", addNote) : __defers["$.__views.__alloyId52!click!addNote"] = true;
+    addEvent ? $.__views.__alloyId52.addEventListener("click", addEvent) : __defers["$.__views.__alloyId52!click!addEvent"] = true;
     $.__views.__alloyId53 = Ti.UI.createLabel({
         left: 50,
         width: 20,
         height: 20,
-        backgroundImage: "/images/843-link@2x.png",
+        backgroundImage: "/images/826-money-1@2x.png",
         id: "__alloyId53"
     });
     $.__views.buttonsContainer.add($.__views.__alloyId53);
-    addLink ? $.__views.__alloyId53.addEventListener("click", addLink) : __defers["$.__views.__alloyId53!click!addLink"] = true;
+    addCashflow ? $.__views.__alloyId53.addEventListener("click", addCashflow) : __defers["$.__views.__alloyId53!click!addCashflow"] = true;
+    $.__views.__alloyId54 = Ti.UI.createLabel({
+        left: 50,
+        width: 20,
+        height: 20,
+        backgroundImage: "/images/770-paper-clip@2x.png",
+        id: "__alloyId54"
+    });
+    $.__views.buttonsContainer.add($.__views.__alloyId54);
+    addDocument ? $.__views.__alloyId54.addEventListener("click", addDocument) : __defers["$.__views.__alloyId54!click!addDocument"] = true;
+    $.__views.__alloyId55 = Ti.UI.createLabel({
+        left: 50,
+        width: 20,
+        height: 20,
+        backgroundImage: "/images/809-clipboard@2x.png",
+        id: "__alloyId55"
+    });
+    $.__views.buttonsContainer.add($.__views.__alloyId55);
+    addNote ? $.__views.__alloyId55.addEventListener("click", addNote) : __defers["$.__views.__alloyId55!click!addNote"] = true;
+    $.__views.__alloyId56 = Ti.UI.createLabel({
+        left: 50,
+        width: 20,
+        height: 20,
+        backgroundImage: "/images/843-link@2x.png",
+        id: "__alloyId56"
+    });
+    $.__views.buttonsContainer.add($.__views.__alloyId56);
+    addLink ? $.__views.__alloyId56.addEventListener("click", addLink) : __defers["$.__views.__alloyId56!click!addLink"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
@@ -421,11 +421,11 @@ function Controller() {
     $.window.open();
     __defers["$.__views.window!open!populateCategories"] && $.__views.window.addEventListener("open", populateCategories);
     __defers["$.__views.salva!click!savePost"] && $.__views.salva.addEventListener("click", savePost);
-    __defers["$.__views.__alloyId49!click!addEvent"] && $.__views.__alloyId49.addEventListener("click", addEvent);
-    __defers["$.__views.__alloyId50!click!addCashflow"] && $.__views.__alloyId50.addEventListener("click", addCashflow);
-    __defers["$.__views.__alloyId51!click!addDocument"] && $.__views.__alloyId51.addEventListener("click", addDocument);
-    __defers["$.__views.__alloyId52!click!addNote"] && $.__views.__alloyId52.addEventListener("click", addNote);
-    __defers["$.__views.__alloyId53!click!addLink"] && $.__views.__alloyId53.addEventListener("click", addLink);
+    __defers["$.__views.__alloyId52!click!addEvent"] && $.__views.__alloyId52.addEventListener("click", addEvent);
+    __defers["$.__views.__alloyId53!click!addCashflow"] && $.__views.__alloyId53.addEventListener("click", addCashflow);
+    __defers["$.__views.__alloyId54!click!addDocument"] && $.__views.__alloyId54.addEventListener("click", addDocument);
+    __defers["$.__views.__alloyId55!click!addNote"] && $.__views.__alloyId55.addEventListener("click", addNote);
+    __defers["$.__views.__alloyId56!click!addLink"] && $.__views.__alloyId56.addEventListener("click", addLink);
     _.extend($, exports);
 }
 

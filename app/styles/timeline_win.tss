@@ -1,6 +1,6 @@
 ".container": {
 	//backgroundColor: '#d8d8d8',
-	backgroundColor: '#F2F2F2',
+	backgroundColor: '#F9F9F9',
 	//layout: "vertical",
 	exitOnClose: true
 }
@@ -31,7 +31,7 @@
 
 
 ".row": {
-
+	backgroundColor: '#F9F9F9',
 	className: 'itemRow',
 	height: 170
 }
@@ -44,7 +44,7 @@
 	borderRadius: 5,
 	borderWidth: 1,
 	borderColor: "#CCCCCC",
-
+	backgroundColor: '#FFF',
 	//bottom:10,
 	//height: Ti.UI.SIZE,
 	touchEnabled: false,
