@@ -269,6 +269,7 @@ function refreshTable() {
 			silent : true
 		});
 		syncTimeline();
+		Alloy.Globals.loading.hide();
 
 	});
 

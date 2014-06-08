@@ -31,8 +31,8 @@ exports.getData = function(page, max, _callback) {
 	var today = moment().format("YYYY-MM-DD");
 
 	//xhr.open("GET", "https://demo.ziriziri.com/cxf/api/v01/actions/actions/680?_type=json");
-	Ti.API.info("################CALL:"+"GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON&from=2014-01-01&to="+today+""+pagination+"&cached=true");
-	xhr.open("GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON&from=2014-01-01&to="+today+""+pagination+"&cached=true");
+	Ti.API.info("################CALL:"+"GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON&from=2014-01-01&to="+today+""+pagination+"&cached=false");
+	xhr.open("GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON&from=2014-01-01&to="+today+""+pagination+"&cached=false");
 	xhr.send(); 
 };
 

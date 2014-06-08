@@ -14,7 +14,7 @@ Alloy.Globals.winTop = (OS_IOS && parseInt(Ti.Platform.version, 10) >= 7) ? 20 :
 
 var icons = require('/icons');
 
-////////////////////////////////// Gestione Collection e Cache //////////////////
+////////////////////////////////// Gestio ne Collection e Cache //////////////////
 
 //Alloy.Globals.cachedTimeline = Ti.App.Properties.getObject("timelineProp", null);
 //Ti.API.info("TIMELINE CACHEATA: " + JSON.stringify(Alloy.Globals.cachedTimeline));
@@ -38,8 +38,8 @@ Alloy.Collections.Timeline = new Timeline();
 
 //Alloy.Globals.baseUrl = 'https://demo.ziriziri.com';
 //Alloy.Globals.baseUrl = 'http://172.30.123.10:6969';
-Alloy.Globals.baseUrl = 'http://172.30.113.10:10010/zz/api/v02'; //SVILUPPO
-//Alloy.Globals.baseUrl = 'https://beta.ziriziri.com/zz/api/v02'; //PRODUZIONE
+//Alloy.Globals.baseUrl = 'http://172.30.113.10:10010/zz/api/v02'; //SVILUPPO
+Alloy.Globals.baseUrl = 'https://beta.ziriziri.com/zz/api/v02'; //PRODUZIONE
 
 Alloy.Globals.loading = Alloy.createWidget("nl.fokkezb.loading");
 

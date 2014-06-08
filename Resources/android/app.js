@@ -14,7 +14,7 @@ var Timeline = Backbone.Collection.extend({
 
 Alloy.Collections.Timeline = new Timeline();
 
-Alloy.Globals.baseUrl = "http://172.30.113.10:10010/zz/api/v02";
+Alloy.Globals.baseUrl = "https://beta.ziriziri.com/zz/api/v02";
 
 Alloy.Globals.loading = Alloy.createWidget("nl.fokkezb.loading");
 

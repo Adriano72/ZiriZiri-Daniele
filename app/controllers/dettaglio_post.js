@@ -48,23 +48,66 @@ Ti.API.info("ASPETTI JSON: " + JSON.stringify(aspects));
 
 Alloy.Models.Post.trigger('change');
 
-var arrayAspettiCashflow = [];
+// GESTIONE RIEPILOGO ASPETTI *******
 
-_.each(aspects, function(value) {
-
-	if (value.kind.code == "CASHFLOWDATATYPE_CODE") {
-		
-		Alloy.Models.Aspetto = new Backbone.Model;
-		Alloy.Models.Aspetto.set(value);
-		$.aspectsWrapper.add(Alloy.createController('briefCashflow').getView());
-	}
-
+var aspettoEvento = _.filter(aspects, function(item) {
+	return item.kind.code == "EVENTDATATYPE_CODE";
 });
 
+var allAspettiCashflow = _.filter(aspects, function(item) {
+	return item.kind.code == "CASHFLOWDATATYPE_CODE";
+});
+
+Alloy.Collections.aspettiCashflow = new Backbone.Collection;
+
+Alloy.Collections.aspettiCashflow.reset(allAspettiCashflow);
+
+if (allAspettiCashflow.length > 0) {
+	$.aspectsWrapper.add(Alloy.createController('briefCashflow').getView());
+}
+
+var aspettiDocuments = _.filter(aspects, function(item) {
+	return item.kind.code == "FILEDOCUMENTDATATYPE_CODE";
+});
+
+var aspettiNotes = _.filter(aspects, function(item) {
+	return item.kind.code == "NOTEDATATYPE_CODE";
+});
+
+var aspettiLinks = _.filter(aspects, function(item) {
+	return item.kind.code == "FILELINKDATATYPE_CODE";
+});
+
+var aspettiComunications = _.filter(aspects, function(item) {
+	return item.kind.code == "COMMUNICATIONDATATYPE_CODE";
+});
+
+//Ti.API.info("ASPETTI CASHFLOW: "+JSON.stringify(aspettiCashflow));
+//Ti.API.info("ASPETTI CASHFLOW LENGTH: "+aspettiCashflow.length);
+/*
+if (!_.isNull(aspects)) {
+
+	_.each(aspects, function(value) {
+
+		if (value.kind.code == "CASHFLOWDATATYPE_CODE") {
+
+			//Ti.API.info(JSON.stringify(value));
+
+			//Alloy.Models.Aspetto = new Backbone.Model;
+			//Alloy.Models.Aspetto.set(value);
+			$.aspectsWrapper.add(Alloy.createController('briefCashflow').getView());
+		}
+
+	});
+
+}
+*/
+
+/*
 var arrayAspettiCashflow = _.where(aspects.kind, {
-	code : "CASHFLOWDATATYPE_CODE"
+code : "CASHFLOWDATATYPE_CODE"
 });
-
+*/
 //Alloy.Models.Post.trigger('change');
 /*
  var creationDate = new Date(args.data.referenceTime);
