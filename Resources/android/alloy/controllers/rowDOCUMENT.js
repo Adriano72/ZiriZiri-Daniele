@@ -15,13 +15,13 @@ function Controller() {
         id: "row"
     });
     $.__views.row && $.addTopLevelView($.__views.row);
-    $.__views.__alloyId56 = Ti.UI.createView({
+    $.__views.__alloyId66 = Ti.UI.createView({
         height: 40,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId56"
+        id: "__alloyId66"
     });
-    $.__views.row.add($.__views.__alloyId56);
+    $.__views.row.add($.__views.__alloyId66);
     $.__views.description = Ti.UI.createLabel({
         height: 30,
         font: {
@@ -37,7 +37,7 @@ function Controller() {
         width: 55,
         id: "description"
     });
-    $.__views.__alloyId56.add($.__views.description);
+    $.__views.__alloyId66.add($.__views.description);
     $.__views.titolo = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -49,7 +49,7 @@ function Controller() {
         width: Ti.UI.SIZE,
         id: "titolo"
     });
-    $.__views.__alloyId56.add($.__views.titolo);
+    $.__views.__alloyId66.add($.__views.titolo);
     $.__views.descrizione = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -61,14 +61,14 @@ function Controller() {
         width: Ti.UI.SIZE,
         id: "descrizione"
     });
-    $.__views.__alloyId56.add($.__views.descrizione);
-    $.__views.__alloyId57 = Ti.UI.createView({
+    $.__views.__alloyId66.add($.__views.descrizione);
+    $.__views.__alloyId67 = Ti.UI.createView({
         height: 40,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId57"
+        id: "__alloyId67"
     });
-    $.__views.row.add($.__views.__alloyId57);
+    $.__views.row.add($.__views.__alloyId67);
     $.__views.fileSize = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -80,7 +80,7 @@ function Controller() {
         width: Ti.UI.SIZE,
         id: "fileSize"
     });
-    $.__views.__alloyId57.add($.__views.fileSize);
+    $.__views.__alloyId67.add($.__views.fileSize);
     $.__views.fileName = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -92,7 +92,7 @@ function Controller() {
         width: Ti.UI.SIZE,
         id: "fileName"
     });
-    $.__views.__alloyId57.add($.__views.fileName);
+    $.__views.__alloyId67.add($.__views.fileName);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

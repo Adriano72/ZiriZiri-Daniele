@@ -1,0 +1,74 @@
+".separator": {
+	height: 1,
+	top: 0,
+	touchEnabled: false,
+	backgroundColor: '#D6D6D6',
+	width: Ti.UI.FILL
+}
+
+"#aspectTable": {
+	top: 5,
+	left: 30,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,	
+	separatorColor: '#transparent',
+	backgroundColor: 'blue'
+}	
+
+".row": {
+	backgroundColor: 'pink',
+	className: 'itemRow',
+	width: Ti.UI.FILL
+}
+
+".aspectContainer": {
+	//width: '100%',
+	//borderRadius: 5,
+	backgroundColor: 'lime',
+	top: 0,
+	//bottom:10,
+	height: 200 ,
+	width: Ti.UI.FILL,
+	touchEnabled: false,
+	layout: 'horizontal'
+}
+
+".aspectIcon": {
+	top:5,
+	left: 5,
+	width: 25,
+	height: 25
+}
+"#cashFlowIcon": {
+	backgroundImage: '/images/kernel-finance-on.png'
+}
+
+".dataWrapper": {
+	left: 10,
+	layout: "horizontal",
+	width: Ti.UI.FILL
+}
+
+".dataDisplay": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 14,
+	},
+	color: "#999",
+	backgroundColor: 'white',
+	width: 80,
+	wordWrap: false,
+	ellipsize: true,
+	left: 5
+	
+}
+
+"#importo": {
+	backgroundColor: 'yellow',
+	color: "#444"
+}
+
+".first": {
+	left: 0
+
+}

@@ -14,7 +14,7 @@ Alloy.Globals.winTop = (OS_IOS && parseInt(Ti.Platform.version, 10) >= 7) ? 20 :
 
 var icons = require('/icons');
 
-////////////////////////////////// Gestione Collection e Cache //////////////////
+////////////////////////////////// Gestio ne Collection e Cache //////////////////
 
 //Alloy.Globals.cachedTimeline = Ti.App.Properties.getObject("timelineProp", null);
 //Ti.API.info("TIMELINE CACHEATA: " + JSON.stringify(Alloy.Globals.cachedTimeline));

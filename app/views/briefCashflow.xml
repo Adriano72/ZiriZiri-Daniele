@@ -1,0 +1,21 @@
+<Alloy>
+
+	<View class="aspectContainer">
+
+		<Label class="separator"/>
+		<Label id="cashFlowIcon" class="aspectIcon"/>
+		<TableView id="aspectTable" dataCollection="aspettiCashflow"  dataFunction="syncAspects" dataTransform="transformData">
+
+			<TableViewRow class="row">
+				<View class="dataWrapper">
+					<Label class="dataDisplay first" id="importo" text="{importo}"/>
+					<Label class="dataDisplay" id="tipoMovimento" text="{tipoMovimento}"/>
+					<Label class="dataDisplay" id="modalitaPagamento" text="{modalitaPagamento}"/>
+				</View>
+			</TableViewRow>
+
+		</TableView>
+
+	</View>
+
+</Alloy>
