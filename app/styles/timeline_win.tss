@@ -160,7 +160,7 @@
 }
 
 ".post_icons_container": {
-	height: Ti.UI.SIZE,
+	
 	//backgroundColor: "yellow",
 	width: Ti.UI.SIZE,
 	touchEnabled: false,

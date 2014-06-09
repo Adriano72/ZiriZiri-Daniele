@@ -262,12 +262,14 @@ net.getPagamentoIncasso(function(p_pagamentoIncasso) {
 function refreshTable() {
 
 	Alloy.Globals.loading.show('Sincronizzazione...', false);
+	
 	net.getData(0, 100, function(timeline_obj) {
 
 		Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
-		Alloy.Collections.Timeline.reset(timeTemp.slice(0, 10), {
+		Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
 			silent : true
 		});
+		Ti.API.info("COLLECTION LENGTH AFTER SYNC: "+Alloy.Collections.Timeline.length);
 		syncTimeline();
 		Alloy.Globals.loading.hide();
 

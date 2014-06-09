@@ -54,6 +54,8 @@ var aspettoEvento = _.filter(aspects, function(item) {
 	return item.kind.code == "EVENTDATATYPE_CODE";
 });
 
+// ASPETTI CASHFLOW *********
+
 var allAspettiCashflow = _.filter(aspects, function(item) {
 	return item.kind.code == "CASHFLOWDATATYPE_CODE";
 });
@@ -66,9 +68,21 @@ if (allAspettiCashflow.length > 0) {
 	$.aspectsWrapper.add(Alloy.createController('briefCashflow').getView());
 }
 
-var aspettiDocuments = _.filter(aspects, function(item) {
+// ASPETTI DOCUMENT *********
+
+var allAspettiDocuments = _.filter(aspects, function(item) {
 	return item.kind.code == "FILEDOCUMENTDATATYPE_CODE";
 });
+
+Alloy.Collections.aspettiDocument = new Backbone.Collection;
+
+Alloy.Collections.aspettiDocument.reset(allAspettiDocuments);
+
+if (allAspettiDocuments.length > 0) {
+	$.aspectsWrapper.add(Alloy.createController('briefDocument').getView());
+}
+
+// ASPETTI NOTES *********
 
 var aspettiNotes = _.filter(aspects, function(item) {
 	return item.kind.code == "NOTEDATATYPE_CODE";

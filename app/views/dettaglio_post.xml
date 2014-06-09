@@ -10,51 +10,49 @@
 			<MenuItem id="mn_search" title="Immagine"/>
 			<!--<MenuItem id="Foto" title="Foto" icon="/images/86-camera.png"  showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />-->
 		</Menu>
-		<TableView id="postTable">
+		<ScrollView id="postTable">
 
-			<TableViewRow class="row">
+			<View class="eventContainer">
 
-				<View class="eventContainer">
+				<View id="topWrapper">
 
-					<View id="topWrapper">
-
-						<ImageView id="postIcon"/>
-						<View id="innerWrapper">
-							<View id="date_rating">
-								<Label id = "date" text="{Post.referenceTime}"/>
-								<View id = "ratingContainer">
-									<ImageView id="rating_1" class="ratingstars" image="{Post.rating_1}"/>
-									<ImageView id="rating_2" class="ratingstars" image="{Post.rating_2}"/>
-									<ImageView id="rating_3" class="ratingstars" image="{Post.rating_3}"/>
-									<ImageView id="rating_4" class="ratingstars" image="{Post.rating_4}"/>
-									<ImageView id="rating_5" class="ratingstars" image="{Post.rating_5}"/>
-								</View>
+					<ImageView id="postIcon"/>
+					<View id="innerWrapper">
+						<View id="date_rating">
+							<Label id = "date" text="{Post.referenceTime}"/>
+							<View id = "ratingContainer">
+								<ImageView id="rating_1" class="ratingstars" image="{Post.rating_1}"/>
+								<ImageView id="rating_2" class="ratingstars" image="{Post.rating_2}"/>
+								<ImageView id="rating_3" class="ratingstars" image="{Post.rating_3}"/>
+								<ImageView id="rating_4" class="ratingstars" image="{Post.rating_4}"/>
+								<ImageView id="rating_5" class="ratingstars" image="{Post.rating_5}"/>
 							</View>
-							<Label id = "name" text="{Post.name}"/>
 						</View>
-
+						<Label id = "name" text="{Post.name}"/>
 					</View>
-					<View id="middleWrapper">
-						<View class="post_icons_container first" >
-							<Label class="post_icon" id="cat_icon"/>
-							<Label class="btn_text" id="category" text ="{Post.categoria}"/>
-						</View>
-						<View class="post_icons_container">
-							<Label class="post_icon" id="tag_icon"/>
-							<Label class="btn_text" id="tags" text="{Post.tag}"/>
-						</View>
-						<View class="post_icons_container">
-							<Label class="post_icon" id="stories_icon"/>
-							<Label class="btn_text" id="stories" text="storie"/>
-						</View>
 
-					</View>
-					<View id="aspectsWrapper"/>
 				</View>
+				
+				<View id="middleWrapper">
+					<View class="post_icons_container first" >
+						<Label class="post_icon" id="cat_icon"/>
+						<Label class="btn_text" id="category" text ="{Post.categoria}"/>
+					</View>
+					<View class="post_icons_container">
+						<Label class="post_icon" id="tag_icon"/>
+						<Label class="btn_text" id="tags" text="{Post.tag}"/>
+					</View>
+					<View class="post_icons_container">
+						<Label class="post_icon" id="stories_icon"/>
+						<Label class="btn_text" id="stories" text="storie"/>
+					</View>
 
-			</TableViewRow>
+				</View>
+				<View id="aspectsWrapper"></View>
 
-		</TableView>
+			</View>
+
+		</ScrollView>
 
 	</Window>
 </Alloy>

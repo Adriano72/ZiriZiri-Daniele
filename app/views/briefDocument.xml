@@ -1,0 +1,21 @@
+<Alloy>
+
+	<View class="aspectDocumentContainer">
+
+		<Label class="separator"/>
+		<Label id="documentIcon" class="aspectDocumentIcon"/>
+		<TableView id="aspectDocumentTable" dataCollection="aspettiDocument"  dataFunction="syncAspects" dataTransform="transformData">
+
+			<TableViewRow class="row">
+				<View class="dataWrapper">
+					<Label class="dataDisplay first" id="titolo" text="{name}"/>
+					<Label class="dataDisplay" id="tipoFile" text="{tipoFile}"/>
+					<Label class="dataDisplay" id="visualizza" text="Visualizza"/>
+				</View>
+			</TableViewRow>
+
+		</TableView>
+
+	</View>
+
+</Alloy>

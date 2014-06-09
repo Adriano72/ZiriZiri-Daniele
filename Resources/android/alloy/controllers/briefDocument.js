@@ -2,25 +2,25 @@ function Controller() {
     function syncAspects(e) {
         if (e && e.fromAdapter) return;
         syncAspects.opts || {};
-        var models = __alloyId40.models;
+        var models = __alloyId50.models;
         var len = models.length;
         var rows = [];
         for (var i = 0; len > i; i++) {
-            var __alloyId32 = models[i];
-            __alloyId32.__transform = transformData(__alloyId32);
-            var __alloyId34 = Ti.UI.createTableViewRow({
+            var __alloyId42 = models[i];
+            __alloyId42.__transform = transformData(__alloyId42);
+            var __alloyId44 = Ti.UI.createTableViewRow({
                 backgroundColor: "pink",
                 className: "itemRow",
                 width: Ti.UI.FILL
             });
-            rows.push(__alloyId34);
-            var __alloyId36 = Ti.UI.createView({
+            rows.push(__alloyId44);
+            var __alloyId46 = Ti.UI.createView({
                 left: 2,
                 layout: "horizontal",
                 width: Ti.UI.FILL
             });
-            __alloyId34.add(__alloyId36);
-            var __alloyId37 = Ti.UI.createLabel({
+            __alloyId44.add(__alloyId46);
+            var __alloyId47 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -32,10 +32,10 @@ function Controller() {
                 wordWrap: false,
                 ellipsize: true,
                 left: 0,
-                text: "undefined" != typeof __alloyId32.__transform["importo"] ? __alloyId32.__transform["importo"] : __alloyId32.get("importo")
+                text: "undefined" != typeof __alloyId42.__transform["name"] ? __alloyId42.__transform["name"] : __alloyId42.get("name")
             });
-            __alloyId36.add(__alloyId37);
-            var __alloyId38 = Ti.UI.createLabel({
+            __alloyId46.add(__alloyId47);
+            var __alloyId48 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -46,10 +46,10 @@ function Controller() {
                 width: 95,
                 wordWrap: false,
                 ellipsize: true,
-                text: "undefined" != typeof __alloyId32.__transform["tipoMovimento"] ? __alloyId32.__transform["tipoMovimento"] : __alloyId32.get("tipoMovimento")
+                text: "undefined" != typeof __alloyId42.__transform["tipoFile"] ? __alloyId42.__transform["tipoFile"] : __alloyId42.get("tipoFile")
             });
-            __alloyId36.add(__alloyId38);
-            var __alloyId39 = Ti.UI.createLabel({
+            __alloyId46.add(__alloyId48);
+            var __alloyId49 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -60,75 +60,73 @@ function Controller() {
                 width: 95,
                 wordWrap: false,
                 ellipsize: true,
-                text: "undefined" != typeof __alloyId32.__transform["modalitaPagamento"] ? __alloyId32.__transform["modalitaPagamento"] : __alloyId32.get("modalitaPagamento")
+                text: "Visualizza"
             });
-            __alloyId36.add(__alloyId39);
+            __alloyId46.add(__alloyId49);
         }
-        $.__views.aspectTable.setData(rows);
+        $.__views.aspectDocumentTable.setData(rows);
     }
     function transformData(model) {
         var attrs = model.toJSON();
-        attrs.importo = attrs.data.importo + "€";
-        attrs.tipoMovimento = attrs.data.tipoMovimento.codice;
-        attrs.modalitaPagamento = attrs.data.modalitaPagamento.descrizioneBreve;
+        attrs.tipoFile = attrs.data.format.name;
         return attrs;
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
-    this.__controllerPath = "briefCashflow";
+    this.__controllerPath = "briefDocument";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
-    $.__views.briefCashflow = Ti.UI.createView({
+    $.__views.briefDocument = Ti.UI.createView({
         backgroundColor: "lime",
         top: 0,
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         touchEnabled: false,
         layout: "horizontal",
-        id: "briefCashflow"
+        id: "briefDocument"
     });
-    $.__views.briefCashflow && $.addTopLevelView($.__views.briefCashflow);
-    $.__views.__alloyId31 = Ti.UI.createLabel({
+    $.__views.briefDocument && $.addTopLevelView($.__views.briefDocument);
+    $.__views.__alloyId41 = Ti.UI.createLabel({
         height: 1,
         top: 0,
         touchEnabled: false,
         backgroundColor: "#D6D6D6",
         width: Ti.UI.FILL,
-        id: "__alloyId31"
+        id: "__alloyId41"
     });
-    $.__views.briefCashflow.add($.__views.__alloyId31);
-    $.__views.cashFlowIcon = Ti.UI.createLabel({
+    $.__views.briefDocument.add($.__views.__alloyId41);
+    $.__views.documentIcon = Ti.UI.createLabel({
         top: 5,
         left: 5,
         width: 25,
         height: 25,
-        backgroundImage: "/images/kernel-finance-on.png",
-        id: "cashFlowIcon"
+        backgroundImage: "/images/kernel-document-on.png",
+        id: "documentIcon"
     });
-    $.__views.briefCashflow.add($.__views.cashFlowIcon);
-    $.__views.aspectTable = Ti.UI.createTableView({
+    $.__views.briefDocument.add($.__views.documentIcon);
+    $.__views.aspectDocumentTable = Ti.UI.createTableView({
         top: 5,
         left: 0,
         width: "90%",
         height: Ti.UI.SIZE,
         separatorColor: "#transparent",
         backgroundColor: "blue",
-        id: "aspectTable"
+        id: "aspectDocumentTable"
     });
-    $.__views.briefCashflow.add($.__views.aspectTable);
-    var __alloyId40 = Alloy.Collections["aspettiCashflow"] || aspettiCashflow;
-    __alloyId40.on("fetch destroy change add remove reset", syncAspects);
+    $.__views.briefDocument.add($.__views.aspectDocumentTable);
+    var __alloyId50 = Alloy.Collections["aspettiDocument"] || aspettiDocument;
+    __alloyId50.on("fetch destroy change add remove reset", syncAspects);
     exports.destroy = function() {
-        __alloyId40.off("fetch destroy change add remove reset", syncAspects);
+        __alloyId50.off("fetch destroy change add remove reset", syncAspects);
     };
     _.extend($, $.__views);
     arguments[0] || {};
-    Ti.API.info("COLLECTION CASHFLOW: " + JSON.stringify(Alloy.Collections.aspettiCashflow));
+    Ti.API.info("COLLECTION DOCUMENT: " + JSON.stringify(Alloy.Collections.aspettiDocument));
     syncAspects();
-    $.briefCashflow.addEventListener("close", function() {
-        $.briefCashflow.destroy();
+    $.briefDocument.addEventListener("close", function() {
+        $.briefDocument.destroy();
     });
     _.extend($, exports);
 }

@@ -6,7 +6,7 @@
 	width: Ti.UI.FILL
 }
 
-"#aspectTable": {
+"#aspectDocumentTable": {
 	top: 5,
 	left: 0,
 	width: "90%",
@@ -21,7 +21,7 @@
 	width: Ti.UI.FILL
 }
 
-".aspectContainer": {
+".aspectDocumentContainer": {
 	//width: '100%',
 	//borderRadius: 5,
 	backgroundColor: 'lime',
@@ -33,14 +33,14 @@
 	layout: 'horizontal'
 }
 
-".aspectIcon": {
+".aspectDocumentIcon": {
 	top:5,
 	left: 5,
 	width: 25,
 	height: 25
 }
-"#cashFlowIcon": {
-	backgroundImage: '/images/kernel-finance-on.png'
+"#documentIcon": {
+	backgroundImage: '/images/kernel-document-on.png'
 }
 
 ".dataWrapper": {
@@ -63,7 +63,7 @@
 	
 }
 
-"#importo": {
+"#titolo": {
 	backgroundColor: 'yellow',
 	color: "#444"
 }
