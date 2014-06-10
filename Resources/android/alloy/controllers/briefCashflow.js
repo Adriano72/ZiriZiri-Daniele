@@ -9,7 +9,6 @@ function Controller() {
             var __alloyId32 = models[i];
             __alloyId32.__transform = transformData(__alloyId32);
             var __alloyId34 = Ti.UI.createTableViewRow({
-                backgroundColor: "pink",
                 className: "itemRow",
                 width: Ti.UI.FILL
             });
@@ -26,7 +25,7 @@ function Controller() {
                     fontSize: 18
                 },
                 color: "#444",
-                backgroundColor: "yellow",
+                backgroundColor: "white",
                 textAlign: "center",
                 width: 95,
                 wordWrap: false,
@@ -81,8 +80,8 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.briefCashflow = Ti.UI.createView({
-        backgroundColor: "lime",
-        top: 0,
+        top: 5,
+        bottom: 5,
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         touchEnabled: false,
@@ -110,11 +109,10 @@ function Controller() {
     $.__views.briefCashflow.add($.__views.cashFlowIcon);
     $.__views.aspectTable = Ti.UI.createTableView({
         top: 5,
-        left: 0,
+        left: 5,
         width: "90%",
         height: Ti.UI.SIZE,
         separatorColor: "#transparent",
-        backgroundColor: "blue",
         id: "aspectTable"
     });
     $.__views.briefCashflow.add($.__views.aspectTable);

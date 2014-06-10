@@ -222,14 +222,14 @@
 	left: 5
 }
 
-"#aspectsWrapper": {
-	top:5,
+"#aspectsCashflowWrapper": {
+	top:0,
 	width: Ti.UI.FILL,
 	touchEnabled: false
 }
 
 "#aspectsDocumentWrapper": {
-	top:5,
+	top:0,
 	width: Ti.UI.FILL,
 	touchEnabled: false
 }

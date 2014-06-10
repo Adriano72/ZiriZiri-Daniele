@@ -276,15 +276,15 @@ function Controller() {
         text: "storie"
     });
     $.__views.__alloyId57.add($.__views.stories);
-    $.__views.aspectsWrapper = Ti.UI.createView({
-        top: 5,
+    $.__views.aspectsCashflowWrapper = Ti.UI.createView({
+        top: 0,
         width: Ti.UI.FILL,
         touchEnabled: false,
-        id: "aspectsWrapper"
+        id: "aspectsCashflowWrapper"
     });
-    $.__views.__alloyId54.add($.__views.aspectsWrapper);
+    $.__views.__alloyId54.add($.__views.aspectsCashflowWrapper);
     $.__views.aspectsDocumentWrapper = Ti.UI.createView({
-        top: 5,
+        top: 0,
         width: Ti.UI.FILL,
         touchEnabled: false,
         id: "aspectsDocumentWrapper"
@@ -348,7 +348,7 @@ function Controller() {
     });
     Alloy.Collections.aspettiCashflow = new Backbone.Collection();
     Alloy.Collections.aspettiCashflow.reset(allAspettiCashflow);
-    allAspettiCashflow.length > 0 && $.aspectsWrapper.add(Alloy.createController("briefCashflow").getView());
+    allAspettiCashflow.length > 0 && $.aspectsCashflowWrapper.add(Alloy.createController("briefCashflow").getView());
     var allAspettiDocuments = _.filter(aspects, function(item) {
         return "FILEDOCUMENTDATATYPE_CODE" == item.kind.code;
     });

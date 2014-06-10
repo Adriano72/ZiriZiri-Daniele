@@ -65,7 +65,7 @@ Alloy.Collections.aspettiCashflow = new Backbone.Collection;
 Alloy.Collections.aspettiCashflow.reset(allAspettiCashflow);
 
 if (allAspettiCashflow.length > 0) {
-	$.aspectsWrapper.add(Alloy.createController('briefCashflow').getView());
+	$.aspectsCashflowWrapper.add(Alloy.createController('briefCashflow').getView());
 }
 
 // ASPETTI DOCUMENT *********

@@ -17,18 +17,47 @@ Ti.API.info("**** timeNow: " + timeNow);
 
 //moment().format("Do MMM YY")
 
-function populateCategories() {
+function openEvent() {
+	//Ti.API.info("win OPEN");
+	theActionBar = $.win.activity.actionBar;
+
+	$.win.activity.invalidateOptionsMenu();
+
+	theActionBar = $.win.activity.actionBar;
+	if (theActionBar != undefined) {
+		theActionBar.displayHomeAsUp = true;
+		theActionBar.setIcon('images/logo-test.png');
+		//theActionBar.setTitle(self.title);
+		theActionBar.onHomeIconItemSelected = function() {
+			$.win.close({
+				animate : true
+			});
+		};
+
+	};
+
+};
+
+$.starwidget.init(); 
+
+function initializeThings() {
+
+	openEvent();
 
 	var rowsCat = [Ti.UI.createPickerRow({
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 8,
 		title : "Selezionare una categoria",
 		id : 9999
 	})];
 
 	_.forEach(Ti.App.Properties.getObject("elencoCategorie"), function(value, key) {
+		
 		Ti.API.info("CAT: " + JSON.stringify(value));
 
 		var pkrRow = Ti.UI.createPickerRow(value);
-
+		//pkrRow.fontFamily = "SourceSansPro-Regular";
+		
 		rowsCat.push(pkrRow);
 
 	});
@@ -92,13 +121,13 @@ function savePost() {
 					Ti.API.info("ARRAY ID ASPETTI DA MANDARE IN ASSOCIAZIONE: " + p_arrayIdAspetti);
 
 					net.linkAspectsToPost(post_id, p_arrayIdAspetti, function() {
-						$.window.close();
+						$.win.close();
 						args();
 					});
 				});
 			} else {
 
-				$.window.close();
+				$.win.close();
 				alert("Post salvato");
 
 				setTimeout(function() {
@@ -129,65 +158,66 @@ function addEvent() {
 
 		location = p_retLocation;
 
-		dataFrom = moment(p_dataFrom).format('LLL');;
+		dataFrom = moment(p_dataFrom).format('LLL');
+		;
 
-		dataTo = moment(p_dataTo).format('LLL');;
+		dataTo = moment(p_dataTo).format('LLL');
+		;
 
 		Ti.API.info("LOCATION: " + JSON.stringify(location));
 		Ti.API.info("DATA DA: " + dataFrom);
 		Ti.API.info("DATA A: " + dataTo);
 		/*
-		var objAspect = {
+		 var objAspect = {
 
-		kind : {
-		code : "LINKDATATYPE_CODE",
-		name : "LINKDATATYPE_NAME",
-		description : "LINKDATATYPE_DESCRIPTION"
+		 kind : {
+		 code : "LINKDATATYPE_CODE",
+		 name : "LINKDATATYPE_NAME",
+		 description : "LINKDATATYPE_DESCRIPTION"
 
-		},
-		data : {}
+		 },
+		 data : {}
 
-		};
+		 };
 
-		objAspect.name = objRet.name;
-		objAspect.description = objRet.description;
-		objAspect.referenceTime = $.postDate.dataRaw;
-		objAspect.category = {
-		id : $.pkrCategoria.getSelectedRow(0).id,
-		version : $.pkrCategoria.getSelectedRow(0).version
-		};
+		 objAspect.name = objRet.name;
+		 objAspect.description = objRet.description;
+		 objAspect.referenceTime = $.postDate.dataRaw;
+		 objAspect.category = {
+		 id : $.pkrCategoria.getSelectedRow(0).id,
+		 version : $.pkrCategoria.getSelectedRow(0).version
+		 };
 
-		objAspect.data.format = {
-		name : "LINK",
-		description : "HTML LINK",
-		type : "LINK"
-		};
+		 objAspect.data.format = {
+		 name : "LINK",
+		 description : "HTML LINK",
+		 type : "LINK"
+		 };
 
-		objAspect.data.title = objRet.name;
-		objAspect.data.name = objRet.name;
-		objAspect.data.description = objRet.description;
-		objAspect.data.content = (objRet.content.indexOf("http://") == -1) ? "http://" + objRet.content : objRet.content;
-		objAspect.data.preview = null;
+		 objAspect.data.title = objRet.name;
+		 objAspect.data.name = objRet.name;
+		 objAspect.data.description = objRet.description;
+		 objAspect.data.content = (objRet.content.indexOf("http://") == -1) ? "http://" + objRet.content : objRet.content;
+		 objAspect.data.preview = null;
 
-		Ti.API.info("OBJ ASPECT: " + JSON.stringify(objAspect));
+		 Ti.API.info("OBJ ASPECT: " + JSON.stringify(objAspect));
 
-		var tempObj = _.clone(objAspect);
-		objAspect.data = JSON.stringify(objAspect.data);
+		 var tempObj = _.clone(objAspect);
+		 objAspect.data = JSON.stringify(objAspect.data);
 
-		arrayAspetti.push(objAspect);
+		 arrayAspetti.push(objAspect);
 
-		Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
-		*/
+		 Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
+		 */
 		var riga = Alloy.createController('rowEvent', {
 
-		//id_code : arrayAspetti.length - 1,
-		dataDa : dataFrom,
-		dataA : dataTo,
-		posizione : location.name
+			//id_code : arrayAspetti.length - 1,
+			dataDa : dataFrom,
+			dataA : dataTo,
+			posizione : location.name
 
 		}).getView();
 		$.newPostTable.appendRow(riga);
-		
 
 		//Ti.API.info("FINISHED ASPECT OBJ: "+JSON.stringify(objAspect));
 	}).getView().open();
@@ -495,4 +525,4 @@ function callSaveAspects(_callback) {
 
 };
 
-$.window.open();
+$.win.open();

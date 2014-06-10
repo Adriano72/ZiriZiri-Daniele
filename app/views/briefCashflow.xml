@@ -1,6 +1,6 @@
 <Alloy>
 
-	<View class="aspectContainer">
+	<View class="aspectCashflowContainer">
 
 		<Label class="separator"/>
 		<Label id="cashFlowIcon" class="aspectIcon"/>

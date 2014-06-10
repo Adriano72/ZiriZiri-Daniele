@@ -1,23 +1,45 @@
 <Alloy>
-	<Window id="window" class="container" title = "Nuovo Post" onOpen="populateCategories">
+	<Window id="win" class="container" title = "Nuovo Post" onOpen="initializeThings">
 		<Menu id="menu" platform="android">
-			
-			<MenuItem id="salva" title="Scrivi" icon="/images/floppy-disk.png"  onClick="savePost" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
-			
-		</Menu>
 
+			<MenuItem id="mn_salva" onClick="savePost"/>
+
+		</Menu>
 		<TableView id="newPostTable">
 
 			<TableViewRow class="row">
 				<TextField id="titolo"></TextField>
 			</TableViewRow>
-			
-			<TableViewRow class="row" leftImage="/images/list.png">
+			<TableViewRow>
+				<Widget id="starwidget" src="starrating" max='5' initialRating='0'/>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<TextField id="descrizione"></TextField>
+			</TableViewRow>
+			<TableViewRow class="row" hasDetail="true">
 				<Picker id="pkrCategoria" selectionIndicator="true"/>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<TextField id="tag"></TextField>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<TextField id="storie"></TextField>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<View id="picOptionsContainer">
+					<View id="picture">						
+						<ImageView id="takePicIcon"/>
+						<Label id="takePicText"/>
+					</View>
+					<View id="gallery">
+						<ImageView id="galleryPicIcon"/>
+						<Label id="galleryPicText"/>
+						<ImageView id="galleryPic2"/>
+					</View>
+				</View>
 			</TableViewRow>
 
 		</TableView>
-		
 		<View id="bottomBar">
 			<Label class="separator"/>
 			<View id="buttonsContainer">
@@ -27,7 +49,7 @@
 				<Label class="insertAspects" backgroundImage="/images/809-clipboard@2x.png" onClick="addNote"/>
 				<Label class="insertAspects" backgroundImage="/images/843-link@2x.png" onClick="addLink"/>
 			</View>
-			
+
 		</View>
 
 	</Window>
