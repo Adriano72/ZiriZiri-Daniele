@@ -224,7 +224,12 @@
 
 "#aspectsWrapper": {
 	top:5,
+	width: Ti.UI.FILL,
+	touchEnabled: false
+}
 
+"#aspectsDocumentWrapper": {
+	top:5,
 	width: Ti.UI.FILL,
 	touchEnabled: false
 }

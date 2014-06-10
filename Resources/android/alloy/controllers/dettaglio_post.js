@@ -283,6 +283,13 @@ function Controller() {
         id: "aspectsWrapper"
     });
     $.__views.__alloyId54.add($.__views.aspectsWrapper);
+    $.__views.aspectsDocumentWrapper = Ti.UI.createView({
+        top: 5,
+        width: Ti.UI.FILL,
+        touchEnabled: false,
+        id: "aspectsDocumentWrapper"
+    });
+    $.__views.__alloyId54.add($.__views.aspectsDocumentWrapper);
     var __alloyId58 = function() {
         $.date.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["referenceTime"] : Alloy.Models.Post.get("referenceTime");
         $.date.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["referenceTime"] : Alloy.Models.Post.get("referenceTime");
@@ -347,7 +354,7 @@ function Controller() {
     });
     Alloy.Collections.aspettiDocument = new Backbone.Collection();
     Alloy.Collections.aspettiDocument.reset(allAspettiDocuments);
-    allAspettiDocuments.length > 0 && $.aspectsWrapper.add(Alloy.createController("briefDocument").getView());
+    allAspettiDocuments.length > 0 && $.aspectsDocumentWrapper.add(Alloy.createController("briefDocument").getView());
     _.filter(aspects, function(item) {
         return "NOTEDATATYPE_CODE" == item.kind.code;
     });

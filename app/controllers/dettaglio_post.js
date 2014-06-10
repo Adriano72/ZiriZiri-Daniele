@@ -79,7 +79,7 @@ Alloy.Collections.aspettiDocument = new Backbone.Collection;
 Alloy.Collections.aspettiDocument.reset(allAspettiDocuments);
 
 if (allAspettiDocuments.length > 0) {
-	$.aspectsWrapper.add(Alloy.createController('briefDocument').getView());
+	$.aspectsDocumentWrapper.add(Alloy.createController('briefDocument').getView());
 }
 
 // ASPETTI NOTES *********

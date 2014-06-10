@@ -49,6 +49,7 @@
 
 				</View>
 				<View id="aspectsWrapper"></View>
+				<View id="aspectsDocumentWrapper"></View>
 
 			</View>
 
