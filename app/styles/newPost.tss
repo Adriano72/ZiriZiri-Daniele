@@ -171,12 +171,17 @@
 		fontFamily: 'SourceSansPro-Regular',
 		fontSize: 18,
 	},
-	borderRight: true,
-	borderLeft: false,
-	borderWidth: 1,
-	borderColor: "#CCCCCC",
 	text: "Gallery",
 	color: '#999'
+}
+
+"#verticalBar": {
+	
+	height: Ti.UI.FILL,
+	width: 1,
+	right: 45,
+	backgroundColor: "#CCCCCC"
+	
 }
 
 "#galleryPic2": {
@@ -248,7 +253,7 @@
 }
 
 "#bottomBar": {
-	backgroundColor: '#EBEBEB',
+	backgroundColor: '#5FAEE3',
 	width: Ti.UI.FILL,
 	touchEnabled: false,
 	height: 50,
@@ -280,7 +285,7 @@
 }
 
 ".insertAspects": {
-	left: 50,
+	left: 40,
 	width: 20,
 	height: 20
 	

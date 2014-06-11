@@ -1,8 +1,22 @@
 var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
+Alloy.Globals.winTop = true && parseInt(Ti.Platform.version, 10) >= 7 ? 20 : 0;
+
 var icons = require("/icons");
 
-Alloy.Globals.baseUrl = "https://demo.ziriziri.com";
+Alloy.Models.Post = new Backbone.Model();
+
+var Timeline = Backbone.Collection.extend({
+    comparator: function(model) {
+        return -model.get("referenceTime");
+    }
+});
+
+Alloy.Collections.Timeline = new Timeline();
+
+Alloy.Globals.baseUrl = "https://beta.ziriziri.com/zz/api/v02";
+
+Alloy.Globals.loading = Alloy.createWidget("nl.fokkezb.loading");
 
 var dFactor = Ti.Platform.displayCaps.logicalDensityFactor ? Ti.Platform.displayCaps.logicalDensityFactor : 1;
 
@@ -61,5 +75,32 @@ Alloy.Globals.Moment_IT = {
         doy: 4
     }
 };
+
+var rc = Alloy.Globals.Map.isGooglePlayServicesAvailable();
+
+switch (rc) {
+  case Alloy.Globals.Map.SUCCESS:
+    Ti.API.info("Google Play services is installed.");
+    break;
+
+  case Alloy.Globals.Map.SERVICE_MISSING:
+    alert("Google Play services is missing. Please install Google Play services from the Google Play store.");
+    break;
+
+  case Alloy.Globals.Map.SERVICE_VERSION_UPDATE_REQUIRED:
+    alert("Google Play services is out of date. Please update Google Play services.");
+    break;
+
+  case Alloy.Globals.Map.SERVICE_DISABLED:
+    alert("Google Play services is disabled. Please enable Google Play services.");
+    break;
+
+  case Alloy.Globals.Map.SERVICE_INVALID:
+    alert("Google Play services cannot be authenticated. Reinstall Google Play services.");
+    break;
+
+  default:
+    alert("Unknown error.");
+}
 
 Alloy.createController("index");

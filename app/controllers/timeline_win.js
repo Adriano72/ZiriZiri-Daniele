@@ -188,8 +188,12 @@ net.getCategories(function(categoriesData) {
 });
 
 net.getPostTemplate(0, 1, function(p_postTemplate) {
+	
+	Alloy.Models.Template = new Backbone.Model;
+	
+	Alloy.Models.Template.set(p_postTemplate.data);
 
-	Ti.API.info("POST TEMPLATE: " + JSON.stringify(p_postTemplate));
+	Ti.API.info("POST TEMPLATE MODEL: " + JSON.stringify(Alloy.Models.Template));
 
 	var arrayTemplateIds = [];
 

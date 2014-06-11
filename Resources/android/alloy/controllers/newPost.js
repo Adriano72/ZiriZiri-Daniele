@@ -518,15 +518,19 @@ function Controller() {
             fontFamily: "SourceSansPro-Regular",
             fontSize: 18
         },
-        borderRight: true,
-        borderLeft: false,
-        borderWidth: 1,
-        borderColor: "#CCCCCC",
         text: "Gallery",
         color: "#999",
         id: "galleryPicText"
     });
     $.__views.gallery.add($.__views.galleryPicText);
+    $.__views.verticalBar = Ti.UI.createLabel({
+        height: Ti.UI.FILL,
+        width: 1,
+        right: 45,
+        backgroundColor: "#CCCCCC",
+        id: "verticalBar"
+    });
+    $.__views.gallery.add($.__views.verticalBar);
     $.__views.galleryPic2 = Ti.UI.createImageView({
         borderLeft: true,
         width: 40,
@@ -547,7 +551,7 @@ function Controller() {
     });
     $.__views.win.add($.__views.newPostTable);
     $.__views.bottomBar = Ti.UI.createView({
-        backgroundColor: "#EBEBEB",
+        backgroundColor: "#5FAEE3",
         width: Ti.UI.FILL,
         touchEnabled: false,
         height: 50,
@@ -576,47 +580,55 @@ function Controller() {
         left: 0,
         width: 20,
         height: 20,
-        backgroundImage: "/images/851-calendar@2x.png",
+        backgroundImage: "/images/kernel-event-dark.png",
         id: "__alloyId72"
     });
     $.__views.buttonsContainer.add($.__views.__alloyId72);
     addEvent ? $.__views.__alloyId72.addEventListener("click", addEvent) : __defers["$.__views.__alloyId72!click!addEvent"] = true;
     $.__views.__alloyId73 = Ti.UI.createLabel({
-        left: 50,
+        left: 40,
         width: 20,
         height: 20,
-        backgroundImage: "/images/826-money-1@2x.png",
+        backgroundImage: "/images/kernel-finance-dark.png",
         id: "__alloyId73"
     });
     $.__views.buttonsContainer.add($.__views.__alloyId73);
     addCashflow ? $.__views.__alloyId73.addEventListener("click", addCashflow) : __defers["$.__views.__alloyId73!click!addCashflow"] = true;
     $.__views.__alloyId74 = Ti.UI.createLabel({
-        left: 50,
+        left: 40,
         width: 20,
         height: 20,
-        backgroundImage: "/images/770-paper-clip@2x.png",
+        backgroundImage: "/images/kernel-document-dark.png",
         id: "__alloyId74"
     });
     $.__views.buttonsContainer.add($.__views.__alloyId74);
     addDocument ? $.__views.__alloyId74.addEventListener("click", addDocument) : __defers["$.__views.__alloyId74!click!addDocument"] = true;
     $.__views.__alloyId75 = Ti.UI.createLabel({
-        left: 50,
+        left: 40,
         width: 20,
         height: 20,
-        backgroundImage: "/images/809-clipboard@2x.png",
+        backgroundImage: "/images/kernel-note-dark.png",
         id: "__alloyId75"
     });
     $.__views.buttonsContainer.add($.__views.__alloyId75);
     addNote ? $.__views.__alloyId75.addEventListener("click", addNote) : __defers["$.__views.__alloyId75!click!addNote"] = true;
     $.__views.__alloyId76 = Ti.UI.createLabel({
-        left: 50,
+        left: 40,
         width: 20,
         height: 20,
-        backgroundImage: "/images/843-link@2x.png",
+        backgroundImage: "/images/kernel-link-dark.png",
         id: "__alloyId76"
     });
     $.__views.buttonsContainer.add($.__views.__alloyId76);
     addLink ? $.__views.__alloyId76.addEventListener("click", addLink) : __defers["$.__views.__alloyId76!click!addLink"] = true;
+    $.__views.__alloyId77 = Ti.UI.createLabel({
+        left: 40,
+        width: 20,
+        height: 20,
+        backgroundImage: "/images/kernel-comunicazioni-dark.png",
+        id: "__alloyId77"
+    });
+    $.__views.buttonsContainer.add($.__views.__alloyId77);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

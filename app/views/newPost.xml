@@ -34,6 +34,7 @@
 					<View id="gallery">
 						<ImageView id="galleryPicIcon"/>
 						<Label id="galleryPicText"/>
+						<Label id="verticalBar"/>
 						<ImageView id="galleryPic2"/>
 					</View>
 				</View>
@@ -43,11 +44,12 @@
 		<View id="bottomBar">
 			<Label class="separator"/>
 			<View id="buttonsContainer">
-				<Label class="1_insertAspects" backgroundImage="/images/851-calendar@2x.png" onClick="addEvent"/>
-				<Label class="insertAspects" backgroundImage="/images/826-money-1@2x.png" onClick="addCashflow"/>
-				<Label class="insertAspects" backgroundImage="/images/770-paper-clip@2x.png" onClick="addDocument"/>
-				<Label class="insertAspects" backgroundImage="/images/809-clipboard@2x.png" onClick="addNote"/>
-				<Label class="insertAspects" backgroundImage="/images/843-link@2x.png" onClick="addLink"/>
+				<Label class="1_insertAspects" backgroundImage="/images/kernel-event-dark.png" onClick="addEvent"/>
+				<Label class="insertAspects" backgroundImage="/images/kernel-finance-dark.png" onClick="addCashflow"/>
+				<Label class="insertAspects" backgroundImage="/images/kernel-document-dark.png" onClick="addDocument"/>
+				<Label class="insertAspects" backgroundImage="/images/kernel-note-dark.png" onClick="addNote"/>
+				<Label class="insertAspects" backgroundImage="/images/kernel-link-dark.png" onClick="addLink"/>
+				<Label class="insertAspects" backgroundImage="/images/kernel-comunicazioni-dark.png"/>
 			</View>
 
 		</View>
