@@ -124,6 +124,9 @@ exports.getCategories = function(_callback) {
 };
 
 exports.savePost = function(objPost, _callback) {
+	
+	var dataJson = {};
+	dataJson.data = objPost;
 
 	var xhr = Ti.Network.createHTTPClient();
 
@@ -159,7 +162,7 @@ exports.savePost = function(objPost, _callback) {
 	xhr.setRequestHeader('Accept', 'application/json');
 	xhr.setRequestHeader('Content-Type', 'application/json');
 
-	xhr.send(JSON.stringify(objPost));
+	xhr.send(JSON.stringify(dataJson));
 
 };
 

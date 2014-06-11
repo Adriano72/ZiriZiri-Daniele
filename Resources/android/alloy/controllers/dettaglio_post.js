@@ -1,19 +1,19 @@
 function Controller() {
-    function __alloyId53() {
-        $.__views.win.removeEventListener("open", __alloyId53);
+    function __alloyId54() {
+        $.__views.win.removeEventListener("open", __alloyId54);
         if ($.__views.win.activity) $.__views.win.activity.onCreateOptionsMenu = function(e) {
-            var __alloyId51 = {
+            var __alloyId52 = {
                 id: "mn_notify",
                 title: "Scrivi"
             };
-            $.__views.mn_notify = e.menu.add(_.pick(__alloyId51, Alloy.Android.menuItemCreateArgs));
-            $.__views.mn_notify.applyProperties(_.omit(__alloyId51, Alloy.Android.menuItemCreateArgs));
-            var __alloyId52 = {
+            $.__views.mn_notify = e.menu.add(_.pick(__alloyId52, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_notify.applyProperties(_.omit(__alloyId52, Alloy.Android.menuItemCreateArgs));
+            var __alloyId53 = {
                 id: "mn_search",
                 title: "Immagine"
             };
-            $.__views.mn_search = e.menu.add(_.pick(__alloyId52, Alloy.Android.menuItemCreateArgs));
-            $.__views.mn_search.applyProperties(_.omit(__alloyId52, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_search = e.menu.add(_.pick(__alloyId53, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_search.applyProperties(_.omit(__alloyId53, Alloy.Android.menuItemCreateArgs));
         }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
             Ti.API.warn("or other UI component which does not have an Android activity.");
@@ -33,12 +33,12 @@ function Controller() {
         title: "Post"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
-    $.__views.win.addEventListener("open", __alloyId53);
+    $.__views.win.addEventListener("open", __alloyId54);
     $.__views.postTable = Ti.UI.createScrollView({
         id: "postTable"
     });
     $.__views.win.add($.__views.postTable);
-    $.__views.__alloyId54 = Ti.UI.createView({
+    $.__views.__alloyId55 = Ti.UI.createView({
         left: 5,
         right: 5,
         top: 5,
@@ -49,9 +49,9 @@ function Controller() {
         height: Ti.UI.SIZE,
         touchEnabled: false,
         layout: "vertical",
-        id: "__alloyId54"
+        id: "__alloyId55"
     });
-    $.__views.postTable.add($.__views.__alloyId54);
+    $.__views.postTable.add($.__views.__alloyId55);
     $.__views.topWrapper = Ti.UI.createView({
         height: Ti.UI.SIZE,
         left: 10,
@@ -61,7 +61,7 @@ function Controller() {
         layout: "horizontal",
         id: "topWrapper"
     });
-    $.__views.__alloyId54.add($.__views.topWrapper);
+    $.__views.__alloyId55.add($.__views.topWrapper);
     $.__views.postIcon = Ti.UI.createImageView({
         left: 0,
         top: 0,
@@ -182,16 +182,16 @@ function Controller() {
         layout: "horizontal",
         id: "middleWrapper"
     });
-    $.__views.__alloyId54.add($.__views.middleWrapper);
-    $.__views.__alloyId55 = Ti.UI.createView({
+    $.__views.__alloyId55.add($.__views.middleWrapper);
+    $.__views.__alloyId56 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         touchEnabled: false,
         layout: "horizontal",
         left: 0,
-        id: "__alloyId55"
+        id: "__alloyId56"
     });
-    $.__views.middleWrapper.add($.__views.__alloyId55);
+    $.__views.middleWrapper.add($.__views.__alloyId56);
     $.__views.cat_icon = Ti.UI.createLabel({
         width: 20,
         height: 20,
@@ -200,7 +200,7 @@ function Controller() {
         left: 0,
         id: "cat_icon"
     });
-    $.__views.__alloyId55.add($.__views.cat_icon);
+    $.__views.__alloyId56.add($.__views.cat_icon);
     $.__views.category = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -212,16 +212,16 @@ function Controller() {
         left: 5,
         id: "category"
     });
-    $.__views.__alloyId55.add($.__views.category);
-    $.__views.__alloyId56 = Ti.UI.createView({
+    $.__views.__alloyId56.add($.__views.category);
+    $.__views.__alloyId57 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         touchEnabled: false,
         layout: "horizontal",
         left: 50,
-        id: "__alloyId56"
+        id: "__alloyId57"
     });
-    $.__views.middleWrapper.add($.__views.__alloyId56);
+    $.__views.middleWrapper.add($.__views.__alloyId57);
     $.__views.tag_icon = Ti.UI.createLabel({
         width: 20,
         height: 20,
@@ -230,7 +230,7 @@ function Controller() {
         left: 0,
         id: "tag_icon"
     });
-    $.__views.__alloyId56.add($.__views.tag_icon);
+    $.__views.__alloyId57.add($.__views.tag_icon);
     $.__views.tags = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -243,16 +243,16 @@ function Controller() {
         left: 5,
         id: "tags"
     });
-    $.__views.__alloyId56.add($.__views.tags);
-    $.__views.__alloyId57 = Ti.UI.createView({
+    $.__views.__alloyId57.add($.__views.tags);
+    $.__views.__alloyId58 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         touchEnabled: false,
         layout: "horizontal",
         left: 50,
-        id: "__alloyId57"
+        id: "__alloyId58"
     });
-    $.__views.middleWrapper.add($.__views.__alloyId57);
+    $.__views.middleWrapper.add($.__views.__alloyId58);
     $.__views.stories_icon = Ti.UI.createLabel({
         width: 20,
         height: 20,
@@ -261,7 +261,7 @@ function Controller() {
         left: 0,
         id: "stories_icon"
     });
-    $.__views.__alloyId57.add($.__views.stories_icon);
+    $.__views.__alloyId58.add($.__views.stories_icon);
     $.__views.stories = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -275,22 +275,22 @@ function Controller() {
         id: "stories",
         text: "storie"
     });
-    $.__views.__alloyId57.add($.__views.stories);
+    $.__views.__alloyId58.add($.__views.stories);
     $.__views.aspectsCashflowWrapper = Ti.UI.createView({
         top: 0,
         width: Ti.UI.FILL,
         touchEnabled: false,
         id: "aspectsCashflowWrapper"
     });
-    $.__views.__alloyId54.add($.__views.aspectsCashflowWrapper);
+    $.__views.__alloyId55.add($.__views.aspectsCashflowWrapper);
     $.__views.aspectsDocumentWrapper = Ti.UI.createView({
         top: 0,
         width: Ti.UI.FILL,
         touchEnabled: false,
         id: "aspectsDocumentWrapper"
     });
-    $.__views.__alloyId54.add($.__views.aspectsDocumentWrapper);
-    var __alloyId58 = function() {
+    $.__views.__alloyId55.add($.__views.aspectsDocumentWrapper);
+    var __alloyId59 = function() {
         $.date.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["referenceTime"] : Alloy.Models.Post.get("referenceTime");
         $.date.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["referenceTime"] : Alloy.Models.Post.get("referenceTime");
         $.rating_1.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["rating_1"] : Alloy.Models.Post.get("rating_1");
@@ -310,9 +310,9 @@ function Controller() {
         $.tags.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["tag"] : Alloy.Models.Post.get("tag");
         $.tags.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["tag"] : Alloy.Models.Post.get("tag");
     };
-    Alloy.Models.Post.on("fetch change destroy", __alloyId58);
+    Alloy.Models.Post.on("fetch change destroy", __alloyId59);
     exports.destroy = function() {
-        Alloy.Models.Post.off("fetch change destroy", __alloyId58);
+        Alloy.Models.Post.off("fetch change destroy", __alloyId59);
     };
     _.extend($, $.__views);
     arguments[0] || {};

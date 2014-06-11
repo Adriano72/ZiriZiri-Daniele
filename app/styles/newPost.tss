@@ -4,7 +4,7 @@
 }
 
 "#mn_salva": {
-	icon: "/images/check-blu.png",
+	icon: "/images/top-save.png",
 	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
 }
 

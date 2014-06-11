@@ -38,26 +38,26 @@ function openEvent() {
 
 };
 
-$.starwidget.init(); 
+$.starwidget.init();
 
 function initializeThings() {
 
 	openEvent();
 
 	var rowsCat = [Ti.UI.createPickerRow({
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 8,
+		fontFamily : 'SourceSansPro-Regular',
+		fontSize : 8,
 		title : "Selezionare una categoria",
 		id : 9999
 	})];
 
 	_.forEach(Ti.App.Properties.getObject("elencoCategorie"), function(value, key) {
-		
-		Ti.API.info("CAT: " + JSON.stringify(value));
+
+		//Ti.API.info("CAT: " + JSON.stringify(value));
 
 		var pkrRow = Ti.UI.createPickerRow(value);
 		//pkrRow.fontFamily = "SourceSansPro-Regular";
-		
+
 		rowsCat.push(pkrRow);
 
 	});
@@ -70,6 +70,10 @@ function savePost() {
 
 	//Ti.API.info("POST DATE VALUE AT BEGINNING; " + $.postDate.value);
 	//Ti.API.info("POST DATE PARSED AT BEGINNING; " + Date.parse($.postDate.value));
+
+	//var strutturaPost = _.omit(Alloy.Models.Template, 'modules');
+
+	//Ti.API.info("UNSET MODEL: "+JSON.stringify(Alloy.Models.Template));
 
 	if ($.titolo.value !== "" && $.pkrCategoria.getSelectedRow(0).id != 9999) {
 
@@ -103,8 +107,18 @@ function savePost() {
 		 };
 		 */
 
-		Ti.API.info("JSON POST: " + JSON.stringify(postObj));
-		net.savePost(postObj, function(post_id) {
+		Alloy.Models.Post_template.set("name", $.titolo.value);
+		Alloy.Models.Post_template.set("rating", $.starwidget.getRating());
+		Alloy.Models.Post_template.set("category", {
+			id : $.pkrCategoria.getSelectedRow(0).id,
+			code : $.pkrCategoria.getSelectedRow(0).code
+		});
+		Alloy.Models.Post_template.set("description", $.descrizione.value);
+		Alloy.Models.Post_template.set("referenceTime", timeNow);
+
+		Ti.API.info("JSON POST: " + JSON.stringify(Alloy.Models.Template));
+		
+		net.savePost(Alloy.Models.Post_template, function(post_id) {
 
 			Alloy.Globals.showSpinner();
 

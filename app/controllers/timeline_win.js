@@ -167,7 +167,7 @@ net.getCategories(function(categoriesData) {
 
 	var objCategorie = [];
 
-	//Ti.API.info("INIZIO, DATI RIC "+JSON.stringify(categoriesData));
+	Ti.API.info("CATEGORIE "+JSON.stringify(categoriesData));
 
 	_.forEach(categoriesData.data, function(value, key) {
 
@@ -176,7 +176,7 @@ net.getCategories(function(categoriesData) {
 		objCategorie.push({
 			"title" : value.name,
 			"id" : value.id,
-			"version" : value.version
+			"code" : value.code
 		});
 
 	});
@@ -190,8 +190,19 @@ net.getCategories(function(categoriesData) {
 net.getPostTemplate(0, 1, function(p_postTemplate) {
 	
 	Alloy.Models.Template = new Backbone.Model;
+	Alloy.Models.Template.set(p_postTemplate.data[0]);
 	
-	Alloy.Models.Template.set(p_postTemplate.data);
+	Alloy.Models.Post_template = new Backbone.Model;	
+	Alloy.Models.Post_template = Alloy.Models.Template.unset("modules");
+	
+	Alloy.Models.Event_template = new Backbone.Model;
+	Alloy.Models.Cashflow_template = new Backbone.Model;
+	Alloy.Models.Document_template = new Backbone.Model;
+	Alloy.Models.Note_template = new Backbone.Model;
+	Alloy.Models.Link_template = new Backbone.Model;
+	Alloy.Models.Communication_template = new Backbone.Model;
+	
+	
 
 	Ti.API.info("POST TEMPLATE MODEL: " + JSON.stringify(Alloy.Models.Template));
 

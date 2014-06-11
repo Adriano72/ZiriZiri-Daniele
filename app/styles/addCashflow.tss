@@ -1,12 +1,19 @@
 ".container": {
-  	backgroundColor: '#F2F2F2'
+  	backgroundColor: '#F9F9F9',
 	//layout: "vertical",
 }
 
+"#mn_salva": {
+	icon: "/images/top-save.png",
+	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+}
+
+
 "#newCashflowTable":{
 	top: 5 ,
-	left: 20,
-	right: 20,
+	bottom: 50,
+	left: 0,
+	right: 0,
 	separatorColor: 'transparent'
 } 
 
@@ -14,15 +21,203 @@
 	
 	height: Ti.UI.SIZE,
 	width: Ti.UI.FILL,
-	backgroundColor: '#F2F2F2',
+	backgroundColor: '#F9F9F9',
     className: 'itemRow',
-    layout: 'horizontal',
-    left: 5,
-    right: 5
+    layout: 'horizontal'
     
 } 
 
-"#importo": {
+"#titolo": {
+	
+	color: "#999",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	top: 5,
+	right: 5,
+	left: 5,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	//backgroundColor: '#C8DDE8',
+	hintText: "Titolo",
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF'
+
+}
+
+"#descrizione": {
+	
+	color: "#999",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	top: 5,
+	right: 5,
+	left: 5,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	//backgroundColor: '#C8DDE8',
+	hintText: "Descrizione",
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF'
+
+}
+
+"#tag": {
+	
+	color: "#999",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	top: 5,
+	right: 5,
+	left: 5,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	//backgroundColor: '#C8DDE8',
+	hintText: "Tag",
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF'
+
+}
+
+
+"#storie": {
+	
+	color: "#999",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	top: 5,
+	right: 5,
+	left: 5,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	//backgroundColor: '#C8DDE8',
+	hintText: "Storie",
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF'
+
+}
+
+"#picOptionsContainer": {
+	top: 5,
+	left: 5,
+	right: 5,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE
+}
+
+"#picture": {
+	height: 40,
+	width: "49.5%",
+	left: 0,
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#5FAEE3",
+	backgroundColor: '#5FAEE3'
+}
+
+"#takePicIcon": {
+	
+	width: 25,
+	height: Ti.UI.SIZE,
+	image: "/images/various-take-a-photo.png",
+	left: 5
+}
+
+"#takePicText": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	right: 10,
+	text: "Take a Picture!",
+	color: '#FFF'
+}
+
+"#gallery": {
+	height: 40,
+	width: "49.5%",
+	right: 0,
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF'
+}
+
+"#galleryPicIcon": {
+	
+	width: 25,
+	height: Ti.UI.SIZE,
+	image: "/images/various-add.png",
+	left: 5
+}
+
+"#galleryPicText": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	text: "Gallery",
+	color: '#999'
+}
+
+"#verticalBar": {
+	
+	height: Ti.UI.FILL,
+	width: 1,
+	right: 45,
+	backgroundColor: "#CCCCCC"
+	
+}
+
+"#galleryPic2": {
+	borderLeft: true,
+	
+	width: 40,
+	height: Ti.UI.SIZE,
+	image: "/images/various-galllery.png",
+	right: 5
+}
+
+
+"#starwidget": {
+	
+	top:10,
+	bottom: 10
+	
+}
+
+"#pkrCategoria": {
+
+	color: "#999",
+	top: 5,
+	right: 5,
+	left: 5,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF'
+	//backgroundColor: '#C8DD
+
+}
+
+"#postDate": {
 	
 	borderColor: "#000000",
 	color: "#336699",
@@ -31,32 +226,67 @@
 	left: 5,
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE,
-	keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD,
 	//backgroundColor: '#C8DDE8',
-	hintText: "Importo",
+	
+	editable: false,
 	borderRadius: 5,
 	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
 
 }
 
-"#pkrTipoMovimento": {
+"#location": {
 	
-	//top: 20,
+	borderColor: "#000000",
+	color: "#336699",
+	ellipsize: true,
+	top: 5,
 	right: 5,
 	left: 5,
 	width: Ti.UI.FILL,
+	autocorrect: false,
 	height: Ti.UI.SIZE,
-	//backgroundColor: '#C8DD
+	//backgroundColor: '#C8DDE8',
+	hintText: "Posizione",
+	borderRadius: 5,
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
 
 }
 
-"#pkrPagamentoIncasso": {
-	
-	//top: 20,
-	right: 5,
-	left: 5,
+"#bottomBar": {
+	backgroundColor: '#5FAEE3',
 	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
-	//backgroundColor: '#C8DD
+	touchEnabled: false,
+	height: 50,
+	bottom: 0
+}
 
+".separator": {
+	height: 1,
+	top: 0,
+	touchEnabled: false,
+	backgroundColor: '#D6D6D6',
+	width: '100%'
+}
+
+
+"#buttonsContainer": {
+	layout: 'horizontal',
+	width: Ti.UI.SIZE,
+	top: 15,
+	
+	height: 25
+}
+
+".1_insertAspects": {
+	left: 0,
+	width: 20,
+	height: 20
+	
+}
+
+".insertAspects": {
+	left: 40,
+	width: 20,
+	height: 20
+	
 }

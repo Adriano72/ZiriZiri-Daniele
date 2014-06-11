@@ -89,6 +89,8 @@ exports.getCategories = function(_callback) {
 };
 
 exports.savePost = function(objPost, _callback) {
+    var dataJson = {};
+    dataJson.data = objPost;
     var xhr = Ti.Network.createHTTPClient();
     xhr.onload = function() {
         var json = JSON.parse(this.responseText);
@@ -104,7 +106,7 @@ exports.savePost = function(objPost, _callback) {
     xhr.open("POST", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON");
     xhr.setRequestHeader("Accept", "application/json");
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify(objPost));
+    xhr.send(JSON.stringify(dataJson));
 };
 
 exports.saveAspect = function(allAspects, _callback) {
