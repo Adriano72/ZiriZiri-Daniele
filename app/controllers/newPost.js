@@ -54,7 +54,7 @@ function initializeThings() {
 	var rowsCat = [Ti.UI.createPickerRow({
 		fontFamily : 'SourceSansPro-Regular',
 		fontSize : 8,
-		title : "Selezionare una categoria",
+		title : "Categorie",
 		id : 9999
 	})];
 
