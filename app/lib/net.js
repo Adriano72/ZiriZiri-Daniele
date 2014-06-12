@@ -61,7 +61,7 @@ exports.getPostTemplate = function(page, max, _callback) {
 	var xhr = Ti.Network.createHTTPClient();
 
 	xhr.onload = function() {
-		//Ti.API.info("RESPONSE: "+xhr.responseText);
+		Ti.API.info("RESPONSE TEMPLATE: "+xhr.responseText);
 		_callback(JSON.parse(xhr.responseText));
 	};
 

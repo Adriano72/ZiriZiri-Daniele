@@ -1,0 +1,296 @@
+
+".container": {
+  	backgroundColor: '#F9F9F9',
+  	orientationModes: [Ti.UI.PORTRAIT]
+	//layout: "vertical",
+}
+
+"#mn_delete": {
+	icon: "/images/top-delete.png",
+	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+}
+
+"#mn_cancel": {
+	icon: "/images/top-cancel.png",
+	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+}
+
+"#mn_save": {
+	icon: "/images/top-save.png",
+	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+}
+
+"#postTable": {
+	bottom: 50
+}
+
+".eventContainer": {
+	//width: '100%',
+	left: 5,
+	right: 5,
+	top: 5,
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#E9FA32",
+	backgroundColor: '#FFF',
+	//bottom:10,
+	height: Ti.UI.SIZE,
+	touchEnabled: false,
+	layout: 'vertical'
+}
+
+"#topWrapper": {
+
+	height: Ti.UI.SIZE,
+	left:10,
+	right:10,
+	top: 10,
+	touchEnabled: false,
+	layout: "horizontal"
+}
+
+
+
+"#innerWrapper": {
+	left: 10,
+	//backgroundColor: "red",
+	top: 0,
+	width: Ti.UI.SIZE,
+	height: 70,
+	touchEnabled: false,
+	layout: "vertical"
+}
+
+"#postIcon":{
+	//backgroundColor: "navy",
+	left: 0,
+	top:0,
+	image: '/images/android-robot.jpg',
+	touchEnabled: false,
+	width: 70,
+	height: 70,
+	//left: 5,
+	//top: 5,
+
+	borderRadius: 4
+}
+
+"#date_rating": {
+	//backgroundColor: "yellow",
+	top:0,
+	left:0,
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE,
+	touchEnabled: false,
+	layout: "horizontal"
+}
+
+
+"#date": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 14,
+	},
+	color: "#999",
+	//height: Ti.UI.SIZE,
+	textAlign: 'right',
+	wordWrap: false,
+	left:0,
+	top: 0
+}
+
+"#ratingContainer": {
+	touchEnabled: false,
+	height: Ti.UI.SIZE,
+	layout: "horizontal",
+	width: 100,
+	left: 20,
+	top: 0
+}
+
+".ratingstars": {
+	width: 15,
+	height: 15,
+	left:5,
+	top:0
+}
+
+
+"#name": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	color: "#444",
+	height: 100,
+	width: '70%',
+	left: 0,
+	ellipsize: true,
+	wordWrap: true,
+	top: 0
+}
+
+".separator": {
+	height: 1,
+	width: Ti.UI.FILL,
+	backgroundColor: "#CCCCCC",
+	touchEnabled: false
+}
+
+
+"#middleWrapper": {
+	left: 10,
+	//backgroundColor: "navy",
+	top: 10,
+	bottom: 5,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	touchEnabled: false,
+	layout: "horizontal"
+}
+
+".post_icons_container": {
+	height: Ti.UI.SIZE,
+	//backgroundColor: "yellow",
+	width: Ti.UI.SIZE,
+	touchEnabled: false,
+	layout: "horizontal",
+	left: 50
+
+}
+
+".post_icon": {
+	width: 44,
+	height: 44,
+	touchEnabled: false,
+	//backgroundColor: "red"
+
+}
+
+"#cat_icon": {
+	backgroundImage: "/images/head-category.png",
+	touchEnabled: false,
+	left: 0,
+	width: 20,
+	height: 20
+
+}
+
+"#tag_icon": {
+	backgroundImage: "/images/head-tag.png",
+	touchEnabled: false,
+	left: 0,
+	width: 20,
+	height: 20
+
+}
+
+"#stories_icon": {
+	backgroundImage: "/images/head-story.png",
+	touchEnabled: false,
+	left: 0,
+	width: 20,
+	height: 20
+
+}
+
+
+"#category": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 14,
+	},
+	//backgroundColor: '#E3E3E3',
+	//borderRadius: Alloy.Globals.borderRad,
+	height: 18,
+	color: "#999",
+	left: 5
+}
+
+"#tags": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 14,
+	},
+	//backgroundColor: '#E3E3E3',
+	//borderRadius: Alloy.Globals.borderRad,
+	height: 18,
+	width: Ti.UI.SIZE,
+	color: "#999",
+	left: 5
+}
+
+"#stories": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 14,
+	},
+	//backgroundColor: '#E3E3E3',
+	//borderRadius: Alloy.Globals.borderRad,
+	height: 18,
+	width: Ti.UI.SIZE,
+	color: "#999",
+	left: 5
+}
+
+"#aspectsCashflowWrapper": {
+	top:0,
+	width: Ti.UI.FILL,
+	touchEnabled: false
+}
+
+"#aspectsDocumentWrapper": {
+	top:0,
+	width: Ti.UI.FILL,
+	touchEnabled: false
+}
+
+
+".first": {
+	left: 0
+
+}
+
+"#bottomBar": {
+	backgroundColor: '#5FAEE3',
+	width: Ti.UI.FILL,
+	touchEnabled: false,
+	height: 50,
+	bottom: 0
+}
+
+".separator": {
+	height: 1,
+	top: 0,
+	touchEnabled: false,
+	backgroundColor: '#D6D6D6',
+	width: '100%'
+}
+
+
+"#buttonsContainer": {
+	layout: 'horizontal',
+	width: Ti.UI.SIZE,
+	top: 15,
+	
+	height: 25
+}
+
+".1_insertAspects": {
+	left: 0,
+	width: 20,
+	height: 20
+	
+}
+
+".insertAspects": {
+	left: 40,
+	width: 20,
+	height: 20
+	
+}

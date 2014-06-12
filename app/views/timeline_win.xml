@@ -1,7 +1,7 @@
 <Alloy>
 
 	<!--<Collection src = "events" id="subsetEvents" instance="true"/>-->
-	<Window id="win" class="container" title = "Diario" onOpen="openEvent" exitOnClose="true">
+	<Window id="win" class="container" title = "Diario" onOpen="openEvent">
 
 		<!-- The Menu tag adds the Android menu. -->
 		<Menu id="menu" platform="android">

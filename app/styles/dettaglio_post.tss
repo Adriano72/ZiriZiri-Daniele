@@ -1,8 +1,15 @@
 
 ".container": {
-  	backgroundColor: '#F9F9F9'
+  	backgroundColor: '#F9F9F9',
+  	orientationModes: [Ti.UI.PORTRAIT]
 	//layout: "vertical",
 }
+
+"#mn_edit": {
+	icon: "/images/top-edit.png",
+	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+}
+
 
 ".eventContainer": {
 	//width: '100%',
@@ -25,7 +32,7 @@
 	left:10,
 	right:10,
 	top: 10,
-	touchEnabled: false,
+	//touchEnabled: false,
 	layout: "horizontal"
 }
 
@@ -129,6 +136,7 @@
 	left: 10,
 	//backgroundColor: "navy",
 	top: 10,
+	bottom: 5,
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE,
 	touchEnabled: false,

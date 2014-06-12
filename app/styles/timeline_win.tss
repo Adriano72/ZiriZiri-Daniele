@@ -2,6 +2,7 @@
 	//backgroundColor: '#d8d8d8',
 	backgroundColor: '#F9F9F9',
 	//layout: "vertical",
+	orientationModes: [Ti.UI.PORTRAIT],
 	exitOnClose: true
 }
 
@@ -54,8 +55,8 @@
 "#topWrapper": {
 
 	height: Ti.UI.SIZE,
-	left:10,
-	right:10,
+	left: 10,
+	right: 10,
 	top: 10,
 	touchEnabled: false,
 	layout: "horizontal"
@@ -74,7 +75,7 @@
 "#postIcon":{
 	//backgroundColor: "navy",
 	left: 0,
-	top:0,
+	top: 0,
 	image: '/images/android-robot.jpg',
 	touchEnabled: false,
 	width: 70,
@@ -87,8 +88,8 @@
 
 "#date_rating": {
 	//backgroundColor: "yellow",
-	top:0,
-	left:0,
+	top: 0,
+	left: 0,
 	width: Ti.UI.SIZE,
 	height: Ti.UI.SIZE,
 	touchEnabled: false,
@@ -100,13 +101,13 @@
 	touchEnabled: false,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 14,
+		fontSize: 14
 	},
 	color: "#999",
 	//height: Ti.UI.SIZE,
 	textAlign: 'right',
 	wordWrap: false,
-	left:0,
+	left: 0,
 	top: 0
 }
 
@@ -122,15 +123,15 @@
 ".ratingstars": {
 	width: 15,
 	height: 15,
-	left:5,
-	top:0
+	left: 5,
+	top: 0
 }
 
 "#name": {
 	touchEnabled: false,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
+		fontSize: 18
 	},
 	color: "#444",
 	height: 100,
@@ -160,21 +161,18 @@
 }
 
 ".post_icons_container": {
-	
+
 	//backgroundColor: "yellow",
 	width: Ti.UI.SIZE,
 	touchEnabled: false,
 	layout: "horizontal",
 	left: 40
-
 }
 
 ".post_icon": {
 	width: 44,
 	height: 44,
-	touchEnabled: false,
-	//backgroundColor: "red"
-
+	touchEnabled: false
 }
 
 "#cat_icon": {
@@ -183,7 +181,6 @@
 	left: 0,
 	width: 20,
 	height: 20
-
 }
 
 "#tag_icon": {
@@ -192,7 +189,6 @@
 	left: 0,
 	width: 20,
 	height: 20
-
 }
 
 "#stories_icon": {
@@ -201,7 +197,6 @@
 	left: 0,
 	width: 20,
 	height: 20
-
 }
 
 
@@ -209,7 +204,7 @@
 	touchEnabled: false,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 14,
+		fontSize: 14
 	},
 	//backgroundColor: '#E3E3E3',
 	//borderRadius: Alloy.Globals.borderRad,
@@ -222,7 +217,7 @@
 	touchEnabled: false,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 14,
+		fontSize: 14
 	},
 	//backgroundColor: '#E3E3E3',
 	//borderRadius: Alloy.Globals.borderRad,
@@ -236,7 +231,7 @@
 	touchEnabled: false,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 14,
+		fontSize: 14
 	},
 	//backgroundColor: '#E3E3E3',
 	//borderRadius: Alloy.Globals.borderRad,
@@ -270,32 +265,31 @@
 	width: Ti.UI.FILL,
 	touchEnabled: false,
 	layout: "horizontal",
-	left: 5,
+	left: 5
 }
 
 
 ".aspects_icons":{
 	//backgroundColor: "navy",
 	left: 15,
-	top:10,
+	top: 10,
 	bottom: 10,
 	image: '/images/android-robot.jpg',
 	touchEnabled: false,
 	center: 45,
 	width: 25,
 	height: 25
-
 }
 
 "#event_icon": {
 	backgroundImage: '/images/kernel-event-off.png',
-	left: 5,
+	left: 5
 }
 
 
 
 "#communication_icon": {
-	backgroundImage: '/images/kernel-comunicazioni-off.png',
+	backgroundImage: '/images/kernel-comunicazioni-off.png'
 }
 
 ".show_all_container": {
@@ -314,7 +308,7 @@
 ".push_to_right": {
 	//backgroundColor: "yellow",
 	height: 25,
-	left:0,	
+	left: 0,
 	height: Ti.UI.SIZE,
 	width: Ti.UI.FILL
 }
@@ -322,11 +316,11 @@
 "#show_all_text": {
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 14,
+		fontSize: 14
 	},
 	color: "#5FAEE3",
 	right: 30,
-	top:10,
+	top: 10,
 	bottom: 10,
 	height: 25,
 
@@ -336,7 +330,7 @@
 "#show_all_icon": {
 	right: 0,
 
-	top:10,
+	top: 10,
 	bottom: 10,
 	backgroundImage: '/images/kernel-show-all.png',
 	touchEnabled: false,
@@ -373,12 +367,10 @@
 	width: Ti.UI.SIZE,
 	layout: "vertical",
 	left: 70
-
 }
 
 ".first": {
 	left: 0
-
 }
 
 ".btn_text": {
@@ -407,34 +399,32 @@
 ".icon": {
 	width: 35,
 	height: 35,
-	top:0
-
+	top: 0
 }
 
 "#bottom_sync": {
-	backgroundImage: "/images/bottom-refresh.png",	
-	left: 0	
+	backgroundImage: "/images/bottom-refresh.png",
+	left: 0
 }
 
 "#txt_sync": {
-	text: "SYNC"	
+	text: "SYNC"
 }
 
 "#bottom_new": {
-	backgroundImage: "/images/bottom-new-post.png",	
-	left: 0	
+	backgroundImage: "/images/bottom-new-post.png",
+	left: 0
 }
 
 "#txt_new": {
-	text: "NEW POST"	
+	text: "NEW POST"
 }
 
 "#bottom_today": {
-	backgroundImage: "/images/bottom-today.png",	
-	left: 0	
+	backgroundImage: "/images/bottom-today.png",
+	left: 0
 }
 
 "#txt_today": {
 	text: "TODAY"
-
 }

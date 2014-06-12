@@ -1,5 +1,6 @@
 ".container": {
   	backgroundColor: '#F9F9F9',
+  	orientationModes: [Ti.UI.PORTRAIT]
 	//layout: "vertical",
 }
 
@@ -10,10 +11,7 @@
 
 
 "#newCashflowTable":{
-	top: 5 ,
-	bottom: 50,
-	left: 0,
-	right: 0,
+	top: 5,
 	separatorColor: 'transparent'
 } 
 
@@ -23,30 +21,111 @@
 	width: Ti.UI.FILL,
 	backgroundColor: '#F9F9F9',
     className: 'itemRow',
-    layout: 'horizontal'
+    top:5
     
 } 
 
-"#titolo": {
-	
-	color: "#999",
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
-	},
-	top: 5,
-	right: 5,
-	left: 5,
+".rowWrapper": {
+	height: 40,
 	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
-	//backgroundColor: '#C8DDE8',
-	hintText: "Titolo",
+	left: 5,
+	top:5,
+	right: 5,
 	borderRadius: 5,
 	borderWidth: 1,
 	borderColor: "#CCCCCC",
-	backgroundColor: '#FFF'
+	backgroundColor: '#FFF', 
+	layout: 'horizontal'
+}
+
+"#importoLabel": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Importo",
+	width: 110,
+	color: '#444'
+}
+
+"#importoValue": {
+	
+	color: "#666",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	left:5,
+	backgroundColor: "#fff",
+	width: 200,	
+	wordWrap: false,
+	//backgroundColor: '#C8DDE8',
+	hintText: "0.00"
 
 }
+
+"#valutaImg": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "yellow",
+	right: 5,
+	text: "€",
+	textAlign: 'center',
+	width: 20,
+	color: '#666'
+}
+
+"#tipoMovimento": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Tipologia",
+	width: 110,
+	color: '#444'
+}
+
+
+"#pkrTipoMovimento": {
+
+	color: "#999",
+	left: 5,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	backgroundColor: '#FFF'
+	//backgroundColor: '#C8DD
+
+}
+
+"#pagamentoIncasso": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Pagamento",
+	width: 110,
+	color: '#444'
+}
+
+"#pkrPagamentoIncasso": {
+
+	color: "#999",
+	left: 5,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	backgroundColor: '#FFF'
+	//backgroundColor: '#C8DD
+
+}
+
 
 "#descrizione": {
 	
@@ -175,11 +254,11 @@
 	color: '#999'
 }
 
-"#verticalBar": {
+".verticalBar": {
 	
 	height: Ti.UI.FILL,
 	width: 1,
-	right: 45,
+	left: 0,
 	backgroundColor: "#CCCCCC"
 	
 }
@@ -201,21 +280,7 @@
 	
 }
 
-"#pkrCategoria": {
 
-	color: "#999",
-	top: 5,
-	right: 5,
-	left: 5,
-	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
-	borderRadius: 5,
-	borderWidth: 1,
-	borderColor: "#CCCCCC",
-	backgroundColor: '#FFF'
-	//backgroundColor: '#C8DD
-
-}
 
 "#postDate": {
 	

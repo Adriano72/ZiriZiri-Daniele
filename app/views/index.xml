@@ -1,5 +1,5 @@
 <Alloy>
-	<Window backgroundColor="white" layout="vertical">
+	<Window class="container" backgroundColor="white" layout="vertical">
         <TextField id="username"/>
         <TextField id="password"/>
         <Button id="btn_login" onClick="do_login" />

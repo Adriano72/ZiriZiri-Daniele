@@ -51,9 +51,9 @@ function do_login(e) {
 			Alloy.Globals.loading.show('Sincronizzazione...', false);
 
 			if (_.isNull(Ti.App.Properties.getObject('timelineProp'))) {
-				Ti.API.info("********** HERE 111111 *********");
+				
 				net.getData(0,50,function(timeline_obj) {
-					Ti.API.info("********** HERE 2222222 *********");
+					
 					Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
 					Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
 					Alloy.createController("timeline_win").getView();

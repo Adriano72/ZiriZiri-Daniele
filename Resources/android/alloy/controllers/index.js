@@ -14,15 +14,11 @@ function Controller() {
                 Ti.App.Properties.setString("sessionId", json.data.sessionId);
                 Ti.API.info("SESSIONE: " + Ti.App.Properties.getString("sessionId", 0));
                 Alloy.Globals.loading.show("Sincronizzazione...", false);
-                if (_.isNull(Ti.App.Properties.getObject("timelineProp"))) {
-                    Ti.API.info("********** HERE 111111 *********");
-                    net.getData(0, 50, function(timeline_obj) {
-                        Ti.API.info("********** HERE 2222222 *********");
-                        Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
-                        Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
-                        Alloy.createController("timeline_win").getView();
-                    });
-                }
+                _.isNull(Ti.App.Properties.getObject("timelineProp")) && net.getData(0, 50, function(timeline_obj) {
+                    Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
+                    Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
+                    Alloy.createController("timeline_win").getView();
+                });
                 $.index.close();
             } else alert("Username o password errati");
         };
@@ -45,6 +41,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.index = Ti.UI.createWindow({
+        orientationModes: [ Ti.UI.PORTRAIT ],
         backgroundColor: "white",
         layout: "vertical",
         id: "index"

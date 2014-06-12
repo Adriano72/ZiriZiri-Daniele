@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="win" class="container" title = "Nuovo Post" onOpen="initializeThings">
+	<Window id="win" class="container" title = "Nuovo Post" onOpen="initializeThings" onClose="checkForSync">
 		<Menu id="menu" platform="android">
 
 			<MenuItem id="mn_salva" onClick="savePost"/>
@@ -27,7 +27,7 @@
 			</TableViewRow>
 			<TableViewRow class="row">
 				<View id="picOptionsContainer">
-					<View id="picture">						
+					<View id="picture">
 						<ImageView id="takePicIcon"/>
 						<Label id="takePicText"/>
 					</View>
@@ -41,18 +41,5 @@
 			</TableViewRow>
 
 		</TableView>
-		<View id="bottomBar">
-			<Label class="separator"/>
-			<View id="buttonsContainer">
-				<Label class="1_insertAspects" backgroundImage="/images/kernel-event-dark.png" onClick="addEvent"/>
-				<Label class="insertAspects" backgroundImage="/images/kernel-finance-dark.png" onClick="addCashflow"/>
-				<Label class="insertAspects" backgroundImage="/images/kernel-document-dark.png" onClick="addDocument"/>
-				<Label class="insertAspects" backgroundImage="/images/kernel-note-dark.png" onClick="addNote"/>
-				<Label class="insertAspects" backgroundImage="/images/kernel-link-dark.png" onClick="addLink"/>
-				<Label class="insertAspects" backgroundImage="/images/kernel-comunicazioni-dark.png"/>
-			</View>
-
-		</View>
-
 	</Window>
 </Alloy>

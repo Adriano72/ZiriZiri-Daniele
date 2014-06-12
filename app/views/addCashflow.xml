@@ -1,34 +1,38 @@
 <Alloy>
-	<Window id="window" class="container" title = "Nuovo CashFlow">
-		
+	<Window id="win" class="container" title = "Nuovo CashFlow" onOpen="openEvent">
+
 		<Menu id="menu" platform="android">
 
-			<MenuItem id="mn_salva" onClick="savePost"/>
+			<MenuItem id="mn_salva" onClick="saveCashflow"/>
 
 		</Menu>
-
 		<TableView id="newCashflowTable">
-			
-			<TableViewRow>
-				<View id="importoWrapper">
-						<Label id="importoText"/>
-						<Label id="importoValue"/>
-						<Label id="verticalBar"/>
-						<ImageView id="valutaImg"/>
-					</View>
-			</TableViewRow>
-			
+
 			<TableViewRow class="row">
-				<Picker id="pkrTipoMovimento" selectionIndicator="true"/>
+				<View class="rowWrapper">
+					<Label id="importoLabel"/>
+					<Label class="verticalBar"/>
+					<TextField id="importoValue"/>
+					<Label class="verticalBar"/>
+					<Label id="valutaImg"/>
+				</View>
 			</TableViewRow>
-			
 			<TableViewRow class="row">
-				<TextField id="importo"/>				
+				<View class="rowWrapper">
+					<Label id="tipoMovimento"/>
+					<Label class="verticalBar"/>
+					<Picker id="pkrTipoMovimento" selectionIndicator="true"/>
+				</View>
 			</TableViewRow>
-			
 			<TableViewRow class="row">
-				<Picker id="pkrPagamentoIncasso" selectionIndicator="true"/>
+				<View class="rowWrapper">
+					<Label id="pagamentoIncasso"/>
+					<Label class="verticalBar"/>
+					<Picker id="pkrPagamentoIncasso" selectionIndicator="true"/>
+				</View>
 			</TableViewRow>
+
+			
 
 		</TableView>
 

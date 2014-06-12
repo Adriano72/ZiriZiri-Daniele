@@ -42,6 +42,7 @@ exports.getPostTemplate = function(page, max, _callback) {
     var pagination = max > 0 ? "&page=" + page + "&max=" + max : "";
     var xhr = Ti.Network.createHTTPClient();
     xhr.onload = function() {
+        Ti.API.info("RESPONSE TEMPLATE: " + xhr.responseText);
         _callback(JSON.parse(xhr.responseText));
     };
     xhr.onerror = function(e) {

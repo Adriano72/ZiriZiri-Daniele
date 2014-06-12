@@ -2,24 +2,24 @@ function Controller() {
     function syncAspects(e) {
         if (e && e.fromAdapter) return;
         syncAspects.opts || {};
-        var models = __alloyId51.models;
+        var models = __alloyId57.models;
         var len = models.length;
         var rows = [];
         for (var i = 0; len > i; i++) {
-            var __alloyId43 = models[i];
-            __alloyId43.__transform = transformData(__alloyId43);
-            var __alloyId45 = Ti.UI.createTableViewRow({
+            var __alloyId49 = models[i];
+            __alloyId49.__transform = transformData(__alloyId49);
+            var __alloyId51 = Ti.UI.createTableViewRow({
                 className: "itemRow",
                 width: Ti.UI.FILL
             });
-            rows.push(__alloyId45);
-            var __alloyId47 = Ti.UI.createView({
+            rows.push(__alloyId51);
+            var __alloyId53 = Ti.UI.createView({
                 left: 2,
                 layout: "horizontal",
                 width: Ti.UI.FILL
             });
-            __alloyId45.add(__alloyId47);
-            var __alloyId48 = Ti.UI.createLabel({
+            __alloyId51.add(__alloyId53);
+            var __alloyId54 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -31,10 +31,10 @@ function Controller() {
                 wordWrap: false,
                 ellipsize: true,
                 left: 0,
-                text: "undefined" != typeof __alloyId43.__transform["name"] ? __alloyId43.__transform["name"] : __alloyId43.get("name")
+                text: "undefined" != typeof __alloyId49.__transform["name"] ? __alloyId49.__transform["name"] : __alloyId49.get("name")
             });
-            __alloyId47.add(__alloyId48);
-            var __alloyId49 = Ti.UI.createLabel({
+            __alloyId53.add(__alloyId54);
+            var __alloyId55 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -45,10 +45,10 @@ function Controller() {
                 width: 95,
                 wordWrap: false,
                 ellipsize: true,
-                text: "undefined" != typeof __alloyId43.__transform["tipoFile"] ? __alloyId43.__transform["tipoFile"] : __alloyId43.get("tipoFile")
+                text: "undefined" != typeof __alloyId49.__transform["tipoFile"] ? __alloyId49.__transform["tipoFile"] : __alloyId49.get("tipoFile")
             });
-            __alloyId47.add(__alloyId49);
-            var __alloyId50 = Ti.UI.createLabel({
+            __alloyId53.add(__alloyId55);
+            var __alloyId56 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -61,7 +61,7 @@ function Controller() {
                 ellipsize: true,
                 text: "Visualizza"
             });
-            __alloyId47.add(__alloyId50);
+            __alloyId53.add(__alloyId56);
         }
         $.__views.aspectDocumentTable.setData(rows);
     }
@@ -87,15 +87,15 @@ function Controller() {
         id: "briefDocument"
     });
     $.__views.briefDocument && $.addTopLevelView($.__views.briefDocument);
-    $.__views.__alloyId42 = Ti.UI.createLabel({
+    $.__views.__alloyId48 = Ti.UI.createLabel({
         height: 1,
         top: 0,
         touchEnabled: false,
         backgroundColor: "#D6D6D6",
         width: Ti.UI.FILL,
-        id: "__alloyId42"
+        id: "__alloyId48"
     });
-    $.__views.briefDocument.add($.__views.__alloyId42);
+    $.__views.briefDocument.add($.__views.__alloyId48);
     $.__views.documentIcon = Ti.UI.createLabel({
         top: 5,
         left: 5,
@@ -114,10 +114,10 @@ function Controller() {
         id: "aspectDocumentTable"
     });
     $.__views.briefDocument.add($.__views.aspectDocumentTable);
-    var __alloyId51 = Alloy.Collections["aspettiDocument"] || aspettiDocument;
-    __alloyId51.on("fetch destroy change add remove reset", syncAspects);
+    var __alloyId57 = Alloy.Collections["aspettiDocument"] || aspettiDocument;
+    __alloyId57.on("fetch destroy change add remove reset", syncAspects);
     exports.destroy = function() {
-        __alloyId51.off("fetch destroy change add remove reset", syncAspects);
+        __alloyId57.off("fetch destroy change add remove reset", syncAspects);
     };
     _.extend($, $.__views);
     arguments[0] || {};

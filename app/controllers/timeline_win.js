@@ -189,22 +189,18 @@ net.getCategories(function(categoriesData) {
 
 net.getPostTemplate(0, 1, function(p_postTemplate) {
 	
-	Alloy.Models.Template = new Backbone.Model;
-	Alloy.Models.Template.set(p_postTemplate.data[0]);
-	
-	Alloy.Models.Post_template = new Backbone.Model;	
-	Alloy.Models.Post_template = Alloy.Models.Template.unset("modules");
-	
-	Alloy.Models.Event_template = new Backbone.Model;
-	Alloy.Models.Cashflow_template = new Backbone.Model;
-	Alloy.Models.Document_template = new Backbone.Model;
-	Alloy.Models.Note_template = new Backbone.Model;
-	Alloy.Models.Link_template = new Backbone.Model;
-	Alloy.Models.Communication_template = new Backbone.Model;
+
+	Alloy.Models.Template.set(p_postTemplate.data[0]);	
+	Alloy.Models.Template.unset("id");
+	var templateJson = Alloy.Models.Template.toJSON();
+	templateJson = _.omit(templateJson, 'modules');
+		
+	Alloy.Models.Post_template.set(templateJson);
+
 	
 	
 
-	Ti.API.info("POST TEMPLATE MODEL: " + JSON.stringify(Alloy.Models.Template));
+	Ti.API.info("POST TEMPLATE MODEL: " + JSON.stringify(Alloy.Models.Post_template));
 
 	var arrayTemplateIds = [];
 
@@ -287,6 +283,10 @@ function refreshTable() {
 		Ti.API.info("COLLECTION LENGTH AFTER SYNC: "+Alloy.Collections.Timeline.length);
 		syncTimeline();
 		Alloy.Globals.loading.hide();
+		if(Alloy.Globals.postSaved){
+			alert("Post salvato!");
+			Alloy.Globals.postSaved = false;
+		}
 
 	});
 

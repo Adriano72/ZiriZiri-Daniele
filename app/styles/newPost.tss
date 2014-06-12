@@ -1,5 +1,6 @@
 ".container": {
   	backgroundColor: '#F9F9F9',
+  	orientationModes: [Ti.UI.PORTRAIT]
 	//layout: "vertical",
 }
 
@@ -10,10 +11,7 @@
 
 
 "#newPostTable":{
-	top: 5 ,
-	bottom: 50,
-	left: 0,
-	right: 0,
+	top: 5,
 	separatorColor: 'transparent'
 } 
 
@@ -23,7 +21,8 @@
 	width: Ti.UI.FILL,
 	backgroundColor: '#F9F9F9',
     className: 'itemRow',
-    layout: 'horizontal'
+    layout: 'horizontal',
+    touchEnabled: false
     
 } 
 
@@ -35,7 +34,7 @@
 		fontSize: 18,
 	},
 	top: 5,
-	right: 5,
+	
 	left: 5,
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE,
@@ -56,7 +55,7 @@
 		fontSize: 18,
 	},
 	top: 5,
-	right: 5,
+	
 	left: 5,
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE,
@@ -77,7 +76,7 @@
 		fontSize: 18,
 	},
 	top: 5,
-	right: 5,
+	
 	left: 5,
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE,
@@ -99,7 +98,7 @@
 		fontSize: 18,
 	},
 	top: 5,
-	right: 5,
+	
 	left: 5,
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE,
@@ -115,7 +114,7 @@
 "#picOptionsContainer": {
 	top: 5,
 	left: 5,
-	right: 5,
+	
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE
 }
@@ -205,7 +204,7 @@
 
 	color: "#999",
 	top: 5,
-	right: 5,
+	
 	left: 5,
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE,

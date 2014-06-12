@@ -2,24 +2,24 @@ function Controller() {
     function syncAspects(e) {
         if (e && e.fromAdapter) return;
         syncAspects.opts || {};
-        var models = __alloyId41.models;
+        var models = __alloyId47.models;
         var len = models.length;
         var rows = [];
         for (var i = 0; len > i; i++) {
-            var __alloyId33 = models[i];
-            __alloyId33.__transform = transformData(__alloyId33);
-            var __alloyId35 = Ti.UI.createTableViewRow({
+            var __alloyId39 = models[i];
+            __alloyId39.__transform = transformData(__alloyId39);
+            var __alloyId41 = Ti.UI.createTableViewRow({
                 className: "itemRow",
                 width: Ti.UI.FILL
             });
-            rows.push(__alloyId35);
-            var __alloyId37 = Ti.UI.createView({
+            rows.push(__alloyId41);
+            var __alloyId43 = Ti.UI.createView({
                 left: 2,
                 layout: "horizontal",
                 width: Ti.UI.FILL
             });
-            __alloyId35.add(__alloyId37);
-            var __alloyId38 = Ti.UI.createLabel({
+            __alloyId41.add(__alloyId43);
+            var __alloyId44 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -31,10 +31,10 @@ function Controller() {
                 wordWrap: false,
                 ellipsize: true,
                 left: 0,
-                text: "undefined" != typeof __alloyId33.__transform["importo"] ? __alloyId33.__transform["importo"] : __alloyId33.get("importo")
+                text: "undefined" != typeof __alloyId39.__transform["importo"] ? __alloyId39.__transform["importo"] : __alloyId39.get("importo")
             });
-            __alloyId37.add(__alloyId38);
-            var __alloyId39 = Ti.UI.createLabel({
+            __alloyId43.add(__alloyId44);
+            var __alloyId45 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -45,10 +45,10 @@ function Controller() {
                 width: 95,
                 wordWrap: false,
                 ellipsize: true,
-                text: "undefined" != typeof __alloyId33.__transform["tipoMovimento"] ? __alloyId33.__transform["tipoMovimento"] : __alloyId33.get("tipoMovimento")
+                text: "undefined" != typeof __alloyId39.__transform["tipoMovimento"] ? __alloyId39.__transform["tipoMovimento"] : __alloyId39.get("tipoMovimento")
             });
-            __alloyId37.add(__alloyId39);
-            var __alloyId40 = Ti.UI.createLabel({
+            __alloyId43.add(__alloyId45);
+            var __alloyId46 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -59,9 +59,9 @@ function Controller() {
                 width: 95,
                 wordWrap: false,
                 ellipsize: true,
-                text: "undefined" != typeof __alloyId33.__transform["modalitaPagamento"] ? __alloyId33.__transform["modalitaPagamento"] : __alloyId33.get("modalitaPagamento")
+                text: "undefined" != typeof __alloyId39.__transform["modalitaPagamento"] ? __alloyId39.__transform["modalitaPagamento"] : __alloyId39.get("modalitaPagamento")
             });
-            __alloyId37.add(__alloyId40);
+            __alloyId43.add(__alloyId46);
         }
         $.__views.aspectTable.setData(rows);
     }
@@ -89,15 +89,15 @@ function Controller() {
         id: "briefCashflow"
     });
     $.__views.briefCashflow && $.addTopLevelView($.__views.briefCashflow);
-    $.__views.__alloyId32 = Ti.UI.createLabel({
+    $.__views.__alloyId38 = Ti.UI.createLabel({
         height: 1,
         top: 0,
         touchEnabled: false,
         backgroundColor: "#D6D6D6",
         width: Ti.UI.FILL,
-        id: "__alloyId32"
+        id: "__alloyId38"
     });
-    $.__views.briefCashflow.add($.__views.__alloyId32);
+    $.__views.briefCashflow.add($.__views.__alloyId38);
     $.__views.cashFlowIcon = Ti.UI.createLabel({
         top: 5,
         left: 5,
@@ -116,10 +116,10 @@ function Controller() {
         id: "aspectTable"
     });
     $.__views.briefCashflow.add($.__views.aspectTable);
-    var __alloyId41 = Alloy.Collections["aspettiCashflow"] || aspettiCashflow;
-    __alloyId41.on("fetch destroy change add remove reset", syncAspects);
+    var __alloyId47 = Alloy.Collections["aspettiCashflow"] || aspettiCashflow;
+    __alloyId47.on("fetch destroy change add remove reset", syncAspects);
     exports.destroy = function() {
-        __alloyId41.off("fetch destroy change add remove reset", syncAspects);
+        __alloyId47.off("fetch destroy change add remove reset", syncAspects);
     };
     _.extend($, $.__views);
     arguments[0] || {};

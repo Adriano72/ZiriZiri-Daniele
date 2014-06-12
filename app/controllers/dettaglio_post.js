@@ -4,6 +4,26 @@ var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
 moment.lang('it');
 
+function openEvent() {
+	//Ti.API.info("WINDOW OPEN");
+	theActionBar = $.win.activity.actionBar;
+
+	$.win.activity.invalidateOptionsMenu();
+
+	theActionBar = $.win.activity.actionBar;
+	if (theActionBar != undefined) {
+		theActionBar.displayHomeAsUp = true;
+		theActionBar.setIcon('images/logo-test.png');
+		//theActionBar.setTitle(self.title);
+		theActionBar.onHomeIconItemSelected = function() {
+			$.win.close({
+				animate : true
+			});
+		};
+	};
+
+};
+
 //Ti.API.info("ARGS: " + JSON.stringify(args));
 
 //Alloy.Models.Post = Alloy.createModel("post", Alloy.Collections.Timeline.at(args));
@@ -95,6 +115,11 @@ var aspettiLinks = _.filter(aspects, function(item) {
 var aspettiComunications = _.filter(aspects, function(item) {
 	return item.kind.code == "COMMUNICATIONDATATYPE_CODE";
 });
+
+function editPost(){
+	
+	
+};
 
 //Ti.API.info("ASPETTI CASHFLOW: "+JSON.stringify(aspettiCashflow));
 //Ti.API.info("ASPETTI CASHFLOW LENGTH: "+aspettiCashflow.length);

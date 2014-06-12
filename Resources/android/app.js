@@ -2,6 +2,8 @@ var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
 Alloy.Globals.winTop = 0;
 
+Alloy.Globals.postSaved = false;
+
 var icons = require("/icons");
 
 Alloy.Models.Post = new Backbone.Model();
@@ -13,6 +15,22 @@ var Timeline = Backbone.Collection.extend({
 });
 
 Alloy.Collections.Timeline = new Timeline();
+
+Alloy.Models.Template = new Backbone.Model();
+
+Alloy.Models.Post_template = new Backbone.Model();
+
+Alloy.Models.Event_template = new Backbone.Model();
+
+Alloy.Models.Cashflow_template = new Backbone.Model();
+
+Alloy.Models.Document_template = new Backbone.Model();
+
+Alloy.Models.Note_template = new Backbone.Model();
+
+Alloy.Models.Link_template = new Backbone.Model();
+
+Alloy.Models.Communication_template = new Backbone.Model();
 
 Alloy.Globals.baseUrl = "https://beta.ziriziri.com/zz/api/v02";
 

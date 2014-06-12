@@ -10,7 +10,7 @@
     <icon>appicon.png</icon>
     <fullscreen>false</fullscreen>
     <navbar-hidden>false</navbar-hidden>
-    <analytics>true</analytics>
+    <analytics>false</analytics>
     <guid>41a029b7-e397-426e-87e1-c55eece46489</guid>
     <property name="ti.ui.defaultunit" type="string">dp</property>
     <property name="ti.android.fastdev" type="bool">false</property>

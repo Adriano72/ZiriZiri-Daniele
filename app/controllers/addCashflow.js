@@ -2,6 +2,28 @@ var args = arguments[0] || {};
 
 //Ti.API.info("PARAMETRI: "+JSON.stringify(args));
 
+function openEvent() {
+	//Ti.API.info("win OPEN");
+	theActionBar = $.win.activity.actionBar;
+
+	$.win.activity.invalidateOptionsMenu();
+
+	theActionBar = $.win.activity.actionBar;
+	if (theActionBar != undefined) {
+		theActionBar.displayHomeAsUp = true;
+		theActionBar.setIcon('images/logo-test.png');
+		//theActionBar.setTitle(self.title);
+		theActionBar.onHomeIconItemSelected = function() {
+			$.win.close({
+				animate : true
+			});
+		};
+
+	};
+
+};
+
+
 function showTipoMovPicker(e) {
 
 	var riga = Alloy.createController('tipoMovPicker', function(p_data) {
@@ -12,7 +34,7 @@ function showTipoMovPicker(e) {
 };
 
 var rowsTipoMov = [Ti.UI.createPickerRow({
-	title : "Tipo Movimento",
+	title : "",
 	id : 9999
 })];
 
@@ -28,7 +50,7 @@ _.forEach(Ti.App.Properties.getObject("elencoTipoMov"), function(value, key) {
 $.pkrTipoMovimento.add(rowsTipoMov);
 
 var rowsPagamIncasso = [Ti.UI.createPickerRow({
-	title : "Pagamento Incasso",
+	title : "",
 	id : 9999
 })];
 
@@ -43,7 +65,7 @@ _.forEach(Ti.App.Properties.getObject("elencoPagamIncasso"), function(value, key
 
 $.pkrPagamentoIncasso.add(rowsPagamIncasso);
 
-function createProtoObj() { 
+function saveCashflow() { 
 	
 	if($.pkrPagamentoIncasso.getSelectedRow(0).id != 9999 && $.pkrTipoMovimento.getSelectedRow(0).id != 9999){
 		
@@ -72,7 +94,7 @@ function createProtoObj() {
 	};
 	
 	args(objCashFlow);
-	$.window.close();
+	$.win.close();
 	
 	//Ti.API.info("MOSTRO : "+objCashFlow);
 	/*

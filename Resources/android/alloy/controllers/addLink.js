@@ -1,15 +1,15 @@
 function Controller() {
-    function __alloyId22() {
-        $.__views.window.removeEventListener("open", __alloyId22);
+    function __alloyId28() {
+        $.__views.window.removeEventListener("open", __alloyId28);
         if ($.__views.window.activity) $.__views.window.activity.onCreateOptionsMenu = function(e) {
-            var __alloyId21 = {
+            var __alloyId27 = {
                 id: "salva",
                 title: "Scrivi",
                 icon: "/images/785-floppy-disk.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
             };
-            $.__views.salva = e.menu.add(_.pick(__alloyId21, Alloy.Android.menuItemCreateArgs));
-            $.__views.salva.applyProperties(_.omit(__alloyId21, Alloy.Android.menuItemCreateArgs));
+            $.__views.salva = e.menu.add(_.pick(__alloyId27, Alloy.Android.menuItemCreateArgs));
+            $.__views.salva.applyProperties(_.omit(__alloyId27, Alloy.Android.menuItemCreateArgs));
             createProtoObj ? $.__views.salva.addEventListener("click", createProtoObj) : __defers["$.__views.salva!click!createProtoObj"] = true;
         }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
@@ -44,9 +44,9 @@ function Controller() {
         title: "Nuovo Link"
     });
     $.__views.window && $.addTopLevelView($.__views.window);
-    $.__views.window.addEventListener("open", __alloyId22);
-    var __alloyId23 = [];
-    $.__views.__alloyId24 = Ti.UI.createTableViewRow({
+    $.__views.window.addEventListener("open", __alloyId28);
+    var __alloyId29 = [];
+    $.__views.__alloyId30 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F2F2F2",
@@ -54,9 +54,9 @@ function Controller() {
         layout: "horizontal",
         left: 5,
         right: 5,
-        id: "__alloyId24"
+        id: "__alloyId30"
     });
-    __alloyId23.push($.__views.__alloyId24);
+    __alloyId29.push($.__views.__alloyId30);
     $.__views.titolo = Ti.UI.createTextField({
         borderColor: "#000000",
         color: "#336699",
@@ -70,8 +70,8 @@ function Controller() {
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "titolo"
     });
-    $.__views.__alloyId24.add($.__views.titolo);
-    $.__views.__alloyId25 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId30.add($.__views.titolo);
+    $.__views.__alloyId31 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F2F2F2",
@@ -79,9 +79,9 @@ function Controller() {
         layout: "horizontal",
         left: 5,
         right: 5,
-        id: "__alloyId25"
+        id: "__alloyId31"
     });
-    __alloyId23.push($.__views.__alloyId25);
+    __alloyId29.push($.__views.__alloyId31);
     $.__views.descrizione = Ti.UI.createTextField({
         borderColor: "#000000",
         color: "#336699",
@@ -95,8 +95,8 @@ function Controller() {
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "descrizione"
     });
-    $.__views.__alloyId25.add($.__views.descrizione);
-    $.__views.__alloyId26 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId31.add($.__views.descrizione);
+    $.__views.__alloyId32 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F2F2F2",
@@ -104,9 +104,9 @@ function Controller() {
         layout: "horizontal",
         left: 5,
         right: 5,
-        id: "__alloyId26"
+        id: "__alloyId32"
     });
-    __alloyId23.push($.__views.__alloyId26);
+    __alloyId29.push($.__views.__alloyId32);
     $.__views.content = Ti.UI.createTextField({
         borderColor: "#000000",
         color: "#336699",
@@ -120,13 +120,13 @@ function Controller() {
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "content"
     });
-    $.__views.__alloyId26.add($.__views.content);
+    $.__views.__alloyId32.add($.__views.content);
     $.__views.newLinkTable = Ti.UI.createTableView({
         top: 5,
         left: 20,
         right: 20,
         separatorColor: "transparent",
-        data: __alloyId23,
+        data: __alloyId29,
         id: "newLinkTable"
     });
     $.__views.window.add($.__views.newLinkTable);
