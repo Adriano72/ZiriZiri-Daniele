@@ -15,13 +15,13 @@ function Controller() {
         id: "row"
     });
     $.__views.row && $.addTopLevelView($.__views.row);
-    $.__views.__alloyId142 = Ti.UI.createView({
+    $.__views.__alloyId153 = Ti.UI.createView({
         height: 80,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId142"
+        id: "__alloyId153"
     });
-    $.__views.row.add($.__views.__alloyId142);
+    $.__views.row.add($.__views.__alloyId153);
     $.__views.description = Ti.UI.createLabel({
         height: 30,
         font: {
@@ -37,7 +37,7 @@ function Controller() {
         width: 55,
         id: "description"
     });
-    $.__views.__alloyId142.add($.__views.description);
+    $.__views.__alloyId153.add($.__views.description);
     $.__views.dateFrom = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -49,7 +49,7 @@ function Controller() {
         width: Ti.UI.SIZE,
         id: "dateFrom"
     });
-    $.__views.__alloyId142.add($.__views.dateFrom);
+    $.__views.__alloyId153.add($.__views.dateFrom);
     $.__views.dateTo = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -61,14 +61,14 @@ function Controller() {
         width: Ti.UI.SIZE,
         id: "dateTo"
     });
-    $.__views.__alloyId142.add($.__views.dateTo);
-    $.__views.__alloyId143 = Ti.UI.createView({
+    $.__views.__alloyId153.add($.__views.dateTo);
+    $.__views.__alloyId154 = Ti.UI.createView({
         height: 80,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId143"
+        id: "__alloyId154"
     });
-    $.__views.row.add($.__views.__alloyId143);
+    $.__views.row.add($.__views.__alloyId154);
     $.__views.location = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -80,7 +80,7 @@ function Controller() {
         width: Ti.UI.SIZE,
         id: "location"
     });
-    $.__views.__alloyId143.add($.__views.location);
+    $.__views.__alloyId154.add($.__views.location);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

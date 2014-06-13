@@ -22,17 +22,7 @@ function openEvent() {
 	};
 
 };
-
-
-function showTipoMovPicker(e) {
-
-	var riga = Alloy.createController('tipoMovPicker', function(p_data) {
-		//$.postDate.value = moment(p_data).format('LL');
-		//Ti.API.info("PARAMETRO: "+p_data);
-	}).getView();
-
-};
-
+// ******* PICKER TIPO MOVIMENTO *******
 var rowsTipoMov = [Ti.UI.createPickerRow({
 	title : "",
 	id : 9999
@@ -49,6 +39,8 @@ _.forEach(Ti.App.Properties.getObject("elencoTipoMov"), function(value, key) {
 
 $.pkrTipoMovimento.add(rowsTipoMov);
 
+
+// ******* PICKER PAGAMENTO INCASSO *******
 var rowsPagamIncasso = [Ti.UI.createPickerRow({
 	title : "",
 	id : 9999
@@ -64,6 +56,42 @@ _.forEach(Ti.App.Properties.getObject("elencoPagamIncasso"), function(value, key
 });
 
 $.pkrPagamentoIncasso.add(rowsPagamIncasso);
+
+// ******* PICKER STATO MOVIMENTO *******
+var rowsStatoMovimento = [Ti.UI.createPickerRow({
+	title : "",
+	id : 9999
+})];
+
+_.forEach(Ti.App.Properties.getObject("statoMovimento"), function(value, key) {
+	//Ti.API.info("CAT: "+JSON.stringify(value));
+
+	var pkrRow = Ti.UI.createPickerRow(value);
+
+	rowsStatoMovimento.push(pkrRow);
+
+});
+
+$.pkrStatoMovimento.add(rowsStatoMovimento);
+
+// ******* PICKER VARIABILITA' *******
+var rowsVariabilita = [Ti.UI.createPickerRow({
+	title : "",
+	id : 9999
+})];
+
+_.forEach(Ti.App.Properties.getObject("tipoVariabilita"), function(value, key) {
+	//Ti.API.info("CAT: "+JSON.stringify(value));
+
+	var pkrRow = Ti.UI.createPickerRow(value);
+
+	rowsVariabilita.push(pkrRow);
+
+});
+
+$.pkrVariabilita.add(rowsVariabilita);
+
+
 
 function saveCashflow() { 
 	

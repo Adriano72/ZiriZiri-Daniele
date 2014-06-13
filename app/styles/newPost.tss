@@ -207,7 +207,7 @@
 	
 	left: 5,
 	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
+	height: Ti.UI.FILL,
 	borderRadius: 5,
 	borderWidth: 1,
 	borderColor: "#CCCCCC",

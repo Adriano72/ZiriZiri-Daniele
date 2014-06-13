@@ -238,6 +238,54 @@ net.getTipoMovimento(function(p_tipoMovimento) {
 
 });
 
+net.getVariabilita(function(p_tipoVariabilita) {
+
+	var objTipoVariabilita = [];
+
+	_.forEach(p_tipoVariabilita.data, function(value, key) {
+
+		//Ti.API.info("Categoria: "+key+" : "+value.name);
+
+		objTipoVariabilita.push({
+			"title" : value.descrizioneBreve,
+			"codice" : value.codice,
+			"descrizioneBreve" : value.descrizioneBreve,
+			"descrizioneLunga" : value.descrizioneLunga,
+			"id" : value.id
+		});
+
+	});
+
+	Ti.App.Properties.setObject("tipoVariabilita", objTipoVariabilita);
+
+	Ti.API.info("OBJ VARIABILITA': "+JSON.stringify(Ti.App.Properties.getObject("tipoVariabilita")));
+
+});
+
+net.getStatoMovimento(function(p_statoMovimento) {
+
+	var objStatoMovimento = [];
+
+	_.forEach(p_statoMovimento.data, function(value, key) {
+
+		//Ti.API.info("Categoria: "+key+" : "+value.name);
+
+		objStatoMovimento.push({
+			"title" : value.descrizioneBreve,
+			"codice" : value.codice,
+			"descrizioneBreve" : value.descrizioneBreve,
+			"descrizioneLunga" : value.descrizioneLunga,
+			"id" : value.id
+		});
+
+	});
+
+	Ti.App.Properties.setObject("statoMovimento", objStatoMovimento);
+
+	Ti.API.info("OBJ STATO MOVIMENTO': "+JSON.stringify(Ti.App.Properties.getObject("statoMovimento")));
+
+});
+
 net.getPagamentoIncasso(function(p_pagamentoIncasso) {
 
 	//Ti.API.info("OBJ PAGAMENTO INCASSO: "+JSON.stringify(p_pagamentoIncasso));

@@ -105,6 +105,39 @@ exports.getPagamentoIncasso = function(_callback) {
 	xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/aliasstrumentopagamentoincasso/" + session + "?_type=JSON");
 	xhr.send();
 };
+
+exports.getVariabilita = function(_callback) {
+
+	var xhr = Ti.Network.createHTTPClient();
+
+	xhr.onload = function() {
+		//Ti.API.info("RESPONSE: "+xhr.responseText);
+		_callback(JSON.parse(xhr.responseText));
+	};
+
+	xhr.onerror = function(e) {
+		alert("Error getting Variabilità: " + JSON.stringify(e));
+	}; https://demo.ziriziri.com/zz/api/v0/financial/financial/tipomovimento/103?_type=json
+	xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/tipovariabilita/" + session + "?_type=JSON");
+	xhr.send();
+};
+
+exports.getStatoMovimento = function(_callback) {
+
+	var xhr = Ti.Network.createHTTPClient();
+
+	xhr.onload = function() {
+		//Ti.API.info("RESPONSE: "+xhr.responseText);
+		_callback(JSON.parse(xhr.responseText));
+	};
+
+	xhr.onerror = function(e) {
+		alert("Error getting Stato Movimento: " + JSON.stringify(e));
+	}; https://demo.ziriziri.com/zz/api/v0/financial/financial/tipomovimento/103?_type=json
+	xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/statomovimento/" + session + "?_type=JSON");
+	xhr.send();
+};
+
 exports.getCategories = function(_callback) {
 
 	var xhr = Ti.Network.createHTTPClient();
