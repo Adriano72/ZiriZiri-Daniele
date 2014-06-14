@@ -38,7 +38,7 @@ function Controller() {
         var rowsCat = [ Ti.UI.createPickerRow({
             fontFamily: "SourceSansPro-Regular",
             fontSize: 8,
-            title: "Selezionare una categoria",
+            title: "Categorie",
             id: 9999
         }) ];
         _.forEach(Ti.App.Properties.getObject("elencoCategorie"), function(value) {
