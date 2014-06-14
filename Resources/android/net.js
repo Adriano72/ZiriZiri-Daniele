@@ -76,6 +76,30 @@ exports.getPagamentoIncasso = function(_callback) {
     xhr.send();
 };
 
+exports.getVariabilita = function(_callback) {
+    var xhr = Ti.Network.createHTTPClient();
+    xhr.onload = function() {
+        _callback(JSON.parse(xhr.responseText));
+    };
+    xhr.onerror = function(e) {
+        alert("Error getting Variabilità: " + JSON.stringify(e));
+    };
+    xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/tipovariabilita/" + session + "?_type=JSON");
+    xhr.send();
+};
+
+exports.getStatoMovimento = function(_callback) {
+    var xhr = Ti.Network.createHTTPClient();
+    xhr.onload = function() {
+        _callback(JSON.parse(xhr.responseText));
+    };
+    xhr.onerror = function(e) {
+        alert("Error getting Stato Movimento: " + JSON.stringify(e));
+    };
+    xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/statomovimento/" + session + "?_type=JSON");
+    xhr.send();
+};
+
 exports.getCategories = function(_callback) {
     var xhr = Ti.Network.createHTTPClient();
     xhr.onload = function() {

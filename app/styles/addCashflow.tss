@@ -126,133 +126,136 @@
 
 }
 
-
-"#descrizione": {
-	
-	color: "#999",
+"#statoMovimento": {
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
+		fontSize: 16
 	},
-	top: 5,
-	right: 5,
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Stato",
+	width: 110,
+	color: '#444'
+}
+
+"#pkrStatoMovimento": {
+
+	color: "#999",
 	left: 5,
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE,
-	//backgroundColor: '#C8DDE8',
-	hintText: "Descrizione",
-	borderRadius: 5,
-	borderWidth: 1,
-	borderColor: "#CCCCCC",
 	backgroundColor: '#FFF'
+	//backgroundColor: '#C8DD
 
 }
 
-"#tag": {
-	
-	color: "#999",
+"#variabilita": {
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
+		fontSize: 16
 	},
-	top: 5,
-	right: 5,
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Variabilità",
+	width: 110,
+	color: '#444'
+}
+
+"#pkrVariabilita": {
+
+	color: "#999",
 	left: 5,
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE,
-	//backgroundColor: '#C8DDE8',
-	hintText: "Tag",
-	borderRadius: 5,
-	borderWidth: 1,
-	borderColor: "#CCCCCC",
 	backgroundColor: '#FFF'
+	//backgroundColor: '#C8DD
 
 }
 
-
-"#storie": {
-	
-	color: "#999",
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
-	},
-	top: 5,
-	right: 5,
-	left: 5,
-	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
-	//backgroundColor: '#C8DDE8',
-	hintText: "Storie",
-	borderRadius: 5,
-	borderWidth: 1,
-	borderColor: "#CCCCCC",
-	backgroundColor: '#FFF'
-
+"#leftSubWrapper": {
+	width: "50%",
+	layout: "horizontal",
+	left:0
 }
 
-"#picOptionsContainer": {
-	top: 5,
-	left: 5,
-	right: 5,
-	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE
-}
-
-"#picture": {
-	height: 40,
-	width: "49.5%",
-	left: 0,
-	borderRadius: 5,
-	borderWidth: 1,
-	borderColor: "#5FAEE3",
-	backgroundColor: '#5FAEE3'
-}
-
-"#takePicIcon": {
+"#dotSwitchImageLeft": {
 	
 	width: 25,
 	height: Ti.UI.SIZE,
-	image: "/images/various-take-a-photo.png",
+	image: "/images/dot-switch-on.png",
 	left: 5
 }
 
-"#takePicText": {
+
+"#ordinarioLabel": {
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
+		fontSize: 16
 	},
-	right: 10,
-	text: "Take a Picture!",
-	color: '#FFF'
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Ordinario",
+	height: Ti.UI.FILL,
+	color: '#444'
 }
 
-"#gallery": {
-	height: 40,
-	width: "49.5%",
-	right: 0,
-	borderRadius: 5,
-	borderWidth: 1,
-	borderColor: "#CCCCCC",
-	backgroundColor: '#FFF'
+"#rightSubWrapper": {
+	width: Ti.UI.FILL,
+	//backgroundColor: "red",
+	//height: Ti.UI.FILL,
+	layout: "horizontal",
+	left:0
 }
 
-"#galleryPicIcon": {
+"#dotSwitchImageRight": {
 	
 	width: 25,
 	height: Ti.UI.SIZE,
-	image: "/images/various-add.png",
+	image: "/images/dot-switch-off.png",
 	left: 5
 }
 
-"#galleryPicText": {
+"#straordinarioLabel": {
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
+		fontSize: 16
 	},
-	text: "Gallery",
-	color: '#999'
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Straordinario",
+	width: Ti.UI.SIZE,
+	height: Ti.UI.FILL,
+	color: '#444'
+
 }
+
+"#dichRedditiLabel": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Dichiarazione dei Redditi",
+	height: Ti.UI.FILL,
+	color: '#444'
+}
+
+"#ovalSwitchContainer": {
+	width: Ti.UI.FILL,
+	//backgroundColor: "red",
+	//height: Ti.UI.FILL,
+	left:0
+}
+
+"#ovalSwitchRedditi": {
+	
+	width: 30,
+	height: Ti.UI.SIZE,
+	image: "/images/oval-switch-off.png",
+	right: 5
+}
+
 
 ".verticalBar": {
 	
@@ -260,98 +263,5 @@
 	width: 1,
 	left: 0,
 	backgroundColor: "#CCCCCC"
-	
-}
-
-"#galleryPic2": {
-	borderLeft: true,
-	
-	width: 40,
-	height: Ti.UI.SIZE,
-	image: "/images/various-galllery.png",
-	right: 5
-}
-
-
-"#starwidget": {
-	
-	top:10,
-	bottom: 10
-	
-}
-
-
-
-"#postDate": {
-	
-	borderColor: "#000000",
-	color: "#336699",
-	top: 5,
-	right: 5,
-	left: 5,
-	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
-	//backgroundColor: '#C8DDE8',
-	
-	editable: false,
-	borderRadius: 5,
-	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
-
-}
-
-"#location": {
-	
-	borderColor: "#000000",
-	color: "#336699",
-	ellipsize: true,
-	top: 5,
-	right: 5,
-	left: 5,
-	width: Ti.UI.FILL,
-	autocorrect: false,
-	height: Ti.UI.SIZE,
-	//backgroundColor: '#C8DDE8',
-	hintText: "Posizione",
-	borderRadius: 5,
-	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
-
-}
-
-"#bottomBar": {
-	backgroundColor: '#5FAEE3',
-	width: Ti.UI.FILL,
-	touchEnabled: false,
-	height: 50,
-	bottom: 0
-}
-
-".separator": {
-	height: 1,
-	top: 0,
-	touchEnabled: false,
-	backgroundColor: '#D6D6D6',
-	width: '100%'
-}
-
-
-"#buttonsContainer": {
-	layout: 'horizontal',
-	width: Ti.UI.SIZE,
-	top: 15,
-	
-	height: 25
-}
-
-".1_insertAspects": {
-	left: 0,
-	width: 20,
-	height: 20
-	
-}
-
-".insertAspects": {
-	left: 40,
-	width: 20,
-	height: 20
 	
 }

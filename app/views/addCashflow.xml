@@ -31,8 +31,51 @@
 					<Picker id="pkrPagamentoIncasso" selectionIndicator="true"/>
 				</View>
 			</TableViewRow>
+			<TableViewRow class="row">
+				<View class="rowWrapper">
+					<Label id="statoMovimento"/>
+					<Label class="verticalBar"/>
+					<Picker id="pkrStatoMovimento" selectionIndicator="true"/>
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<View class="rowWrapper">
+					<Label id="variabilita"/>
+					<Label class="verticalBar"/>
+					<Picker id="pkrVariabilita" selectionIndicator="true"/>
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
 
-			
+				<View class="rowWrapper">
+
+					<View id="leftSubWrapper">
+						<ImageView id="dotSwitchImageLeft"/>
+						<Label id="ordinarioLabel"/>
+					</View>
+					<Label class="verticalBar"/>
+					<View id="rightSubWrapper">
+						<ImageView id="dotSwitchImageRight"/>
+						<Label id="straordinarioLabel"/>
+					</View>
+
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+
+				<View class="rowWrapper">
+
+					<View id="leftSubWrapper">
+						
+						<Label id="dichRedditiLabel"/>
+					</View>
+					
+					<View id="ovalSwitchContainer">
+						<ImageView id="ovalSwitchRedditi"/>						
+					</View>
+
+				</View>
+			</TableViewRow>
 
 		</TableView>
 
