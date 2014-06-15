@@ -1,37 +1,57 @@
 <!--<Alloy>
-	<TableViewRow id="row">
-		<Label id="description"/>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Importo: ">
-			<Label class="block_data" id="importo"/>
-		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Data operazione: ">
-			<Label class="block_data" id="dataOperazione"/>
-		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Data valuta: ">
-			<Label class="block_data" id="dataValuta"/>
-		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Tipo movimento: ">
-			<Label class="block_data" id="codTipoMovimento"/>
-		</View>
-	</TableViewRow>
+<TableViewRow id="row">
+<Label id="description"/>
+<View class="block_container" layout="horizontal">
+<Label class="block_label" text="Importo: ">
+<Label class="block_data" id="importo"/>
+</View>
+<View class="block_container" layout="horizontal">
+<Label class="block_label" text="Data operazione: ">
+<Label class="block_data" id="dataOperazione"/>
+</View>
+<View class="block_container" layout="horizontal">
+<Label class="block_label" text="Data valuta: ">
+<Label class="block_data" id="dataValuta"/>
+</View>
+<View class="block_container" layout="horizontal">
+<Label class="block_label" text="Tipo movimento: ">
+<Label class="block_data" id="codTipoMovimento"/>
+</View>
+</TableViewRow>
+</Alloy>
+
+<Alloy>
+<TableViewRow id="row">
+
+<View class="block_container" layout="horizontal">
+<Label id="description"/>
+<Label class="block_data" id="importo"/>
+<Label class="block_data" id="dataValuta"/>
+</View>
+<View class="block_container" layout="horizontal">
+<Label class="block_data" id="codTipoMovimento"/>
+
+<Label class="block_data" id="dataOperazione"/>
+</View>
+</TableViewRow>
 </Alloy>-->
 
 <Alloy>
-	<TableViewRow id="row">
-		
-		<View class="block_container" layout="horizontal">
-			<Label id="description"/>
-			<Label class="block_data" id="importo"/>
-			<Label class="block_data" id="dataValuta"/>
+
+	<TableViewRow class="row">
+
+		<View class="aspectCashflowContainer">
+			<Label id="cashFlowIcon" class="aspectIcon"/>
+			<View class="aligningWrapper">
+				<View class="dataWrapper">
+					<Label class="dataDisplay first" id="importo"/>
+					<Label class="dataDisplay" id="tipoMovimento"/>
+					<Label class="dataDisplay" id="modalitaPagamento"/>
+				</View>
+			</View>
+
 		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_data" id="codTipoMovimento"/>
-			
-			<Label class="block_data" id="dataOperazione"/>
-		</View>
+
 	</TableViewRow>
+
 </Alloy>

@@ -140,6 +140,7 @@ exports.saveAspect = function(allAspects, _callback) {
         _callback(arrayIDAspetti);
     });
     _.forEach(allAspects, function(value) {
+        var dataJson = {};
         Ti.API.info("***SAVING ASPECT***");
         var xhr = Ti.Network.createHTTPClient();
         xhr.onload = function() {
@@ -157,12 +158,14 @@ exports.saveAspect = function(allAspects, _callback) {
         xhr.setRequestHeader("Accept", "application/json");
         xhr.setRequestHeader("Content-Type", "application/json");
         Ti.API.info("JSON ASPETTO DA SALVARE: " + JSON.stringify(value));
-        xhr.send(JSON.stringify(value));
+        dataJson.data = value;
+        xhr.send(JSON.stringify(dataJson));
     });
 };
 
 exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
     Ti.API.info("ARRAY ****:" + JSON.stringify(p_array));
+    var dataJson = {};
     var tmpArr = [];
     tmpArr.push(p_array);
     tmpArr = _.flatten(tmpArr);
@@ -172,7 +175,6 @@ exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
         var json = JSON.parse(this.responseText);
         if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
             Ti.App.fireEvent("loading_done");
-            alert("Post salvato");
             _callback();
         } else alert("Errore nella comunicazione col server.");
     };
@@ -185,7 +187,7 @@ exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("X-HTTP-Method-Override", "PUT");
     "[" + p_array.toString() + "]";
-    tmpArr = JSON.stringify(tmpArr);
     Ti.API.info("ARRAY INVIATO: " + tmpArr);
-    xhr.send(tmpArr);
+    dataJson.data = tmpArr;
+    xhr.send(JSON.stringify(dataJson));
 };

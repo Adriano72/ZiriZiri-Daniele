@@ -20,7 +20,7 @@ function transformData(model) {
 	//attrs.imageUrl = '/' + attrs.direction + '.png';
 	attrs.importo = attrs.data.importo+"€";
 	attrs.tipoMovimento = attrs.data.tipoMovimento.codice;
-	attrs.modalitaPagamento = attrs.data.modalitaPagamento.descrizioneBreve;
+	attrs.modalitaPagamento = attrs.data.pagamentoIncasso.descrizioneBreve;
 
 	return attrs;
 }

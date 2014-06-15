@@ -73,7 +73,7 @@ function submitPost() {
 
 	net.savePost(Alloy.Models.Post_template, function(post_id) {
 
-		Alloy.Globals.showSpinner();
+		Alloy.Globals.loading.show('Salvataggio in corso...', false);
 
 		Ti.API.info("ID POST SALVATO: " + post_id);
 
@@ -81,7 +81,7 @@ function submitPost() {
 
 			callSaveAspects(function(p_arrayIdAspetti) {
 
-				p_arrayIdAspetti.push(Ti.App.Properties.getList("postTemplateIds"));
+				//p_arrayIdAspetti.push(Ti.App.Properties.getList("postTemplateIds"));
 
 				p_arrayIdAspetti = _.flatten(p_arrayIdAspetti);
 
@@ -89,6 +89,8 @@ function submitPost() {
 
 				net.linkAspectsToPost(post_id, p_arrayIdAspetti, function() {
 					$.win.close();
+					args.close();
+					Alloy.Globals.postSaved = true;
 					
 					
 				});
@@ -99,18 +101,33 @@ function submitPost() {
 			args.close();
 			Alloy.Globals.postSaved = true;
 			//alert("Post salvato");
-
+			/*
 			setTimeout(function() {
 
 				Ti.App.fireEvent("loading_done");
 				
 			}, 500);
+			*/
 
 		};
 
 	});
 
 }
+
+function callSaveAspects(_callback) {
+
+	net.saveAspect(arrayAspetti, function(id_saved_aspects_array) {
+
+		//arrayIdAspetti.push(id_aspect);
+
+		Ti.API.info("ARRAY DEGLI ID ASPETTI SALVATI: " + id_saved_aspects_array);
+
+		_callback(id_saved_aspects_array);
+
+	});
+
+};
 
 function addEvent() {
 
@@ -196,7 +213,8 @@ function addCashflow(id_post) {
 
 
 	Alloy.createController("addCashflow", function(objRet) {
-
+		
+	/*
 		var objAspect = {
 
 			kind : {
@@ -228,30 +246,34 @@ function addCashflow(id_post) {
 		objAspect.data.dataValuta = timeNow;
 		objAspect.data.pagamentoIncasso = objRet.pagamentoIncasso;
 		objAspect.data.importo = objRet.importo;
+		*/
 
 		/*
 		 "kind":{"code":"CASHFLOWDATATYPE_CODE"},
 		 "data": "{\"tipoMovimento\":{\"codice\":\""+tipoMovCodice+"\",\"id\":"+tipoMovId+",\"version\":"+tipoMovVersion+"},\"pagamentoIncasso\":{\"descrizioneBreve\":\""+pagamIncDescBreve+"\",\"id\":"+tipoMovId+",\"version\":"+tipoMovVersion+"},\"dataOperazione\":1393066568000,\"descrizioneBreve\":\"\",\"importo\":"+$.importo.value+"}"
 		 */
-
+		/*
 		var tempObj = _.clone(objAspect);
 		objAspect.data = JSON.stringify(objAspect.data);
+		*/
 
-		arrayAspetti.push(objAspect);
+		arrayAspetti.push(objRet);
 
 		Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
-
+		
+		var aspettoDataJson = JSON.parse(objRet.data);
+		
+		Ti.API.info("DATA PARSATO: "+JSON.stringify(aspettoDataJson));
+		
 		var riga = Alloy.createController('rowCASHFLOW', {
 
-			id_code : arrayAspetti.length - 1,
-			name : objAspect.name,
-			importo : tempObj.data.importo,
-			dataOperazione : tempObj.data.dataOperazione,
-			dataValuta : tempObj.data.dataValuta,
-			codTipoMovimento : tempObj.data.tipoMovimento.codice
+			id_code : arrayAspetti.length - 1,			
+			importo : aspettoDataJson.importo,	
+			modalitaPagamento : aspettoDataJson.pagamentoIncasso.descrizioneBreve,
+			tipoMovimento : aspettoDataJson.tipoMovimento.descrizioneBreve
 
 		}).getView();
-		$.newPostTable.appendRow(riga);
+		$.postTable.appendRow(riga);
 
 		//Ti.API.info("FINISHED ASPECT OBJ: "+JSON.stringify(objAspect));
 	}).getView().open();
@@ -473,19 +495,7 @@ function addNote(id_post) {
 	}).getView().open();
 };
 
-function callSaveAspects(_callback) {
 
-	net.saveAspect(arrayAspetti, function(id_saved_aspects_array) {
-
-		//arrayIdAspetti.push(id_aspect);
-
-		Ti.API.info("ARRAY DEGLI ID ASPETTI SALVATI: " + id_saved_aspects_array);
-
-		_callback(id_saved_aspects_array);
-
-	});
-
-};
 
 $.win.open();
 

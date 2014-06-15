@@ -4,7 +4,7 @@ function Controller() {
             par_data: sel_data,
             _callback: function(p_data) {
                 Ti.API.info("FINAL DATE TIME: " + p_data);
-                args(p_data);
+                args._callback(p_data);
             }
         });
     }
@@ -36,7 +36,11 @@ function Controller() {
         callback: function(e) {
             if (e.cancel) Ti.API.info("User canceled dialog"); else if (0 == bug_flag) {
                 bug_flag = 1;
-                showTimePicker(e.value);
+                if (args.onlyDate) {
+                    var soloData = moment(e.value).format("YYYY-MM-DD");
+                    var dataCompleta = soloData.toString();
+                    args._callback(dataCompleta);
+                } else showTimePicker(e.value);
             }
         }
     });

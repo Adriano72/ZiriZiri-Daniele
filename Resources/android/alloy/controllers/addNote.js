@@ -1,15 +1,15 @@
 function Controller() {
-    function __alloyId45() {
-        $.__views.window.removeEventListener("open", __alloyId45);
+    function __alloyId54() {
+        $.__views.window.removeEventListener("open", __alloyId54);
         if ($.__views.window.activity) $.__views.window.activity.onCreateOptionsMenu = function(e) {
-            var __alloyId44 = {
+            var __alloyId53 = {
                 id: "salva",
                 title: "Scrivi",
                 icon: "/images/785-floppy-disk.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
             };
-            $.__views.salva = e.menu.add(_.pick(__alloyId44, Alloy.Android.menuItemCreateArgs));
-            $.__views.salva.applyProperties(_.omit(__alloyId44, Alloy.Android.menuItemCreateArgs));
+            $.__views.salva = e.menu.add(_.pick(__alloyId53, Alloy.Android.menuItemCreateArgs));
+            $.__views.salva.applyProperties(_.omit(__alloyId53, Alloy.Android.menuItemCreateArgs));
             createProtoObj ? $.__views.salva.addEventListener("click", createProtoObj) : __defers["$.__views.salva!click!createProtoObj"] = true;
         }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
@@ -43,9 +43,9 @@ function Controller() {
         title: "Nuova Nota"
     });
     $.__views.window && $.addTopLevelView($.__views.window);
-    $.__views.window.addEventListener("open", __alloyId45);
-    var __alloyId46 = [];
-    $.__views.__alloyId47 = Ti.UI.createTableViewRow({
+    $.__views.window.addEventListener("open", __alloyId54);
+    var __alloyId55 = [];
+    $.__views.__alloyId56 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F2F2F2",
@@ -53,9 +53,9 @@ function Controller() {
         layout: "horizontal",
         left: 5,
         right: 5,
-        id: "__alloyId47"
+        id: "__alloyId56"
     });
-    __alloyId46.push($.__views.__alloyId47);
+    __alloyId55.push($.__views.__alloyId56);
     $.__views.title = Ti.UI.createTextField({
         borderColor: "#000000",
         color: "#336699",
@@ -69,8 +69,8 @@ function Controller() {
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "title"
     });
-    $.__views.__alloyId47.add($.__views.title);
-    $.__views.__alloyId48 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId56.add($.__views.title);
+    $.__views.__alloyId57 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F2F2F2",
@@ -78,9 +78,9 @@ function Controller() {
         layout: "horizontal",
         left: 5,
         right: 5,
-        id: "__alloyId48"
+        id: "__alloyId57"
     });
-    __alloyId46.push($.__views.__alloyId48);
+    __alloyId55.push($.__views.__alloyId57);
     $.__views.content = Ti.UI.createTextArea({
         borderColor: "#000000",
         color: "#336699",
@@ -94,7 +94,7 @@ function Controller() {
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "content"
     });
-    $.__views.__alloyId48.add($.__views.content);
+    $.__views.__alloyId57.add($.__views.content);
     $.__views.titolo = Ti.UI.createTableView({
         borderColor: "#000000",
         color: "#336699",
@@ -106,7 +106,7 @@ function Controller() {
         hintText: "Titolo",
         borderRadius: 5,
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        data: __alloyId46,
+        data: __alloyId55,
         id: "titolo"
     });
     $.__views.window.add($.__views.titolo);

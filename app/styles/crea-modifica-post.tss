@@ -21,7 +21,13 @@
 }
 
 "#postTable": {
-	bottom: 50
+	bottom: 50,
+	separatorColor: 'transparent',
+	layout: "vertical"
+}
+
+".row": {
+	bottom: 10
 }
 
 ".eventContainer": {
@@ -29,6 +35,7 @@
 	left: 5,
 	right: 5,
 	top: 5,
+	bottom: 10,
 	borderRadius: 5,
 	borderWidth: 1,
 	borderColor: "#E9FA32",

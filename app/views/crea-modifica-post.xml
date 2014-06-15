@@ -11,51 +11,51 @@
 			<MenuItem id="mn_save" title="Salva" onClick="submitPost"/>
 			<!--<MenuItem id="Foto" title="Foto" icon="/images/86-camera.png"  showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />-->
 		</Menu>
-		<ScrollView id="postTable">
+		<TableView id="postTable">
 
-			<View class="eventContainer">
+			<TableViewRow class="row">
+				<View class="eventContainer">
 
-				<View id="topWrapper">
+					<View id="topWrapper">
 
-					<ImageView id="postIcon"/>
-					<View id="innerWrapper">
-						<View id="date_rating">
-							<Label id = "date"/>
-							<View id = "ratingContainer">
-								<ImageView id="rating_1" class="ratingstars"/>
-								<ImageView id="rating_2" class="ratingstars"/>
-								<ImageView id="rating_3" class="ratingstars"/>
-								<ImageView id="rating_4" class="ratingstars"/>
-								<ImageView id="rating_5" class="ratingstars"/>
+						<ImageView id="postIcon"/>
+						<View id="innerWrapper">
+							<View id="date_rating">
+								<Label id = "date"/>
+								<View id = "ratingContainer">
+									<ImageView id="rating_1" class="ratingstars"/>
+									<ImageView id="rating_2" class="ratingstars"/>
+									<ImageView id="rating_3" class="ratingstars"/>
+									<ImageView id="rating_4" class="ratingstars"/>
+									<ImageView id="rating_5" class="ratingstars"/>
+								</View>
 							</View>
+							<Label id = "name" text="{Post_template.name}"/>
 						</View>
-						<Label id = "name" text="{Post_template.name}"/>
-					</View>
 
+					</View>
+					<View id="middleWrapper">
+						<View class="post_icons_container first" >
+							<Label class="post_icon" id="cat_icon"/>
+							<Label class="btn_text" id="category"/>
+						</View>
+						<View class="post_icons_container">
+							<Label class="post_icon" id="tag_icon"/>
+							<Label class="btn_text" id="tags"/>
+						</View>
+						<View class="post_icons_container">
+							<Label class="post_icon" id="stories_icon"/>
+							<Label class="btn_text" id="stories" text="storie"/>
+						</View>
+
+					</View>
 				</View>
-				<View id="middleWrapper">
-					<View class="post_icons_container first" >
-						<Label class="post_icon" id="cat_icon"/>
-						<Label class="btn_text" id="category"/>
-					</View>
-					<View class="post_icons_container">
-						<Label class="post_icon" id="tag_icon"/>
-						<Label class="btn_text" id="tags" text="{Post_template.tag}"/>
-					</View>
-					<View class="post_icons_container">
-						<Label class="post_icon" id="stories_icon"/>
-						<Label class="btn_text" id="stories" text="storie"/>
-					</View>
 
-				</View>
-				<View id="aspectsCashflowWrapper"></View>
-				<View id="aspectsDocumentWrapper"></View>
+			</TableViewRow>
 
-			</View>
-
-		</ScrollView>
+		</TableView>
 		<View id="bottomBar">
-			
+
 			<View id="buttonsContainer">
 				<Label class="1_insertAspects" backgroundImage="/images/kernel-event-dark.png" onClick="addEvent"/>
 				<Label class="insertAspects" backgroundImage="/images/kernel-finance-dark.png" onClick="addCashflow"/>

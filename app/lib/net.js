@@ -200,6 +200,7 @@ exports.savePost = function(objPost, _callback) {
 };
 
 exports.saveAspect = function(allAspects, _callback) {
+	
 
 	var arrayIDAspetti = [];
 
@@ -208,6 +209,9 @@ exports.saveAspect = function(allAspects, _callback) {
 	});
 
 	_.forEach(allAspects, function(value, key) {
+		
+		var dataJson = {};
+		
 
 		Ti.API.info("***SAVING ASPECT***");
 
@@ -249,8 +253,10 @@ exports.saveAspect = function(allAspects, _callback) {
 		xhr.setRequestHeader('Content-Type', 'application/json');
 
 		Ti.API.info("JSON ASPETTO DA SALVARE: "+JSON.stringify(value));
+		
+		dataJson.data = value;
 
-		xhr.send(JSON.stringify(value));
+		xhr.send(JSON.stringify(dataJson));
 	});
 
 };
@@ -258,6 +264,8 @@ exports.saveAspect = function(allAspects, _callback) {
 exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
 
 	Ti.API.info("ARRAY ****:" + JSON.stringify(p_array));
+	
+	var dataJson = {};
 
 	var tmpArr = [];
 
@@ -277,7 +285,7 @@ exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
 		if (JSON.stringify(json.type.code) == "\"SUCCESS\"") {
 
 			Ti.App.fireEvent("loading_done");
-			alert("Post salvato");
+			//alert("Post salvato");
 			_callback();
 			//_callback(json.data.id);
 
@@ -303,10 +311,12 @@ exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
 	var arrIdAspects = "["+p_array.toString()+"]";
 
 
-	tmpArr = JSON.stringify(tmpArr);
+	//tmpArr = JSON.stringify(tmpArr);
 
 	Ti.API.info("ARRAY INVIATO: "+tmpArr);
+	
+	dataJson.data = tmpArr;
 
-	xhr.send(tmpArr);
+	xhr.send(JSON.stringify(dataJson));
 
 };

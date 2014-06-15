@@ -59,6 +59,7 @@
 	},
 	left:5,
 	backgroundColor: "#fff",
+	keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD,
 	width: 200,	
 	wordWrap: false,
 	//backgroundColor: '#C8DDE8',
@@ -256,7 +257,85 @@
 	right: 5
 }
 
+"#dataValutaLabel": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Data Valuta",
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	color: '#444'
+}
 
+"#dataValuta": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "",
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	color: '#444'
+
+}
+
+"#dataScadenzaLabel": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Data Scadenza",
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	color: '#444'
+}
+
+"#dataScadenza": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "",
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	color: '#444'
+
+}
+"#dataPagamentoLabel": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Data Pagamento",
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	color: '#444'
+}
+
+"#dataPagamento": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "",
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	color: '#444'
+
+}
 ".verticalBar": {
 	
 	height: Ti.UI.FILL,

@@ -189,13 +189,25 @@ net.getCategories(function(categoriesData) {
 
 net.getPostTemplate(0, 1, function(p_postTemplate) {
 	
-
+	// ***** EXTRACT POST ONLY TEMPLATE *****************
 	Alloy.Models.Template.set(p_postTemplate.data[0]);	
 	Alloy.Models.Template.unset("id");
+	
 	var templateJson = Alloy.Models.Template.toJSON();
-	templateJson = _.omit(templateJson, 'modules');
+	var post_only_template = _.omit(templateJson, 'modules');
 		
-	Alloy.Models.Post_template.set(templateJson);
+	Alloy.Models.Post_template.set(post_only_template);
+	
+	// ***** EXTRACT CASHFLOW TEMPLATE *****************
+	
+	var templateCashflow = _.filter(templateJson.modules, function(value){
+		return value.kind.code == "CASHFLOWDATATYPE_CODE";
+	});
+	
+	Alloy.Models.Cashflow_template.set(templateCashflow[0]);
+	Alloy.Models.Cashflow_template.unset("id");
+	
+	Ti.API.info("TEMPLATE CASHFLOW: "+JSON.stringify(Alloy.Models.Cashflow_template));
 
 	
 	
@@ -227,7 +239,7 @@ net.getTipoMovimento(function(p_tipoMovimento) {
 			"title" : value.descrizioneBreve,
 			"id" : value.id,
 			"codice" : value.codice,
-			"version" : value.version
+			"descrizioneBreve" : value.descrizioneBreve
 		});
 
 	});
@@ -298,7 +310,7 @@ net.getPagamentoIncasso(function(p_pagamentoIncasso) {
 		objPagamIncasso.push({
 			"title" : value.descrizioneBreve,
 			"id" : value.id,
-			"version" : value.version
+			"codice" : value.codice
 		});
 
 	});

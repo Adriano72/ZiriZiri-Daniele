@@ -1,15 +1,15 @@
 function Controller() {
-    function __alloyId33() {
-        $.__views.window.removeEventListener("open", __alloyId33);
+    function __alloyId42() {
+        $.__views.window.removeEventListener("open", __alloyId42);
         if ($.__views.window.activity) $.__views.window.activity.onCreateOptionsMenu = function(e) {
-            var __alloyId32 = {
+            var __alloyId41 = {
                 id: "salva",
                 title: "Scrivi",
                 icon: "/images/floppy-disk.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM
             };
-            $.__views.salva = e.menu.add(_.pick(__alloyId32, Alloy.Android.menuItemCreateArgs));
-            $.__views.salva.applyProperties(_.omit(__alloyId32, Alloy.Android.menuItemCreateArgs));
+            $.__views.salva = e.menu.add(_.pick(__alloyId41, Alloy.Android.menuItemCreateArgs));
+            $.__views.salva.applyProperties(_.omit(__alloyId41, Alloy.Android.menuItemCreateArgs));
             saveEvent ? $.__views.salva.addEventListener("click", saveEvent) : __defers["$.__views.salva!click!saveEvent"] = true;
         }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
@@ -54,9 +54,9 @@ function Controller() {
         title: "Nuovo Evento"
     });
     $.__views.window && $.addTopLevelView($.__views.window);
-    $.__views.window.addEventListener("open", __alloyId33);
-    var __alloyId34 = [];
-    $.__views.__alloyId35 = Ti.UI.createTableViewRow({
+    $.__views.window.addEventListener("open", __alloyId42);
+    var __alloyId43 = [];
+    $.__views.__alloyId44 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F2F2F2",
@@ -65,9 +65,9 @@ function Controller() {
         left: 5,
         right: 5,
         leftImage: "/images/calendar.png",
-        id: "__alloyId35"
+        id: "__alloyId44"
     });
-    __alloyId34.push($.__views.__alloyId35);
+    __alloyId43.push($.__views.__alloyId44);
     $.__views.dataFrom = Ti.UI.createTextField({
         borderColor: "#000000",
         color: "#336699",
@@ -82,10 +82,10 @@ function Controller() {
         id: "dataFrom",
         dataRaw: ""
     });
-    $.__views.__alloyId35.add($.__views.dataFrom);
+    $.__views.__alloyId44.add($.__views.dataFrom);
     showDatePicker ? $.__views.dataFrom.addEventListener("focus", showDatePicker) : __defers["$.__views.dataFrom!focus!showDatePicker"] = true;
     showDatePicker ? $.__views.dataFrom.addEventListener("click", showDatePicker) : __defers["$.__views.dataFrom!click!showDatePicker"] = true;
-    $.__views.__alloyId36 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId45 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F2F2F2",
@@ -94,9 +94,9 @@ function Controller() {
         left: 5,
         right: 5,
         leftImage: "/images/calendar.png",
-        id: "__alloyId36"
+        id: "__alloyId45"
     });
-    __alloyId34.push($.__views.__alloyId36);
+    __alloyId43.push($.__views.__alloyId45);
     $.__views.dataTo = Ti.UI.createTextField({
         borderColor: "#000000",
         color: "#336699",
@@ -111,10 +111,10 @@ function Controller() {
         id: "dataTo",
         dataRaw: ""
     });
-    $.__views.__alloyId36.add($.__views.dataTo);
+    $.__views.__alloyId45.add($.__views.dataTo);
     showDatePicker ? $.__views.dataTo.addEventListener("focus", showDatePicker) : __defers["$.__views.dataTo!focus!showDatePicker"] = true;
     showDatePicker ? $.__views.dataTo.addEventListener("click", showDatePicker) : __defers["$.__views.dataTo!click!showDatePicker"] = true;
-    $.__views.__alloyId37 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId46 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F2F2F2",
@@ -123,10 +123,10 @@ function Controller() {
         left: 5,
         right: 5,
         leftImage: "/images/location.png",
-        id: "__alloyId37"
+        id: "__alloyId46"
     });
-    __alloyId34.push($.__views.__alloyId37);
-    getLocation ? $.__views.__alloyId37.addEventListener("click", getLocation) : __defers["$.__views.__alloyId37!click!getLocation"] = true;
+    __alloyId43.push($.__views.__alloyId46);
+    getLocation ? $.__views.__alloyId46.addEventListener("click", getLocation) : __defers["$.__views.__alloyId46!click!getLocation"] = true;
     $.__views.location = Ti.UI.createLabel({
         borderColor: "#000000",
         color: "#336699",
@@ -143,13 +143,13 @@ function Controller() {
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "location"
     });
-    $.__views.__alloyId37.add($.__views.location);
+    $.__views.__alloyId46.add($.__views.location);
     $.__views.newEventTable = Ti.UI.createTableView({
         top: 5,
         left: 20,
         right: 20,
         separatorColor: "transparent",
-        data: __alloyId34,
+        data: __alloyId43,
         id: "newEventTable"
     });
     $.__views.window.add($.__views.newEventTable);
@@ -166,7 +166,7 @@ function Controller() {
     __defers["$.__views.dataFrom!click!showDatePicker"] && $.__views.dataFrom.addEventListener("click", showDatePicker);
     __defers["$.__views.dataTo!focus!showDatePicker"] && $.__views.dataTo.addEventListener("focus", showDatePicker);
     __defers["$.__views.dataTo!click!showDatePicker"] && $.__views.dataTo.addEventListener("click", showDatePicker);
-    __defers["$.__views.__alloyId37!click!getLocation"] && $.__views.__alloyId37.addEventListener("click", getLocation);
+    __defers["$.__views.__alloyId46!click!getLocation"] && $.__views.__alloyId46.addEventListener("click", getLocation);
     _.extend($, exports);
 }
 
