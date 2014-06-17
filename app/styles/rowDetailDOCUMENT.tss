@@ -1,85 +1,211 @@
-"#row": {
-	
-	height: Ti.UI.SIZE,
-	width: Ti.UI.FILL,
-	backgroundColor: '#F2F2F2',
-    className: 'itemRow',
-    layout: 'vertical'
-    
-} 
 
-"#description": {
-    height: 30,
-    font: {
-    	fontFamily: 'AppIcons',
-    	
-        fontSize: 18
-    },
-    color: "#DB4C3F",
-    left: 5,
-    right: 5,
-    top: 5,
-    ellipsize: true,
-    wordWrap: false,
-    backgroundColor: '#E3E3E3',
-    borderRadius: Alloy.Globals.borderRad,
-    touchEnabled: false,
-    width: Ti.UI.FILL
+".container": {
+  	backgroundColor: '#F9F9F9',
+  	orientationModes: [Ti.UI.PORTRAIT]
+	//layout: "vertical",
 }
 
-"#category": {
-	touchEnabled: false,
-	font: {
-		fontFamily: 'AppIcons',
-		fontSize: 12
-	},
-	backgroundColor: '#E3E3E3',
-	borderRadius: Alloy.Globals.borderRad,
-	height: 18,
-	width: Ti.UI.SIZE,
-	color: "#5E5E5E",
+".eventContainer": {
+	//width: '100%',
 	left: 5,
+	right: 5,
 	top: 5,
-	bottom: 10
-}
-
-".block_container":{
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF',
+	//bottom:10,
 	height: Ti.UI.SIZE,
-	touchEnabled: false,
-	layout: 'vertical',
-	backgroundColor: '#DEDEDE'
-}
-
-".block_label":{
-	height: 20,
-	width: Ti.UI.FILL,
-	backgroundColor: '#787878',
-	top: 0,
-	font: {    	
-        fontSize: 14,
-        fontFamily: 'Rosario-Regular'
-    },
-    touchEnabled: false,
-	color: '#FFFFFF'
-}
-
-".block_data": {
-	height: Ti.UI.SIZE,
-    font: {    	
-        fontSize: 16
-    },
-    left: 20,
-    right: 5,
-    top:5,
-    bottom: 5,
-    touchEnabled: false,
-   	width: Ti.UI.FILL
-	
+	layout: "vertical",
+	touchEnabled: false
 }
 
 "#img_preview": {
-	top: 5,
-	width: "95%",
-	height: 300
 	
+	borderColor: "#000000",
+	color: "#336699",
+	top: 10,
+	left: 5,
+	right: 5,
+	//width: Alloy.Globals.screenWidth,
+	height: 200
+	//backgroundColor: '#C8DDE8',
+	
+
 }
+
+".rowWrapper": {
+	layout: "horizontal",
+	top: 10
+}
+
+"#titoloLabel": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	color: "#5FAEE3",
+	text: "Titolo",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	left: 10
+}
+
+"#titolo": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	color: "#444",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	left: 10,
+	ellipsize: true,
+	wordWrap: false
+}
+
+"#nomeFileLabel": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	color: "#5FAEE3",
+	text: "Nome File",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	left: 10
+}
+
+"#nomeFile": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	color: "#444",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	left: 10,
+	ellipsize: true,
+	wordWrap: false
+}
+
+"#tipologiaLabel": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	color: "#5FAEE3",
+	text: "Tipologia",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	left: 10
+}
+
+"#tipologia": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	color: "#444",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	left: 10,
+	ellipsize: true,
+	wordWrap: false
+}
+
+"#formatoLabel": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	color: "#5FAEE3",
+	text: "Formato",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	left: 10
+}
+
+"#formato": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	color: "#444",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	left: 10,
+	ellipsize: true,
+	wordWrap: false
+}
+
+"#filesizeLabel": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	color: "#5FAEE3",
+	text: "File Size",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	left: 10
+}
+
+"#filesize": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	color: "#444",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	left: 10,
+	ellipsize: true,
+	wordWrap: false
+}
+
+"#dataDocLabel": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	color: "#5FAEE3",
+	text: "Data Documento",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	left: 10
+}
+
+"#dataDoc": {
+	touchEnabled: false,
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	color: "#444",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	left: 10,
+	ellipsize: true,
+	wordWrap: false
+}
+
+".newline": {
+	top: 30
+}
+
+".last": {
+	bottom: 20
+}
+

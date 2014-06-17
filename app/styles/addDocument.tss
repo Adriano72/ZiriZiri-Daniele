@@ -1,12 +1,17 @@
 ".container": {
-  	backgroundColor: '#F2F2F2'
+  	backgroundColor: '#F9F9F9',
+  	orientationModes: [Ti.UI.PORTRAIT]
 	//layout: "vertical",
 }
 
+"#mn_salva": {
+	icon: "/images/top-save.png",
+	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+}
+
+
 "#newDocumentTable":{
-	top: 5 ,
-	left: 20,
-	right: 20,
+	top: 5,
 	separatorColor: 'transparent'
 } 
 
@@ -14,44 +19,202 @@
 	
 	height: Ti.UI.SIZE,
 	width: Ti.UI.FILL,
-	backgroundColor: '#F2F2F2',
+	backgroundColor: '#F9F9F9',
     className: 'itemRow',
-    layout: 'horizontal',
-    left: 5,
-    right: 5
+    top:5
     
 } 
 
+".rowWrapper": {
+	//height: 40,
+	width: Ti.UI.FILL,
+	left: 5,
+	top:5,
+	right: 5,
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF'
+}
+
+".dateWrapper": {
+	height: 40,
+	width: Ti.UI.FILL,
+	left: 5,
+	top:5,
+	right: 5,
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF', 
+	layout: 'horizontal'
+}
+
 "#titolo": {
 	
-	borderColor: "#000000",
-	color: "#336699",
-	top: 5,
-	right: 5,
-	left: 5,
-	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
+	color: "#666",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	left:5,
+	height: 40,
+	backgroundColor: "#fff",
+	width: Ti.UI.FILL,	
+	//height: Ti.UI.SIZE,
+	wordWrap: false,
 	//backgroundColor: '#C8DDE8',
-	hintText: "Titolo",
-	borderRadius: 5,
-	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
+	hintText: "Titolo"
 
 }
 
 "#descrizione": {
 	
-	borderColor: "#000000",
-	color: "#336699",
-	top: 5,
-	right: 5,
-	left: 5,
-	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
+	color: "#666",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	left:5,
+	backgroundColor: "#fff",
+	width: Ti.UI.FILL,	
+	height: 100,
+	wordWrap: false,
 	//backgroundColor: '#C8DDE8',
-	hintText: "Descrizione",
-	borderRadius: 5,
-	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
+	hintText: "Descrizione"
 
+}
+
+"#leftSubWrapper": {
+	width: "50%",
+	layout: "horizontal",
+	left:0
+}
+
+
+"#rightSubWrapper": {
+	width: Ti.UI.FILL,
+	//backgroundColor: "red",
+	//height: Ti.UI.FILL,
+	layout: "horizontal",
+	left:0
+}
+
+"#dataDocumentoLabel": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Data Documento",
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	color: '#444'
+}
+
+"#dataDocumento": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "",
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	color: '#444'
+
+}
+
+".verticalBar": {
+	
+	height: Ti.UI.FILL,
+	width: 1,
+	left: 0,
+	backgroundColor: "#CCCCCC"
+	
+}
+
+"#picOptionsContainer": {
+	top: 5,
+	left: 5,
+	
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE
+}
+
+"#picture": {
+	height: 40,
+	width: "49%",
+	left: 0,
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#5FAEE3",
+	backgroundColor: '#5FAEE3'
+}
+
+"#takePicIcon": {
+	
+	width: 25,
+	height: Ti.UI.SIZE,
+	image: "/images/various-take-a-photo.png",
+	left: 5
+}
+
+"#takePicText": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	right: 10,
+	text: "Take a Picture!",
+	color: '#FFF'
+}
+
+"#gallery": {
+	height: 40,
+	width: "49%",
+	right: 5,
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF'
+}
+
+"#galleryPicIcon": {
+	
+	width: 25,
+	height: Ti.UI.SIZE,
+	image: "/images/various-add.png",
+	left: 5
+}
+
+"#galleryPicText": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	text: "Gallery",
+	color: '#999'
+}
+
+"#verticalBar": {
+	
+	height: Ti.UI.FILL,
+	width: 1,
+	right: 45,
+	backgroundColor: "#CCCCCC"
+	
+}
+
+"#galleryPic2": {
+	borderLeft: true,
+	
+	width: 40,
+	height: Ti.UI.SIZE,
+	image: "/images/various-galllery.png",
+	right: 5
 }
 
 "#preview": {
@@ -61,7 +224,7 @@
 	top: 5,
 	right: 5,
 	left: 5,
-	width: "95%",
+	//width: 320,
 	height: 200
 	//backgroundColor: '#C8DDE8',
 	

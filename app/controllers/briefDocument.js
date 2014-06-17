@@ -25,6 +25,16 @@ function transformData(model) {
 	return attrs;
 }
 
+function showDetail(e){
+	
+	var selectedAspect = Alloy.Collections.aspettiDocument.at(e.index).attributes;
+	
+	//Ti.API.info("ATTRIBUTES DOCUMENT: "+JSON.stringify(selectedAspect));
+	
+	var riga = Alloy.createController('rowDetailDOCUMENT', selectedAspect).getView();
+	
+}
+
 syncAspects();
 
 

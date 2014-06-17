@@ -1,15 +1,15 @@
 function Controller() {
-    function __alloyId96() {
-        $.__views.win.removeEventListener("open", __alloyId96);
+    function __alloyId100() {
+        $.__views.win.removeEventListener("open", __alloyId100);
         if ($.__views.win.activity) $.__views.win.activity.onCreateOptionsMenu = function(e) {
-            var __alloyId95 = {
+            var __alloyId99 = {
                 icon: "/images/top-edit.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
                 id: "mn_edit",
                 title: "Modifica"
             };
-            $.__views.mn_edit = e.menu.add(_.pick(__alloyId95, Alloy.Android.menuItemCreateArgs));
-            $.__views.mn_edit.applyProperties(_.omit(__alloyId95, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_edit = e.menu.add(_.pick(__alloyId99, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_edit.applyProperties(_.omit(__alloyId99, Alloy.Android.menuItemCreateArgs));
             editPost ? $.__views.mn_edit.addEventListener("click", editPost) : __defers["$.__views.mn_edit!click!editPost"] = true;
         }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
@@ -48,12 +48,12 @@ function Controller() {
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
-    $.__views.win.addEventListener("open", __alloyId96);
+    $.__views.win.addEventListener("open", __alloyId100);
     $.__views.postTable = Ti.UI.createScrollView({
         id: "postTable"
     });
     $.__views.win.add($.__views.postTable);
-    $.__views.__alloyId97 = Ti.UI.createView({
+    $.__views.__alloyId101 = Ti.UI.createView({
         left: 5,
         right: 5,
         top: 5,
@@ -64,9 +64,9 @@ function Controller() {
         height: Ti.UI.SIZE,
         touchEnabled: false,
         layout: "vertical",
-        id: "__alloyId97"
+        id: "__alloyId101"
     });
-    $.__views.postTable.add($.__views.__alloyId97);
+    $.__views.postTable.add($.__views.__alloyId101);
     $.__views.topWrapper = Ti.UI.createView({
         height: Ti.UI.SIZE,
         left: 10,
@@ -75,7 +75,7 @@ function Controller() {
         layout: "horizontal",
         id: "topWrapper"
     });
-    $.__views.__alloyId97.add($.__views.topWrapper);
+    $.__views.__alloyId101.add($.__views.topWrapper);
     $.__views.postIcon = Ti.UI.createImageView({
         left: 0,
         top: 0,
@@ -197,16 +197,16 @@ function Controller() {
         layout: "horizontal",
         id: "middleWrapper"
     });
-    $.__views.__alloyId97.add($.__views.middleWrapper);
-    $.__views.__alloyId98 = Ti.UI.createView({
+    $.__views.__alloyId101.add($.__views.middleWrapper);
+    $.__views.__alloyId102 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         touchEnabled: false,
         layout: "horizontal",
         left: 0,
-        id: "__alloyId98"
+        id: "__alloyId102"
     });
-    $.__views.middleWrapper.add($.__views.__alloyId98);
+    $.__views.middleWrapper.add($.__views.__alloyId102);
     $.__views.cat_icon = Ti.UI.createLabel({
         width: 20,
         height: 20,
@@ -215,7 +215,7 @@ function Controller() {
         left: 0,
         id: "cat_icon"
     });
-    $.__views.__alloyId98.add($.__views.cat_icon);
+    $.__views.__alloyId102.add($.__views.cat_icon);
     $.__views.category = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -227,16 +227,16 @@ function Controller() {
         left: 5,
         id: "category"
     });
-    $.__views.__alloyId98.add($.__views.category);
-    $.__views.__alloyId99 = Ti.UI.createView({
+    $.__views.__alloyId102.add($.__views.category);
+    $.__views.__alloyId103 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         touchEnabled: false,
         layout: "horizontal",
         left: 50,
-        id: "__alloyId99"
+        id: "__alloyId103"
     });
-    $.__views.middleWrapper.add($.__views.__alloyId99);
+    $.__views.middleWrapper.add($.__views.__alloyId103);
     $.__views.tag_icon = Ti.UI.createLabel({
         width: 20,
         height: 20,
@@ -245,7 +245,7 @@ function Controller() {
         left: 0,
         id: "tag_icon"
     });
-    $.__views.__alloyId99.add($.__views.tag_icon);
+    $.__views.__alloyId103.add($.__views.tag_icon);
     $.__views.tags = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -258,16 +258,16 @@ function Controller() {
         left: 5,
         id: "tags"
     });
-    $.__views.__alloyId99.add($.__views.tags);
-    $.__views.__alloyId100 = Ti.UI.createView({
+    $.__views.__alloyId103.add($.__views.tags);
+    $.__views.__alloyId104 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         touchEnabled: false,
         layout: "horizontal",
         left: 50,
-        id: "__alloyId100"
+        id: "__alloyId104"
     });
-    $.__views.middleWrapper.add($.__views.__alloyId100);
+    $.__views.middleWrapper.add($.__views.__alloyId104);
     $.__views.stories_icon = Ti.UI.createLabel({
         width: 20,
         height: 20,
@@ -276,7 +276,7 @@ function Controller() {
         left: 0,
         id: "stories_icon"
     });
-    $.__views.__alloyId100.add($.__views.stories_icon);
+    $.__views.__alloyId104.add($.__views.stories_icon);
     $.__views.stories = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -290,22 +290,22 @@ function Controller() {
         id: "stories",
         text: "storie"
     });
-    $.__views.__alloyId100.add($.__views.stories);
+    $.__views.__alloyId104.add($.__views.stories);
     $.__views.aspectsCashflowWrapper = Ti.UI.createView({
         top: 0,
         width: Ti.UI.FILL,
         touchEnabled: false,
         id: "aspectsCashflowWrapper"
     });
-    $.__views.__alloyId97.add($.__views.aspectsCashflowWrapper);
+    $.__views.__alloyId101.add($.__views.aspectsCashflowWrapper);
     $.__views.aspectsDocumentWrapper = Ti.UI.createView({
         top: 0,
         width: Ti.UI.FILL,
         touchEnabled: false,
         id: "aspectsDocumentWrapper"
     });
-    $.__views.__alloyId97.add($.__views.aspectsDocumentWrapper);
-    var __alloyId101 = function() {
+    $.__views.__alloyId101.add($.__views.aspectsDocumentWrapper);
+    var __alloyId105 = function() {
         $.date.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["referenceTime"] : Alloy.Models.Post.get("referenceTime");
         $.date.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["referenceTime"] : Alloy.Models.Post.get("referenceTime");
         $.rating_1.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["rating_1"] : Alloy.Models.Post.get("rating_1");
@@ -325,9 +325,9 @@ function Controller() {
         $.tags.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["tag"] : Alloy.Models.Post.get("tag");
         $.tags.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["tag"] : Alloy.Models.Post.get("tag");
     };
-    Alloy.Models.Post.on("fetch change destroy", __alloyId101);
+    Alloy.Models.Post.on("fetch change destroy", __alloyId105);
     exports.destroy = function() {
-        Alloy.Models.Post.off("fetch change destroy", __alloyId101);
+        Alloy.Models.Post.off("fetch change destroy", __alloyId105);
     };
     _.extend($, $.__views);
     arguments[0] || {};
@@ -361,13 +361,11 @@ function Controller() {
     var allAspettiCashflow = _.filter(aspects, function(item) {
         return "CASHFLOWDATATYPE_CODE" == item.kind.code;
     });
-    Alloy.Collections.aspettiCashflow = new Backbone.Collection();
     Alloy.Collections.aspettiCashflow.reset(allAspettiCashflow);
     allAspettiCashflow.length > 0 && $.aspectsCashflowWrapper.add(Alloy.createController("briefCashflow").getView());
     var allAspettiDocuments = _.filter(aspects, function(item) {
         return "FILEDOCUMENTDATATYPE_CODE" == item.kind.code;
     });
-    Alloy.Collections.aspettiDocument = new Backbone.Collection();
     Alloy.Collections.aspettiDocument.reset(allAspettiDocuments);
     allAspettiDocuments.length > 0 && $.aspectsDocumentWrapper.add(Alloy.createController("briefDocument").getView());
     _.filter(aspects, function(item) {

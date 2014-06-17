@@ -44,6 +44,23 @@ function openEvent() {
 		//theActionBar.setTitle(self.title);
 
 	};
+	
+	setTimeout(function(){
+		
+		net.getData(0, 100, function(timeline_obj) {
+
+			Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
+			Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
+				silent : true
+			});
+			Ti.API.info("Sync Executed by SILENT SERVICE");
+			syncTimeline();
+
+		});
+		
+	}, 2000);
+	
+	
 
 };
 
@@ -167,7 +184,7 @@ net.getCategories(function(categoriesData) {
 
 	var objCategorie = [];
 
-	Ti.API.info("CATEGORIE "+JSON.stringify(categoriesData));
+	Ti.API.info("CATEGORIE " + JSON.stringify(categoriesData));
 
 	_.forEach(categoriesData.data, function(value, key) {
 
@@ -188,31 +205,37 @@ net.getCategories(function(categoriesData) {
 });
 
 net.getPostTemplate(0, 1, function(p_postTemplate) {
-	
+
 	// ***** EXTRACT POST ONLY TEMPLATE *****************
-	Alloy.Models.Template.set(p_postTemplate.data[0]);	
+	Alloy.Models.Template.set(p_postTemplate.data[0]);
 	Alloy.Models.Template.unset("id");
-	
+
 	var templateJson = Alloy.Models.Template.toJSON();
 	var post_only_template = _.omit(templateJson, 'modules');
-		
+
 	Alloy.Models.Post_template.set(post_only_template);
-	
+
 	// ***** EXTRACT CASHFLOW TEMPLATE *****************
-	
-	var templateCashflow = _.filter(templateJson.modules, function(value){
+	var templateCashflow = _.filter(templateJson.modules, function(value) {
 		return value.kind.code == "CASHFLOWDATATYPE_CODE";
 	});
-	
+
 	Alloy.Models.Cashflow_template.set(templateCashflow[0]);
 	Alloy.Models.Cashflow_template.unset("id");
 	
-	Ti.API.info("TEMPLATE CASHFLOW: "+JSON.stringify(Alloy.Models.Cashflow_template));
+	// ***** EXTRACT DOCUMENT TEMPLATE *****************
+	var templateDocument = _.filter(templateJson.modules, function(value) {
+		return value.kind.code == "FILEDOCUMENTDATATYPE_CODE";
+	});
 
+	Alloy.Models.Document_template.set(templateDocument[0]);
+	Alloy.Models.Document_template.unset("id");
 	
 	
 
-	Ti.API.info("POST TEMPLATE MODEL: " + JSON.stringify(Alloy.Models.Post_template));
+	Ti.API.info("DOCUMENT  TEMPLATE: " + JSON.stringify(Alloy.Models.Document_template));
+
+	//Ti.API.info("POST TEMPLATE MODEL: " + JSON.stringify(Alloy.Models.Post_template));
 
 	var arrayTemplateIds = [];
 
@@ -270,7 +293,7 @@ net.getVariabilita(function(p_tipoVariabilita) {
 
 	Ti.App.Properties.setObject("tipoVariabilita", objTipoVariabilita);
 
-	Ti.API.info("OBJ VARIABILITA': "+JSON.stringify(Ti.App.Properties.getObject("tipoVariabilita")));
+	Ti.API.info("OBJ VARIABILITA': " + JSON.stringify(Ti.App.Properties.getObject("tipoVariabilita")));
 
 });
 
@@ -294,7 +317,7 @@ net.getStatoMovimento(function(p_statoMovimento) {
 
 	Ti.App.Properties.setObject("statoMovimento", objStatoMovimento);
 
-	Ti.API.info("OBJ STATO MOVIMENTO': "+JSON.stringify(Ti.App.Properties.getObject("statoMovimento")));
+	Ti.API.info("OBJ STATO MOVIMENTO': " + JSON.stringify(Ti.App.Properties.getObject("statoMovimento")));
 
 });
 
@@ -332,24 +355,31 @@ net.getPagamentoIncasso(function(p_pagamentoIncasso) {
 
 function refreshTable() {
 
-	Alloy.Globals.loading.show('Sincronizzazione...', false);
-	
-	net.getData(0, 100, function(timeline_obj) {
-
-		Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
-		Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
-			silent : true
-		});
-		Ti.API.info("COLLECTION LENGTH AFTER SYNC: "+Alloy.Collections.Timeline.length);
-		syncTimeline();
+	if (Alloy.Globals.postSaved) {
 		Alloy.Globals.loading.hide();
-		if(Alloy.Globals.postSaved){
-			alert("Post salvato!");
-			Alloy.Globals.postSaved = false;
-		}
+		alert("Post salvato!");
+		Alloy.Globals.postSaved = false;
+	} else {
 
-	});
+		Alloy.Globals.loading.show('Sincronizzazione...', false);
 
+		net.getData(0, 100, function(timeline_obj) {
+
+			Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
+			Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
+				silent : true
+			});
+			Ti.API.info("COLLECTION LENGTH AFTER SYNC: " + Alloy.Collections.Timeline.length);
+			syncTimeline();
+			Alloy.Globals.loading.hide();
+			if (Alloy.Globals.postSaved) {
+				alert("Post salvato!");
+				Alloy.Globals.postSaved = false;
+			}
+
+		});
+
+	}
 }
 
 function gotoToday() {

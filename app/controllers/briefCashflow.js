@@ -18,9 +18,9 @@ Ti.API.info("COLLECTION CASHFLOW: "+JSON.stringify(Alloy.Collections.aspettiCash
 function transformData(model) {
 	var attrs = model.toJSON();
 	//attrs.imageUrl = '/' + attrs.direction + '.png';
-	attrs.importo = attrs.data.importo+"€";
-	attrs.tipoMovimento = attrs.data.tipoMovimento.codice;
-	attrs.modalitaPagamento = attrs.data.pagamentoIncasso.descrizioneBreve;
+	attrs.temp_importo = attrs.data.importo+"€";
+	attrs.temp_tipoMovimento = attrs.data.tipoMovimento.codice;
+	attrs.temp_pagamentoIncasso = attrs.data.pagamentoIncasso.descrizioneBreve;
 
 	return attrs;
 }

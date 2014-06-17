@@ -1,26 +1,49 @@
 <Alloy>
-	<Window id="window" class="container" title = "Nuovo Documento">
-		<Menu id="menu" platform="android">
-			
-			<MenuItem id="salva" title="Scrivi" icon="/images/785-floppy-disk.png"  onClick="createProtoObj" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
-			
-		</Menu>
+	<Window id="win" class="container" title = "Nuovo Documento" onOpen="openEvent">
 
+		<Menu id="menu" platform="android">
+
+			<MenuItem id="mn_salva" onClick="saveDocument"/>
+
+		</Menu>
 		<TableView id="newDocumentTable">
-			
+
 			<TableViewRow class="row">
-				<TextField id="titolo"/>				
-			</TableViewRow>
-			
-			<TableViewRow class="row">
-				<TextField id="descrizione"/>
-			</TableViewRow>
-			
-			<TableViewRow class="row">
-				<Button id="foto" title= 'Scatta foto' onClick="openCamera" />
+				<View class="rowWrapper">
+					<TextField id="titolo"/>
+				</View>
 			</TableViewRow>
 			<TableViewRow class="row">
-				<Button id="gallery" title= "Scegli foto esistente" onClick="openGallery"/>
+				<View class="rowWrapper">
+					<TextArea id="descrizione"/>
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<View class="dateWrapper">
+
+					<View id="leftSubWrapper">
+						<Label id="dataDocumentoLabel"/>
+					</View>
+					<Label class="verticalBar"/>
+					<View id="rightSubWrapper">
+						<Label id="dataDocumento" dataRaw="" onClick="showDatePicker"/>
+					</View>
+
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<View id="picOptionsContainer">
+					<View id="picture" onClick="openCamera">
+						<ImageView id="takePicIcon"/>
+						<Label id="takePicText"/>
+					</View>
+					<View id="gallery" onClick="openGallery">
+						<ImageView id="galleryPicIcon"/>
+						<Label id="galleryPicText"/>
+						<Label id="verticalBar"/>
+						<ImageView id="galleryPic2"/>
+					</View>
+				</View>
 			</TableViewRow>
 			<TableViewRow class="row">
 				<ImageView id="preview" />

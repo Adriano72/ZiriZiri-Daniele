@@ -202,39 +202,6 @@ function saveCashflow() {
 		args(modCashflowJSON);
 		$.win.close();
 
-		//Ti.API.info("TIPO MOVIM OBJ: "+JSON.stringify($.pkrTipoMovimento.getSelectedRow(0)));
-		//Ti.API.info("PAGAM INCASSO OBJ: "+JSON.stringify($.pkrPagamentoIncasso.getSelectedRow(0)));
-
-		/*
-		var tipoMovCodice = $.pkrTipoMovimento.getSelectedRow(0).codice;
-		var tipoMovId = $.pkrTipoMovimento.getSelectedRow(0).id;
-		var tipoMovVersion = $.pkrTipoMovimento.getSelectedRow(0).version;
-
-		//var pagamIncDescBreve = $.pkrPagamentoIncasso.getSelectedRow(0).title;
-		var pagamIncID = $.pkrPagamentoIncasso.getSelectedRow(0).id;
-		var pagamIncVersion = $.pkrPagamentoIncasso.getSelectedRow(0).version;
-
-		var objCashFlow = {
-
-		//kind:{code:"CASHFLOWDATATYPE_CODE"},
-		tipoMovimento: {codice: tipoMovCodice, id: tipoMovId, version: tipoMovVersion},
-		pagamentoIncasso: {id: pagamIncID, version: pagamIncVersion},
-		importo: $.importo.value
-
-		};
-
-		args(objCashFlow);
-		$.win.close();
-		*/
-
-		//Ti.API.info("MOSTRO : "+objCashFlow);
-		/*
-
-		 var objCashFlow = {
-		 "kind":{"code":"CASHFLOWDATATYPE_CODE"},
-		 "data" :  "{\"tipoMovimento\":{\"codice\":\"USC\",\"id\":1,\"version\":0},\"pagamentoIncasso\":null,\"dataOperazione\":1393066568000,\"descrizioneBreve\":\"\",\"importo\":55}"
-		 */
-
 	} else {
 		alert("Il campo Importo è obbligatorio, inserire un valore");
 	}

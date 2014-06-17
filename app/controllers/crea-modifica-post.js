@@ -67,13 +67,13 @@ Alloy.Models.Post_template.trigger('change');
 
 function submitPost() {
 
-
+	Alloy.Globals.loading.show('Salvataggio in corso...', false);
 
 	Ti.API.info("JSON POST: " + JSON.stringify(Alloy.Models.Post_template));
 
-	net.savePost(Alloy.Models.Post_template, function(post_id) {
+	net.savePost(Alloy.Models.Post_template, function(post_id, postToAddToTimeline) {
 
-		Alloy.Globals.loading.show('Salvataggio in corso...', false);
+		
 
 		Ti.API.info("ID POST SALVATO: " + post_id);
 
@@ -87,7 +87,9 @@ function submitPost() {
 
 				Ti.API.info("ARRAY ID ASPETTI DA MANDARE IN ASSOCIAZIONE: " + p_arrayIdAspetti);
 
-				net.linkAspectsToPost(post_id, p_arrayIdAspetti, function() {
+				net.linkAspectsToPost(post_id, p_arrayIdAspetti, function(postToAddToTimeline) {
+					Ti.API.info("OGG CON ASPETTI DA AGGIUNGERE TIMELINE: "+JSON.stringify(postToAddToTimeline));
+					Alloy.Collections.Timeline.add(postToAddToTimeline);
 					$.win.close();
 					args.close();
 					Alloy.Globals.postSaved = true;
@@ -96,7 +98,8 @@ function submitPost() {
 				});
 			});
 		} else {
-
+			
+			Alloy.Collections.Timeline.add(postToAddToTimeline);
 			$.win.close();
 			args.close();
 			Alloy.Globals.postSaved = true;
@@ -213,49 +216,6 @@ function addCashflow(id_post) {
 
 
 	Alloy.createController("addCashflow", function(objRet) {
-		
-	/*
-		var objAspect = {
-
-			kind : {
-				code : "CASHFLOWDATATYPE_CODE",
-				name : "CASHFLOWDATATYPE_NAME",
-				description : "CASHFLOWDATATYPE_DESCRIPTION"
-			},
-			data : {}
-
-		};
-
-		objAspect.name = $.titolo.value;
-
-		objAspect.referenceTime = timeNow;
-		objAspect.category = {
-			id : $.pkrCategoria.getSelectedRow(0).id,
-			version : $.pkrCategoria.getSelectedRow(0).version
-		};
-
-		objAspect.location = {
-			name : $.location.value,
-			description : $.location.value,
-			latitude : location_result.latitude,
-			longitude : location_result.longitude
-
-		};
-		objAspect.data.tipoMovimento = objRet.tipoMovimento;
-		objAspect.data.dataOperazione = timeNow;
-		objAspect.data.dataValuta = timeNow;
-		objAspect.data.pagamentoIncasso = objRet.pagamentoIncasso;
-		objAspect.data.importo = objRet.importo;
-		*/
-
-		/*
-		 "kind":{"code":"CASHFLOWDATATYPE_CODE"},
-		 "data": "{\"tipoMovimento\":{\"codice\":\""+tipoMovCodice+"\",\"id\":"+tipoMovId+",\"version\":"+tipoMovVersion+"},\"pagamentoIncasso\":{\"descrizioneBreve\":\""+pagamIncDescBreve+"\",\"id\":"+tipoMovId+",\"version\":"+tipoMovVersion+"},\"dataOperazione\":1393066568000,\"descrizioneBreve\":\"\",\"importo\":"+$.importo.value+"}"
-		 */
-		/*
-		var tempObj = _.clone(objAspect);
-		objAspect.data = JSON.stringify(objAspect.data);
-		*/
 
 		arrayAspetti.push(objRet);
 
@@ -267,7 +227,7 @@ function addCashflow(id_post) {
 		
 		var riga = Alloy.createController('rowCASHFLOW', {
 
-			id_code : arrayAspetti.length - 1,			
+			//id_code : arrayAspetti.length - 1,			
 			importo : aspettoDataJson.importo,	
 			modalitaPagamento : aspettoDataJson.pagamentoIncasso.descrizioneBreve,
 			tipoMovimento : aspettoDataJson.tipoMovimento.descrizioneBreve
@@ -282,15 +242,26 @@ function addCashflow(id_post) {
 function addDocument(id_post) {
 	//Ti.API.info("**** INSERT CASHFLOW!");
 
-	if ($.titolo.value == "" && $.pkrCategoria.getSelectedRow(0).id == 9999) {
-
-		alert("Prima di inserire il dettaglio dell'evento è necessario specificare titolo e categoria");
-		return;
-
-	};
 
 	Alloy.createController("addDocument", function(objRet) {
+		
+		arrayAspetti.push(objRet);
+		
+		var aspettoDataJson = JSON.parse(objRet.data);
+		
+		Ti.API.info("DATA PARSATO: "+JSON.stringify(aspettoDataJson));
+		
+		var riga = Alloy.createController('rowDOCUMENT', {
 
+			//id_code : arrayAspetti.length - 1,			
+			titolo : aspettoDataJson.title,	
+			formato : aspettoDataJson.format,
+			hashedImage : aspettoDataJson.content
+
+		}).getView();
+		$.postTable.appendRow(riga);
+	
+		/*
 		var objAspect = {
 
 			kind : {
@@ -317,10 +288,7 @@ function addDocument(id_post) {
 		objAspect.data.timestamp = moment();
 		objAspect.data.content = objRet.content;
 
-		/*
-		 "kind":{"code":"CASHFLOWDATATYPE_CODE"},
-		 "data": "{\"tipoMovimento\":{\"codice\":\""+tipoMovCodice+"\",\"id\":"+tipoMovId+",\"version\":"+tipoMovVersion+"},\"pagamentoIncasso\":{\"descrizioneBreve\":\""+pagamIncDescBreve+"\",\"id\":"+tipoMovId+",\"version\":"+tipoMovVersion+"},\"dataOperazione\":1393066568000,\"descrizioneBreve\":\"\",\"importo\":"+$.importo.value+"}"
-		 */
+
 
 		Ti.API.info("OBJ ASPECT: " + JSON.stringify(objAspect));
 
@@ -343,6 +311,7 @@ function addDocument(id_post) {
 		$.newPostTable.appendRow(riga);
 
 		//Ti.API.info("FINISHED ASPECT OBJ: "+JSON.stringify(objAspect));
+		*/
 	}).getView().open();
 };
 

@@ -1,30 +1,71 @@
 <Alloy>
-	<TableViewRow id="row">
+	<Window id="win" title="Dettaglio Documento" class="container" onOpen="openEvent">
+
+		<!-- The Menu tag adds the Android menu. -->
+		<Menu id="menu" platform="android">
+
+			<!-- Cannot specify node text.  Use attributes only. -->
+			<!--<MenuItem id="mn_edit" title="Modifica" onClick="editPost"/>-->
+			<!--<MenuItem id="Foto" title="Foto" icon="/images/86-camera.png"  showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />-->
+		</Menu>
+		<ScrollView>
+			<View class="eventContainer">
+				<ImageView id="img_preview"/>
+				<View class="rowWrapper">
+					<Label id = "titoloLabel"/>
+					<Label id = "titolo"/>
+				</View>
+				<View class="rowWrapper">
+					<Label id = "nomeFileLabel"/>
+					<Label id = "nomeFile"/>
+				</View>
+				<View class="rowWrapper newline">
+					<Label id = "tipologiaLabel"/>
+					<Label id = "tipologia"/>
+				</View>
+				<View class="rowWrapper">
+					<Label id = "formatoLabel"/>
+					<Label id = "formato"/>
+				</View>
+				<View class="rowWrapper">
+					<Label id = "filesizeLabel"/>
+					<Label id = "filesize"/>
+				</View>
+				<View class="rowWrapper newline bottom">
+					<Label id = "dataDocLabel"/>
+					<Label id = "dataDoc"/>
+				</View>
+
+			</View>
+		</ScrollView>
+
+		<!--<TableViewRow id="row">
 		<Label id="description"/>
 		<Label id="category"/>
 		<View class="block_container">
-			<Label class="block_label" text=" Formato">
-			<Label class="block_data" id="format"/>
+		<Label class="block_label" text=" Formato">
+		<Label class="block_data" id="format"/>
 		</View>
 		<View class="block_container">
-			<Label class="block_label" text=" Tipo">
-			<Label class="block_data" id="type"/>
+		<Label class="block_label" text=" Tipo">
+		<Label class="block_data" id="type"/>
 		</View>
 		<View class="block_container">
-			<Label class="block_label" text=" Nome">
-			<Label class="block_data" id="name"/>
+		<Label class="block_label" text=" Nome">
+		<Label class="block_data" id="name"/>
 		</View>
 		<View class="block_container">
-			<Label class="block_label" text=" Dimensioni">
-			<Label class="block_data" id="size"/>
+		<Label class="block_label" text=" Dimensioni">
+		<Label class="block_data" id="size"/>
 		</View>
 		<View class="block_container">
-			<Label class="block_label" text=" Timestamp">
-			<Label class="block_data" id="timestamp"/>
+		<Label class="block_label" text=" Timestamp">
+		<Label class="block_data" id="timestamp"/>
 		</View>
 		<View class="block_container">
-			<Label class="block_label" text=" Preview">
-			<ImageView id="img_preview"/>
+		<Label class="block_label" text=" Preview">
+		<ImageView id="img_preview"/>
 		</View>
-	</TableViewRow>
+		</TableViewRow>-->
+	</Window>
 </Alloy>

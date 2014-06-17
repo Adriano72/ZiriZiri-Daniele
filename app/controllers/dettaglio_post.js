@@ -75,12 +75,9 @@ var aspettoEvento = _.filter(aspects, function(item) {
 });
 
 // ASPETTI CASHFLOW *********
-
 var allAspettiCashflow = _.filter(aspects, function(item) {
 	return item.kind.code == "CASHFLOWDATATYPE_CODE";
 });
-
-Alloy.Collections.aspettiCashflow = new Backbone.Collection;
 
 Alloy.Collections.aspettiCashflow.reset(allAspettiCashflow);
 
@@ -89,12 +86,9 @@ if (allAspettiCashflow.length > 0) {
 }
 
 // ASPETTI DOCUMENT *********
-
 var allAspettiDocuments = _.filter(aspects, function(item) {
 	return item.kind.code == "FILEDOCUMENTDATATYPE_CODE";
 });
-
-Alloy.Collections.aspettiDocument = new Backbone.Collection;
 
 Alloy.Collections.aspettiDocument.reset(allAspettiDocuments);
 

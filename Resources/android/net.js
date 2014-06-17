@@ -17,6 +17,7 @@ exports.getData = function(page, max, _callback) {
         _callback(JSON.parse(xhr.responseText));
     };
     xhr.onerror = function() {
+        Alloy.Globals.loading.hide();
         alert("Errore nella comunicazione con il server. Accertarsi che il dispositivo sia collegato alla rete e riprovare");
     };
     session = Ti.App.Properties.getString("sessionId", 0);
@@ -119,13 +120,14 @@ exports.savePost = function(objPost, _callback) {
     var xhr = Ti.Network.createHTTPClient();
     xhr.onload = function() {
         var json = JSON.parse(this.responseText);
-        Ti.API.info("********** FRM XHR: " + JSON.stringify(json));
-        if ('"SUCCESS"' == JSON.stringify(json.type.code)) _callback(json.data.id); else {
+        Ti.API.info("******RESPONSE TEXT SALVATAGGIO POST: " + JSON.stringify(json.data));
+        if ('"SUCCESS"' == JSON.stringify(json.type.code)) _callback(json.data.id, json.data); else {
             Ti.App.Properties.getList("unsavedPosts", []).push(objPost);
             alert("Errore nella comunicazione col server. L'evento è stato salvato nel dispositivo e sarà possibilie salvarlo in seguito");
         }
     };
     xhr.onerror = function() {
+        Alloy.Globals.loading.hide();
         Ti.API.error(this.status + " - " + this.statusText);
     };
     xhr.open("POST", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON");
@@ -149,7 +151,11 @@ exports.saveAspect = function(allAspects, _callback) {
                 Ti.API.info("ID ASPETTO SALVATO: " + json.data.id);
                 arrayIDAspetti.push(json.data.id);
                 deferredCall();
-            } else alert("Errore nella comunicazione col server.");
+            } else {
+                Alloy.Globals.loading.hide();
+                alert("Errore nella comunicazione col server");
+                Ti.API.info("ERRORE RICEVUTO: " + JSON.stringify(json));
+            }
         };
         xhr.onerror = function() {
             Ti.API.error("ERRORE SALVATAGGIO ASPETTO: " + this.status + " - " + this.statusText);
@@ -175,7 +181,7 @@ exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
         var json = JSON.parse(this.responseText);
         if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
             Ti.App.fireEvent("loading_done");
-            _callback();
+            _callback(json.data);
         } else alert("Errore nella comunicazione col server.");
     };
     xhr.onerror = function() {

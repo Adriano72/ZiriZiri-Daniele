@@ -12,6 +12,8 @@
 
 Alloy.Globals.winTop = (OS_IOS && parseInt(Ti.Platform.version, 10) >= 7) ? 20 : 0;
 
+Alloy.Globals.screenWidth = Ti.Platform.displayCaps.platformWidth;
+
 Alloy.Globals.postSaved = false;
 
 var icons = require('/icons');
@@ -31,6 +33,8 @@ var Timeline = Backbone.Collection.extend({
 });
 
 Alloy.Collections.Timeline = new Timeline();
+Alloy.Collections.aspettiCashflow = new Backbone.Collection;
+Alloy.Collections.aspettiDocument = new Backbone.Collection;
 
 Alloy.Models.Template = new Backbone.Model;
 Alloy.Models.Post_template = new Backbone.Model;
@@ -50,8 +54,10 @@ Alloy.Models.Communication_template = new Backbone.Model;
 //Alloy.Globals.baseUrl = 'https://demo.ziriziri.com';
 //Alloy.Globals.baseUrl = 'http://172.30.123.10:6969';
 //Alloy.Globals.baseUrl = 'http://172.30.113.10:10010/zz/api/v02'; //SVILUPPO
+
 Alloy.Globals.baseUrl = 'https://beta.ziriziri.com/zz/api/v02';
 //PRODUZIONE
+//Alloy.Globals.baseUrl = 'http://172.30.103.12:10010/zz/api/v02';
 
 Alloy.Globals.loading = Alloy.createWidget("nl.fokkezb.loading");
 

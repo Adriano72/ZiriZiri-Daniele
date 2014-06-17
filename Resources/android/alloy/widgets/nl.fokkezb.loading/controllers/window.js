@@ -75,6 +75,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.loadingMask = Ti.UI.createWindow({
+        orientationModes: [ Ti.UI.PORTRAIT ],
         backgroundColor: "#5000",
         backgroundImage: null,
         opacity: 1,

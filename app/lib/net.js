@@ -23,6 +23,7 @@ exports.getData = function(page, max, _callback) {
 	};
 
 	xhr.onerror = function(e) {
+		Alloy.Globals.loading.hide();
 		alert("Errore nella comunicazione con il server. Accertarsi che il dispositivo sia collegato alla rete e riprovare");
 	};
 
@@ -169,12 +170,13 @@ exports.savePost = function(objPost, _callback) {
 		//Ti.API.info("RISPOSTA SERV SALVA POST: "+this.responseText);
 
 		var json = JSON.parse(this.responseText);
-		Ti.API.info("********** FRM XHR: " + JSON.stringify(json));
-
+		Ti.API.info("******RESPONSE TEXT SALVATAGGIO POST: " + JSON.stringify(json.data));
+		
+		
 		if (JSON.stringify(json.type.code) == "\"SUCCESS\"") {
 
 			//alert("Evento salvato");
-			_callback(json.data.id);
+			_callback(json.data.id, json.data);
 
 		} else {
 			Ti.App.Properties.getList('unsavedPosts', []).push(objPost);
@@ -184,6 +186,7 @@ exports.savePost = function(objPost, _callback) {
 	};
 
 	xhr.onerror = function() {
+		Alloy.Globals.loading.hide();
 		Ti.API.error(this.status + ' - ' + this.statusText);
 	};
 
@@ -235,7 +238,9 @@ exports.saveAspect = function(allAspects, _callback) {
 
 			} else {
 				//Ti.App.Properties.getList('unsavedAspects', []).push(objAspect);
-				alert("Errore nella comunicazione col server.");
+				Alloy.Globals.loading.hide();
+				alert("Errore nella comunicazione col server");
+				Ti.API.info("ERRORE RICEVUTO: "+JSON.stringify(json));
 			};
 
 		};
@@ -286,7 +291,7 @@ exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
 
 			Ti.App.fireEvent("loading_done");
 			//alert("Post salvato");
-			_callback();
+			_callback(json.data);
 			//_callback(json.data.id);
 
 		} else {

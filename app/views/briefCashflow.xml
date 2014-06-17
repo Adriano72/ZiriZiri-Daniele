@@ -8,9 +8,9 @@
 
 			<TableViewRow class="row">
 				<View class="dataWrapper">
-					<Label class="dataDisplay first" id="importo" text="{importo}"/>
-					<Label class="dataDisplay" id="tipoMovimento" text="{tipoMovimento}"/>
-					<Label class="dataDisplay" id="modalitaPagamento" text="{modalitaPagamento}"/>
+					<Label class="dataDisplay first" id="importo" text="{temp_importo}"/>
+					<Label class="dataDisplay" id="tipoMovimento" text="{temp_tipoMovimento}"/>
+					<Label class="dataDisplay" id="pagamentoIncasso" text="{temp_pagamentoIncasso}"/>
 				</View>
 			</TableViewRow>
 

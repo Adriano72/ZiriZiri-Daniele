@@ -6,7 +6,7 @@
 		<Label id="documentIcon" class="aspectDocumentIcon"/>
 		<TableView id="aspectDocumentTable" dataCollection="aspettiDocument"  dataFunction="syncAspects" dataTransform="transformData">
 
-			<TableViewRow class="row">
+			<TableViewRow class="row" onClick="showDetail">
 				<View class="dataWrapper">
 					<Label class="dataDisplay first" id="titolo" text="{name}"/>
 					<Label class="dataDisplay" id="tipoFile" text="{tipoFile}"/>

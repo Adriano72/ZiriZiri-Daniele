@@ -14,7 +14,7 @@
 			<Label class="block_data" id="type"/>
 		</View>
 	</TableViewRow>
-</Alloy>-->
+</Alloy>
 
 <Alloy>
 	<TableViewRow id="row">
@@ -29,4 +29,24 @@
 			<Label class="block_data" id="fileName"/>
 		</View>
 	</TableViewRow>
+</Alloy>-->
+
+<Alloy>
+
+	<TableViewRow class="row">
+
+		<View class="aspectDocumentContainer">
+			<Label id="documentIcon" class="aspectIcon"/>
+			<View class="aligningWrapper">
+				<View class="dataWrapper">
+					<Label class="dataDisplay first" id="titolo"/>
+					<Label class="dataDisplay" id="formato"/>
+					<Label class="link" id="visualizza"/>
+				</View>
+			</View>
+
+		</View>
+
+	</TableViewRow>
+
 </Alloy>

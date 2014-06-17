@@ -2,6 +2,8 @@ var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
 Alloy.Globals.winTop = 0;
 
+Alloy.Globals.screenWidth = Ti.Platform.displayCaps.platformWidth;
+
 Alloy.Globals.postSaved = false;
 
 var icons = require("/icons");
@@ -15,6 +17,10 @@ var Timeline = Backbone.Collection.extend({
 });
 
 Alloy.Collections.Timeline = new Timeline();
+
+Alloy.Collections.aspettiCashflow = new Backbone.Collection();
+
+Alloy.Collections.aspettiDocument = new Backbone.Collection();
 
 Alloy.Models.Template = new Backbone.Model();
 

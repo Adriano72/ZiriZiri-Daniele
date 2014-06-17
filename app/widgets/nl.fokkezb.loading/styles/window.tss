@@ -1,3 +1,7 @@
+"Window":{
+	orientationModes: [Ti.UI.PORTRAIT]
+}
+
 ".loadingMask": {
 	backgroundColor: "#5000",
 	backgroundImage: null, // Prevent a app-wide Window-background to take over

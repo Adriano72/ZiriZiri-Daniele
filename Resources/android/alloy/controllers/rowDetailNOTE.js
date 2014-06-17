@@ -58,43 +58,6 @@ function Controller() {
         id: "category"
     });
     $.__views.row.add($.__views.category);
-    $.__views.__alloyId161 = Ti.UI.createView({
-        height: Ti.UI.SIZE,
-        touchEnabled: false,
-        layout: "vertical",
-        backgroundColor: "#DEDEDE",
-        id: "__alloyId161"
-    });
-    $.__views.row.add($.__views.__alloyId161);
-    $.__views.__alloyId162 = Ti.UI.createLabel({
-        height: 20,
-        width: Ti.UI.FILL,
-        backgroundColor: "#787878",
-        top: 0,
-        font: {
-            fontSize: 14,
-            fontFamily: "Rosario-Regular"
-        },
-        touchEnabled: false,
-        color: "#FFFFFF",
-        text: " Timestamp",
-        id: "__alloyId162"
-    });
-    $.__views.__alloyId161.add($.__views.__alloyId162);
-    $.__views.timestamp = Ti.UI.createLabel({
-        height: Ti.UI.SIZE,
-        font: {
-            fontSize: 16
-        },
-        left: 20,
-        right: 5,
-        top: 5,
-        bottom: 5,
-        touchEnabled: false,
-        width: Ti.UI.FILL,
-        id: "timestamp"
-    });
-    $.__views.__alloyId161.add($.__views.timestamp);
     $.__views.__alloyId163 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         touchEnabled: false,
@@ -114,17 +77,54 @@ function Controller() {
         },
         touchEnabled: false,
         color: "#FFFFFF",
-        text: " Contenuto",
+        text: " Timestamp",
         id: "__alloyId164"
     });
     $.__views.__alloyId163.add($.__views.__alloyId164);
+    $.__views.timestamp = Ti.UI.createLabel({
+        height: Ti.UI.SIZE,
+        font: {
+            fontSize: 16
+        },
+        left: 20,
+        right: 5,
+        top: 5,
+        bottom: 5,
+        touchEnabled: false,
+        width: Ti.UI.FILL,
+        id: "timestamp"
+    });
+    $.__views.__alloyId163.add($.__views.timestamp);
+    $.__views.__alloyId165 = Ti.UI.createView({
+        height: Ti.UI.SIZE,
+        touchEnabled: false,
+        layout: "vertical",
+        backgroundColor: "#DEDEDE",
+        id: "__alloyId165"
+    });
+    $.__views.row.add($.__views.__alloyId165);
+    $.__views.__alloyId166 = Ti.UI.createLabel({
+        height: 20,
+        width: Ti.UI.FILL,
+        backgroundColor: "#787878",
+        top: 0,
+        font: {
+            fontSize: 14,
+            fontFamily: "Rosario-Regular"
+        },
+        touchEnabled: false,
+        color: "#FFFFFF",
+        text: " Contenuto",
+        id: "__alloyId166"
+    });
+    $.__views.__alloyId165.add($.__views.__alloyId166);
     $.__views.content = Ti.UI.createWebView({
         top: 5,
         width: "95%",
         height: 300,
         id: "content"
     });
-    $.__views.__alloyId163.add($.__views.content);
+    $.__views.__alloyId165.add($.__views.content);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
