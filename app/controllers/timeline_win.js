@@ -78,8 +78,8 @@ function closeSpinner() {
 ///////////////////////////////////////// CARICAMENTO TIMELINE /////////////////////////////////////
 
 var timeTemp = Ti.App.Properties.getObject("timelineProp");
-Ti.API.info("RETRIVING CACHED DATA, LENGTH STORED PROPERTY: " + timeTemp.length);
-Ti.API.info("OGGETTO PROPERTY TIMELINE; " + JSON.stringify(timeTemp));
+//Ti.API.info("RETRIVING CACHED DATA, LENGTH STORED PROPERTY: " + timeTemp.length);
+//Ti.API.info("OGGETTO PROPERTY TIMELINE; " + JSON.stringify(timeTemp));
 
 //timeTemp = timeTemp.slice(0,10), {silent: true};
 

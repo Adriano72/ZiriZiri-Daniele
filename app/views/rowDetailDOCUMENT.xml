@@ -17,7 +17,7 @@
 				</View>
 				<View class="rowWrapper">
 					<Label id = "nomeFileLabel" class = "label">Nome File:</Label>
-					<Label id = "nomeFile"/>
+					<Label id = "nomeFile" class = "value"/>
 				</View>
 				<View class="rowWrapper newline">
 					<Label id = "tipologiaLabel" class = "label">Tipologia:</Label>
@@ -31,7 +31,11 @@
 					<Label id = "filesizeLabel" class = "label">File Size:</Label>
 					<Label id = "filesize" class = "value"/>
 				</View>
-				<View class="rowWrapper newline last">
+				<View class="rowWrapper newline">
+					<Label id = "filesizeLabel" class = "label">Caricato da:</Label>
+					<Label id = "caricato" class = "value"/>
+				</View>
+				<View class="rowWrapper last">
 					<Label id = "dataDocLabel" class = "label">Data Documento:</Label>
 					<Label id = "dataDoc" class = "value"/>
 				</View>
