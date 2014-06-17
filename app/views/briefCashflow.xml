@@ -6,7 +6,7 @@
 		<Label id="cashFlowIcon" class="aspectIcon"/>
 		<TableView id="aspectTable" dataCollection="aspettiCashflow"  dataFunction="syncAspects" dataTransform="transformData">
 
-			<TableViewRow class="row">
+			<TableViewRow class="row" onClick="showDetail">
 				<View class="dataWrapper">
 					<Label class="dataDisplay first" id="importo" text="{temp_importo}"/>
 					<Label class="dataDisplay" id="tipoMovimento" text="{temp_tipoMovimento}"/>

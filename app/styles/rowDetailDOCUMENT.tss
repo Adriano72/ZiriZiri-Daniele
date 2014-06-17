@@ -39,7 +39,7 @@
 	top: 10
 }
 
-"#titoloLabel": {
+".label": {
 	touchEnabled: false,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
@@ -52,142 +52,7 @@
 	left: 10
 }
 
-"#titolo": {
-	touchEnabled: false,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
-	},
-	color: "#444",
-	height: Ti.UI.SIZE,
-	width: Ti.UI.SIZE,
-	left: 10,
-	ellipsize: true,
-	wordWrap: false
-}
-
-"#nomeFileLabel": {
-	touchEnabled: false,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
-	},
-	color: "#5FAEE3",
-	text: "Nome File",
-	height: Ti.UI.SIZE,
-	width: Ti.UI.SIZE,
-	left: 10
-}
-
-"#nomeFile": {
-	touchEnabled: false,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
-	},
-	color: "#444",
-	height: Ti.UI.SIZE,
-	width: Ti.UI.SIZE,
-	left: 10,
-	ellipsize: true,
-	wordWrap: false
-}
-
-"#tipologiaLabel": {
-	touchEnabled: false,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
-	},
-	color: "#5FAEE3",
-	text: "Tipologia",
-	height: Ti.UI.SIZE,
-	width: Ti.UI.SIZE,
-	left: 10
-}
-
-"#tipologia": {
-	touchEnabled: false,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
-	},
-	color: "#444",
-	height: Ti.UI.SIZE,
-	width: Ti.UI.SIZE,
-	left: 10,
-	ellipsize: true,
-	wordWrap: false
-}
-
-"#formatoLabel": {
-	touchEnabled: false,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
-	},
-	color: "#5FAEE3",
-	text: "Formato",
-	height: Ti.UI.SIZE,
-	width: Ti.UI.SIZE,
-	left: 10
-}
-
-"#formato": {
-	touchEnabled: false,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
-	},
-	color: "#444",
-	height: Ti.UI.SIZE,
-	width: Ti.UI.SIZE,
-	left: 10,
-	ellipsize: true,
-	wordWrap: false
-}
-
-"#filesizeLabel": {
-	touchEnabled: false,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
-	},
-	color: "#5FAEE3",
-	text: "File Size",
-	height: Ti.UI.SIZE,
-	width: Ti.UI.SIZE,
-	left: 10
-}
-
-"#filesize": {
-	touchEnabled: false,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
-	},
-	color: "#444",
-	height: Ti.UI.SIZE,
-	width: Ti.UI.SIZE,
-	left: 10,
-	ellipsize: true,
-	wordWrap: false
-}
-
-"#dataDocLabel": {
-	touchEnabled: false,
-	font: {
-		fontFamily: 'SourceSansPro-Regular',
-		fontSize: 18,
-	},
-	color: "#5FAEE3",
-	text: "Data Documento",
-	height: Ti.UI.SIZE,
-	width: Ti.UI.SIZE,
-	left: 10
-}
-
-"#dataDoc": {
+".value": {
 	touchEnabled: false,
 	font: {
 		fontFamily: 'SourceSansPro-Regular',

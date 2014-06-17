@@ -1,4 +1,67 @@
 <Alloy>
+	<Window id="win" title="Cashflow" class="container" onOpen="openEvent">
+
+		<!-- The Menu tag adds the Android menu. -->
+		<Menu id="menu" platform="android">
+
+			<!-- Cannot specify node text.  Use attributes only. -->
+			<!--<MenuItem id="mn_edit" title="Modifica" onClick="editPost"/>-->
+			<!--<MenuItem id="Foto" title="Foto" icon="/images/86-camera.png"  showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />-->
+		</Menu>
+		<ScrollView>
+			<View class="eventContainer">
+				<View class="rowWrapper">
+					<Label class = "label">Importo:</Label>
+					<Label id = "importo" class = "value"/>
+				</View>
+				<View class="rowWrapper">
+					<Label class = "label">Movimento:</Label>
+					<Label id = "movimento" class = "value"/>
+				</View>
+				<View class="rowWrapper">
+					<Label class = "label">Pagamento:</Label>
+					<Label id = "pagamento" class = "value"/>
+				</View>
+				<View class="rowWrapper newline">
+					<Label class = "label">Variabilità:</Label>
+					<Label id = "variabilita" class = "value"/>
+				</View>
+				<View class="rowWrapper">
+					<Label class = "label">Stato:</Label>
+					<Label id = "stato" class = "value"/>
+				</View>
+				<View class="rowWrapper">
+					<Label class = "label">Tipologia:</Label>
+					<Label id = "tipologia" class = "value"/>
+				</View>
+				<View class="rowWrapper">
+					<Label class = "label">Dichiarazione dei Redditi:</Label>
+					<Label id = "redditi" class = "value"/>
+				</View>
+				<View class="rowWrapper newline">
+					<Label class = "label">Data Valuta:</Label>
+					<Label id = "datavaluta" class = "value"/>
+				</View>
+				<View class="rowWrapper">
+					<Label class = "label">Data Scadenza:</Label>
+					<Label id = "datascadenza" class = "value"/>
+				</View>
+				<View class="rowWrapper last">
+					<Label class = "label">Data Pagamento:</Label>
+					<Label id = "datapagamento" class = "value"/>
+				</View>
+				
+
+			</View>
+		</ScrollView>
+
+	</Window>
+</Alloy>
+
+
+
+
+<!--<Alloy>
 	<TableViewRow id="row">
 		<Label id="description"/>
 		<Label id="category"/>
@@ -47,6 +110,6 @@
 			<Label class="block_data" id="tipoFonteLiquidita"/>
 		</View>
 	</TableViewRow>
-</Alloy>
+</Alloy>-->
 
 

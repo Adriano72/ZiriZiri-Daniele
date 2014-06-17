@@ -55,8 +55,8 @@ Alloy.Models.Communication_template = new Backbone.Model;
 //Alloy.Globals.baseUrl = 'http://172.30.123.10:6969';
 //Alloy.Globals.baseUrl = 'http://172.30.113.10:10010/zz/api/v02'; //SVILUPPO
 
-Alloy.Globals.baseUrl = 'https://beta.ziriziri.com/zz/api/v02';
 //PRODUZIONE
+Alloy.Globals.baseUrl = 'https://beta.ziriziri.com/zz/api/v02';
 //Alloy.Globals.baseUrl = 'http://172.30.103.12:10010/zz/api/v02';
 
 Alloy.Globals.loading = Alloy.createWidget("nl.fokkezb.loading");

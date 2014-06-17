@@ -13,6 +13,7 @@ function Controller() {
                 width: Ti.UI.FILL
             });
             rows.push(__alloyId65);
+            showDetail ? __alloyId65.addEventListener("click", showDetail) : __defers["__alloyId65!click!showDetail"] = true;
             var __alloyId67 = Ti.UI.createView({
                 left: 2,
                 layout: "horizontal",
@@ -72,6 +73,10 @@ function Controller() {
         attrs.temp_pagamentoIncasso = attrs.data.pagamentoIncasso.descrizioneBreve;
         return attrs;
     }
+    function showDetail(e) {
+        var selectedAspect = Alloy.Collections.aspettiCashflow.at(e.index).attributes;
+        Alloy.createController("rowDetailCASHFLOW", selectedAspect).getView();
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "briefCashflow";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -79,6 +84,7 @@ function Controller() {
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
+    var __defers = {};
     $.__views.briefCashflow = Ti.UI.createView({
         top: 5,
         bottom: 5,
@@ -128,6 +134,7 @@ function Controller() {
     $.briefCashflow.addEventListener("close", function() {
         $.briefCashflow.destroy();
     });
+    __defers["__alloyId65!click!showDetail"] && __alloyId65.addEventListener("click", showDetail);
     _.extend($, exports);
 }
 

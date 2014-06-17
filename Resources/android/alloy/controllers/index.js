@@ -14,7 +14,7 @@ function Controller() {
                 Ti.App.Properties.setString("sessionId", json.data.sessionId);
                 Ti.API.info("SESSIONE: " + Ti.App.Properties.getString("sessionId", 0));
                 Alloy.Globals.loading.show("Sincronizzazione...", false);
-                _.isNull(Ti.App.Properties.getObject("timelineProp")) && net.getData(0, 50, function(timeline_obj) {
+                _.isNull(Ti.App.Properties.getObject("timelineProp")) && net.getData(0, 25, function(timeline_obj) {
                     Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
                     Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
                     Alloy.createController("timeline_win").getView();
@@ -96,7 +96,7 @@ function Controller() {
     Ti.API.info("PROP TIMELINE (Index): " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
     if (Ti.App.Properties.getBool("authenticated", false)) {
         Ti.API.info("Already Authenticated!");
-        _.isNull(Ti.App.Properties.getObject("timelineProp")) && net.getData(0, 50, function(timeline_obj) {
+        _.isNull(Ti.App.Properties.getObject("timelineProp")) && net.getData(0, 25, function(timeline_obj) {
             Ti.API.info("RETURN CODE: " + timeline_obj.type.code);
             Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
             Ti.API.info("PROP TIMELINE (Index): " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));

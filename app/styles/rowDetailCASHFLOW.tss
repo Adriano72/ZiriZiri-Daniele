@@ -1,78 +1,62 @@
-"#row": {
-	
-	height: Ti.UI.SIZE,
-	width: Ti.UI.FILL,
-	backgroundColor: '#F2F2F2',
-    className: 'itemRow',
-    layout: 'vertical'
-    
-} 
 
-"#description": {
-    height: 30,
-    font: {
-    	fontFamily: 'AppIcons',
-    	
-        fontSize: 18
-    },
-    color: "#DB4C3F",
-    left: 5,
-    right: 5,
-    top: 5,
-    ellipsize: true,
-    wordWrap: false,
-    backgroundColor: '#E3E3E3',
-    borderRadius: Alloy.Globals.borderRad,
-    touchEnabled: false,
-    width: Ti.UI.FILL
+".container": {
+  	backgroundColor: '#F9F9F9',
+  	orientationModes: [Ti.UI.PORTRAIT]
+	//layout: "vertical",
 }
 
-"#category": {
+".eventContainer": {
+	//width: '100%',
+	left: 5,
+	right: 5,
+	top: 5,
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF',
+	//bottom:10,
+	height: Ti.UI.SIZE,
+	layout: "vertical",
+	touchEnabled: false
+}
+
+".rowWrapper": {
+	layout: "horizontal",
+	top: 10
+}
+
+".label": {
 	touchEnabled: false,
 	font: {
-		fontFamily: 'AppIcons',
-		fontSize: 12
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
 	},
-	backgroundColor: '#E3E3E3',
-	borderRadius: Alloy.Globals.borderRad,
-	height: 18,
+	color: "#5FAEE3",
+	text: "Titolo",
+	height: Ti.UI.SIZE,
 	width: Ti.UI.SIZE,
-	color: "#5E5E5E",
-	left: 5,
-	top: 5,
-	bottom: 10
+	left: 10
 }
 
-".block_container":{
-	height: Ti.UI.SIZE,
+".value": {
 	touchEnabled: false,
-	layout: 'vertical',
-	backgroundColor: '#DEDEDE'
-}
-
-".block_label":{
-	height: 20,
-	width: Ti.UI.FILL,
-	backgroundColor: '#787878',
-	top: 0,
-	font: {    	
-        fontSize: 14,
-        fontFamily: 'Rosario-Regular'
-    },
-    touchEnabled: false,
-	color: '#FFFFFF'
-}
-
-".block_data": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	color: "#444",
 	height: Ti.UI.SIZE,
-    font: {    	
-        fontSize: 16
-    },
-    left: 20,
-    right: 5,
-    top:5,
-    bottom: 5,
-    touchEnabled: false,
-   	width: Ti.UI.FILL
-	
+	width: Ti.UI.SIZE,
+	left: 10,
+	ellipsize: true,
+	wordWrap: false
 }
+
+".newline": {
+	top: 30
+}
+
+".last": {
+	bottom: 20
+}
+

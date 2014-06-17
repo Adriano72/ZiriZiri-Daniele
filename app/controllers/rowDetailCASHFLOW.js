@@ -1,31 +1,53 @@
 var args = arguments[0] || {};
 
+function openEvent() {
+	//Ti.API.info("WINDOW OPEN");
+	theActionBar = $.win.activity.actionBar;
 
+	$.win.activity.invalidateOptionsMenu();
 
-//$.row.id_code = args.id_code,
-$.description.text = '  '+icons.bar_chart_alt+"  "+args.description;
-$.category.text = (_.isNull(args.category))?null:" " + icons.tag + " " +args.category;
-$.importo.text = "€ "+args.importo;
-$.dataOperazione.text = composeDate(args.dataOperazione);
-$.dataValuta.text = composeDate(args.dataValuta);
-$.flagOrdinarioStraordinario.text = args.flagOrdinarioStraordinario;
-$.statoMovimento.text = args.statoMovimento;
-$.tipoMovimento.text = args.tipoMovimento;
-$.tipoVariabilita.text = args.tipoVariabilita;
-$.modalitaPagamento.text = args.modalitaPagamento;
-$.strumentoPagamentoIncasso.text = args.strumentoPagamentoIncasso;
-$.fonteLiquidita.text = args.fonteLiquidita;
-$.tipoFonteLiquidita.text = args.tipoFonteLiquidita;
+	theActionBar = $.win.activity.actionBar;
+	if (theActionBar != undefined) {
+		theActionBar.displayHomeAsUp = true;
+		theActionBar.setIcon('images/logo-test.png');
+		//theActionBar.setTitle(self.title);
+		theActionBar.onHomeIconItemSelected = function() {
+			$.win.close({
+				animate : true
+			});
+		};
+	};
 
+};
 
-function composeDate(d_par){
+//Ti.API.info("PAR CASHFLOW RECEIVED: "+JSON.stringify(args));
+if(args.data.tipoMovimento.descrizioneBreve == "Entrata"){
 	
-	var p_toDate = new Date(d_par);
+	$.importo.text = "+"+args.data.importo+"€";
+	$.importo.color = "#358A27";
 	
-	var day = p_toDate.getDate();
-	var month = p_toDate.getCMonth();
-	var year = p_toDate.getFullYear();
+}else if(args.data.tipoMovimento.descrizioneBreve == "Uscita"){
+	$.importo.text = "-"+args.data.importo+"€";
+	$.importo.color = "#E01D1D";
+}else{
+	$.importo.text = args.data.importo+"€";
+	$.importo.color = "#444";
+}
+
+$.movimento.text = args.data.tipoMovimento.descrizioneBreve;
+$.pagamento.text = (testExistence(args.data.pagamentoIncasso))?args.data.pagamentoIncasso.descrizioneBreve:"";
+$.variabilita.text = (testExistence(args.data.tipoVariabilita))?args.data.tipoVariabilita.descrizioneBreve:"";
+$.stato.text = (testExistence(args.data.statoMovimento))?args.data.statoMovimento.descrizioneBreve:"";
+$.tipologia.text = (args.data.flagOrdinarioStraordinario)?"Straordinario":"Ordinario";
+$.redditi.text = (args.data.flagDichiarazioneRedditi)?"Si":"No";
+$.datavaluta.text = moment(args.data.dataValuta).format("L");
+$.datascadenza.text = moment(args.data.dataScadenza).format("L");
+$.datapagamento.text = moment(args.data.dataPagamentoIncasso).format("L");
+
+function testExistence(param){
 	
-	return day+" "+month+" "+year; 
+	return !(_.isUndefined(param) || _.isNull(param));
 	
 }
+
+$.win.open();
