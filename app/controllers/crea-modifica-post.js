@@ -133,14 +133,31 @@ function callSaveAspects(_callback) {
 };
 
 function addEvent() {
+	
+	Alloy.createController("addEvent", function(objRet) {
 
-	if ($.titolo.value == "" && $.pkrCategoria.getSelectedRow(0).id == 9999) {
+		arrayAspetti.push(objRet);
 
-		alert("Prima di inserire il dettaglio dell'evento è necessario specificare titolo e categoria");
-		return;
+		Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
+		
+		var aspettoDataJson = JSON.parse(objRet.data);
+		
+		Ti.API.info("DATA PARSATO: "+JSON.stringify(aspettoDataJson));
+		
+		var riga = Alloy.createController('rowCASHFLOW', {
 
-	};
+			//id_code : arrayAspetti.length - 1,			
+			importo : aspettoDataJson.importo,	
+			modalitaPagamento : aspettoDataJson.pagamentoIncasso.descrizioneBreve,
+			tipoMovimento : aspettoDataJson.tipoMovimento.descrizioneBreve
 
+		}).getView();
+		$.postTable.appendRow(riga);
+
+		//Ti.API.info("FINISHED ASPECT OBJ: "+JSON.stringify(objAspect));
+	}).getView().open();
+	
+	/*
 	Alloy.createController("addEvent", function(p_retLocation, p_dataFrom, p_dataTo) {
 
 		location = p_retLocation;
@@ -196,6 +213,7 @@ function addEvent() {
 
 		 Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
 		 */
+		/*
 		var riga = Alloy.createController('rowEvent', {
 
 			//id_code : arrayAspetti.length - 1,
@@ -208,6 +226,7 @@ function addEvent() {
 
 		//Ti.API.info("FINISHED ASPECT OBJ: "+JSON.stringify(objAspect));
 	}).getView().open();
+	*/
 };
 
 function addCashflow(id_post) {

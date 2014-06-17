@@ -44,7 +44,7 @@ function openEvent() {
 		//theActionBar.setTitle(self.title);
 
 	};
-	
+	/*
 	setTimeout(function(){
 		
 		net.getData(0, 100, function(timeline_obj) {
@@ -58,7 +58,8 @@ function openEvent() {
 
 		});
 		
-	}, 2000);
+	}, 5000);
+	*/
 	
 	
 
@@ -79,7 +80,7 @@ function closeSpinner() {
 
 var timeTemp = Ti.App.Properties.getObject("timelineProp");
 //Ti.API.info("RETRIVING CACHED DATA, LENGTH STORED PROPERTY: " + timeTemp.length);
-//Ti.API.info("OGGETTO PROPERTY TIMELINE; " + JSON.stringify(timeTemp));
+Ti.API.info("OGGETTO PROPERTY TIMELINE; " + JSON.stringify(timeTemp));
 
 //timeTemp = timeTemp.slice(0,10), {silent: true};
 
@@ -214,6 +215,14 @@ net.getPostTemplate(0, 1, function(p_postTemplate) {
 	var post_only_template = _.omit(templateJson, 'modules');
 
 	Alloy.Models.Post_template.set(post_only_template);
+	
+	// ***** EXTRACT EVENTS TEMPLATE *****************
+	var templateEvents = _.filter(templateJson.modules, function(value) {
+		return value.kind.code == "CASHFLOWDATATYPE_CODE";
+	});
+
+	Alloy.Models.Event_template.set(templateEvents[0]);
+	Alloy.Models.Event_template.unset("id");
 
 	// ***** EXTRACT CASHFLOW TEMPLATE *****************
 	var templateCashflow = _.filter(templateJson.modules, function(value) {
