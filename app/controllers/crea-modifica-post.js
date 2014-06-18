@@ -6,10 +6,6 @@ moment.lang('it');
 
 var net = require('net');
 
-var location = null;
-
-var dataFrom, dataTo = null;
-
 var timeNow = moment();
 
 var arrayAspetti = [];
@@ -135,98 +131,32 @@ function callSaveAspects(_callback) {
 function addEvent() {
 	
 	Alloy.createController("addEvent", function(objRet) {
-
+		
+		Ti.API.info("EVENTO RICEVUTO: "+JSON.stringify(objRet));
+		
 		arrayAspetti.push(objRet);
 
-		Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
+		//Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
 		
 		var aspettoDataJson = JSON.parse(objRet.data);
 		
 		Ti.API.info("DATA PARSATO: "+JSON.stringify(aspettoDataJson));
 		
-		var riga = Alloy.createController('rowCASHFLOW', {
+		var riga = Alloy.createController('rowEvent', {
 
 			//id_code : arrayAspetti.length - 1,			
-			importo : aspettoDataJson.importo,	
-			modalitaPagamento : aspettoDataJson.pagamentoIncasso.descrizioneBreve,
-			tipoMovimento : aspettoDataJson.tipoMovimento.descrizioneBreve
+			startDate : moment(aspettoDataJson.startTime.time).format("LLL"),	
+			endDate : moment(aspettoDataJson.endTime).format("LLL"),
+			location : objRet.location.name
 
 		}).getView();
 		$.postTable.appendRow(riga);
+		
 
-		//Ti.API.info("FINISHED ASPECT OBJ: "+JSON.stringify(objAspect));
+		
 	}).getView().open();
 	
-	/*
-	Alloy.createController("addEvent", function(p_retLocation, p_dataFrom, p_dataTo) {
 
-		location = p_retLocation;
-
-		dataFrom = moment(p_dataFrom).format('LLL');
-		;
-
-		dataTo = moment(p_dataTo).format('LLL');
-		;
-
-		Ti.API.info("LOCATION: " + JSON.stringify(location));
-		Ti.API.info("DATA DA: " + dataFrom);
-		Ti.API.info("DATA A: " + dataTo);
-		/*
-		 var objAspect = {
-
-		 kind : {
-		 code : "LINKDATATYPE_CODE",
-		 name : "LINKDATATYPE_NAME",
-		 description : "LINKDATATYPE_DESCRIPTION"
-
-		 },
-		 data : {}
-
-		 };
-
-		 objAspect.name = objRet.name;
-		 objAspect.description = objRet.description;
-		 objAspect.referenceTime = $.postDate.dataRaw;
-		 objAspect.category = {
-		 id : $.pkrCategoria.getSelectedRow(0).id,
-		 version : $.pkrCategoria.getSelectedRow(0).version
-		 };
-
-		 objAspect.data.format = {
-		 name : "LINK",
-		 description : "HTML LINK",
-		 type : "LINK"
-		 };
-
-		 objAspect.data.title = objRet.name;
-		 objAspect.data.name = objRet.name;
-		 objAspect.data.description = objRet.description;
-		 objAspect.data.content = (objRet.content.indexOf("http://") == -1) ? "http://" + objRet.content : objRet.content;
-		 objAspect.data.preview = null;
-
-		 Ti.API.info("OBJ ASPECT: " + JSON.stringify(objAspect));
-
-		 var tempObj = _.clone(objAspect);
-		 objAspect.data = JSON.stringify(objAspect.data);
-
-		 arrayAspetti.push(objAspect);
-
-		 Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
-		 */
-		/*
-		var riga = Alloy.createController('rowEvent', {
-
-			//id_code : arrayAspetti.length - 1,
-			dataDa : dataFrom,
-			dataA : dataTo,
-			posizione : location.name
-
-		}).getView();
-		$.newPostTable.appendRow(riga);
-
-		//Ti.API.info("FINISHED ASPECT OBJ: "+JSON.stringify(objAspect));
-	}).getView().open();
-	*/
 };
 
 function addCashflow(id_post) {

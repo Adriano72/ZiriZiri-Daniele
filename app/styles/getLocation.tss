@@ -1,6 +1,11 @@
 ".container": {
-  	backgroundColor: '#F2F2F2',
+  	backgroundColor: '#F9F9F9',
 	layout: "vertical",
+}
+
+"#mn_salva": {
+	icon: "/images/top-save.png",
+	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
 }
 
 "#disambiguazioneTable":{
@@ -8,6 +13,8 @@
 	
 	separatorColor: 'transparent'
 } 
+
+
 
 ".row": {
 	
@@ -22,14 +29,18 @@
 "#mapview": {
 	height: 130,
 	top: 5,
-	width: Ti.UI.FILL
+	right: 5,
+	left: 5,
+	//borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC"
 }
 
-"#topContainer": {
+"#container": {
 	
-	layout: 'horizontal',
+	//layout: 'horizontal',
 	height: Ti.UI.SIZE,
-	width: Ti.UI.SIZE
+	width: Ti.UI.FILL
 	
 }
 
@@ -41,26 +52,52 @@
 	wordWrap: false,
 	top: 5,
 	left: 5,
-	width: "85%",
+	right: 40,
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
 	autocorrect: false,
 	height: Ti.UI.SIZE,
-	//backgroundColor: '#C8DDE8',
+	wordWrap: false,
+	ellipsize: true,
+	backgroundColor: "#fff",
 	hintText: "Posizione"
+
+}
+
+"#searchAddress": {
+	
+	borderColor: "#000000",
+	color: "#336699",
+	ellipsize: true,
+	wordWrap: false,
+	top: 5,
+	left: 5,
+	right: 40,
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	autocorrect: false,
+	height: Ti.UI.SIZE,
+
+	backgroundColor: "#fff",
+	hintText: "Cerca Indirizzo"
 
 }
 
 "#centra": {
 	
 	backgroundImage: "/images/location-target.png",
-    left: 5, 
+    right: 5, 
     width: 30,
     height: 30
 }
 
-"#searchAddress": {
-	showCancel: true,
-	hintText : 'Cerca indirizzo',
-	height: 50,
-	top: 5
+"#lookAddress": {
 	
+	backgroundImage: "/images/search.png",
+    right: 5, 
+    width: 30,
+    height: 30
 }
+

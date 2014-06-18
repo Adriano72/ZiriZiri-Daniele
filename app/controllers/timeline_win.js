@@ -218,7 +218,7 @@ net.getPostTemplate(0, 1, function(p_postTemplate) {
 	
 	// ***** EXTRACT EVENTS TEMPLATE *****************
 	var templateEvents = _.filter(templateJson.modules, function(value) {
-		return value.kind.code == "CASHFLOWDATATYPE_CODE";
+		return value.kind.code == "EVENTDATATYPE_CODE";
 	});
 
 	Alloy.Models.Event_template.set(templateEvents[0]);

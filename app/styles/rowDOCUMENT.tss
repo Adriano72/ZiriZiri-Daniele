@@ -1,13 +1,4 @@
 
-"#aspectTable": {
-	top: 5,
-	left: 5,
-	width: "90%",
-	height: Ti.UI.SIZE,
-	separatorColor: 'transparent'
-	//backgroundColor: 'blue'
-}	
-
 ".row": {
 	//backgroundColor: 'pink',
 	className: 'itemRow',

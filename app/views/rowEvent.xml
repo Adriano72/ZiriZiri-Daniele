@@ -1,4 +1,4 @@
-<Alloy>
+<!--<Alloy>
 	<TableViewRow id="row">
 		
 		<View class="block_container" layout="horizontal">
@@ -10,4 +10,24 @@
 			<Label class="block_data" id="location"/>			
 		</View>
 	</TableViewRow>
+</Alloy>-->
+
+<Alloy>
+
+	<TableViewRow class="row">
+
+		<View class="aspectEventContainer">
+			<Label id="eventIcon" class="aspectIcon"/>
+			<View class="aligningWrapper">
+				<View class="dataWrapper">
+					<Label class="dataDisplay first" id="startDate"/>
+					<Label class="dataDisplay" id="endDate"/>
+					<Label class="dataDisplay" id="location"/>
+				</View>
+			</View>
+
+		</View>
+
+	</TableViewRow>
+
 </Alloy>

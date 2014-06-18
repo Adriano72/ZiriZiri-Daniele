@@ -6,6 +6,28 @@ var res_reverseGeo;
 
 var res_forwardGeo;
 
+function openEvent() {
+	//Ti.API.info("WINDOW OPEN");
+	theActionBar = $.win.activity.actionBar;
+
+	$.win.activity.invalidateOptionsMenu();
+
+	theActionBar = $.win.activity.actionBar;
+	if (theActionBar != undefined) {
+		theActionBar.displayHomeAsUp = true;
+		theActionBar.setIcon('images/logo-test.png');
+		//theActionBar.setTitle(self.title);
+		theActionBar.onHomeIconItemSelected = function() {
+			$.win.close({
+				animate : true
+			});
+		};
+	};
+	
+	reverseGeocoding();
+
+};
+
 function reverseGeocoding() {
 
 	var u_location = require('getUserLocation');
@@ -93,6 +115,6 @@ function updateDisplay(locationData) {
 function storeLocation() {
 
 	args(location_result);
-	$.window.close();
+	$.win.close();
 
 };

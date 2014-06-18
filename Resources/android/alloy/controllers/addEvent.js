@@ -34,6 +34,7 @@ function Controller() {
         Alloy.createController("getLocation", function(locationData) {
             location_result = locationData;
             $.location.text = locationData.address;
+            Ti.API.info("LOCATION DATA: " + JSON.stringify(location_result));
         }).getView().open();
     }
     function showDatePicker(e) {
@@ -52,7 +53,28 @@ function Controller() {
         $.ovalSwitchScadStrutt.image = scadenzaStrutturale ? "/images/oval-switch-on.png" : "/images/oval-switch-off.png";
         Ti.API.info("SCAD STRUTT FLAG: " + scadenzaStrutturale);
     }
-    function saveEvent() {}
+    function saveEvent() {
+        var modEventJSON = Alloy.Models.Event_template.toJSON();
+        Ti.API.info("MODELLO EVENTO: " + JSON.stringify(modEventJSON));
+        modEventJSON.name = Alloy.Models.Post_template.get("name");
+        modEventJSON.description = Alloy.Models.Post_template.get("description");
+        modEventJSON.referenceTime = Alloy.Models.Post_template.get("referenceTime");
+        modEventJSON.category = Alloy.Models.Post_template.get("category");
+        modEventJSON.data.title = Alloy.Models.Post_template.get("name");
+        modEventJSON.data.description = Alloy.Models.Post_template.get("description");
+        modEventJSON.location = {
+            name: $.location.text,
+            description: $.location.text,
+            latitude: location_result.latitude,
+            longitude: location_result.longitude
+        };
+        modEventJSON.data.startTime.time = $.pkrDataInizioEvento.dataRaw;
+        modEventJSON.data.endTime = $.pkrDataFineEvento.dataRaw;
+        modEventJSON.data = JSON.stringify(modEventJSON.data);
+        Ti.API.info("ASPETTO EVENT VALIDATO: " + JSON.stringify(modEventJSON));
+        args(modEventJSON);
+        $.win.close();
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "addEvent";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -296,7 +318,7 @@ function Controller() {
         id: "locationImage"
     });
     $.__views.__alloyId57.add($.__views.locationImage);
-    $.__views.location = Ti.UI.createTextField({
+    $.__views.location = Ti.UI.createLabel({
         color: "#666",
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -308,7 +330,7 @@ function Controller() {
         backgroundColor: "#FFF",
         wordWrap: false,
         ellipsize: true,
-        autocorrect: false,
+        text: "Location",
         hintText: "Location",
         id: "location"
     });
@@ -379,7 +401,7 @@ function Controller() {
     $.__views.win.add($.__views.newEventTable);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    arguments[0] || {};
+    var args = arguments[0] || {};
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     $.pkrDataInizioEvento.text = moment().format("LLL");

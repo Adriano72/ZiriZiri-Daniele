@@ -149,7 +149,7 @@ exports.forwardGeo = function(address, _callback) {
 				Ti.API.info('Frwrd Geocoding Success: ' + JSON.stringify(e));
 			},
 			error : function(e) {
-				alert('Error');
+				alert('Nessun risultato dalla ricerca');
 			}
 		});
 

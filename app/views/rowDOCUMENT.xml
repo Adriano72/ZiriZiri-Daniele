@@ -1,36 +1,3 @@
-<!--<Alloy>
-	<TableViewRow id="row">
-		<Label id="description"/>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Titolo: ">
-			<Label class="block_data" id="titolo"/>
-		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Formato: ">
-			<Label class="block_data" id="format"/>
-		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Tipo: ">
-			<Label class="block_data" id="type"/>
-		</View>
-	</TableViewRow>
-</Alloy>
-
-<Alloy>
-	<TableViewRow id="row">
-		
-		<View class="block_container" layout="horizontal">
-			<Label id="description"/>
-			<Label class="block_data" id="titolo"/>
-			<Label class="block_data" id="descrizione"/>
-		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_data" id="fileSize"/>			
-			<Label class="block_data" id="fileName"/>
-		</View>
-	</TableViewRow>
-</Alloy>-->
-
 <Alloy>
 
 	<TableViewRow class="row">

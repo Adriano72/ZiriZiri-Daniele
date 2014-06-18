@@ -6,87 +6,88 @@ function Controller() {
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
-    $.__views.row = Ti.UI.createTableViewRow({
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL,
-        backgroundColor: "#E3E3E3",
+    $.__views.rowEvent = Ti.UI.createTableViewRow({
         className: "itemRow",
-        layout: "vertical",
-        id: "row"
+        width: Ti.UI.FILL,
+        id: "rowEvent"
     });
-    $.__views.row && $.addTopLevelView($.__views.row);
+    $.__views.rowEvent && $.addTopLevelView($.__views.rowEvent);
     $.__views.__alloyId178 = Ti.UI.createView({
-        height: 80,
+        left: 5,
+        right: 5,
+        top: 5,
+        bottom: 10,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: "#E9FA32",
+        backgroundColor: "#FFF",
+        height: 50,
         touchEnabled: false,
         layout: "horizontal",
         id: "__alloyId178"
     });
-    $.__views.row.add($.__views.__alloyId178);
-    $.__views.description = Ti.UI.createLabel({
-        height: 30,
-        font: {
-            fontFamily: "AppIcons",
-            fontSize: 18
-        },
-        color: "#5C5C5C",
+    $.__views.rowEvent.add($.__views.__alloyId178);
+    $.__views.eventIcon = Ti.UI.createLabel({
         left: 5,
-        top: 5,
-        ellipsize: true,
-        wordWrap: false,
-        touchEnabled: false,
-        width: 55,
-        id: "description"
+        width: 25,
+        height: 25,
+        backgroundImage: "/images/kernel-event-on.png",
+        id: "eventIcon"
     });
-    $.__views.__alloyId178.add($.__views.description);
-    $.__views.dateFrom = Ti.UI.createLabel({
-        height: 40,
-        font: {
-            fontSize: 16
-        },
-        left: 5,
-        right: 5,
-        touchEnabled: false,
-        width: Ti.UI.SIZE,
-        id: "dateFrom"
-    });
-    $.__views.__alloyId178.add($.__views.dateFrom);
-    $.__views.dateTo = Ti.UI.createLabel({
-        height: 40,
-        font: {
-            fontSize: 16
-        },
-        left: 5,
-        right: 5,
-        touchEnabled: false,
-        width: Ti.UI.SIZE,
-        id: "dateTo"
-    });
-    $.__views.__alloyId178.add($.__views.dateTo);
+    $.__views.__alloyId178.add($.__views.eventIcon);
     $.__views.__alloyId179 = Ti.UI.createView({
-        height: 80,
-        touchEnabled: false,
-        layout: "horizontal",
+        width: Ti.UI.SIZE,
+        left: 10,
         id: "__alloyId179"
     });
-    $.__views.row.add($.__views.__alloyId179);
-    $.__views.location = Ti.UI.createLabel({
-        height: 40,
+    $.__views.__alloyId178.add($.__views.__alloyId179);
+    $.__views.__alloyId180 = Ti.UI.createView({
+        left: 2,
+        width: "85%",
+        height: Ti.UI.SIZE,
+        layout: "horizontal",
+        id: "__alloyId180"
+    });
+    $.__views.__alloyId179.add($.__views.__alloyId180);
+    $.__views.startDate = Ti.UI.createLabel({
         font: {
-            fontSize: 16
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
         },
-        left: 5,
-        right: 5,
-        touchEnabled: false,
-        width: Ti.UI.SIZE,
+        color: "#444",
+        backgroundColor: "white",
+        width: 130,
+        left: 0,
+        id: "startDate"
+    });
+    $.__views.__alloyId180.add($.__views.startDate);
+    $.__views.endDate = Ti.UI.createLabel({
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
+        },
+        color: "#444",
+        backgroundColor: "white",
+        width: 130,
+        id: "endDate"
+    });
+    $.__views.__alloyId180.add($.__views.endDate);
+    $.__views.location = Ti.UI.createLabel({
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
+        },
+        color: "#999",
+        backgroundColor: "white",
+        width: 130,
         id: "location"
     });
-    $.__views.__alloyId179.add($.__views.location);
+    $.__views.__alloyId180.add($.__views.location);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    $.row.id_code = args.id_code, $.description.text = "  " + icons.calendar;
-    $.dateFrom.text = args.dataDa;
-    $.dateTo.text = args.dataA, $.location.text = args.posizione;
+    $.startDate.text = args.startDate;
+    $.endDate.text = args.endDate;
     _.extend($, exports);
 }
 

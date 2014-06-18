@@ -33,14 +33,17 @@ function openEvent() {
 };
 
 function getLocation() {
-	
+
 	var loc = Alloy.createController('getLocation', function(locationData) {
-		
+
 		location_result = locationData;
 
 		$.location.text = locationData.address;
 		
-	}).getView().open();;
+		Ti.API.info("LOCATION DATA: "+JSON.stringify(location_result));
+
+	}).getView().open();
+	
 
 };
 
@@ -62,8 +65,6 @@ function showDatePicker(e) {
 
 };
 
-
-
 function toggleScadStrutt() {(scadenzaStrutturale) = !(scadenzaStrutturale);
 
 	$.ovalSwitchScadStrutt.image = (scadenzaStrutturale) ? "/images/oval-switch-on.png" : "/images/oval-switch-off.png";
@@ -72,24 +73,35 @@ function toggleScadStrutt() {(scadenzaStrutturale) = !(scadenzaStrutturale);
 }
 
 function saveEvent() {
+
+	var modEventJSON = Alloy.Models.Event_template.toJSON();
 	
-	/*
+	Ti.API.info("MODELLO EVENTO: "+JSON.stringify(modEventJSON));
 
-	var retLocation = null;
+	modEventJSON.name = Alloy.Models.Post_template.get("name");
+	modEventJSON.description = Alloy.Models.Post_template.get("description");
+	modEventJSON.referenceTime = Alloy.Models.Post_template.get("referenceTime");
+	modEventJSON.category = Alloy.Models.Post_template.get("category");
+	
+	modEventJSON.data.title = Alloy.Models.Post_template.get("name");
+	modEventJSON.data.description = Alloy.Models.Post_template.get("description");
 
-	if (location_result != null) {
-		
-		retLocation = {
-			name : $.location.text,
-			description : $.location.text,
-			latitude : location_result.latitude,
-			longitude : location_result.longitude
+	modEventJSON.location = {
+		name : $.location.text,
+		description : $.location.text,
+		latitude : location_result.latitude,
+		longitude : location_result.longitude
 
-		};
-		
 	};
+	
+	modEventJSON.data.startTime.time = $.pkrDataInizioEvento.dataRaw;
+	modEventJSON.data.endTime = $.pkrDataFineEvento.dataRaw;
+	
+	modEventJSON.data = JSON.stringify(modEventJSON.data);
+	
+	Ti.API.info("ASPETTO EVENT VALIDATO: " + JSON.stringify(modEventJSON));
 
-	args(retLocation, $.dataFrom.dataRaw, $.dataTo.dataRaw);
-	$.window.close();
-	*/
+	args(modEventJSON);
+	$.win.close();
+
 };

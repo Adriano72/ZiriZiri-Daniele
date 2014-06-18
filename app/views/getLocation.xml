@@ -1,19 +1,25 @@
 <Alloy>
-	<Window id="window" class="container" title = "Posizione" onOpen="reverseGeocoding">
+	<Window id="win" class="container" title = "Location" onOpen="openEvent">
 		<Menu id="menu" platform="android">
 
-			<MenuItem id="salva" title="Scrivi" icon="/images/1040-checkmark.png" onClick="storeLocation" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
+			<MenuItem id="mn_salva" onClick="storeLocation"/>
 
 		</Menu>
-		<View id="mapview" ns="Alloy.Globals.Map"/>
-		<View id="topContainer">
-			<TextField id="location"/>
-			<Button onClick="reverseGeocoding" id="centra" />
+	
+			<View id="mapview" ns="Alloy.Globals.Map"/>
+			<View id="container">
+				<TextField id="location"/>
+				<Button onClick="reverseGeocoding" id="centra" />
 
-		</View>
-		<SearchBar id="searchAddress" onReturn="forwardGeocoding"/>
+			</View>
+			<View id="container">
+				<TextField id="searchAddress"/>
+				<Button onClick="forwardGeocoding" id="lookAddress" />
+
+			</View>
+			
+			<!--<TableView id="disambiguazioneTable"/>-->
+			
 		
-		<TableView id="disambiguazioneTable"/>
-
 	</Window>
 </Alloy>

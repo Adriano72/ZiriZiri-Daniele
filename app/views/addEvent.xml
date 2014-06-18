@@ -1,30 +1,3 @@
-<!--<Alloy>
-	<Window id="window" class="container" title = "Nuovo Evento">
-		<Menu id="menu" platform="android">
-			
-			<MenuItem id="salva" title="Scrivi" icon="/images/floppy-disk.png"  onClick="saveEvent" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
-			
-		</Menu>
-
-		<TableView id="newEventTable">
-			
-			<TableViewRow class="row" leftImage="/images/calendar.png">
-				<TextField id="dataFrom"  dataRaw="" onFocus="showDatePicker" onClick="showDatePicker"/>				
-			</TableViewRow>
-			
-			<TableViewRow class="row" leftImage="/images/calendar.png">
-				<TextField id="dataTo"  dataRaw="" onFocus="showDatePicker" onClick="showDatePicker"/>				
-			</TableViewRow>
-			
-			<TableViewRow class="row" leftImage="/images/location.png" onClick = "getLocation">
-				<Label id="location"/>
-			</TableViewRow>
-
-		</TableView>
-
-	</Window>
-</Alloy>-->
-
 <Alloy>
 	<Window id="win" class="container" title = "Nuovo Evento" onOpen="openEvent">
 
@@ -71,7 +44,7 @@
 			<TableViewRow class="row" onClick = "getLocation">
 				<View class="rowWrapper">
 					<ImageView id="locationImage"/>					
-					<TextField id="location"/>
+					<Label id="location"/>
 				</View>
 			</TableViewRow>
 			<TableViewRow class="row">
@@ -88,90 +61,7 @@
 
 				</View>
 			</TableViewRow>
-			<!--<TableViewRow class="row">
-				<View class="rowWrapper">
-					<Label id="statoMovimento"/>
-					<Label class="verticalBar"/>
-					<Picker id="pkrStatoMovimento" selectionIndicator="true"/>
-				</View>
-			</TableViewRow>
-			<TableViewRow class="row">
-				<View class="rowWrapper">
-					<Label id="variabilita"/>
-					<Label class="verticalBar"/>
-					<Picker id="pkrVariabilita" selectionIndicator="true"/>
-				</View>
-			</TableViewRow>
-			<TableViewRow class="row">
-
-				<View class="rowWrapper">
-
-					<View id="leftSubWrapper" onClick="setOrdinario">
-						<ImageView id="dotSwitchImageLeft"/>
-						<Label id="ordinarioLabel"/>
-					</View>
-					<Label class="verticalBar"/>
-					<View id="rightSubWrapper" onClick="setStraordinario">
-						<ImageView id="dotSwitchImageRight"/>
-						<Label id="straordinarioLabel"/>
-					</View>
-
-				</View>
-			</TableViewRow>
-			<TableViewRow class="row">
-
-				<View class="rowWrapper" onClick="toggleRedditi">
-
-					<View id="leftSubWrapper">
-
-						<Label id="dichRedditiLabel"/>
-					</View>
-					<View id="ovalSwitchContainer">
-						<ImageView id="ovalSwitchRedditi"/>
-					</View>
-
-				</View>
-			</TableViewRow>
-			<TableViewRow class="row">
-				<View class="rowWrapper">
-
-					<View id="leftSubWrapper">
-						<Label id="dataValutaLabel"/>
-					</View>
-					<Label class="verticalBar"/>
-					<View id="rightSubWrapper">
-						<Label id="dataValuta" dataRaw="" onClick="showDatePicker"/>
-					</View>
-
-				</View>
-			</TableViewRow>
-			<TableViewRow class="row">
-				<View class="rowWrapper">
-
-					<View id="leftSubWrapper">
-						<Label id="dataScadenzaLabel"/>
-					</View>
-					<Label class="verticalBar"/>
-					<View id="rightSubWrapper">
-						<Label id="dataScadenza" dataRaw="" onClick="showDatePicker"/>
-					</View>
-
-				</View>
-			</TableViewRow>
-			<TableViewRow class="row">
-				<View class="rowWrapper">
-
-					<View id="leftSubWrapper">
-						<Label id="dataPagamentoLabel"/>
-					</View>
-					<Label class="verticalBar"/>
-					<View id="rightSubWrapper">
-						<Label id="dataPagamento" dataRaw="" onClick="showDatePicker"/>
-					</View>
-
-				</View>
-			</TableViewRow>-->
-
+			
 		</TableView>
 
 	</Window>

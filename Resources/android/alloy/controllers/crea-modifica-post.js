@@ -78,14 +78,14 @@ function Controller() {
     }
     function addEvent() {
         Alloy.createController("addEvent", function(objRet) {
+            Ti.API.info("EVENTO RICEVUTO: " + JSON.stringify(objRet));
             arrayAspetti.push(objRet);
-            Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
             var aspettoDataJson = JSON.parse(objRet.data);
             Ti.API.info("DATA PARSATO: " + JSON.stringify(aspettoDataJson));
-            var riga = Alloy.createController("rowCASHFLOW", {
-                importo: aspettoDataJson.importo,
-                modalitaPagamento: aspettoDataJson.pagamentoIncasso.descrizioneBreve,
-                tipoMovimento: aspettoDataJson.tipoMovimento.descrizioneBreve
+            var riga = Alloy.createController("rowEvent", {
+                startDate: moment(aspettoDataJson.startTime.time).format("LLL"),
+                endDate: moment(aspettoDataJson.endTime).format("LLL"),
+                location: objRet.location.name
             }).getView();
             $.postTable.appendRow(riga);
         }).getView().open();

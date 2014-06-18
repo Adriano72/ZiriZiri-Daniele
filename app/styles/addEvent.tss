@@ -156,7 +156,7 @@
 	backgroundColor: '#FFF',
 	wordWrap: false,
 	ellipsize: true,
-	autocorrect: false,
+	text: "Location",
 	hintText: "Location"
 	//backgroundColor: '#C8DD
 
