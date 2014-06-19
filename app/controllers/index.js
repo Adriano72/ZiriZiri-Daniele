@@ -27,6 +27,10 @@ if (Ti.App.Properties.getBool('authenticated', false)) {
 
 };
 
+function manageRememberMe(e){
+	Ti.API.info("SWITCH STATE: "+e.value);
+};
+
 function do_login(e) {
 
 	var user_name = $.username.value || 'none';
@@ -63,7 +67,7 @@ function do_login(e) {
 				});
 			};
 
-			$.index.close();
+			//$.index.close();
 			//$.index.open();
 
 		} else {

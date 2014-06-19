@@ -1,4 +1,7 @@
 function Controller() {
+    function manageRememberMe(e) {
+        Ti.API.info("SWITCH STATE: " + e.value);
+    }
     function do_login() {
         var user_name = $.username.value || "none";
         var user_password = $.password.value || "none";
@@ -19,7 +22,6 @@ function Controller() {
                     Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
                     Alloy.createController("timeline_win").getView();
                 });
-                $.index.close();
             } else alert("Username o password errati");
         };
         xhr.onerror = function() {
@@ -44,12 +46,13 @@ function Controller() {
         backgroundColor: "#8BC7F2",
         layout: "vertical",
         navBarHidden: true,
+        exitOnClose: true,
         orientationModes: [ Ti.UI.PORTRAIT ],
         id: "index"
     });
     $.__views.index && $.addTopLevelView($.__views.index);
     $.__views.bigLogo = Ti.UI.createImageView({
-        top: 60,
+        top: 40,
         image: "/images/bigLogo.png",
         height: 160,
         id: "bigLogo"
@@ -137,6 +140,7 @@ function Controller() {
         id: "remember"
     });
     $.__views.__alloyId130.add($.__views.remember);
+    manageRememberMe ? $.__views.remember.addEventListener("change", manageRememberMe) : __defers["$.__views.remember!change!manageRememberMe"] = true;
     $.__views.forgotPassword = Ti.UI.createLabel({
         color: "#4BAEE7",
         right: 0,
@@ -162,6 +166,7 @@ function Controller() {
         Alloy.createController("timeline_win").getView();
     } else $.index.open();
     __defers["$.__views.btn_login!click!do_login"] && $.__views.btn_login.addEventListener("click", do_login);
+    __defers["$.__views.remember!change!manageRememberMe"] && $.__views.remember.addEventListener("change", manageRememberMe);
     _.extend($, exports);
 }
 

@@ -7,7 +7,7 @@
 			<Label id="btn_login" onClick="do_login" />
 		</View>
 		<View class="bottomContainer">
-			<Switch value="true" id="remember"/>
+			<Switch value="true" id="remember" onChange="manageRememberMe"/>
 			<Label id="forgotPassword"/>
 		</View>
 	</Window>

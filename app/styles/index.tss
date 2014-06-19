@@ -4,11 +4,12 @@
 	layout: "vertical",
 	//exitOnClose: true,
 	navBarHidden: true,
+	exitOnClose: true,
 	orientationModes: [Ti.UI.PORTRAIT]
 }
 
 "#bigLogo":{
-	top: 60,
+	top: 40,
 	image: "/images/bigLogo.png",
 	height: 160
 }
