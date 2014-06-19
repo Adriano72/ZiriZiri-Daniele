@@ -11,7 +11,7 @@ Alloy.Models.Aspetto.set("modalitaPagamento", aspectJson.data.modalitaPagamento.
 Alloy.Models.Aspetto.trigger('change');
 */
 
-Ti.API.info("COLLECTION DOCUMENT: "+JSON.stringify(Alloy.Collections.aspettiDocument));
+Ti.API.info("COLLECTION EVENT: "+JSON.stringify(Alloy.Collections.aspettoEvento));
 
 
 
@@ -19,7 +19,9 @@ function transformData(model) {
 	var attrs = model.toJSON();
 	//attrs.imageUrl = '/' + attrs.direction + '.png';
 	//attrs.titolo = attrs.data.importo+"€";
-	attrs.tipoFile = attrs.data.format.name;
+	attrs.dataDa = moment(attrs.data.startTime.time).format("DD-MM-YYYY HH:MM");
+	attrs.dataA = moment(attrs.data.endTime.time).format("DD-MM-YYYY HH:MM");
+	attrs.posizione = attrs.location.name;
 	
 
 	return attrs;
@@ -27,17 +29,17 @@ function transformData(model) {
 
 function showDetail(e){
 	
-	var selectedAspect = Alloy.Collections.aspettiDocument.at(e.index).attributes;
+	var selectedAspect = Alloy.Collections.aspettoEvento.at(e.index).attributes;
 	
 	//Ti.API.info("ATTRIBUTES DOCUMENT: "+JSON.stringify(selectedAspect));
 	
-	Alloy.createController('rowDetailDOCUMENT', selectedAspect).getView();
+	var riga = Alloy.createController('rowDetailEVENT', selectedAspect).getView();
 	
 }
 
 syncAspects();
 
 
-$.briefDocument.addEventListener("close", function() {
-	$.briefDocument.destroy();
+$.briefEvento.addEventListener("close", function() {
+	$.briefEvento.destroy();
 });

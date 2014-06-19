@@ -22,6 +22,7 @@ exports.getData = function(page, max, _callback) {
     };
     session = Ti.App.Properties.getString("sessionId", 0);
     var today = moment().format("YYYY-MM-DD");
+    today += "23:59";
     Ti.API.info("################CALL:GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON&from=2014-01-01&to=" + today + pagination + "&cached=false");
     xhr.open("GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON&from=2014-01-01&to=" + today + pagination + "&cached=true");
     xhr.send();
@@ -153,7 +154,7 @@ exports.saveAspect = function(allAspects, _callback) {
                 deferredCall();
             } else {
                 Alloy.Globals.loading.hide();
-                alert("Errore nella comunicazione col server");
+                alert("Errore salvataggio aspetto");
                 Ti.API.info("ERRORE RICEVUTO: " + JSON.stringify(json));
             }
         };

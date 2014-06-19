@@ -1,0 +1,35 @@
+<Alloy>
+	<Window id="win" title="Evento" class="container" onOpen="openEvent">
+
+		<!-- The Menu tag adds the Android menu. -->
+		<Menu id="menu" platform="android">
+
+			<!-- Cannot specify node text.  Use attributes only. -->
+			<!--<MenuItem id="mn_edit" title="Modifica" onClick="editPost"/>-->
+			<!--<MenuItem id="Foto" title="Foto" icon="/images/86-camera.png"  showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />-->
+		</Menu>
+		<View class="eventContainer" id="wrapper">
+
+			<View id="mapview" ns="Alloy.Globals.Map"/>
+			<View class="aspectEventContainer">
+
+				<Label id="eventIcon" class="aspectEventIcon"/>
+				<View class="row">
+					<View class="dataWrapper">
+						<Label class="dataDisplay first" id="dataInizio"/>
+						<Label class="dataDisplay" id="dataFine"/>
+
+					</View>
+					<View class="dataWrapper">
+						<Label class="dataDisplay" id="location"/>
+					</View>
+				</View>
+
+			</View>
+
+			<!--<TableView id="disambiguazioneTable"/>-->
+
+		</View>
+
+	</Window>
+</Alloy>

@@ -145,8 +145,8 @@ function addEvent() {
 		var riga = Alloy.createController('rowEvent', {
 
 			//id_code : arrayAspetti.length - 1,			
-			startDate : moment(aspettoDataJson.startTime.time).format("LLL"),	
-			endDate : moment(aspettoDataJson.endTime).format("LLL"),
+			startDate : moment(aspettoDataJson.startTime.time).format("DD-MM-YYYY HH:MM"),	
+			endDate : moment(aspettoDataJson.endTime.time).format("DD-MM-YYYY HH:MM"),
 			location : objRet.location.name
 
 		}).getView();

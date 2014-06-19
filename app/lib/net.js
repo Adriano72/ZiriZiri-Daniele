@@ -30,6 +30,7 @@ exports.getData = function(page, max, _callback) {
 	session = Ti.App.Properties.getString('sessionId', 0);
 	
 	var today = moment().format("YYYY-MM-DD");
+	today = today+"23:59";
 
 	//xhr.open("GET", "https://demo.ziriziri.com/cxf/api/v01/actions/actions/680?_type=json");
 	Ti.API.info("################CALL:"+"GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON&from=2014-01-01&to="+today+""+pagination+"&cached=false");
@@ -239,7 +240,7 @@ exports.saveAspect = function(allAspects, _callback) {
 			} else {
 				//Ti.App.Properties.getList('unsavedAspects', []).push(objAspect);
 				Alloy.Globals.loading.hide();
-				alert("Errore nella comunicazione col server");
+				alert("Errore salvataggio aspetto");
 				Ti.API.info("ERRORE RICEVUTO: "+JSON.stringify(json));
 			};
 

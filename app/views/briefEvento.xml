@@ -1,0 +1,24 @@
+<Alloy>
+
+	<View class="aspectEventContainer">
+
+		<Label class="separator"/>
+		<Label id="eventIcon" class="aspectEventIcon"/>
+		<TableView id="aspectEventTable" dataCollection="aspettoEvento"  dataFunction="syncAspects" dataTransform="transformData">
+
+			<TableViewRow class="row" onClick="showDetail">
+				<View class="dataWrapper">
+					<Label class="dataDisplay first" id="dataInizio" text="{dataDa}"/>
+					<Label class="dataDisplay" id="dataFine" text="{dataA}"/>
+					
+				</View>
+				<View class="dataWrapper">
+					<Label class="dataDisplay" id="location" text = "{posizione}"/>
+				</View>
+			</TableViewRow>
+
+		</TableView>
+
+	</View>
+
+</Alloy>

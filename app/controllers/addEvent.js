@@ -39,11 +39,10 @@ function getLocation() {
 		location_result = locationData;
 
 		$.location.text = locationData.address;
-		
-		Ti.API.info("LOCATION DATA: "+JSON.stringify(location_result));
+
+		Ti.API.info("LOCATION DATA: " + JSON.stringify(location_result));
 
 	}).getView().open();
-	
 
 };
 
@@ -75,14 +74,14 @@ function toggleScadStrutt() {(scadenzaStrutturale) = !(scadenzaStrutturale);
 function saveEvent() {
 
 	var modEventJSON = Alloy.Models.Event_template.toJSON();
-	
-	Ti.API.info("MODELLO EVENTO: "+JSON.stringify(modEventJSON));
+
+	Ti.API.info("MODELLO EVENTO: " + JSON.stringify(modEventJSON));
 
 	modEventJSON.name = Alloy.Models.Post_template.get("name");
 	modEventJSON.description = Alloy.Models.Post_template.get("description");
 	modEventJSON.referenceTime = Alloy.Models.Post_template.get("referenceTime");
 	modEventJSON.category = Alloy.Models.Post_template.get("category");
-	
+
 	modEventJSON.data.title = Alloy.Models.Post_template.get("name");
 	modEventJSON.data.description = Alloy.Models.Post_template.get("description");
 
@@ -93,12 +92,16 @@ function saveEvent() {
 		longitude : location_result.longitude
 
 	};
-	
+
 	modEventJSON.data.startTime.time = $.pkrDataInizioEvento.dataRaw;
-	modEventJSON.data.endTime = $.pkrDataFineEvento.dataRaw;
-	
+	modEventJSON.data.endTime = {
+		time : $.pkrDataFineEvento.dataRaw,
+		type : "NONE",
+		id : null
+	};
+
 	modEventJSON.data = JSON.stringify(modEventJSON.data);
-	
+
 	Ti.API.info("ASPETTO EVENT VALIDATO: " + JSON.stringify(modEventJSON));
 
 	args(modEventJSON);

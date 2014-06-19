@@ -5,3 +5,4 @@ var args = arguments[0] || {};
 //$.row.id_code = args.id_code,
 $.startDate.text = args.startDate;
 $.endDate.text = args.endDate;
+$.location.text = args.location;

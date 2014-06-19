@@ -47,6 +47,7 @@
 					</View>
 
 				</View>
+				<View id="aspectsEventsWrapper"></View>
 				<View id="aspectsCashflowWrapper"></View>
 				<View id="aspectsDocumentWrapper"></View>
 

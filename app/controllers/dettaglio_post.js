@@ -74,6 +74,12 @@ var aspettoEvento = _.filter(aspects, function(item) {
 	return item.kind.code == "EVENTDATATYPE_CODE";
 });
 
+Alloy.Collections.aspettoEvento.reset(aspettoEvento);
+
+if (aspettoEvento.length > 0) {
+	$.aspectsEventsWrapper.add(Alloy.createController('briefEvento').getView());
+}
+
 // ASPETTI CASHFLOW *********
 var allAspettiCashflow = _.filter(aspects, function(item) {
 	return item.kind.code == "CASHFLOWDATATYPE_CODE";

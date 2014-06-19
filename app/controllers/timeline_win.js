@@ -44,7 +44,7 @@ function openEvent() {
 		//theActionBar.setTitle(self.title);
 
 	};
-	/*
+	
 	setTimeout(function(){
 		
 		net.getData(0, 100, function(timeline_obj) {
@@ -59,7 +59,7 @@ function openEvent() {
 		});
 		
 	}, 5000);
-	*/
+	
 	
 	
 
@@ -201,7 +201,7 @@ net.getCategories(function(categoriesData) {
 
 	Ti.App.Properties.setObject("elencoCategorie", objCategorie);
 
-	//Ti.API.info("OBJ CATEGORIE: "+ JSON.stringify(Ti.App.Properties.getObject("elencoCategorie")));
+	Ti.API.info("OBJ CATEGORIE: "+ JSON.stringify(Ti.App.Properties.getObject("elencoCategorie")));
 
 });
 

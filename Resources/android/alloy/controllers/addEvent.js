@@ -69,7 +69,11 @@ function Controller() {
             longitude: location_result.longitude
         };
         modEventJSON.data.startTime.time = $.pkrDataInizioEvento.dataRaw;
-        modEventJSON.data.endTime = $.pkrDataFineEvento.dataRaw;
+        modEventJSON.data.endTime = {
+            time: $.pkrDataFineEvento.dataRaw,
+            type: "NONE",
+            id: null
+        };
         modEventJSON.data = JSON.stringify(modEventJSON.data);
         Ti.API.info("ASPETTO EVENT VALIDATO: " + JSON.stringify(modEventJSON));
         args(modEventJSON);

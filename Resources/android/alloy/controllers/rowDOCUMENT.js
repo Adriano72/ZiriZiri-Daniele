@@ -12,7 +12,7 @@ function Controller() {
         id: "rowDOCUMENT"
     });
     $.__views.rowDOCUMENT && $.addTopLevelView($.__views.rowDOCUMENT);
-    $.__views.__alloyId130 = Ti.UI.createView({
+    $.__views.__alloyId142 = Ti.UI.createView({
         left: 5,
         right: 5,
         top: 5,
@@ -24,9 +24,9 @@ function Controller() {
         height: 50,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId130"
+        id: "__alloyId142"
     });
-    $.__views.rowDOCUMENT.add($.__views.__alloyId130);
+    $.__views.rowDOCUMENT.add($.__views.__alloyId142);
     $.__views.documentIcon = Ti.UI.createLabel({
         left: 5,
         width: 25,
@@ -34,21 +34,21 @@ function Controller() {
         backgroundImage: "/images/kernel-document-on.png",
         id: "documentIcon"
     });
-    $.__views.__alloyId130.add($.__views.documentIcon);
-    $.__views.__alloyId131 = Ti.UI.createView({
+    $.__views.__alloyId142.add($.__views.documentIcon);
+    $.__views.__alloyId143 = Ti.UI.createView({
         width: Ti.UI.SIZE,
         left: 10,
-        id: "__alloyId131"
+        id: "__alloyId143"
     });
-    $.__views.__alloyId130.add($.__views.__alloyId131);
-    $.__views.__alloyId132 = Ti.UI.createView({
+    $.__views.__alloyId142.add($.__views.__alloyId143);
+    $.__views.__alloyId144 = Ti.UI.createView({
         left: 2,
         width: "85%",
         height: Ti.UI.SIZE,
         layout: "horizontal",
-        id: "__alloyId132"
+        id: "__alloyId144"
     });
-    $.__views.__alloyId131.add($.__views.__alloyId132);
+    $.__views.__alloyId143.add($.__views.__alloyId144);
     $.__views.titolo = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -62,7 +62,7 @@ function Controller() {
         left: 0,
         id: "titolo"
     });
-    $.__views.__alloyId132.add($.__views.titolo);
+    $.__views.__alloyId144.add($.__views.titolo);
     $.__views.formato = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -75,7 +75,7 @@ function Controller() {
         ellipsize: true,
         id: "formato"
     });
-    $.__views.__alloyId132.add($.__views.formato);
+    $.__views.__alloyId144.add($.__views.formato);
     $.__views.visualizza = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -89,7 +89,7 @@ function Controller() {
         ellipsize: true,
         id: "visualizza"
     });
-    $.__views.__alloyId132.add($.__views.visualizza);
+    $.__views.__alloyId144.add($.__views.visualizza);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
