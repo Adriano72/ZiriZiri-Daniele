@@ -47,7 +47,7 @@ function openEvent() {
 	
 	setTimeout(function(){
 		
-		net.getData(0, 100, function(timeline_obj) {
+		net.getData(0, 200, function(timeline_obj) {
 
 			Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
 			Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
@@ -149,6 +149,13 @@ function checkAspects(node, target) {
 function transformData(model) {
 	var attrs = model.toJSON();
 	//attrs.imageUrl = '/' + attrs.direction + '.png';
+	/*
+	if(!_.isNull(attrs.category.code)){
+		Ti.API.info("****** Immagine: "+'/images/'+attrs.category.code.slice(0,2)+".png");
+	};
+	Ti.API.info("CAT LETTA*****: "+JSON.stringify(attrs.category));
+	*/
+	attrs.catImage = (!_.isNull(attrs.category.code))?'/images/'+attrs.category.code.slice(0,2)+".png":'/images/android-robot.jpg';
 	attrs.postDate = moment(attrs.referenceTime).fromNow();
 	attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
 

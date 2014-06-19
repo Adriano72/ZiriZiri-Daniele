@@ -41,55 +41,113 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.index = Ti.UI.createWindow({
-        orientationModes: [ Ti.UI.PORTRAIT ],
-        backgroundColor: "white",
+        backgroundColor: "#8BC7F2",
         layout: "vertical",
+        navBarHidden: true,
+        orientationModes: [ Ti.UI.PORTRAIT ],
         id: "index"
     });
     $.__views.index && $.addTopLevelView($.__views.index);
+    $.__views.bigLogo = Ti.UI.createImageView({
+        top: 60,
+        image: "/images/bigLogo.png",
+        height: 160,
+        id: "bigLogo"
+    });
+    $.__views.index.add($.__views.bigLogo);
     $.__views.username = Ti.UI.createTextField({
-        borderColor: "#000000",
+        color: "#999",
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
+        },
         textAlign: "",
-        color: "#336699",
         top: 20,
-        width: 250,
-        height: Ti.UI.SIZE,
-        backgroundColor: "#C8DDE8",
-        hintText: "User name",
-        borderRadius: 5,
+        width: 330,
+        height: 40,
+        backgroundColor: "#fff",
+        hintText: "Username or Email",
+        borderRadius: 2,
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "username"
     });
     $.__views.index.add($.__views.username);
-    $.__views.password = Ti.UI.createTextField({
-        borderColor: "#000000",
-        textAlign: "",
-        color: "#336699",
+    $.__views.__alloyId129 = Ti.UI.createView({
         top: 10,
-        width: 250,
+        width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
-        backgroundColor: "#C8DDE8",
+        layout: "horizontal",
+        id: "__alloyId129"
+    });
+    $.__views.index.add($.__views.__alloyId129);
+    $.__views.password = Ti.UI.createTextField({
+        color: "#999",
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
+        },
+        textAlign: "",
+        left: 0,
+        width: 200,
+        height: 40,
+        backgroundColor: "#fff",
         hintText: "Password",
         passwordMask: true,
-        borderRadius: 5,
+        borderRadius: 2,
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "password"
     });
-    $.__views.index.add($.__views.password);
-    $.__views.btn_login = Ti.UI.createButton({
-        title: "Login",
-        top: 20,
+    $.__views.__alloyId129.add($.__views.password);
+    $.__views.btn_login = Ti.UI.createLabel({
+        backgroundColor: "#4BAEE7",
+        text: "LOGIN",
+        textAlign: "center",
+        left: 5,
+        color: "#fff",
         font: {
-            fontFamily: "AppIcons",
+            fontFamily: "SourceSansPro-Regular",
             fontSize: 18
         },
-        width: Ti.UI.SIZE,
-        borderRadius: 5,
-        height: Ti.UI.SIZE,
+        width: 125,
+        borderRadius: 2,
+        height: 40,
         id: "btn_login"
     });
-    $.__views.index.add($.__views.btn_login);
+    $.__views.__alloyId129.add($.__views.btn_login);
     do_login ? $.__views.btn_login.addEventListener("click", do_login) : __defers["$.__views.btn_login!click!do_login"] = true;
+    $.__views.__alloyId130 = Ti.UI.createView({
+        top: 10,
+        width: 330,
+        height: Ti.UI.SIZE,
+        id: "__alloyId130"
+    });
+    $.__views.index.add($.__views.__alloyId130);
+    $.__views.remember = Ti.UI.createSwitch({
+        color: "#fff",
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
+        },
+        left: 0,
+        height: 30,
+        title: "Remember me",
+        width: Ti.UI.SIZE,
+        style: Titanium.UI.Android.SWITCH_STYLE_CHECKBOX,
+        value: true,
+        id: "remember"
+    });
+    $.__views.__alloyId130.add($.__views.remember);
+    $.__views.forgotPassword = Ti.UI.createLabel({
+        color: "#4BAEE7",
+        right: 0,
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
+        },
+        text: "Forgot Password?",
+        id: "forgotPassword"
+    });
+    $.__views.__alloyId130.add($.__views.forgotPassword);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var net = require("net");

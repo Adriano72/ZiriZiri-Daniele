@@ -251,7 +251,6 @@ function Controller() {
     $.__views.postIcon = Ti.UI.createImageView({
         left: 0,
         top: 0,
-        image: "/images/android-robot.jpg",
         touchEnabled: false,
         width: 70,
         height: 70,
@@ -428,7 +427,8 @@ function Controller() {
         width: Ti.UI.SIZE,
         color: "#999",
         left: 5,
-        id: "tags"
+        id: "tags",
+        text: "tags"
     });
     $.__views.__alloyId111.add($.__views.tags);
     $.__views.__alloyId112 = Ti.UI.createView({
@@ -560,6 +560,7 @@ function Controller() {
     var modJson = Alloy.Models.Post_template.toJSON();
     Ti.API.info("MODEL JSON: " + JSON.stringify(modJson));
     Ti.API.info("MODEL CATEGORY: " + modJson.category.name);
+    $.postIcon.image = _.isNull(modJson.category.code) ? "/images/android-robot.jpg" : "/images/" + modJson.category.code.slice(0, 2) + ".png";
     $.date.text = moment(Alloy.Models.Post_template.get("referenceTime")).fromNow();
     $.category.text = _.isNull(modJson.category) ? "" : modJson.category.name;
     Ti.API.info("CATEGORIA: " + modJson.category.name);

@@ -35,7 +35,7 @@ var modJson = Alloy.Models.Post_template.toJSON();
 Ti.API.info("MODEL JSON: " + JSON.stringify(modJson));
 Ti.API.info("MODEL CATEGORY: " + modJson.category.name);
 
-
+$.postIcon.image = (!_.isNull(modJson.category.code))?'/images/'+modJson.category.code.slice(0,2)+".png":'/images/android-robot.jpg';
 
 $.date.text = moment(Alloy.Models.Post_template.get("referenceTime")).fromNow();
 

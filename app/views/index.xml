@@ -1,7 +1,14 @@
 <Alloy>
-	<Window class="container" backgroundColor="white" layout="vertical">
-        <TextField id="username"/>
-        <TextField id="password"/>
-        <Button id="btn_login" onClick="do_login" />
-    </Window>
+	<Window class="container" layout="vertical">
+		<ImageView id="bigLogo"/>
+		<TextField id="username"/>
+		<View class="subContainer">
+			<TextField id="password"/>
+			<Label id="btn_login" onClick="do_login" />
+		</View>
+		<View class="bottomContainer">
+			<Switch value="true" id="remember"/>
+			<Label id="forgotPassword"/>
+		</View>
+	</Window>
 </Alloy>

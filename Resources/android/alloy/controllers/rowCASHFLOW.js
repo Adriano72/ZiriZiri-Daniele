@@ -12,7 +12,7 @@ function Controller() {
         id: "rowCASHFLOW"
     });
     $.__views.rowCASHFLOW && $.addTopLevelView($.__views.rowCASHFLOW);
-    $.__views.__alloyId139 = Ti.UI.createView({
+    $.__views.__alloyId141 = Ti.UI.createView({
         left: 5,
         right: 5,
         top: 5,
@@ -24,9 +24,9 @@ function Controller() {
         height: 50,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId139"
+        id: "__alloyId141"
     });
-    $.__views.rowCASHFLOW.add($.__views.__alloyId139);
+    $.__views.rowCASHFLOW.add($.__views.__alloyId141);
     $.__views.cashFlowIcon = Ti.UI.createLabel({
         left: 5,
         width: 25,
@@ -34,21 +34,21 @@ function Controller() {
         backgroundImage: "/images/kernel-finance-on.png",
         id: "cashFlowIcon"
     });
-    $.__views.__alloyId139.add($.__views.cashFlowIcon);
-    $.__views.__alloyId140 = Ti.UI.createView({
+    $.__views.__alloyId141.add($.__views.cashFlowIcon);
+    $.__views.__alloyId142 = Ti.UI.createView({
         width: Ti.UI.SIZE,
         left: 10,
-        id: "__alloyId140"
+        id: "__alloyId142"
     });
-    $.__views.__alloyId139.add($.__views.__alloyId140);
-    $.__views.__alloyId141 = Ti.UI.createView({
+    $.__views.__alloyId141.add($.__views.__alloyId142);
+    $.__views.__alloyId143 = Ti.UI.createView({
         left: 2,
         width: "85%",
         height: Ti.UI.SIZE,
         layout: "horizontal",
-        id: "__alloyId141"
+        id: "__alloyId143"
     });
-    $.__views.__alloyId140.add($.__views.__alloyId141);
+    $.__views.__alloyId142.add($.__views.__alloyId143);
     $.__views.importo = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -62,7 +62,7 @@ function Controller() {
         left: 0,
         id: "importo"
     });
-    $.__views.__alloyId141.add($.__views.importo);
+    $.__views.__alloyId143.add($.__views.importo);
     $.__views.tipoMovimento = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -75,7 +75,7 @@ function Controller() {
         ellipsize: true,
         id: "tipoMovimento"
     });
-    $.__views.__alloyId141.add($.__views.tipoMovimento);
+    $.__views.__alloyId143.add($.__views.tipoMovimento);
     $.__views.modalitaPagamento = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -88,7 +88,7 @@ function Controller() {
         ellipsize: true,
         id: "modalitaPagamento"
     });
-    $.__views.__alloyId141.add($.__views.modalitaPagamento);
+    $.__views.__alloyId143.add($.__views.modalitaPagamento);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

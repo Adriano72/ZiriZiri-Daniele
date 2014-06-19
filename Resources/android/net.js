@@ -23,8 +23,8 @@ exports.getData = function(page, max, _callback) {
     session = Ti.App.Properties.getString("sessionId", 0);
     var today = moment().format("YYYY-MM-DD");
     today += "23:59";
-    Ti.API.info("################CALL:GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON&from=2014-01-01&to=" + today + pagination + "&cached=false");
-    xhr.open("GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON&from=2014-01-01&to=" + today + pagination + "&cached=true");
+    Ti.API.info("################CALL:GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON&from=2013-01-01&to=" + today + pagination + "&cached=false");
+    xhr.open("GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON&from=2013-01-01&to=" + today + pagination + "&cached=true");
     xhr.send();
 };
 

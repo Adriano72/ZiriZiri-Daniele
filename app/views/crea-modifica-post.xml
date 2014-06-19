@@ -41,7 +41,7 @@
 						</View>
 						<View class="post_icons_container">
 							<Label class="post_icon" id="tag_icon"/>
-							<Label class="btn_text" id="tags"/>
+							<Label class="btn_text" id="tags" text="tags"/>
 						</View>
 						<View class="post_icons_container">
 							<Label class="post_icon" id="stories_icon"/>

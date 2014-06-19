@@ -2,6 +2,8 @@
 
 var net = require('net');
 
+var rememberMe = false;
+
 Ti.API.info("PROP TIMELINE (Index): " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
 
 if (Ti.App.Properties.getBool('authenticated', false)) {

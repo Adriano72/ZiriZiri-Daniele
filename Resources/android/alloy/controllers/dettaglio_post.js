@@ -79,7 +79,6 @@ function Controller() {
     $.__views.postIcon = Ti.UI.createImageView({
         left: 0,
         top: 0,
-        image: "/images/android-robot.jpg",
         touchEnabled: false,
         width: 70,
         height: 70,
@@ -310,6 +309,8 @@ function Controller() {
     });
     $.__views.__alloyId122.add($.__views.aspectsDocumentWrapper);
     var __alloyId126 = function() {
+        $.postIcon.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["catImage"] : Alloy.Models.Post.get("catImage");
+        $.postIcon.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["catImage"] : Alloy.Models.Post.get("catImage");
         $.date.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["referenceTime"] : Alloy.Models.Post.get("referenceTime");
         $.date.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["referenceTime"] : Alloy.Models.Post.get("referenceTime");
         $.rating_1.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["rating_1"] : Alloy.Models.Post.get("rating_1");
@@ -350,6 +351,7 @@ function Controller() {
         silent: true
     });
     var rating = Alloy.Models.Post.get("rating");
+    Alloy.Models.Post.set("catImage", _.isNull(modJson.category.code) ? "/images/android-robot.jpg" : "/images/" + modJson.category.code.slice(0, 2) + ".png");
     Alloy.Models.Post.set("rating_1", rating > 0 ? "/images/star-small.png" : "");
     Alloy.Models.Post.set("rating_2", rating > 1 ? "/images/star-small.png" : "");
     Alloy.Models.Post.set("rating_3", rating > 2 ? "/images/star-small.png" : "");

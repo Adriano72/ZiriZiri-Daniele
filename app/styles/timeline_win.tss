@@ -76,7 +76,7 @@
 	//backgroundColor: "navy",
 	left: 0,
 	top: 0,
-	image: '/images/android-robot.jpg',
+	//image: '/images/android-robot.jpg',
 	touchEnabled: false,
 	width: 70,
 	height: 70,

@@ -15,7 +15,7 @@
 
 				<View id="topWrapper">
 
-					<ImageView id="postIcon"/>
+					<ImageView id="postIcon" image="{Post.catImage}"/>
 					<View id="innerWrapper">
 						<View id="date_rating">
 							<Label id = "date" text="{Post.referenceTime}"/>
