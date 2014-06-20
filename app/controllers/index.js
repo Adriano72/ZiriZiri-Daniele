@@ -12,30 +12,35 @@ if (Ti.App.Properties.getBool('authenticated', false)) {
 
 	if (_.isNull(Ti.App.Properties.getObject('timelineProp'))) {
 
-		net.getData(0,25,function(timeline_obj) {
+		net.getData(0, 25, function(timeline_obj) {
 			Ti.API.info("RETURN CODE: " + timeline_obj.type.code);
 			Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
 			Ti.API.info("PROP TIMELINE (Index): " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
-
+			Alloy.createController("timeline_win").getView();
 		});
-	};
-	Alloy.createController("timeline_win").getView();
-} else {
 
+	} else {
+		Alloy.createController("timeline_win").getView();
+	};
+
+} else {
+	Ti.App.Properties.setObject('timelineProp', null);
 	$.index.open();
 	//Alloy.createController("timeline_win").getView().open(); //solo per debug
 
 };
 
-function manageRememberMe(e){
-	Ti.API.info("SWITCH STATE: "+e.value);
+function manageRememberMe(e) {
+
+	rememberMe = e.value;
+
 };
 
 function do_login(e) {
 
 	var user_name = $.username.value || 'none';
 	var user_password = $.password.value || 'none';
-	
+
 	var dataJson = {};
 
 	Ti.API.info("Username: " + user_name);
@@ -51,20 +56,27 @@ function do_login(e) {
 
 		if (JSON.stringify(json.type.code) == "\"SUCCESS\"") {
 
-			Ti.App.Properties.setBool('authenticated', true);
+			if (rememberMe)
+				Ti.App.Properties.setBool('authenticated', true);
 			Ti.App.Properties.setString('sessionId', json.data.sessionId);
 			Ti.API.info("SESSIONE: " + Ti.App.Properties.getString('sessionId', 0));
 			Alloy.Globals.loading.show('Sincronizzazione...', false);
 
 			if (_.isNull(Ti.App.Properties.getObject('timelineProp'))) {
-				
-				net.getData(0,25,function(timeline_obj) {
-					
+
+				$.index.close();
+
+				net.getData(0, 25, function(timeline_obj) {
+
 					Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
 					Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
 					Alloy.createController("timeline_win").getView();
+
 					//Alloy.createController("timeline_win").getView();
 				});
+			} else {
+				$.index.close();
+				Alloy.createController("timeline_win").getView();
 			};
 
 			//$.index.close();
@@ -77,7 +89,7 @@ function do_login(e) {
 	};
 
 	xhr.onerror = function() {
-		Ti.API.error("ERRORE DO LOGIN: "+this.status + ' - ' + this.statusText);
+		Ti.API.error("ERRORE DO LOGIN: " + this.status + ' - ' + this.statusText);
 	};
 
 	//xhr.open('POST', 'https://demo.ziriziri.com/cxf/session/session/login/' + user_name + '?_type=JSON');
@@ -85,10 +97,10 @@ function do_login(e) {
 
 	xhr.setRequestHeader('Accept', 'application/json');
 	xhr.setRequestHeader('Content-Type', 'application/json');
-	
+
 	dataJson.data = user_password;
-	
-	Ti.API.info("DATA JSON: "+JSON.stringify(dataJson));
+
+	Ti.API.info("DATA JSON: " + JSON.stringify(dataJson));
 
 	xhr.send(JSON.stringify(dataJson));
 

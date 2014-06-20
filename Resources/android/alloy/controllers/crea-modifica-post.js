@@ -211,6 +211,7 @@ function Controller() {
     $.__views.win = Ti.UI.createWindow({
         backgroundColor: "#F9F9F9",
         orientationModes: [ Ti.UI.PORTRAIT ],
+        exitOnClose: true,
         id: "win",
         title: "Crea/Modifica"
     });

@@ -1,7 +1,8 @@
 
 ".container": {
   	backgroundColor: '#F9F9F9',
-  	orientationModes: [Ti.UI.PORTRAIT]
+  	orientationModes: [Ti.UI.PORTRAIT],
+  	exitOnClose: true
 	//layout: "vertical",
 }
 

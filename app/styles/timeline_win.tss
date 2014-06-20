@@ -2,8 +2,7 @@
 	//backgroundColor: '#d8d8d8',
 	backgroundColor: '#F9F9F9',
 	//layout: "vertical",
-	orientationModes: [Ti.UI.PORTRAIT],
-	exitOnClose: true
+	orientationModes: [Ti.UI.PORTRAIT]
 }
 
 "Label": {
@@ -27,6 +26,12 @@
 "#mn_search": {
 	icon: "/images/top-search.png",
 	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+}
+
+"#mn_logout": {
+	
+	//icon: "/images/top-search.png",
+	showAsAction: Ti.Android.SHOW_AS_ACTION_NEVER
 }
 
 

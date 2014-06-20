@@ -1,6 +1,6 @@
 function Controller() {
     function manageRememberMe(e) {
-        Ti.API.info("SWITCH STATE: " + e.value);
+        rememberMe = e.value;
     }
     function do_login() {
         var user_name = $.username.value || "none";
@@ -13,15 +13,21 @@ function Controller() {
             var json = JSON.parse(this.responseText);
             Ti.API.info("********** FRM XHR: " + JSON.stringify(json));
             if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
-                Ti.App.Properties.setBool("authenticated", true);
+                rememberMe && Ti.App.Properties.setBool("authenticated", true);
                 Ti.App.Properties.setString("sessionId", json.data.sessionId);
                 Ti.API.info("SESSIONE: " + Ti.App.Properties.getString("sessionId", 0));
                 Alloy.Globals.loading.show("Sincronizzazione...", false);
-                _.isNull(Ti.App.Properties.getObject("timelineProp")) && net.getData(0, 25, function(timeline_obj) {
-                    Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
-                    Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
+                if (_.isNull(Ti.App.Properties.getObject("timelineProp"))) {
+                    $.index.close();
+                    net.getData(0, 25, function(timeline_obj) {
+                        Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
+                        Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
+                        Alloy.createController("timeline_win").getView();
+                    });
+                } else {
+                    $.index.close();
                     Alloy.createController("timeline_win").getView();
-                });
+                }
             } else alert("Username o password errati");
         };
         xhr.onerror = function() {
@@ -46,7 +52,6 @@ function Controller() {
         backgroundColor: "#8BC7F2",
         layout: "vertical",
         navBarHidden: true,
-        exitOnClose: true,
         orientationModes: [ Ti.UI.PORTRAIT ],
         id: "index"
     });
@@ -136,7 +141,7 @@ function Controller() {
         title: "Remember me",
         width: Ti.UI.SIZE,
         style: Titanium.UI.Android.SWITCH_STYLE_CHECKBOX,
-        value: true,
+        value: false,
         id: "remember"
     });
     $.__views.__alloyId130.add($.__views.remember);
@@ -155,16 +160,20 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var net = require("net");
+    var rememberMe = false;
     Ti.API.info("PROP TIMELINE (Index): " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
     if (Ti.App.Properties.getBool("authenticated", false)) {
         Ti.API.info("Already Authenticated!");
-        _.isNull(Ti.App.Properties.getObject("timelineProp")) && net.getData(0, 25, function(timeline_obj) {
+        _.isNull(Ti.App.Properties.getObject("timelineProp")) ? net.getData(0, 25, function(timeline_obj) {
             Ti.API.info("RETURN CODE: " + timeline_obj.type.code);
             Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
             Ti.API.info("PROP TIMELINE (Index): " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
-        });
-        Alloy.createController("timeline_win").getView();
-    } else $.index.open();
+            Alloy.createController("timeline_win").getView();
+        }) : Alloy.createController("timeline_win").getView();
+    } else {
+        Ti.App.Properties.setObject("timelineProp", null);
+        $.index.open();
+    }
     __defers["$.__views.btn_login!click!do_login"] && $.__views.btn_login.addEventListener("click", do_login);
     __defers["$.__views.remember!change!manageRememberMe"] && $.__views.remember.addEventListener("change", manageRememberMe);
     _.extend($, exports);

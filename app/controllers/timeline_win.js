@@ -1,6 +1,6 @@
 var args = arguments[0] || {};
 
-$.win.open();
+//$.win.open();
 
 var net = require('net');
 
@@ -31,6 +31,20 @@ $.is.init($.timelineTable);
  });
  */
 
+function manageClose() {
+	Ti.API.info("Ciao");
+	var activity = Titanium.Android.currentActivity;
+	activity.finish();
+
+};
+
+function f_logout() {
+	Ti.App.Properties.setObject('timelineProp', null);
+	Ti.App.Properties.setBool('authenticated', false);
+	$.win.close();
+	Alloy.createController("index").getView().open();
+};
+
 function openEvent() {
 	//Ti.API.info("WINDOW OPEN");
 	theActionBar = $.win.activity.actionBar;
@@ -44,9 +58,9 @@ function openEvent() {
 		//theActionBar.setTitle(self.title);
 
 	};
-	
-	setTimeout(function(){
-		
+
+	setTimeout(function() {
+
 		net.getData(0, 200, function(timeline_obj) {
 
 			Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
@@ -57,11 +71,8 @@ function openEvent() {
 			syncTimeline();
 
 		});
-		
+
 	}, 5000);
-	
-	
-	
 
 };
 
@@ -150,12 +161,12 @@ function transformData(model) {
 	var attrs = model.toJSON();
 	//attrs.imageUrl = '/' + attrs.direction + '.png';
 	/*
-	if(!_.isNull(attrs.category.code)){
-		Ti.API.info("****** Immagine: "+'/images/'+attrs.category.code.slice(0,2)+".png");
-	};
-	Ti.API.info("CAT LETTA*****: "+JSON.stringify(attrs.category));
-	*/
-	attrs.catImage = (!_.isNull(attrs.category.code))?'/images/'+attrs.category.code.slice(0,2)+".png":'/images/android-robot.jpg';
+	 if(!_.isNull(attrs.category.code)){
+	 Ti.API.info("****** Immagine: "+'/images/'+attrs.category.code.slice(0,2)+".png");
+	 };
+	 Ti.API.info("CAT LETTA*****: "+JSON.stringify(attrs.category));
+	 */
+	attrs.catImage = (!_.isNull(attrs.category.code)) ? '/images/' + attrs.category.code.slice(0, 2) + ".png" : '/images/android-robot.jpg';
 	attrs.postDate = moment(attrs.referenceTime).fromNow();
 	attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
 
@@ -208,7 +219,7 @@ net.getCategories(function(categoriesData) {
 
 	Ti.App.Properties.setObject("elencoCategorie", objCategorie);
 
-	Ti.API.info("OBJ CATEGORIE: "+ JSON.stringify(Ti.App.Properties.getObject("elencoCategorie")));
+	Ti.API.info("OBJ CATEGORIE: " + JSON.stringify(Ti.App.Properties.getObject("elencoCategorie")));
 
 });
 
@@ -222,7 +233,7 @@ net.getPostTemplate(0, 1, function(p_postTemplate) {
 	var post_only_template = _.omit(templateJson, 'modules');
 
 	Alloy.Models.Post_template.set(post_only_template);
-	
+
 	// ***** EXTRACT EVENTS TEMPLATE *****************
 	var templateEvents = _.filter(templateJson.modules, function(value) {
 		return value.kind.code == "EVENTDATATYPE_CODE";
@@ -238,7 +249,7 @@ net.getPostTemplate(0, 1, function(p_postTemplate) {
 
 	Alloy.Models.Cashflow_template.set(templateCashflow[0]);
 	Alloy.Models.Cashflow_template.unset("id");
-	
+
 	// ***** EXTRACT DOCUMENT TEMPLATE *****************
 	var templateDocument = _.filter(templateJson.modules, function(value) {
 		return value.kind.code == "FILEDOCUMENTDATATYPE_CODE";
@@ -246,8 +257,6 @@ net.getPostTemplate(0, 1, function(p_postTemplate) {
 
 	Alloy.Models.Document_template.set(templateDocument[0]);
 	Alloy.Models.Document_template.unset("id");
-	
-	
 
 	Ti.API.info("DOCUMENT  TEMPLATE: " + JSON.stringify(Alloy.Models.Document_template));
 
@@ -379,7 +388,7 @@ function refreshTable() {
 
 		Alloy.Globals.loading.show('Sincronizzazione...', false);
 
-		net.getData(0, 100, function(timeline_obj) {
+		net.getData(0, 200, function(timeline_obj) {
 
 			Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
 			Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
@@ -499,8 +508,8 @@ function createNewPost() {
 	}).getView();
 };
 
-//$.win.open();
+$.win.open();
 
 $.win.addEventListener("close", function() {
-	$.win.destroy();
+	$.destroy();
 });
