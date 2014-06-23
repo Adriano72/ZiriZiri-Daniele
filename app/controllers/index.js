@@ -30,6 +30,14 @@ if (Ti.App.Properties.getBool('authenticated', false)) {
 
 };
 
+function manageClose() {
+	
+	var activity = Titanium.Android.currentActivity;
+	activity.finish();
+
+};
+
+
 function manageRememberMe(e) {
 
 	rememberMe = e.value;

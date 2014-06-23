@@ -32,7 +32,7 @@ $.is.init($.timelineTable);
  */
 
 function manageClose() {
-	Ti.API.info("Ciao");
+
 	var activity = Titanium.Android.currentActivity;
 	activity.finish();
 
@@ -61,7 +61,7 @@ function openEvent() {
 
 	setTimeout(function() {
 
-		net.getData(0, 200, function(timeline_obj) {
+		net.getData(0, 50, function(timeline_obj) {
 
 			Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
 			Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
@@ -166,7 +166,7 @@ function transformData(model) {
 	 };
 	 Ti.API.info("CAT LETTA*****: "+JSON.stringify(attrs.category));
 	 */
-	attrs.catImage = (!_.isNull(attrs.category.code)) ? '/images/' + attrs.category.code.slice(0, 2) + ".png" : '/images/android-robot.jpg';
+	attrs.catImage = (!_.isNull(attrs.category)) ? '/images/' + attrs.category.code.slice(0, 2) + ".png" : '/images/android-robot.jpg';
 	attrs.postDate = moment(attrs.referenceTime).fromNow();
 	attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
 

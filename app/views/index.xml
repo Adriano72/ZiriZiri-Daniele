@@ -1,5 +1,5 @@
 <Alloy>
-	<Window class="container" layout="vertical">
+	<Window class="container" layout="vertical" onAndroid:back="manageClose">
 		<ImageView id="bigLogo"/>
 		<TextField id="username"/>
 		<View class="subContainer">

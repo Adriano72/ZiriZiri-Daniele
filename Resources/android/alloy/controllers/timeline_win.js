@@ -424,7 +424,6 @@ function Controller() {
         $.__views.timelineTable.setData(rows);
     }
     function manageClose() {
-        Ti.API.info("Ciao");
         var activity = Titanium.Android.currentActivity;
         activity.finish();
     }
@@ -443,7 +442,7 @@ function Controller() {
             theActionBar.setIcon("images/logo-test.png");
         }
         setTimeout(function() {
-            net.getData(0, 200, function(timeline_obj) {
+            net.getData(0, 50, function(timeline_obj) {
                 Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
                 Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
                     silent: true
@@ -505,7 +504,7 @@ function Controller() {
     }
     function transformData(model) {
         var attrs = model.toJSON();
-        attrs.catImage = _.isNull(attrs.category.code) ? "/images/android-robot.jpg" : "/images/" + attrs.category.code.slice(0, 2) + ".png";
+        attrs.catImage = _.isNull(attrs.category) ? "/images/android-robot.jpg" : "/images/" + attrs.category.code.slice(0, 2) + ".png";
         attrs.postDate = moment(attrs.referenceTime).fromNow();
         attrs.categoria = _.isNull(attrs.category) ? "" : attrs.category.name;
         attrs.iconEvent = checkAspects(attrs.aspects, "EVENTDATATYPE_CODE");

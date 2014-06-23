@@ -1,4 +1,8 @@
 function Controller() {
+    function manageClose() {
+        var activity = Titanium.Android.currentActivity;
+        activity.finish();
+    }
     function manageRememberMe(e) {
         rememberMe = e.value;
     }
@@ -56,6 +60,7 @@ function Controller() {
         id: "index"
     });
     $.__views.index && $.addTopLevelView($.__views.index);
+    manageClose ? $.__views.index.addEventListener("android:back", manageClose) : __defers["$.__views.index!android:back!manageClose"] = true;
     $.__views.bigLogo = Ti.UI.createImageView({
         top: 40,
         image: "/images/bigLogo.png",
@@ -174,6 +179,7 @@ function Controller() {
         Ti.App.Properties.setObject("timelineProp", null);
         $.index.open();
     }
+    __defers["$.__views.index!android:back!manageClose"] && $.__views.index.addEventListener("android:back", manageClose);
     __defers["$.__views.btn_login!click!do_login"] && $.__views.btn_login.addEventListener("click", do_login);
     __defers["$.__views.remember!change!manageRememberMe"] && $.__views.remember.addEventListener("change", manageRememberMe);
     _.extend($, exports);
