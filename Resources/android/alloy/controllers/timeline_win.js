@@ -423,14 +423,9 @@ function Controller() {
         }
         $.__views.timelineTable.setData(rows);
     }
-    function manageClose() {
-        var activity = Titanium.Android.currentActivity;
-        activity.finish();
-    }
     function f_logout() {
         Ti.App.Properties.setObject("timelineProp", null);
         Ti.App.Properties.setBool("authenticated", false);
-        $.win.close();
         Alloy.createController("index").getView().open();
     }
     function openEvent() {
@@ -441,16 +436,6 @@ function Controller() {
             theActionBar.displayHomeAsUp = false;
             theActionBar.setIcon("images/logo-test.png");
         }
-        setTimeout(function() {
-            net.getData(0, 50, function(timeline_obj) {
-                Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
-                Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
-                    silent: true
-                });
-                Ti.API.info("Sync Executed by SILENT SERVICE");
-                syncTimeline();
-            });
-        }, 5e3);
     }
     function closeSpinner() {
         Alloy.Globals.loading.hide();
@@ -504,7 +489,7 @@ function Controller() {
     }
     function transformData(model) {
         var attrs = model.toJSON();
-        attrs.catImage = _.isNull(attrs.category) ? "/images/android-robot.jpg" : "/images/" + attrs.category.code.slice(0, 2) + ".png";
+        attrs.catImage = _.isNull(attrs.category) || _.isNull(attrs.category.code) ? "/images/android-robot.jpg" : "/images/" + attrs.category.code.slice(0, 2) + ".png";
         attrs.postDate = moment(attrs.referenceTime).fromNow();
         attrs.categoria = _.isNull(attrs.category) ? "" : attrs.category.name;
         attrs.iconEvent = checkAspects(attrs.aspects, "EVENTDATATYPE_CODE");
@@ -569,7 +554,7 @@ function Controller() {
     }
     function createNewPost() {
         Alloy.createController("newPost", function() {
-            refreshTable();
+            Alloy.Globals.loading.hide();
         }).getView();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -582,13 +567,13 @@ function Controller() {
     var __defers = {};
     $.__views.win = Ti.UI.createWindow({
         backgroundColor: "#F9F9F9",
+        exitOnClose: true,
         orientationModes: [ Ti.UI.PORTRAIT ],
         id: "win",
         title: "Diario"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
-    manageClose ? $.__views.win.addEventListener("android:back", manageClose) : __defers["$.__views.win!android:back!manageClose"] = true;
     $.__views.win.addEventListener("open", __alloyId207);
     $.__views.is = Alloy.createWidget("nl.fokkezb.infiniteScroll", "widget", {
         id: "is",
@@ -771,12 +756,6 @@ function Controller() {
         Alloy.Models.Document_template.set(templateDocument[0]);
         Alloy.Models.Document_template.unset("id");
         Ti.API.info("DOCUMENT  TEMPLATE: " + JSON.stringify(Alloy.Models.Document_template));
-        var arrayTemplateIds = [];
-        _.forEach(p_postTemplate.data[0].modules, function(value) {
-            arrayTemplateIds.push(value.id);
-        });
-        Ti.App.Properties.setList("postTemplateIds", arrayTemplateIds);
-        Ti.API.info("ID TEMPLATE ASPECT: " + Ti.App.Properties.getList("postTemplateIds"));
     });
     net.getTipoMovimento(function(p_tipoMovimento) {
         var objTipoMov = [];
@@ -830,11 +809,7 @@ function Controller() {
         Ti.App.Properties.setObject("elencoPagamIncasso", objPagamIncasso);
     });
     $.win.open();
-    $.win.addEventListener("close", function() {
-        $.destroy();
-    });
     __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
-    __defers["$.__views.win!android:back!manageClose"] && $.__views.win.addEventListener("android:back", manageClose);
     __defers["$.__views.mn_logout!click!f_logout"] && $.__views.mn_logout.addEventListener("click", f_logout);
     __defers["__alloyId210!click!mostraDettaglioEvento"] && __alloyId210.addEventListener("click", mostraDettaglioEvento);
     __defers["__alloyId212!swipe!slideRow"] && __alloyId212.addEventListener("swipe", slideRow);

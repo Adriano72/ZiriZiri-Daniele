@@ -1,8 +1,4 @@
 function Controller() {
-    function manageClose() {
-        var activity = Titanium.Android.currentActivity;
-        activity.finish();
-    }
     function manageRememberMe(e) {
         rememberMe = e.value;
     }
@@ -21,17 +17,11 @@ function Controller() {
                 Ti.App.Properties.setString("sessionId", json.data.sessionId);
                 Ti.API.info("SESSIONE: " + Ti.App.Properties.getString("sessionId", 0));
                 Alloy.Globals.loading.show("Sincronizzazione...", false);
-                if (_.isNull(Ti.App.Properties.getObject("timelineProp"))) {
-                    $.index.close();
-                    net.getData(0, 25, function(timeline_obj) {
-                        Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
-                        Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
-                        Alloy.createController("timeline_win").getView();
-                    });
-                } else {
-                    $.index.close();
+                _.isNull(Ti.App.Properties.getObject("timelineProp")) ? net.getData(0, 25, function(timeline_obj) {
+                    Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
+                    Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
                     Alloy.createController("timeline_win").getView();
-                }
+                }) : Alloy.createController("timeline_win").getView();
             } else alert("Username o password errati");
         };
         xhr.onerror = function() {
@@ -55,12 +45,12 @@ function Controller() {
     $.__views.index = Ti.UI.createWindow({
         backgroundColor: "#8BC7F2",
         layout: "vertical",
+        exitOnClose: true,
         navBarHidden: true,
         orientationModes: [ Ti.UI.PORTRAIT ],
         id: "index"
     });
     $.__views.index && $.addTopLevelView($.__views.index);
-    manageClose ? $.__views.index.addEventListener("android:back", manageClose) : __defers["$.__views.index!android:back!manageClose"] = true;
     $.__views.bigLogo = Ti.UI.createImageView({
         top: 40,
         image: "/images/bigLogo.png",
@@ -179,7 +169,6 @@ function Controller() {
         Ti.App.Properties.setObject("timelineProp", null);
         $.index.open();
     }
-    __defers["$.__views.index!android:back!manageClose"] && $.__views.index.addEventListener("android:back", manageClose);
     __defers["$.__views.btn_login!click!do_login"] && $.__views.btn_login.addEventListener("click", do_login);
     __defers["$.__views.remember!change!manageRememberMe"] && $.__views.remember.addEventListener("change", manageRememberMe);
     _.extend($, exports);

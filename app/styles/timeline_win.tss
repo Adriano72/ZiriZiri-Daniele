@@ -2,6 +2,7 @@
 	//backgroundColor: '#d8d8d8',
 	backgroundColor: '#F9F9F9',
 	//layout: "vertical",
+	exitOnClose: true,
 	orientationModes: [Ti.UI.PORTRAIT]
 }
 

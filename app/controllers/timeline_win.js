@@ -30,18 +30,19 @@ $.is.init($.timelineTable);
 
  });
  */
-
+/*
 function manageClose() {
 
 	var activity = Titanium.Android.currentActivity;
 	activity.finish();
 
 };
+*/
 
 function f_logout() {
 	Ti.App.Properties.setObject('timelineProp', null);
 	Ti.App.Properties.setBool('authenticated', false);
-	$.win.close();
+	//$.win.close();
 	Alloy.createController("index").getView().open();
 };
 
@@ -58,6 +59,8 @@ function openEvent() {
 		//theActionBar.setTitle(self.title);
 
 	};
+	
+	/*
 
 	setTimeout(function() {
 
@@ -73,6 +76,7 @@ function openEvent() {
 		});
 
 	}, 5000);
+	*/
 
 };
 
@@ -166,7 +170,7 @@ function transformData(model) {
 	 };
 	 Ti.API.info("CAT LETTA*****: "+JSON.stringify(attrs.category));
 	 */
-	attrs.catImage = (!_.isNull(attrs.category)) ? '/images/' + attrs.category.code.slice(0, 2) + ".png" : '/images/android-robot.jpg';
+	attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg':'/images/' + attrs.category.code.slice(0, 2) + ".png";
 	attrs.postDate = moment(attrs.referenceTime).fromNow();
 	attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
 
@@ -259,7 +263,7 @@ net.getPostTemplate(0, 1, function(p_postTemplate) {
 	Alloy.Models.Document_template.unset("id");
 
 	Ti.API.info("DOCUMENT  TEMPLATE: " + JSON.stringify(Alloy.Models.Document_template));
-
+	/*
 	//Ti.API.info("POST TEMPLATE MODEL: " + JSON.stringify(Alloy.Models.Post_template));
 
 	var arrayTemplateIds = [];
@@ -272,6 +276,7 @@ net.getPostTemplate(0, 1, function(p_postTemplate) {
 	Ti.App.Properties.setList("postTemplateIds", arrayTemplateIds);
 
 	Ti.API.info("ID TEMPLATE ASPECT: " + Ti.App.Properties.getList("postTemplateIds"));
+	*/
 
 });
 
@@ -504,12 +509,14 @@ function slideRow(e) {
 
 function createNewPost() {
 	Alloy.createController("newPost", function() {
-		refreshTable();
+		Alloy.Globals.loading.hide();
 	}).getView();
 };
 
 $.win.open();
 
+/*
 $.win.addEventListener("close", function() {
 	$.destroy();
 });
+*/

@@ -59,14 +59,13 @@ function Controller() {
                     Ti.API.info("OGG CON ASPETTI DA AGGIUNGERE TIMELINE: " + JSON.stringify(postToAddToTimeline));
                     Alloy.Collections.Timeline.add(postToAddToTimeline);
                     $.win.close();
-                    args.close();
+                    args();
                     Alloy.Globals.postSaved = true;
                 });
             }); else {
                 Alloy.Collections.Timeline.add(postToAddToTimeline);
                 $.win.close();
-                args.close();
-                Alloy.Globals.postSaved = true;
+                args();
             }
         });
     }
@@ -211,7 +210,6 @@ function Controller() {
     $.__views.win = Ti.UI.createWindow({
         backgroundColor: "#F9F9F9",
         orientationModes: [ Ti.UI.PORTRAIT ],
-        exitOnClose: true,
         id: "win",
         title: "Crea/Modifica"
     });

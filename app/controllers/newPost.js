@@ -94,7 +94,10 @@ function savePost() {
 		Alloy.Models.Post_template.set("description", $.descrizione.value);
 		Alloy.Models.Post_template.set("referenceTime", timeNow);
 
-		Alloy.createController("crea-modifica-post", $.win).getView();
+		Alloy.createController("crea-modifica-post", function(){
+			$.win.close();
+			args();
+		}).getView();
 		/*
 		 var postObj = {
 

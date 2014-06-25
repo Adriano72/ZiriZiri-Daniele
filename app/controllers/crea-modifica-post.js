@@ -87,18 +87,17 @@ function submitPost() {
 					Ti.API.info("OGG CON ASPETTI DA AGGIUNGERE TIMELINE: "+JSON.stringify(postToAddToTimeline));
 					Alloy.Collections.Timeline.add(postToAddToTimeline);
 					$.win.close();
-					args.close();
+					args();
 					Alloy.Globals.postSaved = true;
 					
 					
 				});
 			});
 		} else {
-			
 			Alloy.Collections.Timeline.add(postToAddToTimeline);
-			$.win.close();
-			args.close();
-			Alloy.Globals.postSaved = true;
+			$.win.close();			
+			args();
+			
 			//alert("Post salvato");
 			/*
 			setTimeout(function() {

@@ -58,7 +58,10 @@ function Controller() {
             });
             Alloy.Models.Post_template.set("description", $.descrizione.value);
             Alloy.Models.Post_template.set("referenceTime", timeNow);
-            Alloy.createController("crea-modifica-post", $.win).getView();
+            Alloy.createController("crea-modifica-post", function() {
+                $.win.close();
+                args();
+            }).getView();
         } else alert("Il campo Titolo e il campo Categoria sono obbligatori!");
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));

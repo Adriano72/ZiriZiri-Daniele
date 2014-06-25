@@ -30,12 +30,14 @@ if (Ti.App.Properties.getBool('authenticated', false)) {
 
 };
 
+/*
 function manageClose() {
 	
 	var activity = Titanium.Android.currentActivity;
 	activity.finish();
 
 };
+*/
 
 
 function manageRememberMe(e) {
@@ -72,7 +74,7 @@ function do_login(e) {
 
 			if (_.isNull(Ti.App.Properties.getObject('timelineProp'))) {
 
-				$.index.close();
+				//$.index.close();
 
 				net.getData(0, 25, function(timeline_obj) {
 
@@ -83,7 +85,7 @@ function do_login(e) {
 					//Alloy.createController("timeline_win").getView();
 				});
 			} else {
-				$.index.close();
+				//$.index.close();
 				Alloy.createController("timeline_win").getView();
 			};
 
