@@ -36,7 +36,7 @@ exports.getPost = function(postId, _callback) {
     xhr.onerror = function(e) {
         alert("Error gettin Timeline: " + JSON.stringify(e));
     };
-    xhr.open("GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "/" + postId + "?_type=JSON");
+    xhr.open("GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "/" + postId + "?_type=JSON" + "&cached=true");
     xhr.send();
 };
 
@@ -50,7 +50,7 @@ exports.getPostTemplate = function(page, max, _callback) {
     xhr.onerror = function(e) {
         alert("Error getting Template " + JSON.stringify(e));
     };
-    xhr.open("GET", Alloy.Globals.baseUrl + "/actions/actions/templates/" + session + "?_type=JSON" + pagination);
+    xhr.open("GET", Alloy.Globals.baseUrl + "/actions/actions/templates/" + session + "?_type=JSON" + pagination + "&cached=true");
     xhr.send();
 };
 
@@ -62,7 +62,7 @@ exports.getTipoMovimento = function(_callback) {
     xhr.onerror = function(e) {
         alert("Error getting Tipo Movimento " + JSON.stringify(e));
     };
-    xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/tipomovimento/" + session + "?_type=JSON");
+    xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/tipomovimento/" + session + "?_type=JSON" + "&cached=true");
     xhr.send();
 };
 
@@ -74,7 +74,7 @@ exports.getPagamentoIncasso = function(_callback) {
     xhr.onerror = function(e) {
         alert("Error getting Pagamento Incasso: " + JSON.stringify(e));
     };
-    xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/aliasstrumentopagamentoincasso/" + session + "?_type=JSON");
+    xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/aliasstrumentopagamentoincasso/" + session + "?_type=JSON" + "&cached=true");
     xhr.send();
 };
 
@@ -86,7 +86,7 @@ exports.getVariabilita = function(_callback) {
     xhr.onerror = function(e) {
         alert("Error getting Variabilità: " + JSON.stringify(e));
     };
-    xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/tipovariabilita/" + session + "?_type=JSON");
+    xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/tipovariabilita/" + session + "?_type=JSON" + "&cached=true");
     xhr.send();
 };
 
@@ -98,7 +98,7 @@ exports.getStatoMovimento = function(_callback) {
     xhr.onerror = function(e) {
         alert("Error getting Stato Movimento: " + JSON.stringify(e));
     };
-    xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/statomovimento/" + session + "?_type=JSON");
+    xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/statomovimento/" + session + "?_type=JSON" + "&cached=true");
     xhr.send();
 };
 
@@ -111,7 +111,7 @@ exports.getCategories = function(_callback) {
     xhr.onerror = function(e) {
         alert("Error getting Categories " + JSON.stringify(e));
     };
-    xhr.open("GET", Alloy.Globals.baseUrl + "/categories/categories/getLeafs/" + session + "?_type=JSON");
+    xhr.open("GET", Alloy.Globals.baseUrl + "/categories/categories/getLeafs/" + session + "?_type=JSON" + "&cached=true");
     xhr.send();
 };
 

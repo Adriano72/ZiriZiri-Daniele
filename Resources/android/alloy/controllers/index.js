@@ -13,6 +13,7 @@ function Controller() {
             var json = JSON.parse(this.responseText);
             Ti.API.info("********** FRM XHR: " + JSON.stringify(json));
             if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
+                loadTabData.loadTabData();
                 rememberMe && Ti.App.Properties.setBool("authenticated", true);
                 Ti.App.Properties.setString("sessionId", json.data.sessionId);
                 Ti.API.info("SESSIONE: " + Ti.App.Properties.getString("sessionId", 0));
@@ -155,10 +156,12 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var net = require("net");
+    var loadTabData = require("loadTabulatedData");
     var rememberMe = false;
     Ti.API.info("PROP TIMELINE (Index): " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
     if (Ti.App.Properties.getBool("authenticated", false)) {
         Ti.API.info("Already Authenticated!");
+        loadTabData.loadTabData();
         _.isNull(Ti.App.Properties.getObject("timelineProp")) ? net.getData(0, 25, function(timeline_obj) {
             Ti.API.info("RETURN CODE: " + timeline_obj.type.code);
             Ti.App.Properties.setObject("timelineProp", timeline_obj.data);

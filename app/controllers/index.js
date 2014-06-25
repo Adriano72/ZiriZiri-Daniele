@@ -2,6 +2,8 @@
 
 var net = require('net');
 
+var loadTabData = require("loadTabulatedData");
+
 var rememberMe = false;
 
 Ti.API.info("PROP TIMELINE (Index): " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
@@ -9,6 +11,8 @@ Ti.API.info("PROP TIMELINE (Index): " + JSON.stringify(Ti.App.Properties.getObje
 if (Ti.App.Properties.getBool('authenticated', false)) {
 	//$.index.open();
 	Ti.API.info("Already Authenticated!");
+	
+	loadTabData.loadTabData();
 
 	if (_.isNull(Ti.App.Properties.getObject('timelineProp'))) {
 
@@ -20,6 +24,7 @@ if (Ti.App.Properties.getBool('authenticated', false)) {
 		});
 
 	} else {
+		
 		Alloy.createController("timeline_win").getView();
 	};
 
@@ -65,7 +70,7 @@ function do_login(e) {
 		Ti.API.info("********** FRM XHR: " + JSON.stringify(json));
 
 		if (JSON.stringify(json.type.code) == "\"SUCCESS\"") {
-
+			loadTabData.loadTabData();
 			if (rememberMe)
 				Ti.App.Properties.setBool('authenticated', true);
 			Ti.App.Properties.setString('sessionId', json.data.sessionId);
