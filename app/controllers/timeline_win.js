@@ -4,10 +4,11 @@ var args = arguments[0] || {};
 
 var net = require('net');
 
-
 var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
 moment.lang('it');
+
+var presentPage = 0;
 
 // to keep track of content size on iOS
 var startIndex = 0;
@@ -39,7 +40,6 @@ function manageClose() {
 
 };
 
-
 function f_logout() {
 	Ti.App.Properties.setObject('timelineProp', null);
 	Ti.App.Properties.setBool('authenticated', false);
@@ -60,24 +60,24 @@ function openEvent() {
 		//theActionBar.setTitle(self.title);
 
 	};
-	
+
 	/*
 
-	setTimeout(function() {
+	 setTimeout(function() {
 
-		net.getData(0, 50, function(timeline_obj) {
+	 net.getData(0, 50, function(timeline_obj) {
 
-			Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
-			Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
-				silent : true
-			});
-			Ti.API.info("Sync Executed by SILENT SERVICE");
-			syncTimeline();
+	 Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
+	 Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
+	 silent : true
+	 });
+	 Ti.API.info("Sync Executed by SILENT SERVICE");
+	 syncTimeline();
 
-		});
+	 });
 
-	}, 5000);
-	*/
+	 }, 5000);
+	 */
 
 };
 
@@ -171,7 +171,7 @@ function transformData(model) {
 	 };
 	 Ti.API.info("CAT LETTA*****: "+JSON.stringify(attrs.category));
 	 */
-	attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg':'/images/' + attrs.category.code.slice(0, 2) + ".png";
+	attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/' + attrs.category.code.slice(0, 2) + ".png";
 	attrs.postDate = moment(attrs.referenceTime).fromNow();
 	attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
 
@@ -204,7 +204,6 @@ function transformData(model) {
 
 //subsetEvents.fetch({ query: 'select * from ' + table + ' where alloy_id = ' + 1});
 
-
 //var extentedDate = require('extendedDate');
 //var encoder = require('encoder');
 
@@ -225,7 +224,7 @@ function refreshTable() {
 
 		Alloy.Globals.loading.show('Sincronizzazione...', false);
 
-		net.getData(0, 200, function(timeline_obj) {
+		net.getData(0, 25, function(timeline_obj) {
 
 			Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
 			Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
@@ -256,24 +255,46 @@ function loadMoreRows(e) {
 
 	var timelineDataObj = Ti.App.Properties.getObject('timelineProp');
 
-	Ti.API.info("OGGETTO PROPERTY: " + JSON.stringify(timelineDataObj));
+	//Ti.API.info("OGGETTO PROPERTY: " + JSON.stringify(timelineDataObj));
 
 	//Ti.API.info("COLLECTION LENGTH PRIMA: " + Alloy.Collections.Timeline.length);
 
-	var begin = Alloy.Collections.Timeline.length;
+	if (Alloy.Collections.Timeline.length + 10 >= timelineDataObj.length) {
+		
+		presentPage += 1;
 
-	var end = Alloy.Collections.Timeline.length + 10;
+		net.getData(presentPage, 25, function(timeline_obj) {
+			
+			Ti.App.Properties.setObject('timelineProp', timelineDataObj.push(timeline_obj.data));
 
-	var slice = timelineDataObj.slice(begin, end);
+			//Ti.App.Properties.getObject('timelineProp').push(timeline_obj.data);
 
-	Alloy.Collections.Timeline.add(slice, {
-		silent : true
-	});
+			var begin = Alloy.Collections.Timeline.length;
 
-	syncTimeline();
+			var end = Alloy.Collections.Timeline.length + 10;
+
+			var slice = Ti.App.Properties.getObject('timelineProp').slice(begin, end);
+
+			Alloy.Collections.Timeline.add(slice);
+
+			e.done();
+		});
+
+	} else {
+
+		var begin = Alloy.Collections.Timeline.length;
+
+		var end = Alloy.Collections.Timeline.length + 10;
+
+		var slice = timelineDataObj.slice(begin, end);
+
+		Alloy.Collections.Timeline.add(slice);
+		e.done();
+	}
+
+	//syncTimeline();
 
 	//Ti.API.info("COLLECTION LENGTH DOPO: " + Alloy.Collections.Timeline.length);
-	e.done();
 
 };
 // cross-platform event listener for lazy tableview loading
@@ -348,7 +369,7 @@ function createNewPost() {
 $.win.open();
 
 /*
-$.win.addEventListener("close", function() {
-	$.destroy();
-});
-*/
+ $.win.addEventListener("close", function() {
+ $.destroy();
+ });
+ */

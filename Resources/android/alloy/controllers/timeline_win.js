@@ -518,7 +518,7 @@ function Controller() {
             Alloy.Globals.postSaved = false;
         } else {
             Alloy.Globals.loading.show("Sincronizzazione...", false);
-            net.getData(0, 200, function(timeline_obj) {
+            net.getData(0, 25, function(timeline_obj) {
                 Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
                 Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
                     silent: true
@@ -538,15 +538,23 @@ function Controller() {
     }
     function loadMoreRows(e) {
         var timelineDataObj = Ti.App.Properties.getObject("timelineProp");
-        Ti.API.info("OGGETTO PROPERTY: " + JSON.stringify(timelineDataObj));
-        var begin = Alloy.Collections.Timeline.length;
-        var end = Alloy.Collections.Timeline.length + 10;
-        var slice = timelineDataObj.slice(begin, end);
-        Alloy.Collections.Timeline.add(slice, {
-            silent: true
-        });
-        syncTimeline();
-        e.done();
+        if (Alloy.Collections.Timeline.length + 10 >= timelineDataObj.length) {
+            presentPage += 1;
+            net.getData(presentPage, 25, function(timeline_obj) {
+                Ti.App.Properties.setObject("timelineProp", timelineDataObj.push(timeline_obj.data));
+                var begin = Alloy.Collections.Timeline.length;
+                var end = Alloy.Collections.Timeline.length + 10;
+                var slice = Ti.App.Properties.getObject("timelineProp").slice(begin, end);
+                Alloy.Collections.Timeline.add(slice);
+                e.done();
+            });
+        } else {
+            var begin = Alloy.Collections.Timeline.length;
+            var end = Alloy.Collections.Timeline.length + 10;
+            var slice = timelineDataObj.slice(begin, end);
+            Alloy.Collections.Timeline.add(slice);
+            e.done();
+        }
     }
     function mostraDettaglioEvento(e) {
         Alloy.Models.Post.set(Alloy.Collections.Timeline.at(e.index));
@@ -717,6 +725,7 @@ function Controller() {
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     moment.lang("it");
+    var presentPage = 0;
     var theActionBar = null;
     $.is.init($.timelineTable);
     var timeTemp = Ti.App.Properties.getObject("timelineProp");
