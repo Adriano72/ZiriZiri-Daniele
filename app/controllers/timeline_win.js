@@ -257,7 +257,7 @@ function loadMoreRows(e) {
 
 	//Ti.API.info("OGGETTO PROPERTY: " + JSON.stringify(timelineDataObj));
 
-	//Ti.API.info("COLLECTION LENGTH PRIMA: " + Alloy.Collections.Timeline.length);
+	Ti.API.info("TIMELINE LENGTH PRIMA: " + timelineDataObj.length);
 
 	if (Alloy.Collections.Timeline.length + 10 >= timelineDataObj.length) {
 		
@@ -265,7 +265,11 @@ function loadMoreRows(e) {
 
 		net.getData(presentPage, 25, function(timeline_obj) {
 			
-			Ti.App.Properties.setObject('timelineProp', timelineDataObj.push(timeline_obj.data));
+			timelineDataObj = timelineDataObj.concat(timeline_obj.data);
+			
+			Ti.App.Properties.setObject('timelineProp', timelineDataObj);
+			
+			Ti.API.info("TIMELINE LENGTH DOPO: " + Ti.App.Properties.getObject('timelineProp').length);
 
 			//Ti.App.Properties.getObject('timelineProp').push(timeline_obj.data);
 
@@ -277,7 +281,7 @@ function loadMoreRows(e) {
 
 			Alloy.Collections.Timeline.add(slice);
 
-			e.done();
+			e.success();
 		});
 
 	} else {

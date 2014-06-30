@@ -538,15 +538,18 @@ function Controller() {
     }
     function loadMoreRows(e) {
         var timelineDataObj = Ti.App.Properties.getObject("timelineProp");
+        Ti.API.info("TIMELINE LENGTH PRIMA: " + timelineDataObj.length);
         if (Alloy.Collections.Timeline.length + 10 >= timelineDataObj.length) {
             presentPage += 1;
             net.getData(presentPage, 25, function(timeline_obj) {
-                Ti.App.Properties.setObject("timelineProp", timelineDataObj.push(timeline_obj.data));
+                timelineDataObj = timelineDataObj.concat(timeline_obj.data);
+                Ti.App.Properties.setObject("timelineProp", timelineDataObj);
+                Ti.API.info("TIMELINE LENGTH DOPO: " + Ti.App.Properties.getObject("timelineProp").length);
                 var begin = Alloy.Collections.Timeline.length;
                 var end = Alloy.Collections.Timeline.length + 10;
                 var slice = Ti.App.Properties.getObject("timelineProp").slice(begin, end);
                 Alloy.Collections.Timeline.add(slice);
-                e.done();
+                e.success();
             });
         } else {
             var begin = Alloy.Collections.Timeline.length;

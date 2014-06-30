@@ -1,6 +1,30 @@
 exports.loadTabData = function() {
 
 	var net = require('net');
+	
+	net.getCategories(function(categoriesData) {
+
+		var objCategorie = [];
+
+		Ti.API.info("CATEGORIE " + JSON.stringify(categoriesData));
+
+		_.forEach(categoriesData.data, function(value, key) {
+
+			//Ti.API.info("Categoria: "+key+" : "+value.name);
+
+			objCategorie.push({
+				"title" : value.name,
+				"id" : value.id,
+				"code" : value.code
+			});
+
+		});
+
+		Ti.App.Properties.setObject("elencoCategorie", objCategorie);
+
+		Ti.API.info("OBJ CATEGORIE: " + JSON.stringify(Ti.App.Properties.getObject("elencoCategorie")));
+
+	});
 
 	net.getPostTemplate(0, 1, function(p_postTemplate) {
 
@@ -55,29 +79,7 @@ exports.loadTabData = function() {
 
 	});
 	
-	net.getCategories(function(categoriesData) {
-
-		var objCategorie = [];
-
-		Ti.API.info("CATEGORIE " + JSON.stringify(categoriesData));
-
-		_.forEach(categoriesData.data, function(value, key) {
-
-			//Ti.API.info("Categoria: "+key+" : "+value.name);
-
-			objCategorie.push({
-				"title" : value.name,
-				"id" : value.id,
-				"code" : value.code
-			});
-
-		});
-
-		Ti.App.Properties.setObject("elencoCategorie", objCategorie);
-
-		Ti.API.info("OBJ CATEGORIE: " + JSON.stringify(Ti.App.Properties.getObject("elencoCategorie")));
-
-	});
+	
 
 	net.getTipoMovimento(function(p_tipoMovimento) {
 
