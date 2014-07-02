@@ -411,6 +411,7 @@ function Controller() {
     function f_logout() {
         Ti.App.Properties.setObject("timelineProp", null);
         Ti.App.Properties.setBool("authenticated", false);
+        presentPage = 0;
         $.win.close();
         Alloy.createController("index").getView().open();
     }
@@ -519,7 +520,9 @@ function Controller() {
     }
     function loadMoreRows(e) {
         var timelineDataObj = Ti.App.Properties.getObject("timelineProp");
-        Ti.API.info("TIMELINE LENGTH PRIMA: " + timelineDataObj.length);
+        Ti.API.info("TIMELINE PROPERTY LENGTH PRIMA: " + timelineDataObj.length);
+        Ti.API.info("TIMELINE COLLECTION LENGTH PRIMA: " + Alloy.Collections.Timeline.length);
+        var startCollectionLength = Alloy.Collections.Timeline.length;
         if (Alloy.Collections.Timeline.length + 10 >= timelineDataObj.length && lastNumberOfRecordsFetched >= 25) {
             presentPage += 1;
             net.getData(presentPage, 25, function(timeline_obj) {
@@ -527,13 +530,18 @@ function Controller() {
                 Ti.API.info("Last Number Records Fetched: " + lastNumberOfRecordsFetched);
                 timelineDataObj = timelineDataObj.concat(timeline_obj.data);
                 Ti.App.Properties.setObject("timelineProp", timelineDataObj);
-                Ti.API.info("TIMELINE PROPERTY LENGTH DOPO: " + Ti.App.Properties.getObject("timelineProp").length);
                 var begin = Alloy.Collections.Timeline.length;
                 var end = Alloy.Collections.Timeline.length + 10;
                 var slice = Ti.App.Properties.getObject("timelineProp").slice(begin, end);
                 Alloy.Collections.Timeline.add(slice, {
                     silent: true
                 });
+                if (startCollectionLength == Alloy.Collections.Timeline.length) {
+                    Ti.API.info("*******************QUI **********");
+                    Ti.App.Properties.setObject("timelineProp", Alloy.Collections.Timeline);
+                }
+                Ti.API.info("TIMELINE PROPERTY LENGTH DOPO: " + Ti.App.Properties.getObject("timelineProp").length);
+                Ti.API.info("TIMELINE COLLECTION LENGTH DOPO: " + Alloy.Collections.Timeline.length);
                 syncTimeline();
                 e.done();
             });
@@ -541,7 +549,11 @@ function Controller() {
             var begin = Alloy.Collections.Timeline.length;
             var end = Alloy.Collections.Timeline.length + 10;
             var slice = timelineDataObj.slice(begin, end);
-            Alloy.Collections.Timeline.add(slice);
+            Alloy.Collections.Timeline.add(slice, {
+                silent: true
+            });
+            Ti.API.info("TIMELINE COLLECTION LENGTH DOPO (NO GET DATA): " + Alloy.Collections.Timeline.length);
+            syncTimeline();
             e.done();
         }
     }
@@ -710,7 +722,7 @@ function Controller() {
     moment.lang("it", Alloy.Globals.Moment_IT);
     moment.lang("it");
     var presentPage = 0;
-    var lastNumberOfRecordsFetched = 0;
+    var lastNumberOfRecordsFetched;
     var theActionBar = null;
     $.is.init($.timelineTable);
     var timeTemp = Ti.App.Properties.getObject("timelineProp");
@@ -721,6 +733,7 @@ function Controller() {
     });
     syncTimeline();
     Ti.API.info("LENGTH COLLECTION: " + Alloy.Collections.Timeline.length);
+    Ti.API.info("TIMELINE LENGTH STORED PROPERTY: " + timeTemp.length);
     $.win.open();
     __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
     __defers["$.__views.win!android:back!manageClose"] && $.__views.win.addEventListener("android:back", manageClose);
