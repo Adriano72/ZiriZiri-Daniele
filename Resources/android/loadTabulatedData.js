@@ -1,5 +1,18 @@
 exports.loadTabData = function() {
     var net = require("net");
+    net.getCategories(function(categoriesData) {
+        var objCategorie = [];
+        Ti.API.info("CATEGORIE " + JSON.stringify(categoriesData));
+        _.forEach(categoriesData.data, function(value) {
+            objCategorie.push({
+                title: value.name,
+                id: value.id,
+                code: value.code
+            });
+        });
+        Ti.App.Properties.setObject("elencoCategorie", objCategorie);
+        Ti.API.info("OBJ CATEGORIE: " + JSON.stringify(Ti.App.Properties.getObject("elencoCategorie")));
+    });
     net.getPostTemplate(0, 1, function(p_postTemplate) {
         Alloy.Models.Template.set(p_postTemplate.data[0]);
         Alloy.Models.Template.unset("id");
@@ -22,19 +35,6 @@ exports.loadTabData = function() {
         Alloy.Models.Document_template.set(templateDocument[0]);
         Alloy.Models.Document_template.unset("id");
         Ti.API.info("DOCUMENT  TEMPLATE: " + JSON.stringify(Alloy.Models.Document_template));
-    });
-    net.getCategories(function(categoriesData) {
-        var objCategorie = [];
-        Ti.API.info("CATEGORIE " + JSON.stringify(categoriesData));
-        _.forEach(categoriesData.data, function(value) {
-            objCategorie.push({
-                title: value.name,
-                id: value.id,
-                code: value.code
-            });
-        });
-        Ti.App.Properties.setObject("elencoCategorie", objCategorie);
-        Ti.API.info("OBJ CATEGORIE: " + JSON.stringify(Ti.App.Properties.getObject("elencoCategorie")));
     });
     net.getTipoMovimento(function(p_tipoMovimento) {
         var objTipoMov = [];

@@ -103,6 +103,7 @@ exports.getStatoMovimento = function(_callback) {
 };
 
 exports.getCategories = function(_callback) {
+    Ti.API.info("SESSIONE TEST: " + session);
     var xhr = Ti.Network.createHTTPClient();
     xhr.onload = function() {
         Ti.API.info("RESPONSE CATEGORY: " + xhr.responseText);
