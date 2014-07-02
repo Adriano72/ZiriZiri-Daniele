@@ -1,9 +1,5 @@
 //var timelineWin = Alloy.createController("timeline_win").getView();
 
-var net = require('net');
-
-var loadTabData = require("loadTabulatedData");
-
 var rememberMe = false;
 
 Ti.API.info("PROP TIMELINE (Index CACHED): " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
@@ -11,11 +7,12 @@ Ti.API.info("PROP TIMELINE (Index CACHED): " + JSON.stringify(Ti.App.Properties.
 if (Ti.App.Properties.getBool('authenticated', false)) {
 	//$.index.open();
 	Ti.API.info("Already Authenticated!");
-
+	var net = require('net');
+	var loadTabData = require("loadTabulatedData");
 	loadTabData.loadTabData();
 
 	if (_.isNull(Ti.App.Properties.getObject('timelineProp'))) {
-
+		
 		net.getData(0, 25, function(timeline_obj) {
 			Ti.API.info("RETURN CODE: " + timeline_obj.type.code);
 			Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
@@ -69,14 +66,21 @@ function do_login(e) {
 		Ti.API.info("********** FRM XHR: " + JSON.stringify(json));
 
 		if (JSON.stringify(json.type.code) == "\"SUCCESS\"") {
-
+			
 			if (rememberMe) {
 				Ti.App.Properties.setBool('authenticated', true);
 			};
+			
 			Ti.App.Properties.setString('sessionId', json.data.sessionId);
 			
 			Ti.API.info("SESSIONE: " + Ti.App.Properties.getString('sessionId', 0));
+			
+			var net = require('net');
+			
+			var loadTabData = require("loadTabulatedData");
+			
 			loadTabData.loadTabData();
+			
 			Alloy.Globals.loading.show('Sincronizzazione...', false);
 
 			if (_.isNull(Ti.App.Properties.getObject('timelineProp'))) {
@@ -86,7 +90,7 @@ function do_login(e) {
 				net.getData(0, 25, function(timeline_obj) {
 
 					Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
-					Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
+					//Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
 					Alloy.createController("timeline_win").getView();
 
 					//Alloy.createController("timeline_win").getView();

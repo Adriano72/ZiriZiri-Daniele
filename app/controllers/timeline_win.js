@@ -13,6 +13,8 @@ var presentPage = 0;
 // to keep track of content size on iOS
 var startIndex = 0;
 
+var lastNumberOfRecordsFetched = 0;
+
 // to know when the table is loading
 var isLoading = false;
 
@@ -95,14 +97,16 @@ function closeSpinner() {
 ///////////////////////////////////////// CARICAMENTO TIMELINE /////////////////////////////////////
 
 var timeTemp = Ti.App.Properties.getObject("timelineProp");
+
+lastNumberOfRecordsFetched = timeTemp.length;
+
+Ti.API.info("NUM RECORDS FETCHED AT START: "+lastNumberOfRecordsFetched);
 //Ti.API.info("RETRIVING CACHED DATA, LENGTH STORED PROPERTY: " + timeTemp.length);
-Ti.API.info("OGGETTO PROPERTY TIMELINE; " + JSON.stringify(timeTemp));
+//Ti.API.info("OGGETTO PROPERTY TIMELINE; " + JSON.stringify(timeTemp));
 
 //timeTemp = timeTemp.slice(0,10), {silent: true};
 
-Alloy.Collections.Timeline.reset(timeTemp.slice(0, 10), {
-	silent : true
-});
+Alloy.Collections.Timeline.reset(timeTemp.slice(0, 10), {silent: true});
 syncTimeline();
 Ti.API.info("LENGTH COLLECTION: " + Alloy.Collections.Timeline.length);
 
@@ -259,17 +263,21 @@ function loadMoreRows(e) {
 
 	Ti.API.info("TIMELINE LENGTH PRIMA: " + timelineDataObj.length);
 
-	if (Alloy.Collections.Timeline.length + 10 >= timelineDataObj.length) {
-		
+	if (Alloy.Collections.Timeline.length + 10 >= timelineDataObj.length && lastNumberOfRecordsFetched >= 25) {
+
 		presentPage += 1;
 
 		net.getData(presentPage, 25, function(timeline_obj) {
 			
+			lastNumberOfRecordsFetched = timeline_obj.data.length;
+			
+			Ti.API.info("Last Number Records Fetched: "+lastNumberOfRecordsFetched);
+
 			timelineDataObj = timelineDataObj.concat(timeline_obj.data);
-			
+
 			Ti.App.Properties.setObject('timelineProp', timelineDataObj);
-			
-			Ti.API.info("TIMELINE LENGTH DOPO: " + Ti.App.Properties.getObject('timelineProp').length);
+
+			Ti.API.info("TIMELINE PROPERTY LENGTH DOPO: " + Ti.App.Properties.getObject('timelineProp').length);
 
 			//Ti.App.Properties.getObject('timelineProp').push(timeline_obj.data);
 
@@ -279,9 +287,13 @@ function loadMoreRows(e) {
 
 			var slice = Ti.App.Properties.getObject('timelineProp').slice(begin, end);
 
-			Alloy.Collections.Timeline.add(slice);
+			Alloy.Collections.Timeline.add(slice, {
+				silent : true
+			});
+			
+			syncTimeline();
 
-			e.success();
+			e.done();
 		});
 
 	} else {

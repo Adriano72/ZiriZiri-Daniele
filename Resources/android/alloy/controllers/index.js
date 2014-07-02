@@ -15,12 +15,13 @@ function Controller() {
             if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
                 rememberMe && Ti.App.Properties.setBool("authenticated", true);
                 Ti.App.Properties.setString("sessionId", json.data.sessionId);
-                loadTabData.loadTabData();
                 Ti.API.info("SESSIONE: " + Ti.App.Properties.getString("sessionId", 0));
+                var net = require("net");
+                var loadTabData = require("loadTabulatedData");
+                loadTabData.loadTabData();
                 Alloy.Globals.loading.show("Sincronizzazione...", false);
                 _.isNull(Ti.App.Properties.getObject("timelineProp")) ? net.getData(0, 25, function(timeline_obj) {
                     Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
-                    Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
                     Alloy.createController("timeline_win").getView();
                 }) : Alloy.createController("timeline_win").getView();
             } else alert("Username o password errati");
@@ -155,12 +156,12 @@ function Controller() {
     $.__views.__alloyId130.add($.__views.forgotPassword);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var net = require("net");
-    var loadTabData = require("loadTabulatedData");
     var rememberMe = false;
     Ti.API.info("PROP TIMELINE (Index CACHED): " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
     if (Ti.App.Properties.getBool("authenticated", false)) {
         Ti.API.info("Already Authenticated!");
+        var net = require("net");
+        var loadTabData = require("loadTabulatedData");
         loadTabData.loadTabData();
         _.isNull(Ti.App.Properties.getObject("timelineProp")) ? net.getData(0, 25, function(timeline_obj) {
             Ti.API.info("RETURN CODE: " + timeline_obj.type.code);

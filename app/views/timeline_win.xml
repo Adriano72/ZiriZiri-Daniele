@@ -16,7 +16,7 @@
 
 			<TableViewRow class="row" onClick = "mostraDettaglioEvento">
 
-				<View class="eventContainer" onSwipe="slideRow">
+				<View class="eventContainer">
 
 					<View id="topWrapper">
 
@@ -51,33 +51,33 @@
 					</View>
 					<View id="middleWrapper">
 						<View class="post_icons_container first" >
-							<Label class="post_icon" id="cat_icon"/>
+							<ImageView class="post_icon" id="cat_icon"/>
 							<Label class="btn_text" id="category" text ="{categoria}"/>
 						</View>
 						<View class="post_icons_container">
-							<Label class="post_icon" id="tag_icon"/>
+							<ImageView class="post_icon" id="tag_icon"/>
 							<Label class="btn_text" id="tags" text="{tag}"/>
 						</View>
 						<View class="post_icons_container">
-							<Label class="post_icon" id="stories_icon"/>
+							<ImageView class="post_icon" id="stories_icon"/>
 							<Label class="btn_text" id="stories" text="storie"/>
 						</View>
 
 					</View>
 					<View class="separator"/>
 					<View id="bottomWrapper">
-						<Label class="aspects_icons first" id="event_icon" backgroundImage="{iconEvent}"/>
-						<Label class="aspects_icons" id="cashflow_icon" backgroundImage="{iconCashFlow}"/>
-						<Label class="aspects_icons" id="document_icon" backgroundImage="{iconDocument}"/>
-						<Label class="aspects_icons" id="note_icon" backgroundImage="{iconNote}"/>
-						<Label class="aspects_icons" id="link_icon" backgroundImage="{iconLink}"/>
-						<Label class="aspects_icons" id="communication_icon" backgroundImage="{iconCommunication}"/>
+						<ImageView class="aspects_icons first" id="event_icon" image="{iconEvent}"/>
+						<ImageView class="aspects_icons" id="cashflow_icon" image="{iconCashFlow}"/>
+						<ImageView class="aspects_icons" id="document_icon" image="{iconDocument}"/>
+						<ImageView class="aspects_icons" id="note_icon" image="{iconNote}"/>
+						<ImageView class="aspects_icons" id="link_icon" image="{iconLink}"/>
+						<ImageView class="aspects_icons" id="communication_icon" image="{iconCommunication}"/>
 						<!--<Label id = "aspects" text="{aspects}"/>-->
 						<View class="show_all_container">
 
 							<View class="push_to_right">
 								<Label  id="show_all_text"/>
-								<Label  id="show_all_icon"/>
+								<ImageView  id="show_all_icon"/>
 							</View>
 
 						</View>

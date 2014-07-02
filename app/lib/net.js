@@ -15,7 +15,7 @@ exports.getData = function(page, max, _callback) {
 	var pagination = (max > 0)?"&page="+page+"&max="+max:"";
 
 	xhr.onload = function() {
-		Ti.API.info("RESPONSE FROM GET DATA: "+xhr.responseText);
+		//Ti.API.info("RESPONSE FROM GET DATA: "+xhr.responseText);
 		//Ti.App.fireEvent("loading_done");
 
 		_callback(JSON.parse(xhr.responseText));
@@ -33,7 +33,7 @@ exports.getData = function(page, max, _callback) {
 	today = today+"23:59";
 
 	//xhr.open("GET", "https://demo.ziriziri.com/cxf/api/v01/actions/actions/680?_type=json");
-	Ti.API.info("################CALL:"+"GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON&from=2013-01-01&to="+today+""+pagination+"&cached=false");
+	//Ti.API.info("################CALL:"+"GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON&from=2013-01-01&to="+today+""+pagination+"&cached=false");
 	xhr.open("GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON&from=2013-01-01&to="+today+""+pagination+"&cached=true");
 	xhr.send(); 
 };
@@ -141,8 +141,6 @@ exports.getStatoMovimento = function(_callback) {
 };
 
 exports.getCategories = function(_callback) {
-	
-	Ti.API.info("SESSIONE TEST: "+session);
 
 	var xhr = Ti.Network.createHTTPClient();
 

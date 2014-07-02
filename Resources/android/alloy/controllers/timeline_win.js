@@ -43,7 +43,7 @@ function Controller() {
             __alloyId208.__transform = transformData(__alloyId208);
             var __alloyId210 = Ti.UI.createTableViewRow({
                 backgroundColor: "#F9F9F9",
-                className: "itemRow",
+                className: "itemrow",
                 height: 170
             });
             rows.push(__alloyId210);
@@ -60,7 +60,6 @@ function Controller() {
                 layout: "vertical"
             });
             __alloyId210.add(__alloyId212);
-            slideRow ? __alloyId212.addEventListener("swipe", slideRow) : __defers["__alloyId212!swipe!slideRow"] = true;
             var __alloyId213 = Ti.UI.createView({
                 height: Ti.UI.SIZE,
                 left: 10,
@@ -195,13 +194,11 @@ function Controller() {
                 left: 0
             });
             __alloyId225.add(__alloyId227);
-            var __alloyId228 = Ti.UI.createLabel({
-                top: 10,
+            var __alloyId228 = Ti.UI.createImageView({
                 width: 20,
                 height: 20,
-                color: "#000",
                 touchEnabled: false,
-                backgroundImage: "/images/head-category.png",
+                image: "/images/head-category.png",
                 left: 0
             });
             __alloyId227.add(__alloyId228);
@@ -228,13 +225,11 @@ function Controller() {
                 left: 40
             });
             __alloyId225.add(__alloyId231);
-            var __alloyId232 = Ti.UI.createLabel({
-                top: 10,
+            var __alloyId232 = Ti.UI.createImageView({
                 width: 20,
                 height: 20,
-                color: "#000",
                 touchEnabled: false,
-                backgroundImage: "/images/head-tag.png",
+                image: "/images/head-tag.png",
                 left: 0
             });
             __alloyId231.add(__alloyId232);
@@ -261,13 +256,11 @@ function Controller() {
                 left: 40
             });
             __alloyId225.add(__alloyId235);
-            var __alloyId236 = Ti.UI.createLabel({
-                top: 10,
+            var __alloyId236 = Ti.UI.createImageView({
                 width: 20,
                 height: 20,
-                color: "#000",
                 touchEnabled: false,
-                backgroundImage: "/images/head-story.png",
+                image: "/images/head-story.png",
                 left: 0
             });
             __alloyId235.add(__alloyId236);
@@ -303,82 +296,71 @@ function Controller() {
                 left: 5
             });
             __alloyId212.add(__alloyId240);
-            var __alloyId241 = Ti.UI.createLabel({
-                top: 10,
-                width: 25,
-                height: 25,
-                color: "#000",
+            var __alloyId241 = Ti.UI.createImageView({
                 left: 5,
+                top: 10,
                 bottom: 10,
-                image: "/images/android-robot.jpg",
                 touchEnabled: false,
                 center: 45,
-                backgroundImage: "undefined" != typeof __alloyId208.__transform["iconEvent"] ? __alloyId208.__transform["iconEvent"] : __alloyId208.get("iconEvent")
+                width: 25,
+                height: 25,
+                image: "undefined" != typeof __alloyId208.__transform["iconEvent"] ? __alloyId208.__transform["iconEvent"] : __alloyId208.get("iconEvent")
             });
             __alloyId240.add(__alloyId241);
-            var __alloyId242 = Ti.UI.createLabel({
-                top: 10,
-                width: 25,
-                height: 25,
-                color: "#000",
+            var __alloyId242 = Ti.UI.createImageView({
                 left: 15,
+                top: 10,
                 bottom: 10,
-                image: "/images/android-robot.jpg",
                 touchEnabled: false,
                 center: 45,
-                backgroundImage: "undefined" != typeof __alloyId208.__transform["iconCashFlow"] ? __alloyId208.__transform["iconCashFlow"] : __alloyId208.get("iconCashFlow")
+                width: 25,
+                height: 25,
+                image: "undefined" != typeof __alloyId208.__transform["iconCashFlow"] ? __alloyId208.__transform["iconCashFlow"] : __alloyId208.get("iconCashFlow")
             });
             __alloyId240.add(__alloyId242);
-            var __alloyId243 = Ti.UI.createLabel({
-                top: 10,
-                width: 25,
-                height: 25,
-                color: "#000",
+            var __alloyId243 = Ti.UI.createImageView({
                 left: 15,
+                top: 10,
                 bottom: 10,
-                image: "/images/android-robot.jpg",
                 touchEnabled: false,
                 center: 45,
-                backgroundImage: "undefined" != typeof __alloyId208.__transform["iconDocument"] ? __alloyId208.__transform["iconDocument"] : __alloyId208.get("iconDocument")
+                width: 25,
+                height: 25,
+                image: "undefined" != typeof __alloyId208.__transform["iconDocument"] ? __alloyId208.__transform["iconDocument"] : __alloyId208.get("iconDocument")
             });
             __alloyId240.add(__alloyId243);
-            var __alloyId244 = Ti.UI.createLabel({
-                top: 10,
-                width: 25,
-                height: 25,
-                color: "#000",
+            var __alloyId244 = Ti.UI.createImageView({
                 left: 15,
+                top: 10,
                 bottom: 10,
-                image: "/images/android-robot.jpg",
                 touchEnabled: false,
                 center: 45,
-                backgroundImage: "undefined" != typeof __alloyId208.__transform["iconNote"] ? __alloyId208.__transform["iconNote"] : __alloyId208.get("iconNote")
+                width: 25,
+                height: 25,
+                image: "undefined" != typeof __alloyId208.__transform["iconNote"] ? __alloyId208.__transform["iconNote"] : __alloyId208.get("iconNote")
             });
             __alloyId240.add(__alloyId244);
-            var __alloyId245 = Ti.UI.createLabel({
-                top: 10,
-                width: 25,
-                height: 25,
-                color: "#000",
+            var __alloyId245 = Ti.UI.createImageView({
                 left: 15,
+                top: 10,
                 bottom: 10,
-                image: "/images/android-robot.jpg",
                 touchEnabled: false,
                 center: 45,
-                backgroundImage: "undefined" != typeof __alloyId208.__transform["iconLink"] ? __alloyId208.__transform["iconLink"] : __alloyId208.get("iconLink")
+                width: 25,
+                height: 25,
+                image: "undefined" != typeof __alloyId208.__transform["iconLink"] ? __alloyId208.__transform["iconLink"] : __alloyId208.get("iconLink")
             });
             __alloyId240.add(__alloyId245);
-            var __alloyId246 = Ti.UI.createLabel({
-                top: 10,
-                width: 25,
-                height: 25,
-                color: "#000",
+            var __alloyId246 = Ti.UI.createImageView({
                 left: 15,
+                top: 10,
                 bottom: 10,
-                image: "/images/android-robot.jpg",
                 touchEnabled: false,
                 center: 45,
-                backgroundImage: "undefined" != typeof __alloyId208.__transform["iconCommunication"] ? __alloyId208.__transform["iconCommunication"] : __alloyId208.get("iconCommunication")
+                width: 25,
+                height: 25,
+                backgroundImage: "/images/kernel-comunicazioni-off.png",
+                image: "undefined" != typeof __alloyId208.__transform["iconCommunication"] ? __alloyId208.__transform["iconCommunication"] : __alloyId208.get("iconCommunication")
             });
             __alloyId240.add(__alloyId246);
             var __alloyId248 = Ti.UI.createView({
@@ -409,15 +391,14 @@ function Controller() {
                 text: "Show All"
             });
             __alloyId250.add(__alloyId251);
-            var __alloyId252 = Ti.UI.createLabel({
-                top: 10,
-                width: 25,
-                height: 25,
-                color: "#000",
+            var __alloyId252 = Ti.UI.createImageView({
                 right: 0,
+                top: 10,
                 bottom: 10,
-                backgroundImage: "/images/kernel-show-all.png",
-                touchEnabled: false
+                image: "/images/kernel-show-all.png",
+                touchEnabled: false,
+                width: 25,
+                height: 25
             });
             __alloyId250.add(__alloyId252);
         }
@@ -539,17 +520,22 @@ function Controller() {
     function loadMoreRows(e) {
         var timelineDataObj = Ti.App.Properties.getObject("timelineProp");
         Ti.API.info("TIMELINE LENGTH PRIMA: " + timelineDataObj.length);
-        if (Alloy.Collections.Timeline.length + 10 >= timelineDataObj.length) {
+        if (Alloy.Collections.Timeline.length + 10 >= timelineDataObj.length && lastNumberOfRecordsFetched >= 25) {
             presentPage += 1;
             net.getData(presentPage, 25, function(timeline_obj) {
+                lastNumberOfRecordsFetched = timeline_obj.data.length;
+                Ti.API.info("Last Number Records Fetched: " + lastNumberOfRecordsFetched);
                 timelineDataObj = timelineDataObj.concat(timeline_obj.data);
                 Ti.App.Properties.setObject("timelineProp", timelineDataObj);
-                Ti.API.info("TIMELINE LENGTH DOPO: " + Ti.App.Properties.getObject("timelineProp").length);
+                Ti.API.info("TIMELINE PROPERTY LENGTH DOPO: " + Ti.App.Properties.getObject("timelineProp").length);
                 var begin = Alloy.Collections.Timeline.length;
                 var end = Alloy.Collections.Timeline.length + 10;
                 var slice = Ti.App.Properties.getObject("timelineProp").slice(begin, end);
-                Alloy.Collections.Timeline.add(slice);
-                e.success();
+                Alloy.Collections.Timeline.add(slice, {
+                    silent: true
+                });
+                syncTimeline();
+                e.done();
             });
         } else {
             var begin = Alloy.Collections.Timeline.length;
@@ -562,11 +548,6 @@ function Controller() {
     function mostraDettaglioEvento(e) {
         Alloy.Models.Post.set(Alloy.Collections.Timeline.at(e.index));
         Alloy.createController("dettaglio_post").getView();
-    }
-    function slideRow(e) {
-        Ti.API.info("SLIDE****");
-        e.source.left -= 50;
-        e.source.right += 50;
     }
     function createNewPost() {
         Alloy.createController("newPost", function() {
@@ -729,10 +710,12 @@ function Controller() {
     moment.lang("it", Alloy.Globals.Moment_IT);
     moment.lang("it");
     var presentPage = 0;
+    var lastNumberOfRecordsFetched = 0;
     var theActionBar = null;
     $.is.init($.timelineTable);
     var timeTemp = Ti.App.Properties.getObject("timelineProp");
-    Ti.API.info("OGGETTO PROPERTY TIMELINE; " + JSON.stringify(timeTemp));
+    lastNumberOfRecordsFetched = timeTemp.length;
+    Ti.API.info("NUM RECORDS FETCHED AT START: " + lastNumberOfRecordsFetched);
     Alloy.Collections.Timeline.reset(timeTemp.slice(0, 10), {
         silent: true
     });
@@ -743,7 +726,6 @@ function Controller() {
     __defers["$.__views.win!android:back!manageClose"] && $.__views.win.addEventListener("android:back", manageClose);
     __defers["$.__views.mn_logout!click!f_logout"] && $.__views.mn_logout.addEventListener("click", f_logout);
     __defers["__alloyId210!click!mostraDettaglioEvento"] && __alloyId210.addEventListener("click", mostraDettaglioEvento);
-    __defers["__alloyId212!swipe!slideRow"] && __alloyId212.addEventListener("swipe", slideRow);
     __defers["$.__views.is!end!loadMoreRows"] && $.__views.is.on("end", loadMoreRows);
     __defers["$.__views.timelineTable!postlayout!closeSpinner"] && $.__views.timelineTable.addEventListener("postlayout", closeSpinner);
     __defers["$.__views.__alloyId256!click!refreshTable"] && $.__views.__alloyId256.addEventListener("click", refreshTable);

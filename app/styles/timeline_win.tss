@@ -39,7 +39,7 @@
 
 ".row": {
 	backgroundColor: '#F9F9F9',
-	className: 'itemRow',
+	className: 'itemrow',
 	height: 170
 }
 
@@ -182,7 +182,7 @@
 }
 
 "#cat_icon": {
-	backgroundImage: "/images/head-category.png",
+	image: "/images/head-category.png",
 	touchEnabled: false,
 	left: 0,
 	width: 20,
@@ -190,7 +190,7 @@
 }
 
 "#tag_icon": {
-	backgroundImage: "/images/head-tag.png",
+	image: "/images/head-tag.png",
 	touchEnabled: false,
 	left: 0,
 	width: 20,
@@ -198,7 +198,7 @@
 }
 
 "#stories_icon": {
-	backgroundImage: "/images/head-story.png",
+	image: "/images/head-story.png",
 	touchEnabled: false,
 	left: 0,
 	width: 20,
@@ -280,7 +280,7 @@
 	left: 15,
 	top: 10,
 	bottom: 10,
-	image: '/images/android-robot.jpg',
+	//image: '/images/android-robot.jpg',
 	touchEnabled: false,
 	center: 45,
 	width: 25,
@@ -288,7 +288,7 @@
 }
 
 "#event_icon": {
-	backgroundImage: '/images/kernel-event-off.png',
+	//backgroundImage: '/images/kernel-event-off.png',
 	left: 5
 }
 
@@ -338,7 +338,7 @@
 
 	top: 10,
 	bottom: 10,
-	backgroundImage: '/images/kernel-show-all.png',
+	image: '/images/kernel-show-all.png',
 	touchEnabled: false,
 	width: 25,
 	height: 25
