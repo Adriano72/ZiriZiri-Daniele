@@ -74,8 +74,9 @@ function do_login(e) {
 				Ti.App.Properties.setBool('authenticated', true);
 			};
 			Ti.App.Properties.setString('sessionId', json.data.sessionId);
-			loadTabData.loadTabData();
+			
 			Ti.API.info("SESSIONE: " + Ti.App.Properties.getString('sessionId', 0));
+			loadTabData.loadTabData();
 			Alloy.Globals.loading.show('Sincronizzazione...', false);
 
 			if (_.isNull(Ti.App.Properties.getObject('timelineProp'))) {
