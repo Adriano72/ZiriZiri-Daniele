@@ -16,6 +16,8 @@ Alloy.Globals.screenWidth = Ti.Platform.displayCaps.platformWidth;
 
 Alloy.Globals.postSaved = false;
 
+Alloy.Globals.shortcutMode = false;
+
 var icons = require('/icons');
 
 ////////////////////////////////// Gestio ne Collection e Cache //////////////////

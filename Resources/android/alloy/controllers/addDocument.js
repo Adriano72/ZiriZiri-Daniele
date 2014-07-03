@@ -29,6 +29,10 @@ function Controller() {
                 });
             };
         }
+        if (Alloy.Globals.shortcutMode) {
+            Alloy.Globals.shortcutMode = false;
+            openCamera();
+        }
     }
     function showDatePicker(e) {
         Ti.API.info("SOURCE CLICK: " + JSON.stringify(e));

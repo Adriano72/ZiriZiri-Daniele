@@ -1,7 +1,5 @@
 var args = arguments[0] || {};
 
-Ti.API.info("PARAMETRI: " + JSON.stringify(args));
-
 var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
 
@@ -41,6 +39,7 @@ function openEvent() {
 };
 
 function checkForSync() {
+	
 	args();
 }
 
@@ -73,12 +72,14 @@ function initializeThings() {
 }
 
 function takePicture() {
+	
+	Alloy.Globals.shortcutMode = true;
 
-	savePost(true);
+	savePost();
 
 };
 
-function savePost(shortCutMode) {
+function savePost() {
 
 	//Ti.API.info("POST DATE VALUE AT BEGINNING; " + $.postDate.value);
 	//Ti.API.info("POST DATE PARSED AT BEGINNING; " + Date.parse($.postDate.value));
@@ -87,7 +88,10 @@ function savePost(shortCutMode) {
 
 	//Ti.API.info("SELECTED CATEGORY ROW: "+JSON.stringify($.pkrCategoria.getSelectedRow(0)));
 
-	if (shortCutMode == 1) {
+	if (Alloy.Globals.shortcutMode) {
+		
+		Alloy.Models.Post_template.set("name", "");
+		Alloy.Models.Post_template.set("rating", 0);
 
 		Alloy.Models.Post_template.set("category", {
 			id : "5529",
@@ -100,7 +104,7 @@ function savePost(shortCutMode) {
 		Alloy.createController("crea-modifica-post", function() {
 			$.win.close();
 			args();
-		}).getView();
+		}, {testkey: "ciao"}).getView();
 
 	} else {
 

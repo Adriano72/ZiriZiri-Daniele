@@ -1,5 +1,7 @@
 var args = arguments[0] || {};
 
+Ti.API.info("PARAMETRI: " + JSON.stringify(args));
+
 var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
 moment.lang('it');
@@ -28,8 +30,17 @@ function openEvent() {
 		};
 	};
 	
+	if(Alloy.Globals.shortcutMode){
+		
+		addDocument();
+	}
+	
 
 };
+
+function resetShortcut(){
+	Alloy.Globals.shortcutMode = false;
+}
 
 var modJson = Alloy.Models.Post_template.toJSON();
 
@@ -159,7 +170,7 @@ function addEvent() {
 
 };
 
-function addCashflow(id_post) {
+function addCashflow() {
 	//Ti.API.info("**** INSERT CASHFLOW!");
 
 
@@ -188,7 +199,7 @@ function addCashflow(id_post) {
 	}).getView().open();
 };
 
-function addDocument(id_post) {
+function addDocument(p_shortcutMode) {
 	//Ti.API.info("**** INSERT CASHFLOW!");
 
 
@@ -202,7 +213,8 @@ function addDocument(id_post) {
 		
 		var riga = Alloy.createController('rowDOCUMENT', {
 
-			//id_code : arrayAspetti.length - 1,			
+			//id_code : arrayAspetti.length - 1,
+						
 			titolo : aspettoDataJson.title,	
 			formato : aspettoDataJson.format,
 			hashedImage : aspettoDataJson.content
@@ -213,7 +225,7 @@ function addDocument(id_post) {
 	}).getView().open();
 };
 
-function addLink(id_post) {
+function addLink() {
 	//Ti.API.info("**** INSERT CASHFLOW!");
 
 	if ($.titolo.value == "" && $.pkrCategoria.getSelectedRow(0).id == 9999) {
@@ -292,7 +304,7 @@ function addLink(id_post) {
 	}).getView().open();
 };
 
-function addNote(id_post) {
+function addNote() {
 	Ti.API.info("**** INSERT NOTE!");
 
 	if ($.titolo.value == "" && $.pkrCategoria.getSelectedRow(0).id == 9999) {

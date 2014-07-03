@@ -48,10 +48,26 @@ function Controller() {
         $.pkrCategoria.add(rowsCat);
     }
     function takePicture() {
-        savePost(true);
+        Alloy.Globals.shortcutMode = true;
+        savePost();
     }
-    function savePost(shortCutMode) {
-        if (1 == shortCutMode) ; else if ("" !== $.titolo.value && 9999 != $.pkrCategoria.getSelectedRow(0).id) {
+    function savePost() {
+        if (Alloy.Globals.shortcutMode) {
+            Alloy.Models.Post_template.set("name", "");
+            Alloy.Models.Post_template.set("rating", 0);
+            Alloy.Models.Post_template.set("category", {
+                id: "5529",
+                code: "09.04.01",
+                name: "Foto"
+            });
+            Alloy.Models.Post_template.set("referenceTime", timeNow);
+            Alloy.createController("crea-modifica-post", function() {
+                $.win.close();
+                args();
+            }, {
+                testkey: "ciao"
+            }).getView();
+        } else if ("" !== $.titolo.value && 9999 != $.pkrCategoria.getSelectedRow(0).id) {
             Alloy.Models.Post_template.set("name", $.titolo.value);
             Alloy.Models.Post_template.set("rating", $.starwidget.getRating());
             Alloy.Models.Post_template.set("category", {
@@ -341,7 +357,6 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    Ti.API.info("PARAMETRI: " + JSON.stringify(args));
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     require("net");

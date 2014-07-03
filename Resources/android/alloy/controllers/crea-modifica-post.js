@@ -46,6 +46,10 @@ function Controller() {
                 });
             };
         }
+        Alloy.Globals.shortcutMode && addDocument();
+    }
+    function resetShortcut() {
+        Alloy.Globals.shortcutMode = false;
     }
     function submitPost() {
         Alloy.Globals.loading.show("Salvataggio in corso...", false);
@@ -214,6 +218,7 @@ function Controller() {
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
+    resetShortcut ? $.__views.win.addEventListener("close", resetShortcut) : __defers["$.__views.win!close!resetShortcut"] = true;
     $.__views.win.addEventListener("open", __alloyId106);
     var __alloyId107 = [];
     $.__views.__alloyId108 = Ti.UI.createTableViewRow({
@@ -549,6 +554,7 @@ function Controller() {
     };
     _.extend($, $.__views);
     var args = arguments[0] || {};
+    Ti.API.info("PARAMETRI: " + JSON.stringify(args));
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     moment.lang("it");
@@ -576,6 +582,7 @@ function Controller() {
         $.destroy();
     });
     __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
+    __defers["$.__views.win!close!resetShortcut"] && $.__views.win.addEventListener("close", resetShortcut);
     __defers["$.__views.mn_save!click!submitPost"] && $.__views.mn_save.addEventListener("click", submitPost);
     __defers["$.__views.__alloyId113!click!addEvent"] && $.__views.__alloyId113.addEventListener("click", addEvent);
     __defers["$.__views.__alloyId114!click!addCashflow"] && $.__views.__alloyId114.addEventListener("click", addCashflow);

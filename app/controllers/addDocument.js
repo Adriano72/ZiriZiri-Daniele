@@ -21,6 +21,12 @@ function openEvent() {
 		};
 
 	};
+	
+	if(Alloy.Globals.shortcutMode){
+		
+		Alloy.Globals.shortcutMode = false;
+		openCamera();
+	}
 
 };
 
