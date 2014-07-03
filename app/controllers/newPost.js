@@ -1,5 +1,7 @@
 var args = arguments[0] || {};
 
+Ti.API.info("PARAMETRI: " + JSON.stringify(args));
+
 var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
 
@@ -38,11 +40,8 @@ function openEvent() {
 
 };
 
-function checkForSync(){
-	
-	if(Alloy.Globals.postSaved){
-		args();
-	}
+function checkForSync() {
+	args();
 }
 
 $.starwidget.init();
@@ -73,7 +72,13 @@ function initializeThings() {
 
 }
 
-function savePost() {
+function takePicture() {
+
+	savePost(true);
+
+};
+
+function savePost(shortCutMode) {
 
 	//Ti.API.info("POST DATE VALUE AT BEGINNING; " + $.postDate.value);
 	//Ti.API.info("POST DATE PARSED AT BEGINNING; " + Date.parse($.postDate.value));
@@ -82,60 +87,43 @@ function savePost() {
 
 	//Ti.API.info("SELECTED CATEGORY ROW: "+JSON.stringify($.pkrCategoria.getSelectedRow(0)));
 
-	if ($.titolo.value !== "" && $.pkrCategoria.getSelectedRow(0).id != 9999) {
+	if (shortCutMode == 1) {
 
-		Alloy.Models.Post_template.set("name", $.titolo.value);
-		Alloy.Models.Post_template.set("rating", $.starwidget.getRating());
 		Alloy.Models.Post_template.set("category", {
-			id : $.pkrCategoria.getSelectedRow(0).id,
-			code : $.pkrCategoria.getSelectedRow(0).code,
-			name : $.pkrCategoria.getSelectedRow(0).title,
+			id : "5529",
+			code : "09.04.01",
+			name : "Foto",
 		});
-		Alloy.Models.Post_template.set("description", $.descrizione.value);
+
 		Alloy.Models.Post_template.set("referenceTime", timeNow);
 
-		Alloy.createController("crea-modifica-post", function(){
+		Alloy.createController("crea-modifica-post", function() {
 			$.win.close();
 			args();
 		}).getView();
-		/*
-		 var postObj = {
-
-		 name : $.titolo.value,
-		 description : "DATAPOST-TEMPLATE-DEFAULT-DESC",
-		 referenceTime : timeNow,
-		 category : {
-		 id : $.pkrCategoria.getSelectedRow(0).id,
-		 version : $.pkrCategoria.getSelectedRow(0).version
-		 },
-		 location : location,
-		 startTime : dataFrom,
-		 endTime : dataTo
-		 };
-
-		 */
-		/*
-		 var name = $.titolo.value;
-		 var referenceTime = $.postDate.dataRaw
-		 Ti.API.info("SELECTED ROW: " + JSON.stringify($.pkrCategoria.getSelectedRow(0).id));
-		 var category = {
-		 id : $.pkrCategoria.getSelectedRow(0).id,
-		 version : $.pkrCategoria.getSelectedRow(0).version
-		 };
-		 var sel_location = {
-		 name : $.location.value,
-		 description : $.location.value,
-		 latitude : location_result.latitude,
-		 longitude : location_result.longitude
-
-		 };
-		 */
-		/*
-
-		 */
 
 	} else {
-		alert("Il campo Titolo e il campo Categoria sono obbligatori!");
+
+		if ($.titolo.value !== "" && $.pkrCategoria.getSelectedRow(0).id != 9999) {
+
+			Alloy.Models.Post_template.set("name", $.titolo.value);
+			Alloy.Models.Post_template.set("rating", $.starwidget.getRating());
+			Alloy.Models.Post_template.set("category", {
+				id : $.pkrCategoria.getSelectedRow(0).id,
+				code : $.pkrCategoria.getSelectedRow(0).code,
+				name : $.pkrCategoria.getSelectedRow(0).title,
+			});
+			Alloy.Models.Post_template.set("description", $.descrizione.value);
+			Alloy.Models.Post_template.set("referenceTime", timeNow);
+
+			Alloy.createController("crea-modifica-post", function() {
+				$.win.close();
+				args();
+			}).getView();
+
+		} else {
+			alert("Il campo Titolo e il campo Categoria sono obbligatori!");
+		}
 	}
 
 };

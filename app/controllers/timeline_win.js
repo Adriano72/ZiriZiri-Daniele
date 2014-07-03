@@ -64,23 +64,20 @@ function openEvent() {
 
 	};
 
-	/*
+	setTimeout(function() {
 
-	 setTimeout(function() {
+		net.getData(0, 25, function(timeline_obj) {
 
-	 net.getData(0, 50, function(timeline_obj) {
+			Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
+			Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
+				silent : true
+			});
+			Ti.API.info("Sync Executed by SILENT SERVICE");
+			syncTimeline();
 
-	 Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
-	 Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
-	 silent : true
-	 });
-	 Ti.API.info("Sync Executed by SILENT SERVICE");
-	 syncTimeline();
+		});
 
-	 });
-
-	 }, 5000);
-	 */
+	}, 0);
 
 };
 
@@ -92,8 +89,6 @@ function closeSpinner() {
 //var Timeline = Alloy.Collections.Timeline;
 
 //eventsCollection.fetch();
-
-
 
 ///////////////////////////////////////// CARICAMENTO TIMELINE /////////////////////////////////////
 
@@ -227,31 +222,23 @@ function transformData(model) {
 
 function refreshTable() {
 
-	if (Alloy.Globals.postSaved) {
-		Alloy.Globals.loading.hide();
-		alert("Post salvato!");
-		Alloy.Globals.postSaved = false;
-	} else {
+	Alloy.Globals.loading.show('Sincronizzazione...', false);
 
-		Alloy.Globals.loading.show('Sincronizzazione...', false);
+	net.getData(0, 25, function(timeline_obj) {
 
-		net.getData(0, 25, function(timeline_obj) {
-
-			Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
-			Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
-				silent : true
-			});
-			Ti.API.info("COLLECTION LENGTH AFTER SYNC: " + Alloy.Collections.Timeline.length);
-			syncTimeline();
-			Alloy.Globals.loading.hide();
-			if (Alloy.Globals.postSaved) {
-				alert("Post salvato!");
-				Alloy.Globals.postSaved = false;
-			}
-
+		Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
+		Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
+			silent : true
 		});
+		Ti.API.info("COLLECTION LENGTH AFTER SYNC: " + Alloy.Collections.Timeline.length);
+		syncTimeline();
+		lastNumberOfRecordsFetched = timeTemp.length;
+		presentPage = 0;
+		Alloy.Globals.loading.hide();
+		
 
-	}
+	});
+
 }
 
 function gotoToday() {
@@ -270,7 +257,7 @@ function loadMoreRows(e) {
 
 	Ti.API.info("TIMELINE PROPERTY LENGTH PRIMA: " + timelineDataObj.length);
 	Ti.API.info("TIMELINE COLLECTION LENGTH PRIMA: " + Alloy.Collections.Timeline.length);
-	
+
 	var startCollectionLength = Alloy.Collections.Timeline.length;
 
 	if (Alloy.Collections.Timeline.length + 10 >= timelineDataObj.length && lastNumberOfRecordsFetched >= 25) {
@@ -287,9 +274,6 @@ function loadMoreRows(e) {
 
 			Ti.App.Properties.setObject('timelineProp', timelineDataObj);
 
-			
-			
-
 			//Ti.App.Properties.getObject('timelineProp').push(timeline_obj.data);
 
 			var begin = Alloy.Collections.Timeline.length;
@@ -301,18 +285,17 @@ function loadMoreRows(e) {
 			Alloy.Collections.Timeline.add(slice, {
 				silent : true
 			});
-			
-			if(startCollectionLength == Alloy.Collections.Timeline.length){
-				
+
+			if (startCollectionLength == Alloy.Collections.Timeline.length) {
+
 				Ti.API.info("*******************QUI **********");
-				
+
 				Ti.App.Properties.setObject('timelineProp', Alloy.Collections.Timeline);
 			};
-			
+
 			Ti.API.info("TIMELINE PROPERTY LENGTH DOPO: " + Ti.App.Properties.getObject('timelineProp').length);
-			
+
 			Ti.API.info("TIMELINE COLLECTION LENGTH DOPO: " + Alloy.Collections.Timeline.length);
-			
 
 			syncTimeline();
 
@@ -330,7 +313,7 @@ function loadMoreRows(e) {
 		Alloy.Collections.Timeline.add(slice, {
 			silent : true
 		});
-		
+
 		Ti.API.info("TIMELINE COLLECTION LENGTH DOPO (NO GET DATA): " + Alloy.Collections.Timeline.length);
 
 		syncTimeline();
@@ -406,7 +389,7 @@ function slideRow(e) {
 }
 
 function createNewPost() {
-	Alloy.createController("newPost", function() {
+	Alloy.createController("newPost", function(pars) {
 		Alloy.Globals.loading.hide();
 	}).getView();
 };

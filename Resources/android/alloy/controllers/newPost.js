@@ -31,7 +31,7 @@ function Controller() {
         }
     }
     function checkForSync() {
-        Alloy.Globals.postSaved && args();
+        args();
     }
     function initializeThings() {
         openEvent();
@@ -47,8 +47,11 @@ function Controller() {
         });
         $.pkrCategoria.add(rowsCat);
     }
-    function savePost() {
-        if ("" !== $.titolo.value && 9999 != $.pkrCategoria.getSelectedRow(0).id) {
+    function takePicture() {
+        savePost(true);
+    }
+    function savePost(shortCutMode) {
+        if (1 == shortCutMode) ; else if ("" !== $.titolo.value && 9999 != $.pkrCategoria.getSelectedRow(0).id) {
             Alloy.Models.Post_template.set("name", $.titolo.value);
             Alloy.Models.Post_template.set("rating", $.starwidget.getRating());
             Alloy.Models.Post_template.set("category", {
@@ -262,6 +265,7 @@ function Controller() {
         id: "picture"
     });
     $.__views.picOptionsContainer.add($.__views.picture);
+    takePicture ? $.__views.picture.addEventListener("click", takePicture) : __defers["$.__views.picture!click!takePicture"] = true;
     $.__views.takePicIcon = Ti.UI.createImageView({
         width: 25,
         height: Ti.UI.SIZE,
@@ -337,6 +341,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
+    Ti.API.info("PARAMETRI: " + JSON.stringify(args));
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     require("net");
@@ -347,6 +352,7 @@ function Controller() {
     __defers["$.__views.win!open!initializeThings"] && $.__views.win.addEventListener("open", initializeThings);
     __defers["$.__views.win!close!checkForSync"] && $.__views.win.addEventListener("close", checkForSync);
     __defers["$.__views.mn_salva!click!savePost"] && $.__views.mn_salva.addEventListener("click", savePost);
+    __defers["$.__views.picture!click!takePicture"] && $.__views.picture.addEventListener("click", takePicture);
     _.extend($, exports);
 }
 

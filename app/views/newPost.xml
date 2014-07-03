@@ -27,7 +27,7 @@
 			</TableViewRow>
 			<TableViewRow class="row">
 				<View id="picOptionsContainer">
-					<View id="picture">
+					<View id="picture" onClick="takePicture">
 						<ImageView id="takePicIcon"/>
 						<Label id="takePicText"/>
 					</View>

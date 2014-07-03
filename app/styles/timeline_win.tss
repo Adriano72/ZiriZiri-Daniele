@@ -19,6 +19,11 @@
 	bottom: 60
 }
 
+"#mn_picture": {
+	icon: "/images/top-camera.png",
+	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+}
+
 "#mn_notify": {
 	icon: "/images/top-notifiche.png",
 	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS

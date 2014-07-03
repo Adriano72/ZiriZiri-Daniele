@@ -27,6 +27,7 @@ function openEvent() {
 			});
 		};
 	};
+	
 
 };
 
@@ -88,7 +89,7 @@ function submitPost() {
 					Alloy.Collections.Timeline.add(postToAddToTimeline);
 					$.win.close();
 					args();
-					Alloy.Globals.postSaved = true;
+					
 					
 					
 				});
@@ -209,57 +210,6 @@ function addDocument(id_post) {
 		}).getView();
 		$.postTable.appendRow(riga);
 	
-		/*
-		var objAspect = {
-
-			kind : {
-				code : "DOCUMENTDATATYPE_CODE",
-				name : "DOCUMENTDATATYPE_NAME",
-				description : "DOCUMENTDATATYPE_DESCRIPTION"
-			},
-			data : {}
-
-		};
-
-		objAspect.name = objRet.name;
-		objAspect.description = objRet.description;
-		objAspect.referenceTime = timeNow;
-		objAspect.category = {
-			id : $.pkrCategoria.getSelectedRow(0).id,
-			version : $.pkrCategoria.getSelectedRow(0).version
-		};
-
-		objAspect.data.title = objRet.name;
-		objAspect.data.description = objRet.description;
-		objAspect.data.name = objRet.fileName;
-		objAspect.data.size = objRet.fileSize;
-		objAspect.data.timestamp = moment();
-		objAspect.data.content = objRet.content;
-
-
-
-		Ti.API.info("OBJ ASPECT: " + JSON.stringify(objAspect));
-
-		var tempObj = _.clone(objAspect);
-		objAspect.data = JSON.stringify(objAspect.data);
-
-		arrayAspetti.push(objAspect);
-
-		Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
-
-		var riga = Alloy.createController('rowDOCUMENT', {
-
-			id_code : arrayAspetti.length - 1,
-			titolo : tempObj.name,
-			descrizione : tempObj.description,
-			size : tempObj.data.size,
-			name : tempObj.data.name
-
-		}).getView();
-		$.newPostTable.appendRow(riga);
-
-		//Ti.API.info("FINISHED ASPECT OBJ: "+JSON.stringify(objAspect));
-		*/
 	}).getView().open();
 };
 

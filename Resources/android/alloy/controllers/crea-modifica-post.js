@@ -60,7 +60,6 @@ function Controller() {
                     Alloy.Collections.Timeline.add(postToAddToTimeline);
                     $.win.close();
                     args();
-                    Alloy.Globals.postSaved = true;
                 });
             }); else {
                 Alloy.Collections.Timeline.add(postToAddToTimeline);

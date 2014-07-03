@@ -423,6 +423,16 @@ function Controller() {
             theActionBar.displayHomeAsUp = false;
             theActionBar.setIcon("images/logo-test.png");
         }
+        setTimeout(function() {
+            net.getData(0, 25, function(timeline_obj) {
+                Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
+                Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
+                    silent: true
+                });
+                Ti.API.info("Sync Executed by SILENT SERVICE");
+                syncTimeline();
+            });
+        }, 0);
     }
     function closeSpinner() {
         Alloy.Globals.loading.hide();
@@ -494,26 +504,18 @@ function Controller() {
         return attrs;
     }
     function refreshTable() {
-        if (Alloy.Globals.postSaved) {
-            Alloy.Globals.loading.hide();
-            alert("Post salvato!");
-            Alloy.Globals.postSaved = false;
-        } else {
-            Alloy.Globals.loading.show("Sincronizzazione...", false);
-            net.getData(0, 25, function(timeline_obj) {
-                Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
-                Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
-                    silent: true
-                });
-                Ti.API.info("COLLECTION LENGTH AFTER SYNC: " + Alloy.Collections.Timeline.length);
-                syncTimeline();
-                Alloy.Globals.loading.hide();
-                if (Alloy.Globals.postSaved) {
-                    alert("Post salvato!");
-                    Alloy.Globals.postSaved = false;
-                }
+        Alloy.Globals.loading.show("Sincronizzazione...", false);
+        net.getData(0, 25, function(timeline_obj) {
+            Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
+            Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
+                silent: true
             });
-        }
+            Ti.API.info("COLLECTION LENGTH AFTER SYNC: " + Alloy.Collections.Timeline.length);
+            syncTimeline();
+            lastNumberOfRecordsFetched = timeTemp.length;
+            presentPage = 0;
+            Alloy.Globals.loading.hide();
+        });
     }
     function gotoToday() {
         $.timelineTable.scrollToTop(0);
