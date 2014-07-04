@@ -48,11 +48,15 @@ function Controller() {
         $.pkrCategoria.add(rowsCat);
     }
     function takePicture() {
-        Alloy.Globals.shortcutMode = true;
+        Alloy.Globals.shortcutMode = "camera";
+        savePost();
+    }
+    function openGallery() {
+        Alloy.Globals.shortcutMode = "gallery";
         savePost();
     }
     function savePost() {
-        if (Alloy.Globals.shortcutMode) {
+        if ("camera" == Alloy.Globals.shortcutMode || "gallery" == Alloy.Globals.shortcutMode) {
             Alloy.Models.Post_template.set("name", "");
             Alloy.Models.Post_template.set("rating", 0);
             Alloy.Models.Post_template.set("category", {
@@ -64,8 +68,6 @@ function Controller() {
             Alloy.createController("crea-modifica-post", function() {
                 $.win.close();
                 args();
-            }, {
-                testkey: "ciao"
             }).getView();
         } else if ("" !== $.titolo.value && 9999 != $.pkrCategoria.getSelectedRow(0).id) {
             Alloy.Models.Post_template.set("name", $.titolo.value);
@@ -312,6 +314,7 @@ function Controller() {
         id: "gallery"
     });
     $.__views.picOptionsContainer.add($.__views.gallery);
+    openGallery ? $.__views.gallery.addEventListener("click", openGallery) : __defers["$.__views.gallery!click!openGallery"] = true;
     $.__views.galleryPicIcon = Ti.UI.createImageView({
         width: 25,
         height: Ti.UI.SIZE,
@@ -368,6 +371,7 @@ function Controller() {
     __defers["$.__views.win!close!checkForSync"] && $.__views.win.addEventListener("close", checkForSync);
     __defers["$.__views.mn_salva!click!savePost"] && $.__views.mn_salva.addEventListener("click", savePost);
     __defers["$.__views.picture!click!takePicture"] && $.__views.picture.addEventListener("click", takePicture);
+    __defers["$.__views.gallery!click!openGallery"] && $.__views.gallery.addEventListener("click", openGallery);
     _.extend($, exports);
 }
 

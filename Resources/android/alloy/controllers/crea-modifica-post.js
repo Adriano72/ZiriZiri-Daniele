@@ -46,7 +46,7 @@ function Controller() {
                 });
             };
         }
-        Alloy.Globals.shortcutMode && addDocument();
+        ("camera" == Alloy.Globals.shortcutMode || "gallery" == Alloy.Globals.shortcutMode) && addDocument();
     }
     function resetShortcut() {
         Alloy.Globals.shortcutMode = false;

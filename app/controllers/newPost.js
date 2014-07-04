@@ -73,11 +73,19 @@ function initializeThings() {
 
 function takePicture() {
 	
-	Alloy.Globals.shortcutMode = true;
+	Alloy.Globals.shortcutMode = "camera";
 
 	savePost();
 
 };
+
+function openGallery(){
+	
+	Alloy.Globals.shortcutMode = "gallery";
+
+	savePost();
+	
+}
 
 function savePost() {
 
@@ -88,7 +96,7 @@ function savePost() {
 
 	//Ti.API.info("SELECTED CATEGORY ROW: "+JSON.stringify($.pkrCategoria.getSelectedRow(0)));
 
-	if (Alloy.Globals.shortcutMode) {
+	if (Alloy.Globals.shortcutMode == "camera" || Alloy.Globals.shortcutMode == "gallery") {
 		
 		Alloy.Models.Post_template.set("name", "");
 		Alloy.Models.Post_template.set("rating", 0);
@@ -104,7 +112,7 @@ function savePost() {
 		Alloy.createController("crea-modifica-post", function() {
 			$.win.close();
 			args();
-		}, {testkey: "ciao"}).getView();
+		}).getView();
 
 	} else {
 

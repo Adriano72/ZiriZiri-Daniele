@@ -442,22 +442,22 @@ function Controller() {
             return value.kind.code == target;
         }))) switch (target) {
           case "EVENTDATATYPE_CODE":
-            return "/images/kernel-event-off.png";
+            return null;
 
           case "CASHFLOWDATATYPE_CODE":
-            return "/images/kernel-finance-off.png";
+            return null;
 
           case "FILEDOCUMENTDATATYPE_CODE":
-            return "/images/kernel-document-off.png";
+            return null;
 
           case "NOTEDATATYPE_CODE":
-            return "/images/kernel-note-off.png";
+            return null;
 
           case "FILELINKDATATYPE_CODE":
-            return "/images/kernel-link-off.png";
+            return null;
 
           case "COMMUNICATIONDATATYPE_CODE":
-            return "/images/kernel-comunicazioni-off.png";
+            return null;
 
           default:
             return;

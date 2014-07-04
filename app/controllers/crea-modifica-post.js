@@ -30,7 +30,7 @@ function openEvent() {
 		};
 	};
 	
-	if(Alloy.Globals.shortcutMode){
+	if(Alloy.Globals.shortcutMode == "camera" || Alloy.Globals.shortcutMode == "gallery"){
 		
 		addDocument();
 	}

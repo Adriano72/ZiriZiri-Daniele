@@ -29,9 +29,13 @@ function Controller() {
                 });
             };
         }
-        if (Alloy.Globals.shortcutMode) {
-            Alloy.Globals.shortcutMode = false;
-            openCamera();
+        if ("camera" == Alloy.Globals.shortcutMode) {
+            Alloy.Globals.shortcutMode = null;
+            openCamera(true);
+        }
+        if ("gallery" == Alloy.Globals.shortcutMode) {
+            Alloy.Globals.shortcutMode = null;
+            openGallery(true);
         }
     }
     function showDatePicker(e) {
@@ -64,7 +68,8 @@ function Controller() {
             $.win.close();
         } else alert("E' necessario scattare una foto o selezionarla dalla galleria, i campi titolo e descrizione sono obbligatori");
     }
-    function openCamera() {
+    function openCamera(shortcutMode) {
+        Ti.API.info("SHORTCUT MODE: " + (true == shortcutMode));
         try {
             Ti.Media.showCamera({
                 success: function(event) {
@@ -82,6 +87,11 @@ function Controller() {
                     imageContent.base64 = hashedImage;
                     fileSize = tempFile.size;
                     fileName = tempFile.name;
+                    if (shortcutMode) {
+                        Alloy.Models.Post_template.set("name", "Foto scattata il " + moment().format("DD-MM-YYYY HH:MM"));
+                        $.titolo.value = "Foto scattata il " + moment().format("DD-MM-YYYY HH:MM");
+                        $.descrizione.value = "Foto scattata il " + moment().format("DD-MM-YYYY HH:MM");
+                    }
                 },
                 cancel: function() {},
                 error: function(error) {
@@ -417,6 +427,8 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
+    var moment = require("alloy/moment");
+    moment.lang("it", Alloy.Globals.Moment_IT);
     var ImageFactory = require("ti.imagefactory");
     $.dataDocumento.text = moment().format("L");
     $.dataDocumento.dataRaw = moment();

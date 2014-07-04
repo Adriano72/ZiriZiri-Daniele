@@ -1,5 +1,8 @@
 var args = arguments[0] || {};
 
+var moment = require('alloy/moment');
+moment.lang('it', Alloy.Globals.Moment_IT);
+
 var ImageFactory = require('ti.imagefactory');
 //Ti.API.info("PARAMETRI: "+JSON.stringify(args));
 
@@ -22,10 +25,16 @@ function openEvent() {
 
 	};
 	
-	if(Alloy.Globals.shortcutMode){
+	if(Alloy.Globals.shortcutMode == "camera"){
 		
-		Alloy.Globals.shortcutMode = false;
-		openCamera();
+		Alloy.Globals.shortcutMode = null;
+		openCamera(true);
+	};
+	
+	if(Alloy.Globals.shortcutMode == "gallery"){
+		
+		Alloy.Globals.shortcutMode = null;
+		openGallery(true);
 	}
 
 };
@@ -117,7 +126,9 @@ function saveDocument() {
 
 };
 
-function openCamera() {
+function openCamera(shortcutMode) {
+	
+	Ti.API.info("SHORTCUT MODE: "+(shortcutMode== true));
 
 	try {
 
@@ -145,6 +156,12 @@ function openCamera() {
 				imageContent.base64 = hashedImage;
 				fileSize = tempFile.size;
 				fileName = tempFile.name;
+				
+				if(shortcutMode){
+					Alloy.Models.Post_template.set("name", "Foto scattata il "+moment().format("DD-MM-YYYY HH:MM"));
+					$.titolo.value = "Foto scattata il "+moment().format("DD-MM-YYYY HH:MM");
+					$.descrizione.value = "Foto scattata il "+moment().format("DD-MM-YYYY HH:MM");
+				}
 
 			},
 			cancel : function() {
