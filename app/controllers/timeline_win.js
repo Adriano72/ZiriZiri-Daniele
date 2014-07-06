@@ -35,6 +35,14 @@ $.is.init($.timelineTable);
  });
  */
 
+function takePicture() {
+	
+	Alloy.Globals.shortcutMode = "camera";
+
+	createNewPost();
+
+};
+
 function manageClose() {
 
 	var activity = Titanium.Android.currentActivity;
@@ -389,7 +397,7 @@ function slideRow(e) {
 }
 
 function createNewPost() {
-	Alloy.createController("newPost", function(pars) {
+	Alloy.createController("newPost", function() {
 		Alloy.Globals.loading.hide();
 	}).getView();
 };

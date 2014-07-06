@@ -35,6 +35,11 @@ function openEvent() {
 		};
 
 	};
+	
+	if(Alloy.Globals.shortcutMode == "camera"){
+		savePost();
+	}
+
 
 };
 

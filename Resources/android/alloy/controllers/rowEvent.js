@@ -12,7 +12,7 @@ function Controller() {
         id: "rowEvent"
     });
     $.__views.rowEvent && $.addTopLevelView($.__views.rowEvent);
-    $.__views.__alloyId197 = Ti.UI.createView({
+    $.__views.__alloyId196 = Ti.UI.createView({
         left: 5,
         right: 5,
         top: 5,
@@ -24,9 +24,9 @@ function Controller() {
         height: 50,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId197"
+        id: "__alloyId196"
     });
-    $.__views.rowEvent.add($.__views.__alloyId197);
+    $.__views.rowEvent.add($.__views.__alloyId196);
     $.__views.eventIcon = Ti.UI.createLabel({
         left: 5,
         width: 25,
@@ -34,22 +34,22 @@ function Controller() {
         backgroundImage: "/images/kernel-event-on.png",
         id: "eventIcon"
     });
-    $.__views.__alloyId197.add($.__views.eventIcon);
-    $.__views.__alloyId198 = Ti.UI.createView({
+    $.__views.__alloyId196.add($.__views.eventIcon);
+    $.__views.__alloyId197 = Ti.UI.createView({
         width: Ti.UI.SIZE,
         left: 10,
         layout: "vertical",
-        id: "__alloyId198"
+        id: "__alloyId197"
     });
-    $.__views.__alloyId197.add($.__views.__alloyId198);
-    $.__views.__alloyId199 = Ti.UI.createView({
+    $.__views.__alloyId196.add($.__views.__alloyId197);
+    $.__views.__alloyId198 = Ti.UI.createView({
         left: 2,
         width: "85%",
         height: Ti.UI.SIZE,
         layout: "horizontal",
-        id: "__alloyId199"
+        id: "__alloyId198"
     });
-    $.__views.__alloyId198.add($.__views.__alloyId199);
+    $.__views.__alloyId197.add($.__views.__alloyId198);
     $.__views.startDate = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -61,7 +61,7 @@ function Controller() {
         left: 0,
         id: "startDate"
     });
-    $.__views.__alloyId199.add($.__views.startDate);
+    $.__views.__alloyId198.add($.__views.startDate);
     $.__views.endDate = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -72,15 +72,15 @@ function Controller() {
         width: 140,
         id: "endDate"
     });
-    $.__views.__alloyId199.add($.__views.endDate);
-    $.__views.__alloyId200 = Ti.UI.createView({
+    $.__views.__alloyId198.add($.__views.endDate);
+    $.__views.__alloyId199 = Ti.UI.createView({
         left: 2,
         width: "85%",
         height: Ti.UI.SIZE,
         layout: "horizontal",
-        id: "__alloyId200"
+        id: "__alloyId199"
     });
-    $.__views.__alloyId198.add($.__views.__alloyId200);
+    $.__views.__alloyId197.add($.__views.__alloyId199);
     $.__views.location = Ti.UI.createLabel({
         color: "#999",
         width: Ti.UI.FILL,
@@ -88,7 +88,7 @@ function Controller() {
         ellipsize: true,
         id: "location"
     });
-    $.__views.__alloyId200.add($.__views.location);
+    $.__views.__alloyId199.add($.__views.location);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

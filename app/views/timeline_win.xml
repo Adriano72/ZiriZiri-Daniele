@@ -7,7 +7,7 @@
 		<Menu id="menu" platform="android">
 
 			<!-- Cannot specify node text.  Use attributes only. -->
-			<!--<MenuItem id="mn_picture" title="TakeAPicture" onClick="takePicture"/>-->
+			<MenuItem id="mn_picture" title="TakeAPicture" onClick="takePicture"/>
 			<MenuItem id="mn_notify" title="Notifiche"/>
 			<MenuItem id="mn_search" title="Immagine"/>
 			<MenuItem id="mn_logout" title="Logout" onClick="f_logout"/>

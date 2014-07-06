@@ -29,6 +29,7 @@ function Controller() {
                 });
             };
         }
+        "camera" == Alloy.Globals.shortcutMode && savePost();
     }
     function checkForSync() {
         args();
@@ -46,14 +47,6 @@ function Controller() {
             rowsCat.push(pkrRow);
         });
         $.pkrCategoria.add(rowsCat);
-    }
-    function takePicture() {
-        Alloy.Globals.shortcutMode = "camera";
-        savePost();
-    }
-    function openGallery() {
-        Alloy.Globals.shortcutMode = "gallery";
-        savePost();
     }
     function savePost() {
         if ("camera" == Alloy.Globals.shortcutMode || "gallery" == Alloy.Globals.shortcutMode) {
@@ -254,102 +247,6 @@ function Controller() {
         id: "storie"
     });
     $.__views.__alloyId139.add($.__views.storie);
-    $.__views.__alloyId140 = Ti.UI.createTableViewRow({
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL,
-        backgroundColor: "#F9F9F9",
-        className: "itemRow",
-        layout: "horizontal",
-        touchEnabled: false,
-        id: "__alloyId140"
-    });
-    __alloyId133.push($.__views.__alloyId140);
-    $.__views.picOptionsContainer = Ti.UI.createView({
-        top: 5,
-        left: 5,
-        width: Ti.UI.FILL,
-        height: Ti.UI.SIZE,
-        id: "picOptionsContainer"
-    });
-    $.__views.__alloyId140.add($.__views.picOptionsContainer);
-    $.__views.picture = Ti.UI.createView({
-        height: 40,
-        width: "49.5%",
-        left: 0,
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: "#5FAEE3",
-        backgroundColor: "#5FAEE3",
-        id: "picture"
-    });
-    $.__views.picOptionsContainer.add($.__views.picture);
-    takePicture ? $.__views.picture.addEventListener("click", takePicture) : __defers["$.__views.picture!click!takePicture"] = true;
-    $.__views.takePicIcon = Ti.UI.createImageView({
-        width: 25,
-        height: Ti.UI.SIZE,
-        image: "/images/various-take-a-photo.png",
-        left: 5,
-        id: "takePicIcon"
-    });
-    $.__views.picture.add($.__views.takePicIcon);
-    $.__views.takePicText = Ti.UI.createLabel({
-        font: {
-            fontFamily: "SourceSansPro-Regular",
-            fontSize: 18
-        },
-        right: 10,
-        text: "Take a Picture!",
-        color: "#FFF",
-        id: "takePicText"
-    });
-    $.__views.picture.add($.__views.takePicText);
-    $.__views.gallery = Ti.UI.createView({
-        height: 40,
-        width: "49.5%",
-        right: 0,
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: "#CCCCCC",
-        backgroundColor: "#FFF",
-        id: "gallery"
-    });
-    $.__views.picOptionsContainer.add($.__views.gallery);
-    openGallery ? $.__views.gallery.addEventListener("click", openGallery) : __defers["$.__views.gallery!click!openGallery"] = true;
-    $.__views.galleryPicIcon = Ti.UI.createImageView({
-        width: 25,
-        height: Ti.UI.SIZE,
-        image: "/images/various-add.png",
-        left: 5,
-        id: "galleryPicIcon"
-    });
-    $.__views.gallery.add($.__views.galleryPicIcon);
-    $.__views.galleryPicText = Ti.UI.createLabel({
-        font: {
-            fontFamily: "SourceSansPro-Regular",
-            fontSize: 18
-        },
-        text: "Gallery",
-        color: "#999",
-        id: "galleryPicText"
-    });
-    $.__views.gallery.add($.__views.galleryPicText);
-    $.__views.verticalBar = Ti.UI.createLabel({
-        height: Ti.UI.FILL,
-        width: 1,
-        right: 45,
-        backgroundColor: "#CCCCCC",
-        id: "verticalBar"
-    });
-    $.__views.gallery.add($.__views.verticalBar);
-    $.__views.galleryPic2 = Ti.UI.createImageView({
-        borderLeft: true,
-        width: 40,
-        height: Ti.UI.SIZE,
-        image: "/images/various-galllery.png",
-        right: 5,
-        id: "galleryPic2"
-    });
-    $.__views.gallery.add($.__views.galleryPic2);
     $.__views.newPostTable = Ti.UI.createTableView({
         top: 5,
         separatorColor: "transparent",
@@ -370,8 +267,6 @@ function Controller() {
     __defers["$.__views.win!open!initializeThings"] && $.__views.win.addEventListener("open", initializeThings);
     __defers["$.__views.win!close!checkForSync"] && $.__views.win.addEventListener("close", checkForSync);
     __defers["$.__views.mn_salva!click!savePost"] && $.__views.mn_salva.addEventListener("click", savePost);
-    __defers["$.__views.picture!click!takePicture"] && $.__views.picture.addEventListener("click", takePicture);
-    __defers["$.__views.gallery!click!openGallery"] && $.__views.gallery.addEventListener("click", openGallery);
     _.extend($, exports);
 }
 

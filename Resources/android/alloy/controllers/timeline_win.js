@@ -2,6 +2,15 @@ function Controller() {
     function __alloyId207() {
         $.__views.win.removeEventListener("open", __alloyId207);
         if ($.__views.win.activity) $.__views.win.activity.onCreateOptionsMenu = function(e) {
+            var __alloyId203 = {
+                icon: "/images/top-camera.png",
+                showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
+                id: "mn_picture",
+                title: "TakeAPicture"
+            };
+            $.__views.mn_picture = e.menu.add(_.pick(__alloyId203, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_picture.applyProperties(_.omit(__alloyId203, Alloy.Android.menuItemCreateArgs));
+            takePicture ? $.__views.mn_picture.addEventListener("click", takePicture) : __defers["$.__views.mn_picture!click!takePicture"] = true;
             var __alloyId204 = {
                 icon: "/images/top-notifiche.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
@@ -404,6 +413,10 @@ function Controller() {
         }
         $.__views.timelineTable.setData(rows);
     }
+    function takePicture() {
+        Alloy.Globals.shortcutMode = "camera";
+        createNewPost();
+    }
     function manageClose() {
         var activity = Titanium.Android.currentActivity;
         activity.finish();
@@ -442,22 +455,22 @@ function Controller() {
             return value.kind.code == target;
         }))) switch (target) {
           case "EVENTDATATYPE_CODE":
-            return null;
+            return "/images/kernel-event-off.png";
 
           case "CASHFLOWDATATYPE_CODE":
-            return null;
+            return "/images/kernel-finance-off.png";
 
           case "FILEDOCUMENTDATATYPE_CODE":
-            return null;
+            return "/images/kernel-document-off.png";
 
           case "NOTEDATATYPE_CODE":
-            return null;
+            return "/images/kernel-note-off.png";
 
           case "FILELINKDATATYPE_CODE":
-            return null;
+            return "/images/kernel-link-off.png";
 
           case "COMMUNICATIONDATATYPE_CODE":
-            return null;
+            return "/images/kernel-comunicazioni-off.png";
 
           default:
             return;
@@ -739,6 +752,7 @@ function Controller() {
     $.win.open();
     __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
     __defers["$.__views.win!android:back!manageClose"] && $.__views.win.addEventListener("android:back", manageClose);
+    __defers["$.__views.mn_picture!click!takePicture"] && $.__views.mn_picture.addEventListener("click", takePicture);
     __defers["$.__views.mn_logout!click!f_logout"] && $.__views.mn_logout.addEventListener("click", f_logout);
     __defers["__alloyId210!click!mostraDettaglioEvento"] && __alloyId210.addEventListener("click", mostraDettaglioEvento);
     __defers["$.__views.is!end!loadMoreRows"] && $.__views.is.on("end", loadMoreRows);

@@ -25,6 +25,7 @@
 			<TableViewRow class="row">
 				<TextField id="storie"></TextField>
 			</TableViewRow>
+			<!--
 			<TableViewRow class="row">
 				<View id="picOptionsContainer">
 					<View id="picture" onClick="takePicture">
@@ -38,7 +39,7 @@
 						<ImageView id="galleryPic2"/>
 					</View>
 				</View>
-			</TableViewRow>
+			</TableViewRow>-->
 
 		</TableView>
 	</Window>
