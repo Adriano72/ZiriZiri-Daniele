@@ -20,7 +20,7 @@ function transformData(model) {
 	//attrs.imageUrl = '/' + attrs.direction + '.png';
 	//attrs.titolo = attrs.data.importo+"€";
 	attrs.dataDa = moment(attrs.data.startTime.time).format("DD-MM-YYYY HH:MM");
-	attrs.dataA = moment(attrs.data.endTime.time).format("DD-MM-YYYY HH:MM");
+	attrs.dataA = (attrs.data.startTime.time !== attrs.data.endTime.time)?moment(attrs.data.endTime.time).format("DD-MM-YYYY HH:MM"):"";
 	attrs.posizione = attrs.location.name;
 	
 

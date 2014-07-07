@@ -148,9 +148,11 @@ function saveCashflow() {
 
 	var modCashflowJSON = Alloy.Models.Cashflow_template.toJSON();
 	modCashflowJSON = _.omit(modCashflowJSON, "kind.id");
+	
+	Ti.API.info("SEL MOVIMENTO: "+$.pkrTipoMovimento.getSelectedRow(0).id);
 
 	//if($.pkrPagamentoIncasso.getSelectedRow(0).id != 9999 && $.pkrTipoMovimento.getSelectedRow(0).id != 9999){
-	if ($.importoValue.value > 0) {
+	if ($.importoValue.value > 0 && $.pkrTipoMovimento.getSelectedRow(0).id != "9999") {
 		
 		modCashflowJSON.name = Alloy.Models.Post_template.get("name");
 		modCashflowJSON.description = Alloy.Models.Post_template.get("description");
@@ -203,7 +205,7 @@ function saveCashflow() {
 		$.win.close();
 
 	} else {
-		alert("Il campo Importo è obbligatorio, inserire un valore");
+		alert("I campi Importo e Tipo Movimento sono obbligatori");
 	}
 
 };

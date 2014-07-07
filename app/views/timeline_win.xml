@@ -77,7 +77,7 @@
 						<View class="show_all_container">
 
 							<View class="push_to_right">
-								<Label  id="show_all_text"/>
+								<!--<Label  id="show_all_text"/>-->
 								<ImageView  id="show_all_icon"/>
 							</View>
 

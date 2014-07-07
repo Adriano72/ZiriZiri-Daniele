@@ -44,7 +44,7 @@ function Controller() {
     function syncTimeline(e) {
         if (e && e.fromAdapter) return;
         syncTimeline.opts || {};
-        var models = __alloyId255.models;
+        var models = __alloyId254.models;
         var len = models.length;
         var rows = [];
         for (var i = 0; len > i; i++) {
@@ -386,21 +386,7 @@ function Controller() {
                 width: Ti.UI.FILL
             });
             __alloyId248.add(__alloyId250);
-            var __alloyId251 = Ti.UI.createLabel({
-                top: 10,
-                width: Ti.UI.SIZE,
-                height: 25,
-                color: "#5FAEE3",
-                font: {
-                    fontFamily: "SourceSansPro-Regular",
-                    fontSize: 14
-                },
-                right: 30,
-                bottom: 10,
-                text: "Show All"
-            });
-            __alloyId250.add(__alloyId251);
-            var __alloyId252 = Ti.UI.createImageView({
+            var __alloyId251 = Ti.UI.createImageView({
                 right: 0,
                 top: 10,
                 bottom: 10,
@@ -409,7 +395,7 @@ function Controller() {
                 width: 25,
                 height: 25
             });
-            __alloyId250.add(__alloyId252);
+            __alloyId250.add(__alloyId251);
         }
         $.__views.timelineTable.setData(rows);
     }
@@ -499,8 +485,9 @@ function Controller() {
     }
     function transformData(model) {
         var attrs = model.toJSON();
+        var diffTime = moment().diff(attrs.referenceTime, "days");
         attrs.catImage = _.isNull(attrs.category) || _.isNull(attrs.category.code) ? "/images/android-robot.jpg" : "/images/" + attrs.category.code.slice(0, 2) + ".png";
-        attrs.postDate = moment(attrs.referenceTime).fromNow();
+        attrs.postDate = diffTime > 1 ? moment(attrs.referenceTime).format("LL") : moment(attrs.referenceTime).fromNow();
         attrs.categoria = _.isNull(attrs.category) ? "" : attrs.category.name;
         attrs.iconEvent = checkAspects(attrs.aspects, "EVENTDATATYPE_CODE");
         attrs.iconCashFlow = checkAspects(attrs.aspects, "CASHFLOWDATATYPE_CODE");
@@ -614,8 +601,8 @@ function Controller() {
         id: "timelineTable"
     });
     $.__views.win.add($.__views.timelineTable);
-    var __alloyId255 = Alloy.Collections["Timeline"] || Timeline;
-    __alloyId255.on("fetch destroy change add remove reset", syncTimeline);
+    var __alloyId254 = Alloy.Collections["Timeline"] || Timeline;
+    __alloyId254.on("fetch destroy change add remove reset", syncTimeline);
     closeSpinner ? $.__views.timelineTable.addEventListener("postlayout", closeSpinner) : __defers["$.__views.timelineTable!postlayout!closeSpinner"] = true;
     $.__views.bottomBar = Ti.UI.createView({
         backgroundColor: "#5FAEE3",
@@ -634,15 +621,15 @@ function Controller() {
         id: "buttonsContainer"
     });
     $.__views.bottomBar.add($.__views.buttonsContainer);
-    $.__views.__alloyId256 = Ti.UI.createView({
+    $.__views.__alloyId255 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         layout: "vertical",
         left: 0,
-        id: "__alloyId256"
+        id: "__alloyId255"
     });
-    $.__views.buttonsContainer.add($.__views.__alloyId256);
-    refreshTable ? $.__views.__alloyId256.addEventListener("click", refreshTable) : __defers["$.__views.__alloyId256!click!refreshTable"] = true;
+    $.__views.buttonsContainer.add($.__views.__alloyId255);
+    refreshTable ? $.__views.__alloyId255.addEventListener("click", refreshTable) : __defers["$.__views.__alloyId255!click!refreshTable"] = true;
     $.__views.bottom_sync = Ti.UI.createLabel({
         top: 0,
         width: 35,
@@ -652,7 +639,7 @@ function Controller() {
         left: 0,
         id: "bottom_sync"
     });
-    $.__views.__alloyId256.add($.__views.bottom_sync);
+    $.__views.__alloyId255.add($.__views.bottom_sync);
     $.__views.txt_sync = Ti.UI.createLabel({
         top: 1,
         width: Ti.UI.SIE,
@@ -664,16 +651,16 @@ function Controller() {
         text: "SYNC",
         id: "txt_sync"
     });
-    $.__views.__alloyId256.add($.__views.txt_sync);
-    $.__views.__alloyId257 = Ti.UI.createView({
+    $.__views.__alloyId255.add($.__views.txt_sync);
+    $.__views.__alloyId256 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         layout: "vertical",
         left: 70,
-        id: "__alloyId257"
+        id: "__alloyId256"
     });
-    $.__views.buttonsContainer.add($.__views.__alloyId257);
-    createNewPost ? $.__views.__alloyId257.addEventListener("click", createNewPost) : __defers["$.__views.__alloyId257!click!createNewPost"] = true;
+    $.__views.buttonsContainer.add($.__views.__alloyId256);
+    createNewPost ? $.__views.__alloyId256.addEventListener("click", createNewPost) : __defers["$.__views.__alloyId256!click!createNewPost"] = true;
     $.__views.bottom_new = Ti.UI.createLabel({
         top: 0,
         width: 35,
@@ -683,7 +670,7 @@ function Controller() {
         left: 0,
         id: "bottom_new"
     });
-    $.__views.__alloyId257.add($.__views.bottom_new);
+    $.__views.__alloyId256.add($.__views.bottom_new);
     $.__views.txt_new = Ti.UI.createLabel({
         top: 1,
         width: Ti.UI.SIE,
@@ -695,16 +682,16 @@ function Controller() {
         text: "NEW POST",
         id: "txt_new"
     });
-    $.__views.__alloyId257.add($.__views.txt_new);
-    $.__views.__alloyId258 = Ti.UI.createView({
+    $.__views.__alloyId256.add($.__views.txt_new);
+    $.__views.__alloyId257 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         layout: "vertical",
         left: 70,
-        id: "__alloyId258"
+        id: "__alloyId257"
     });
-    $.__views.buttonsContainer.add($.__views.__alloyId258);
-    gotoToday ? $.__views.__alloyId258.addEventListener("click", gotoToday) : __defers["$.__views.__alloyId258!click!gotoToday"] = true;
+    $.__views.buttonsContainer.add($.__views.__alloyId257);
+    gotoToday ? $.__views.__alloyId257.addEventListener("click", gotoToday) : __defers["$.__views.__alloyId257!click!gotoToday"] = true;
     $.__views.bottom_today = Ti.UI.createLabel({
         top: 0,
         width: 35,
@@ -714,7 +701,7 @@ function Controller() {
         left: 0,
         id: "bottom_today"
     });
-    $.__views.__alloyId258.add($.__views.bottom_today);
+    $.__views.__alloyId257.add($.__views.bottom_today);
     $.__views.txt_today = Ti.UI.createLabel({
         top: 1,
         width: Ti.UI.SIE,
@@ -726,9 +713,9 @@ function Controller() {
         text: "TODAY",
         id: "txt_today"
     });
-    $.__views.__alloyId258.add($.__views.txt_today);
+    $.__views.__alloyId257.add($.__views.txt_today);
     exports.destroy = function() {
-        __alloyId255.off("fetch destroy change add remove reset", syncTimeline);
+        __alloyId254.off("fetch destroy change add remove reset", syncTimeline);
     };
     _.extend($, $.__views);
     arguments[0] || {};
@@ -757,9 +744,9 @@ function Controller() {
     __defers["__alloyId210!click!mostraDettaglioEvento"] && __alloyId210.addEventListener("click", mostraDettaglioEvento);
     __defers["$.__views.is!end!loadMoreRows"] && $.__views.is.on("end", loadMoreRows);
     __defers["$.__views.timelineTable!postlayout!closeSpinner"] && $.__views.timelineTable.addEventListener("postlayout", closeSpinner);
-    __defers["$.__views.__alloyId256!click!refreshTable"] && $.__views.__alloyId256.addEventListener("click", refreshTable);
-    __defers["$.__views.__alloyId257!click!createNewPost"] && $.__views.__alloyId257.addEventListener("click", createNewPost);
-    __defers["$.__views.__alloyId258!click!gotoToday"] && $.__views.__alloyId258.addEventListener("click", gotoToday);
+    __defers["$.__views.__alloyId255!click!refreshTable"] && $.__views.__alloyId255.addEventListener("click", refreshTable);
+    __defers["$.__views.__alloyId256!click!createNewPost"] && $.__views.__alloyId256.addEventListener("click", createNewPost);
+    __defers["$.__views.__alloyId257!click!gotoToday"] && $.__views.__alloyId257.addEventListener("click", gotoToday);
     _.extend($, exports);
 }
 

@@ -13,13 +13,14 @@ function Controller() {
         theActionBar = $.win.activity.actionBar;
         if (void 0 != theActionBar) {
             theActionBar.displayHomeAsUp = true;
-            theActionBar.setIcon("images/logo-test.png");
+            theActionBar.setIcon("images/kernel-document-on.png");
             theActionBar.onHomeIconItemSelected = function() {
                 $.win.close({
                     animate: true
                 });
             };
         }
+        $.win.title = args.data.title;
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "rowDetailDOCUMENT";
@@ -32,8 +33,7 @@ function Controller() {
     $.__views.win = Ti.UI.createWindow({
         backgroundColor: "#F9F9F9",
         orientationModes: [ Ti.UI.PORTRAIT ],
-        id: "win",
-        title: "Documento"
+        id: "win"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
