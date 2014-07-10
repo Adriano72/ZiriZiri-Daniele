@@ -12,8 +12,8 @@ function Controller() {
         title: "Nuova Nota"
     });
     $.__views.window && $.addTopLevelView($.__views.window);
-    var __alloyId18 = [];
-    $.__views.__alloyId19 = Ti.UI.createTableViewRow({
+    var __alloyId58 = [];
+    $.__views.__alloyId59 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F2F2F2",
@@ -21,9 +21,9 @@ function Controller() {
         layout: "horizontal",
         left: 5,
         right: 5,
-        id: "__alloyId19"
+        id: "__alloyId59"
     });
-    __alloyId18.push($.__views.__alloyId19);
+    __alloyId58.push($.__views.__alloyId59);
     $.__views.title = Ti.UI.createTextField({
         borderColor: "#000000",
         color: "#336699",
@@ -37,8 +37,8 @@ function Controller() {
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "title"
     });
-    $.__views.__alloyId19.add($.__views.title);
-    $.__views.__alloyId20 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId59.add($.__views.title);
+    $.__views.__alloyId60 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F2F2F2",
@@ -46,9 +46,9 @@ function Controller() {
         layout: "horizontal",
         left: 5,
         right: 5,
-        id: "__alloyId20"
+        id: "__alloyId60"
     });
-    __alloyId18.push($.__views.__alloyId20);
+    __alloyId58.push($.__views.__alloyId60);
     $.__views.content = Ti.UI.createTextArea({
         borderColor: "#000000",
         color: "#336699",
@@ -62,7 +62,7 @@ function Controller() {
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "content"
     });
-    $.__views.__alloyId20.add($.__views.content);
+    $.__views.__alloyId60.add($.__views.content);
     $.__views.titolo = Ti.UI.createTableView({
         borderColor: "#000000",
         color: "#336699",
@@ -74,7 +74,7 @@ function Controller() {
         hintText: "Titolo",
         borderRadius: 5,
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        data: __alloyId18,
+        data: __alloyId58,
         id: "titolo"
     });
     $.__views.window.add($.__views.titolo);

@@ -86,7 +86,7 @@ exports.forwardGeo = function(address, _callback) {
             Ti.API.info("Frwrd Geocoding Success: " + JSON.stringify(e));
         },
         error: function() {
-            alert("Error");
+            alert("Nessun risultato dalla ricerca");
         }
     }) : alert("Servizi di localizzazione non abilitati!");
 };

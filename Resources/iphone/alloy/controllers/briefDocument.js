@@ -2,24 +2,25 @@ function Controller() {
     function syncAspects(e) {
         if (e && e.fromAdapter) return;
         syncAspects.opts || {};
-        var models = __alloyId40.models;
+        var models = __alloyId80.models;
         var len = models.length;
         var rows = [];
         for (var i = 0; len > i; i++) {
-            var __alloyId32 = models[i];
-            __alloyId32.__transform = transformData(__alloyId32);
-            var __alloyId34 = Ti.UI.createTableViewRow({
+            var __alloyId72 = models[i];
+            __alloyId72.__transform = transformData(__alloyId72);
+            var __alloyId74 = Ti.UI.createTableViewRow({
                 className: "itemRow",
                 width: Ti.UI.FILL
             });
-            rows.push(__alloyId34);
-            var __alloyId36 = Ti.UI.createView({
+            rows.push(__alloyId74);
+            showDetail ? __alloyId74.addEventListener("click", showDetail) : __defers["__alloyId74!click!showDetail"] = true;
+            var __alloyId76 = Ti.UI.createView({
                 left: 2,
                 layout: "horizontal",
                 width: Ti.UI.FILL
             });
-            __alloyId34.add(__alloyId36);
-            var __alloyId37 = Ti.UI.createLabel({
+            __alloyId74.add(__alloyId76);
+            var __alloyId77 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -31,10 +32,10 @@ function Controller() {
                 wordWrap: false,
                 ellipsize: true,
                 left: 0,
-                text: "undefined" != typeof __alloyId32.__transform["name"] ? __alloyId32.__transform["name"] : __alloyId32.get("name")
+                text: "undefined" != typeof __alloyId72.__transform["name"] ? __alloyId72.__transform["name"] : __alloyId72.get("name")
             });
-            __alloyId36.add(__alloyId37);
-            var __alloyId38 = Ti.UI.createLabel({
+            __alloyId76.add(__alloyId77);
+            var __alloyId78 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -45,10 +46,10 @@ function Controller() {
                 width: 95,
                 wordWrap: false,
                 ellipsize: true,
-                text: "undefined" != typeof __alloyId32.__transform["tipoFile"] ? __alloyId32.__transform["tipoFile"] : __alloyId32.get("tipoFile")
+                text: "undefined" != typeof __alloyId72.__transform["tipoFile"] ? __alloyId72.__transform["tipoFile"] : __alloyId72.get("tipoFile")
             });
-            __alloyId36.add(__alloyId38);
-            var __alloyId39 = Ti.UI.createLabel({
+            __alloyId76.add(__alloyId78);
+            var __alloyId79 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -61,7 +62,7 @@ function Controller() {
                 ellipsize: true,
                 text: "Visualizza"
             });
-            __alloyId36.add(__alloyId39);
+            __alloyId76.add(__alloyId79);
         }
         $.__views.aspectDocumentTable.setData(rows);
     }
@@ -70,6 +71,10 @@ function Controller() {
         attrs.tipoFile = attrs.data.format.name;
         return attrs;
     }
+    function showDetail(e) {
+        var selectedAspect = Alloy.Collections.aspettiDocument.at(e.index).attributes;
+        Alloy.createController("rowDetailDOCUMENT", selectedAspect).getView();
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "briefDocument";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -77,6 +82,7 @@ function Controller() {
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
+    var __defers = {};
     $.__views.briefDocument = Ti.UI.createView({
         top: 5,
         bottom: 5,
@@ -87,15 +93,15 @@ function Controller() {
         id: "briefDocument"
     });
     $.__views.briefDocument && $.addTopLevelView($.__views.briefDocument);
-    $.__views.__alloyId31 = Ti.UI.createLabel({
+    $.__views.__alloyId71 = Ti.UI.createLabel({
         height: 1,
         top: 0,
         touchEnabled: false,
         backgroundColor: "#D6D6D6",
         width: Ti.UI.FILL,
-        id: "__alloyId31"
+        id: "__alloyId71"
     });
-    $.__views.briefDocument.add($.__views.__alloyId31);
+    $.__views.briefDocument.add($.__views.__alloyId71);
     $.__views.documentIcon = Ti.UI.createLabel({
         top: 5,
         left: 5,
@@ -114,10 +120,10 @@ function Controller() {
         id: "aspectDocumentTable"
     });
     $.__views.briefDocument.add($.__views.aspectDocumentTable);
-    var __alloyId40 = Alloy.Collections["aspettiDocument"] || aspettiDocument;
-    __alloyId40.on("fetch destroy change add remove reset", syncAspects);
+    var __alloyId80 = Alloy.Collections["aspettiDocument"] || aspettiDocument;
+    __alloyId80.on("fetch destroy change add remove reset", syncAspects);
     exports.destroy = function() {
-        __alloyId40.off("fetch destroy change add remove reset", syncAspects);
+        __alloyId80.off("fetch destroy change add remove reset", syncAspects);
     };
     _.extend($, $.__views);
     arguments[0] || {};
@@ -126,6 +132,7 @@ function Controller() {
     $.briefDocument.addEventListener("close", function() {
         $.briefDocument.destroy();
     });
+    __defers["__alloyId74!click!showDetail"] && __alloyId74.addEventListener("click", showDetail);
     _.extend($, exports);
 }
 

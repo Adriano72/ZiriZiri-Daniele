@@ -6,102 +6,95 @@ function Controller() {
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
-    $.__views.row = Ti.UI.createTableViewRow({
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL,
-        backgroundColor: "#E3E3E3",
+    $.__views.rowDOCUMENT = Ti.UI.createTableViewRow({
         className: "itemRow",
-        layout: "vertical",
-        id: "row"
+        width: Ti.UI.FILL,
+        id: "rowDOCUMENT"
     });
-    $.__views.row && $.addTopLevelView($.__views.row);
-    $.__views.__alloyId63 = Ti.UI.createView({
-        height: 40,
+    $.__views.rowDOCUMENT && $.addTopLevelView($.__views.rowDOCUMENT);
+    $.__views.__alloyId123 = Ti.UI.createView({
+        left: 5,
+        right: 5,
+        top: 5,
+        bottom: 10,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: "#E9FA32",
+        backgroundColor: "#FFF",
+        height: 50,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId63"
+        id: "__alloyId123"
     });
-    $.__views.row.add($.__views.__alloyId63);
-    $.__views.description = Ti.UI.createLabel({
-        height: 30,
+    $.__views.rowDOCUMENT.add($.__views.__alloyId123);
+    $.__views.documentIcon = Ti.UI.createLabel({
+        left: 5,
+        width: 25,
+        height: 25,
+        backgroundImage: "/images/kernel-document-on.png",
+        id: "documentIcon"
+    });
+    $.__views.__alloyId123.add($.__views.documentIcon);
+    $.__views.__alloyId124 = Ti.UI.createView({
+        width: Ti.UI.SIZE,
+        left: 10,
+        id: "__alloyId124"
+    });
+    $.__views.__alloyId123.add($.__views.__alloyId124);
+    $.__views.__alloyId125 = Ti.UI.createView({
+        left: 2,
+        width: "85%",
+        height: Ti.UI.SIZE,
+        layout: "horizontal",
+        id: "__alloyId125"
+    });
+    $.__views.__alloyId124.add($.__views.__alloyId125);
+    $.__views.titolo = Ti.UI.createLabel({
         font: {
-            fontFamily: "AppIcons",
+            fontFamily: "SourceSansPro-Regular",
             fontSize: 18
         },
-        color: "#5C5C5C",
-        left: 5,
-        top: 5,
-        ellipsize: true,
+        color: "#444",
+        backgroundColor: "white",
+        width: 95,
         wordWrap: false,
-        touchEnabled: false,
-        width: 55,
-        id: "description"
-    });
-    $.__views.__alloyId63.add($.__views.description);
-    $.__views.titolo = Ti.UI.createLabel({
-        height: 40,
-        font: {
-            fontSize: 16
-        },
-        left: 5,
-        right: 5,
-        touchEnabled: false,
-        width: Ti.UI.SIZE,
+        ellipsize: true,
+        left: 0,
         id: "titolo"
     });
-    $.__views.__alloyId63.add($.__views.titolo);
-    $.__views.descrizione = Ti.UI.createLabel({
-        height: 40,
+    $.__views.__alloyId125.add($.__views.titolo);
+    $.__views.formato = Ti.UI.createLabel({
         font: {
-            fontSize: 16
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
         },
-        left: 5,
-        right: 5,
-        touchEnabled: false,
-        width: Ti.UI.SIZE,
-        id: "descrizione"
+        color: "#999",
+        backgroundColor: "white",
+        width: 95,
+        wordWrap: false,
+        ellipsize: true,
+        id: "formato"
     });
-    $.__views.__alloyId63.add($.__views.descrizione);
-    $.__views.__alloyId64 = Ti.UI.createView({
-        height: 40,
-        touchEnabled: false,
-        layout: "horizontal",
-        id: "__alloyId64"
-    });
-    $.__views.row.add($.__views.__alloyId64);
-    $.__views.fileSize = Ti.UI.createLabel({
-        height: 40,
+    $.__views.__alloyId125.add($.__views.formato);
+    $.__views.visualizza = Ti.UI.createLabel({
         font: {
-            fontSize: 16
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
         },
-        left: 5,
-        right: 5,
-        touchEnabled: false,
-        width: Ti.UI.SIZE,
-        id: "fileSize"
+        color: "#5FAEE3",
+        backgroundColor: "white",
+        text: "Visualizza",
+        width: 95,
+        wordWrap: false,
+        ellipsize: true,
+        id: "visualizza"
     });
-    $.__views.__alloyId64.add($.__views.fileSize);
-    $.__views.fileName = Ti.UI.createLabel({
-        height: 40,
-        font: {
-            fontSize: 16
-        },
-        left: 5,
-        right: 5,
-        touchEnabled: false,
-        width: Ti.UI.SIZE,
-        id: "fileName"
-    });
-    $.__views.__alloyId64.add($.__views.fileName);
+    $.__views.__alloyId125.add($.__views.visualizza);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    Ti.API.info("VALORE PASSATO: " + JSON.stringify(args));
-    $.row.id_code = args.id_code, $.description.text = "  " + icons.paper_clip;
     $.titolo.text = args.titolo;
-    $.descrizione.text = args.descrizione;
-    $.fileSize.text = args.size;
-    $.fileName.text = args.name;
+    $.formato.text = args.formato;
     _.extend($, exports);
 }
 

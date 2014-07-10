@@ -2,20 +2,20 @@ function Controller() {
     function syncTimeline(e) {
         if (e && e.fromAdapter) return;
         syncTimeline.opts || {};
-        var models = __alloyId163.models;
+        var models = __alloyId225.models;
         var len = models.length;
         var rows = [];
         for (var i = 0; len > i; i++) {
-            var __alloyId116 = models[i];
-            __alloyId116.__transform = transformData(__alloyId116);
-            var __alloyId118 = Ti.UI.createTableViewRow({
+            var __alloyId180 = models[i];
+            __alloyId180.__transform = transformData(__alloyId180);
+            var __alloyId182 = Ti.UI.createTableViewRow({
                 backgroundColor: "#F9F9F9",
-                className: "itemRow",
+                className: "itemrow",
                 height: 170
             });
-            rows.push(__alloyId118);
-            mostraDettaglioEvento ? __alloyId118.addEventListener("click", mostraDettaglioEvento) : __defers["__alloyId118!click!mostraDettaglioEvento"] = true;
-            var __alloyId120 = Ti.UI.createView({
+            rows.push(__alloyId182);
+            mostraDettaglioEvento ? __alloyId182.addEventListener("click", mostraDettaglioEvento) : __defers["__alloyId182!click!mostraDettaglioEvento"] = true;
+            var __alloyId184 = Ti.UI.createView({
                 left: 5,
                 right: 5,
                 top: 5,
@@ -26,9 +26,8 @@ function Controller() {
                 touchEnabled: false,
                 layout: "vertical"
             });
-            __alloyId118.add(__alloyId120);
-            slideRow ? __alloyId120.addEventListener("swipe", slideRow) : __defers["__alloyId120!swipe!slideRow"] = true;
-            var __alloyId121 = Ti.UI.createView({
+            __alloyId182.add(__alloyId184);
+            var __alloyId185 = Ti.UI.createView({
                 height: Ti.UI.SIZE,
                 left: 10,
                 right: 10,
@@ -36,18 +35,18 @@ function Controller() {
                 touchEnabled: false,
                 layout: "horizontal"
             });
-            __alloyId120.add(__alloyId121);
-            var __alloyId122 = Ti.UI.createImageView({
+            __alloyId184.add(__alloyId185);
+            var __alloyId186 = Ti.UI.createImageView({
                 left: 0,
                 top: 0,
-                image: "/images/android-robot.jpg",
                 touchEnabled: false,
                 width: 70,
                 height: 70,
-                borderRadius: 4
+                borderRadius: 4,
+                image: "undefined" != typeof __alloyId180.__transform["catImage"] ? __alloyId180.__transform["catImage"] : __alloyId180.get("catImage")
             });
-            __alloyId121.add(__alloyId122);
-            var __alloyId123 = Ti.UI.createView({
+            __alloyId185.add(__alloyId186);
+            var __alloyId187 = Ti.UI.createView({
                 left: 10,
                 top: 0,
                 width: Ti.UI.SIZE,
@@ -55,8 +54,8 @@ function Controller() {
                 touchEnabled: false,
                 layout: "vertical"
             });
-            __alloyId121.add(__alloyId123);
-            var __alloyId124 = Ti.UI.createView({
+            __alloyId185.add(__alloyId187);
+            var __alloyId188 = Ti.UI.createView({
                 top: 0,
                 left: 0,
                 width: Ti.UI.SIZE,
@@ -64,8 +63,8 @@ function Controller() {
                 touchEnabled: false,
                 layout: "horizontal"
             });
-            __alloyId123.add(__alloyId124);
-            var __alloyId125 = Ti.UI.createLabel({
+            __alloyId187.add(__alloyId188);
+            var __alloyId189 = Ti.UI.createLabel({
                 top: 0,
                 width: Ti.UI.SIZE,
                 height: Ti.UI.SIZE,
@@ -78,10 +77,10 @@ function Controller() {
                 textAlign: "right",
                 wordWrap: false,
                 left: 0,
-                text: "undefined" != typeof __alloyId116.__transform["postDate"] ? __alloyId116.__transform["postDate"] : __alloyId116.get("postDate")
+                text: "undefined" != typeof __alloyId180.__transform["postDate"] ? __alloyId180.__transform["postDate"] : __alloyId180.get("postDate")
             });
-            __alloyId124.add(__alloyId125);
-            var __alloyId126 = Ti.UI.createView({
+            __alloyId188.add(__alloyId189);
+            var __alloyId190 = Ti.UI.createView({
                 touchEnabled: false,
                 height: Ti.UI.SIZE,
                 layout: "horizontal",
@@ -89,48 +88,48 @@ function Controller() {
                 left: 20,
                 top: 0
             });
-            __alloyId124.add(__alloyId126);
-            var __alloyId127 = Ti.UI.createImageView({
+            __alloyId188.add(__alloyId190);
+            var __alloyId191 = Ti.UI.createImageView({
                 width: 15,
                 height: 15,
                 left: 5,
                 top: 0,
-                image: "undefined" != typeof __alloyId116.__transform["rating_1"] ? __alloyId116.__transform["rating_1"] : __alloyId116.get("rating_1")
+                image: "undefined" != typeof __alloyId180.__transform["rating_1"] ? __alloyId180.__transform["rating_1"] : __alloyId180.get("rating_1")
             });
-            __alloyId126.add(__alloyId127);
-            var __alloyId128 = Ti.UI.createImageView({
+            __alloyId190.add(__alloyId191);
+            var __alloyId192 = Ti.UI.createImageView({
                 width: 15,
                 height: 15,
                 left: 5,
                 top: 0,
-                image: "undefined" != typeof __alloyId116.__transform["rating_2"] ? __alloyId116.__transform["rating_2"] : __alloyId116.get("rating_2")
+                image: "undefined" != typeof __alloyId180.__transform["rating_2"] ? __alloyId180.__transform["rating_2"] : __alloyId180.get("rating_2")
             });
-            __alloyId126.add(__alloyId128);
-            var __alloyId129 = Ti.UI.createImageView({
+            __alloyId190.add(__alloyId192);
+            var __alloyId193 = Ti.UI.createImageView({
                 width: 15,
                 height: 15,
                 left: 5,
                 top: 0,
-                image: "undefined" != typeof __alloyId116.__transform["rating_3"] ? __alloyId116.__transform["rating_3"] : __alloyId116.get("rating_3")
+                image: "undefined" != typeof __alloyId180.__transform["rating_3"] ? __alloyId180.__transform["rating_3"] : __alloyId180.get("rating_3")
             });
-            __alloyId126.add(__alloyId129);
-            var __alloyId130 = Ti.UI.createImageView({
+            __alloyId190.add(__alloyId193);
+            var __alloyId194 = Ti.UI.createImageView({
                 width: 15,
                 height: 15,
                 left: 5,
                 top: 0,
-                image: "undefined" != typeof __alloyId116.__transform["rating_4"] ? __alloyId116.__transform["rating_4"] : __alloyId116.get("rating_4")
+                image: "undefined" != typeof __alloyId180.__transform["rating_4"] ? __alloyId180.__transform["rating_4"] : __alloyId180.get("rating_4")
             });
-            __alloyId126.add(__alloyId130);
-            var __alloyId131 = Ti.UI.createImageView({
+            __alloyId190.add(__alloyId194);
+            var __alloyId195 = Ti.UI.createImageView({
                 width: 15,
                 height: 15,
                 left: 5,
                 top: 0,
-                image: "undefined" != typeof __alloyId116.__transform["rating_5"] ? __alloyId116.__transform["rating_5"] : __alloyId116.get("rating_5")
+                image: "undefined" != typeof __alloyId180.__transform["rating_5"] ? __alloyId180.__transform["rating_5"] : __alloyId180.get("rating_5")
             });
-            __alloyId126.add(__alloyId131);
-            var __alloyId132 = Ti.UI.createLabel({
+            __alloyId190.add(__alloyId195);
+            var __alloyId196 = Ti.UI.createLabel({
                 top: 0,
                 width: "70%",
                 height: 100,
@@ -143,10 +142,10 @@ function Controller() {
                 left: 0,
                 ellipsize: true,
                 wordWrap: true,
-                text: "undefined" != typeof __alloyId116.__transform["name"] ? __alloyId116.__transform["name"] : __alloyId116.get("name")
+                text: "undefined" != typeof __alloyId180.__transform["name"] ? __alloyId180.__transform["name"] : __alloyId180.get("name")
             });
-            __alloyId123.add(__alloyId132);
-            var __alloyId133 = Ti.UI.createView({
+            __alloyId187.add(__alloyId196);
+            var __alloyId197 = Ti.UI.createView({
                 left: 10,
                 top: 0,
                 width: Ti.UI.FILL,
@@ -154,25 +153,23 @@ function Controller() {
                 touchEnabled: false,
                 layout: "horizontal"
             });
-            __alloyId120.add(__alloyId133);
-            var __alloyId135 = Ti.UI.createView({
+            __alloyId184.add(__alloyId197);
+            var __alloyId199 = Ti.UI.createView({
                 width: Ti.UI.SIZE,
                 touchEnabled: false,
                 layout: "horizontal",
                 left: 0
             });
-            __alloyId133.add(__alloyId135);
-            var __alloyId136 = Ti.UI.createLabel({
-                top: 10,
+            __alloyId197.add(__alloyId199);
+            var __alloyId200 = Ti.UI.createImageView({
                 width: 20,
                 height: 20,
-                color: "#000",
                 touchEnabled: false,
-                backgroundImage: "/images/head-category.png",
+                image: "/images/head-category.png",
                 left: 0
             });
-            __alloyId135.add(__alloyId136);
-            var __alloyId137 = Ti.UI.createLabel({
+            __alloyId199.add(__alloyId200);
+            var __alloyId201 = Ti.UI.createLabel({
                 top: 10,
                 width: 70,
                 height: 18,
@@ -185,27 +182,25 @@ function Controller() {
                 },
                 touchEnabled: false,
                 left: 5,
-                text: "undefined" != typeof __alloyId116.__transform["categoria"] ? __alloyId116.__transform["categoria"] : __alloyId116.get("categoria")
+                text: "undefined" != typeof __alloyId180.__transform["categoria"] ? __alloyId180.__transform["categoria"] : __alloyId180.get("categoria")
             });
-            __alloyId135.add(__alloyId137);
-            var __alloyId139 = Ti.UI.createView({
+            __alloyId199.add(__alloyId201);
+            var __alloyId203 = Ti.UI.createView({
                 width: Ti.UI.SIZE,
                 touchEnabled: false,
                 layout: "horizontal",
                 left: 40
             });
-            __alloyId133.add(__alloyId139);
-            var __alloyId140 = Ti.UI.createLabel({
-                top: 10,
+            __alloyId197.add(__alloyId203);
+            var __alloyId204 = Ti.UI.createImageView({
                 width: 20,
                 height: 20,
-                color: "#000",
                 touchEnabled: false,
-                backgroundImage: "/images/head-tag.png",
+                image: "/images/head-tag.png",
                 left: 0
             });
-            __alloyId139.add(__alloyId140);
-            var __alloyId141 = Ti.UI.createLabel({
+            __alloyId203.add(__alloyId204);
+            var __alloyId205 = Ti.UI.createLabel({
                 top: 10,
                 width: Ti.UI.SIZE,
                 height: 18,
@@ -218,27 +213,25 @@ function Controller() {
                 },
                 touchEnabled: false,
                 left: 5,
-                text: "undefined" != typeof __alloyId116.__transform["tag"] ? __alloyId116.__transform["tag"] : __alloyId116.get("tag")
+                text: "undefined" != typeof __alloyId180.__transform["tag"] ? __alloyId180.__transform["tag"] : __alloyId180.get("tag")
             });
-            __alloyId139.add(__alloyId141);
-            var __alloyId143 = Ti.UI.createView({
+            __alloyId203.add(__alloyId205);
+            var __alloyId207 = Ti.UI.createView({
                 width: Ti.UI.SIZE,
                 touchEnabled: false,
                 layout: "horizontal",
                 left: 40
             });
-            __alloyId133.add(__alloyId143);
-            var __alloyId144 = Ti.UI.createLabel({
-                top: 10,
+            __alloyId197.add(__alloyId207);
+            var __alloyId208 = Ti.UI.createImageView({
                 width: 20,
                 height: 20,
-                color: "#000",
                 touchEnabled: false,
-                backgroundImage: "/images/head-story.png",
+                image: "/images/head-story.png",
                 left: 0
             });
-            __alloyId143.add(__alloyId144);
-            var __alloyId145 = Ti.UI.createLabel({
+            __alloyId207.add(__alloyId208);
+            var __alloyId209 = Ti.UI.createLabel({
                 top: 10,
                 width: Ti.UI.SIZE,
                 height: 18,
@@ -253,142 +246,120 @@ function Controller() {
                 left: 5,
                 text: "storie"
             });
-            __alloyId143.add(__alloyId145);
-            var __alloyId147 = Ti.UI.createView({
+            __alloyId207.add(__alloyId209);
+            var __alloyId211 = Ti.UI.createView({
                 height: 1,
                 top: 0,
                 touchEnabled: false,
                 backgroundColor: "#D6D6D6",
                 width: "100%"
             });
-            __alloyId120.add(__alloyId147);
-            var __alloyId148 = Ti.UI.createView({
+            __alloyId184.add(__alloyId211);
+            var __alloyId212 = Ti.UI.createView({
                 height: 45,
                 width: Ti.UI.FILL,
                 touchEnabled: false,
                 layout: "horizontal",
                 left: 5
             });
-            __alloyId120.add(__alloyId148);
-            var __alloyId149 = Ti.UI.createLabel({
-                top: 10,
-                width: 25,
-                height: 25,
-                color: "#000",
+            __alloyId184.add(__alloyId212);
+            var __alloyId213 = Ti.UI.createImageView({
                 left: 5,
+                top: 10,
                 bottom: 10,
-                image: "/images/android-robot.jpg",
                 touchEnabled: false,
                 center: 45,
-                backgroundImage: "undefined" != typeof __alloyId116.__transform["iconEvent"] ? __alloyId116.__transform["iconEvent"] : __alloyId116.get("iconEvent")
-            });
-            __alloyId148.add(__alloyId149);
-            var __alloyId150 = Ti.UI.createLabel({
-                top: 10,
                 width: 25,
                 height: 25,
-                color: "#000",
+                image: "undefined" != typeof __alloyId180.__transform["iconEvent"] ? __alloyId180.__transform["iconEvent"] : __alloyId180.get("iconEvent")
+            });
+            __alloyId212.add(__alloyId213);
+            var __alloyId214 = Ti.UI.createImageView({
                 left: 15,
+                top: 10,
                 bottom: 10,
-                image: "/images/android-robot.jpg",
                 touchEnabled: false,
                 center: 45,
-                backgroundImage: "undefined" != typeof __alloyId116.__transform["iconCashFlow"] ? __alloyId116.__transform["iconCashFlow"] : __alloyId116.get("iconCashFlow")
-            });
-            __alloyId148.add(__alloyId150);
-            var __alloyId151 = Ti.UI.createLabel({
-                top: 10,
                 width: 25,
                 height: 25,
-                color: "#000",
+                image: "undefined" != typeof __alloyId180.__transform["iconCashFlow"] ? __alloyId180.__transform["iconCashFlow"] : __alloyId180.get("iconCashFlow")
+            });
+            __alloyId212.add(__alloyId214);
+            var __alloyId215 = Ti.UI.createImageView({
                 left: 15,
+                top: 10,
                 bottom: 10,
-                image: "/images/android-robot.jpg",
                 touchEnabled: false,
                 center: 45,
-                backgroundImage: "undefined" != typeof __alloyId116.__transform["iconDocument"] ? __alloyId116.__transform["iconDocument"] : __alloyId116.get("iconDocument")
-            });
-            __alloyId148.add(__alloyId151);
-            var __alloyId152 = Ti.UI.createLabel({
-                top: 10,
                 width: 25,
                 height: 25,
-                color: "#000",
+                image: "undefined" != typeof __alloyId180.__transform["iconDocument"] ? __alloyId180.__transform["iconDocument"] : __alloyId180.get("iconDocument")
+            });
+            __alloyId212.add(__alloyId215);
+            var __alloyId216 = Ti.UI.createImageView({
                 left: 15,
+                top: 10,
                 bottom: 10,
-                image: "/images/android-robot.jpg",
                 touchEnabled: false,
                 center: 45,
-                backgroundImage: "undefined" != typeof __alloyId116.__transform["iconNote"] ? __alloyId116.__transform["iconNote"] : __alloyId116.get("iconNote")
-            });
-            __alloyId148.add(__alloyId152);
-            var __alloyId153 = Ti.UI.createLabel({
-                top: 10,
                 width: 25,
                 height: 25,
-                color: "#000",
+                image: "undefined" != typeof __alloyId180.__transform["iconNote"] ? __alloyId180.__transform["iconNote"] : __alloyId180.get("iconNote")
+            });
+            __alloyId212.add(__alloyId216);
+            var __alloyId217 = Ti.UI.createImageView({
                 left: 15,
+                top: 10,
                 bottom: 10,
-                image: "/images/android-robot.jpg",
                 touchEnabled: false,
                 center: 45,
-                backgroundImage: "undefined" != typeof __alloyId116.__transform["iconLink"] ? __alloyId116.__transform["iconLink"] : __alloyId116.get("iconLink")
-            });
-            __alloyId148.add(__alloyId153);
-            var __alloyId154 = Ti.UI.createLabel({
-                top: 10,
                 width: 25,
                 height: 25,
-                color: "#000",
+                image: "undefined" != typeof __alloyId180.__transform["iconLink"] ? __alloyId180.__transform["iconLink"] : __alloyId180.get("iconLink")
+            });
+            __alloyId212.add(__alloyId217);
+            var __alloyId218 = Ti.UI.createImageView({
                 left: 15,
+                top: 10,
                 bottom: 10,
-                image: "/images/android-robot.jpg",
                 touchEnabled: false,
                 center: 45,
-                backgroundImage: "undefined" != typeof __alloyId116.__transform["iconCommunication"] ? __alloyId116.__transform["iconCommunication"] : __alloyId116.get("iconCommunication")
+                width: 25,
+                height: 25,
+                backgroundImage: "/images/kernel-comunicazioni-off.png",
+                image: "undefined" != typeof __alloyId180.__transform["iconCommunication"] ? __alloyId180.__transform["iconCommunication"] : __alloyId180.get("iconCommunication")
             });
-            __alloyId148.add(__alloyId154);
-            var __alloyId156 = Ti.UI.createView({
+            __alloyId212.add(__alloyId218);
+            var __alloyId220 = Ti.UI.createView({
                 height: Ti.UI.SIZE,
                 width: Ti.UI.FILL,
                 touchEnabled: false,
                 layout: "horizontal",
                 left: 5
             });
-            __alloyId148.add(__alloyId156);
-            var __alloyId158 = Ti.UI.createView({
+            __alloyId212.add(__alloyId220);
+            var __alloyId222 = Ti.UI.createView({
                 height: Ti.UI.SIZE,
                 left: 0,
                 width: Ti.UI.FILL
             });
-            __alloyId156.add(__alloyId158);
-            var __alloyId159 = Ti.UI.createLabel({
-                top: 10,
-                width: Ti.UI.SIZE,
-                height: 25,
-                color: "#5FAEE3",
-                font: {
-                    fontFamily: "SourceSansPro-Regular",
-                    fontSize: 14
-                },
-                right: 30,
-                bottom: 10,
-                text: "Show All"
-            });
-            __alloyId158.add(__alloyId159);
-            var __alloyId160 = Ti.UI.createLabel({
-                top: 10,
-                width: 25,
-                height: 25,
-                color: "#000",
+            __alloyId220.add(__alloyId222);
+            var __alloyId223 = Ti.UI.createImageView({
                 right: 0,
+                top: 10,
                 bottom: 10,
-                backgroundImage: "/images/kernel-show-all.png",
-                touchEnabled: false
+                image: "/images/kernel-show-all.png",
+                touchEnabled: false,
+                width: 25,
+                height: 25
             });
-            __alloyId158.add(__alloyId160);
+            __alloyId222.add(__alloyId223);
         }
         $.__views.timelineTable.setData(rows);
+    }
+    function manageClose() {
+        var activity = Titanium.Android.currentActivity;
+        activity.finish();
     }
     function openEvent() {
         theActionBar = $.win.activity.actionBar;
@@ -398,6 +369,16 @@ function Controller() {
             theActionBar.displayHomeAsUp = false;
             theActionBar.setIcon("images/logo-test.png");
         }
+        setTimeout(function() {
+            net.getData(0, 25, function(timeline_obj) {
+                Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
+                Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
+                    silent: true
+                });
+                Ti.API.info("Sync Executed by SILENT SERVICE");
+                syncTimeline();
+            });
+        }, 0);
     }
     function closeSpinner() {
         Alloy.Globals.loading.hide();
@@ -451,7 +432,9 @@ function Controller() {
     }
     function transformData(model) {
         var attrs = model.toJSON();
-        attrs.postDate = moment(attrs.referenceTime).fromNow();
+        var diffTime = moment().diff(attrs.referenceTime, "days");
+        attrs.catImage = _.isNull(attrs.category) || _.isNull(attrs.category.code) ? "/images/android-robot.jpg" : "/images/" + attrs.category.code.slice(0, 2) + ".png";
+        attrs.postDate = diffTime > 1 ? moment(attrs.referenceTime).format("LL") : moment(attrs.referenceTime).fromNow();
         attrs.categoria = _.isNull(attrs.category) ? "" : attrs.category.name;
         attrs.iconEvent = checkAspects(attrs.aspects, "EVENTDATATYPE_CODE");
         attrs.iconCashFlow = checkAspects(attrs.aspects, "CASHFLOWDATATYPE_CODE");
@@ -469,48 +452,33 @@ function Controller() {
     }
     function refreshTable() {
         Alloy.Globals.loading.show("Sincronizzazione...", false);
-        net.getData(0, 100, function(timeline_obj) {
+        net.getData(0, 25, function(timeline_obj) {
             Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
             Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
                 silent: true
             });
             Ti.API.info("COLLECTION LENGTH AFTER SYNC: " + Alloy.Collections.Timeline.length);
             syncTimeline();
+            lastNumberOfRecordsFetched = timeTemp.length;
+            presentPage = 0;
             Alloy.Globals.loading.hide();
         });
     }
     function gotoToday() {
         $.timelineTable.scrollToTop(0);
     }
-    function loadMoreRows(e) {
-        var timelineDataObj = Ti.App.Properties.getObject("timelineProp");
-        Ti.API.info("OGGETTO PROPERTY: " + JSON.stringify(timelineDataObj));
-        var begin = Alloy.Collections.Timeline.length;
-        var end = Alloy.Collections.Timeline.length + 10;
-        var slice = timelineDataObj.slice(begin, end);
-        Alloy.Collections.Timeline.add(slice, {
-            silent: true
-        });
-        syncTimeline();
-        e.done();
-    }
     function mostraDettaglioEvento(e) {
         Alloy.Models.Post.set(Alloy.Collections.Timeline.at(e.index));
         Alloy.createController("dettaglio_post").getView();
     }
-    function slideRow(e) {
-        Ti.API.info("SLIDE****");
-        e.source.left -= 50;
-        e.source.right += 50;
-    }
     function createNewPost() {
         Alloy.createController("newPost", function() {
-            refreshTable();
+            Alloy.Globals.loading.hide();
         }).getView();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "timeline_win";
-    var __parentSymbol = arguments[0] ? arguments[0]["__parentSymbol"] : null;
+    arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
@@ -518,29 +486,21 @@ function Controller() {
     var __defers = {};
     $.__views.win = Ti.UI.createWindow({
         backgroundColor: "#F9F9F9",
-        exitOnClose: "true",
+        orientationModes: [ Ti.UI.PORTRAIT ],
         id: "win",
         title: "Diario"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
-    $.__views.is = Alloy.createWidget("nl.fokkezb.infiniteScroll", "widget", {
-        id: "is",
-        msgDone: "Fine della lista",
-        __parentSymbol: __parentSymbol
-    });
-    loadMoreRows ? $.__views.is.on("end", loadMoreRows) : __defers["$.__views.is!end!loadMoreRows"] = true;
+    manageClose ? $.__views.win.addEventListener("android:back", manageClose) : __defers["$.__views.win!android:back!manageClose"] = true;
     $.__views.timelineTable = Ti.UI.createTableView({
         separatorColor: "#transparent",
         bottom: 60,
-        footerView: $.__views.is.getProxyPropertyEx("footerView", {
-            recurse: true
-        }),
         id: "timelineTable"
     });
     $.__views.win.add($.__views.timelineTable);
-    var __alloyId163 = Alloy.Collections["Timeline"] || Timeline;
-    __alloyId163.on("fetch destroy change add remove reset", syncTimeline);
+    var __alloyId225 = Alloy.Collections["Timeline"] || Timeline;
+    __alloyId225.on("fetch destroy change add remove reset", syncTimeline);
     closeSpinner ? $.__views.timelineTable.addEventListener("postlayout", closeSpinner) : __defers["$.__views.timelineTable!postlayout!closeSpinner"] = true;
     $.__views.bottomBar = Ti.UI.createView({
         backgroundColor: "#5FAEE3",
@@ -559,15 +519,15 @@ function Controller() {
         id: "buttonsContainer"
     });
     $.__views.bottomBar.add($.__views.buttonsContainer);
-    $.__views.__alloyId164 = Ti.UI.createView({
+    $.__views.__alloyId226 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         layout: "vertical",
         left: 0,
-        id: "__alloyId164"
+        id: "__alloyId226"
     });
-    $.__views.buttonsContainer.add($.__views.__alloyId164);
-    refreshTable ? $.__views.__alloyId164.addEventListener("click", refreshTable) : __defers["$.__views.__alloyId164!click!refreshTable"] = true;
+    $.__views.buttonsContainer.add($.__views.__alloyId226);
+    refreshTable ? $.__views.__alloyId226.addEventListener("click", refreshTable) : __defers["$.__views.__alloyId226!click!refreshTable"] = true;
     $.__views.bottom_sync = Ti.UI.createLabel({
         top: 0,
         width: 35,
@@ -577,7 +537,7 @@ function Controller() {
         left: 0,
         id: "bottom_sync"
     });
-    $.__views.__alloyId164.add($.__views.bottom_sync);
+    $.__views.__alloyId226.add($.__views.bottom_sync);
     $.__views.txt_sync = Ti.UI.createLabel({
         top: 1,
         width: Ti.UI.SIE,
@@ -589,16 +549,16 @@ function Controller() {
         text: "SYNC",
         id: "txt_sync"
     });
-    $.__views.__alloyId164.add($.__views.txt_sync);
-    $.__views.__alloyId165 = Ti.UI.createView({
+    $.__views.__alloyId226.add($.__views.txt_sync);
+    $.__views.__alloyId227 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         layout: "vertical",
         left: 70,
-        id: "__alloyId165"
+        id: "__alloyId227"
     });
-    $.__views.buttonsContainer.add($.__views.__alloyId165);
-    createNewPost ? $.__views.__alloyId165.addEventListener("click", createNewPost) : __defers["$.__views.__alloyId165!click!createNewPost"] = true;
+    $.__views.buttonsContainer.add($.__views.__alloyId227);
+    createNewPost ? $.__views.__alloyId227.addEventListener("click", createNewPost) : __defers["$.__views.__alloyId227!click!createNewPost"] = true;
     $.__views.bottom_new = Ti.UI.createLabel({
         top: 0,
         width: 35,
@@ -608,7 +568,7 @@ function Controller() {
         left: 0,
         id: "bottom_new"
     });
-    $.__views.__alloyId165.add($.__views.bottom_new);
+    $.__views.__alloyId227.add($.__views.bottom_new);
     $.__views.txt_new = Ti.UI.createLabel({
         top: 1,
         width: Ti.UI.SIE,
@@ -620,16 +580,16 @@ function Controller() {
         text: "NEW POST",
         id: "txt_new"
     });
-    $.__views.__alloyId165.add($.__views.txt_new);
-    $.__views.__alloyId166 = Ti.UI.createView({
+    $.__views.__alloyId227.add($.__views.txt_new);
+    $.__views.__alloyId228 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         layout: "vertical",
         left: 70,
-        id: "__alloyId166"
+        id: "__alloyId228"
     });
-    $.__views.buttonsContainer.add($.__views.__alloyId166);
-    gotoToday ? $.__views.__alloyId166.addEventListener("click", gotoToday) : __defers["$.__views.__alloyId166!click!gotoToday"] = true;
+    $.__views.buttonsContainer.add($.__views.__alloyId228);
+    gotoToday ? $.__views.__alloyId228.addEventListener("click", gotoToday) : __defers["$.__views.__alloyId228!click!gotoToday"] = true;
     $.__views.bottom_today = Ti.UI.createLabel({
         top: 0,
         width: 35,
@@ -639,7 +599,7 @@ function Controller() {
         left: 0,
         id: "bottom_today"
     });
-    $.__views.__alloyId166.add($.__views.bottom_today);
+    $.__views.__alloyId228.add($.__views.bottom_today);
     $.__views.txt_today = Ti.UI.createLabel({
         top: 1,
         width: Ti.UI.SIE,
@@ -651,83 +611,36 @@ function Controller() {
         text: "TODAY",
         id: "txt_today"
     });
-    $.__views.__alloyId166.add($.__views.txt_today);
+    $.__views.__alloyId228.add($.__views.txt_today);
     exports.destroy = function() {
-        __alloyId163.off("fetch destroy change add remove reset", syncTimeline);
+        __alloyId225.off("fetch destroy change add remove reset", syncTimeline);
     };
     _.extend($, $.__views);
     arguments[0] || {};
-    $.win.open();
     var net = require("net");
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     moment.lang("it");
+    var presentPage = 0;
+    var lastNumberOfRecordsFetched;
     var theActionBar = null;
-    $.is.init($.timelineTable);
     var timeTemp = Ti.App.Properties.getObject("timelineProp");
-    Ti.API.info("RETRIVING CACHED DATA, LENGTH STORED PROPERTY: " + timeTemp.length);
-    Ti.API.info("OGGETTO PROPERTY TIMELINE; " + JSON.stringify(timeTemp));
+    lastNumberOfRecordsFetched = timeTemp.length;
+    Ti.API.info("NUM RECORDS FETCHED AT START: " + lastNumberOfRecordsFetched);
     Alloy.Collections.Timeline.reset(timeTemp.slice(0, 10), {
         silent: true
     });
     syncTimeline();
     Ti.API.info("LENGTH COLLECTION: " + Alloy.Collections.Timeline.length);
-    net.getCategories(function(categoriesData) {
-        var objCategorie = [];
-        _.forEach(categoriesData.data, function(value) {
-            objCategorie.push({
-                title: value.name,
-                id: value.id,
-                version: value.version
-            });
-        });
-        Ti.App.Properties.setObject("elencoCategorie", objCategorie);
-    });
-    net.getPostTemplate(0, 1, function(p_postTemplate) {
-        Alloy.Models.Template = new Backbone.Model();
-        Alloy.Models.Template.set(p_postTemplate);
-        Ti.API.info("POST TEMPLATE MODEL: " + JSON.stringify(Alloy.Models.Template));
-        var arrayTemplateIds = [];
-        _.forEach(p_postTemplate.data[0].modules, function(value) {
-            arrayTemplateIds.push(value.id);
-        });
-        Ti.App.Properties.setList("postTemplateIds", arrayTemplateIds);
-        Ti.API.info("ID TEMPLATE ASPECT: " + Ti.App.Properties.getList("postTemplateIds"));
-    });
-    net.getTipoMovimento(function(p_tipoMovimento) {
-        var objTipoMov = [];
-        _.forEach(p_tipoMovimento.data, function(value) {
-            objTipoMov.push({
-                title: value.descrizioneBreve,
-                id: value.id,
-                codice: value.codice,
-                version: value.version
-            });
-        });
-        Ti.App.Properties.setObject("elencoTipoMov", objTipoMov);
-    });
-    net.getPagamentoIncasso(function(p_pagamentoIncasso) {
-        var objPagamIncasso = [];
-        _.forEach(p_pagamentoIncasso.data, function(value) {
-            objPagamIncasso.push({
-                title: value.descrizioneBreve,
-                id: value.id,
-                version: value.version
-            });
-        });
-        Ti.App.Properties.setObject("elencoPagamIncasso", objPagamIncasso);
-    });
-    $.win.addEventListener("close", function() {
-        $.win.destroy();
-    });
+    Ti.API.info("TIMELINE LENGTH STORED PROPERTY: " + timeTemp.length);
+    $.win.open();
     __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
-    __defers["__alloyId118!click!mostraDettaglioEvento"] && __alloyId118.addEventListener("click", mostraDettaglioEvento);
-    __defers["__alloyId120!swipe!slideRow"] && __alloyId120.addEventListener("swipe", slideRow);
-    __defers["$.__views.is!end!loadMoreRows"] && $.__views.is.on("end", loadMoreRows);
+    __defers["$.__views.win!android:back!manageClose"] && $.__views.win.addEventListener("android:back", manageClose);
+    __defers["__alloyId182!click!mostraDettaglioEvento"] && __alloyId182.addEventListener("click", mostraDettaglioEvento);
     __defers["$.__views.timelineTable!postlayout!closeSpinner"] && $.__views.timelineTable.addEventListener("postlayout", closeSpinner);
-    __defers["$.__views.__alloyId164!click!refreshTable"] && $.__views.__alloyId164.addEventListener("click", refreshTable);
-    __defers["$.__views.__alloyId165!click!createNewPost"] && $.__views.__alloyId165.addEventListener("click", createNewPost);
-    __defers["$.__views.__alloyId166!click!gotoToday"] && $.__views.__alloyId166.addEventListener("click", gotoToday);
+    __defers["$.__views.__alloyId226!click!refreshTable"] && $.__views.__alloyId226.addEventListener("click", refreshTable);
+    __defers["$.__views.__alloyId227!click!createNewPost"] && $.__views.__alloyId227.addEventListener("click", createNewPost);
+    __defers["$.__views.__alloyId228!click!gotoToday"] && $.__views.__alloyId228.addEventListener("click", gotoToday);
     _.extend($, exports);
 }
 

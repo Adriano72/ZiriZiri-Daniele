@@ -25,7 +25,7 @@ var theActionBar = null;
 
 var temp = [];
 
-$.is.init($.timelineTable);
+if (OS_ANDROID) $.is.init($.timelineTable);
 
 /*
  $.win.addEventListener('open', function() {

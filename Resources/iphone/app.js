@@ -2,6 +2,12 @@ var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
 Alloy.Globals.winTop = true && parseInt(Ti.Platform.version, 10) >= 7 ? 20 : 0;
 
+Alloy.Globals.screenWidth = Ti.Platform.displayCaps.platformWidth;
+
+Alloy.Globals.postSaved = false;
+
+Alloy.Globals.shortcutMode = false;
+
 var icons = require("/icons");
 
 Alloy.Models.Post = new Backbone.Model();
@@ -13,6 +19,28 @@ var Timeline = Backbone.Collection.extend({
 });
 
 Alloy.Collections.Timeline = new Timeline();
+
+Alloy.Collections.aspettoEvento = new Backbone.Collection();
+
+Alloy.Collections.aspettiCashflow = new Backbone.Collection();
+
+Alloy.Collections.aspettiDocument = new Backbone.Collection();
+
+Alloy.Models.Template = new Backbone.Model();
+
+Alloy.Models.Post_template = new Backbone.Model();
+
+Alloy.Models.Event_template = new Backbone.Model();
+
+Alloy.Models.Cashflow_template = new Backbone.Model();
+
+Alloy.Models.Document_template = new Backbone.Model();
+
+Alloy.Models.Note_template = new Backbone.Model();
+
+Alloy.Models.Link_template = new Backbone.Model();
+
+Alloy.Models.Communication_template = new Backbone.Model();
 
 Alloy.Globals.baseUrl = "https://beta.ziriziri.com/zz/api/v02";
 
@@ -76,31 +104,6 @@ Alloy.Globals.Moment_IT = {
     }
 };
 
-var rc = Alloy.Globals.Map.isGooglePlayServicesAvailable();
-
-switch (rc) {
-  case Alloy.Globals.Map.SUCCESS:
-    Ti.API.info("Google Play services is installed.");
-    break;
-
-  case Alloy.Globals.Map.SERVICE_MISSING:
-    alert("Google Play services is missing. Please install Google Play services from the Google Play store.");
-    break;
-
-  case Alloy.Globals.Map.SERVICE_VERSION_UPDATE_REQUIRED:
-    alert("Google Play services is out of date. Please update Google Play services.");
-    break;
-
-  case Alloy.Globals.Map.SERVICE_DISABLED:
-    alert("Google Play services is disabled. Please enable Google Play services.");
-    break;
-
-  case Alloy.Globals.Map.SERVICE_INVALID:
-    alert("Google Play services cannot be authenticated. Reinstall Google Play services.");
-    break;
-
-  default:
-    alert("Unknown error.");
-}
+var rc;
 
 Alloy.createController("index");

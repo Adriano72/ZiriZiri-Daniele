@@ -1,4 +1,19 @@
 function Controller() {
+    function openEvent() {
+        theActionBar = $.win.activity.actionBar;
+        $.win.activity.invalidateOptionsMenu();
+        theActionBar = $.win.activity.actionBar;
+        if (void 0 != theActionBar) {
+            theActionBar.displayHomeAsUp = true;
+            theActionBar.setIcon("images/logo-test.png");
+            theActionBar.onHomeIconItemSelected = function() {
+                $.win.close({
+                    animate: true
+                });
+            };
+        }
+        reverseGeocoding();
+    }
     function reverseGeocoding() {
         var u_location = require("getUserLocation");
         u_location.reverseGeo(function(locationData) {
@@ -37,74 +52,96 @@ function Controller() {
     var $ = this;
     var exports = {};
     var __defers = {};
-    $.__views.window = Ti.UI.createWindow({
-        backgroundColor: "#F2F2F2",
+    $.__views.win = Ti.UI.createWindow({
+        backgroundColor: "#F9F9F9",
         layout: "vertical",
-        id: "window",
-        title: "Posizione"
+        id: "win",
+        title: "Location"
     });
-    $.__views.window && $.addTopLevelView($.__views.window);
-    reverseGeocoding ? $.__views.window.addEventListener("open", reverseGeocoding) : __defers["$.__views.window!open!reverseGeocoding"] = true;
+    $.__views.win && $.addTopLevelView($.__views.win);
+    openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
     $.__views.mapview = Alloy.Globals.Map.createView({
         height: 130,
         top: 5,
-        width: Ti.UI.FILL,
+        right: 5,
+        left: 5,
+        borderWidth: 1,
+        borderColor: "#CCCCCC",
         id: "mapview",
         ns: "Alloy.Globals.Map"
     });
-    $.__views.window.add($.__views.mapview);
-    $.__views.topContainer = Ti.UI.createView({
-        layout: "horizontal",
+    $.__views.win.add($.__views.mapview);
+    $.__views.container = Ti.UI.createView({
         height: Ti.UI.SIZE,
-        width: Ti.UI.SIZE,
-        id: "topContainer"
+        width: Ti.UI.FILL,
+        id: "container"
     });
-    $.__views.window.add($.__views.topContainer);
+    $.__views.win.add($.__views.container);
     $.__views.location = Ti.UI.createTextField({
-        borderColor: "#000000",
+        borderColor: "#CCCCCC",
         color: "#336699",
         ellipsize: true,
         wordWrap: false,
         top: 5,
         left: 5,
-        width: "85%",
+        right: 40,
+        borderRadius: 5,
+        borderWidth: 1,
         autocorrect: false,
         height: Ti.UI.SIZE,
+        backgroundColor: "#fff",
         hintText: "Posizione",
         id: "location"
     });
-    $.__views.topContainer.add($.__views.location);
+    $.__views.container.add($.__views.location);
     $.__views.centra = Ti.UI.createButton({
         backgroundImage: "/images/location-target.png",
-        left: 5,
+        right: 5,
         width: 30,
         height: 30,
         id: "centra"
     });
-    $.__views.topContainer.add($.__views.centra);
+    $.__views.container.add($.__views.centra);
     reverseGeocoding ? $.__views.centra.addEventListener("click", reverseGeocoding) : __defers["$.__views.centra!click!reverseGeocoding"] = true;
-    $.__views.searchAddress = Ti.UI.createSearchBar({
-        showCancel: true,
-        hintText: "Cerca indirizzo",
-        height: 50,
+    $.__views.container = Ti.UI.createView({
+        height: Ti.UI.SIZE,
+        width: Ti.UI.FILL,
+        id: "container"
+    });
+    $.__views.win.add($.__views.container);
+    $.__views.searchAddress = Ti.UI.createTextField({
+        borderColor: "#CCCCCC",
+        color: "#336699",
+        ellipsize: true,
+        wordWrap: false,
         top: 5,
+        left: 5,
+        right: 40,
+        borderRadius: 5,
+        borderWidth: 1,
+        autocorrect: false,
+        height: Ti.UI.SIZE,
+        backgroundColor: "#fff",
+        hintText: "Cerca Indirizzo",
         id: "searchAddress"
     });
-    $.__views.window.add($.__views.searchAddress);
-    forwardGeocoding ? $.__views.searchAddress.addEventListener("return", forwardGeocoding) : __defers["$.__views.searchAddress!return!forwardGeocoding"] = true;
-    $.__views.disambiguazioneTable = Ti.UI.createTableView({
-        top: 5,
-        separatorColor: "transparent",
-        id: "disambiguazioneTable"
+    $.__views.container.add($.__views.searchAddress);
+    $.__views.lookAddress = Ti.UI.createButton({
+        backgroundImage: "/images/search.png",
+        right: 5,
+        width: 30,
+        height: 30,
+        id: "lookAddress"
     });
-    $.__views.window.add($.__views.disambiguazioneTable);
+    $.__views.container.add($.__views.lookAddress);
+    forwardGeocoding ? $.__views.lookAddress.addEventListener("click", forwardGeocoding) : __defers["$.__views.lookAddress!click!forwardGeocoding"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};
     var location_result = null;
-    __defers["$.__views.window!open!reverseGeocoding"] && $.__views.window.addEventListener("open", reverseGeocoding);
+    __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
     __defers["$.__views.centra!click!reverseGeocoding"] && $.__views.centra.addEventListener("click", reverseGeocoding);
-    __defers["$.__views.searchAddress!return!forwardGeocoding"] && $.__views.searchAddress.addEventListener("return", forwardGeocoding);
+    __defers["$.__views.lookAddress!click!forwardGeocoding"] && $.__views.lookAddress.addEventListener("click", forwardGeocoding);
     _.extend($, exports);
 }
 

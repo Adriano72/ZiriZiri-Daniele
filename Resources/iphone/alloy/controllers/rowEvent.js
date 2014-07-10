@@ -6,87 +6,95 @@ function Controller() {
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
-    $.__views.row = Ti.UI.createTableViewRow({
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL,
-        backgroundColor: "#E3E3E3",
+    $.__views.rowEvent = Ti.UI.createTableViewRow({
         className: "itemRow",
-        layout: "vertical",
-        id: "row"
+        width: Ti.UI.FILL,
+        id: "rowEvent"
     });
-    $.__views.row && $.addTopLevelView($.__views.row);
-    $.__views.__alloyId111 = Ti.UI.createView({
-        height: 80,
+    $.__views.rowEvent && $.addTopLevelView($.__views.rowEvent);
+    $.__views.__alloyId173 = Ti.UI.createView({
+        left: 5,
+        right: 5,
+        top: 5,
+        bottom: 10,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: "#E9FA32",
+        backgroundColor: "#FFF",
+        height: 50,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId111"
+        id: "__alloyId173"
     });
-    $.__views.row.add($.__views.__alloyId111);
-    $.__views.description = Ti.UI.createLabel({
-        height: 30,
+    $.__views.rowEvent.add($.__views.__alloyId173);
+    $.__views.eventIcon = Ti.UI.createLabel({
+        left: 5,
+        width: 25,
+        height: 25,
+        backgroundImage: "/images/kernel-event-on.png",
+        id: "eventIcon"
+    });
+    $.__views.__alloyId173.add($.__views.eventIcon);
+    $.__views.__alloyId174 = Ti.UI.createView({
+        width: Ti.UI.SIZE,
+        left: 10,
+        layout: "vertical",
+        id: "__alloyId174"
+    });
+    $.__views.__alloyId173.add($.__views.__alloyId174);
+    $.__views.__alloyId175 = Ti.UI.createView({
+        left: 2,
+        width: "85%",
+        height: Ti.UI.SIZE,
+        layout: "horizontal",
+        id: "__alloyId175"
+    });
+    $.__views.__alloyId174.add($.__views.__alloyId175);
+    $.__views.startDate = Ti.UI.createLabel({
         font: {
-            fontFamily: "AppIcons",
+            fontFamily: "SourceSansPro-Regular",
             fontSize: 18
         },
-        color: "#5C5C5C",
-        left: 5,
-        top: 5,
-        ellipsize: true,
-        wordWrap: false,
-        touchEnabled: false,
-        width: 55,
-        id: "description"
+        color: "#444",
+        backgroundColor: "white",
+        width: 140,
+        left: 0,
+        id: "startDate"
     });
-    $.__views.__alloyId111.add($.__views.description);
-    $.__views.dateFrom = Ti.UI.createLabel({
-        height: 40,
+    $.__views.__alloyId175.add($.__views.startDate);
+    $.__views.endDate = Ti.UI.createLabel({
         font: {
-            fontSize: 16
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
         },
-        left: 5,
-        right: 5,
-        touchEnabled: false,
-        width: Ti.UI.SIZE,
-        id: "dateFrom"
+        color: "#444",
+        backgroundColor: "white",
+        width: 140,
+        id: "endDate"
     });
-    $.__views.__alloyId111.add($.__views.dateFrom);
-    $.__views.dateTo = Ti.UI.createLabel({
-        height: 40,
-        font: {
-            fontSize: 16
-        },
-        left: 5,
-        right: 5,
-        touchEnabled: false,
-        width: Ti.UI.SIZE,
-        id: "dateTo"
-    });
-    $.__views.__alloyId111.add($.__views.dateTo);
-    $.__views.__alloyId112 = Ti.UI.createView({
-        height: 80,
-        touchEnabled: false,
+    $.__views.__alloyId175.add($.__views.endDate);
+    $.__views.__alloyId176 = Ti.UI.createView({
+        left: 2,
+        width: "85%",
+        height: Ti.UI.SIZE,
         layout: "horizontal",
-        id: "__alloyId112"
+        id: "__alloyId176"
     });
-    $.__views.row.add($.__views.__alloyId112);
+    $.__views.__alloyId174.add($.__views.__alloyId176);
     $.__views.location = Ti.UI.createLabel({
-        height: 40,
-        font: {
-            fontSize: 16
-        },
-        left: 5,
-        right: 5,
-        touchEnabled: false,
-        width: Ti.UI.SIZE,
+        color: "#999",
+        width: Ti.UI.FILL,
+        wordWrap: false,
+        ellipsize: true,
         id: "location"
     });
-    $.__views.__alloyId112.add($.__views.location);
+    $.__views.__alloyId176.add($.__views.location);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    $.row.id_code = args.id_code, $.description.text = "  " + icons.calendar;
-    $.dateFrom.text = args.dataDa;
-    $.dateTo.text = args.dataA, $.location.text = args.posizione;
+    $.startDate.text = args.startDate;
+    $.endDate.text = args.endDate;
+    $.location.text = args.location;
     _.extend($, exports);
 }
 
