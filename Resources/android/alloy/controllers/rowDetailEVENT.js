@@ -22,13 +22,14 @@ function Controller() {
         theActionBar = $.win.activity.actionBar;
         if (void 0 != theActionBar) {
             theActionBar.displayHomeAsUp = true;
-            theActionBar.setIcon("images/logo-test.png");
+            theActionBar.setIcon("images/kernel-event-on.png");
             theActionBar.onHomeIconItemSelected = function() {
                 $.win.close({
                     animate: true
                 });
             };
         }
+        $.win.title = args.data.title;
         updateDisplay();
     }
     function updateDisplay() {
@@ -179,7 +180,7 @@ function Controller() {
     _.extend($, $.__views);
     var args = arguments[0] || {};
     $.dataInizio.text = moment(args.data.startTime.time).format("DD-MM-YYYY HH:MM");
-    $.dataFine.text = moment(args.data.endTime.time).format("DD-MM-YYYY HH:MM");
+    $.dataFine.text = args.data.startTime.time !== args.data.endTime.time ? moment(args.data.endTime.time).format("DD-MM-YYYY HH:MM") : "";
     $.location.text = args.location.name;
     $.win.open();
     __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);

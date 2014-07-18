@@ -27,13 +27,13 @@ function openEvent() {
 	
 	if(Alloy.Globals.shortcutMode == "camera"){
 		
-		Alloy.Globals.shortcutMode = null;
+		//Alloy.Globals.shortcutMode = null;
 		openCamera(true);
 	};
 	
 	if(Alloy.Globals.shortcutMode == "gallery"){
 		
-		Alloy.Globals.shortcutMode = null;
+		//Alloy.Globals.shortcutMode = null;
 		openGallery(true);
 	}
 
@@ -48,6 +48,10 @@ var imageContent = {};
 
 var fileName;
 var fileSize;
+
+function resetGlobals(){
+	Alloy.Globals.shortcutMode = null;
+}
 
 // ******** PICKER DATA ***********
 function showDatePicker(e) {
@@ -73,6 +77,10 @@ function saveDocument() {
 	modDocumentJSON = _.omit(modDocumentJSON, "kind.id");
 
 	if ($.titolo.value != "" && $.descrizione.value != "" && imageContent != "") {
+		
+		if(Alloy.Globals.shortcutMode){
+			Alloy.Models.Post_template.set("name", $.titolo.value);
+		};
 
 		modDocumentJSON.name = Alloy.Models.Post_template.get("name");
 		modDocumentJSON.description = Alloy.Models.Post_template.get("description");
@@ -128,7 +136,7 @@ function saveDocument() {
 
 function openCamera(shortcutMode) {
 	
-	Ti.API.info("SHORTCUT MODE: "+(shortcutMode== true));
+	Ti.API.info("SHORTCUT MODE: "+ Alloy.Globals.shortcutMode);
 
 	try {
 
@@ -157,8 +165,8 @@ function openCamera(shortcutMode) {
 				fileSize = tempFile.size;
 				fileName = tempFile.name;
 				
-				if(shortcutMode){
-					Alloy.Models.Post_template.set("name", "Foto scattata il "+moment().format("DD-MM-YYYY HH:MM"));
+				if(Alloy.Globals.shortcutMode){
+								
 					$.titolo.value = "Foto scattata il "+moment().format("DD-MM-YYYY HH:MM");
 					$.descrizione.value = "Foto scattata il "+moment().format("DD-MM-YYYY HH:MM");
 				}

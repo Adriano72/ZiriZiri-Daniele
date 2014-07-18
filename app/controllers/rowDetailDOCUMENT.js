@@ -9,7 +9,7 @@ function openEvent() {
 	theActionBar = $.win.activity.actionBar;
 	if (theActionBar != undefined) {
 		theActionBar.displayHomeAsUp = true;
-		theActionBar.setIcon('images/logo-test.png');
+		theActionBar.setIcon('images/kernel-document-on.png');
 		//theActionBar.setTitle(self.title);
 		theActionBar.onHomeIconItemSelected = function() {
 			$.win.close({
@@ -17,6 +17,8 @@ function openEvent() {
 			});
 		};
 	};
+	
+	$.win.title = args.data.title;
 
 };
 

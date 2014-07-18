@@ -22,13 +22,14 @@ function Controller() {
         theActionBar = $.win.activity.actionBar;
         if (void 0 != theActionBar) {
             theActionBar.displayHomeAsUp = true;
-            theActionBar.setIcon("images/logo-test.png");
+            theActionBar.setIcon("images/kernel-finance-on.png");
             theActionBar.onHomeIconItemSelected = function() {
                 $.win.close({
                     animate: true
                 });
             };
         }
+        $.win.title = args.name;
     }
     function testExistence(param) {
         return !(_.isUndefined(param) || _.isNull(param));
@@ -434,7 +435,7 @@ function Controller() {
         $.importo.text = args.data.importo + "€";
         $.importo.color = "#444";
     }
-    $.movimento.text = args.data.tipoMovimento.descrizioneBreve;
+    $.movimento.text = testExistence(args.data.tipoMovimento) ? args.data.tipoMovimento.descrizioneBreve : "";
     $.pagamento.text = testExistence(args.data.pagamentoIncasso) ? args.data.pagamentoIncasso.descrizioneBreve : "";
     $.variabilita.text = testExistence(args.data.tipoVariabilita) ? args.data.tipoVariabilita.descrizioneBreve : "";
     $.stato.text = testExistence(args.data.statoMovimento) ? args.data.statoMovimento.descrizioneBreve : "";

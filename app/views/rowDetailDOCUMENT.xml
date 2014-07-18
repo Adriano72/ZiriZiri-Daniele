@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="win" title="Documento" class="container" onOpen="openEvent">
+	<Window id="win" class="container" onOpen="openEvent">
 
 		<!-- The Menu tag adds the Android menu. -->
 		<Menu id="menu" platform="android">

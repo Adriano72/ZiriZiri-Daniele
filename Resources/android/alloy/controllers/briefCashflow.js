@@ -78,8 +78,8 @@ function Controller() {
     function transformData(model) {
         var attrs = model.toJSON();
         attrs.temp_importo = attrs.data.importo + "€";
-        attrs.temp_tipoMovimento = attrs.data.tipoMovimento.codice;
-        attrs.temp_pagamentoIncasso = attrs.data.pagamentoIncasso.descrizioneBreve;
+        attrs.temp_tipoMovimento = _.isUndefined(attrs.data.tipoMovimento) || _.isNull(attrs.data.tipoMovimento) ? "" : attrs.data.tipoMovimento.codice;
+        attrs.temp_pagamentoIncasso = _.isUndefined(attrs.data.pagamentoIncasso) || _.isNull(attrs.data.pagamentoIncasso) ? "" : attrs.data.pagamentoIncasso.descrizioneBreve;
         return attrs;
     }
     function showDetail(e) {

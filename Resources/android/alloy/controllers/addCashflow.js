@@ -70,7 +70,8 @@ function Controller() {
     function saveCashflow() {
         var modCashflowJSON = Alloy.Models.Cashflow_template.toJSON();
         modCashflowJSON = _.omit(modCashflowJSON, "kind.id");
-        if ($.importoValue.value > 0) {
+        Ti.API.info("SEL MOVIMENTO: " + $.pkrTipoMovimento.getSelectedRow(0).id);
+        if ($.importoValue.value > 0 && "9999" != $.pkrTipoMovimento.getSelectedRow(0).id) {
             modCashflowJSON.name = Alloy.Models.Post_template.get("name");
             modCashflowJSON.description = Alloy.Models.Post_template.get("description");
             modCashflowJSON.referenceTime = Alloy.Models.Post_template.get("referenceTime");
@@ -106,7 +107,7 @@ function Controller() {
             Ti.API.info("ASPETTO VALIDATO: " + JSON.stringify(modCashflowJSON));
             args(modCashflowJSON);
             $.win.close();
-        } else alert("Il campo Importo è obbligatorio, inserire un valore");
+        } else alert("I campi Importo e Tipo Movimento sono obbligatori");
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "addCashflow";

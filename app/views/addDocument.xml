@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="win" class="container" title = "Nuovo Documento" onOpen="openEvent">
+	<Window id="win" class="container" title = "Nuovo Documento" onOpen="openEvent" onClose="resetGlobals">
 
 		<Menu id="menu" platform="android">
 

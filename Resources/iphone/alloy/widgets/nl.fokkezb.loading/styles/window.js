@@ -5,8 +5,15 @@ function WPATH(s) {
 }
 
 module.exports = [ {
+    isApi: true,
+    priority: 1000.0004,
+    key: "Window",
+    style: {
+        orientationModes: [ Ti.UI.PORTRAIT ]
+    }
+}, {
     isClass: true,
-    priority: 10000.0004,
+    priority: 10000.0005,
     key: "loadingMask",
     style: {
         backgroundColor: "#5000",
@@ -16,7 +23,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0005,
+    priority: 10000.0006,
     key: "loadingOuter",
     style: {
         width: Ti.UI.SIZE,
@@ -26,7 +33,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0006,
+    priority: 10000.0007,
     key: "loadingInner",
     style: {
         top: "20dp",
@@ -39,7 +46,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0007,
+    priority: 10000.0008,
     key: "loadingIndicator",
     style: {
         top: "0dp",
@@ -47,7 +54,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0009,
+    priority: 10000.001,
     key: "loadingImages",
     style: {
         top: "0dp",
@@ -55,7 +62,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.001,
+    priority: 10000.0011,
     key: "loadingMessage",
     style: {
         top: "20dp",
@@ -67,7 +74,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10101.0008,
+    priority: 10101.0009,
     key: "loadingIndicator",
     style: {
         style: Ti.UI.iPhone.ActivityIndicatorStyle.BIG

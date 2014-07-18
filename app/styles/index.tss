@@ -79,7 +79,7 @@
 	height: Ti.UI.SIZE
 }
 
-"#remember": {
+"#remember[platform=android]": {
 	color: "#fff",
 	font: {
 		fontFamily: 'SourceSansPro-Regular',
@@ -90,6 +90,18 @@
 	title: "Remember me",
 	width: Ti.UI.SIZE,
 	style: Titanium.UI.Android.SWITCH_STYLE_CHECKBOX
+}
+
+"#remember[platform=ios]": {
+	color: "#fff",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	left: 0,
+	height: 30,
+	title: "Remember me",
+	width: Ti.UI.SIZE
 }
 
 "#forgotPassword": {

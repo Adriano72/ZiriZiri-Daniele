@@ -81,7 +81,21 @@ function saveEvent() {
 	modEventJSON.description = Alloy.Models.Post_template.get("description");
 	modEventJSON.referenceTime = Alloy.Models.Post_template.get("referenceTime");
 	modEventJSON.category = Alloy.Models.Post_template.get("category");
-
+	modEventJSON.data = {
+		"owner" : null,
+		"title" : null,
+		"type" : "NONE",
+		"priority" : "LOW",
+		"repeatPeriod" : "NONE",
+	};
+	modEventJSON.data.startTime = {
+		"type" : "NONE",
+		"id" : null
+	};
+	modEventJSON.data.endTime = {
+		"type" : "NONE",
+		"id" : null
+	};
 	modEventJSON.data.title = Alloy.Models.Post_template.get("name");
 	modEventJSON.data.description = Alloy.Models.Post_template.get("description");
 

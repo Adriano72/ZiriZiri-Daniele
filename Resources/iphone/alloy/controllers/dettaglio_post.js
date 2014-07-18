@@ -1,4 +1,18 @@
 function Controller() {
+    function openEvent() {
+        theActionBar = $.win.activity.actionBar;
+        $.win.activity.invalidateOptionsMenu();
+        theActionBar = $.win.activity.actionBar;
+        if (void 0 != theActionBar) {
+            theActionBar.displayHomeAsUp = true;
+            theActionBar.setIcon("images/logo-test.png");
+            theActionBar.onHomeIconItemSelected = function() {
+                $.win.close({
+                    animate: true
+                });
+            };
+        }
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dettaglio_post";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -6,17 +20,20 @@ function Controller() {
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
+    var __defers = {};
     $.__views.win = Ti.UI.createWindow({
         backgroundColor: "#F9F9F9",
+        orientationModes: [ Ti.UI.PORTRAIT ],
         id: "win",
-        title: "Post"
+        title: "Dettaglio Post"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
+    openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
     $.__views.postTable = Ti.UI.createScrollView({
         id: "postTable"
     });
     $.__views.win.add($.__views.postTable);
-    $.__views.__alloyId41 = Ti.UI.createView({
+    $.__views.__alloyId106 = Ti.UI.createView({
         left: 5,
         right: 5,
         top: 5,
@@ -27,23 +44,21 @@ function Controller() {
         height: Ti.UI.SIZE,
         touchEnabled: false,
         layout: "vertical",
-        id: "__alloyId41"
+        id: "__alloyId106"
     });
-    $.__views.postTable.add($.__views.__alloyId41);
+    $.__views.postTable.add($.__views.__alloyId106);
     $.__views.topWrapper = Ti.UI.createView({
         height: Ti.UI.SIZE,
         left: 10,
         right: 10,
         top: 10,
-        touchEnabled: false,
         layout: "horizontal",
         id: "topWrapper"
     });
-    $.__views.__alloyId41.add($.__views.topWrapper);
+    $.__views.__alloyId106.add($.__views.topWrapper);
     $.__views.postIcon = Ti.UI.createImageView({
         left: 0,
         top: 0,
-        image: "/images/android-robot.jpg",
         touchEnabled: false,
         width: 70,
         height: 70,
@@ -154,22 +169,23 @@ function Controller() {
     $.__views.middleWrapper = Ti.UI.createView({
         left: 10,
         top: 10,
+        bottom: 5,
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         touchEnabled: false,
         layout: "horizontal",
         id: "middleWrapper"
     });
-    $.__views.__alloyId41.add($.__views.middleWrapper);
-    $.__views.__alloyId42 = Ti.UI.createView({
+    $.__views.__alloyId106.add($.__views.middleWrapper);
+    $.__views.__alloyId107 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         touchEnabled: false,
         layout: "horizontal",
         left: 0,
-        id: "__alloyId42"
+        id: "__alloyId107"
     });
-    $.__views.middleWrapper.add($.__views.__alloyId42);
+    $.__views.middleWrapper.add($.__views.__alloyId107);
     $.__views.cat_icon = Ti.UI.createLabel({
         width: 20,
         height: 20,
@@ -178,7 +194,7 @@ function Controller() {
         left: 0,
         id: "cat_icon"
     });
-    $.__views.__alloyId42.add($.__views.cat_icon);
+    $.__views.__alloyId107.add($.__views.cat_icon);
     $.__views.category = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -190,16 +206,16 @@ function Controller() {
         left: 5,
         id: "category"
     });
-    $.__views.__alloyId42.add($.__views.category);
-    $.__views.__alloyId43 = Ti.UI.createView({
+    $.__views.__alloyId107.add($.__views.category);
+    $.__views.__alloyId108 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         touchEnabled: false,
         layout: "horizontal",
         left: 50,
-        id: "__alloyId43"
+        id: "__alloyId108"
     });
-    $.__views.middleWrapper.add($.__views.__alloyId43);
+    $.__views.middleWrapper.add($.__views.__alloyId108);
     $.__views.tag_icon = Ti.UI.createLabel({
         width: 20,
         height: 20,
@@ -208,7 +224,7 @@ function Controller() {
         left: 0,
         id: "tag_icon"
     });
-    $.__views.__alloyId43.add($.__views.tag_icon);
+    $.__views.__alloyId108.add($.__views.tag_icon);
     $.__views.tags = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -221,16 +237,16 @@ function Controller() {
         left: 5,
         id: "tags"
     });
-    $.__views.__alloyId43.add($.__views.tags);
-    $.__views.__alloyId44 = Ti.UI.createView({
+    $.__views.__alloyId108.add($.__views.tags);
+    $.__views.__alloyId109 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         touchEnabled: false,
         layout: "horizontal",
         left: 50,
-        id: "__alloyId44"
+        id: "__alloyId109"
     });
-    $.__views.middleWrapper.add($.__views.__alloyId44);
+    $.__views.middleWrapper.add($.__views.__alloyId109);
     $.__views.stories_icon = Ti.UI.createLabel({
         width: 20,
         height: 20,
@@ -239,7 +255,7 @@ function Controller() {
         left: 0,
         id: "stories_icon"
     });
-    $.__views.__alloyId44.add($.__views.stories_icon);
+    $.__views.__alloyId109.add($.__views.stories_icon);
     $.__views.stories = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -253,22 +269,28 @@ function Controller() {
         id: "stories",
         text: "storie"
     });
-    $.__views.__alloyId44.add($.__views.stories);
+    $.__views.__alloyId109.add($.__views.stories);
+    $.__views.aspectsEventsWrapper = Ti.UI.createView({
+        id: "aspectsEventsWrapper"
+    });
+    $.__views.__alloyId106.add($.__views.aspectsEventsWrapper);
     $.__views.aspectsCashflowWrapper = Ti.UI.createView({
         top: 0,
         width: Ti.UI.FILL,
         touchEnabled: false,
         id: "aspectsCashflowWrapper"
     });
-    $.__views.__alloyId41.add($.__views.aspectsCashflowWrapper);
+    $.__views.__alloyId106.add($.__views.aspectsCashflowWrapper);
     $.__views.aspectsDocumentWrapper = Ti.UI.createView({
         top: 0,
         width: Ti.UI.FILL,
         touchEnabled: false,
         id: "aspectsDocumentWrapper"
     });
-    $.__views.__alloyId41.add($.__views.aspectsDocumentWrapper);
-    var __alloyId45 = function() {
+    $.__views.__alloyId106.add($.__views.aspectsDocumentWrapper);
+    var __alloyId110 = function() {
+        $.postIcon.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["catImage"] : Alloy.Models.Post.get("catImage");
+        $.postIcon.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["catImage"] : Alloy.Models.Post.get("catImage");
         $.date.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["referenceTime"] : Alloy.Models.Post.get("referenceTime");
         $.date.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["referenceTime"] : Alloy.Models.Post.get("referenceTime");
         $.rating_1.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["rating_1"] : Alloy.Models.Post.get("rating_1");
@@ -288,9 +310,9 @@ function Controller() {
         $.tags.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["tag"] : Alloy.Models.Post.get("tag");
         $.tags.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["tag"] : Alloy.Models.Post.get("tag");
     };
-    Alloy.Models.Post.on("fetch change destroy", __alloyId45);
+    Alloy.Models.Post.on("fetch change destroy", __alloyId110);
     exports.destroy = function() {
-        Alloy.Models.Post.off("fetch change destroy", __alloyId45);
+        Alloy.Models.Post.off("fetch change destroy", __alloyId110);
     };
     _.extend($, $.__views);
     arguments[0] || {};
@@ -309,6 +331,7 @@ function Controller() {
         silent: true
     });
     var rating = Alloy.Models.Post.get("rating");
+    Alloy.Models.Post.set("catImage", _.isNull(modJson.category.code) ? "/images/android-robot.jpg" : "/images/" + modJson.category.code.slice(0, 2) + ".png");
     Alloy.Models.Post.set("rating_1", rating > 0 ? "/images/star-small.png" : "");
     Alloy.Models.Post.set("rating_2", rating > 1 ? "/images/star-small.png" : "");
     Alloy.Models.Post.set("rating_3", rating > 2 ? "/images/star-small.png" : "");
@@ -318,19 +341,19 @@ function Controller() {
     var aspects = modJson.aspects;
     Ti.API.info("ASPETTI JSON: " + JSON.stringify(aspects));
     Alloy.Models.Post.trigger("change");
-    _.filter(aspects, function(item) {
+    var aspettoEvento = _.filter(aspects, function(item) {
         return "EVENTDATATYPE_CODE" == item.kind.code;
     });
+    Alloy.Collections.aspettoEvento.reset(aspettoEvento);
+    aspettoEvento.length > 0 && $.aspectsEventsWrapper.add(Alloy.createController("briefEvento").getView());
     var allAspettiCashflow = _.filter(aspects, function(item) {
         return "CASHFLOWDATATYPE_CODE" == item.kind.code;
     });
-    Alloy.Collections.aspettiCashflow = new Backbone.Collection();
     Alloy.Collections.aspettiCashflow.reset(allAspettiCashflow);
     allAspettiCashflow.length > 0 && $.aspectsCashflowWrapper.add(Alloy.createController("briefCashflow").getView());
     var allAspettiDocuments = _.filter(aspects, function(item) {
         return "FILEDOCUMENTDATATYPE_CODE" == item.kind.code;
     });
-    Alloy.Collections.aspettiDocument = new Backbone.Collection();
     Alloy.Collections.aspettiDocument.reset(allAspettiDocuments);
     allAspettiDocuments.length > 0 && $.aspectsDocumentWrapper.add(Alloy.createController("briefDocument").getView());
     _.filter(aspects, function(item) {
@@ -346,6 +369,7 @@ function Controller() {
     $.win.addEventListener("close", function() {
         $.destroy();
     });
+    __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
     _.extend($, exports);
 }
 

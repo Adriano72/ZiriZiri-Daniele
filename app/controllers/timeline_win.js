@@ -25,7 +25,7 @@ var theActionBar = null;
 
 var temp = [];
 
-$.is.init($.timelineTable);
+if (OS_ANDROID) $.is.init($.timelineTable);
 
 /*
  $.win.addEventListener('open', function() {
@@ -144,8 +144,10 @@ function checkAspects(node, target) {
 				break;
 			case "FILELINKDATATYPE_CODE":
 				return ('/images/kernel-link-off.png');
+				break;
 			case "COMMUNICATIONDATATYPE_CODE":
 				return ('/images/kernel-comunicazioni-off.png');
+				break;
 			default:
 				return;
 		}
@@ -167,8 +169,10 @@ function checkAspects(node, target) {
 				break;
 			case "FILELINKDATATYPE_CODE":
 				return ('/images/kernel-link-on.png');
+				break;
 			case "COMMUNICATIONDATATYPE_CODE":
 				return ('/images/kernel-comunicazioni-on.png');
+				break;
 			default:
 				return;
 		}
@@ -185,8 +189,11 @@ function transformData(model) {
 	 };
 	 Ti.API.info("CAT LETTA*****: "+JSON.stringify(attrs.category));
 	 */
+	
+	var diffTime = moment().diff(attrs.referenceTime, 'days');
+	
 	attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/' + attrs.category.code.slice(0, 2) + ".png";
-	attrs.postDate = moment(attrs.referenceTime).fromNow();
+	attrs.postDate = (diffTime > 1)?moment(attrs.referenceTime).format('LL'):moment(attrs.referenceTime).fromNow();
 	attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
 
 	//attrs.iconEvent = (_.find(node, function(value) {return value.kind.code == target;}))
@@ -197,6 +204,8 @@ function transformData(model) {
 	attrs.iconNote = checkAspects(attrs.aspects, "NOTEDATATYPE_CODE");
 	attrs.iconLink = checkAspects(attrs.aspects, "FILELINKDATATYPE_CODE");
 	attrs.iconCommunication = checkAspects(attrs.aspects, "COMMUNICATIONDATATYPE_CODE");
+	
+	//Ti.API.info("TIME DIFFERENCE IN DAYS: "+moment().diff(attrs.referenceTime, 'days'));
 
 	attrs.rating_1 = (attrs.rating > 0) ? "/images/star-small.png" : "";
 	attrs.rating_2 = (attrs.rating > 1) ? "/images/star-small.png" : "";

@@ -1,10 +1,21 @@
 function Controller() {
-    function composeDate(d_par) {
-        var p_toDate = new Date(d_par);
-        var day = p_toDate.getDate();
-        var month = p_toDate.getCMonth();
-        var year = p_toDate.getFullYear();
-        return day + " " + month + " " + year;
+    function openEvent() {
+        theActionBar = $.win.activity.actionBar;
+        $.win.activity.invalidateOptionsMenu();
+        theActionBar = $.win.activity.actionBar;
+        if (void 0 != theActionBar) {
+            theActionBar.displayHomeAsUp = true;
+            theActionBar.setIcon("images/kernel-finance-on.png");
+            theActionBar.onHomeIconItemSelected = function() {
+                $.win.close({
+                    animate: true
+                });
+            };
+        }
+        $.win.title = args.name;
+    }
+    function testExistence(param) {
+        return !(_.isUndefined(param) || _.isNull(param));
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "rowDetailCASHFLOW";
@@ -13,474 +24,408 @@ function Controller() {
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
-    $.__views.row = Ti.UI.createTableViewRow({
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL,
-        backgroundColor: "#F2F2F2",
-        className: "itemRow",
-        layout: "vertical",
-        id: "row"
+    var __defers = {};
+    $.__views.win = Ti.UI.createWindow({
+        backgroundColor: "#F9F9F9",
+        orientationModes: [ Ti.UI.PORTRAIT ],
+        id: "win",
+        title: "Cashflow"
     });
-    $.__views.row && $.addTopLevelView($.__views.row);
-    $.__views.description = Ti.UI.createLabel({
-        height: 30,
+    $.__views.win && $.addTopLevelView($.__views.win);
+    openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
+    $.__views.__alloyId126 = Ti.UI.createScrollView({
+        id: "__alloyId126"
+    });
+    $.__views.win.add($.__views.__alloyId126);
+    $.__views.__alloyId127 = Ti.UI.createView({
+        left: 5,
+        right: 5,
+        top: 5,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: "#CCCCCC",
+        backgroundColor: "#FFF",
+        height: Ti.UI.SIZE,
+        layout: "vertical",
+        touchEnabled: false,
+        id: "__alloyId127"
+    });
+    $.__views.__alloyId126.add($.__views.__alloyId127);
+    $.__views.__alloyId128 = Ti.UI.createView({
+        layout: "horizontal",
+        top: 10,
+        id: "__alloyId128"
+    });
+    $.__views.__alloyId127.add($.__views.__alloyId128);
+    $.__views.__alloyId129 = Ti.UI.createLabel({
+        touchEnabled: false,
         font: {
-            fontFamily: "AppIcons",
+            fontFamily: "SourceSansPro-Regular",
             fontSize: 18
         },
-        color: "#DB4C3F",
-        left: 5,
-        right: 5,
-        top: 5,
+        color: "#5FAEE3",
+        text: "Importo:",
+        height: Ti.UI.SIZE,
+        width: Ti.UI.SIZE,
+        left: 10,
+        id: "__alloyId129"
+    });
+    $.__views.__alloyId128.add($.__views.__alloyId129);
+    $.__views.importo = Ti.UI.createLabel({
+        touchEnabled: false,
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
+        },
+        color: "#444",
+        height: Ti.UI.SIZE,
+        width: Ti.UI.SIZE,
+        left: 10,
         ellipsize: true,
         wordWrap: false,
-        backgroundColor: "#E3E3E3",
-        borderRadius: Alloy.Globals.borderRad,
-        touchEnabled: false,
-        width: Ti.UI.FILL,
-        id: "description"
-    });
-    $.__views.row.add($.__views.description);
-    $.__views.category = Ti.UI.createLabel({
-        touchEnabled: false,
-        font: {
-            fontFamily: "AppIcons",
-            fontSize: 12
-        },
-        backgroundColor: "#E3E3E3",
-        borderRadius: Alloy.Globals.borderRad,
-        height: 18,
-        width: Ti.UI.SIZE,
-        color: "#5E5E5E",
-        left: 5,
-        top: 5,
-        bottom: 10,
-        id: "category"
-    });
-    $.__views.row.add($.__views.category);
-    $.__views.__alloyId65 = Ti.UI.createView({
-        height: Ti.UI.SIZE,
-        touchEnabled: false,
-        layout: "vertical",
-        backgroundColor: "#DEDEDE",
-        id: "__alloyId65"
-    });
-    $.__views.row.add($.__views.__alloyId65);
-    $.__views.__alloyId66 = Ti.UI.createLabel({
-        height: 20,
-        width: Ti.UI.FILL,
-        backgroundColor: "#787878",
-        top: 0,
-        font: {
-            fontSize: 14,
-            fontFamily: "Rosario-Regular"
-        },
-        touchEnabled: false,
-        color: "#FFFFFF",
-        text: " Importo",
-        id: "__alloyId66"
-    });
-    $.__views.__alloyId65.add($.__views.__alloyId66);
-    $.__views.importo = Ti.UI.createLabel({
-        height: Ti.UI.SIZE,
-        font: {
-            fontSize: 16
-        },
-        left: 20,
-        right: 5,
-        top: 5,
-        bottom: 5,
-        touchEnabled: false,
-        width: Ti.UI.FILL,
         id: "importo"
     });
-    $.__views.__alloyId65.add($.__views.importo);
-    $.__views.__alloyId67 = Ti.UI.createView({
-        height: Ti.UI.SIZE,
-        touchEnabled: false,
-        layout: "vertical",
-        backgroundColor: "#DEDEDE",
-        id: "__alloyId67"
+    $.__views.__alloyId128.add($.__views.importo);
+    $.__views.__alloyId130 = Ti.UI.createView({
+        layout: "horizontal",
+        top: 10,
+        id: "__alloyId130"
     });
-    $.__views.row.add($.__views.__alloyId67);
-    $.__views.__alloyId68 = Ti.UI.createLabel({
-        height: 20,
-        width: Ti.UI.FILL,
-        backgroundColor: "#787878",
-        top: 0,
+    $.__views.__alloyId127.add($.__views.__alloyId130);
+    $.__views.__alloyId131 = Ti.UI.createLabel({
+        touchEnabled: false,
         font: {
-            fontSize: 14,
-            fontFamily: "Rosario-Regular"
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
         },
-        touchEnabled: false,
-        color: "#FFFFFF",
-        text: " Data operazione",
-        id: "__alloyId68"
-    });
-    $.__views.__alloyId67.add($.__views.__alloyId68);
-    $.__views.dataOperazione = Ti.UI.createLabel({
+        color: "#5FAEE3",
+        text: "Movimento:",
         height: Ti.UI.SIZE,
-        font: {
-            fontSize: 16
-        },
-        left: 20,
-        right: 5,
-        top: 5,
-        bottom: 5,
-        touchEnabled: false,
-        width: Ti.UI.FILL,
-        id: "dataOperazione"
+        width: Ti.UI.SIZE,
+        left: 10,
+        id: "__alloyId131"
     });
-    $.__views.__alloyId67.add($.__views.dataOperazione);
-    $.__views.__alloyId69 = Ti.UI.createView({
+    $.__views.__alloyId130.add($.__views.__alloyId131);
+    $.__views.movimento = Ti.UI.createLabel({
+        touchEnabled: false,
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
+        },
+        color: "#444",
         height: Ti.UI.SIZE,
-        touchEnabled: false,
-        layout: "vertical",
-        backgroundColor: "#DEDEDE",
-        id: "__alloyId69"
+        width: Ti.UI.SIZE,
+        left: 10,
+        ellipsize: true,
+        wordWrap: false,
+        id: "movimento"
     });
-    $.__views.row.add($.__views.__alloyId69);
-    $.__views.__alloyId70 = Ti.UI.createLabel({
-        height: 20,
-        width: Ti.UI.FILL,
-        backgroundColor: "#787878",
-        top: 0,
+    $.__views.__alloyId130.add($.__views.movimento);
+    $.__views.__alloyId132 = Ti.UI.createView({
+        layout: "horizontal",
+        top: 10,
+        id: "__alloyId132"
+    });
+    $.__views.__alloyId127.add($.__views.__alloyId132);
+    $.__views.__alloyId133 = Ti.UI.createLabel({
+        touchEnabled: false,
         font: {
-            fontSize: 14,
-            fontFamily: "Rosario-Regular"
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
         },
-        touchEnabled: false,
-        color: "#FFFFFF",
-        text: " Data valuta",
-        id: "__alloyId70"
-    });
-    $.__views.__alloyId69.add($.__views.__alloyId70);
-    $.__views.dataValuta = Ti.UI.createLabel({
+        color: "#5FAEE3",
+        text: "Pagamento:",
         height: Ti.UI.SIZE,
-        font: {
-            fontSize: 16
-        },
-        left: 20,
-        right: 5,
-        top: 5,
-        bottom: 5,
-        touchEnabled: false,
-        width: Ti.UI.FILL,
-        id: "dataValuta"
+        width: Ti.UI.SIZE,
+        left: 10,
+        id: "__alloyId133"
     });
-    $.__views.__alloyId69.add($.__views.dataValuta);
-    $.__views.__alloyId71 = Ti.UI.createView({
+    $.__views.__alloyId132.add($.__views.__alloyId133);
+    $.__views.pagamento = Ti.UI.createLabel({
+        touchEnabled: false,
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
+        },
+        color: "#444",
         height: Ti.UI.SIZE,
-        touchEnabled: false,
-        layout: "vertical",
-        backgroundColor: "#DEDEDE",
-        id: "__alloyId71"
+        width: Ti.UI.SIZE,
+        left: 10,
+        ellipsize: true,
+        wordWrap: false,
+        id: "pagamento"
     });
-    $.__views.row.add($.__views.__alloyId71);
-    $.__views.__alloyId72 = Ti.UI.createLabel({
-        height: 20,
-        width: Ti.UI.FILL,
-        backgroundColor: "#787878",
-        top: 0,
+    $.__views.__alloyId132.add($.__views.pagamento);
+    $.__views.__alloyId134 = Ti.UI.createView({
+        layout: "horizontal",
+        top: 30,
+        id: "__alloyId134"
+    });
+    $.__views.__alloyId127.add($.__views.__alloyId134);
+    $.__views.__alloyId135 = Ti.UI.createLabel({
+        touchEnabled: false,
         font: {
-            fontSize: 14,
-            fontFamily: "Rosario-Regular"
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
         },
-        touchEnabled: false,
-        color: "#FFFFFF",
-        text: " Ord/Straord",
-        id: "__alloyId72"
-    });
-    $.__views.__alloyId71.add($.__views.__alloyId72);
-    $.__views.flagOrdinarioStraordinario = Ti.UI.createLabel({
+        color: "#5FAEE3",
+        text: "Variabilità:",
         height: Ti.UI.SIZE,
-        font: {
-            fontSize: 16
-        },
-        left: 20,
-        right: 5,
-        top: 5,
-        bottom: 5,
-        touchEnabled: false,
-        width: Ti.UI.FILL,
-        id: "flagOrdinarioStraordinario"
+        width: Ti.UI.SIZE,
+        left: 10,
+        id: "__alloyId135"
     });
-    $.__views.__alloyId71.add($.__views.flagOrdinarioStraordinario);
-    $.__views.__alloyId73 = Ti.UI.createView({
+    $.__views.__alloyId134.add($.__views.__alloyId135);
+    $.__views.variabilita = Ti.UI.createLabel({
+        touchEnabled: false,
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
+        },
+        color: "#444",
         height: Ti.UI.SIZE,
-        touchEnabled: false,
-        layout: "vertical",
-        backgroundColor: "#DEDEDE",
-        id: "__alloyId73"
+        width: Ti.UI.SIZE,
+        left: 10,
+        ellipsize: true,
+        wordWrap: false,
+        id: "variabilita"
     });
-    $.__views.row.add($.__views.__alloyId73);
-    $.__views.__alloyId74 = Ti.UI.createLabel({
-        height: 20,
-        width: Ti.UI.FILL,
-        backgroundColor: "#787878",
-        top: 0,
+    $.__views.__alloyId134.add($.__views.variabilita);
+    $.__views.__alloyId136 = Ti.UI.createView({
+        layout: "horizontal",
+        top: 10,
+        id: "__alloyId136"
+    });
+    $.__views.__alloyId127.add($.__views.__alloyId136);
+    $.__views.__alloyId137 = Ti.UI.createLabel({
+        touchEnabled: false,
         font: {
-            fontSize: 14,
-            fontFamily: "Rosario-Regular"
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
         },
-        touchEnabled: false,
-        color: "#FFFFFF",
-        text: " Stato movimento",
-        id: "__alloyId74"
-    });
-    $.__views.__alloyId73.add($.__views.__alloyId74);
-    $.__views.statoMovimento = Ti.UI.createLabel({
+        color: "#5FAEE3",
+        text: "Stato:",
         height: Ti.UI.SIZE,
-        font: {
-            fontSize: 16
-        },
-        left: 20,
-        right: 5,
-        top: 5,
-        bottom: 5,
-        touchEnabled: false,
-        width: Ti.UI.FILL,
-        id: "statoMovimento"
+        width: Ti.UI.SIZE,
+        left: 10,
+        id: "__alloyId137"
     });
-    $.__views.__alloyId73.add($.__views.statoMovimento);
-    $.__views.__alloyId75 = Ti.UI.createView({
+    $.__views.__alloyId136.add($.__views.__alloyId137);
+    $.__views.stato = Ti.UI.createLabel({
+        touchEnabled: false,
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
+        },
+        color: "#444",
         height: Ti.UI.SIZE,
-        touchEnabled: false,
-        layout: "vertical",
-        backgroundColor: "#DEDEDE",
-        id: "__alloyId75"
+        width: Ti.UI.SIZE,
+        left: 10,
+        ellipsize: true,
+        wordWrap: false,
+        id: "stato"
     });
-    $.__views.row.add($.__views.__alloyId75);
-    $.__views.__alloyId76 = Ti.UI.createLabel({
-        height: 20,
-        width: Ti.UI.FILL,
-        backgroundColor: "#787878",
-        top: 0,
+    $.__views.__alloyId136.add($.__views.stato);
+    $.__views.__alloyId138 = Ti.UI.createView({
+        layout: "horizontal",
+        top: 10,
+        id: "__alloyId138"
+    });
+    $.__views.__alloyId127.add($.__views.__alloyId138);
+    $.__views.__alloyId139 = Ti.UI.createLabel({
+        touchEnabled: false,
         font: {
-            fontSize: 14,
-            fontFamily: "Rosario-Regular"
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
         },
-        touchEnabled: false,
-        color: "#FFFFFF",
-        text: " Tipo movimento",
-        id: "__alloyId76"
-    });
-    $.__views.__alloyId75.add($.__views.__alloyId76);
-    $.__views.tipoMovimento = Ti.UI.createLabel({
+        color: "#5FAEE3",
+        text: "Tipologia:",
         height: Ti.UI.SIZE,
-        font: {
-            fontSize: 16
-        },
-        left: 20,
-        right: 5,
-        top: 5,
-        bottom: 5,
-        touchEnabled: false,
-        width: Ti.UI.FILL,
-        id: "tipoMovimento"
+        width: Ti.UI.SIZE,
+        left: 10,
+        id: "__alloyId139"
     });
-    $.__views.__alloyId75.add($.__views.tipoMovimento);
-    $.__views.__alloyId77 = Ti.UI.createView({
+    $.__views.__alloyId138.add($.__views.__alloyId139);
+    $.__views.tipologia = Ti.UI.createLabel({
+        touchEnabled: false,
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
+        },
+        color: "#444",
         height: Ti.UI.SIZE,
-        touchEnabled: false,
-        layout: "vertical",
-        backgroundColor: "#DEDEDE",
-        id: "__alloyId77"
+        width: Ti.UI.SIZE,
+        left: 10,
+        ellipsize: true,
+        wordWrap: false,
+        id: "tipologia"
     });
-    $.__views.row.add($.__views.__alloyId77);
-    $.__views.__alloyId78 = Ti.UI.createLabel({
-        height: 20,
-        width: Ti.UI.FILL,
-        backgroundColor: "#787878",
-        top: 0,
+    $.__views.__alloyId138.add($.__views.tipologia);
+    $.__views.__alloyId140 = Ti.UI.createView({
+        layout: "horizontal",
+        top: 10,
+        id: "__alloyId140"
+    });
+    $.__views.__alloyId127.add($.__views.__alloyId140);
+    $.__views.__alloyId141 = Ti.UI.createLabel({
+        touchEnabled: false,
         font: {
-            fontSize: 14,
-            fontFamily: "Rosario-Regular"
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
         },
-        touchEnabled: false,
-        color: "#FFFFFF",
-        text: " Tipo variabilità",
-        id: "__alloyId78"
-    });
-    $.__views.__alloyId77.add($.__views.__alloyId78);
-    $.__views.tipoVariabilita = Ti.UI.createLabel({
+        color: "#5FAEE3",
+        text: "Dichiarazione dei Redditi:",
         height: Ti.UI.SIZE,
-        font: {
-            fontSize: 16
-        },
-        left: 20,
-        right: 5,
-        top: 5,
-        bottom: 5,
-        touchEnabled: false,
-        width: Ti.UI.FILL,
-        id: "tipoVariabilita"
+        width: Ti.UI.SIZE,
+        left: 10,
+        id: "__alloyId141"
     });
-    $.__views.__alloyId77.add($.__views.tipoVariabilita);
-    $.__views.__alloyId79 = Ti.UI.createView({
+    $.__views.__alloyId140.add($.__views.__alloyId141);
+    $.__views.redditi = Ti.UI.createLabel({
+        touchEnabled: false,
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
+        },
+        color: "#444",
         height: Ti.UI.SIZE,
-        touchEnabled: false,
-        layout: "vertical",
-        backgroundColor: "#DEDEDE",
-        id: "__alloyId79"
+        width: Ti.UI.SIZE,
+        left: 10,
+        ellipsize: true,
+        wordWrap: false,
+        id: "redditi"
     });
-    $.__views.row.add($.__views.__alloyId79);
-    $.__views.__alloyId80 = Ti.UI.createLabel({
-        height: 20,
-        width: Ti.UI.FILL,
-        backgroundColor: "#787878",
-        top: 0,
+    $.__views.__alloyId140.add($.__views.redditi);
+    $.__views.__alloyId142 = Ti.UI.createView({
+        layout: "horizontal",
+        top: 30,
+        id: "__alloyId142"
+    });
+    $.__views.__alloyId127.add($.__views.__alloyId142);
+    $.__views.__alloyId143 = Ti.UI.createLabel({
+        touchEnabled: false,
         font: {
-            fontSize: 14,
-            fontFamily: "Rosario-Regular"
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
         },
-        touchEnabled: false,
-        color: "#FFFFFF",
-        text: " Modalità pagamento",
-        id: "__alloyId80"
-    });
-    $.__views.__alloyId79.add($.__views.__alloyId80);
-    $.__views.modalitaPagamento = Ti.UI.createLabel({
+        color: "#5FAEE3",
+        text: "Data Valuta:",
         height: Ti.UI.SIZE,
-        font: {
-            fontSize: 16
-        },
-        left: 20,
-        right: 5,
-        top: 5,
-        bottom: 5,
-        touchEnabled: false,
-        width: Ti.UI.FILL,
-        id: "modalitaPagamento"
+        width: Ti.UI.SIZE,
+        left: 10,
+        id: "__alloyId143"
     });
-    $.__views.__alloyId79.add($.__views.modalitaPagamento);
-    $.__views.__alloyId81 = Ti.UI.createView({
+    $.__views.__alloyId142.add($.__views.__alloyId143);
+    $.__views.datavaluta = Ti.UI.createLabel({
+        touchEnabled: false,
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
+        },
+        color: "#444",
         height: Ti.UI.SIZE,
-        touchEnabled: false,
-        layout: "vertical",
-        backgroundColor: "#DEDEDE",
-        id: "__alloyId81"
+        width: Ti.UI.SIZE,
+        left: 10,
+        ellipsize: true,
+        wordWrap: false,
+        id: "datavaluta"
     });
-    $.__views.row.add($.__views.__alloyId81);
-    $.__views.__alloyId82 = Ti.UI.createLabel({
-        height: 20,
-        width: Ti.UI.FILL,
-        backgroundColor: "#787878",
-        top: 0,
+    $.__views.__alloyId142.add($.__views.datavaluta);
+    $.__views.__alloyId144 = Ti.UI.createView({
+        layout: "horizontal",
+        top: 10,
+        id: "__alloyId144"
+    });
+    $.__views.__alloyId127.add($.__views.__alloyId144);
+    $.__views.__alloyId145 = Ti.UI.createLabel({
+        touchEnabled: false,
         font: {
-            fontSize: 14,
-            fontFamily: "Rosario-Regular"
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
         },
-        touchEnabled: false,
-        color: "#FFFFFF",
-        text: " Stumento pagamento/incasso",
-        id: "__alloyId82"
-    });
-    $.__views.__alloyId81.add($.__views.__alloyId82);
-    $.__views.strumentoPagamentoIncasso = Ti.UI.createLabel({
+        color: "#5FAEE3",
+        text: "Data Scadenza:",
         height: Ti.UI.SIZE,
-        font: {
-            fontSize: 16
-        },
-        left: 20,
-        right: 5,
-        top: 5,
-        bottom: 5,
-        touchEnabled: false,
-        width: Ti.UI.FILL,
-        id: "strumentoPagamentoIncasso"
+        width: Ti.UI.SIZE,
+        left: 10,
+        id: "__alloyId145"
     });
-    $.__views.__alloyId81.add($.__views.strumentoPagamentoIncasso);
-    $.__views.__alloyId83 = Ti.UI.createView({
+    $.__views.__alloyId144.add($.__views.__alloyId145);
+    $.__views.datascadenza = Ti.UI.createLabel({
+        touchEnabled: false,
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
+        },
+        color: "#444",
         height: Ti.UI.SIZE,
-        touchEnabled: false,
-        layout: "vertical",
-        backgroundColor: "#DEDEDE",
-        id: "__alloyId83"
+        width: Ti.UI.SIZE,
+        left: 10,
+        ellipsize: true,
+        wordWrap: false,
+        id: "datascadenza"
     });
-    $.__views.row.add($.__views.__alloyId83);
-    $.__views.__alloyId84 = Ti.UI.createLabel({
-        height: 20,
-        width: Ti.UI.FILL,
-        backgroundColor: "#787878",
-        top: 0,
+    $.__views.__alloyId144.add($.__views.datascadenza);
+    $.__views.__alloyId146 = Ti.UI.createView({
+        layout: "horizontal",
+        top: 10,
+        bottom: 20,
+        id: "__alloyId146"
+    });
+    $.__views.__alloyId127.add($.__views.__alloyId146);
+    $.__views.__alloyId147 = Ti.UI.createLabel({
+        touchEnabled: false,
         font: {
-            fontSize: 14,
-            fontFamily: "Rosario-Regular"
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
         },
-        touchEnabled: false,
-        color: "#FFFFFF",
-        text: " Fonte liquidità",
-        id: "__alloyId84"
-    });
-    $.__views.__alloyId83.add($.__views.__alloyId84);
-    $.__views.fonteLiquidita = Ti.UI.createLabel({
+        color: "#5FAEE3",
+        text: "Data Pagamento:",
         height: Ti.UI.SIZE,
-        font: {
-            fontSize: 16
-        },
-        left: 20,
-        right: 5,
-        top: 5,
-        bottom: 5,
-        touchEnabled: false,
-        width: Ti.UI.FILL,
-        id: "fonteLiquidita"
+        width: Ti.UI.SIZE,
+        left: 10,
+        id: "__alloyId147"
     });
-    $.__views.__alloyId83.add($.__views.fonteLiquidita);
-    $.__views.__alloyId85 = Ti.UI.createView({
+    $.__views.__alloyId146.add($.__views.__alloyId147);
+    $.__views.datapagamento = Ti.UI.createLabel({
+        touchEnabled: false,
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 18
+        },
+        color: "#444",
         height: Ti.UI.SIZE,
-        touchEnabled: false,
-        layout: "vertical",
-        backgroundColor: "#DEDEDE",
-        id: "__alloyId85"
+        width: Ti.UI.SIZE,
+        left: 10,
+        ellipsize: true,
+        wordWrap: false,
+        id: "datapagamento"
     });
-    $.__views.row.add($.__views.__alloyId85);
-    $.__views.__alloyId86 = Ti.UI.createLabel({
-        height: 20,
-        width: Ti.UI.FILL,
-        backgroundColor: "#787878",
-        top: 0,
-        font: {
-            fontSize: 14,
-            fontFamily: "Rosario-Regular"
-        },
-        touchEnabled: false,
-        color: "#FFFFFF",
-        text: " Tipo fonte Liquidità",
-        id: "__alloyId86"
-    });
-    $.__views.__alloyId85.add($.__views.__alloyId86);
-    $.__views.tipoFonteLiquidita = Ti.UI.createLabel({
-        height: Ti.UI.SIZE,
-        font: {
-            fontSize: 16
-        },
-        left: 20,
-        right: 5,
-        top: 5,
-        bottom: 5,
-        touchEnabled: false,
-        width: Ti.UI.FILL,
-        id: "tipoFonteLiquidita"
-    });
-    $.__views.__alloyId85.add($.__views.tipoFonteLiquidita);
+    $.__views.__alloyId146.add($.__views.datapagamento);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    $.description.text = "  " + icons.bar_chart_alt + "  " + args.description;
-    $.category.text = _.isNull(args.category) ? null : " " + icons.tag + " " + args.category;
-    $.importo.text = "€ " + args.importo;
-    $.dataOperazione.text = composeDate(args.dataOperazione);
-    $.dataValuta.text = composeDate(args.dataValuta);
-    $.flagOrdinarioStraordinario.text = args.flagOrdinarioStraordinario;
-    $.statoMovimento.text = args.statoMovimento;
-    $.tipoMovimento.text = args.tipoMovimento;
-    $.tipoVariabilita.text = args.tipoVariabilita;
-    $.modalitaPagamento.text = args.modalitaPagamento;
-    $.strumentoPagamentoIncasso.text = args.strumentoPagamentoIncasso;
-    $.fonteLiquidita.text = args.fonteLiquidita;
-    $.tipoFonteLiquidita.text = args.tipoFonteLiquidita;
+    if ("Entrata" == args.data.tipoMovimento.descrizioneBreve) {
+        $.importo.text = "+" + args.data.importo + "€";
+        $.importo.color = "#358A27";
+    } else if ("Uscita" == args.data.tipoMovimento.descrizioneBreve) {
+        $.importo.text = "-" + args.data.importo + "€";
+        $.importo.color = "#E01D1D";
+    } else {
+        $.importo.text = args.data.importo + "€";
+        $.importo.color = "#444";
+    }
+    $.movimento.text = testExistence(args.data.tipoMovimento) ? args.data.tipoMovimento.descrizioneBreve : "";
+    $.pagamento.text = testExistence(args.data.pagamentoIncasso) ? args.data.pagamentoIncasso.descrizioneBreve : "";
+    $.variabilita.text = testExistence(args.data.tipoVariabilita) ? args.data.tipoVariabilita.descrizioneBreve : "";
+    $.stato.text = testExistence(args.data.statoMovimento) ? args.data.statoMovimento.descrizioneBreve : "";
+    $.tipologia.text = args.data.flagOrdinarioStraordinario ? "Straordinario" : "Ordinario";
+    $.redditi.text = args.data.flagDichiarazioneRedditi ? "Si" : "No";
+    $.datavaluta.text = moment(args.data.dataValuta).format("L");
+    $.datascadenza.text = moment(args.data.dataScadenza).format("L");
+    $.datapagamento.text = moment(args.data.dataPagamentoIncasso).format("L");
+    $.win.open();
+    __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
     _.extend($, exports);
 }
 

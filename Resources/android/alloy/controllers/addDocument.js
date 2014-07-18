@@ -38,14 +38,11 @@ function Controller() {
                 });
             };
         }
-        if ("camera" == Alloy.Globals.shortcutMode) {
-            Alloy.Globals.shortcutMode = null;
-            openCamera(true);
-        }
-        if ("gallery" == Alloy.Globals.shortcutMode) {
-            Alloy.Globals.shortcutMode = null;
-            openGallery(true);
-        }
+        "camera" == Alloy.Globals.shortcutMode && openCamera(true);
+        "gallery" == Alloy.Globals.shortcutMode && openGallery(true);
+    }
+    function resetGlobals() {
+        Alloy.Globals.shortcutMode = null;
     }
     function showDatePicker(e) {
         Ti.API.info("SOURCE CLICK: " + JSON.stringify(e));
@@ -62,6 +59,7 @@ function Controller() {
         var modDocumentJSON = Alloy.Models.Document_template.toJSON();
         modDocumentJSON = _.omit(modDocumentJSON, "kind.id");
         if ("" != $.titolo.value && "" != $.descrizione.value && "" != imageContent) {
+            Alloy.Globals.shortcutMode && Alloy.Models.Post_template.set("name", $.titolo.value);
             modDocumentJSON.name = Alloy.Models.Post_template.get("name");
             modDocumentJSON.description = Alloy.Models.Post_template.get("description");
             modDocumentJSON.referenceTime = Alloy.Models.Post_template.get("referenceTime");
@@ -77,8 +75,8 @@ function Controller() {
             $.win.close();
         } else alert("E' necessario scattare una foto o selezionarla dalla galleria, i campi titolo e descrizione sono obbligatori");
     }
-    function openCamera(shortcutMode) {
-        Ti.API.info("SHORTCUT MODE: " + (true == shortcutMode));
+    function openCamera() {
+        Ti.API.info("SHORTCUT MODE: " + Alloy.Globals.shortcutMode);
         try {
             Ti.Media.showCamera({
                 success: function(event) {
@@ -96,8 +94,7 @@ function Controller() {
                     imageContent.base64 = hashedImage;
                     fileSize = tempFile.size;
                     fileName = tempFile.name;
-                    if (shortcutMode) {
-                        Alloy.Models.Post_template.set("name", "Foto scattata il " + moment().format("DD-MM-YYYY HH:MM"));
+                    if (Alloy.Globals.shortcutMode) {
                         $.titolo.value = "Foto scattata il " + moment().format("DD-MM-YYYY HH:MM");
                         $.descrizione.value = "Foto scattata il " + moment().format("DD-MM-YYYY HH:MM");
                     }
@@ -167,6 +164,7 @@ function Controller() {
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
+    resetGlobals ? $.__views.win.addEventListener("close", resetGlobals) : __defers["$.__views.win!close!resetGlobals"] = true;
     $.__views.win.addEventListener("open", __alloyId34);
     var __alloyId35 = [];
     $.__views.__alloyId36 = Ti.UI.createTableViewRow({
@@ -447,6 +445,7 @@ function Controller() {
     var fileName;
     var fileSize;
     __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
+    __defers["$.__views.win!close!resetGlobals"] && $.__views.win.addEventListener("close", resetGlobals);
     __defers["$.__views.mn_salva!click!saveDocument"] && $.__views.mn_salva.addEventListener("click", saveDocument);
     __defers["$.__views.dataDocumento!click!showDatePicker"] && $.__views.dataDocumento.addEventListener("click", showDatePicker);
     __defers["$.__views.picture!click!openCamera"] && $.__views.picture.addEventListener("click", openCamera);

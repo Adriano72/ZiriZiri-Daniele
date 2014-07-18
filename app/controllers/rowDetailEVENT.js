@@ -9,7 +9,7 @@ function openEvent() {
 	theActionBar = $.win.activity.actionBar;
 	if (theActionBar != undefined) {
 		theActionBar.displayHomeAsUp = true;
-		theActionBar.setIcon('images/logo-test.png');
+		theActionBar.setIcon('images/kernel-event-on.png');
 		//theActionBar.setTitle(self.title);
 		theActionBar.onHomeIconItemSelected = function() {
 			$.win.close({
@@ -18,12 +18,14 @@ function openEvent() {
 		};
 	};
 	
+	$.win.title = args.data.title;
+	
 	updateDisplay();
 
 };
 
 $.dataInizio.text = moment(args.data.startTime.time).format("DD-MM-YYYY HH:MM");
-$.dataFine.text = moment(args.data.endTime.time).format("DD-MM-YYYY HH:MM");
+$.dataFine.text = (args.data.startTime.time !== args.data.endTime.time)?moment(args.data.endTime.time).format("DD-MM-YYYY HH:MM"):"";
 $.location.text = args.location.name;
 
 function updateDisplay() {
