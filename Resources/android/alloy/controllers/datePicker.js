@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function showTimePicker(sel_data) {
         Alloy.createController("timePicker", {
@@ -10,9 +19,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "datePicker";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     $.__views.pkrData = Ti.UI.createPicker({
@@ -21,8 +32,8 @@ function Controller() {
         left: 5,
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        id: "pkrData",
-        selectionIndicator: "true"
+        id: pkrData,
+        selectionIndicator: true
     });
     $.__views.pkrData && $.addTopLevelView($.__views.pkrData);
     exports.destroy = function() {};

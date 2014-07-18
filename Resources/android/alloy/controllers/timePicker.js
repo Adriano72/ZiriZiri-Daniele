@@ -1,9 +1,20 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "timePicker";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     $.__views.pkrTime = Ti.UI.createPicker({
@@ -12,8 +23,8 @@ function Controller() {
         left: 5,
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        id: "pkrTime",
-        selectionIndicator: "true"
+        id: pkrTime,
+        selectionIndicator: true
     });
     $.__views.pkrTime && $.addTopLevelView($.__views.pkrTime);
     exports.destroy = function() {};

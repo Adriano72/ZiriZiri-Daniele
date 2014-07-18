@@ -3,19 +3,19 @@
 		<Label id="description"/>
 		<Label id="category"/>
 		<View class="block_container">
-			<Label class="block_label" text=" Tags">
+			<Label class="block_label" text=" Tags"/>
 			<Label class="block_data" id="tags"/>
 		</View>
 		<View class="block_container">
-			<Label class="block_label" text=" Tipo">
+			<Label class="block_label" text=" Tipo"/>
 			<Label class="block_data" id="type"/>
 		</View>
 		<View class="block_container">
-			<Label class="block_label" text=" Contenuto">
+			<Label class="block_label" text=" Contenuto"/>
 			<Label class="block_data" id="content" onClick="openLink"/>
 		</View>
 		<View class="block_container">
-			<Label class="block_label" text=" Preview">
+			<Label class="block_label" text=" Preview"/>
 			<ImageView id="img_preview"/>
 		</View>
 	</TableViewRow>
