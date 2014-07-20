@@ -11,28 +11,28 @@ function Controller() {
     function syncAspects(e) {
         if (e && e.fromAdapter) return;
         syncAspects.opts || {};
-        var models = __alloyId102.models;
+        var models = __alloyId99.models;
         var len = models.length;
         var rows = [];
         for (var i = 0; len > i; i++) {
-            var __alloyId92 = models[i];
-            __alloyId92.__transform = transformData(__alloyId92);
-            var __alloyId94 = Ti.UI.createTableViewRow({
+            var __alloyId89 = models[i];
+            __alloyId89.__transform = transformData(__alloyId89);
+            var __alloyId91 = Ti.UI.createTableViewRow({
                 className: "itemRow",
                 layout: "vertical",
                 width: Ti.UI.FILL
             });
-            rows.push(__alloyId94);
-            showDetail ? __alloyId94.addEventListener("click", showDetail) : __defers["__alloyId94!click!showDetail"] = true;
-            var __alloyId96 = Ti.UI.createView({
+            rows.push(__alloyId91);
+            showDetail ? __alloyId91.addEventListener("click", showDetail) : __defers["__alloyId91!click!showDetail"] = true;
+            var __alloyId93 = Ti.UI.createView({
                 top: 2,
                 left: 2,
                 layout: "horizontal",
                 height: Ti.UI.SIZE,
                 width: Ti.UI.FILL
             });
-            __alloyId94.add(__alloyId96);
-            var __alloyId97 = Ti.UI.createLabel({
+            __alloyId91.add(__alloyId93);
+            var __alloyId94 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -43,10 +43,10 @@ function Controller() {
                 height: Ti.UI.SIZE,
                 width: 140,
                 left: 0,
-                text: "undefined" != typeof __alloyId92.__transform["dataDa"] ? __alloyId92.__transform["dataDa"] : __alloyId92.get("dataDa")
+                text: "undefined" != typeof __alloyId89.__transform["dataDa"] ? __alloyId89.__transform["dataDa"] : __alloyId89.get("dataDa")
             });
-            __alloyId96.add(__alloyId97);
-            var __alloyId98 = Ti.UI.createLabel({
+            __alloyId93.add(__alloyId94);
+            var __alloyId95 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -56,18 +56,18 @@ function Controller() {
                 textAlign: "center",
                 height: Ti.UI.SIZE,
                 width: 140,
-                text: "undefined" != typeof __alloyId92.__transform["dataA"] ? __alloyId92.__transform["dataA"] : __alloyId92.get("dataA")
+                text: "undefined" != typeof __alloyId89.__transform["dataA"] ? __alloyId89.__transform["dataA"] : __alloyId89.get("dataA")
             });
-            __alloyId96.add(__alloyId98);
-            var __alloyId100 = Ti.UI.createView({
+            __alloyId93.add(__alloyId95);
+            var __alloyId97 = Ti.UI.createView({
                 top: 2,
                 left: 2,
                 layout: "horizontal",
                 height: Ti.UI.SIZE,
                 width: Ti.UI.FILL
             });
-            __alloyId94.add(__alloyId100);
-            var __alloyId101 = Ti.UI.createLabel({
+            __alloyId91.add(__alloyId97);
+            var __alloyId98 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -80,9 +80,9 @@ function Controller() {
                 left: 5,
                 wordWrap: false,
                 ellipsize: true,
-                text: "undefined" != typeof __alloyId92.__transform["posizione"] ? __alloyId92.__transform["posizione"] : __alloyId92.get("posizione")
+                text: "undefined" != typeof __alloyId89.__transform["posizione"] ? __alloyId89.__transform["posizione"] : __alloyId89.get("posizione")
             });
-            __alloyId100.add(__alloyId101);
+            __alloyId97.add(__alloyId98);
         }
         $.__views.aspectEventTable.setData(rows);
     }
@@ -117,15 +117,6 @@ function Controller() {
         id: "briefEvento"
     });
     $.__views.briefEvento && $.addTopLevelView($.__views.briefEvento);
-    $.__views.__alloyId91 = Ti.UI.createLabel({
-        height: 1,
-        top: 0,
-        touchEnabled: false,
-        backgroundColor: "#D6D6D6",
-        width: Ti.UI.FILL,
-        id: "__alloyId91"
-    });
-    $.__views.briefEvento.add($.__views.__alloyId91);
     $.__views.eventIcon = Ti.UI.createLabel({
         top: 5,
         left: 5,
@@ -144,10 +135,10 @@ function Controller() {
         id: "aspectEventTable"
     });
     $.__views.briefEvento.add($.__views.aspectEventTable);
-    var __alloyId102 = Alloy.Collections["aspettoEvento"] || aspettoEvento;
-    __alloyId102.on("fetch destroy change add remove reset", syncAspects);
+    var __alloyId99 = Alloy.Collections["aspettoEvento"] || aspettoEvento;
+    __alloyId99.on("fetch destroy change add remove reset", syncAspects);
     exports.destroy = function() {
-        __alloyId102.off("fetch destroy change add remove reset", syncAspects);
+        __alloyId99.off("fetch destroy change add remove reset", syncAspects);
     };
     _.extend($, $.__views);
     arguments[0] || {};
@@ -156,7 +147,7 @@ function Controller() {
     $.briefEvento.addEventListener("close", function() {
         $.briefEvento.destroy();
     });
-    __defers["__alloyId94!click!showDetail"] && __alloyId94.addEventListener("click", showDetail);
+    __defers["__alloyId91!click!showDetail"] && __alloyId91.addEventListener("click", showDetail);
     _.extend($, exports);
 }
 

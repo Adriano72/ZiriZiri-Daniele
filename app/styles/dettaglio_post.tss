@@ -2,7 +2,7 @@
 ".container": {
   	backgroundColor: '#F9F9F9',
   	orientationModes: [Ti.UI.PORTRAIT]
-	//layout: "vertical",
+	
 }
 
 "#mn_edit": {
@@ -10,13 +10,16 @@
 	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
 }
 
+"#postTable": {
+	layout: "vertical"
+}
 
 ".eventContainer": {
 	//width: '100%',
 	left: 5,
 	right: 5,
 	top: 5,
-	borderRadius: 5,
+	borderRadius: 3,
 	borderWidth: 1,
 	borderColor: "#CCCCCC",
 	backgroundColor: '#FFF',
@@ -230,15 +233,42 @@
 	left: 5
 }
 
-"#aspectsCashflowWrapper": {
-	top:0,
+"#aspectsEventsWrapper": {
+	top:5,
+	borderRadius: 3,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF',
+	left: 5,
+	right: 5,
 	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	touchEnabled: false
+}
+
+"#aspectsCashflowWrapper": {
+	top:5,
+	borderRadius: 3,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF',
+	left: 5,
+	right: 5,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
 	touchEnabled: false
 }
 
 "#aspectsDocumentWrapper": {
-	top:0,
+	top:5,
+	borderRadius: 3,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF',
+	left: 5,
+	right: 5,
 	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
 	touchEnabled: false
 }
 

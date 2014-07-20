@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function setOrdinario() {
         staordinario = false;
@@ -16,20 +25,6 @@ function Controller() {
         $.ovalSwitchRedditi.image = dichRedditi ? "/images/oval-switch-on.png" : "/images/oval-switch-off.png";
         Ti.API.info("REDDITI FLAG: " + dichRedditi);
     }
-    function openEvent() {
-        theActionBar = $.win.activity.actionBar;
-        $.win.activity.invalidateOptionsMenu();
-        theActionBar = $.win.activity.actionBar;
-        if (void 0 != theActionBar) {
-            theActionBar.displayHomeAsUp = true;
-            theActionBar.setIcon("images/logo-test.png");
-            theActionBar.onHomeIconItemSelected = function() {
-                $.win.close({
-                    animate: true
-                });
-            };
-        }
-    }
     function showDatePicker(e) {
         Ti.API.info("SOURCE CLICK: " + JSON.stringify(e));
         Alloy.createController("datePicker", {
@@ -43,9 +38,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "addCashflow";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -56,7 +53,6 @@ function Controller() {
         title: "Nuovo CashFlow"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
-    openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
     var __alloyId0 = [];
     $.__views.__alloyId1 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
@@ -767,7 +763,6 @@ function Controller() {
         rowsVariabilita.push(pkrRow);
     });
     $.pkrVariabilita.add(rowsVariabilita);
-    __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
     __defers["$.__views.leftSubWrapper!click!setOrdinario"] && $.__views.leftSubWrapper.addEventListener("click", setOrdinario);
     __defers["$.__views.rightSubWrapper!click!setStraordinario"] && $.__views.rightSubWrapper.addEventListener("click", setStraordinario);
     __defers["$.__views.__alloyId21!click!toggleRedditi"] && $.__views.__alloyId21.addEventListener("click", toggleRedditi);

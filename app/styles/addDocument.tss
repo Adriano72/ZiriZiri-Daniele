@@ -4,11 +4,18 @@
 	//layout: "vertical",
 }
 
-"#mn_salva": {
-	icon: "/images/top-save.png",
-	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+"MenuItem": {
+    showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
 }
 
+"#mn_salva": {
+	icon: "/images/top-save2.png"
+}
+
+"#menu": {
+    icon: "images/logo-test.png",
+    displayHomeAsUp: true
+}
 
 "#newDocumentTable":{
 	top: 5,
@@ -31,7 +38,7 @@
 	left: 5,
 	top:5,
 	right: 5,
-	borderRadius: 5,
+	borderRadius: 3,
 	borderWidth: 1,
 	borderColor: "#CCCCCC",
 	backgroundColor: '#FFF'
@@ -43,7 +50,7 @@
 	left: 5,
 	top:5,
 	right: 5,
-	borderRadius: 5,
+	borderRadius: 3,
 	borderWidth: 1,
 	borderColor: "#CCCCCC",
 	backgroundColor: '#FFF', 
@@ -148,7 +155,7 @@
 	height: 40,
 	width: "49%",
 	left: 0,
-	borderRadius: 5,
+	borderRadius: 3,
 	borderWidth: 1,
 	borderColor: "#5FAEE3",
 	backgroundColor: '#5FAEE3'
@@ -176,7 +183,7 @@
 	height: 40,
 	width: "49%",
 	right: 5,
-	borderRadius: 5,
+	borderRadius: 3,
 	borderWidth: 1,
 	borderColor: "#CCCCCC",
 	backgroundColor: '#FFF'

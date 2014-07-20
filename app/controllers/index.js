@@ -2,6 +2,10 @@
 
 var rememberMe = false;
 
+function hideActionBar(){
+	$.index.activity.actionBar.hide();
+}
+
 Ti.API.info("PROP TIMELINE (Index CACHED): " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
 
 if (Ti.App.Properties.getBool('authenticated', false)) {

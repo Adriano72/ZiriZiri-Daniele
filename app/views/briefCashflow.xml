@@ -2,7 +2,7 @@
 
 	<View class="aspectCashflowContainer">
 
-		<Label class="separator"/>
+		<!--<Label class="separator"/>-->
 		<Label id="cashFlowIcon" class="aspectIcon"/>
 		<TableView id="aspectTable" dataCollection="aspettiCashflow"  dataFunction="syncAspects" dataTransform="transformData">
 

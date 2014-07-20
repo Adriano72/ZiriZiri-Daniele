@@ -1,9 +1,9 @@
 <Alloy>
 
-	<Window id="win" title="Crea/Modifica" class="container" onOpen="openEvent" onClose="resetShortcut">
+	<Window id="win" title="{Post_template.name}" class="container" onOpen="openEvent" onClose="resetShortcut">
 
 		<!-- The Menu tag adds the Android menu. -->
-		<Menu id="menu" platform="android">
+		<Menu id="menu" platform="android" onHomeIconItemSelected="homeIconSelected">
 
 			<!-- Cannot specify node text.  Use attributes only. -->
 			<MenuItem id="mn_delete" title="Cancella"/>

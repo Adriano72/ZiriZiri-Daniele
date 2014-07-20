@@ -12,32 +12,30 @@ function Controller() {
         $.__views.win.removeEventListener("open", __alloyId34);
         if ($.__views.win.activity) $.__views.win.activity.onCreateOptionsMenu = function(e) {
             var __alloyId33 = {
-                icon: "/images/top-save.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
+                icon: "/images/top-save2.png",
                 id: "mn_salva"
             };
             $.__views.mn_salva = e.menu.add(_.pick(__alloyId33, Alloy.Android.menuItemCreateArgs));
             $.__views.mn_salva.applyProperties(_.omit(__alloyId33, Alloy.Android.menuItemCreateArgs));
             saveDocument ? $.__views.mn_salva.addEventListener("click", saveDocument) : __defers["$.__views.mn_salva!click!saveDocument"] = true;
+            if ($.__views.win.activity.actionBar) {
+                $.__views.win.activity.actionBar.displayHomeAsUp = true;
+                $.__views.win.activity.actionBar.icon = "images/logo-test.png";
+                $.__views.win.activity.actionBar.onHomeIconItemSelected = homeIconSelected;
+            }
         }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
             Ti.API.warn("or other UI component which does not have an Android activity.");
             Ti.API.warn("Android Menus can only be opened on TabGroups and heavyweight Windows.");
         }
     }
+    function homeIconSelected() {
+        $.win.close({
+            animate: true
+        });
+    }
     function openEvent() {
-        theActionBar = $.win.activity.actionBar;
-        $.win.activity.invalidateOptionsMenu();
-        theActionBar = $.win.activity.actionBar;
-        if (void 0 != theActionBar) {
-            theActionBar.displayHomeAsUp = true;
-            theActionBar.setIcon("images/logo-test.png");
-            theActionBar.onHomeIconItemSelected = function() {
-                $.win.close({
-                    animate: true
-                });
-            };
-        }
         "camera" == Alloy.Globals.shortcutMode && openCamera(true);
         "gallery" == Alloy.Globals.shortcutMode && openGallery(true);
     }

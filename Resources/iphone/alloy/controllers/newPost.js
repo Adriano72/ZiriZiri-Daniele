@@ -1,35 +1,23 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function openEvent() {
-        theActionBar = $.win.activity.actionBar;
-        $.win.activity.invalidateOptionsMenu();
-        theActionBar = $.win.activity.actionBar;
-        if (void 0 != theActionBar) {
-            theActionBar.displayHomeAsUp = true;
-            theActionBar.setIcon("images/logo-test.png");
-            theActionBar.onHomeIconItemSelected = function() {
-                $.win.close({
-                    animate: true
-                });
-            };
-        }
         "camera" == Alloy.Globals.shortcutMode && savePost();
+    }
+    function openCategoryList() {
+        Alloy.createController("selezionaCategoria", function(cat) {
+            $.categoria.text = cat;
+        }).getView();
     }
     function checkForSync() {
         args();
-    }
-    function initializeThings() {
-        openEvent();
-        var rowsCat = [ Ti.UI.createPickerRow({
-            fontFamily: "SourceSansPro-Regular",
-            fontSize: 8,
-            title: "Categorie",
-            id: 9999
-        }) ];
-        _.forEach(Ti.App.Properties.getObject("elencoCategorie"), function(value) {
-            var pkrRow = Ti.UI.createPickerRow(value);
-            rowsCat.push(pkrRow);
-        });
-        $.pkrCategoria.add(rowsCat);
     }
     function savePost() {
         if ("camera" == Alloy.Globals.shortcutMode || "gallery" == Alloy.Globals.shortcutMode) {
@@ -63,9 +51,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "newPost";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -76,7 +66,7 @@ function Controller() {
         title: "Nuovo Post"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
-    initializeThings ? $.__views.win.addEventListener("open", initializeThings) : __defers["$.__views.win!open!initializeThings"] = true;
+    openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
     checkForSync ? $.__views.win.addEventListener("close", checkForSync) : __defers["$.__views.win!close!checkForSync"] = true;
     var __alloyId113 = [];
     $.__views.__alloyId114 = Ti.UI.createTableViewRow({
@@ -159,20 +149,20 @@ function Controller() {
         id: "__alloyId117"
     });
     __alloyId113.push($.__views.__alloyId117);
-    $.__views.pkrCategoria = Ti.UI.createPicker({
-        color: "#999",
-        top: 5,
+    $.__views.categoria = Ti.UI.createLabel({
+        font: {
+            fontFamily: "SourceSansPro-Regular",
+            fontSize: 16
+        },
         left: 5,
+        text: "Categoria",
         width: Ti.UI.FILL,
         height: Ti.UI.FILL,
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: "#CCCCCC",
-        backgroundColor: "#FFF",
-        id: "pkrCategoria",
-        selectionIndicator: "true"
+        color: "#444",
+        id: "categoria"
     });
-    $.__views.__alloyId117.add($.__views.pkrCategoria);
+    $.__views.__alloyId117.add($.__views.categoria);
+    openCategoryList ? $.__views.categoria.addEventListener("singletap", openCategoryList) : __defers["$.__views.categoria!singletap!openCategoryList"] = true;
     $.__views.__alloyId118 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
@@ -246,8 +236,9 @@ function Controller() {
     Ti.API.info("**** timeNow: " + timeNow);
     $.starwidget.init();
     $.win.open();
-    __defers["$.__views.win!open!initializeThings"] && $.__views.win.addEventListener("open", initializeThings);
+    __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
     __defers["$.__views.win!close!checkForSync"] && $.__views.win.addEventListener("close", checkForSync);
+    __defers["$.__views.categoria!singletap!openCategoryList"] && $.__views.categoria.addEventListener("singletap", openCategoryList);
     _.extend($, exports);
 }
 

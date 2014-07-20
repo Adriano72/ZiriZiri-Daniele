@@ -12,25 +12,12 @@ $.pkrDataFineEvento.dataRaw = moment();
 var location_result = null;
 var scadenzaStrutturale = false;
 
-function openEvent() {
-	//Ti.API.info("WINDOW OPEN");
-	theActionBar = $.win.activity.actionBar;
+function homeIconSelected() {
+	$.win.close({
+		animate : true
+	});
+}
 
-	$.win.activity.invalidateOptionsMenu();
-
-	theActionBar = $.win.activity.actionBar;
-	if (theActionBar != undefined) {
-		theActionBar.displayHomeAsUp = true;
-		theActionBar.setIcon('images/logo-test.png');
-		//theActionBar.setTitle(self.title);
-		theActionBar.onHomeIconItemSelected = function() {
-			$.win.close({
-				animate : true
-			});
-		};
-	};
-
-};
 
 function getLocation() {
 

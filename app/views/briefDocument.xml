@@ -2,7 +2,7 @@
 
 	<View class="aspectDocumentContainer">
 
-		<Label class="separator"/>
+		<!--<Label class="separator"/>-->
 		<Label id="documentIcon" class="aspectDocumentIcon"/>
 		<TableView id="aspectDocumentTable" dataCollection="aspettiDocument"  dataFunction="syncAspects" dataTransform="transformData">
 

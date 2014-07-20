@@ -5,13 +5,13 @@ exports.loadTabData = function() {
         Ti.API.info("CATEGORIE " + JSON.stringify(categoriesData));
         _.forEach(categoriesData.data, function(value) {
             objCategorie.push({
-                title: value.name,
+                name: value.name,
                 id: value.id,
                 code: value.code
             });
         });
-        Ti.App.Properties.setObject("elencoCategorie", objCategorie);
-        Ti.API.info("OBJ CATEGORIE: " + JSON.stringify(Ti.App.Properties.getObject("elencoCategorie")));
+        Alloy.Collections.categorie.reset(objCategorie);
+        Ti.API.info("COLLECTION CATEGORIE: " + JSON.stringify(Alloy.Collections.categorie));
     });
     net.getPostTemplate(0, 1, function(p_postTemplate) {
         Alloy.Models.Template.set(p_postTemplate.data[0]);

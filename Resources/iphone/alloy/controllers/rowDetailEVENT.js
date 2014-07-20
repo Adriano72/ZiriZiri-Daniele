@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function openEvent() {
         theActionBar = $.win.activity.actionBar;
@@ -33,9 +42,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "rowDetailEVENT";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -66,8 +77,7 @@ function Controller() {
         left: 5,
         borderWidth: 1,
         borderColor: "#CCCCCC",
-        id: "mapview",
-        ns: "Alloy.Globals.Map"
+        id: "mapview"
     });
     $.__views.wrapper.add($.__views.mapview);
     $.__views.__alloyId157 = Ti.UI.createView({

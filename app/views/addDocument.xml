@@ -1,7 +1,7 @@
 <Alloy>
 	<Window id="win" class="container" title = "Nuovo Documento" onOpen="openEvent" onClose="resetGlobals">
 
-		<Menu id="menu" platform="android">
+		<Menu id="menu" platform="android" onHomeIconItemSelected="homeIconSelected">
 
 			<MenuItem id="mn_salva" onClick="saveDocument"/>
 

@@ -1,0 +1,1 @@
+module.exports = [{"isClass":true,"priority":10000.0323,"key":"container","style":{backgroundColor:"#F9F9F9",orientationModes:[Ti.UI.PORTRAIT,],}},{"isClass":true,"priority":10000.0325,"key":"row","style":{height:Ti.UI.SIZE,width:Ti.UI.FILL,backgroundColor:"#F9F9F9",className:"itemRow",top:5,}},{"isId":true,"priority":100000.0324,"key":"categorieTable","style":{top:5,}}];

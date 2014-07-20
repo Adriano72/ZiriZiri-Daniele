@@ -6,19 +6,26 @@
 	//layout: "vertical",
 }
 
+"MenuItem": {
+    showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+}
+
+"#menu": {
+    icon: "images/logo-test.png",
+    displayHomeAsUp: true
+}
+
+
 "#mn_delete": {
-	icon: "/images/top-delete.png",
-	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+	icon: "/images/top-delete.png"
 }
 
 "#mn_cancel": {
-	icon: "/images/top-cancel.png",
-	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+	icon: "/images/top-cancel.png"
 }
 
 "#mn_save": {
-	icon: "/images/top-save.png",
-	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+	icon: "/images/top-save2.png"
 }
 
 "#postTable": {
@@ -37,7 +44,7 @@
 	right: 5,
 	top: 5,
 	bottom: 10,
-	borderRadius: 5,
+	borderRadius: 3,
 	borderWidth: 1,
 	borderColor: "#E9FA32",
 	backgroundColor: '#FFF',
@@ -80,7 +87,7 @@
 	//left: 5,
 	//top: 5,
 
-	borderRadius: 4
+	borderRadius: 3
 }
 
 "#date_rating": {

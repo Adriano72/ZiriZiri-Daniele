@@ -31,7 +31,6 @@
 					</View>
 
 				</View>
-				
 				<View id="middleWrapper">
 					<View class="post_icons_container first" >
 						<Label class="post_icon" id="cat_icon"/>
@@ -47,11 +46,11 @@
 					</View>
 
 				</View>
-				<View id="aspectsEventsWrapper"></View>
-				<View id="aspectsCashflowWrapper"></View>
-				<View id="aspectsDocumentWrapper"></View>
 
 			</View>
+			<View id="aspectsEventsWrapper"></View>
+			<View id="aspectsCashflowWrapper"></View>
+			<View id="aspectsDocumentWrapper"></View>
 
 		</ScrollView>
 

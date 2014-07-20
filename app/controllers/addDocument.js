@@ -6,24 +6,15 @@ moment.lang('it', Alloy.Globals.Moment_IT);
 var ImageFactory = require('ti.imagefactory');
 //Ti.API.info("PARAMETRI: "+JSON.stringify(args));
 
+function homeIconSelected() {
+	$.win.close({
+		animate : true
+	});
+}
+
+
 function openEvent() {
 	//Ti.API.info("win OPEN");
-	theActionBar = $.win.activity.actionBar;
-
-	$.win.activity.invalidateOptionsMenu();
-
-	theActionBar = $.win.activity.actionBar;
-	if (theActionBar != undefined) {
-		theActionBar.displayHomeAsUp = true;
-		theActionBar.setIcon('images/logo-test.png');
-		//theActionBar.setTitle(self.title);
-		theActionBar.onHomeIconItemSelected = function() {
-			$.win.close({
-				animate : true
-			});
-		};
-
-	};
 	
 	if(Alloy.Globals.shortcutMode == "camera"){
 		
@@ -74,7 +65,7 @@ function showDatePicker(e) {
 function saveDocument() {
 
 	var modDocumentJSON = Alloy.Models.Document_template.toJSON();
-	modDocumentJSON = _.omit(modDocumentJSON, "kind.id");
+	modDocumentJSON = _.omit(modDocumentJSON, "kind.id"); // questo mi sa che nn serve e nemmeno funziona
 
 	if ($.titolo.value != "" && $.descrizione.value != "" && imageContent != "") {
 		

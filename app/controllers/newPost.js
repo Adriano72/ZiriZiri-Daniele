@@ -13,47 +13,26 @@ var timeNow = moment();
 
 var arrayAspetti = [];
 
+var selectedCategory;
+
 Ti.API.info("**** timeNow: " + timeNow);
 
 //moment().format("Do MMM YY")
 
-function openEvent() {
-	//Ti.API.info("win OPEN");
-	theActionBar = $.win.activity.actionBar;
-
-	$.win.activity.invalidateOptionsMenu();
-
-	theActionBar = $.win.activity.actionBar;
-	if (theActionBar != undefined) {
-		theActionBar.displayHomeAsUp = true;
-		theActionBar.setIcon('images/logo-test.png');
-		//theActionBar.setTitle(self.title);
-		theActionBar.onHomeIconItemSelected = function() {
-			$.win.close({
-				animate : true
-			});
-		};
-
-	};
-	
-	if(Alloy.Globals.shortcutMode == "camera"){
-		savePost();
-	}
-
-
-};
-
-function checkForSync() {
-	
-	args();
+function homeIconSelected() {
+	$.win.close({
+		animate : true
+	});
 }
 
-$.starwidget.init();
+function openEvent() {
 
-function initializeThings() {
 
-	openEvent();
-
+	if (Alloy.Globals.shortcutMode == "camera") {
+		savePost();
+	};
+	
+	/*
 	var rowsCat = [Ti.UI.createPickerRow({
 		fontFamily : 'SourceSansPro-Regular',
 		fontSize : 8,
@@ -73,24 +52,41 @@ function initializeThings() {
 	});
 
 	$.pkrCategoria.add(rowsCat);
+	*/
+};
 
+function openCategoryList(){
+	Alloy.createController("selezionaCategoria", function(cat_obj){
+		$.categoria.value = cat_obj.name;
+		selectedCategory = cat_obj;
+	}).getView();
 }
 
+function checkForSync() {
+
+	args();
+}
+
+$.starwidget.init();
+
+
 function takePicture() {
-	
+
 	Alloy.Globals.shortcutMode = "camera";
 
 	savePost();
 
 };
 
-function openGallery(){
-	
+function openGallery() {
+
 	Alloy.Globals.shortcutMode = "gallery";
 
 	savePost();
-	
+
 }
+
+
 
 function savePost() {
 
@@ -102,7 +98,7 @@ function savePost() {
 	//Ti.API.info("SELECTED CATEGORY ROW: "+JSON.stringify($.pkrCategoria.getSelectedRow(0)));
 
 	if (Alloy.Globals.shortcutMode == "camera" || Alloy.Globals.shortcutMode == "gallery") {
-		
+
 		Alloy.Models.Post_template.set("name", "");
 		Alloy.Models.Post_template.set("rating", 0);
 
@@ -121,15 +117,11 @@ function savePost() {
 
 	} else {
 
-		if ($.titolo.value !== "" && $.pkrCategoria.getSelectedRow(0).id != 9999) {
+		if ($.titolo.value !== "" && !_.isUndefined(selectedCategory)) {
 
 			Alloy.Models.Post_template.set("name", $.titolo.value);
 			Alloy.Models.Post_template.set("rating", $.starwidget.getRating());
-			Alloy.Models.Post_template.set("category", {
-				id : $.pkrCategoria.getSelectedRow(0).id,
-				code : $.pkrCategoria.getSelectedRow(0).code,
-				name : $.pkrCategoria.getSelectedRow(0).title,
-			});
+			Alloy.Models.Post_template.set("category", selectedCategory);
 			Alloy.Models.Post_template.set("description", $.descrizione.value);
 			Alloy.Models.Post_template.set("referenceTime", timeNow);
 

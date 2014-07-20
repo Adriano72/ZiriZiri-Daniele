@@ -12,33 +12,24 @@ var timeNow = moment();
 
 var arrayAspetti = [];
 
+function homeIconSelected() {
+	$.win.close({
+		animate : true
+	});
+}
+
+
 function openEvent() {
-	//Ti.API.info("WINDOW OPEN");
-	theActionBar = $.win.activity.actionBar;
-
-	$.win.activity.invalidateOptionsMenu();
-
-	theActionBar = $.win.activity.actionBar;
-	if (theActionBar != undefined) {
-		theActionBar.displayHomeAsUp = true;
-		theActionBar.setIcon('images/logo-test.png');
-		//theActionBar.setTitle(self.title);
-		theActionBar.onHomeIconItemSelected = function() {
-			$.win.close({
-				animate : true
-			});
-		};
-	};
 	
-	if(Alloy.Globals.shortcutMode == "camera" || Alloy.Globals.shortcutMode == "gallery"){
-		
+
+	if (Alloy.Globals.shortcutMode == "camera" || Alloy.Globals.shortcutMode == "gallery") {
+
 		addDocument();
 	}
-	
 
 };
 
-function resetShortcut(){
+function resetShortcut() {
 	Alloy.Globals.shortcutMode = false;
 }
 
@@ -47,7 +38,7 @@ var modJson = Alloy.Models.Post_template.toJSON();
 Ti.API.info("MODEL JSON: " + JSON.stringify(modJson));
 Ti.API.info("MODEL CATEGORY: " + modJson.category.name);
 
-$.postIcon.image = (!_.isNull(modJson.category.code))?'/images/'+modJson.category.code.slice(0,2)+".png":'/images/android-robot.jpg';
+$.postIcon.image = (!_.isNull(modJson.category.code)) ? '/images/' + modJson.category.code.slice(0, 2) + ".png" : '/images/android-robot.jpg';
 
 $.date.text = moment(Alloy.Models.Post_template.get("referenceTime")).fromNow();
 
@@ -56,8 +47,6 @@ $.category.text = (!_.isNull(modJson.category) ? modJson.category.name : "");
 Ti.API.info("CATEGORIA: " + modJson.category.name);
 
 var rating = Alloy.Models.Post_template.get("rating");
-
-
 
 $.rating_1.image = (rating > 0) ? "/images/star-small.png" : "";
 $.rating_2.image = (rating > 1) ? "/images/star-small.png" : "";
@@ -69,7 +58,7 @@ $.rating_5.image = (rating > 4) ? "/images/star-small.png" : "";
 
 var aspects = modJson.aspects;
 
-Ti.API.info("ASPETTI JSON: " + JSON.stringify(aspects));
+//Ti.API.info("ASPETTI JSON: " + JSON.stringify(aspects));
 
 Alloy.Models.Post_template.trigger('change');
 
@@ -79,47 +68,21 @@ function submitPost() {
 
 	Ti.API.info("JSON POST: " + JSON.stringify(Alloy.Models.Post_template));
 
-	net.savePost(Alloy.Models.Post_template, function(post_id, postToAddToTimeline) {
+	Ti.API.info("JSON POST CON ASPETTI: " + JSON.stringify(Alloy.Models.Post_template));
 
-		
+	if (arrayAspetti.length > 0) {
+		Alloy.Models.Post_template.set("aspects", arrayAspetti);
+	}
+
+	net.savePost(Alloy.Models.Post_template, function(post_id, postToAddToTimeline) {
 
 		Ti.API.info("ID POST SALVATO: " + post_id);
 
-		if (arrayAspetti.length > 0) {// Se ci sono aspetti nel post li salvo e poi li collego al post
+		Alloy.Collections.Timeline.add(postToAddToTimeline);
+		$.win.close();
+		args();
 
-			callSaveAspects(function(p_arrayIdAspetti) {
-
-				//p_arrayIdAspetti.push(Ti.App.Properties.getList("postTemplateIds"));
-
-				p_arrayIdAspetti = _.flatten(p_arrayIdAspetti);
-
-				Ti.API.info("ARRAY ID ASPETTI DA MANDARE IN ASSOCIAZIONE: " + p_arrayIdAspetti);
-
-				net.linkAspectsToPost(post_id, p_arrayIdAspetti, function(postToAddToTimeline) {
-					Ti.API.info("OGG CON ASPETTI DA AGGIUNGERE TIMELINE: "+JSON.stringify(postToAddToTimeline));
-					Alloy.Collections.Timeline.add(postToAddToTimeline);
-					$.win.close();
-					args();
-					
-					
-					
-				});
-			});
-		} else {
-			Alloy.Collections.Timeline.add(postToAddToTimeline);
-			$.win.close();			
-			args();
-			
-			//alert("Post salvato");
-			/*
-			setTimeout(function() {
-
-				Ti.App.fireEvent("loading_done");
-				
-			}, 500);
-			*/
-
-		};
+		//alert("Post salvato");
 
 	});
 
@@ -140,55 +103,50 @@ function callSaveAspects(_callback) {
 };
 
 function addEvent() {
-	
+
 	Alloy.createController("addEvent", function(objRet) {
-		
-		Ti.API.info("EVENTO RICEVUTO: "+JSON.stringify(objRet));
-		
+
+		Ti.API.info("EVENTO RICEVUTO: " + JSON.stringify(objRet));
+
 		arrayAspetti.push(objRet);
 
 		//Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
-		
+
 		var aspettoDataJson = JSON.parse(objRet.data);
-		
-		Ti.API.info("DATA PARSATO: "+JSON.stringify(aspettoDataJson));
-		
+
+		Ti.API.info("DATA PARSATO: " + JSON.stringify(aspettoDataJson));
+
 		var riga = Alloy.createController('rowEvent', {
 
-			//id_code : arrayAspetti.length - 1,			
-			startDate : moment(aspettoDataJson.startTime.time).format("DD-MM-YYYY HH:MM"),	
+			//id_code : arrayAspetti.length - 1,
+			startDate : moment(aspettoDataJson.startTime.time).format("DD-MM-YYYY HH:MM"),
 			endDate : moment(aspettoDataJson.endTime.time).format("DD-MM-YYYY HH:MM"),
 			location : objRet.location.name
 
 		}).getView();
 		$.postTable.appendRow(riga);
-		
 
-		
 	}).getView().open();
-	
 
 };
 
 function addCashflow() {
 	//Ti.API.info("**** INSERT CASHFLOW!");
 
-
-
 	Alloy.createController("addCashflow", function(objRet) {
 
 		arrayAspetti.push(objRet);
 
 		Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
-		
+
 		var aspettoDataJson = JSON.parse(objRet.data);
-		
-		Ti.API.info("DATA PARSATO: "+JSON.stringify(aspettoDataJson));
-		
+
+		Ti.API.info("DATA PARSATO: " + JSON.stringify(aspettoDataJson));
+
 		var riga = Alloy.createController('rowCASHFLOW', {
 
-			//id_code : arrayAspetti.length - 1,			
-			importo : aspettoDataJson.importo,	
+			//id_code : arrayAspetti.length - 1,
+			importo : aspettoDataJson.importo,
 			modalitaPagamento : aspettoDataJson.pagamentoIncasso.descrizioneBreve,
 			tipoMovimento : aspettoDataJson.tipoMovimento.descrizioneBreve
 
@@ -202,26 +160,52 @@ function addCashflow() {
 function addDocument(p_shortcutMode) {
 	//Ti.API.info("**** INSERT CASHFLOW!");
 
-
 	Alloy.createController("addDocument", function(objRet) {
-		
+
 		arrayAspetti.push(objRet);
-		
+
 		var aspettoDataJson = JSON.parse(objRet.data);
-		
-		Ti.API.info("DATA PARSATO: "+JSON.stringify(aspettoDataJson));
-		
+
+		Ti.API.info("DATA PARSATO: " + JSON.stringify(aspettoDataJson));
+
 		var riga = Alloy.createController('rowDOCUMENT', {
 
-			//id_code : arrayAspetti.length - 1,
-						
-			titolo : aspettoDataJson.title,	
-			formato : aspettoDataJson.format,
-			hashedImage : aspettoDataJson.content
+			obj_aspetto : aspettoDataJson,
+			
 
 		}).getView();
+		
+		riga.addEventListener("click", function(e){
+			e.source.hide();
+		});
+		
 		$.postTable.appendRow(riga);
-	
+
+	}).getView().open();
+};
+
+function editDocument(id_array) {
+	//Ti.API.info("**** INSERT CASHFLOW!");
+
+	Alloy.createController("addDocument", function(objRet) {
+
+		arrayAspetti.push(objRet);
+
+		var aspettoDataJson = JSON.parse(objRet.data);
+
+		var riga = Alloy.createController('rowDOCUMENT', {
+
+			obj_aspetto : aspettoDataJson,
+			
+
+		}).getView();
+		
+		riga.addEventListener("click", function(e){
+			e.source.hide();
+		});
+		
+		return(riga);
+
 	}).getView().open();
 };
 
@@ -373,8 +357,6 @@ function addNote() {
 		//Ti.API.info("FINISHED ASPECT OBJ: "+JSON.stringify(objAspect));
 	}).getView().open();
 };
-
-
 
 $.win.open();
 

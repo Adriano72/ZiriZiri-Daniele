@@ -2,18 +2,26 @@
   	backgroundColor: '#F9F9F9',
   	orientationModes: [Ti.UI.PORTRAIT]
 	//layout: "vertical",
-}
+},
+
+"MenuItem": {
+    showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+},
 
 "#mn_salva": {
-	icon: "/images/top-save.png",
-	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
-}
+	icon: "/images/top-save2.png"
+},
+
+"#menu": {
+    icon: "images/logo-test.png",
+    displayHomeAsUp: true
+},
 
 
 "#newPostTable":{
 	top: 5,
 	separatorColor: 'transparent'
-} 
+},
 
 ".row": {
 	
@@ -24,7 +32,7 @@
     layout: 'horizontal',
     touchEnabled: false
     
-} 
+},
 
 "#titolo": {
 	
@@ -45,7 +53,7 @@
 	borderColor: "#CCCCCC",
 	backgroundColor: '#FFF'
 
-}
+},
 
 "#descrizione": {
 	
@@ -66,7 +74,31 @@
 	borderColor: "#CCCCCC",
 	backgroundColor: '#FFF'
 
-}
+},
+
+"#categoria": {
+	
+	color: "#999",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 18,
+	},
+	top: 5,
+	
+	left: 5,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	autocorrect: false,
+	//backgroundColor: '#C8DDE8',
+	hintText: "Categoria",
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF'
+
+},
+
+
 
 "#tag": {
 	
@@ -87,7 +119,7 @@
 	borderColor: "#CCCCCC",
 	backgroundColor: '#FFF'
 
-}
+},
 
 
 "#storie": {
@@ -109,7 +141,7 @@
 	borderColor: "#CCCCCC",
 	backgroundColor: '#FFF'
 
-}
+},
 
 "#picOptionsContainer": {
 	top: 5,
@@ -117,7 +149,7 @@
 	
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE
-}
+},
 
 "#picture": {
 	height: 40,
@@ -127,7 +159,7 @@
 	borderWidth: 1,
 	borderColor: "#5FAEE3",
 	backgroundColor: '#5FAEE3'
-}
+},
 
 "#takePicIcon": {
 	
@@ -135,7 +167,7 @@
 	height: Ti.UI.SIZE,
 	image: "/images/various-take-a-photo.png",
 	left: 5
-}
+},
 
 "#takePicText": {
 	font: {
@@ -145,7 +177,7 @@
 	right: 10,
 	text: "Take a Picture!",
 	color: '#FFF'
-}
+},
 
 "#gallery": {
 	height: 40,
@@ -155,7 +187,7 @@
 	borderWidth: 1,
 	borderColor: "#CCCCCC",
 	backgroundColor: '#FFF'
-}
+},
 
 "#galleryPicIcon": {
 	
@@ -163,7 +195,7 @@
 	height: Ti.UI.SIZE,
 	image: "/images/various-add.png",
 	left: 5
-}
+},
 
 "#galleryPicText": {
 	font: {
@@ -172,7 +204,7 @@
 	},
 	text: "Gallery",
 	color: '#999'
-}
+},
 
 "#verticalBar": {
 	
@@ -181,7 +213,7 @@
 	right: 45,
 	backgroundColor: "#CCCCCC"
 	
-}
+},
 
 "#galleryPic2": {
 	borderLeft: true,
@@ -190,7 +222,7 @@
 	height: Ti.UI.SIZE,
 	image: "/images/various-galllery.png",
 	right: 5
-}
+},
 
 
 "#starwidget": {
@@ -198,23 +230,7 @@
 	top:10,
 	bottom: 10
 	
-}
-
-"#pkrCategoria": {
-
-	color: "#999",
-	top: 5,
-	
-	left: 5,
-	width: Ti.UI.FILL,
-	height: Ti.UI.FILL,
-	borderRadius: 5,
-	borderWidth: 1,
-	borderColor: "#CCCCCC",
-	backgroundColor: '#FFF'
-	//backgroundColor: '#C8DD
-
-}
+},
 
 "#postDate": {
 	
@@ -231,7 +247,7 @@
 	borderRadius: 5,
 	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
 
-}
+},
 
 "#location": {
 	
@@ -249,7 +265,7 @@
 	borderRadius: 5,
 	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
 
-}
+},
 
 "#bottomBar": {
 	backgroundColor: '#5FAEE3',
@@ -257,7 +273,7 @@
 	touchEnabled: false,
 	height: 50,
 	bottom: 0
-}
+},
 
 ".separator": {
 	height: 1,
@@ -265,7 +281,7 @@
 	touchEnabled: false,
 	backgroundColor: '#D6D6D6',
 	width: '100%'
-}
+},
 
 
 "#buttonsContainer": {
@@ -274,18 +290,18 @@
 	top: 15,
 	
 	height: 25
-}
+},
 
 ".1_insertAspects": {
 	left: 0,
 	width: 20,
 	height: 20
 	
-}
+},
 
 ".insertAspects": {
 	left: 40,
 	width: 20,
 	height: 20
 	
-}
+},

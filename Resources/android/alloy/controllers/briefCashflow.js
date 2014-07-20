@@ -11,25 +11,25 @@ function Controller() {
     function syncAspects(e) {
         if (e && e.fromAdapter) return;
         syncAspects.opts || {};
-        var models = __alloyId80.models;
+        var models = __alloyId79.models;
         var len = models.length;
         var rows = [];
         for (var i = 0; len > i; i++) {
-            var __alloyId72 = models[i];
-            __alloyId72.__transform = transformData(__alloyId72);
-            var __alloyId74 = Ti.UI.createTableViewRow({
+            var __alloyId71 = models[i];
+            __alloyId71.__transform = transformData(__alloyId71);
+            var __alloyId73 = Ti.UI.createTableViewRow({
                 className: "itemRow",
                 width: Ti.UI.FILL
             });
-            rows.push(__alloyId74);
-            showDetail ? __alloyId74.addEventListener("click", showDetail) : __defers["__alloyId74!click!showDetail"] = true;
-            var __alloyId76 = Ti.UI.createView({
+            rows.push(__alloyId73);
+            showDetail ? __alloyId73.addEventListener("click", showDetail) : __defers["__alloyId73!click!showDetail"] = true;
+            var __alloyId75 = Ti.UI.createView({
                 left: 2,
                 layout: "horizontal",
                 width: Ti.UI.FILL
             });
-            __alloyId74.add(__alloyId76);
-            var __alloyId77 = Ti.UI.createLabel({
+            __alloyId73.add(__alloyId75);
+            var __alloyId76 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -41,9 +41,23 @@ function Controller() {
                 wordWrap: false,
                 ellipsize: true,
                 left: 0,
-                text: "undefined" != typeof __alloyId72.__transform["temp_importo"] ? __alloyId72.__transform["temp_importo"] : __alloyId72.get("temp_importo")
+                text: "undefined" != typeof __alloyId71.__transform["temp_importo"] ? __alloyId71.__transform["temp_importo"] : __alloyId71.get("temp_importo")
             });
-            __alloyId76.add(__alloyId77);
+            __alloyId75.add(__alloyId76);
+            var __alloyId77 = Ti.UI.createLabel({
+                font: {
+                    fontFamily: "SourceSansPro-Regular",
+                    fontSize: 18
+                },
+                color: "#999",
+                backgroundColor: "white",
+                textAlign: "center",
+                width: 95,
+                wordWrap: false,
+                ellipsize: true,
+                text: "undefined" != typeof __alloyId71.__transform["temp_tipoMovimento"] ? __alloyId71.__transform["temp_tipoMovimento"] : __alloyId71.get("temp_tipoMovimento")
+            });
+            __alloyId75.add(__alloyId77);
             var __alloyId78 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
@@ -55,23 +69,9 @@ function Controller() {
                 width: 95,
                 wordWrap: false,
                 ellipsize: true,
-                text: "undefined" != typeof __alloyId72.__transform["temp_tipoMovimento"] ? __alloyId72.__transform["temp_tipoMovimento"] : __alloyId72.get("temp_tipoMovimento")
+                text: "undefined" != typeof __alloyId71.__transform["temp_pagamentoIncasso"] ? __alloyId71.__transform["temp_pagamentoIncasso"] : __alloyId71.get("temp_pagamentoIncasso")
             });
-            __alloyId76.add(__alloyId78);
-            var __alloyId79 = Ti.UI.createLabel({
-                font: {
-                    fontFamily: "SourceSansPro-Regular",
-                    fontSize: 18
-                },
-                color: "#999",
-                backgroundColor: "white",
-                textAlign: "center",
-                width: 95,
-                wordWrap: false,
-                ellipsize: true,
-                text: "undefined" != typeof __alloyId72.__transform["temp_pagamentoIncasso"] ? __alloyId72.__transform["temp_pagamentoIncasso"] : __alloyId72.get("temp_pagamentoIncasso")
-            });
-            __alloyId76.add(__alloyId79);
+            __alloyId75.add(__alloyId78);
         }
         $.__views.aspectTable.setData(rows);
     }
@@ -106,15 +106,6 @@ function Controller() {
         id: "briefCashflow"
     });
     $.__views.briefCashflow && $.addTopLevelView($.__views.briefCashflow);
-    $.__views.__alloyId71 = Ti.UI.createLabel({
-        height: 1,
-        top: 0,
-        touchEnabled: false,
-        backgroundColor: "#D6D6D6",
-        width: Ti.UI.FILL,
-        id: "__alloyId71"
-    });
-    $.__views.briefCashflow.add($.__views.__alloyId71);
     $.__views.cashFlowIcon = Ti.UI.createLabel({
         top: 5,
         left: 5,
@@ -133,10 +124,10 @@ function Controller() {
         id: "aspectTable"
     });
     $.__views.briefCashflow.add($.__views.aspectTable);
-    var __alloyId80 = Alloy.Collections["aspettiCashflow"] || aspettiCashflow;
-    __alloyId80.on("fetch destroy change add remove reset", syncAspects);
+    var __alloyId79 = Alloy.Collections["aspettiCashflow"] || aspettiCashflow;
+    __alloyId79.on("fetch destroy change add remove reset", syncAspects);
     exports.destroy = function() {
-        __alloyId80.off("fetch destroy change add remove reset", syncAspects);
+        __alloyId79.off("fetch destroy change add remove reset", syncAspects);
     };
     _.extend($, $.__views);
     arguments[0] || {};
@@ -145,7 +136,7 @@ function Controller() {
     $.briefCashflow.addEventListener("close", function() {
         $.briefCashflow.destroy();
     });
-    __defers["__alloyId74!click!showDetail"] && __alloyId74.addEventListener("click", showDetail);
+    __defers["__alloyId73!click!showDetail"] && __alloyId73.addEventListener("click", showDetail);
     _.extend($, exports);
 }
 

@@ -27,16 +27,19 @@
 
 ".aspectIcon": {
 	//top:5,
+	touchEnabled: false,
 	left: 5,
 	width: 25,
 	height: 25
 }
 "#documentIcon": {
+	touchEnabled: false,
 	backgroundImage: '/images/kernel-document-on.png'
 }
 
 ".aligningWrapper":{
 	//height: Ti.UI.FILL,
+	touchEnabled: false,
 	width: Ti.UI.SIZE,
 	//top: 5,
 	//backgroundColor: "lime",
@@ -45,6 +48,7 @@
 
 ".dataWrapper": {
 	left: 2,
+	touchEnabled: false,
 	//backgroundColor: "red",
 	width: "85%",
 	height: Ti.UI.SIZE,
@@ -56,6 +60,7 @@
 		fontFamily: 'SourceSansPro-Regular',
 		fontSize: 18,
 	},
+	touchEnabled: false,
 	color: "#999",
 	backgroundColor: 'white',
 	//textAlign: 'center',
@@ -73,6 +78,7 @@
 	color: "#5FAEE3",
 	backgroundColor: 'white',
 	text: "Visualizza",
+	touchEnabled: false,
 	//textAlign: 'center',
 	width: 95,
 	wordWrap: false,
@@ -81,6 +87,7 @@
 }
 
 "#titolo": {
+	touchEnabled: false,
 	//backgroundColor: 'yellow',
 	color: "#444"
 }

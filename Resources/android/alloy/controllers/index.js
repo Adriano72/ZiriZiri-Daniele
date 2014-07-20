@@ -8,6 +8,9 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
+    function hideActionBar() {
+        $.index.activity.actionBar.hide();
+    }
     function manageRememberMe(e) {
         rememberMe = e.value;
     }
@@ -64,6 +67,7 @@ function Controller() {
         id: "index"
     });
     $.__views.index && $.addTopLevelView($.__views.index);
+    hideActionBar ? $.__views.index.addEventListener("open", hideActionBar) : __defers["$.__views.index!open!hideActionBar"] = true;
     $.__views.bigLogo = Ti.UI.createImageView({
         top: 40,
         image: "/images/bigLogo.png",
@@ -88,14 +92,14 @@ function Controller() {
         id: "username"
     });
     $.__views.index.add($.__views.username);
-    $.__views.__alloyId129 = Ti.UI.createView({
+    $.__views.__alloyId126 = Ti.UI.createView({
         top: 10,
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         layout: "horizontal",
-        id: "__alloyId129"
+        id: "__alloyId126"
     });
-    $.__views.index.add($.__views.__alloyId129);
+    $.__views.index.add($.__views.__alloyId126);
     $.__views.password = Ti.UI.createTextField({
         color: "#999",
         font: {
@@ -113,7 +117,7 @@ function Controller() {
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "password"
     });
-    $.__views.__alloyId129.add($.__views.password);
+    $.__views.__alloyId126.add($.__views.password);
     $.__views.btn_login = Ti.UI.createLabel({
         backgroundColor: "#4BAEE7",
         text: "LOGIN",
@@ -129,15 +133,15 @@ function Controller() {
         height: 40,
         id: "btn_login"
     });
-    $.__views.__alloyId129.add($.__views.btn_login);
+    $.__views.__alloyId126.add($.__views.btn_login);
     do_login ? $.__views.btn_login.addEventListener("click", do_login) : __defers["$.__views.btn_login!click!do_login"] = true;
-    $.__views.__alloyId130 = Ti.UI.createView({
+    $.__views.__alloyId127 = Ti.UI.createView({
         top: 10,
         width: 330,
         height: Ti.UI.SIZE,
-        id: "__alloyId130"
+        id: "__alloyId127"
     });
-    $.__views.index.add($.__views.__alloyId130);
+    $.__views.index.add($.__views.__alloyId127);
     $.__views.remember = Ti.UI.createSwitch({
         color: "#fff",
         font: {
@@ -152,7 +156,7 @@ function Controller() {
         value: false,
         id: "remember"
     });
-    $.__views.__alloyId130.add($.__views.remember);
+    $.__views.__alloyId127.add($.__views.remember);
     manageRememberMe ? $.__views.remember.addEventListener("change", manageRememberMe) : __defers["$.__views.remember!change!manageRememberMe"] = true;
     $.__views.forgotPassword = Ti.UI.createLabel({
         color: "#4BAEE7",
@@ -164,7 +168,7 @@ function Controller() {
         text: "Forgot Password?",
         id: "forgotPassword"
     });
-    $.__views.__alloyId130.add($.__views.forgotPassword);
+    $.__views.__alloyId127.add($.__views.forgotPassword);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var rememberMe = false;
@@ -184,6 +188,7 @@ function Controller() {
         Ti.App.Properties.setObject("timelineProp", null);
         $.index.open();
     }
+    __defers["$.__views.index!open!hideActionBar"] && $.__views.index.addEventListener("open", hideActionBar);
     __defers["$.__views.btn_login!click!do_login"] && $.__views.btn_login.addEventListener("click", do_login);
     __defers["$.__views.remember!change!manageRememberMe"] && $.__views.remember.addEventListener("change", manageRememberMe);
     _.extend($, exports);

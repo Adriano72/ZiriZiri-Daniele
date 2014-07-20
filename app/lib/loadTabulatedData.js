@@ -13,16 +13,18 @@ exports.loadTabData = function() {
 			//Ti.API.info("Categoria: "+key+" : "+value.name);
 
 			objCategorie.push({
-				"title" : value.name,
+				"name" : value.name,
 				"id" : value.id,
 				"code" : value.code
 			});
 
 		});
+		
+		Alloy.Collections.categorie.reset(objCategorie);
 
-		Ti.App.Properties.setObject("elencoCategorie", objCategorie);
+		//Ti.App.Properties.setObject("elencoCategorie", objCategorie);
 
-		Ti.API.info("OBJ CATEGORIE: " + JSON.stringify(Ti.App.Properties.getObject("elencoCategorie")));
+		Ti.API.info("COLLECTION CATEGORIE: " + JSON.stringify(Alloy.Collections.categorie));
 
 	});
 

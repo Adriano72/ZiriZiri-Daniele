@@ -1,8 +1,8 @@
 <Alloy>
-	<Window id="win" class="container" title = "Nuovo Post" onOpen="initializeThings" onClose="checkForSync">
-		<Menu id="menu" platform="android">
+	<Window id="win" class="container" title = "Nuovo Post" onOpen="openEvent" onClose="checkForSync">
+		<Menu id="menu" title="Nuovo Post" platform="android" onHomeIconItemSelected="homeIconSelected">
 
-			<MenuItem id="mn_salva" onClick="savePost"/>
+			<MenuItem id="mn_salva" title="Salva" onClick="savePost"/>
 
 		</Menu>
 		<TableView id="newPostTable">
@@ -17,7 +17,7 @@
 				<TextField id="descrizione"></TextField>
 			</TableViewRow>
 			<TableViewRow class="row" hasDetail="true">
-				<Picker id="pkrCategoria" selectionIndicator="true"/>
+				<TextField id="categoria" onSingletap="openCategoryList"/>
 			</TableViewRow>
 			<TableViewRow class="row">
 				<TextField id="tag"></TextField>

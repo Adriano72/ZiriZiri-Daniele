@@ -4,9 +4,17 @@
 	//layout: "vertical",
 }
 
+"MenuItem": {
+    showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+}
+
 "#mn_salva": {
-	icon: "/images/top-save.png",
-	showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+	icon: "/images/top-save2.png"
+}
+
+"#menu": {
+    icon: "images/logo-test.png",
+    displayHomeAsUp: true
 }
 
 

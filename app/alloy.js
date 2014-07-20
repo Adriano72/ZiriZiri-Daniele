@@ -35,6 +35,7 @@ var Timeline = Backbone.Collection.extend({
 });
 
 Alloy.Collections.Timeline = new Timeline();
+Alloy.Collections.categorie = new Backbone.Collection;
 Alloy.Collections.aspettoEvento = new Backbone.Collection;
 Alloy.Collections.aspettiCashflow = new Backbone.Collection;
 Alloy.Collections.aspettiDocument = new Backbone.Collection;

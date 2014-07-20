@@ -2,7 +2,7 @@
 
 	<View class="aspectEventContainer">
 
-		<Label class="separator"/>
+		<!--<Label class="separator"/>-->
 		<Label id="eventIcon" class="aspectEventIcon"/>
 		<TableView id="aspectEventTable" dataCollection="aspettoEvento"  dataFunction="syncAspects" dataTransform="transformData">
 

@@ -26,13 +26,13 @@ function Controller() {
         id: "row"
     });
     $.__views.row && $.addTopLevelView($.__views.row);
-    $.__views.__alloyId200 = Ti.UI.createView({
+    $.__views.__alloyId197 = Ti.UI.createView({
         height: 40,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId200"
+        id: "__alloyId197"
     });
-    $.__views.row.add($.__views.__alloyId200);
+    $.__views.row.add($.__views.__alloyId197);
     $.__views.description = Ti.UI.createLabel({
         height: 30,
         font: {
@@ -48,7 +48,7 @@ function Controller() {
         width: 55,
         id: "description"
     });
-    $.__views.__alloyId200.add($.__views.description);
+    $.__views.__alloyId197.add($.__views.description);
     $.__views.titolo = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -60,7 +60,7 @@ function Controller() {
         width: Ti.UI.SIZE,
         id: "titolo"
     });
-    $.__views.__alloyId200.add($.__views.titolo);
+    $.__views.__alloyId197.add($.__views.titolo);
     $.__views.descrizione = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -72,14 +72,14 @@ function Controller() {
         width: Ti.UI.SIZE,
         id: "descrizione"
     });
-    $.__views.__alloyId200.add($.__views.descrizione);
-    $.__views.__alloyId201 = Ti.UI.createView({
+    $.__views.__alloyId197.add($.__views.descrizione);
+    $.__views.__alloyId198 = Ti.UI.createView({
         height: 40,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId201"
+        id: "__alloyId198"
     });
-    $.__views.row.add($.__views.__alloyId201);
+    $.__views.row.add($.__views.__alloyId198);
     $.__views.content = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -91,7 +91,7 @@ function Controller() {
         width: Ti.UI.SIZE,
         id: "content"
     });
-    $.__views.__alloyId201.add($.__views.content);
+    $.__views.__alloyId198.add($.__views.content);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

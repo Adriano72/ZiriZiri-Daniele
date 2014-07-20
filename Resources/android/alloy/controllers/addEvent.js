@@ -12,32 +12,28 @@ function Controller() {
         $.__views.win.removeEventListener("open", __alloyId46);
         if ($.__views.win.activity) $.__views.win.activity.onCreateOptionsMenu = function(e) {
             var __alloyId45 = {
-                icon: "/images/top-save.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
+                icon: "/images/top-save2.png",
                 id: "mn_salva"
             };
             $.__views.mn_salva = e.menu.add(_.pick(__alloyId45, Alloy.Android.menuItemCreateArgs));
             $.__views.mn_salva.applyProperties(_.omit(__alloyId45, Alloy.Android.menuItemCreateArgs));
             saveEvent ? $.__views.mn_salva.addEventListener("click", saveEvent) : __defers["$.__views.mn_salva!click!saveEvent"] = true;
+            if ($.__views.win.activity.actionBar) {
+                $.__views.win.activity.actionBar.displayHomeAsUp = true;
+                $.__views.win.activity.actionBar.icon = "images/logo-test.png";
+                $.__views.win.activity.actionBar.onHomeIconItemSelected = homeIconSelected;
+            }
         }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
             Ti.API.warn("or other UI component which does not have an Android activity.");
             Ti.API.warn("Android Menus can only be opened on TabGroups and heavyweight Windows.");
         }
     }
-    function openEvent() {
-        theActionBar = $.win.activity.actionBar;
-        $.win.activity.invalidateOptionsMenu();
-        theActionBar = $.win.activity.actionBar;
-        if (void 0 != theActionBar) {
-            theActionBar.displayHomeAsUp = true;
-            theActionBar.setIcon("images/logo-test.png");
-            theActionBar.onHomeIconItemSelected = function() {
-                $.win.close({
-                    animate: true
-                });
-            };
-        }
+    function homeIconSelected() {
+        $.win.close({
+            animate: true
+        });
     }
     function getLocation() {
         Alloy.createController("getLocation", function(locationData) {
@@ -120,7 +116,6 @@ function Controller() {
         title: "Nuovo Evento"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
-    openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
     $.__views.win.addEventListener("open", __alloyId46);
     var __alloyId47 = [];
     $.__views.__alloyId48 = Ti.UI.createTableViewRow({
@@ -440,7 +435,6 @@ function Controller() {
     $.pkrDataFineEvento.dataRaw = moment();
     var location_result = null;
     var scadenzaStrutturale = false;
-    __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
     __defers["$.__views.mn_salva!click!saveEvent"] && $.__views.mn_salva.addEventListener("click", saveEvent);
     __defers["$.__views.pkrDataInizioEvento!click!showDatePicker"] && $.__views.pkrDataInizioEvento.addEventListener("click", showDatePicker);
     __defers["$.__views.pkrDataFineEvento!click!showDatePicker"] && $.__views.pkrDataFineEvento.addEventListener("click", showDatePicker);

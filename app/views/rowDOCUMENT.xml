@@ -1,6 +1,6 @@
 <Alloy>
 
-	<TableViewRow class="row">
+	<TableViewRow id="riga" class="row">
 
 		<View class="aspectDocumentContainer">
 			<Label id="documentIcon" class="aspectIcon"/>
