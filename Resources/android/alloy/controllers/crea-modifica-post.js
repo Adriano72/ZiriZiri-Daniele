@@ -107,7 +107,13 @@ function Controller() {
                 obj_aspetto: aspettoDataJson
             }).getView();
             riga.addEventListener("click", function(e) {
-                e.source.hide();
+                Ti.API.info("OBJ DOC: " + JSON.stringify(e.source.obj_aspect));
+                Alloy.createController("editDocument", function() {
+                    var aspetto = function() {
+                        return e.source.obj_aspect;
+                    }();
+                    return aspetto;
+                }).getView().open();
             });
             $.postTable.appendRow(riga);
         }).getView().open();

@@ -1,0 +1,55 @@
+<Alloy>
+	<Window id="win" class="container" title = "Nuovo Documento" onOpen="openEvent" onClose="resetGlobals">
+
+		<Menu id="menu" platform="android" onHomeIconItemSelected="homeIconSelected">
+
+			<MenuItem id="mn_salva" onClick="saveDocument"/>
+
+		</Menu>
+		<TableView id="newDocumentTable">
+
+			<TableViewRow class="row">
+				<View class="rowWrapper">
+					<TextField id="titolo"/>
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<View class="rowWrapper">
+					<TextArea id="descrizione"/>
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<View class="dateWrapper">
+
+					<View id="leftSubWrapper">
+						<Label id="dataDocumentoLabel"/>
+					</View>
+					<Label class="verticalBar"/>
+					<View id="rightSubWrapper">
+						<Label id="dataDocumento" dataRaw="" onClick="showDatePicker"/>
+					</View>
+
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<View id="picOptionsContainer">
+					<View id="picture" onClick="openCamera">
+						<ImageView id="takePicIcon"/>
+						<Label id="takePicText"/>
+					</View>
+					<View id="gallery" onClick="openGallery">
+						<ImageView id="galleryPicIcon"/>
+						<Label id="galleryPicText"/>
+						<Label id="verticalBar"/>
+						<ImageView id="galleryPic2"/>
+					</View>
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<ImageView id="preview" />
+			</TableViewRow>
+
+		</TableView>
+
+	</Window>
+</Alloy>

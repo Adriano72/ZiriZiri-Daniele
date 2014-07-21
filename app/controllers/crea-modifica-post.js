@@ -18,9 +18,7 @@ function homeIconSelected() {
 	});
 }
 
-
 function openEvent() {
-	
 
 	if (Alloy.Globals.shortcutMode == "camera" || Alloy.Globals.shortcutMode == "gallery") {
 
@@ -171,14 +169,20 @@ function addDocument(p_shortcutMode) {
 		var riga = Alloy.createController('rowDOCUMENT', {
 
 			obj_aspetto : aspettoDataJson,
-			
 
 		}).getView();
-		
-		riga.addEventListener("click", function(e){
-			e.source.hide();
+
+		riga.addEventListener("click", function(e) {
+			Ti.API.info("OBJ DOC: " + JSON.stringify(e.source.obj_aspect));
+
+			Alloy.createController("editDocument", function(objRet) {
+				var aspetto = (function() {
+					return e.source.obj_aspect;
+				})();
+				return aspetto;
+			}).getView().open();
 		});
-		
+
 		$.postTable.appendRow(riga);
 
 	}).getView().open();
@@ -196,15 +200,14 @@ function editDocument(id_array) {
 		var riga = Alloy.createController('rowDOCUMENT', {
 
 			obj_aspetto : aspettoDataJson,
-			
 
 		}).getView();
-		
-		riga.addEventListener("click", function(e){
+
+		riga.addEventListener("click", function(e) {
 			e.source.hide();
 		});
-		
-		return(riga);
+
+		return (riga);
 
 	}).getView().open();
 };
