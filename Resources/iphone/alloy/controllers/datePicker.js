@@ -9,6 +9,7 @@ function __processArg(obj, key) {
 
 function Controller() {
     function showTimePicker(sel_data) {
+        Ti.API.info("SHOW DATE PIKER GOTTEN DATA: " + moment(sel_data).format("LLL"));
         Alloy.createController("timePicker", {
             par_data: sel_data,
             _callback: function(p_data) {
@@ -26,23 +27,25 @@ function Controller() {
     }
     var $ = this;
     var exports = {};
-    $.__views.pkrData = Ti.UI.createPicker({
-        type: Ti.UI.PICKER_TYPE_DATE,
+    $.__views.picker = Ti.UI.createPicker({
         right: 5,
         left: 5,
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        id: pkrData,
+        format24: false,
+        calendarViewShown: false,
+        id: "picker",
+        type: Ti.UI.PICKER_TYPE_DATE,
         selectionIndicator: true
     });
-    $.__views.pkrData && $.addTopLevelView($.__views.pkrData);
+    $.__views.picker && $.addTopLevelView($.__views.picker);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     var bug_flag = 0;
-    $.pkrData.showDatePickerDialog({
+    $.picker.showDatePickerDialog({
         value: new Date(),
         callback: function(e) {
             if (e.cancel) Ti.API.info("User canceled dialog"); else if (0 == bug_flag) {

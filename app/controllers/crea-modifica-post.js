@@ -12,6 +12,8 @@ var timeNow = moment();
 
 var arrayAspetti = [];
 
+var tempContainer = [];
+
 function homeIconSelected() {
 	$.win.close({
 		animate : true
@@ -61,6 +63,8 @@ var aspects = modJson.aspects;
 Alloy.Models.Post_template.trigger('change');
 
 function submitPost() {
+	
+	_.forEach()
 
 	Alloy.Globals.loading.show('Salvataggio in corso...', false);
 
@@ -157,10 +161,18 @@ function addCashflow() {
 
 function addDocument(p_shortcutMode) {
 	//Ti.API.info("**** INSERT CASHFLOW!");
+	
+	var randomKey = _.random(0, 99999);
 
 	Alloy.createController("addDocument", function(objRet) {
+		
+		tempContainer.push({key: randomKey, aspetto: objRet});
+		
+		Ti.API.info("TEMP ARRAY ASPETTI: "+ JSON.stringify(tempContainer));
 
-		arrayAspetti.push(objRet);
+		//arrayAspetti.push(objRet);
+		
+		var arrayIndex  = arrayAspetti.length - 1;
 
 		var aspettoDataJson = JSON.parse(objRet.data);
 
@@ -169,17 +181,32 @@ function addDocument(p_shortcutMode) {
 		var riga = Alloy.createController('rowDOCUMENT', {
 
 			obj_aspetto : aspettoDataJson,
+			keyIndex: randomKey
 
 		}).getView();
 
 		riga.addEventListener("click", function(e) {
 			Ti.API.info("OBJ DOC: " + JSON.stringify(e.source.obj_aspect));
-
+			Ti.API.info("ROW INDEX: "+e.index);
+			/*
 			Alloy.createController("editDocument", function(objRet) {
 				var aspetto = (function() {
 					return e.source.obj_aspect;
 				})();
 				return aspetto;
+			}).getView().open();
+			*/
+			Alloy.createController("editDocument", {
+				_callback: function(row) {
+					
+					var rowToUpdate = _.where(tempContainer, {
+						key: e.source.arrayKey
+					});
+					Ti.API.info("OGG INDIVIDUATO ****: "+JSON.stringify(rowToUpdate));
+					$.postTable.deleteRow(riga);
+				},
+				aspetto: e.source.obj_aspect,
+				tempKey: e.source.arrayKey
 			}).getView().open();
 		});
 

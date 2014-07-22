@@ -11,25 +11,25 @@ function Controller() {
     function syncAspects(e) {
         if (e && e.fromAdapter) return;
         syncAspects.opts || {};
-        var models = __alloyId88.models;
+        var models = __alloyId85.models;
         var len = models.length;
         var rows = [];
         for (var i = 0; len > i; i++) {
-            var __alloyId80 = models[i];
-            __alloyId80.__transform = transformData(__alloyId80);
-            var __alloyId82 = Ti.UI.createTableViewRow({
+            var __alloyId77 = models[i];
+            __alloyId77.__transform = transformData(__alloyId77);
+            var __alloyId79 = Ti.UI.createTableViewRow({
                 className: "itemRow",
                 width: Ti.UI.FILL
             });
-            rows.push(__alloyId82);
-            showDetail ? __alloyId82.addEventListener("click", showDetail) : __defers["__alloyId82!click!showDetail"] = true;
-            var __alloyId84 = Ti.UI.createView({
+            rows.push(__alloyId79);
+            showDetail ? __alloyId79.addEventListener("click", showDetail) : __defers["__alloyId79!click!showDetail"] = true;
+            var __alloyId81 = Ti.UI.createView({
                 left: 2,
                 layout: "horizontal",
                 width: Ti.UI.FILL
             });
-            __alloyId82.add(__alloyId84);
-            var __alloyId85 = Ti.UI.createLabel({
+            __alloyId79.add(__alloyId81);
+            var __alloyId82 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -41,10 +41,10 @@ function Controller() {
                 wordWrap: false,
                 ellipsize: true,
                 left: 0,
-                text: "undefined" != typeof __alloyId80.__transform["name"] ? __alloyId80.__transform["name"] : __alloyId80.get("name")
+                text: "undefined" != typeof __alloyId77.__transform["name"] ? __alloyId77.__transform["name"] : __alloyId77.get("name")
             });
-            __alloyId84.add(__alloyId85);
-            var __alloyId86 = Ti.UI.createLabel({
+            __alloyId81.add(__alloyId82);
+            var __alloyId83 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -55,10 +55,10 @@ function Controller() {
                 width: 95,
                 wordWrap: false,
                 ellipsize: true,
-                text: "undefined" != typeof __alloyId80.__transform["tipoFile"] ? __alloyId80.__transform["tipoFile"] : __alloyId80.get("tipoFile")
+                text: "undefined" != typeof __alloyId77.__transform["tipoFile"] ? __alloyId77.__transform["tipoFile"] : __alloyId77.get("tipoFile")
             });
-            __alloyId84.add(__alloyId86);
-            var __alloyId87 = Ti.UI.createLabel({
+            __alloyId81.add(__alloyId83);
+            var __alloyId84 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -71,7 +71,7 @@ function Controller() {
                 ellipsize: true,
                 text: "Visualizza"
             });
-            __alloyId84.add(__alloyId87);
+            __alloyId81.add(__alloyId84);
         }
         $.__views.aspectDocumentTable.setData(rows);
     }
@@ -122,10 +122,10 @@ function Controller() {
         id: "aspectDocumentTable"
     });
     $.__views.briefDocument.add($.__views.aspectDocumentTable);
-    var __alloyId88 = Alloy.Collections["aspettiDocument"] || aspettiDocument;
-    __alloyId88.on("fetch destroy change add remove reset", syncAspects);
+    var __alloyId85 = Alloy.Collections["aspettiDocument"] || aspettiDocument;
+    __alloyId85.on("fetch destroy change add remove reset", syncAspects);
     exports.destroy = function() {
-        __alloyId88.off("fetch destroy change add remove reset", syncAspects);
+        __alloyId85.off("fetch destroy change add remove reset", syncAspects);
     };
     _.extend($, $.__views);
     arguments[0] || {};
@@ -134,7 +134,7 @@ function Controller() {
     $.briefDocument.addEventListener("close", function() {
         $.briefDocument.destroy();
     });
-    __defers["__alloyId82!click!showDetail"] && __alloyId82.addEventListener("click", showDetail);
+    __defers["__alloyId79!click!showDetail"] && __alloyId79.addEventListener("click", showDetail);
     _.extend($, exports);
 }
 

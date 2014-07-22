@@ -8,16 +8,16 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
-    function __alloyId137() {
-        $.__views.win.removeEventListener("open", __alloyId137);
+    function __alloyId131() {
+        $.__views.win.removeEventListener("open", __alloyId131);
         if ($.__views.win.activity) $.__views.win.activity.onCreateOptionsMenu = function(e) {
-            var __alloyId136 = {
+            var __alloyId130 = {
                 icon: "/images/top-save.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
                 id: "mn_salva"
             };
-            $.__views.mn_salva = e.menu.add(_.pick(__alloyId136, Alloy.Android.menuItemCreateArgs));
-            $.__views.mn_salva.applyProperties(_.omit(__alloyId136, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_salva = e.menu.add(_.pick(__alloyId130, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_salva.applyProperties(_.omit(__alloyId130, Alloy.Android.menuItemCreateArgs));
             storeLocation ? $.__views.mn_salva.addEventListener("click", storeLocation) : __defers["$.__views.mn_salva!click!storeLocation"] = true;
         }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
@@ -92,7 +92,7 @@ function Controller() {
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
-    $.__views.win.addEventListener("open", __alloyId137);
+    $.__views.win.addEventListener("open", __alloyId131);
     $.__views.mapview = Alloy.Globals.Map.createView({
         height: 130,
         top: 5,

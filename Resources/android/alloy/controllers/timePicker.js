@@ -17,23 +17,23 @@ function Controller() {
     }
     var $ = this;
     var exports = {};
-    $.__views.pkrTime = Ti.UI.createPicker({
+    $.__views.picker = Ti.UI.createPicker({
         type: Ti.UI.PICKER_TYPE_TIME,
         right: 5,
         left: 5,
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        id: pkrTime,
+        id: "picker",
         selectionIndicator: true
     });
-    $.__views.pkrTime && $.addTopLevelView($.__views.pkrTime);
+    $.__views.picker && $.addTopLevelView($.__views.picker);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     var bug_flag = 0;
-    $.pkrTime.showTimePickerDialog({
+    $.picker.showTimePickerDialog({
         value: new Date(),
         callback: function(e) {
             if (e.cancel) Ti.API.info("User canceled dialog"); else if (0 == bug_flag) {

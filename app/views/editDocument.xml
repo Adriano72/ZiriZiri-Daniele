@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="win" class="container" title = "Modifica Documento" onOpen="openEvent" onClose="resetGlobals">
+	<Window id="win" class="container" title = "Modifica Documento"  onClose="resetGlobals">
 
 		<Menu id="menu" platform="android" onHomeIconItemSelected="homeIconSelected">
 
@@ -18,6 +18,7 @@
 					<TextArea id="descrizione"/>
 				</View>
 			</TableViewRow>
+			<!-->
 			<TableViewRow class="row">
 				<View class="dateWrapper">
 
@@ -30,7 +31,7 @@
 					</View>
 
 				</View>
-			</TableViewRow>
+			</TableViewRow>-->
 			<TableViewRow class="row">
 				<View id="picOptionsContainer">
 					<View id="picture" onClick="openCamera">

@@ -29,10 +29,10 @@ function openEvent() {
 	}
 
 };
-
+/*
 $.dataDocumento.text = moment().format('L');
 $.dataDocumento.dataRaw = moment();
-
+*/
 var imageContent = {};
 //imageContent.link = null;
 //imageContent.id = null;

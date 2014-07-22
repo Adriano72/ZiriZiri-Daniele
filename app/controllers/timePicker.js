@@ -7,7 +7,7 @@ var bug_flag = 0;
 
 //Ti.API.info("TIMER PICKER, DATA RICEVUTA: "+moment(args.par_data).format('LLL'));
 
-$.pkrTime.showTimePickerDialog({
+$.picker.showTimePickerDialog({
 	value : new Date(),
 	callback : function(e) {
 		if (e.cancel) {

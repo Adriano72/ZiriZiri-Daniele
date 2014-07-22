@@ -67,14 +67,14 @@ function Controller() {
         id: "category"
     });
     $.__views.row.add($.__views.category);
-    $.__views.__alloyId161 = Ti.UI.createView({
+    $.__views.__alloyId162 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         layout: "vertical",
         backgroundColor: "#DEDEDE",
-        id: "__alloyId161"
+        id: "__alloyId162"
     });
-    $.__views.row.add($.__views.__alloyId161);
-    $.__views.__alloyId162 = Ti.UI.createLabel({
+    $.__views.row.add($.__views.__alloyId162);
+    $.__views.__alloyId163 = Ti.UI.createLabel({
         height: 20,
         width: Ti.UI.FILL,
         backgroundColor: "#787878",
@@ -86,9 +86,9 @@ function Controller() {
         touchEnabled: false,
         color: "#FFFFFF",
         text: " Tags",
-        id: "__alloyId162"
+        id: "__alloyId163"
     });
-    $.__views.__alloyId161.add($.__views.__alloyId162);
+    $.__views.__alloyId162.add($.__views.__alloyId163);
     $.__views.tags = Ti.UI.createLabel({
         height: Ti.UI.SIZE,
         font: {
@@ -101,15 +101,15 @@ function Controller() {
         width: Ti.UI.FILL,
         id: "tags"
     });
-    $.__views.__alloyId161.add($.__views.tags);
-    $.__views.__alloyId163 = Ti.UI.createView({
+    $.__views.__alloyId162.add($.__views.tags);
+    $.__views.__alloyId164 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         layout: "vertical",
         backgroundColor: "#DEDEDE",
-        id: "__alloyId163"
+        id: "__alloyId164"
     });
-    $.__views.row.add($.__views.__alloyId163);
-    $.__views.__alloyId164 = Ti.UI.createLabel({
+    $.__views.row.add($.__views.__alloyId164);
+    $.__views.__alloyId165 = Ti.UI.createLabel({
         height: 20,
         width: Ti.UI.FILL,
         backgroundColor: "#787878",
@@ -121,9 +121,9 @@ function Controller() {
         touchEnabled: false,
         color: "#FFFFFF",
         text: " Tipo",
-        id: "__alloyId164"
+        id: "__alloyId165"
     });
-    $.__views.__alloyId163.add($.__views.__alloyId164);
+    $.__views.__alloyId164.add($.__views.__alloyId165);
     $.__views.type = Ti.UI.createLabel({
         height: Ti.UI.SIZE,
         font: {
@@ -136,15 +136,15 @@ function Controller() {
         width: Ti.UI.FILL,
         id: "type"
     });
-    $.__views.__alloyId163.add($.__views.type);
-    $.__views.__alloyId165 = Ti.UI.createView({
+    $.__views.__alloyId164.add($.__views.type);
+    $.__views.__alloyId166 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         layout: "vertical",
         backgroundColor: "#DEDEDE",
-        id: "__alloyId165"
+        id: "__alloyId166"
     });
-    $.__views.row.add($.__views.__alloyId165);
-    $.__views.__alloyId166 = Ti.UI.createLabel({
+    $.__views.row.add($.__views.__alloyId166);
+    $.__views.__alloyId167 = Ti.UI.createLabel({
         height: 20,
         width: Ti.UI.FILL,
         backgroundColor: "#787878",
@@ -156,9 +156,9 @@ function Controller() {
         touchEnabled: false,
         color: "#FFFFFF",
         text: " Contenuto",
-        id: "__alloyId166"
+        id: "__alloyId167"
     });
-    $.__views.__alloyId165.add($.__views.__alloyId166);
+    $.__views.__alloyId166.add($.__views.__alloyId167);
     $.__views.content = Ti.UI.createLabel({
         height: Ti.UI.SIZE,
         font: {
@@ -172,16 +172,16 @@ function Controller() {
         color: "#0000FF",
         id: "content"
     });
-    $.__views.__alloyId165.add($.__views.content);
+    $.__views.__alloyId166.add($.__views.content);
     openLink ? $.__views.content.addEventListener("click", openLink) : __defers["$.__views.content!click!openLink"] = true;
-    $.__views.__alloyId167 = Ti.UI.createView({
+    $.__views.__alloyId168 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         layout: "vertical",
         backgroundColor: "#DEDEDE",
-        id: "__alloyId167"
+        id: "__alloyId168"
     });
-    $.__views.row.add($.__views.__alloyId167);
-    $.__views.__alloyId168 = Ti.UI.createLabel({
+    $.__views.row.add($.__views.__alloyId168);
+    $.__views.__alloyId169 = Ti.UI.createLabel({
         height: 20,
         width: Ti.UI.FILL,
         backgroundColor: "#787878",
@@ -193,16 +193,16 @@ function Controller() {
         touchEnabled: false,
         color: "#FFFFFF",
         text: " Preview",
-        id: "__alloyId168"
+        id: "__alloyId169"
     });
-    $.__views.__alloyId167.add($.__views.__alloyId168);
+    $.__views.__alloyId168.add($.__views.__alloyId169);
     $.__views.img_preview = Ti.UI.createImageView({
         top: 5,
         width: "95%",
         height: 300,
         id: "img_preview"
     });
-    $.__views.__alloyId167.add($.__views.img_preview);
+    $.__views.__alloyId168.add($.__views.img_preview);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

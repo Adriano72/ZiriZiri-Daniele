@@ -1,5 +1,5 @@
 <Alloy>
 	
-	<Picker id="pkrTime" selectionIndicator="true"/>
+	<Picker id="picker" selectionIndicator="true"/>
 	
 </Alloy>

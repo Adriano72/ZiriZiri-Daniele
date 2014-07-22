@@ -8,16 +8,16 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
-    function __alloyId125() {
-        $.__views.win.removeEventListener("open", __alloyId125);
+    function __alloyId122() {
+        $.__views.win.removeEventListener("open", __alloyId122);
         if ($.__views.win.activity) $.__views.win.activity.onCreateOptionsMenu = function(e) {
-            var __alloyId124 = {
+            var __alloyId121 = {
                 showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
                 icon: "/images/top-save2.png",
                 id: "mn_salva"
             };
-            $.__views.mn_salva = e.menu.add(_.pick(__alloyId124, Alloy.Android.menuItemCreateArgs));
-            $.__views.mn_salva.applyProperties(_.omit(__alloyId124, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_salva = e.menu.add(_.pick(__alloyId121, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_salva.applyProperties(_.omit(__alloyId121, Alloy.Android.menuItemCreateArgs));
             saveDocument ? $.__views.mn_salva.addEventListener("click", saveDocument) : __defers["$.__views.mn_salva!click!saveDocument"] = true;
             if ($.__views.win.activity.actionBar) {
                 $.__views.win.activity.actionBar.displayHomeAsUp = true;
@@ -35,20 +35,8 @@ function Controller() {
             animate: true
         });
     }
-    function openEvent() {}
     function resetGlobals() {
         Alloy.Globals.shortcutMode = null;
-    }
-    function showDatePicker(e) {
-        Ti.API.info("SOURCE CLICK: " + JSON.stringify(e));
-        Alloy.createController("datePicker", {
-            onlyDate: true,
-            _callback: function(p_data) {
-                e.source.text = moment(p_data).format("L");
-                e.source.dataRaw = moment(p_data);
-                Ti.API.info("DATARAW: " + e.source.dataRaw);
-            }
-        });
     }
     function saveDocument() {
         var modDocumentJSON = Alloy.Models.Document_template.toJSON();
@@ -66,7 +54,7 @@ function Controller() {
             modDocumentJSON.data.content = imageContent;
             modDocumentJSON.data = JSON.stringify(modDocumentJSON.data);
             Ti.API.info("ASPETTO DOCUMENT VALIDATO: " + JSON.stringify(modDocumentJSON));
-            args(modDocumentJSON);
+            args._callback(modDocumentJSON);
             $.win.close();
         } else alert("E' necessario scattare una foto o selezionarla dalla galleria, i campi titolo e descrizione sono obbligatori");
     }
@@ -158,20 +146,19 @@ function Controller() {
         title: "Modifica Documento"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
-    openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
     resetGlobals ? $.__views.win.addEventListener("close", resetGlobals) : __defers["$.__views.win!close!resetGlobals"] = true;
-    $.__views.win.addEventListener("open", __alloyId125);
-    var __alloyId126 = [];
-    $.__views.__alloyId127 = Ti.UI.createTableViewRow({
+    $.__views.win.addEventListener("open", __alloyId122);
+    var __alloyId123 = [];
+    $.__views.__alloyId124 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F9F9F9",
         className: "itemRow",
         top: 5,
-        id: "__alloyId127"
+        id: "__alloyId124"
     });
-    __alloyId126.push($.__views.__alloyId127);
-    $.__views.__alloyId128 = Ti.UI.createView({
+    __alloyId123.push($.__views.__alloyId124);
+    $.__views.__alloyId125 = Ti.UI.createView({
         width: Ti.UI.FILL,
         left: 5,
         top: 5,
@@ -180,9 +167,9 @@ function Controller() {
         borderWidth: 1,
         borderColor: "#CCCCCC",
         backgroundColor: "#FFF",
-        id: "__alloyId128"
+        id: "__alloyId125"
     });
-    $.__views.__alloyId127.add($.__views.__alloyId128);
+    $.__views.__alloyId124.add($.__views.__alloyId125);
     $.__views.titolo = Ti.UI.createTextField({
         color: "#666",
         font: {
@@ -197,17 +184,17 @@ function Controller() {
         hintText: "Titolo",
         id: "titolo"
     });
-    $.__views.__alloyId128.add($.__views.titolo);
-    $.__views.__alloyId129 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId125.add($.__views.titolo);
+    $.__views.__alloyId126 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F9F9F9",
         className: "itemRow",
         top: 5,
-        id: "__alloyId129"
+        id: "__alloyId126"
     });
-    __alloyId126.push($.__views.__alloyId129);
-    $.__views.__alloyId130 = Ti.UI.createView({
+    __alloyId123.push($.__views.__alloyId126);
+    $.__views.__alloyId127 = Ti.UI.createView({
         width: Ti.UI.FILL,
         left: 5,
         top: 5,
@@ -216,9 +203,9 @@ function Controller() {
         borderWidth: 1,
         borderColor: "#CCCCCC",
         backgroundColor: "#FFF",
-        id: "__alloyId130"
+        id: "__alloyId127"
     });
-    $.__views.__alloyId129.add($.__views.__alloyId130);
+    $.__views.__alloyId126.add($.__views.__alloyId127);
     $.__views.descrizione = Ti.UI.createTextArea({
         color: "#666",
         font: {
@@ -233,89 +220,16 @@ function Controller() {
         hintText: "Descrizione",
         id: "descrizione"
     });
-    $.__views.__alloyId130.add($.__views.descrizione);
-    $.__views.__alloyId131 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId127.add($.__views.descrizione);
+    $.__views.__alloyId128 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F9F9F9",
         className: "itemRow",
         top: 5,
-        id: "__alloyId131"
+        id: "__alloyId128"
     });
-    __alloyId126.push($.__views.__alloyId131);
-    $.__views.__alloyId132 = Ti.UI.createView({
-        height: 40,
-        width: Ti.UI.FILL,
-        left: 5,
-        top: 5,
-        right: 5,
-        borderRadius: 3,
-        borderWidth: 1,
-        borderColor: "#CCCCCC",
-        backgroundColor: "#FFF",
-        layout: "horizontal",
-        id: "__alloyId132"
-    });
-    $.__views.__alloyId131.add($.__views.__alloyId132);
-    $.__views.leftSubWrapper = Ti.UI.createView({
-        width: "50%",
-        layout: "horizontal",
-        left: 0,
-        id: "leftSubWrapper"
-    });
-    $.__views.__alloyId132.add($.__views.leftSubWrapper);
-    $.__views.dataDocumentoLabel = Ti.UI.createLabel({
-        font: {
-            fontFamily: "SourceSansPro-Regular",
-            fontSize: 16
-        },
-        left: 5,
-        text: "Data Documento",
-        width: Ti.UI.FILL,
-        height: Ti.UI.FILL,
-        color: "#444",
-        id: "dataDocumentoLabel"
-    });
-    $.__views.leftSubWrapper.add($.__views.dataDocumentoLabel);
-    $.__views.__alloyId133 = Ti.UI.createLabel({
-        height: Ti.UI.FILL,
-        width: 1,
-        left: 0,
-        backgroundColor: "#CCCCCC",
-        id: "__alloyId133"
-    });
-    $.__views.__alloyId132.add($.__views.__alloyId133);
-    $.__views.rightSubWrapper = Ti.UI.createView({
-        width: Ti.UI.FILL,
-        layout: "horizontal",
-        left: 0,
-        id: "rightSubWrapper"
-    });
-    $.__views.__alloyId132.add($.__views.rightSubWrapper);
-    $.__views.dataDocumento = Ti.UI.createLabel({
-        font: {
-            fontFamily: "SourceSansPro-Regular",
-            fontSize: 16
-        },
-        left: 5,
-        text: "",
-        width: Ti.UI.FILL,
-        height: Ti.UI.FILL,
-        color: "#444",
-        id: "dataDocumento",
-        dataRaw: ""
-    });
-    $.__views.rightSubWrapper.add($.__views.dataDocumento);
-    showDatePicker ? $.__views.dataDocumento.addEventListener("click", showDatePicker) : __defers["$.__views.dataDocumento!click!showDatePicker"] = true;
-    $.__views.__alloyId134 = Ti.UI.createTableViewRow({
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL,
-        backgroundColor: "#F9F9F9",
-        className: "itemRow",
-        top: 5,
-        id: "__alloyId134"
-    });
-    __alloyId126.push($.__views.__alloyId134);
+    __alloyId123.push($.__views.__alloyId128);
     $.__views.picOptionsContainer = Ti.UI.createView({
         top: 5,
         left: 5,
@@ -323,7 +237,7 @@ function Controller() {
         height: Ti.UI.SIZE,
         id: "picOptionsContainer"
     });
-    $.__views.__alloyId134.add($.__views.picOptionsContainer);
+    $.__views.__alloyId128.add($.__views.picOptionsContainer);
     $.__views.picture = Ti.UI.createView({
         height: 40,
         width: "49%",
@@ -402,15 +316,15 @@ function Controller() {
         id: "galleryPic2"
     });
     $.__views.gallery.add($.__views.galleryPic2);
-    $.__views.__alloyId135 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId129 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F9F9F9",
         className: "itemRow",
         top: 5,
-        id: "__alloyId135"
+        id: "__alloyId129"
     });
-    __alloyId126.push($.__views.__alloyId135);
+    __alloyId123.push($.__views.__alloyId129);
     $.__views.preview = Ti.UI.createImageView({
         borderColor: "#000000",
         color: "#336699",
@@ -420,33 +334,30 @@ function Controller() {
         height: 200,
         id: "preview"
     });
-    $.__views.__alloyId135.add($.__views.preview);
+    $.__views.__alloyId129.add($.__views.preview);
     $.__views.newDocumentTable = Ti.UI.createTableView({
         top: 5,
         separatorColor: "transparent",
-        data: __alloyId126,
+        data: __alloyId123,
         id: "newDocumentTable"
     });
     $.__views.win.add($.__views.newDocumentTable);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    var objDocument = args();
+    var objDocument = args.aspetto;
     Ti.API.info("ARGS ****: " + JSON.stringify(objDocument));
     $.titolo.value = objDocument.title;
     $.descrizione.value = objDocument.description;
+    $.preview.setImage(Ti.Utils.base64decode(objDocument.content.base64.substr(objDocument.content.base64.indexOf(","))));
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     var ImageFactory = require("ti.imagefactory");
-    $.dataDocumento.text = moment().format("L");
-    $.dataDocumento.dataRaw = moment();
     var imageContent = {};
     var fileName;
     var fileSize;
-    __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
     __defers["$.__views.win!close!resetGlobals"] && $.__views.win.addEventListener("close", resetGlobals);
     __defers["$.__views.mn_salva!click!saveDocument"] && $.__views.mn_salva.addEventListener("click", saveDocument);
-    __defers["$.__views.dataDocumento!click!showDatePicker"] && $.__views.dataDocumento.addEventListener("click", showDatePicker);
     __defers["$.__views.picture!click!openCamera"] && $.__views.picture.addEventListener("click", openCamera);
     __defers["$.__views.gallery!click!openGallery"] && $.__views.gallery.addEventListener("click", openGallery);
     _.extend($, exports);

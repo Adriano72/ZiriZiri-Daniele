@@ -1,10 +1,11 @@
 var args = arguments[0] || {};
 
-var objDocument = args();
+var objDocument = args.aspetto;
 Ti.API.info("ARGS ****: "+JSON.stringify(objDocument));
 
 $.titolo.value = objDocument.title;
 $.descrizione.value = objDocument.description;
+$.preview.setImage(Ti.Utils.base64decode(objDocument.content.base64.substr(objDocument.content.base64.indexOf(','))));
 
 var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
@@ -18,17 +19,10 @@ function homeIconSelected() {
 	});
 }
 
-
-function openEvent() {
-	//Ti.API.info("win OPEN");
-	
-	
-
-};
-
+/*
 $.dataDocumento.text = moment().format('L');
 $.dataDocumento.dataRaw = moment();
-
+*/
 var imageContent = {};
 //imageContent.link = null;
 //imageContent.id = null;
@@ -86,7 +80,7 @@ function saveDocument() {
 
 		Ti.API.info("ASPETTO DOCUMENT VALIDATO: " + JSON.stringify(modDocumentJSON));
 
-		args(modDocumentJSON);
+		args._callback(modDocumentJSON);
 		$.win.close();
 
 		//Ti.API.info("TIPO MOVIM OBJ: "+JSON.stringify($.pkrTipoMovimento.getSelectedRow(0)));

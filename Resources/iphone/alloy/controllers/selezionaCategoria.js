@@ -8,29 +8,44 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
-    function __alloyId184(e) {
+    function syncCategorie(e) {
         if (e && e.fromAdapter) return;
-        __alloyId184.opts || {};
-        var models = __alloyId183.models;
+        syncCategorie.opts || {};
+        var models = __alloyId184.models;
         var len = models.length;
         var rows = [];
         for (var i = 0; len > i; i++) {
-            var __alloyId180 = models[i];
-            __alloyId180.__transform = {};
-            var __alloyId182 = Ti.UI.createTableViewRow({
-                height: Ti.UI.SIZE,
+            var __alloyId181 = models[i];
+            __alloyId181.__transform = {};
+            var __alloyId183 = Ti.UI.createTableViewRow({
+                height: 45,
                 width: Ti.UI.FILL,
                 backgroundColor: "#F9F9F9",
                 className: "itemRow",
-                top: 5,
-                title: "undefined" != typeof __alloyId180.__transform["title"] ? __alloyId180.__transform["title"] : __alloyId180.get("title")
+                color: "#999",
+                title: "undefined" != typeof __alloyId181.__transform["name"] ? __alloyId181.__transform["name"] : __alloyId181.get("name")
             });
-            rows.push(__alloyId182);
+            rows.push(__alloyId183);
+            selectCategory ? __alloyId183.addEventListener("click", selectCategory) : __defers["__alloyId183!click!selectCategory"] = true;
         }
         $.__views.categorieTable.setData(rows);
     }
     function hideActionBar() {
-        $.win.activity.actionBar.hide();
+        $.win.activity.onCreateOptionsMenu = function(e) {
+            e.menu.add({
+                title: "Table Search",
+                icon: Ti.Android.R.drawable.ic_menu_search ? Ti.Android.R.drawable.ic_menu_search : "my_search.png",
+                actionView: search,
+                showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS | Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW
+            });
+        };
+        $.win.activity.invalidateOptionsMenu();
+    }
+    function selectCategory(e) {
+        args(Alloy.Collections.categorie.at(e.index).attributes);
+        $.win.close({
+            animate: true
+        });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "selezionaCategoria";
@@ -45,25 +60,31 @@ function Controller() {
     $.__views.win = Ti.UI.createWindow({
         backgroundColor: "#F9F9F9",
         orientationModes: [ Ti.UI.PORTRAIT ],
+        layout: "vertical",
         id: "win",
         title: "Categoria"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     hideActionBar ? $.__views.win.addEventListener("open", hideActionBar) : __defers["$.__views.win!open!hideActionBar"] = true;
     $.__views.categorieTable = Ti.UI.createTableView({
-        top: 5,
+        top: 0,
+        searchAsChild: "false",
         id: "categorieTable"
     });
     $.__views.win.add($.__views.categorieTable);
-    var __alloyId183 = Alloy.Collections["categorie"] || categorie;
-    __alloyId183.on("fetch destroy change add remove reset", __alloyId184);
+    var __alloyId184 = Alloy.Collections["categorie"] || categorie;
+    __alloyId184.on("fetch destroy change add remove reset", syncCategorie);
     exports.destroy = function() {
-        __alloyId183.off("fetch destroy change add remove reset", __alloyId184);
+        __alloyId184.off("fetch destroy change add remove reset", syncCategorie);
     };
     _.extend($, $.__views);
-    arguments[0] || {};
+    var args = arguments[0] || {};
+    var search = Alloy.createController("searchView").getView();
+    $.categorieTable.search = search;
+    syncCategorie();
     $.win.open();
     __defers["$.__views.win!open!hideActionBar"] && $.__views.win.addEventListener("open", hideActionBar);
+    __defers["__alloyId183!click!selectCategory"] && __alloyId183.addEventListener("click", selectCategory);
     _.extend($, exports);
 }
 

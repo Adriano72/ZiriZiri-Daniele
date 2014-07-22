@@ -1,6 +1,6 @@
 
 
-"#pkrTime": {
+"#picker": {
 	
 	type:Ti.UI.PICKER_TYPE_TIME,
 	right: 5,

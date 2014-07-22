@@ -5,7 +5,7 @@ exports.loadTabData = function() {
         Ti.API.info("CATEGORIE " + JSON.stringify(categoriesData));
         _.forEach(categoriesData.data, function(value) {
             objCategorie.push({
-                title: value.name,
+                name: value.name,
                 id: value.id,
                 code: value.code
             });

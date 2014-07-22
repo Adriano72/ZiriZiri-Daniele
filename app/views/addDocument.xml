@@ -18,6 +18,7 @@
 					<TextArea id="descrizione"/>
 				</View>
 			</TableViewRow>
+			<!--->
 			<TableViewRow class="row">
 				<View class="dateWrapper">
 
@@ -30,7 +31,7 @@
 					</View>
 
 				</View>
-			</TableViewRow>
+			</TableViewRow>-->
 			<TableViewRow class="row">
 				<View id="picOptionsContainer">
 					<View id="picture" onClick="openCamera">

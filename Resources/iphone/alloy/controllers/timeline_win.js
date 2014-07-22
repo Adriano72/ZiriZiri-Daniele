@@ -28,7 +28,7 @@ function Controller() {
                 left: 5,
                 right: 5,
                 top: 5,
-                borderRadius: 5,
+                borderRadius: 3,
                 borderWidth: 1,
                 borderColor: "#CCCCCC",
                 backgroundColor: "#FFF",
