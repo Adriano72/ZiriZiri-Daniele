@@ -1,8 +1,6 @@
-
-
-"#pkrData": {
+"#picker": {
 	
-	type:Ti.UI.PICKER_TYPE_DATE,
+	//type:Ti.UI.PICKER_TYPE_DATE,
 	right: 5,
 	left: 5,
 	width: Ti.UI.FILL,

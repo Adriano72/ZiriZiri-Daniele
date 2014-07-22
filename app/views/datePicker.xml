@@ -1,5 +1,5 @@
 <Alloy>
 	
-		<Picker id="pkrData" selectionIndicator="true"/>
+		<Picker id="picker" type="Ti.UI.PICKER_TYPE_DATE" selectionIndicator="true"/>
 	
 </Alloy>

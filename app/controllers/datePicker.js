@@ -9,7 +9,7 @@ var v_date, v_time;
 
 function showTimePicker(sel_data) {
 
-	//Ti.API.info("SHOW DATE PIKER GOTTEN DATA: "+moment(sel_data).format('LLL'));
+	Ti.API.info("SHOW DATE PIKER GOTTEN DATA: "+moment(sel_data).format('LLL'));
 
 	var riga = Alloy.createController('timePicker', {
 		par_data : sel_data,
@@ -23,7 +23,7 @@ function showTimePicker(sel_data) {
 
 };
 
-$.pkrData.showDatePickerDialog({
+$.picker.showDatePickerDialog({
 
 	value : new Date(),
 	callback : function(e) {

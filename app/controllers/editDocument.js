@@ -1,9 +1,10 @@
 var args = arguments[0] || {};
 
-var test = args();
-Ti.API.info("ARGS ****: "+JSON.stringify(test));
+var objDocument = args();
+Ti.API.info("ARGS ****: "+JSON.stringify(objDocument));
 
-$.titolo.value = test.title;
+$.titolo.value = objDocument.title;
+$.descrizione.value = objDocument.description;
 
 var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);

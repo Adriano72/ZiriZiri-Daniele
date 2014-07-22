@@ -155,7 +155,7 @@ function Controller() {
         backgroundColor: "#F9F9F9",
         orientationModes: [ Ti.UI.PORTRAIT ],
         id: "win",
-        title: "Nuovo Documento"
+        title: "Modifica Documento"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
@@ -431,9 +431,10 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    var test = args();
-    Ti.API.info("ARGS ****: " + JSON.stringify(test));
-    $.titolo.value = test.title;
+    var objDocument = args();
+    Ti.API.info("ARGS ****: " + JSON.stringify(objDocument));
+    $.titolo.value = objDocument.title;
+    $.descrizione.value = objDocument.description;
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     var ImageFactory = require("ti.imagefactory");

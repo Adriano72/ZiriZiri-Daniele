@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="win" class="container" title = "Nuovo Documento" onOpen="openEvent" onClose="resetGlobals">
+	<Window id="win" class="container" title = "Modifica Documento" onOpen="openEvent" onClose="resetGlobals">
 
 		<Menu id="menu" platform="android" onHomeIconItemSelected="homeIconSelected">
 
