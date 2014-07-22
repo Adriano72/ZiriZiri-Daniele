@@ -108,10 +108,10 @@ function Controller() {
             });
             Ti.API.info("TEMP ARRAY ASPETTI: " + JSON.stringify(tempContainer));
             arrayAspetti.length - 1;
-            var aspettoDataJson = JSON.parse(objRet.data);
+            var aspettoDataJson = JSON.parse(objRet);
             Ti.API.info("DATA PARSATO: " + JSON.stringify(aspettoDataJson));
             var riga = Alloy.createController("rowDOCUMENT", {
-                obj_aspetto: objRet,
+                obj_aspetto: aspettoDataJson,
                 keyIndex: randomKey,
                 _editFunc: function(updatedAspect) {
                     var rowToUpdate = _.where(tempContainer, {

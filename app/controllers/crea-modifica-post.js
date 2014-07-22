@@ -177,13 +177,13 @@ function addDocument(p_shortcutMode) {
 
 		var arrayIndex = arrayAspetti.length - 1;
 
-		var aspettoDataJson = JSON.parse(objRet.data);
+		var aspettoDataJson = JSON.parse(objRet);
 
 		Ti.API.info("DATA PARSATO: " + JSON.stringify(aspettoDataJson));
 
 		var riga = Alloy.createController('rowDOCUMENT', {
 
-			obj_aspetto : objRet,
+			obj_aspetto : aspettoDataJson,
 			keyIndex : randomKey,
 			_editFunc : function(updatedAspect) {
 
