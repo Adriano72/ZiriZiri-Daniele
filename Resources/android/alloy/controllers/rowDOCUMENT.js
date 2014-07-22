@@ -8,6 +8,15 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
+    function edit(e) {
+        Alloy.createController("editDocument", {
+            _callback: function(aspettoEditato) {
+                args._editFunc(aspettoEditato);
+            },
+            aspetto: e.source.obj_aspect,
+            tempKey: e.source.arrayKey
+        }).getView().open();
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "rowDOCUMENT";
     if (arguments[0]) {
@@ -17,12 +26,14 @@ function Controller() {
     }
     var $ = this;
     var exports = {};
+    var __defers = {};
     $.__views.riga = Ti.UI.createTableViewRow({
         className: "itemRow",
         width: Ti.UI.FILL,
         id: "riga"
     });
     $.__views.riga && $.addTopLevelView($.__views.riga);
+    edit ? $.__views.riga.addEventListener("click", edit) : __defers["$.__views.riga!click!edit"] = true;
     $.__views.__alloyId146 = Ti.UI.createView({
         left: 5,
         right: 5,
@@ -110,9 +121,10 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    $.titolo.text = args.obj_aspetto.title;
+    $.titolo.text = args.obj_aspetto.data.title;
     $.riga.obj_aspect = args.obj_aspetto;
     $.riga.arrayKey = args.keyIndex;
+    __defers["$.__views.riga!click!edit"] && $.__views.riga.addEventListener("click", edit);
     _.extend($, exports);
 }
 

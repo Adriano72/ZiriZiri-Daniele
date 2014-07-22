@@ -111,23 +111,18 @@ function Controller() {
             var aspettoDataJson = JSON.parse(objRet.data);
             Ti.API.info("DATA PARSATO: " + JSON.stringify(aspettoDataJson));
             var riga = Alloy.createController("rowDOCUMENT", {
-                obj_aspetto: aspettoDataJson,
-                keyIndex: randomKey
+                obj_aspetto: objRet,
+                keyIndex: randomKey,
+                _editFunc: function(updatedAspect) {
+                    var rowToUpdate = _.where(tempContainer, {
+                        key: updatedAspect.arrayKey
+                    });
+                    tempContainer.aspetto.data = rowToUpdate;
+                }
             }).getView();
             riga.addEventListener("click", function(e) {
                 Ti.API.info("OBJ DOC: " + JSON.stringify(e.source.obj_aspect));
                 Ti.API.info("ROW INDEX: " + e.index);
-                Alloy.createController("editDocument", {
-                    _callback: function() {
-                        var rowToUpdate = _.where(tempContainer, {
-                            key: e.source.arrayKey
-                        });
-                        Ti.API.info("OGG INDIVIDUATO ****: " + JSON.stringify(rowToUpdate));
-                        $.postTable.deleteRow(riga);
-                    },
-                    aspetto: e.source.obj_aspect,
-                    tempKey: e.source.arrayKey
-                }).getView().open();
             });
             $.postTable.appendRow(riga);
         }).getView().open();
