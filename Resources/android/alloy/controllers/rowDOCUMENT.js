@@ -11,10 +11,12 @@ function Controller() {
     function edit(e) {
         Alloy.createController("editDocument", {
             _callback: function(aspettoEditato) {
-                args._editFunc(aspettoEditato);
+                var aspettoToJSON = JSON.parse(aspettoEditato.data);
+                $.riga.obj_aspect = aspettoEditato;
+                $.titolo.text = aspettoToJSON.title;
+                args._editFunc(aspettoEditato, e.source.arrayKey);
             },
-            aspetto: e.source.obj_aspect,
-            tempKey: e.source.arrayKey
+            aspetto: $.riga.obj_aspect
         }).getView().open();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -121,7 +123,9 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    $.titolo.text = args.obj_aspetto.data.title;
+    var dataAspetto = JSON.parse(args.obj_aspetto.data);
+    Ti.API.info("VALORE PASSATO: " + JSON.stringify(dataAspetto.title));
+    $.titolo.text = dataAspetto.title;
     $.riga.obj_aspect = args.obj_aspetto;
     $.riga.arrayKey = args.keyIndex;
     __defers["$.__views.riga!click!edit"] && $.__views.riga.addEventListener("click", edit);

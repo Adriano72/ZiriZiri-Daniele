@@ -56,15 +56,13 @@ $.rating_5.image = (rating > 4) ? "/images/star-small.png" : "";
 
 //Alloy.Models.Post_template.set("tag", (_.isNull(modJson.tags)) ? "" : modJson.tags[0].name);
 
-var aspects = modJson.aspects;
-
 //Ti.API.info("ASPETTI JSON: " + JSON.stringify(aspects));
 
 Alloy.Models.Post_template.trigger('change');
 
 function submitPost() {
 
-	_.forEach()
+	var aspettiArray = _.pluck(tempContainer, 'aspetto');	
 
 	Alloy.Globals.loading.show('Salvataggio in corso...', false);
 
@@ -72,8 +70,8 @@ function submitPost() {
 
 	Ti.API.info("JSON POST CON ASPETTI: " + JSON.stringify(Alloy.Models.Post_template));
 
-	if (arrayAspetti.length > 0) {
-		Alloy.Models.Post_template.set("aspects", arrayAspetti);
+	if (aspettiArray.length > 0) {
+		Alloy.Models.Post_template.set("aspects", aspettiArray);
 	}
 
 	net.savePost(Alloy.Models.Post_template, function(post_id, postToAddToTimeline) {
@@ -175,34 +173,30 @@ function addDocument(p_shortcutMode) {
 
 		//arrayAspetti.push(objRet);
 
-		var arrayIndex = arrayAspetti.length - 1;
-
-		var aspettoDataJson = JSON.parse(objRet);
-
-		Ti.API.info("DATA PARSATO: " + JSON.stringify(aspettoDataJson));
-
 		var riga = Alloy.createController('rowDOCUMENT', {
 
-			obj_aspetto : aspettoDataJson,
+			obj_aspetto : objRet,
 			keyIndex : randomKey,
-			_editFunc : function(updatedAspect) {
+			_editFunc : function(updatedAspect, arrayKey) {
 
-				var rowToUpdate = _.where(tempContainer, {
-					key : updatedAspect.arrayKey
-				});
+				//rowToUpdate[0].aspetto = updatedAspect;
 				
-				tempContainer.aspetto.data = rowToUpdate;
+				var recordToUpdate = _.find(tempContainer, function(value){ return value.key === arrayKey; });
+				
+				Ti.API.info("ASPETTO PRIMA: "+JSON.stringify(recordToUpdate.aspetto));
+				
+				if(recordToUpdate){
+					recordToUpdate.aspetto = updatedAspect;
+				}
+				
+				Ti.API.info("ASPETTO DOPO: "+JSON.stringify(recordToUpdate.aspetto));
+				
+				//.API.info("PLUCKED OBJ: "+JSON.stringify(_.pluck(tempContainer, 'aspetto')));
 				
 				
 
 			}
 		}).getView();
-
-		riga.addEventListener("click", function(e) {
-			Ti.API.info("OBJ DOC: " + JSON.stringify(e.source.obj_aspect));
-			Ti.API.info("ROW INDEX: " + e.index);
-
-		});
 
 		$.postTable.appendRow(riga);
 

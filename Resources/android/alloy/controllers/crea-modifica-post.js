@@ -59,11 +59,11 @@ function Controller() {
         Alloy.Globals.shortcutMode = false;
     }
     function submitPost() {
-        _.forEach();
+        var aspettiArray = _.pluck(tempContainer, "aspetto");
         Alloy.Globals.loading.show("Salvataggio in corso...", false);
         Ti.API.info("JSON POST: " + JSON.stringify(Alloy.Models.Post_template));
         Ti.API.info("JSON POST CON ASPETTI: " + JSON.stringify(Alloy.Models.Post_template));
-        arrayAspetti.length > 0 && Alloy.Models.Post_template.set("aspects", arrayAspetti);
+        aspettiArray.length > 0 && Alloy.Models.Post_template.set("aspects", aspettiArray);
         net.savePost(Alloy.Models.Post_template, function(post_id, postToAddToTimeline) {
             Ti.API.info("ID POST SALVATO: " + post_id);
             Alloy.Collections.Timeline.add(postToAddToTimeline);
@@ -107,23 +107,18 @@ function Controller() {
                 aspetto: objRet
             });
             Ti.API.info("TEMP ARRAY ASPETTI: " + JSON.stringify(tempContainer));
-            arrayAspetti.length - 1;
-            var aspettoDataJson = JSON.parse(objRet);
-            Ti.API.info("DATA PARSATO: " + JSON.stringify(aspettoDataJson));
             var riga = Alloy.createController("rowDOCUMENT", {
-                obj_aspetto: aspettoDataJson,
+                obj_aspetto: objRet,
                 keyIndex: randomKey,
-                _editFunc: function(updatedAspect) {
-                    var rowToUpdate = _.where(tempContainer, {
-                        key: updatedAspect.arrayKey
+                _editFunc: function(updatedAspect, arrayKey) {
+                    var recordToUpdate = _.find(tempContainer, function(value) {
+                        return value.key === arrayKey;
                     });
-                    tempContainer.aspetto.data = rowToUpdate;
+                    Ti.API.info("ASPETTO PRIMA: " + JSON.stringify(recordToUpdate.aspetto));
+                    recordToUpdate && (recordToUpdate.aspetto = updatedAspect);
+                    Ti.API.info("ASPETTO DOPO: " + JSON.stringify(recordToUpdate.aspetto));
                 }
             }).getView();
-            riga.addEventListener("click", function(e) {
-                Ti.API.info("OBJ DOC: " + JSON.stringify(e.source.obj_aspect));
-                Ti.API.info("ROW INDEX: " + e.index);
-            });
             $.postTable.appendRow(riga);
         }).getView().open();
     }
@@ -586,7 +581,6 @@ function Controller() {
     $.rating_3.image = rating > 2 ? "/images/star-small.png" : "";
     $.rating_4.image = rating > 3 ? "/images/star-small.png" : "";
     $.rating_5.image = rating > 4 ? "/images/star-small.png" : "";
-    modJson.aspects;
     Alloy.Models.Post_template.trigger("change");
     $.win.open();
     $.win.addEventListener("close", function() {

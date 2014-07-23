@@ -51,15 +51,19 @@ function Controller() {
             modDocumentJSON.data.name = fileName;
             modDocumentJSON.data.description = $.descrizione.value;
             modDocumentJSON.data.size = fileSize;
-            modDocumentJSON.data.content = imageContent;
+            if (flagUpdateImage) {
+                Ti.API.info("UPDATED IMAGE TRUE ****");
+                modDocumentJSON.data.content = imageContent;
+            } else {
+                Ti.API.info("UPDATED IMAGE FALSE ****");
+                modDocumentJSON.data.content = dataDocument.content;
+            }
             modDocumentJSON.data = JSON.stringify(modDocumentJSON.data);
-            Ti.API.info("ASPETTO DOCUMENT VALIDATO: " + JSON.stringify(modDocumentJSON));
             args._callback(modDocumentJSON);
             $.win.close();
         } else alert("E' necessario scattare una foto o selezionarla dalla galleria, i campi titolo e descrizione sono obbligatori");
     }
     function openCamera() {
-        Ti.API.info("SHORTCUT MODE: " + Alloy.Globals.shortcutMode);
         try {
             Ti.Media.showCamera({
                 success: function(event) {
@@ -77,10 +81,7 @@ function Controller() {
                     imageContent.base64 = hashedImage;
                     fileSize = tempFile.size;
                     fileName = tempFile.name;
-                    if (Alloy.Globals.shortcutMode) {
-                        $.titolo.value = "Foto scattata il " + moment().format("DD-MM-YYYY HH:MM");
-                        $.descrizione.value = "Foto scattata il " + moment().format("DD-MM-YYYY HH:MM");
-                    }
+                    flagUpdateImage = true;
                 },
                 cancel: function() {},
                 error: function(error) {
@@ -104,21 +105,18 @@ function Controller() {
                 var cropRect = event.cropRect;
                 var image = event.media;
                 Ti.API.info("Our type was: " + event.mediaType);
-                Ti.API.info("*** UNO ***");
                 $.preview.image = image;
-                Ti.API.info("*** DUE ***");
                 Ti.API.info("IMAGE MIME TYPE: " + image.getMimeType());
-                Ti.API.info("*** TRE ***");
                 var tempFile = Ti.Filesystem.createTempFile();
                 tempFile.write(image);
-                Ti.API.info("*** QUATTRO ***");
                 var content = tempFile.read();
                 Ti.API.info("IMAGE FILE SIZE: " + tempFile.size);
                 Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
                 var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(content).toString();
-                imageContent = imageContent.base64 = hashedImage;
+                imageContent.base64 = hashedImage;
                 fileSize = tempFile.size;
                 fileName = tempFile.name;
+                flagUpdateImage = true;
                 Titanium.API.info("PHOTO GALLERY SUCCESS cropRect.x " + cropRect.x + " cropRect.y " + cropRect.y + " cropRect.height " + cropRect.height + " cropRect.width " + cropRect.width);
             },
             cancel: function() {},
@@ -345,15 +343,16 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    var objDocument = args.aspetto;
-    Ti.API.info("ARGS ****: " + JSON.stringify(objDocument));
-    $.titolo.value = objDocument.title;
-    $.descrizione.value = objDocument.description;
-    $.preview.setImage(Ti.Utils.base64decode(objDocument.content.base64.substr(objDocument.content.base64.indexOf(","))));
+    var dataDocument = JSON.parse(args.aspetto.data);
+    Ti.API.info("ARGS ****: " + JSON.stringify(dataDocument));
+    $.titolo.value = dataDocument.title;
+    $.descrizione.value = dataDocument.description;
+    $.preview.setImage(Ti.Utils.base64decode(dataDocument.content.base64.substr(dataDocument.content.base64.indexOf(","))));
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     var ImageFactory = require("ti.imagefactory");
     var imageContent = {};
+    var flagUpdateImage = false;
     var fileName;
     var fileSize;
     __defers["$.__views.win!close!resetGlobals"] && $.__views.win.addEventListener("close", resetGlobals);

@@ -1,11 +1,11 @@
 var args = arguments[0] || {};
 
-var objDocument = args.aspetto;
-Ti.API.info("ARGS ****: "+JSON.stringify(objDocument));
+var dataDocument = JSON.parse(args.aspetto.data);
+Ti.API.info("ARGS ****: "+JSON.stringify(dataDocument));
 
-$.titolo.value = objDocument.title;
-$.descrizione.value = objDocument.description;
-$.preview.setImage(Ti.Utils.base64decode(objDocument.content.base64.substr(objDocument.content.base64.indexOf(','))));
+$.titolo.value = dataDocument.title;
+$.descrizione.value = dataDocument.description;
+$.preview.setImage(Ti.Utils.base64decode(dataDocument.content.base64.substr(dataDocument.content.base64.indexOf(','))));
 
 var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
@@ -24,6 +24,9 @@ $.dataDocumento.text = moment().format('L');
 $.dataDocumento.dataRaw = moment();
 */
 var imageContent = {};
+
+var flagUpdateImage = false;
+
 //imageContent.link = null;
 //imageContent.id = null;
 
@@ -74,11 +77,18 @@ function saveDocument() {
 		//modDocumentJSON.data.format = "JPG"; //_.last(fileName, 3).toUpperCase();
 		modDocumentJSON.data.description = $.descrizione.value;
 		modDocumentJSON.data.size = fileSize;
-		modDocumentJSON.data.content = imageContent;
-
+		
+		if(flagUpdateImage){
+			Ti.API.info("UPDATED IMAGE TRUE ****");
+			modDocumentJSON.data.content = imageContent;
+		}else{
+			Ti.API.info("UPDATED IMAGE FALSE ****");
+			modDocumentJSON.data.content = dataDocument.content;
+		};
+		
 		modDocumentJSON.data = JSON.stringify(modDocumentJSON.data);
 
-		Ti.API.info("ASPETTO DOCUMENT VALIDATO: " + JSON.stringify(modDocumentJSON));
+		//Ti.API.info("ASPETTO DOCUMENT VALIDATO: " + JSON.stringify(modDocumentJSON));
 
 		args._callback(modDocumentJSON);
 		$.win.close();
@@ -117,7 +127,7 @@ function saveDocument() {
 
 function openCamera(shortcutMode) {
 	
-	Ti.API.info("SHORTCUT MODE: "+ Alloy.Globals.shortcutMode);
+	
 
 	try {
 
@@ -145,12 +155,8 @@ function openCamera(shortcutMode) {
 				imageContent.base64 = hashedImage;
 				fileSize = tempFile.size;
 				fileName = tempFile.name;
+				flagUpdateImage = true;
 				
-				if(Alloy.Globals.shortcutMode){
-								
-					$.titolo.value = "Foto scattata il "+moment().format("DD-MM-YYYY HH:MM");
-					$.descrizione.value = "Foto scattata il "+moment().format("DD-MM-YYYY HH:MM");
-				}
 
 			},
 			cancel : function() {
@@ -192,17 +198,16 @@ function openGallery() {
 
 			//$.preview.setWidth(cropRect.width);
 			//$.preview.setHeight(cropRect.height);
-			Ti.API.info("*** UNO ***");
+			
 			$.preview.image = image;
-			Ti.API.info("*** DUE ***");
+			
 			//var hashedImage = Ti.Utils.base64encode(image).toString();
 			//Ti.API.info("HASHED IMAGE: " + image.getFile());
 			Ti.API.info("IMAGE MIME TYPE: " + image.getMimeType());
-			Ti.API.info("*** TRE ***");
+			
 
 			var tempFile = Ti.Filesystem.createTempFile();
 			tempFile.write(image);
-			Ti.API.info("*** QUATTRO ***");
 
 			var content = tempFile.read();
 			Ti.API.info("IMAGE FILE SIZE: " + tempFile.size);
@@ -210,16 +215,18 @@ function openGallery() {
 			//Ti.API.info("HASHED IMAGE : " + hashedImage);
 
 			var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(content).toString();
-			imageContent = imageContent.base64 = hashedImage;
-			;
+			imageContent.base64 = hashedImage;
+		
 			fileSize = tempFile.size;
 			fileName = tempFile.name;
+			
+			flagUpdateImage = true;
 
 			Titanium.API.info('PHOTO GALLERY SUCCESS cropRect.x ' + cropRect.x + ' cropRect.y ' + cropRect.y + ' cropRect.height ' + cropRect.height + ' cropRect.width ' + cropRect.width);
 
 		},
 		cancel : function() {
-
+			
 		},
 		error : function(error) {
 			Ti.API.info("ERROR: " + error);

@@ -199,20 +199,17 @@ function openGallery() {
 
 			// set image view
 			Ti.API.info('Our type was: ' + event.mediaType);
-
 			//$.preview.setWidth(cropRect.width);
 			//$.preview.setHeight(cropRect.height);
-			Ti.API.info("*** UNO ***");
+			
 			$.preview.image = image;
-			Ti.API.info("*** DUE ***");
+		
 			//var hashedImage = Ti.Utils.base64encode(image).toString();
 			//Ti.API.info("HASHED IMAGE: " + image.getFile());
 			Ti.API.info("IMAGE MIME TYPE: " + image.getMimeType());
-			Ti.API.info("*** TRE ***");
-
+			
 			var tempFile = Ti.Filesystem.createTempFile();
 			tempFile.write(image);
-			Ti.API.info("*** QUATTRO ***");
 
 			var content = tempFile.read();
 			Ti.API.info("IMAGE FILE SIZE: " + tempFile.size);
@@ -220,8 +217,8 @@ function openGallery() {
 			//Ti.API.info("HASHED IMAGE : " + hashedImage);
 
 			var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(content).toString();
-			imageContent = imageContent.base64 = hashedImage;
-			;
+			imageContent.base64 = hashedImage;
+
 			fileSize = tempFile.size;
 			fileName = tempFile.name;
 
