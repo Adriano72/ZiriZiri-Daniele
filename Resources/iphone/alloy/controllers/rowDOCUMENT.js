@@ -8,6 +8,17 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
+    function edit(e) {
+        Alloy.createController("editDocument", {
+            _callback: function(aspettoEditato) {
+                var aspettoToJSON = JSON.parse(aspettoEditato.data);
+                $.riga.obj_aspect = aspettoEditato;
+                $.titolo.text = aspettoToJSON.title;
+                args._editFunc(aspettoEditato, e.source.arrayKey);
+            },
+            aspetto: $.riga.obj_aspect
+        }).getView().open();
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "rowDOCUMENT";
     if (arguments[0]) {
@@ -17,13 +28,15 @@ function Controller() {
     }
     var $ = this;
     var exports = {};
+    var __defers = {};
     $.__views.riga = Ti.UI.createTableViewRow({
         className: "itemRow",
         width: Ti.UI.FILL,
         id: "riga"
     });
     $.__views.riga && $.addTopLevelView($.__views.riga);
-    $.__views.__alloyId124 = Ti.UI.createView({
+    edit ? $.__views.riga.addEventListener("click", edit) : __defers["$.__views.riga!click!edit"] = true;
+    $.__views.__alloyId155 = Ti.UI.createView({
         left: 5,
         right: 5,
         top: 5,
@@ -35,9 +48,9 @@ function Controller() {
         height: 50,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId124"
+        id: "__alloyId155"
     });
-    $.__views.riga.add($.__views.__alloyId124);
+    $.__views.riga.add($.__views.__alloyId155);
     $.__views.documentIcon = Ti.UI.createLabel({
         touchEnabled: false,
         left: 5,
@@ -46,23 +59,23 @@ function Controller() {
         backgroundImage: "/images/kernel-document-on.png",
         id: "documentIcon"
     });
-    $.__views.__alloyId124.add($.__views.documentIcon);
-    $.__views.__alloyId125 = Ti.UI.createView({
+    $.__views.__alloyId155.add($.__views.documentIcon);
+    $.__views.__alloyId156 = Ti.UI.createView({
         touchEnabled: false,
         width: Ti.UI.SIZE,
         left: 10,
-        id: "__alloyId125"
+        id: "__alloyId156"
     });
-    $.__views.__alloyId124.add($.__views.__alloyId125);
-    $.__views.__alloyId126 = Ti.UI.createView({
+    $.__views.__alloyId155.add($.__views.__alloyId156);
+    $.__views.__alloyId157 = Ti.UI.createView({
         left: 2,
         touchEnabled: false,
         width: "85%",
         height: Ti.UI.SIZE,
         layout: "horizontal",
-        id: "__alloyId126"
+        id: "__alloyId157"
     });
-    $.__views.__alloyId125.add($.__views.__alloyId126);
+    $.__views.__alloyId156.add($.__views.__alloyId157);
     $.__views.titolo = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -77,7 +90,7 @@ function Controller() {
         left: 0,
         id: "titolo"
     });
-    $.__views.__alloyId126.add($.__views.titolo);
+    $.__views.__alloyId157.add($.__views.titolo);
     $.__views.formato = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -91,7 +104,7 @@ function Controller() {
         ellipsize: true,
         id: "formato"
     });
-    $.__views.__alloyId126.add($.__views.formato);
+    $.__views.__alloyId157.add($.__views.formato);
     $.__views.visualizza = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -106,13 +119,16 @@ function Controller() {
         ellipsize: true,
         id: "visualizza"
     });
-    $.__views.__alloyId126.add($.__views.visualizza);
+    $.__views.__alloyId157.add($.__views.visualizza);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    $.titolo.text = args.obj_aspetto.title;
+    var dataAspetto = JSON.parse(args.obj_aspetto.data);
+    Ti.API.info("VALORE PASSATO: " + JSON.stringify(dataAspetto.title));
+    $.titolo.text = dataAspetto.title;
     $.riga.obj_aspect = args.obj_aspetto;
     $.riga.arrayKey = args.keyIndex;
+    __defers["$.__views.riga!click!edit"] && $.__views.riga.addEventListener("click", edit);
     _.extend($, exports);
 }
 

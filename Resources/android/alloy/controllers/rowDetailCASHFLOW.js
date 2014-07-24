@@ -8,8 +8,8 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
-    function __alloyId149() {
-        $.__views.win.removeEventListener("open", __alloyId149);
+    function __alloyId182() {
+        $.__views.win.removeEventListener("open", __alloyId182);
         if ($.__views.win.activity) $.__views.win.activity.onCreateOptionsMenu = function() {}; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
             Ti.API.warn("or other UI component which does not have an Android activity.");
@@ -52,12 +52,12 @@ function Controller() {
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
-    $.__views.win.addEventListener("open", __alloyId149);
-    $.__views.__alloyId150 = Ti.UI.createScrollView({
-        id: "__alloyId150"
+    $.__views.win.addEventListener("open", __alloyId182);
+    $.__views.__alloyId183 = Ti.UI.createScrollView({
+        id: "__alloyId183"
     });
-    $.__views.win.add($.__views.__alloyId150);
-    $.__views.__alloyId151 = Ti.UI.createView({
+    $.__views.win.add($.__views.__alloyId183);
+    $.__views.__alloyId184 = Ti.UI.createView({
         left: 5,
         right: 5,
         top: 5,
@@ -68,16 +68,16 @@ function Controller() {
         height: Ti.UI.SIZE,
         layout: "vertical",
         touchEnabled: false,
-        id: "__alloyId151"
+        id: "__alloyId184"
     });
-    $.__views.__alloyId150.add($.__views.__alloyId151);
-    $.__views.__alloyId152 = Ti.UI.createView({
+    $.__views.__alloyId183.add($.__views.__alloyId184);
+    $.__views.__alloyId185 = Ti.UI.createView({
         layout: "horizontal",
         top: 10,
-        id: "__alloyId152"
+        id: "__alloyId185"
     });
-    $.__views.__alloyId151.add($.__views.__alloyId152);
-    $.__views.__alloyId153 = Ti.UI.createLabel({
+    $.__views.__alloyId184.add($.__views.__alloyId185);
+    $.__views.__alloyId186 = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -88,9 +88,9 @@ function Controller() {
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         left: 10,
-        id: "__alloyId153"
+        id: "__alloyId186"
     });
-    $.__views.__alloyId152.add($.__views.__alloyId153);
+    $.__views.__alloyId185.add($.__views.__alloyId186);
     $.__views.importo = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -105,14 +105,14 @@ function Controller() {
         wordWrap: false,
         id: "importo"
     });
-    $.__views.__alloyId152.add($.__views.importo);
-    $.__views.__alloyId154 = Ti.UI.createView({
+    $.__views.__alloyId185.add($.__views.importo);
+    $.__views.__alloyId187 = Ti.UI.createView({
         layout: "horizontal",
         top: 10,
-        id: "__alloyId154"
+        id: "__alloyId187"
     });
-    $.__views.__alloyId151.add($.__views.__alloyId154);
-    $.__views.__alloyId155 = Ti.UI.createLabel({
+    $.__views.__alloyId184.add($.__views.__alloyId187);
+    $.__views.__alloyId188 = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -123,9 +123,9 @@ function Controller() {
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         left: 10,
-        id: "__alloyId155"
+        id: "__alloyId188"
     });
-    $.__views.__alloyId154.add($.__views.__alloyId155);
+    $.__views.__alloyId187.add($.__views.__alloyId188);
     $.__views.movimento = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -140,14 +140,14 @@ function Controller() {
         wordWrap: false,
         id: "movimento"
     });
-    $.__views.__alloyId154.add($.__views.movimento);
-    $.__views.__alloyId156 = Ti.UI.createView({
+    $.__views.__alloyId187.add($.__views.movimento);
+    $.__views.__alloyId189 = Ti.UI.createView({
         layout: "horizontal",
         top: 10,
-        id: "__alloyId156"
+        id: "__alloyId189"
     });
-    $.__views.__alloyId151.add($.__views.__alloyId156);
-    $.__views.__alloyId157 = Ti.UI.createLabel({
+    $.__views.__alloyId184.add($.__views.__alloyId189);
+    $.__views.__alloyId190 = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -158,9 +158,9 @@ function Controller() {
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         left: 10,
-        id: "__alloyId157"
+        id: "__alloyId190"
     });
-    $.__views.__alloyId156.add($.__views.__alloyId157);
+    $.__views.__alloyId189.add($.__views.__alloyId190);
     $.__views.pagamento = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -175,14 +175,14 @@ function Controller() {
         wordWrap: false,
         id: "pagamento"
     });
-    $.__views.__alloyId156.add($.__views.pagamento);
-    $.__views.__alloyId158 = Ti.UI.createView({
+    $.__views.__alloyId189.add($.__views.pagamento);
+    $.__views.__alloyId191 = Ti.UI.createView({
         layout: "horizontal",
         top: 30,
-        id: "__alloyId158"
+        id: "__alloyId191"
     });
-    $.__views.__alloyId151.add($.__views.__alloyId158);
-    $.__views.__alloyId159 = Ti.UI.createLabel({
+    $.__views.__alloyId184.add($.__views.__alloyId191);
+    $.__views.__alloyId192 = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -193,9 +193,9 @@ function Controller() {
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         left: 10,
-        id: "__alloyId159"
+        id: "__alloyId192"
     });
-    $.__views.__alloyId158.add($.__views.__alloyId159);
+    $.__views.__alloyId191.add($.__views.__alloyId192);
     $.__views.variabilita = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -210,14 +210,14 @@ function Controller() {
         wordWrap: false,
         id: "variabilita"
     });
-    $.__views.__alloyId158.add($.__views.variabilita);
-    $.__views.__alloyId160 = Ti.UI.createView({
+    $.__views.__alloyId191.add($.__views.variabilita);
+    $.__views.__alloyId193 = Ti.UI.createView({
         layout: "horizontal",
         top: 10,
-        id: "__alloyId160"
+        id: "__alloyId193"
     });
-    $.__views.__alloyId151.add($.__views.__alloyId160);
-    $.__views.__alloyId161 = Ti.UI.createLabel({
+    $.__views.__alloyId184.add($.__views.__alloyId193);
+    $.__views.__alloyId194 = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -228,9 +228,9 @@ function Controller() {
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         left: 10,
-        id: "__alloyId161"
+        id: "__alloyId194"
     });
-    $.__views.__alloyId160.add($.__views.__alloyId161);
+    $.__views.__alloyId193.add($.__views.__alloyId194);
     $.__views.stato = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -245,14 +245,14 @@ function Controller() {
         wordWrap: false,
         id: "stato"
     });
-    $.__views.__alloyId160.add($.__views.stato);
-    $.__views.__alloyId162 = Ti.UI.createView({
+    $.__views.__alloyId193.add($.__views.stato);
+    $.__views.__alloyId195 = Ti.UI.createView({
         layout: "horizontal",
         top: 10,
-        id: "__alloyId162"
+        id: "__alloyId195"
     });
-    $.__views.__alloyId151.add($.__views.__alloyId162);
-    $.__views.__alloyId163 = Ti.UI.createLabel({
+    $.__views.__alloyId184.add($.__views.__alloyId195);
+    $.__views.__alloyId196 = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -263,9 +263,9 @@ function Controller() {
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         left: 10,
-        id: "__alloyId163"
+        id: "__alloyId196"
     });
-    $.__views.__alloyId162.add($.__views.__alloyId163);
+    $.__views.__alloyId195.add($.__views.__alloyId196);
     $.__views.tipologia = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -280,14 +280,14 @@ function Controller() {
         wordWrap: false,
         id: "tipologia"
     });
-    $.__views.__alloyId162.add($.__views.tipologia);
-    $.__views.__alloyId164 = Ti.UI.createView({
+    $.__views.__alloyId195.add($.__views.tipologia);
+    $.__views.__alloyId197 = Ti.UI.createView({
         layout: "horizontal",
         top: 10,
-        id: "__alloyId164"
+        id: "__alloyId197"
     });
-    $.__views.__alloyId151.add($.__views.__alloyId164);
-    $.__views.__alloyId165 = Ti.UI.createLabel({
+    $.__views.__alloyId184.add($.__views.__alloyId197);
+    $.__views.__alloyId198 = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -298,9 +298,9 @@ function Controller() {
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         left: 10,
-        id: "__alloyId165"
+        id: "__alloyId198"
     });
-    $.__views.__alloyId164.add($.__views.__alloyId165);
+    $.__views.__alloyId197.add($.__views.__alloyId198);
     $.__views.redditi = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -315,14 +315,14 @@ function Controller() {
         wordWrap: false,
         id: "redditi"
     });
-    $.__views.__alloyId164.add($.__views.redditi);
-    $.__views.__alloyId166 = Ti.UI.createView({
+    $.__views.__alloyId197.add($.__views.redditi);
+    $.__views.__alloyId199 = Ti.UI.createView({
         layout: "horizontal",
         top: 30,
-        id: "__alloyId166"
+        id: "__alloyId199"
     });
-    $.__views.__alloyId151.add($.__views.__alloyId166);
-    $.__views.__alloyId167 = Ti.UI.createLabel({
+    $.__views.__alloyId184.add($.__views.__alloyId199);
+    $.__views.__alloyId200 = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -333,9 +333,9 @@ function Controller() {
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         left: 10,
-        id: "__alloyId167"
+        id: "__alloyId200"
     });
-    $.__views.__alloyId166.add($.__views.__alloyId167);
+    $.__views.__alloyId199.add($.__views.__alloyId200);
     $.__views.datavaluta = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -350,14 +350,14 @@ function Controller() {
         wordWrap: false,
         id: "datavaluta"
     });
-    $.__views.__alloyId166.add($.__views.datavaluta);
-    $.__views.__alloyId168 = Ti.UI.createView({
+    $.__views.__alloyId199.add($.__views.datavaluta);
+    $.__views.__alloyId201 = Ti.UI.createView({
         layout: "horizontal",
         top: 10,
-        id: "__alloyId168"
+        id: "__alloyId201"
     });
-    $.__views.__alloyId151.add($.__views.__alloyId168);
-    $.__views.__alloyId169 = Ti.UI.createLabel({
+    $.__views.__alloyId184.add($.__views.__alloyId201);
+    $.__views.__alloyId202 = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -368,9 +368,9 @@ function Controller() {
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         left: 10,
-        id: "__alloyId169"
+        id: "__alloyId202"
     });
-    $.__views.__alloyId168.add($.__views.__alloyId169);
+    $.__views.__alloyId201.add($.__views.__alloyId202);
     $.__views.datascadenza = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -385,15 +385,15 @@ function Controller() {
         wordWrap: false,
         id: "datascadenza"
     });
-    $.__views.__alloyId168.add($.__views.datascadenza);
-    $.__views.__alloyId170 = Ti.UI.createView({
+    $.__views.__alloyId201.add($.__views.datascadenza);
+    $.__views.__alloyId203 = Ti.UI.createView({
         layout: "horizontal",
         top: 10,
         bottom: 20,
-        id: "__alloyId170"
+        id: "__alloyId203"
     });
-    $.__views.__alloyId151.add($.__views.__alloyId170);
-    $.__views.__alloyId171 = Ti.UI.createLabel({
+    $.__views.__alloyId184.add($.__views.__alloyId203);
+    $.__views.__alloyId204 = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -404,9 +404,9 @@ function Controller() {
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
         left: 10,
-        id: "__alloyId171"
+        id: "__alloyId204"
     });
-    $.__views.__alloyId170.add($.__views.__alloyId171);
+    $.__views.__alloyId203.add($.__views.__alloyId204);
     $.__views.datapagamento = Ti.UI.createLabel({
         touchEnabled: false,
         font: {
@@ -421,7 +421,7 @@ function Controller() {
         wordWrap: false,
         id: "datapagamento"
     });
-    $.__views.__alloyId170.add($.__views.datapagamento);
+    $.__views.__alloyId203.add($.__views.datapagamento);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

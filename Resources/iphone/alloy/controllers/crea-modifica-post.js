@@ -29,15 +29,26 @@ function Controller() {
         }).getView().open();
     }
     function addCashflow() {
+        var randomKey = _.random(0, 99999);
         Alloy.createController("addCashflow", function(objRet) {
-            arrayAspetti.push(objRet);
-            Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
+            tempContainer.push({
+                key: randomKey,
+                aspetto: objRet
+            });
+            Ti.API.info("TEMP ARRAY ASPETTI: " + JSON.stringify(tempContainer));
             var aspettoDataJson = JSON.parse(objRet.data);
             Ti.API.info("DATA PARSATO: " + JSON.stringify(aspettoDataJson));
             var riga = Alloy.createController("rowCASHFLOW", {
-                importo: aspettoDataJson.importo,
-                modalitaPagamento: aspettoDataJson.pagamentoIncasso.descrizioneBreve,
-                tipoMovimento: aspettoDataJson.tipoMovimento.descrizioneBreve
+                obj_aspetto: objRet,
+                keyIndex: randomKey,
+                _editFunc: function(updatedAspect, arrayKey) {
+                    var recordToUpdate = _.find(tempContainer, function(value) {
+                        return value.key === arrayKey;
+                    });
+                    Ti.API.info("ASPETTO PRIMA: " + JSON.stringify(recordToUpdate.aspetto));
+                    recordToUpdate && (recordToUpdate.aspetto = updatedAspect);
+                    Ti.API.info("ASPETTO DOPO: " + JSON.stringify(recordToUpdate.aspetto));
+                }
             }).getView();
             $.postTable.appendRow(riga);
         }).getView().open();
@@ -45,27 +56,23 @@ function Controller() {
     function addDocument() {
         var randomKey = _.random(0, 99999);
         Alloy.createController("addDocument", function(objRet) {
-            tempContainer.aspetti.push({
+            tempContainer.push({
                 key: randomKey,
                 aspetto: objRet
             });
             Ti.API.info("TEMP ARRAY ASPETTI: " + JSON.stringify(tempContainer));
-            arrayAspetti.length - 1;
-            var aspettoDataJson = JSON.parse(objRet.data);
-            Ti.API.info("DATA PARSATO: " + JSON.stringify(aspettoDataJson));
             var riga = Alloy.createController("rowDOCUMENT", {
-                obj_aspetto: aspettoDataJson,
-                keyIndex: randomKey
+                obj_aspetto: objRet,
+                keyIndex: randomKey,
+                _editFunc: function(updatedAspect, arrayKey) {
+                    var recordToUpdate = _.find(tempContainer, function(value) {
+                        return value.key === arrayKey;
+                    });
+                    Ti.API.info("ASPETTO PRIMA: " + JSON.stringify(recordToUpdate.aspetto));
+                    recordToUpdate && (recordToUpdate.aspetto = updatedAspect);
+                    Ti.API.info("ASPETTO DOPO: " + JSON.stringify(recordToUpdate.aspetto));
+                }
             }).getView();
-            riga.addEventListener("click", function(e) {
-                Ti.API.info("OBJ DOC: " + JSON.stringify(e.source.obj_aspect));
-                Alloy.createController("editDocument", {
-                    _callback: function(row) {
-                        return alert(row);
-                    },
-                    aspetto: e.source.obj_aspect
-                }).getView().open();
-            });
             $.postTable.appendRow(riga);
         }).getView().open();
     }
@@ -513,9 +520,7 @@ function Controller() {
     require("net");
     var timeNow = moment();
     var arrayAspetti = [];
-    var tempContainer = {
-        aspetti: []
-    };
+    var tempContainer = [];
     var modJson = Alloy.Models.Post_template.toJSON();
     Ti.API.info("MODEL JSON: " + JSON.stringify(modJson));
     Ti.API.info("MODEL CATEGORY: " + modJson.category.name);
@@ -529,7 +534,6 @@ function Controller() {
     $.rating_3.image = rating > 2 ? "/images/star-small.png" : "";
     $.rating_4.image = rating > 3 ? "/images/star-small.png" : "";
     $.rating_5.image = rating > 4 ? "/images/star-small.png" : "";
-    modJson.aspects;
     Alloy.Models.Post_template.trigger("change");
     $.win.open();
     $.win.addEventListener("close", function() {

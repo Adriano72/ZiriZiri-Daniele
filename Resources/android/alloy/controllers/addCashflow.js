@@ -119,7 +119,7 @@ function Controller() {
         backgroundColor: "#F9F9F9",
         orientationModes: [ Ti.UI.PORTRAIT ],
         id: "win",
-        title: "Nuovo CashFlow"
+        title: "Nuovo Cashflow"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     $.__views.win.addEventListener("open", __alloyId1);

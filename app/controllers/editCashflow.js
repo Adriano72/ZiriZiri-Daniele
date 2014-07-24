@@ -1,11 +1,24 @@
 var args = arguments[0] || {};
 
-var dataDocument = JSON.parse(args.aspetto.data);
-Ti.API.info("ARGS ****: "+JSON.stringify(dataDocument));
+var dataCashflow = JSON.parse(args.aspetto.data);
+Ti.API.info("ARGS ****: "+JSON.stringify(dataCashflow));
 
 var dichRedditi = false;
 
 var staordinario = false;
+
+$.importoValue.value = dataCashflow.importo;
+$.tipoMovimento.value = dataCashflow.tipoMovimento.descrizioneBreve;
+
+
+$.dataValuta.text = moment().format('L');
+$.dataValuta.dataRaw = moment();
+
+$.dataScadenza.text = moment().format('L');
+$.dataScadenza.dataRaw = moment();
+
+$.dataPagamento.text = moment().format('L');
+$.dataPagamento.dataRaw = moment();
 
 function setOrdinario() {
 	staordinario = false;
@@ -22,15 +35,6 @@ function setStraordinario() {
 	Ti.API.info("STRAORDINARIO FLAG: " + staordinario);
 
 }
-
-$.dataValuta.text = moment().format('L');
-$.dataValuta.dataRaw = moment();
-
-$.dataScadenza.text = moment().format('L');
-$.dataScadenza.dataRaw = moment();
-
-$.dataPagamento.text = moment().format('L');
-$.dataPagamento.dataRaw = moment();
 
 function toggleRedditi() {(dichRedditi) = !(dichRedditi);
 
@@ -52,8 +56,15 @@ var rowsTipoMov = [Ti.UI.createPickerRow({
 	id : 9999
 })];
 
+var matchTipoMov = null;
+
 _.forEach(Ti.App.Properties.getObject("elencoTipoMov"), function(value, key) {
 	//Ti.API.info("CAT: "+JSON.stringify(value));
+	
+	if(value.id == dataCashflow.tipoMovimento.id){
+		Ti.API.info("MATCH: "+key);
+		matchTipoMov = key+1;		
+	}
 
 	var pkrRow = Ti.UI.createPickerRow(value);
 
@@ -63,14 +74,23 @@ _.forEach(Ti.App.Properties.getObject("elencoTipoMov"), function(value, key) {
 
 $.pkrTipoMovimento.add(rowsTipoMov);
 
+$.pkrTipoMovimento.setSelectedRow(0, matchTipoMov);
+
 // ******* PICKER PAGAMENTO INCASSO *******
 var rowsPagamIncasso = [Ti.UI.createPickerRow({
 	title : "",
 	id : 9999
 })];
 
+var matchPagamIncasso = null;
+
 _.forEach(Ti.App.Properties.getObject("elencoPagamIncasso"), function(value, key) {
 	//Ti.API.info("CAT: "+JSON.stringify(value));
+	
+	if(value.id == dataCashflow.pagamentoIncasso.id){
+		Ti.API.info("MATCH: "+key);
+		matchPagamIncasso = key+1;		
+	}
 
 	var pkrRow = Ti.UI.createPickerRow(value);
 
@@ -80,14 +100,23 @@ _.forEach(Ti.App.Properties.getObject("elencoPagamIncasso"), function(value, key
 
 $.pkrPagamentoIncasso.add(rowsPagamIncasso);
 
+$.pkrPagamentoIncasso.setSelectedRow(0, matchPagamIncasso);
+
 // ******* PICKER STATO MOVIMENTO *******
 var rowsStatoMovimento = [Ti.UI.createPickerRow({
 	title : "",
 	id : 9999
 })];
 
+var matchStatoMovimento = null;
+
 _.forEach(Ti.App.Properties.getObject("statoMovimento"), function(value, key) {
 	//Ti.API.info("CAT: "+JSON.stringify(value));
+	
+	if(value.id == dataCashflow.statoMovimento.id){
+		Ti.API.info("MATCH: "+key);
+		matchStatoMovimento = key+1;		
+	}
 
 	var pkrRow = Ti.UI.createPickerRow(value);
 
@@ -97,14 +126,25 @@ _.forEach(Ti.App.Properties.getObject("statoMovimento"), function(value, key) {
 
 $.pkrStatoMovimento.add(rowsStatoMovimento);
 
+$.pkrStatoMovimento.setSelectedRow(0, matchStatoMovimento);
+
+
+
 // ******* PICKER VARIABILITA' *******
 var rowsVariabilita = [Ti.UI.createPickerRow({
 	title : "",
 	id : 9999
 })];
 
+var matchVariabilita = null;
+
 _.forEach(Ti.App.Properties.getObject("tipoVariabilita"), function(value, key) {
 	//Ti.API.info("CAT: "+JSON.stringify(value));
+	
+	if(value.id == dataCashflow.tipoVariabilita.id){
+		Ti.API.info("MATCH: "+key);
+		matchVariabilita = key+1;		
+	}
 
 	var pkrRow = Ti.UI.createPickerRow(value);
 
@@ -113,6 +153,8 @@ _.forEach(Ti.App.Properties.getObject("tipoVariabilita"), function(value, key) {
 });
 
 $.pkrVariabilita.add(rowsVariabilita);
+
+$.pkrVariabilita.setSelectedRow(0, matchVariabilita);
 
 // ******** PICKER DATA ***********
 function showDatePicker(e) {

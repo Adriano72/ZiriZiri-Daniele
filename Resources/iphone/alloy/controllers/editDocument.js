@@ -12,7 +12,6 @@ function Controller() {
         Alloy.Globals.shortcutMode = null;
     }
     function openCamera() {
-        Ti.API.info("SHORTCUT MODE: " + Alloy.Globals.shortcutMode);
         try {
             Ti.Media.showCamera({
                 success: function(event) {
@@ -30,10 +29,7 @@ function Controller() {
                     imageContent.base64 = hashedImage;
                     fileSize = tempFile.size;
                     fileName = tempFile.name;
-                    if (Alloy.Globals.shortcutMode) {
-                        $.titolo.value = "Foto scattata il " + moment().format("DD-MM-YYYY HH:MM");
-                        $.descrizione.value = "Foto scattata il " + moment().format("DD-MM-YYYY HH:MM");
-                    }
+                    flagUpdateImage = true;
                 },
                 cancel: function() {},
                 error: function(error) {
@@ -57,21 +53,18 @@ function Controller() {
                 var cropRect = event.cropRect;
                 var image = event.media;
                 Ti.API.info("Our type was: " + event.mediaType);
-                Ti.API.info("*** UNO ***");
                 $.preview.image = image;
-                Ti.API.info("*** DUE ***");
                 Ti.API.info("IMAGE MIME TYPE: " + image.getMimeType());
-                Ti.API.info("*** TRE ***");
                 var tempFile = Ti.Filesystem.createTempFile();
                 tempFile.write(image);
-                Ti.API.info("*** QUATTRO ***");
                 var content = tempFile.read();
                 Ti.API.info("IMAGE FILE SIZE: " + tempFile.size);
                 Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
                 var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(content).toString();
-                imageContent = imageContent.base64 = hashedImage;
+                imageContent.base64 = hashedImage;
                 fileSize = tempFile.size;
                 fileName = tempFile.name;
+                flagUpdateImage = true;
                 Titanium.API.info("PHOTO GALLERY SUCCESS cropRect.x " + cropRect.x + " cropRect.y " + cropRect.y + " cropRect.height " + cropRect.height + " cropRect.width " + cropRect.width);
             },
             cancel: function() {},
@@ -100,17 +93,17 @@ function Controller() {
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     resetGlobals ? $.__views.win.addEventListener("close", resetGlobals) : __defers["$.__views.win!close!resetGlobals"] = true;
-    var __alloyId105 = [];
-    $.__views.__alloyId106 = Ti.UI.createTableViewRow({
+    var __alloyId136 = [];
+    $.__views.__alloyId137 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F9F9F9",
         className: "itemRow",
         top: 5,
-        id: "__alloyId106"
+        id: "__alloyId137"
     });
-    __alloyId105.push($.__views.__alloyId106);
-    $.__views.__alloyId107 = Ti.UI.createView({
+    __alloyId136.push($.__views.__alloyId137);
+    $.__views.__alloyId138 = Ti.UI.createView({
         width: Ti.UI.FILL,
         left: 5,
         top: 5,
@@ -119,9 +112,9 @@ function Controller() {
         borderWidth: 1,
         borderColor: "#CCCCCC",
         backgroundColor: "#FFF",
-        id: "__alloyId107"
+        id: "__alloyId138"
     });
-    $.__views.__alloyId106.add($.__views.__alloyId107);
+    $.__views.__alloyId137.add($.__views.__alloyId138);
     $.__views.titolo = Ti.UI.createTextField({
         color: "#666",
         font: {
@@ -136,17 +129,17 @@ function Controller() {
         hintText: "Titolo",
         id: "titolo"
     });
-    $.__views.__alloyId107.add($.__views.titolo);
-    $.__views.__alloyId108 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId138.add($.__views.titolo);
+    $.__views.__alloyId139 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F9F9F9",
         className: "itemRow",
         top: 5,
-        id: "__alloyId108"
+        id: "__alloyId139"
     });
-    __alloyId105.push($.__views.__alloyId108);
-    $.__views.__alloyId109 = Ti.UI.createView({
+    __alloyId136.push($.__views.__alloyId139);
+    $.__views.__alloyId140 = Ti.UI.createView({
         width: Ti.UI.FILL,
         left: 5,
         top: 5,
@@ -155,9 +148,9 @@ function Controller() {
         borderWidth: 1,
         borderColor: "#CCCCCC",
         backgroundColor: "#FFF",
-        id: "__alloyId109"
+        id: "__alloyId140"
     });
-    $.__views.__alloyId108.add($.__views.__alloyId109);
+    $.__views.__alloyId139.add($.__views.__alloyId140);
     $.__views.descrizione = Ti.UI.createTextArea({
         color: "#666",
         font: {
@@ -172,16 +165,16 @@ function Controller() {
         hintText: "Descrizione",
         id: "descrizione"
     });
-    $.__views.__alloyId109.add($.__views.descrizione);
-    $.__views.__alloyId110 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId140.add($.__views.descrizione);
+    $.__views.__alloyId141 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F9F9F9",
         className: "itemRow",
         top: 5,
-        id: "__alloyId110"
+        id: "__alloyId141"
     });
-    __alloyId105.push($.__views.__alloyId110);
+    __alloyId136.push($.__views.__alloyId141);
     $.__views.picOptionsContainer = Ti.UI.createView({
         top: 5,
         left: 5,
@@ -189,7 +182,7 @@ function Controller() {
         height: Ti.UI.SIZE,
         id: "picOptionsContainer"
     });
-    $.__views.__alloyId110.add($.__views.picOptionsContainer);
+    $.__views.__alloyId141.add($.__views.picOptionsContainer);
     $.__views.picture = Ti.UI.createView({
         height: 40,
         width: "49%",
@@ -268,15 +261,15 @@ function Controller() {
         id: "galleryPic2"
     });
     $.__views.gallery.add($.__views.galleryPic2);
-    $.__views.__alloyId111 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId142 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F9F9F9",
         className: "itemRow",
         top: 5,
-        id: "__alloyId111"
+        id: "__alloyId142"
     });
-    __alloyId105.push($.__views.__alloyId111);
+    __alloyId136.push($.__views.__alloyId142);
     $.__views.preview = Ti.UI.createImageView({
         borderColor: "#000000",
         color: "#336699",
@@ -286,27 +279,27 @@ function Controller() {
         height: 200,
         id: "preview"
     });
-    $.__views.__alloyId111.add($.__views.preview);
+    $.__views.__alloyId142.add($.__views.preview);
     $.__views.newDocumentTable = Ti.UI.createTableView({
         top: 5,
         separatorColor: "transparent",
-        data: __alloyId105,
+        data: __alloyId136,
         id: "newDocumentTable"
     });
     $.__views.win.add($.__views.newDocumentTable);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    var objDocument = args.aspetto;
-    Ti.API.info("ARGS ****: " + JSON.stringify(objDocument));
-    $.titolo.value = objDocument.title;
-    $.descrizione.value = objDocument.description;
-    var blobPreview = Ti.Utils.base64decode(objDocument.content.base64.substr(objDocument.content.base64.indexOf(",")));
-    $.preview.setImage(blobPreview);
+    var dataDocument = JSON.parse(args.aspetto.data);
+    Ti.API.info("ARGS ****: " + JSON.stringify(dataDocument));
+    $.titolo.value = dataDocument.title;
+    $.descrizione.value = dataDocument.description;
+    $.preview.setImage(Ti.Utils.base64decode(dataDocument.content.base64.substr(dataDocument.content.base64.indexOf(","))));
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     var ImageFactory = require("ti.imagefactory");
     var imageContent = {};
+    var flagUpdateImage = false;
     var fileName;
     var fileSize;
     __defers["$.__views.win!close!resetGlobals"] && $.__views.win.addEventListener("close", resetGlobals);

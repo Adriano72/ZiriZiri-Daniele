@@ -80,16 +80,16 @@ function Controller() {
         id: "mapview"
     });
     $.__views.wrapper.add($.__views.mapview);
-    $.__views.__alloyId158 = Ti.UI.createView({
+    $.__views.__alloyId189 = Ti.UI.createView({
         top: 5,
         bottom: 5,
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId158"
+        id: "__alloyId189"
     });
-    $.__views.wrapper.add($.__views.__alloyId158);
+    $.__views.wrapper.add($.__views.__alloyId189);
     $.__views.eventIcon = Ti.UI.createLabel({
         top: 5,
         left: 5,
@@ -98,23 +98,23 @@ function Controller() {
         backgroundImage: "/images/kernel-event-on.png",
         id: "eventIcon"
     });
-    $.__views.__alloyId158.add($.__views.eventIcon);
-    $.__views.__alloyId159 = Ti.UI.createView({
+    $.__views.__alloyId189.add($.__views.eventIcon);
+    $.__views.__alloyId190 = Ti.UI.createView({
         className: "itemRow",
         layout: "vertical",
         width: Ti.UI.FILL,
-        id: "__alloyId159"
+        id: "__alloyId190"
     });
-    $.__views.__alloyId158.add($.__views.__alloyId159);
-    $.__views.__alloyId160 = Ti.UI.createView({
+    $.__views.__alloyId189.add($.__views.__alloyId190);
+    $.__views.__alloyId191 = Ti.UI.createView({
         top: 2,
         left: 2,
         layout: "horizontal",
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
-        id: "__alloyId160"
+        id: "__alloyId191"
     });
-    $.__views.__alloyId159.add($.__views.__alloyId160);
+    $.__views.__alloyId190.add($.__views.__alloyId191);
     $.__views.dataInizio = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -128,7 +128,7 @@ function Controller() {
         left: 0,
         id: "dataInizio"
     });
-    $.__views.__alloyId160.add($.__views.dataInizio);
+    $.__views.__alloyId191.add($.__views.dataInizio);
     $.__views.dataFine = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -141,16 +141,16 @@ function Controller() {
         width: 140,
         id: "dataFine"
     });
-    $.__views.__alloyId160.add($.__views.dataFine);
-    $.__views.__alloyId161 = Ti.UI.createView({
+    $.__views.__alloyId191.add($.__views.dataFine);
+    $.__views.__alloyId192 = Ti.UI.createView({
         top: 2,
         left: 2,
         layout: "horizontal",
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
-        id: "__alloyId161"
+        id: "__alloyId192"
     });
-    $.__views.__alloyId159.add($.__views.__alloyId161);
+    $.__views.__alloyId190.add($.__views.__alloyId192);
     $.__views.location = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -166,7 +166,7 @@ function Controller() {
         ellipsize: true,
         id: "location"
     });
-    $.__views.__alloyId161.add($.__views.location);
+    $.__views.__alloyId192.add($.__views.location);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

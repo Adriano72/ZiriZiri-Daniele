@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="win" class="container" title = "Nuovo CashFlow">
+	<Window id="win" class="container" title = "Edit Cashflow">
 
 		<Menu id="menu" platform="android" onHomeIconItemSelected="homeIconSelected">
 
