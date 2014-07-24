@@ -1,0 +1,121 @@
+<Alloy>
+	<Window id="win" class="container" title = "Nuovo CashFlow">
+
+		<Menu id="menu" platform="android" onHomeIconItemSelected="homeIconSelected">
+
+			<MenuItem id="mn_salva" onClick="saveCashflow"/>
+
+		</Menu>
+		<TableView id="newCashflowTable">
+
+			<TableViewRow class="row">
+				<View class="rowWrapper">
+					<Label id="importoLabel"/>
+					<Label class="verticalBar"/>
+					<TextField id="importoValue"/>
+					<Label class="verticalBar"/>
+					<Label id="valutaImg"/>
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<View class="rowWrapper">
+					<Label id="tipoMovimento"/>
+					<Label class="verticalBar"/>
+					<Picker id="pkrTipoMovimento" selectionIndicator="true"/>
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<View class="rowWrapper">
+					<Label id="pagamentoIncasso"/>
+					<Label class="verticalBar"/>
+					<Picker id="pkrPagamentoIncasso" selectionIndicator="true"/>
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<View class="rowWrapper">
+					<Label id="statoMovimento"/>
+					<Label class="verticalBar"/>
+					<Picker id="pkrStatoMovimento" selectionIndicator="true"/>
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<View class="rowWrapper">
+					<Label id="variabilita"/>
+					<Label class="verticalBar"/>
+					<Picker id="pkrVariabilita" selectionIndicator="true"/>
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+
+				<View class="rowWrapper">
+
+					<View id="leftSubWrapper" onClick="setOrdinario">
+						<ImageView id="dotSwitchImageLeft"/>
+						<Label id="ordinarioLabel"/>
+					</View>
+					<Label class="verticalBar"/>
+					<View id="rightSubWrapper" onClick="setStraordinario">
+						<ImageView id="dotSwitchImageRight"/>
+						<Label id="straordinarioLabel"/>
+					</View>
+
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+
+				<View class="rowWrapper" onClick="toggleRedditi">
+
+					<View id="leftSubWrapper">
+
+						<Label id="dichRedditiLabel"/>
+					</View>
+					<View id="ovalSwitchContainer">
+						<ImageView id="ovalSwitchRedditi"/>
+					</View>
+
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<View class="rowWrapper">
+
+					<View id="leftSubWrapper">
+						<Label id="dataValutaLabel"/>
+					</View>
+					<Label class="verticalBar"/>
+					<View id="rightSubWrapper">
+						<Label id="dataValuta" dataRaw="" onClick="showDatePicker"/>
+					</View>
+
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<View class="rowWrapper">
+
+					<View id="leftSubWrapper">
+						<Label id="dataScadenzaLabel"/>
+					</View>
+					<Label class="verticalBar"/>
+					<View id="rightSubWrapper">
+						<Label id="dataScadenza" dataRaw="" onClick="showDatePicker"/>
+					</View>
+
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<View class="rowWrapper">
+
+					<View id="leftSubWrapper">
+						<Label id="dataPagamentoLabel"/>
+					</View>
+					<Label class="verticalBar"/>
+					<View id="rightSubWrapper">
+						<Label id="dataPagamento" dataRaw="" onClick="showDatePicker"/>
+					</View>
+
+				</View>
+			</TableViewRow>
+
+		</TableView>
+
+	</Window>
+</Alloy>

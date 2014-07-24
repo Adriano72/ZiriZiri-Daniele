@@ -17,12 +17,12 @@ function Controller() {
     }
     var $ = this;
     var exports = {};
-    $.__views.rowCASHFLOW = Ti.UI.createTableViewRow({
+    $.__views.riga = Ti.UI.createTableViewRow({
         className: "itemRow",
         width: Ti.UI.FILL,
-        id: "rowCASHFLOW"
+        id: "riga"
     });
-    $.__views.rowCASHFLOW && $.addTopLevelView($.__views.rowCASHFLOW);
+    $.__views.riga && $.addTopLevelView($.__views.riga);
     $.__views.__alloyId143 = Ti.UI.createView({
         left: 5,
         right: 5,
@@ -37,7 +37,7 @@ function Controller() {
         layout: "horizontal",
         id: "__alloyId143"
     });
-    $.__views.rowCASHFLOW.add($.__views.__alloyId143);
+    $.__views.riga.add($.__views.__alloyId143);
     $.__views.cashFlowIcon = Ti.UI.createLabel({
         left: 5,
         width: 25,
@@ -103,9 +103,13 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    $.importo.text = args.importo + "€";
-    $.tipoMovimento.text = args.tipoMovimento;
-    $.modalitaPagamento.text = args.modalitaPagamento;
+    var dataAspetto = JSON.parse(args.obj_aspetto.data);
+    Ti.API.info("VALORE PASSATO: " + JSON.stringify(dataAspetto.title));
+    $.importo.text = dataAspetto.importo + "€";
+    $.tipoMovimento.text = dataAspetto.tipoMovimento.descrizioneBreve;
+    $.modalitaPagamento.text = dataAspetto.pagamentoIncasso.descrizioneBreve;
+    $.riga.obj_aspect = args.obj_aspetto;
+    $.riga.arrayKey = args.keyIndex;
     _.extend($, exports);
 }
 

@@ -5,9 +5,12 @@ var args = arguments[0] || {};
 
 
 //$.row.id_code = args.id_code,
+
+/*
 $.importo.text = args.importo+"€";
 $.tipoMovimento.text = args.tipoMovimento;
 $.modalitaPagamento.text = args.modalitaPagamento;
+*/
 
 /*
 function composeDate(d_par){
@@ -22,3 +25,32 @@ function composeDate(d_par){
 	
 }
 */
+
+
+var dataAspetto = JSON.parse(args.obj_aspetto.data);
+
+Ti.API.info("VALORE PASSATO: "+JSON.stringify(dataAspetto.title));
+
+
+$.importo.text = dataAspetto.importo+"€";
+$.tipoMovimento.text = dataAspetto.tipoMovimento.descrizioneBreve;
+$.modalitaPagamento.text = dataAspetto.pagamentoIncasso.descrizioneBreve;
+//$.formato.text = args.obj_aspetto.format;
+$.riga.obj_aspect = args.obj_aspetto;
+$.riga.arrayKey = args.keyIndex;
+
+
+function edit(e) {
+	Alloy.createController("editCashflow", {
+		_callback : function(aspettoEditato) {
+			var aspettoToJSON = JSON.parse(aspettoEditato.data);
+			$.riga.obj_aspect = aspettoEditato;
+			$.titolo.text = aspettoToJSON.title;
+			
+			args._editFunc(aspettoEditato, e.source.arrayKey);
+			
+			
+		},
+		aspetto : $.riga.obj_aspect
+	}).getView().open();
+};

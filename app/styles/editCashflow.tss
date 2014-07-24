@@ -1,0 +1,355 @@
+".container": {
+  	backgroundColor: '#F9F9F9',
+  	orientationModes: [Ti.UI.PORTRAIT]
+	//layout: "vertical",
+}
+
+"MenuItem": {
+    showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+},
+
+"#menu": {
+    icon: "images/logo-test.png",
+    displayHomeAsUp: true
+}
+
+
+"#mn_salva": {
+	icon: "/images/top-save2.png"
+}
+
+
+"#newCashflowTable":{
+	top: 5,
+	separatorColor: 'transparent'
+} 
+
+".row": {
+	
+	height: Ti.UI.SIZE,
+	width: Ti.UI.FILL,
+	backgroundColor: '#F9F9F9',
+    className: 'itemRow',
+    top:5
+    
+} 
+
+".rowWrapper": {
+	height: 40,
+	width: Ti.UI.FILL,
+	left: 5,
+	top:5,
+	right: 5,
+	borderRadius: 5,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF', 
+	layout: 'horizontal'
+}
+
+"#importoLabel": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Importo",
+	width: 110,
+	color: '#444'
+}
+
+"#importoValue": {
+	
+	color: "#666",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	left:5,
+	backgroundColor: "#fff",
+	keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD,
+	width: 200,	
+	wordWrap: false,
+	//backgroundColor: '#C8DDE8',
+	hintText: "0.00"
+
+}
+
+"#valutaImg": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "yellow",
+	right: 5,
+	text: "€",
+	textAlign: 'center',
+	width: 20,
+	color: '#666'
+}
+
+"#tipoMovimento": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Tipologia",
+	width: 110,
+	color: '#444'
+}
+
+
+"#pkrTipoMovimento": {
+
+	color: "#999",
+	left: 5,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	backgroundColor: '#FFF'
+	//backgroundColor: '#C8DD
+
+}
+
+"#pagamentoIncasso": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Pagamento",
+	width: 110,
+	color: '#444'
+}
+
+"#pkrPagamentoIncasso": {
+
+	color: "#999",
+	left: 5,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	backgroundColor: '#FFF'
+	//backgroundColor: '#C8DD
+
+}
+
+"#statoMovimento": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Stato",
+	width: 110,
+	color: '#444'
+}
+
+"#pkrStatoMovimento": {
+
+	color: "#999",
+	left: 5,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	backgroundColor: '#FFF'
+	//backgroundColor: '#C8DD
+
+}
+
+"#variabilita": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Variabilità",
+	width: 110,
+	color: '#444'
+}
+
+"#pkrVariabilita": {
+
+	color: "#999",
+	left: 5,
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	backgroundColor: '#FFF'
+	//backgroundColor: '#C8DD
+
+}
+
+"#leftSubWrapper": {
+	width: "50%",
+	layout: "horizontal",
+	left:0
+}
+
+"#dotSwitchImageLeft": {
+	
+	width: 25,
+	height: Ti.UI.SIZE,
+	image: "/images/dot-switch-on.png",
+	left: 5
+}
+
+
+"#ordinarioLabel": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Ordinario",
+	height: Ti.UI.FILL,
+	color: '#444'
+}
+
+"#rightSubWrapper": {
+	width: Ti.UI.FILL,
+	//backgroundColor: "red",
+	//height: Ti.UI.FILL,
+	layout: "horizontal",
+	left:0
+}
+
+"#dotSwitchImageRight": {
+	
+	width: 25,
+	height: Ti.UI.SIZE,
+	image: "/images/dot-switch-off.png",
+	left: 5
+}
+
+"#straordinarioLabel": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Straordinario",
+	width: Ti.UI.SIZE,
+	height: Ti.UI.FILL,
+	color: '#444'
+
+}
+
+"#dichRedditiLabel": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Dichiarazione dei Redditi",
+	height: Ti.UI.FILL,
+	color: '#444'
+}
+
+"#ovalSwitchContainer": {
+	width: Ti.UI.FILL,
+	//backgroundColor: "red",
+	//height: Ti.UI.FILL,
+	left:0
+}
+
+"#ovalSwitchRedditi": {
+	
+	width: 30,
+	height: Ti.UI.SIZE,
+	image: "/images/oval-switch-off.png",
+	right: 5
+}
+
+"#dataValutaLabel": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Data Valuta",
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	color: '#444'
+}
+
+"#dataValuta": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "",
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	color: '#444'
+
+}
+
+"#dataScadenzaLabel": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Data Scadenza",
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	color: '#444'
+}
+
+"#dataScadenza": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "",
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	color: '#444'
+
+}
+"#dataPagamentoLabel": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "Data Pagamento",
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	color: '#444'
+}
+
+"#dataPagamento": {
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	//backgroundColor: "lime",
+	left: 5,
+	text: "",
+	width: Ti.UI.FILL,
+	height: Ti.UI.FILL,
+	color: '#444'
+
+}
+".verticalBar": {
+	
+	height: Ti.UI.FILL,
+	width: 1,
+	left: 0,
+	backgroundColor: "#CCCCCC"
+	
+}

@@ -64,6 +64,9 @@ function Controller() {
         Ti.API.info("JSON POST: " + JSON.stringify(Alloy.Models.Post_template));
         Ti.API.info("JSON POST CON ASPETTI: " + JSON.stringify(Alloy.Models.Post_template));
         aspettiArray.length > 0 && Alloy.Models.Post_template.set("aspects", aspettiArray);
+        _.each(aspettiArray, function(value) {
+            Ti.API.info("CONTENT: " + JSON.stringify(value.data));
+        });
         net.savePost(Alloy.Models.Post_template, function(post_id, postToAddToTimeline) {
             Ti.API.info("ID POST SALVATO: " + post_id);
             Alloy.Collections.Timeline.add(postToAddToTimeline);
@@ -86,15 +89,26 @@ function Controller() {
         }).getView().open();
     }
     function addCashflow() {
+        var randomKey = _.random(0, 99999);
         Alloy.createController("addCashflow", function(objRet) {
-            arrayAspetti.push(objRet);
-            Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
+            tempContainer.push({
+                key: randomKey,
+                aspetto: objRet
+            });
+            Ti.API.info("TEMP ARRAY ASPETTI: " + JSON.stringify(tempContainer));
             var aspettoDataJson = JSON.parse(objRet.data);
             Ti.API.info("DATA PARSATO: " + JSON.stringify(aspettoDataJson));
             var riga = Alloy.createController("rowCASHFLOW", {
-                importo: aspettoDataJson.importo,
-                modalitaPagamento: aspettoDataJson.pagamentoIncasso.descrizioneBreve,
-                tipoMovimento: aspettoDataJson.tipoMovimento.descrizioneBreve
+                obj_aspetto: objRet,
+                keyIndex: randomKey,
+                _editFunc: function(updatedAspect, arrayKey) {
+                    var recordToUpdate = _.find(tempContainer, function(value) {
+                        return value.key === arrayKey;
+                    });
+                    Ti.API.info("ASPETTO PRIMA: " + JSON.stringify(recordToUpdate.aspetto));
+                    recordToUpdate && (recordToUpdate.aspetto = updatedAspect);
+                    Ti.API.info("ASPETTO DOPO: " + JSON.stringify(recordToUpdate.aspetto));
+                }
             }).getView();
             $.postTable.appendRow(riga);
         }).getView().open();

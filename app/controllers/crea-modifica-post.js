@@ -73,7 +73,12 @@ function submitPost() {
 	if (aspettiArray.length > 0) {
 		Alloy.Models.Post_template.set("aspects", aspettiArray);
 	}
-
+	
+	_.each(aspettiArray, function(value){
+		Ti.API.info("CONTENT: "+JSON.stringify(value.data));
+	});
+	
+	
 	net.savePost(Alloy.Models.Post_template, function(post_id, postToAddToTimeline) {
 
 		Ti.API.info("ID POST SALVATO: " + post_id);
@@ -85,6 +90,7 @@ function submitPost() {
 		//alert("Post salvato");
 
 	});
+	
 
 }
 
@@ -132,12 +138,19 @@ function addEvent() {
 
 function addCashflow() {
 	//Ti.API.info("**** INSERT CASHFLOW!");
+	
+	var randomKey = _.random(0, 99999);
 
 	Alloy.createController("addCashflow", function(objRet) {
 
-		arrayAspetti.push(objRet);
+		//arrayAspetti.push(objRet);
 
-		Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
+		tempContainer.push({
+			key : randomKey,
+			aspetto : objRet
+		});
+
+		Ti.API.info("TEMP ARRAY ASPETTI: " + JSON.stringify(tempContainer));
 
 		var aspettoDataJson = JSON.parse(objRet.data);
 
@@ -145,10 +158,27 @@ function addCashflow() {
 
 		var riga = Alloy.createController('rowCASHFLOW', {
 
-			//id_code : arrayAspetti.length - 1,
-			importo : aspettoDataJson.importo,
-			modalitaPagamento : aspettoDataJson.pagamentoIncasso.descrizioneBreve,
-			tipoMovimento : aspettoDataJson.tipoMovimento.descrizioneBreve
+			obj_aspetto : objRet,
+			keyIndex : randomKey,
+			_editFunc : function(updatedAspect, arrayKey) {
+
+				//rowToUpdate[0].aspetto = updatedAspect;
+				
+				var recordToUpdate = _.find(tempContainer, function(value){ return value.key === arrayKey; });
+				
+				Ti.API.info("ASPETTO PRIMA: "+JSON.stringify(recordToUpdate.aspetto));
+				
+				if(recordToUpdate){
+					recordToUpdate.aspetto = updatedAspect;
+				}
+				
+				Ti.API.info("ASPETTO DOPO: "+JSON.stringify(recordToUpdate.aspetto));
+				
+				//.API.info("PLUCKED OBJ: "+JSON.stringify(_.pluck(tempContainer, 'aspetto')));
+				
+				
+
+			}
 
 		}).getView();
 		$.postTable.appendRow(riga);
