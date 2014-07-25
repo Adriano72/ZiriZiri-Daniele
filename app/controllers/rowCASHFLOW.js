@@ -45,7 +45,9 @@ function edit(e) {
 		_callback : function(aspettoEditato) {
 			var aspettoToJSON = JSON.parse(aspettoEditato.data);
 			$.riga.obj_aspect = aspettoEditato;
-			$.titolo.text = aspettoToJSON.title;
+			$.importo.text = aspettoToJSON.importo;
+			$.tipoMovimento.text = aspettoToJSON.tipoMovimento.descrizioneBreve;
+			$.modalitaPagamento.text = aspettoToJSON.pagamentoIncasso.descrizioneBreve;
 			
 			args._editFunc(aspettoEditato, e.source.arrayKey);
 			

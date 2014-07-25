@@ -1,7 +1,7 @@
 var args = arguments[0] || {};
 
 var dataCashflow = JSON.parse(args.aspetto.data);
-Ti.API.info("ARGS ****: "+JSON.stringify(dataCashflow));
+Ti.API.info("ARGS ****: " + JSON.stringify(dataCashflow));
 
 var dichRedditi = false;
 
@@ -9,7 +9,6 @@ var staordinario = false;
 
 $.importoValue.value = dataCashflow.importo;
 $.tipoMovimento.value = dataCashflow.tipoMovimento.descrizioneBreve;
-
 
 $.dataValuta.text = moment().format('L');
 $.dataValuta.dataRaw = moment();
@@ -19,6 +18,13 @@ $.dataScadenza.dataRaw = moment();
 
 $.dataPagamento.text = moment().format('L');
 $.dataPagamento.dataRaw = moment();
+
+if (dataCashflow.flagOrdinarioStraordinario) {
+	setStraordinario();
+};
+
+$.ovalSwitchRedditi.image = (dataCashflow.flagDichiarazioneRedditi) ? "/images/oval-switch-on.png" : "/images/oval-switch-off.png";
+dichRedditi = dataCashflow.flagDichiarazioneRedditi;
 
 function setOrdinario() {
 	staordinario = false;
@@ -36,8 +42,9 @@ function setStraordinario() {
 
 }
 
-function toggleRedditi() {(dichRedditi) = !(dichRedditi);
-
+function toggleRedditi() {
+	
+	(dichRedditi) = !(dichRedditi);
 	$.ovalSwitchRedditi.image = (dichRedditi) ? "/images/oval-switch-on.png" : "/images/oval-switch-off.png";
 	Ti.API.info("REDDITI FLAG: " + dichRedditi);
 
@@ -49,7 +56,6 @@ function homeIconSelected() {
 	});
 }
 
-
 // ******* PICKER TIPO MOVIMENTO *******
 var rowsTipoMov = [Ti.UI.createPickerRow({
 	title : "",
@@ -60,10 +66,10 @@ var matchTipoMov = null;
 
 _.forEach(Ti.App.Properties.getObject("elencoTipoMov"), function(value, key) {
 	//Ti.API.info("CAT: "+JSON.stringify(value));
-	
-	if(value.id == dataCashflow.tipoMovimento.id){
-		Ti.API.info("MATCH: "+key);
-		matchTipoMov = key+1;		
+
+	if (value.id == dataCashflow.tipoMovimento.id) {
+		Ti.API.info("MATCH: " + key);
+		matchTipoMov = key + 1;
 	}
 
 	var pkrRow = Ti.UI.createPickerRow(value);
@@ -86,10 +92,10 @@ var matchPagamIncasso = null;
 
 _.forEach(Ti.App.Properties.getObject("elencoPagamIncasso"), function(value, key) {
 	//Ti.API.info("CAT: "+JSON.stringify(value));
-	
-	if(value.id == dataCashflow.pagamentoIncasso.id){
-		Ti.API.info("MATCH: "+key);
-		matchPagamIncasso = key+1;		
+
+	if (value.id == dataCashflow.pagamentoIncasso.id) {
+		Ti.API.info("MATCH: " + key);
+		matchPagamIncasso = key + 1;
 	}
 
 	var pkrRow = Ti.UI.createPickerRow(value);
@@ -112,10 +118,10 @@ var matchStatoMovimento = null;
 
 _.forEach(Ti.App.Properties.getObject("statoMovimento"), function(value, key) {
 	//Ti.API.info("CAT: "+JSON.stringify(value));
-	
-	if(value.id == dataCashflow.statoMovimento.id){
-		Ti.API.info("MATCH: "+key);
-		matchStatoMovimento = key+1;		
+
+	if (value.id == dataCashflow.statoMovimento.id) {
+		Ti.API.info("MATCH: " + key);
+		matchStatoMovimento = key + 1;
 	}
 
 	var pkrRow = Ti.UI.createPickerRow(value);
@@ -128,8 +134,6 @@ $.pkrStatoMovimento.add(rowsStatoMovimento);
 
 $.pkrStatoMovimento.setSelectedRow(0, matchStatoMovimento);
 
-
-
 // ******* PICKER VARIABILITA' *******
 var rowsVariabilita = [Ti.UI.createPickerRow({
 	title : "",
@@ -140,10 +144,10 @@ var matchVariabilita = null;
 
 _.forEach(Ti.App.Properties.getObject("tipoVariabilita"), function(value, key) {
 	//Ti.API.info("CAT: "+JSON.stringify(value));
-	
-	if(value.id == dataCashflow.tipoVariabilita.id){
-		Ti.API.info("MATCH: "+key);
-		matchVariabilita = key+1;		
+
+	if (value.id == dataCashflow.tipoVariabilita.id) {
+		Ti.API.info("MATCH: " + key);
+		matchVariabilita = key + 1;
 	}
 
 	var pkrRow = Ti.UI.createPickerRow(value);
@@ -178,12 +182,12 @@ function saveCashflow() {
 
 	var modCashflowJSON = Alloy.Models.Cashflow_template.toJSON();
 	modCashflowJSON = _.omit(modCashflowJSON, "kind.id");
-	
-	Ti.API.info("SEL MOVIMENTO: "+$.pkrTipoMovimento.getSelectedRow(0).id);
+
+	Ti.API.info("SEL MOVIMENTO: " + $.pkrTipoMovimento.getSelectedRow(0).id);
 
 	//if($.pkrPagamentoIncasso.getSelectedRow(0).id != 9999 && $.pkrTipoMovimento.getSelectedRow(0).id != 9999){
 	if ($.importoValue.value > 0 && $.pkrTipoMovimento.getSelectedRow(0).id != "9999") {
-		
+
 		modCashflowJSON.name = Alloy.Models.Post_template.get("name");
 		modCashflowJSON.description = Alloy.Models.Post_template.get("description");
 		modCashflowJSON.referenceTime = Alloy.Models.Post_template.get("referenceTime");
@@ -194,28 +198,28 @@ function saveCashflow() {
 		modCashflowJSON.data.tipoMovimento = {
 			id : $.pkrTipoMovimento.getSelectedRow(0).id,
 			codice : $.pkrTipoMovimento.getSelectedRow(0).codice,
-			descrizioneBreve:  $.pkrTipoMovimento.getSelectedRow(0).descrizioneBreve
+			descrizioneBreve : $.pkrTipoMovimento.getSelectedRow(0).descrizioneBreve
 
 		};
 
 		modCashflowJSON.data.pagamentoIncasso = {
 			id : $.pkrPagamentoIncasso.getSelectedRow(0).id,
 			codice : $.pkrPagamentoIncasso.getSelectedRow(0).codice,
-			descrizioneBreve: $.pkrPagamentoIncasso.getSelectedRow(0).title
+			descrizioneBreve : $.pkrPagamentoIncasso.getSelectedRow(0).title
 
 		};
 
 		modCashflowJSON.data.statoMovimento = {
 			id : $.pkrStatoMovimento.getSelectedRow(0).id,
 			codice : $.pkrStatoMovimento.getSelectedRow(0).codice,
-			descrizioneBreve: $.pkrStatoMovimento.getSelectedRow(0).title
+			descrizioneBreve : $.pkrStatoMovimento.getSelectedRow(0).title
 
 		};
 
 		modCashflowJSON.data.tipoVariabilita = {
 			id : $.pkrVariabilita.getSelectedRow(0).id,
 			codice : $.pkrVariabilita.getSelectedRow(0).codice,
-			descrizioneBreve: $.pkrVariabilita.getSelectedRow(0).title
+			descrizioneBreve : $.pkrVariabilita.getSelectedRow(0).title
 
 		};
 
@@ -224,14 +228,14 @@ function saveCashflow() {
 		modCashflowJSON.data.dataValuta = $.dataValuta.dataRaw;
 		modCashflowJSON.data.dataScadenza = $.dataScadenza.dataRaw;
 		modCashflowJSON.data.dataPagamentoIncasso = $.dataPagamento.dataRaw;
-		
-		Ti.API.info("ASPETTO NON ANCORA STRINGIFIZZATO: "+JSON.stringify(modCashflowJSON));
-		
+
+		Ti.API.info("ASPETTO NON ANCORA STRINGIFIZZATO: " + JSON.stringify(modCashflowJSON));
+
 		modCashflowJSON.data = JSON.stringify(modCashflowJSON.data);
-		
-		Ti.API.info("ASPETTO VALIDATO: "+JSON.stringify(modCashflowJSON));
-		
-		args(modCashflowJSON);
+
+		Ti.API.info("ASPETTO VALIDATO: " + JSON.stringify(modCashflowJSON));
+
+		args._callback(modCashflowJSON);
 		$.win.close();
 
 	} else {

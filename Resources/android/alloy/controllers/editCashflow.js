@@ -101,7 +101,7 @@ function Controller() {
             Ti.API.info("ASPETTO NON ANCORA STRINGIFIZZATO: " + JSON.stringify(modCashflowJSON));
             modCashflowJSON.data = JSON.stringify(modCashflowJSON.data);
             Ti.API.info("ASPETTO VALIDATO: " + JSON.stringify(modCashflowJSON));
-            args(modCashflowJSON);
+            args._callback(modCashflowJSON);
             $.win.close();
         } else alert("I campi Importo e Tipo Movimento sono obbligatori");
     }
@@ -801,6 +801,9 @@ function Controller() {
     $.dataScadenza.dataRaw = moment();
     $.dataPagamento.text = moment().format("L");
     $.dataPagamento.dataRaw = moment();
+    dataCashflow.flagOrdinarioStraordinario && setStraordinario();
+    $.ovalSwitchRedditi.image = dataCashflow.flagDichiarazioneRedditi ? "/images/oval-switch-on.png" : "/images/oval-switch-off.png";
+    dichRedditi = dataCashflow.flagDichiarazioneRedditi;
     var rowsTipoMov = [ Ti.UI.createPickerRow({
         title: "",
         id: 9999
