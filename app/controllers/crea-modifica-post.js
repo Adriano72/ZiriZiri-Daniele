@@ -62,7 +62,7 @@ Alloy.Models.Post_template.trigger('change');
 
 function submitPost() {
 
-	var aspettiArray = _.pluck(tempContainer, 'aspetto');	
+	var aspettiArray = _.pluck(tempContainer, 'aspetto');
 
 	Alloy.Globals.loading.show('Salvataggio in corso...', false);
 
@@ -73,12 +73,11 @@ function submitPost() {
 	if (aspettiArray.length > 0) {
 		Alloy.Models.Post_template.set("aspects", aspettiArray);
 	}
-	
-	_.each(aspettiArray, function(value){
-		Ti.API.info("CONTENT: "+JSON.stringify(value.data));
+
+	_.each(aspettiArray, function(value) {
+		Ti.API.info("CONTENT: " + JSON.stringify(value.data));
 	});
-	
-	
+
 	net.savePost(Alloy.Models.Post_template, function(post_id, postToAddToTimeline) {
 
 		Ti.API.info("ID POST SALVATO: " + post_id);
@@ -90,7 +89,6 @@ function submitPost() {
 		//alert("Post salvato");
 
 	});
-	
 
 }
 
@@ -110,13 +108,16 @@ function callSaveAspects(_callback) {
 
 function addEvent() {
 
+	var randomKey = _.random(0, 99999);
+
 	Alloy.createController("addEvent", function(objRet) {
 
-		Ti.API.info("EVENTO RICEVUTO: " + JSON.stringify(objRet));
+		tempContainer.push({
+			key : randomKey,
+			aspetto : objRet
+		});
 
-		arrayAspetti.push(objRet);
-
-		//Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
+		Ti.API.info("TEMP ARRAY ASPETTI: " + JSON.stringify(tempContainer));
 
 		var aspettoDataJson = JSON.parse(objRet.data);
 
@@ -124,10 +125,32 @@ function addEvent() {
 
 		var riga = Alloy.createController('rowEvent', {
 
-			//id_code : arrayAspetti.length - 1,
-			startDate : moment(aspettoDataJson.startTime.time).format("DD-MM-YYYY HH:MM"),
-			endDate : moment(aspettoDataJson.endTime.time).format("DD-MM-YYYY HH:MM"),
-			location : objRet.location.name
+		
+			//startDate : moment(aspettoDataJson.startTime.time).format("DD-MM-YYYY HH:MM"),
+			//endDate : moment(aspettoDataJson.endTime.time).format("DD-MM-YYYY HH:MM"),
+			//location : objRet.location.name
+			
+			obj_aspetto : objRet,
+			keyIndex : randomKey,
+			_editFunc : function(updatedAspect, arrayKey) {
+
+				//rowToUpdate[0].aspetto = updatedAspect;
+
+				var recordToUpdate = _.find(tempContainer, function(value) {
+					return value.key === arrayKey;
+				});
+
+				Ti.API.info("ASPETTO PRIMA: " + JSON.stringify(recordToUpdate.aspetto));
+
+				if (recordToUpdate) {
+					recordToUpdate.aspetto = updatedAspect;
+				}
+
+				Ti.API.info("ASPETTO DOPO: " + JSON.stringify(recordToUpdate.aspetto));
+
+				//.API.info("PLUCKED OBJ: "+JSON.stringify(_.pluck(tempContainer, 'aspetto')));
+
+			}
 
 		}).getView();
 		$.postTable.appendRow(riga);
@@ -138,7 +161,7 @@ function addEvent() {
 
 function addCashflow() {
 	//Ti.API.info("**** INSERT CASHFLOW!");
-	
+
 	var randomKey = _.random(0, 99999);
 
 	Alloy.createController("addCashflow", function(objRet) {
@@ -163,23 +186,22 @@ function addCashflow() {
 			_editFunc : function(updatedAspect, arrayKey) {
 
 				//rowToUpdate[0].aspetto = updatedAspect;
-				
-				var recordToUpdate = _.find(tempContainer, function(value){ return value.key === arrayKey; });
-				
-				Ti.API.info("ASPETTO PRIMA: "+JSON.stringify(recordToUpdate.aspetto));
-				
-				if(recordToUpdate){
+
+				var recordToUpdate = _.find(tempContainer, function(value) {
+					return value.key === arrayKey;
+				});
+
+				Ti.API.info("ASPETTO PRIMA: " + JSON.stringify(recordToUpdate.aspetto));
+
+				if (recordToUpdate) {
 					recordToUpdate.aspetto = updatedAspect;
 				}
-				
-				Ti.API.info("ASPETTO DOPO: "+JSON.stringify(recordToUpdate.aspetto));
-				
+
+				Ti.API.info("ASPETTO DOPO: " + JSON.stringify(recordToUpdate.aspetto));
+
 				//.API.info("PLUCKED OBJ: "+JSON.stringify(_.pluck(tempContainer, 'aspetto')));
-				
-				
 
 			}
-
 		}).getView();
 		$.postTable.appendRow(riga);
 
@@ -210,20 +232,20 @@ function addDocument(p_shortcutMode) {
 			_editFunc : function(updatedAspect, arrayKey) {
 
 				//rowToUpdate[0].aspetto = updatedAspect;
-				
-				var recordToUpdate = _.find(tempContainer, function(value){ return value.key === arrayKey; });
-				
-				Ti.API.info("ASPETTO PRIMA: "+JSON.stringify(recordToUpdate.aspetto));
-				
-				if(recordToUpdate){
+
+				var recordToUpdate = _.find(tempContainer, function(value) {
+					return value.key === arrayKey;
+				});
+
+				Ti.API.info("ASPETTO PRIMA: " + JSON.stringify(recordToUpdate.aspetto));
+
+				if (recordToUpdate) {
 					recordToUpdate.aspetto = updatedAspect;
 				}
-				
-				Ti.API.info("ASPETTO DOPO: "+JSON.stringify(recordToUpdate.aspetto));
-				
+
+				Ti.API.info("ASPETTO DOPO: " + JSON.stringify(recordToUpdate.aspetto));
+
 				//.API.info("PLUCKED OBJ: "+JSON.stringify(_.pluck(tempContainer, 'aspetto')));
-				
-				
 
 			}
 		}).getView();
