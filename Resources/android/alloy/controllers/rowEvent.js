@@ -8,6 +8,17 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
+    function edit(e) {
+        Alloy.createController("editDocument", {
+            _callback: function(aspettoEditato) {
+                var aspettoToJSON = JSON.parse(aspettoEditato.data);
+                $.riga.obj_aspect = aspettoEditato;
+                $.titolo.text = aspettoToJSON.title;
+                args._editFunc(aspettoEditato, e.source.arrayKey);
+            },
+            aspetto: $.riga.obj_aspect
+        }).getView().open();
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "rowEvent";
     if (arguments[0]) {
@@ -17,12 +28,14 @@ function Controller() {
     }
     var $ = this;
     var exports = {};
-    $.__views.rowEvent = Ti.UI.createTableViewRow({
+    var __defers = {};
+    $.__views.riga = Ti.UI.createTableViewRow({
         className: "itemRow",
         width: Ti.UI.FILL,
-        id: "rowEvent"
+        id: "riga"
     });
-    $.__views.rowEvent && $.addTopLevelView($.__views.rowEvent);
+    $.__views.riga && $.addTopLevelView($.__views.riga);
+    edit ? $.__views.riga.addEventListener("click", edit) : __defers["$.__views.riga!click!edit"] = true;
     $.__views.__alloyId232 = Ti.UI.createView({
         left: 5,
         right: 5,
@@ -37,7 +50,7 @@ function Controller() {
         layout: "horizontal",
         id: "__alloyId232"
     });
-    $.__views.rowEvent.add($.__views.__alloyId232);
+    $.__views.riga.add($.__views.__alloyId232);
     $.__views.eventIcon = Ti.UI.createLabel({
         left: 5,
         width: 25,
@@ -103,9 +116,14 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    $.startDate.text = args.startDate;
-    $.endDate.text = args.endDate;
-    $.location.text = args.location;
+    var moment = require("alloy/moment");
+    moment.lang("it", Alloy.Globals.Moment_IT);
+    moment.lang("it");
+    var dataAspetto = JSON.parse(args.obj_aspetto.data);
+    $.startDate.text = moment(dataAspetto.startTime.time).format("DD-MM-YYYY HH:MM");
+    $.endDate.text = moment(dataAspetto.endTime.time).format("DD-MM-YYYY HH:MM");
+    $.location.text = args.obj_aspetto.location.name;
+    __defers["$.__views.riga!click!edit"] && $.__views.riga.addEventListener("click", edit);
     _.extend($, exports);
 }
 

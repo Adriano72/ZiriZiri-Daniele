@@ -1,0 +1,68 @@
+<Alloy>
+	<Window id="win" class="container" title = "Nuovo Evento">
+
+		<Menu id="menu" platform="android" onHomeIconItemSelected="homeIconSelected">
+
+			<MenuItem id="mn_salva" onClick="saveEvent"/>
+
+		</Menu>
+		<TableView id="newEventTable">
+
+			<TableViewRow class="row">
+				<View class="rowWrapper">
+
+					<View id="leftSubWrapper">
+						<Label id="labelInizioEvento"/>
+					</View>
+					<Label class="verticalBar"/>
+					<View id="rightSubWrapper">
+						<Label id="pkrDataInizioEvento" dataRaw="" onClick="showDatePicker"/>
+					</View>
+
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<View class="rowWrapper">
+
+					<View id="leftSubWrapper">
+						<Label id="labelFineEvento"/>
+					</View>
+					<Label class="verticalBar"/>
+					<View id="rightSubWrapper">
+						<Label id="pkrDataFineEvento" dataRaw="" onClick="showDatePicker"/>
+					</View>
+
+				</View>
+			</TableViewRow>
+			
+			<TableViewRow class="row">
+				<View class="rowWrapper">
+					<ImageView id="addPeopleImage"/>					
+					<TextField id="addPeople"/>
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row" onClick = "getLocation">
+				<View class="rowWrapper">
+					<ImageView id="locationImage"/>					
+					<Label id="location"/>
+				</View>
+			</TableViewRow>
+			<TableViewRow class="row">
+
+				<View class="rowWrapper" onClick="toggleScadStrutt">
+
+					<View id="leftSubWrapper">
+
+						<Label id="scadenzaStrutturaleLabel"/>
+					</View>
+					<View id="ovalSwitchContainer">
+						<ImageView id="ovalSwitchScadStrutt"/>
+					</View>
+
+				</View>
+			</TableViewRow>
+			
+		</TableView>
+
+	</Window>
+</Alloy>

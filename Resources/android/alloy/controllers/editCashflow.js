@@ -804,6 +804,12 @@ function Controller() {
     dataCashflow.flagOrdinarioStraordinario && setStraordinario();
     $.ovalSwitchRedditi.image = dataCashflow.flagDichiarazioneRedditi ? "/images/oval-switch-on.png" : "/images/oval-switch-off.png";
     dichRedditi = dataCashflow.flagDichiarazioneRedditi;
+    $.dataValuta.text = moment(dataCashflow.dataValuta).format("L");
+    $.dataValuta.dataRaw = moment(dataCashflow.dataValuta);
+    $.dataScadenza.text = moment(dataCashflow.dataScadenza).format("L");
+    $.dataScadenza.dataRaw = moment(dataCashflow.dataScadenza);
+    $.dataPagamento.text = moment(dataCashflow.dataPagamentoIncasso).format("L");
+    $.dataPagamento.dataRaw = moment(dataCashflow.dataPagamentoIncasso);
     var rowsTipoMov = [ Ti.UI.createPickerRow({
         title: "",
         id: 9999

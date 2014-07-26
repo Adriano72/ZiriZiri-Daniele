@@ -10,21 +10,22 @@ var staordinario = false;
 $.importoValue.value = dataCashflow.importo;
 $.tipoMovimento.value = dataCashflow.tipoMovimento.descrizioneBreve;
 
-$.dataValuta.text = moment().format('L');
-$.dataValuta.dataRaw = moment();
-
-$.dataScadenza.text = moment().format('L');
-$.dataScadenza.dataRaw = moment();
-
-$.dataPagamento.text = moment().format('L');
-$.dataPagamento.dataRaw = moment();
-
 if (dataCashflow.flagOrdinarioStraordinario) {
 	setStraordinario();
 };
 
 $.ovalSwitchRedditi.image = (dataCashflow.flagDichiarazioneRedditi) ? "/images/oval-switch-on.png" : "/images/oval-switch-off.png";
 dichRedditi = dataCashflow.flagDichiarazioneRedditi;
+
+$.dataValuta.text = moment(dataCashflow.dataValuta).format('L');
+$.dataValuta.dataRaw = moment(dataCashflow.dataValuta);
+
+$.dataScadenza.text = moment(dataCashflow.dataScadenza).format('L');
+$.dataScadenza.dataRaw = moment(dataCashflow.dataScadenza);
+
+$.dataPagamento.text = moment(dataCashflow.dataPagamentoIncasso).format('L');
+$.dataPagamento.dataRaw = moment(dataCashflow.dataPagamentoIncasso);
+
 
 function setOrdinario() {
 	staordinario = false;

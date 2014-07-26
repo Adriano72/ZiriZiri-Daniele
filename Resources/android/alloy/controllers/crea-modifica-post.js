@@ -75,15 +75,26 @@ function Controller() {
         });
     }
     function addEvent() {
+        var randomKey = _.random(0, 99999);
         Alloy.createController("addEvent", function(objRet) {
-            Ti.API.info("EVENTO RICEVUTO: " + JSON.stringify(objRet));
-            arrayAspetti.push(objRet);
+            tempContainer.push({
+                key: randomKey,
+                aspetto: objRet
+            });
+            Ti.API.info("TEMP ARRAY ASPETTI: " + JSON.stringify(tempContainer));
             var aspettoDataJson = JSON.parse(objRet.data);
             Ti.API.info("DATA PARSATO: " + JSON.stringify(aspettoDataJson));
             var riga = Alloy.createController("rowEvent", {
-                startDate: moment(aspettoDataJson.startTime.time).format("DD-MM-YYYY HH:MM"),
-                endDate: moment(aspettoDataJson.endTime.time).format("DD-MM-YYYY HH:MM"),
-                location: objRet.location.name
+                obj_aspetto: objRet,
+                keyIndex: randomKey,
+                _editFunc: function(updatedAspect, arrayKey) {
+                    var recordToUpdate = _.find(tempContainer, function(value) {
+                        return value.key === arrayKey;
+                    });
+                    Ti.API.info("ASPETTO PRIMA: " + JSON.stringify(recordToUpdate.aspetto));
+                    recordToUpdate && (recordToUpdate.aspetto = updatedAspect);
+                    Ti.API.info("ASPETTO DOPO: " + JSON.stringify(recordToUpdate.aspetto));
+                }
             }).getView();
             $.postTable.appendRow(riga);
         }).getView().open();
