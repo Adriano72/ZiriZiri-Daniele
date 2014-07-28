@@ -13,7 +13,7 @@
 		</Menu>
 		<TableView id="postTable">
 
-			<TableViewRow class="row">
+			<TableViewRow class="row" onClick="editPost">
 				<View class="eventContainer">
 
 					<View id="topWrapper">

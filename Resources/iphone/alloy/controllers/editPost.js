@@ -8,46 +8,15 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
-    function openEvent() {
-        "camera" == Alloy.Globals.shortcutMode && savePost();
-    }
+    function openEvent() {}
     function openCategoryList() {
         Alloy.createController("selezionaCategoria", function(cat_obj) {
             $.categoria.value = cat_obj.name;
             selectedCategory = cat_obj;
         }).getView();
     }
-    function checkForSync() {
-        args();
-    }
-    function savePost() {
-        if ("camera" == Alloy.Globals.shortcutMode || "gallery" == Alloy.Globals.shortcutMode) {
-            Alloy.Models.Post_template.set("name", "");
-            Alloy.Models.Post_template.set("rating", 0);
-            Alloy.Models.Post_template.set("category", {
-                id: "5529",
-                code: "09.04.01",
-                name: "Foto"
-            });
-            Alloy.Models.Post_template.set("referenceTime", timeNow);
-            Alloy.createController("crea-modifica-post", function() {
-                $.win.close();
-                args();
-            }).getView();
-        } else if ("" === $.titolo.value || _.isUndefined(selectedCategory)) alert("Il campo Titolo e il campo Categoria sono obbligatori!"); else {
-            Alloy.Models.Post_template.set("name", $.titolo.value);
-            Alloy.Models.Post_template.set("rating", $.starwidget.getRating());
-            Alloy.Models.Post_template.set("category", selectedCategory);
-            Alloy.Models.Post_template.set("description", $.descrizione.value);
-            Alloy.Models.Post_template.set("referenceTime", timeNow);
-            Alloy.createController("crea-modifica-post", function() {
-                $.win.close();
-                args();
-            }).getView();
-        }
-    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
-    this.__controllerPath = "newPost";
+    this.__controllerPath = "editPost";
     if (arguments[0]) {
         __processArg(arguments[0], "__parentSymbol");
         __processArg(arguments[0], "$model");
@@ -64,18 +33,17 @@ function Controller() {
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
-    checkForSync ? $.__views.win.addEventListener("close", checkForSync) : __defers["$.__views.win!close!checkForSync"] = true;
-    var __alloyId165 = [];
-    $.__views.__alloyId166 = Ti.UI.createTableViewRow({
+    var __alloyId156 = [];
+    $.__views.__alloyId157 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F9F9F9",
         className: "itemRow",
         layout: "horizontal",
         touchEnabled: false,
-        id: "__alloyId166"
+        id: "__alloyId157"
     });
-    __alloyId165.push($.__views.__alloyId166);
+    __alloyId156.push($.__views.__alloyId157);
     $.__views.titolo = Ti.UI.createTextField({
         color: "#999",
         font: {
@@ -93,30 +61,30 @@ function Controller() {
         backgroundColor: "#FFF",
         id: "titolo"
     });
-    $.__views.__alloyId166.add($.__views.titolo);
-    $.__views.__alloyId167 = Ti.UI.createTableViewRow({
-        id: "__alloyId167"
+    $.__views.__alloyId157.add($.__views.titolo);
+    $.__views.__alloyId158 = Ti.UI.createTableViewRow({
+        id: "__alloyId158"
     });
-    __alloyId165.push($.__views.__alloyId167);
+    __alloyId156.push($.__views.__alloyId158);
     $.__views.starwidget = Alloy.createWidget("starrating", "widget", {
         top: 10,
         bottom: 10,
         id: "starwidget",
         max: "5",
         initialRating: "0",
-        __parentSymbol: $.__views.__alloyId167
+        __parentSymbol: $.__views.__alloyId158
     });
-    $.__views.starwidget.setParent($.__views.__alloyId167);
-    $.__views.__alloyId168 = Ti.UI.createTableViewRow({
+    $.__views.starwidget.setParent($.__views.__alloyId158);
+    $.__views.__alloyId159 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F9F9F9",
         className: "itemRow",
         layout: "horizontal",
         touchEnabled: false,
-        id: "__alloyId168"
+        id: "__alloyId159"
     });
-    __alloyId165.push($.__views.__alloyId168);
+    __alloyId156.push($.__views.__alloyId159);
     $.__views.descrizione = Ti.UI.createTextField({
         color: "#999",
         font: {
@@ -134,8 +102,8 @@ function Controller() {
         backgroundColor: "#FFF",
         id: "descrizione"
     });
-    $.__views.__alloyId168.add($.__views.descrizione);
-    $.__views.__alloyId169 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId159.add($.__views.descrizione);
+    $.__views.__alloyId160 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F9F9F9",
@@ -143,9 +111,9 @@ function Controller() {
         layout: "horizontal",
         touchEnabled: false,
         hasDetail: "true",
-        id: "__alloyId169"
+        id: "__alloyId160"
     });
-    __alloyId165.push($.__views.__alloyId169);
+    __alloyId156.push($.__views.__alloyId160);
     $.__views.categoria = Ti.UI.createTextField({
         color: "#999",
         font: {
@@ -164,18 +132,18 @@ function Controller() {
         backgroundColor: "#FFF",
         id: "categoria"
     });
-    $.__views.__alloyId169.add($.__views.categoria);
+    $.__views.__alloyId160.add($.__views.categoria);
     openCategoryList ? $.__views.categoria.addEventListener("singletap", openCategoryList) : __defers["$.__views.categoria!singletap!openCategoryList"] = true;
-    $.__views.__alloyId170 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId161 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F9F9F9",
         className: "itemRow",
         layout: "horizontal",
         touchEnabled: false,
-        id: "__alloyId170"
+        id: "__alloyId161"
     });
-    __alloyId165.push($.__views.__alloyId170);
+    __alloyId156.push($.__views.__alloyId161);
     $.__views.tag = Ti.UI.createTextField({
         color: "#999",
         font: {
@@ -193,17 +161,17 @@ function Controller() {
         backgroundColor: "#FFF",
         id: "tag"
     });
-    $.__views.__alloyId170.add($.__views.tag);
-    $.__views.__alloyId171 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId161.add($.__views.tag);
+    $.__views.__alloyId162 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F9F9F9",
         className: "itemRow",
         layout: "horizontal",
         touchEnabled: false,
-        id: "__alloyId171"
+        id: "__alloyId162"
     });
-    __alloyId165.push($.__views.__alloyId171);
+    __alloyId156.push($.__views.__alloyId162);
     $.__views.storie = Ti.UI.createTextField({
         color: "#999",
         font: {
@@ -221,17 +189,17 @@ function Controller() {
         backgroundColor: "#FFF",
         id: "storie"
     });
-    $.__views.__alloyId171.add($.__views.storie);
+    $.__views.__alloyId162.add($.__views.storie);
     $.__views.newPostTable = Ti.UI.createTableView({
         top: 5,
         separatorColor: "transparent",
-        data: __alloyId165,
+        data: __alloyId156,
         id: "newPostTable"
     });
     $.__views.win.add($.__views.newPostTable);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var args = arguments[0] || {};
+    arguments[0] || {};
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     require("net");
@@ -241,7 +209,6 @@ function Controller() {
     $.starwidget.init();
     $.win.open();
     __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
-    __defers["$.__views.win!close!checkForSync"] && $.__views.win.addEventListener("close", checkForSync);
     __defers["$.__views.categoria!singletap!openCategoryList"] && $.__views.categoria.addEventListener("singletap", openCategoryList);
     _.extend($, exports);
 }

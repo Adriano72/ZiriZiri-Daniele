@@ -6,12 +6,12 @@
 		<Menu id="menu" platform="android">
 
 			<!-- Cannot specify node text.  Use attributes only. -->
-			<MenuItem id="mn_edit" title="Modifica" onClick="editPost"/>
+			<!--<MenuItem id="mn_edit" title="Modifica" onClick="editPost"/>
 			<!--<MenuItem id="Foto" title="Foto" icon="/images/86-camera.png"  showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />-->
 		</Menu>
 		<ScrollView id="postTable">
 
-			<View class="eventContainer">
+			<View class="eventContainer" onClick="editPost">
 
 				<View id="topWrapper">
 

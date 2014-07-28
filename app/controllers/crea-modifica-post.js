@@ -92,6 +92,15 @@ function submitPost() {
 
 }
 
+function editPost(){
+	Alloy.createController("editPost", function(){
+		Alloy.Models.Post_template.trigger('change');
+		modJson = Alloy.Models.Post_template.toJSON();
+		$.category.text = (!_.isNull(modJson.category) ? modJson.category.name : "");
+
+	}).getView();
+};
+
 function callSaveAspects(_callback) {
 
 	net.saveAspect(arrayAspetti, function(id_saved_aspects_array) {

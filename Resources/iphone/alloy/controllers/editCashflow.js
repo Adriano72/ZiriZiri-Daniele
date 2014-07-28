@@ -725,49 +725,75 @@ function Controller() {
     var staordinario = false;
     $.importoValue.value = dataCashflow.importo;
     $.tipoMovimento.value = dataCashflow.tipoMovimento.descrizioneBreve;
-    $.dataValuta.text = moment().format("L");
-    $.dataValuta.dataRaw = moment();
-    $.dataScadenza.text = moment().format("L");
-    $.dataScadenza.dataRaw = moment();
-    $.dataPagamento.text = moment().format("L");
-    $.dataPagamento.dataRaw = moment();
+    dataCashflow.flagOrdinarioStraordinario && setStraordinario();
+    $.ovalSwitchRedditi.image = dataCashflow.flagDichiarazioneRedditi ? "/images/oval-switch-on.png" : "/images/oval-switch-off.png";
+    dichRedditi = dataCashflow.flagDichiarazioneRedditi;
+    $.dataValuta.text = moment(dataCashflow.dataValuta).format("L");
+    $.dataValuta.dataRaw = moment(dataCashflow.dataValuta);
+    $.dataScadenza.text = moment(dataCashflow.dataScadenza).format("L");
+    $.dataScadenza.dataRaw = moment(dataCashflow.dataScadenza);
+    $.dataPagamento.text = moment(dataCashflow.dataPagamentoIncasso).format("L");
+    $.dataPagamento.dataRaw = moment(dataCashflow.dataPagamentoIncasso);
     var rowsTipoMov = [ Ti.UI.createPickerRow({
         title: "",
         id: 9999
     }) ];
+    var matchTipoMov = null;
     _.forEach(Ti.App.Properties.getObject("elencoTipoMov"), function(value, key) {
-        value.id == dataCashflow.tipoMovimento.id && Ti.API.info("MATCH: " + key);
+        if (value.id == dataCashflow.tipoMovimento.id) {
+            Ti.API.info("MATCH: " + key);
+            matchTipoMov = key + 1;
+        }
         var pkrRow = Ti.UI.createPickerRow(value);
         rowsTipoMov.push(pkrRow);
     });
     $.pkrTipoMovimento.add(rowsTipoMov);
+    $.pkrTipoMovimento.setSelectedRow(0, matchTipoMov);
     var rowsPagamIncasso = [ Ti.UI.createPickerRow({
         title: "",
         id: 9999
     }) ];
-    _.forEach(Ti.App.Properties.getObject("elencoPagamIncasso"), function(value) {
+    var matchPagamIncasso = null;
+    _.forEach(Ti.App.Properties.getObject("elencoPagamIncasso"), function(value, key) {
+        if (value.id == dataCashflow.pagamentoIncasso.id) {
+            Ti.API.info("MATCH: " + key);
+            matchPagamIncasso = key + 1;
+        }
         var pkrRow = Ti.UI.createPickerRow(value);
         rowsPagamIncasso.push(pkrRow);
     });
     $.pkrPagamentoIncasso.add(rowsPagamIncasso);
+    $.pkrPagamentoIncasso.setSelectedRow(0, matchPagamIncasso);
     var rowsStatoMovimento = [ Ti.UI.createPickerRow({
         title: "",
         id: 9999
     }) ];
-    _.forEach(Ti.App.Properties.getObject("statoMovimento"), function(value) {
+    var matchStatoMovimento = null;
+    _.forEach(Ti.App.Properties.getObject("statoMovimento"), function(value, key) {
+        if (value.id == dataCashflow.statoMovimento.id) {
+            Ti.API.info("MATCH: " + key);
+            matchStatoMovimento = key + 1;
+        }
         var pkrRow = Ti.UI.createPickerRow(value);
         rowsStatoMovimento.push(pkrRow);
     });
     $.pkrStatoMovimento.add(rowsStatoMovimento);
+    $.pkrStatoMovimento.setSelectedRow(0, matchStatoMovimento);
     var rowsVariabilita = [ Ti.UI.createPickerRow({
         title: "",
         id: 9999
     }) ];
-    _.forEach(Ti.App.Properties.getObject("tipoVariabilita"), function(value) {
+    var matchVariabilita = null;
+    _.forEach(Ti.App.Properties.getObject("tipoVariabilita"), function(value, key) {
+        if (value.id == dataCashflow.tipoVariabilita.id) {
+            Ti.API.info("MATCH: " + key);
+            matchVariabilita = key + 1;
+        }
         var pkrRow = Ti.UI.createPickerRow(value);
         rowsVariabilita.push(pkrRow);
     });
     $.pkrVariabilita.add(rowsVariabilita);
+    $.pkrVariabilita.setSelectedRow(0, matchVariabilita);
     __defers["$.__views.leftSubWrapper!click!setOrdinario"] && $.__views.leftSubWrapper.addEventListener("click", setOrdinario);
     __defers["$.__views.rightSubWrapper!click!setStraordinario"] && $.__views.rightSubWrapper.addEventListener("click", setStraordinario);
     __defers["$.__views.__alloyId126!click!toggleRedditi"] && $.__views.__alloyId126.addEventListener("click", toggleRedditi);

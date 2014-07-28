@@ -9,11 +9,12 @@ function __processArg(obj, key) {
 
 function Controller() {
     function edit(e) {
-        Alloy.createController("editDocument", {
+        Alloy.createController("editEvent", {
             _callback: function(aspettoEditato) {
                 var aspettoToJSON = JSON.parse(aspettoEditato.data);
-                $.riga.obj_aspect = aspettoEditato;
-                $.titolo.text = aspettoToJSON.title;
+                $.startDate.text = moment(aspettoToJSON.startTime.time).format("DD-MM-YYYY HH:MM");
+                $.endDate.text = moment(aspettoToJSON.endTime.time).format("DD-MM-YYYY HH:MM");
+                $.location.text = aspettoEditato.location.name;
                 args._editFunc(aspettoEditato, e.source.arrayKey);
             },
             aspetto: $.riga.obj_aspect
@@ -36,7 +37,7 @@ function Controller() {
     });
     $.__views.riga && $.addTopLevelView($.__views.riga);
     edit ? $.__views.riga.addEventListener("click", edit) : __defers["$.__views.riga!click!edit"] = true;
-    $.__views.__alloyId232 = Ti.UI.createView({
+    $.__views.__alloyId255 = Ti.UI.createView({
         left: 5,
         right: 5,
         top: 5,
@@ -48,71 +49,78 @@ function Controller() {
         height: 50,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId232"
+        id: "__alloyId255"
     });
-    $.__views.riga.add($.__views.__alloyId232);
+    $.__views.riga.add($.__views.__alloyId255);
     $.__views.eventIcon = Ti.UI.createLabel({
+        touchEnabled: false,
         left: 5,
         width: 25,
         height: 25,
         backgroundImage: "/images/kernel-event-on.png",
         id: "eventIcon"
     });
-    $.__views.__alloyId232.add($.__views.eventIcon);
-    $.__views.__alloyId233 = Ti.UI.createView({
+    $.__views.__alloyId255.add($.__views.eventIcon);
+    $.__views.__alloyId256 = Ti.UI.createView({
+        touchEnabled: false,
         width: Ti.UI.SIZE,
         left: 10,
         layout: "vertical",
-        id: "__alloyId233"
+        id: "__alloyId256"
     });
-    $.__views.__alloyId232.add($.__views.__alloyId233);
-    $.__views.__alloyId234 = Ti.UI.createView({
+    $.__views.__alloyId255.add($.__views.__alloyId256);
+    $.__views.__alloyId257 = Ti.UI.createView({
         left: 2,
+        touchEnabled: false,
         width: "85%",
         height: Ti.UI.SIZE,
         layout: "horizontal",
-        id: "__alloyId234"
+        id: "__alloyId257"
     });
-    $.__views.__alloyId233.add($.__views.__alloyId234);
+    $.__views.__alloyId256.add($.__views.__alloyId257);
     $.__views.startDate = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
             fontSize: 18
         },
         color: "#444",
+        touchEnabled: false,
         backgroundColor: "white",
         width: 140,
         left: 0,
         id: "startDate"
     });
-    $.__views.__alloyId234.add($.__views.startDate);
+    $.__views.__alloyId257.add($.__views.startDate);
     $.__views.endDate = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
             fontSize: 18
         },
         color: "#444",
+        touchEnabled: false,
         backgroundColor: "white",
         width: 140,
         id: "endDate"
     });
-    $.__views.__alloyId234.add($.__views.endDate);
-    $.__views.__alloyId235 = Ti.UI.createView({
+    $.__views.__alloyId257.add($.__views.endDate);
+    $.__views.__alloyId258 = Ti.UI.createView({
         left: 2,
+        touchEnabled: false,
         width: "85%",
         height: Ti.UI.SIZE,
         layout: "horizontal",
-        id: "__alloyId235"
+        id: "__alloyId258"
     });
-    $.__views.__alloyId233.add($.__views.__alloyId235);
+    $.__views.__alloyId256.add($.__views.__alloyId258);
     $.__views.location = Ti.UI.createLabel({
         color: "#999",
         width: Ti.UI.FILL,
+        touchEnabled: false,
         wordWrap: false,
         ellipsize: true,
         id: "location"
     });
-    $.__views.__alloyId235.add($.__views.location);
+    $.__views.__alloyId258.add($.__views.location);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
@@ -123,6 +131,8 @@ function Controller() {
     $.startDate.text = moment(dataAspetto.startTime.time).format("DD-MM-YYYY HH:MM");
     $.endDate.text = moment(dataAspetto.endTime.time).format("DD-MM-YYYY HH:MM");
     $.location.text = args.obj_aspetto.location.name;
+    $.riga.obj_aspect = args.obj_aspetto;
+    $.riga.arrayKey = args.keyIndex;
     __defers["$.__views.riga!click!edit"] && $.__views.riga.addEventListener("click", edit);
     _.extend($, exports);
 }

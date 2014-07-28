@@ -1,0 +1,32 @@
+<Alloy>
+	<Window id="win" class="container" onOpen="openEvent">
+		<Menu id="menu" title="Edit Post" platform="android" onHomeIconItemSelected="homeIconSelected">
+
+			<MenuItem id="mn_salva" title="Salva" onClick="savePost"/>
+
+		</Menu>
+		<TableView id="newPostTable">
+
+			<TableViewRow class="row">
+				<TextField id="titolo"></TextField>
+			</TableViewRow>
+			<TableViewRow>
+				<Widget id="starwidget" src="starrating" max='5' initialRating='0'/>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<TextField id="descrizione"></TextField>
+			</TableViewRow>
+			<TableViewRow class="row" hasDetail="true">
+				<TextField id="categoria" onSingletap="openCategoryList"/>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<TextField id="tag"></TextField>
+			</TableViewRow>
+			<TableViewRow class="row">
+				<TextField id="storie"></TextField>
+			</TableViewRow>
+		
+
+		</TableView>
+	</Window>
+</Alloy>

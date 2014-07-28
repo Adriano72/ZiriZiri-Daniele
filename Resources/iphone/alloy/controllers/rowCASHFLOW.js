@@ -13,7 +13,9 @@ function Controller() {
             _callback: function(aspettoEditato) {
                 var aspettoToJSON = JSON.parse(aspettoEditato.data);
                 $.riga.obj_aspect = aspettoEditato;
-                $.titolo.text = aspettoToJSON.title;
+                $.importo.text = aspettoToJSON.importo;
+                $.tipoMovimento.text = aspettoToJSON.tipoMovimento.descrizioneBreve;
+                $.modalitaPagamento.text = aspettoToJSON.pagamentoIncasso.descrizioneBreve;
                 args._editFunc(aspettoEditato, e.source.arrayKey);
             },
             aspetto: $.riga.obj_aspect
@@ -36,7 +38,7 @@ function Controller() {
     });
     $.__views.riga && $.addTopLevelView($.__views.riga);
     edit ? $.__views.riga.addEventListener("click", edit) : __defers["$.__views.riga!click!edit"] = true;
-    $.__views.__alloyId152 = Ti.UI.createView({
+    $.__views.__alloyId172 = Ti.UI.createView({
         left: 5,
         right: 5,
         top: 5,
@@ -48,9 +50,9 @@ function Controller() {
         height: 50,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId152"
+        id: "__alloyId172"
     });
-    $.__views.riga.add($.__views.__alloyId152);
+    $.__views.riga.add($.__views.__alloyId172);
     $.__views.cashFlowIcon = Ti.UI.createLabel({
         touchEnabled: false,
         left: 5,
@@ -59,23 +61,23 @@ function Controller() {
         backgroundImage: "/images/kernel-finance-on.png",
         id: "cashFlowIcon"
     });
-    $.__views.__alloyId152.add($.__views.cashFlowIcon);
-    $.__views.__alloyId153 = Ti.UI.createView({
+    $.__views.__alloyId172.add($.__views.cashFlowIcon);
+    $.__views.__alloyId173 = Ti.UI.createView({
         width: Ti.UI.SIZE,
         touchEnabled: false,
         left: 10,
-        id: "__alloyId153"
+        id: "__alloyId173"
     });
-    $.__views.__alloyId152.add($.__views.__alloyId153);
-    $.__views.__alloyId154 = Ti.UI.createView({
+    $.__views.__alloyId172.add($.__views.__alloyId173);
+    $.__views.__alloyId174 = Ti.UI.createView({
         left: 2,
         width: "85%",
         height: Ti.UI.SIZE,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId154"
+        id: "__alloyId174"
     });
-    $.__views.__alloyId153.add($.__views.__alloyId154);
+    $.__views.__alloyId173.add($.__views.__alloyId174);
     $.__views.importo = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -90,7 +92,7 @@ function Controller() {
         left: 0,
         id: "importo"
     });
-    $.__views.__alloyId154.add($.__views.importo);
+    $.__views.__alloyId174.add($.__views.importo);
     $.__views.tipoMovimento = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -104,7 +106,7 @@ function Controller() {
         ellipsize: true,
         id: "tipoMovimento"
     });
-    $.__views.__alloyId154.add($.__views.tipoMovimento);
+    $.__views.__alloyId174.add($.__views.tipoMovimento);
     $.__views.modalitaPagamento = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -118,7 +120,7 @@ function Controller() {
         ellipsize: true,
         id: "modalitaPagamento"
     });
-    $.__views.__alloyId154.add($.__views.modalitaPagamento);
+    $.__views.__alloyId174.add($.__views.modalitaPagamento);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

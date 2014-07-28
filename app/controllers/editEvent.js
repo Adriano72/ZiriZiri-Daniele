@@ -3,17 +3,28 @@ var args = arguments[0] || {};
 var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
 
+Ti.API.info("ARGS ****: " + JSON.stringify(args));
 
 var dataEvent = JSON.parse(args.aspetto.data);
-Ti.API.info("ARGS ****: "+JSON.stringify(dataEvent));
 
-$.pkrDataInizioEvento.text = moment().format('LLL');
-$.pkrDataInizioEvento.dataRaw = moment();
+/*
+ $.pkrDataInizioEvento.text = moment().format('LLL');
+ $.pkrDataInizioEvento.dataRaw = moment();
 
-$.pkrDataFineEvento.text = moment().format('LLL');
-$.pkrDataFineEvento.dataRaw = moment();
+ $.pkrDataFineEvento.text = moment().format('LLL');
+ $.pkrDataFineEvento.dataRaw = moment();
+ */
 
-var location_result = null;
+$.pkrDataInizioEvento.text = moment(dataEvent.startTime.time).format('LLL');
+$.pkrDataInizioEvento.dataRaw = moment(dataEvent.startTime.time);
+
+$.pkrDataFineEvento.text = moment(dataEvent.endTime.time).format('LLL');
+$.pkrDataFineEvento.dataRaw = moment(dataEvent.endTime.time);
+
+$.location.text = args.aspetto.location.name;
+
+var location_result = args.aspetto.location;
+
 var scadenzaStrutturale = false;
 
 function homeIconSelected() {
@@ -21,7 +32,6 @@ function homeIconSelected() {
 		animate : true
 	});
 }
-
 
 function getLocation() {
 
@@ -109,7 +119,7 @@ function saveEvent() {
 
 	Ti.API.info("ASPETTO EVENT VALIDATO: " + JSON.stringify(modEventJSON));
 
-	args(modEventJSON);
+	args._callback(modEventJSON);
 	$.win.close();
 
 };

@@ -74,6 +74,13 @@ function Controller() {
             args();
         });
     }
+    function editPost() {
+        Alloy.createController("editPost", function() {
+            Alloy.Models.Post_template.trigger("change");
+            modJson = Alloy.Models.Post_template.toJSON();
+            $.category.text = _.isNull(modJson.category) ? "" : modJson.category.name;
+        }).getView();
+    }
     function addEvent() {
         var randomKey = _.random(0, 99999);
         Alloy.createController("addEvent", function(objRet) {
@@ -255,6 +262,7 @@ function Controller() {
         id: "__alloyId102"
     });
     __alloyId101.push($.__views.__alloyId102);
+    editPost ? $.__views.__alloyId102.addEventListener("click", editPost) : __defers["$.__views.__alloyId102!click!editPost"] = true;
     $.__views.__alloyId103 = Ti.UI.createView({
         left: 5,
         right: 5,
@@ -614,6 +622,7 @@ function Controller() {
     __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
     __defers["$.__views.win!close!resetShortcut"] && $.__views.win.addEventListener("close", resetShortcut);
     __defers["$.__views.mn_save!click!submitPost"] && $.__views.mn_save.addEventListener("click", submitPost);
+    __defers["$.__views.__alloyId102!click!editPost"] && $.__views.__alloyId102.addEventListener("click", editPost);
     __defers["$.__views.__alloyId107!click!addEvent"] && $.__views.__alloyId107.addEventListener("click", addEvent);
     __defers["$.__views.__alloyId108!click!addCashflow"] && $.__views.__alloyId108.addEventListener("click", addCashflow);
     __defers["$.__views.__alloyId109!click!addDocument"] && $.__views.__alloyId109.addEventListener("click", addDocument);
