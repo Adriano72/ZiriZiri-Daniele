@@ -21,7 +21,7 @@ function Controller() {
             saveEvent ? $.__views.mn_salva.addEventListener("click", saveEvent) : __defers["$.__views.mn_salva!click!saveEvent"] = true;
             if ($.__views.win.activity.actionBar) {
                 $.__views.win.activity.actionBar.displayHomeAsUp = true;
-                $.__views.win.activity.actionBar.icon = "images/logo-test.png";
+                $.__views.win.activity.actionBar.icon = "/images/kernel-event-on.png";
                 $.__views.win.activity.actionBar.onHomeIconItemSelected = homeIconSelected;
             }
         }; else {
@@ -37,6 +37,7 @@ function Controller() {
     }
     function getLocation() {
         Alloy.createController("getLocation", function(locationData) {
+            Ti.API.info("LOCATION DATA: " + JSON.stringify(location_result));
             location_result = locationData;
             $.location.text = locationData.address;
             Ti.API.info("LOCATION DATA: " + JSON.stringify(location_result));
@@ -61,6 +62,7 @@ function Controller() {
     function saveEvent() {
         var modEventJSON = Alloy.Models.Event_template.toJSON();
         Ti.API.info("MODELLO EVENTO: " + JSON.stringify(modEventJSON));
+        modEventJSON.id = args.aspetto.id;
         modEventJSON.name = Alloy.Models.Post_template.get("name");
         modEventJSON.description = Alloy.Models.Post_template.get("description");
         modEventJSON.referenceTime = Alloy.Models.Post_template.get("referenceTime");
@@ -113,7 +115,7 @@ function Controller() {
         backgroundColor: "#F9F9F9",
         orientationModes: [ Ti.UI.PORTRAIT ],
         id: "win",
-        title: "Nuovo Evento"
+        title: "Modifica Evento"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     $.__views.win.addEventListener("open", __alloyId163);
@@ -430,7 +432,7 @@ function Controller() {
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     Ti.API.info("ARGS ****: " + JSON.stringify(args));
-    var dataEvent = JSON.parse(args.aspetto.data);
+    var dataEvent = args.aspetto.data;
     $.pkrDataInizioEvento.text = moment(dataEvent.startTime.time).format("LLL");
     $.pkrDataInizioEvento.dataRaw = moment(dataEvent.startTime.time);
     $.pkrDataFineEvento.text = moment(dataEvent.endTime.time).format("LLL");

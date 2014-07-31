@@ -1,11 +1,12 @@
 <Alloy>
-	<Window id="win" title="Evento" class="container" onOpen="openEvent">
+	<Window id="win" title="Evento" class="container" onPostlayout="openEvent">
 
 		<!-- The Menu tag adds the Android menu. -->
-		<Menu id="menu" platform="android">
+
+		<Menu id="menu" title="Dettaglio Evento" platform="android" onHomeIconItemSelected="homeIconSelected">
 
 			<!-- Cannot specify node text.  Use attributes only. -->
-			<!--<MenuItem id="mn_edit" title="Modifica" onClick="editPost"/>-->
+			<MenuItem id="mn_edit" title="Modifica" onClick="editAspect"/>
 			<!--<MenuItem id="Foto" title="Foto" icon="/images/86-camera.png"  showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />-->
 		</Menu>
 		<View class="eventContainer" id="wrapper">

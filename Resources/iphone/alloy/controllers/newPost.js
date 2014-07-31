@@ -153,6 +153,7 @@ function Controller() {
             fontSize: 18
         },
         top: 5,
+        editable: false,
         left: 5,
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,

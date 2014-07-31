@@ -361,7 +361,7 @@ function Controller() {
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     Ti.API.info("ARGS ****: " + JSON.stringify(args));
-    var dataEvent = JSON.parse(args.aspetto.data);
+    var dataEvent = JSON.parse(args.data);
     $.pkrDataInizioEvento.text = moment(dataEvent.startTime.time).format("LLL");
     $.pkrDataInizioEvento.dataRaw = moment(dataEvent.startTime.time);
     $.pkrDataFineEvento.text = moment(dataEvent.endTime.time).format("LLL");

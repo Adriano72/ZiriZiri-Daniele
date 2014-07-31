@@ -4,6 +4,21 @@
 	//layout: "vertical",
 }
 
+"MenuItem": {
+    showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+},
+
+
+"#mn_edit": {
+	icon: "/images/top-edit.png"
+},
+
+"#menu": {
+    icon: "/images/kernel-event-on.png",
+    displayHomeAsUp: true
+},
+
+
 ".eventContainer": {
 	//width: '100%',
 	left: 5,

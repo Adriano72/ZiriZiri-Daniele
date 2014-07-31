@@ -32,27 +32,6 @@ function openEvent() {
 		savePost();
 	};
 	
-	/*
-	var rowsCat = [Ti.UI.createPickerRow({
-		fontFamily : 'SourceSansPro-Regular',
-		fontSize : 8,
-		title : "Categorie",
-		id : 9999
-	})];
-
-	_.forEach(Ti.App.Properties.getObject("elencoCategorie"), function(value, key) {
-
-		//Ti.API.info("CAT: " + JSON.stringify(value));
-
-		var pkrRow = Ti.UI.createPickerRow(value);
-		//pkrRow.fontFamily = "SourceSansPro-Regular";
-
-		rowsCat.push(pkrRow);
-
-	});
-
-	$.pkrCategoria.add(rowsCat);
-	*/
 };
 
 function openCategoryList(){

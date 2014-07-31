@@ -5,7 +5,7 @@ moment.lang('it', Alloy.Globals.Moment_IT);
 
 Ti.API.info("ARGS ****: " + JSON.stringify(args));
 
-var dataEvent = JSON.parse(args.aspetto.data);
+var dataEvent = args.aspetto.data;
 
 /*
  $.pkrDataInizioEvento.text = moment().format('LLL');
@@ -36,7 +36,9 @@ function homeIconSelected() {
 function getLocation() {
 
 	var loc = Alloy.createController('getLocation', function(locationData) {
-
+		
+		Ti.API.info("LOCATION DATA: " + JSON.stringify(location_result));
+		
 		location_result = locationData;
 
 		$.location.text = locationData.address;
@@ -77,7 +79,7 @@ function saveEvent() {
 	var modEventJSON = Alloy.Models.Event_template.toJSON();
 
 	Ti.API.info("MODELLO EVENTO: " + JSON.stringify(modEventJSON));
-
+	modEventJSON.id = args.aspetto.id;
 	modEventJSON.name = Alloy.Models.Post_template.get("name");
 	modEventJSON.description = Alloy.Models.Post_template.get("description");
 	modEventJSON.referenceTime = Alloy.Models.Post_template.get("referenceTime");

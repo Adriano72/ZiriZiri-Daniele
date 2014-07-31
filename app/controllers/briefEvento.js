@@ -16,6 +16,7 @@ Ti.API.info("COLLECTION EVENT: "+JSON.stringify(Alloy.Collections.aspettoEvento)
 
 
 function transformData(model) {
+	Ti.API.info("***MODEL***: "+JSON.stringify(model));
 	var attrs = model.toJSON();
 	//attrs.imageUrl = '/' + attrs.direction + '.png';
 	//attrs.titolo = attrs.data.importo+"€";
@@ -30,10 +31,19 @@ function transformData(model) {
 function showDetail(e){
 	
 	var selectedAspect = Alloy.Collections.aspettoEvento.at(e.index).attributes;
+	//Ti.API.info("***SELECTED MODEL***: "+JSON.stringify(selectedAspect));
+	var riga = Alloy.createController('rowDetailEVENT', {
+		_callback: function(updated_event){
+			Ti.API.info("***SELECTED MODEL***: "+JSON.stringify(updated_event));
+			Alloy.Models.UpdatedEvent = new Backbone.Model;
+			Alloy.Models.UpdatedEvent.set(updated_event);
+			Alloy.Models.UpdatedEvent.set('data', JSON.parse(Alloy.Models.UpdatedEvent.get('data')));
 	
-	//Ti.API.info("ATTRIBUTES DOCUMENT: "+JSON.stringify(selectedAspect));
-	
-	var riga = Alloy.createController('rowDetailEVENT', selectedAspect).getView();
+			Alloy.Collections.aspettoEvento.remove(Alloy.Collections.aspettoEvento.at(e.index));
+			Alloy.Collections.aspettoEvento.add(Alloy.Models.UpdatedEvent);
+		},
+		selectedAspect: selectedAspect
+	}).getView();
 	
 }
 

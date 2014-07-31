@@ -28,8 +28,7 @@ function Controller() {
     $.__views.win = Ti.UI.createWindow({
         backgroundColor: "#F9F9F9",
         orientationModes: [ Ti.UI.PORTRAIT ],
-        id: "win",
-        title: "Nuovo Post"
+        id: "win"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
@@ -121,6 +120,7 @@ function Controller() {
             fontSize: 18
         },
         top: 5,
+        editable: false,
         left: 5,
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
@@ -199,13 +199,22 @@ function Controller() {
     $.__views.win.add($.__views.newPostTable);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    arguments[0] || {};
+    var args = arguments[0] || {};
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     require("net");
-    var timeNow = moment();
+    moment();
     var selectedCategory;
-    Ti.API.info("**** timeNow: " + timeNow);
+    if (_.isUndefined(args.existingPost)) {
+        var modJson = Alloy.Models.Post_template.toJSON();
+        $.titolo.value = Alloy.Models.Post_template.get("name");
+        $.categoria.value = _.isNull(modJson.category) ? "" : modJson.category.name;
+    } else {
+        var modJson = Alloy.Models.Post.toJSON();
+        $.titolo.value = Alloy.Models.Post.get("name");
+        selectedCategory = Alloy.Models.Post.get("category");
+        $.categoria.value = _.isNull(modJson.category) ? "" : modJson.category.name;
+    }
     $.starwidget.init();
     $.win.open();
     __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);

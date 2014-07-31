@@ -478,7 +478,14 @@ function Controller() {
     }
     function mostraDettaglioEvento(e) {
         Alloy.Models.Post.set(Alloy.Collections.Timeline.at(e.index));
-        Alloy.createController("dettaglio_post").getView();
+        Alloy.createController("dettaglio_post", function(updated) {
+            if (updated) {
+                Ti.API.info("UPDATING COLLECTION");
+                Alloy.Collections.Timeline.remove(Alloy.Collections.Timeline.at(e.index));
+                Alloy.Collections.Timeline.add(Alloy.Models.Post);
+                Alloy.Globals.loading.hide();
+            }
+        }).getView();
     }
     function createNewPost() {
         Alloy.createController("newPost", function() {

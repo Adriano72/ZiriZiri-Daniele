@@ -218,24 +218,7 @@ function transformData(model) {
 	return attrs;
 }
 
-//subsetEvents.reset();
 
-//var subsetEvents = Alloy.Collections.events;
-
-//var table = $.subsetEvents.config.adapter.collection_name;
-//Ti.API.info("Collection TABLE name: " + table);
-
-//subsetEvents.fetch({ query: 'select * from ' + table + ' where alloy_id = ' + 1});
-
-//var extentedDate = require('extendedDate');
-//var encoder = require('encoder');
-
-// Carico le categorie
-
-/*
- var f = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory,'timeline.txt');
- var timelineData = f.read();
- */
 
 function refreshTable() {
 
@@ -366,37 +349,15 @@ function mostraDettaglioEvento(e) {
 
 	Alloy.Models.Post.set(Alloy.Collections.Timeline.at(e.index));
 
-	Alloy.createController("dettaglio_post").getView();
+	Alloy.createController("dettaglio_post", function(updated){
+		if(updated){
+			Ti.API.info("UPDATING COLLECTION");
+			Alloy.Collections.Timeline.remove(Alloy.Collections.Timeline.at(e.index));
+			Alloy.Collections.Timeline.add(Alloy.Models.Post);
+			Alloy.Globals.loading.hide();
+		};
+	}).getView();
 
-	//Ti.API.info("INDEX RIGA CLICCATA: "+JSON.stringify(e));
-	/*
-	try {
-	showSpinner();
-
-	var selEvent = subsetEvents.at(e.index).attributes;
-
-	net.getPost(selEvent.id, function(postData) {
-	Ti.API.info("DETTAGLIO POST: " + JSON.stringify(postData));
-	Alloy.createController("dettaglio_post", postData).getView().open();
-	});
-	} catch(error) {
-	Ti.App.fireEvent("loading_done");
-	Ti.API.info("ERRORE: " + error);
-	}
-	*/
-
-	//Ti.API.info("SELECTED DATA ID: "+selEvent.id);
-
-	/*
-	 var feedClicked = feedlist.at(e.index).attributes;
-	 //Ti.API.info("EVENT "+feedClicked.body);
-
-	 var dettaglioTestoFeedController = Alloy.createController("dettaglioFeed", {titolo: feedClicked.title, body: feedClicked.body});
-	 //dueDateController.setParent($);
-	 //dueDateController.setPickerDefaultDate($.dateBtn.title);
-	 var dettaglioTestoFeedWindow = dettaglioTestoFeedController.getView();
-	 dettaglioTestoFeedWindow.open();
-	 */
 };
 
 function slideRow(e) {

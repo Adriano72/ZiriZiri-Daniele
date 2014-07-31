@@ -24,7 +24,7 @@ function Controller() {
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         id: "picker",
-        selectionIndicator: true
+        selectionIndicator: "true"
     });
     $.__views.picker && $.addTopLevelView($.__views.picker);
     exports.destroy = function() {};

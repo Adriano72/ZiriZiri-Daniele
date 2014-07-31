@@ -13,7 +13,7 @@
 }
 
 "#menu": {
-    icon: "images/logo-test.png",
+    icon: "/images/kernel-event-on.png",
     displayHomeAsUp: true
 }
 

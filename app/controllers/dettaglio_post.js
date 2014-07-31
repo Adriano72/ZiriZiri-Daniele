@@ -1,5 +1,7 @@
 var args = arguments[0] || {};
 
+var net = require('net');
+
 var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
 moment.lang('it');
@@ -28,7 +30,6 @@ function openEvent() {
 
 function editPost() {
 
-	Ti.API.info("CLICK");
 	Alloy.createController("editPost", {
 		existingPost : true,
 		_callback : function(p_data) {
@@ -36,8 +37,20 @@ function editPost() {
 			Alloy.Models.Post.set("categoria", (!_.isNull(modJson.category) ? modJson.category.name : ""), {
 				silent : true
 			});
-
 			Alloy.Models.Post.trigger('change');
+			
+			Alloy.Globals.loading.show();
+
+			net.editPost(Alloy.Models.Post, function(post_id, postToAddToTimeline) {
+
+				Ti.API.info("ID POST UPDATATO: " + post_id);
+				$.win.close();
+				args(true);
+
+				alert("Post updatato");
+
+			});
+
 		}
 	}).getView();
 };
@@ -50,7 +63,7 @@ Ti.API.info("NULL CATEG: " + _.isNull(Alloy.Models.Post.get("category")));
 
 //Alloy.Models.Post.set("name", "TestTransformName", {silent: true});
 
-Alloy.Models.Post.set("referenceTime", moment(Alloy.Models.Post.get("referenceTime")).fromNow(), {
+Alloy.Models.Post.set("tmp_referenceTime", moment(Alloy.Models.Post.get("referenceTime")).fromNow(), {
 	silent : true
 });
 
@@ -66,7 +79,7 @@ Alloy.Models.Post.set("rating_3", (rating > 2) ? "/images/star-small.png" : "");
 Alloy.Models.Post.set("rating_4", (rating > 3) ? "/images/star-small.png" : "");
 Alloy.Models.Post.set("rating_5", (rating > 4) ? "/images/star-small.png" : "");
 
-Alloy.Models.Post.set("tag", (_.isNull(modJson.tags)) ? "" : modJson.tags[0].name);
+//Alloy.Models.Post.set("tag", (_.isNull(modJson.tags)) ? "" : modJson.tags[0].name);
 
 var aspects = modJson.aspects;
 

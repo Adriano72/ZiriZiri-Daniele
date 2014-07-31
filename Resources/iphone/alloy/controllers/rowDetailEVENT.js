@@ -9,19 +9,6 @@ function __processArg(obj, key) {
 
 function Controller() {
     function openEvent() {
-        theActionBar = $.win.activity.actionBar;
-        $.win.activity.invalidateOptionsMenu();
-        theActionBar = $.win.activity.actionBar;
-        if (void 0 != theActionBar) {
-            theActionBar.displayHomeAsUp = true;
-            theActionBar.setIcon("images/kernel-event-on.png");
-            theActionBar.onHomeIconItemSelected = function() {
-                $.win.close({
-                    animate: true
-                });
-            };
-        }
-        $.win.title = args.data.title;
         updateDisplay();
     }
     function updateDisplay() {
@@ -57,7 +44,7 @@ function Controller() {
         title: "Evento"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
-    openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
+    openEvent ? $.__views.win.addEventListener("postlayout", openEvent) : __defers["$.__views.win!postlayout!openEvent"] = true;
     $.__views.wrapper = Ti.UI.createView({
         left: 5,
         right: 5,
@@ -174,7 +161,7 @@ function Controller() {
     $.dataFine.text = args.data.startTime.time !== args.data.endTime.time ? moment(args.data.endTime.time).format("DD-MM-YYYY HH:MM") : "";
     $.location.text = args.location.name;
     $.win.open();
-    __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
+    __defers["$.__views.win!postlayout!openEvent"] && $.__views.win.addEventListener("postlayout", openEvent);
     _.extend($, exports);
 }
 

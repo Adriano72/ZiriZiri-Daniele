@@ -259,6 +259,7 @@ function Controller() {
     } else {
         var modJson = Alloy.Models.Post.toJSON();
         $.titolo.value = Alloy.Models.Post.get("name");
+        selectedCategory = Alloy.Models.Post.get("category");
         $.categoria.value = _.isNull(modJson.category) ? "" : modJson.category.name;
     }
     $.starwidget.init();

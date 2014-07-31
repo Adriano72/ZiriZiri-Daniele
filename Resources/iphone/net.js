@@ -135,6 +135,54 @@ exports.savePost = function(objPost, _callback) {
     xhr.send(JSON.stringify(dataJson));
 };
 
+exports.editPost = function(objPost, _callback) {
+    objPost.unset("categoria", {
+        silent: true
+    });
+    objPost.unset("tmp_referenceTime", {
+        silent: true
+    });
+    objPost.unset("catImage", {
+        silent: true
+    });
+    objPost.unset("rating_1", {
+        silent: true
+    });
+    objPost.unset("rating_2", {
+        silent: true
+    });
+    objPost.unset("rating_3", {
+        silent: true
+    });
+    objPost.unset("rating_4", {
+        silent: true
+    });
+    objPost.unset("rating_5", {
+        silent: true
+    });
+    var dataJson = {};
+    dataJson.data = objPost;
+    var xhr = Ti.Network.createHTTPClient();
+    Ti.API.info("OGGETTO DA MANDARE IN PUT: " + JSON.stringify(objPost));
+    xhr.onload = function() {
+        var json = JSON.parse(this.responseText);
+        Ti.API.info("******RESPONSE TEXT SALVATAGGIO POST: " + JSON.stringify(json.data));
+        if ('"SUCCESS"' == JSON.stringify(json.type.code)) _callback(json.data.id, json.data); else {
+            Ti.App.Properties.getList("unsavedPosts", []).push(objPost);
+            alert("Errore nella comunicazione col server. L'evento è stato salvato nel dispositivo e sarà possibilie salvarlo in seguito");
+        }
+    };
+    xhr.onerror = function() {
+        Alloy.Globals.loading.hide();
+        Ti.API.error(this.status + " - " + this.statusText);
+    };
+    xhr.open("PUT", Alloy.Globals.baseUrl + "/actions/actions/" + session + "?_type=JSON");
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("X-HTTP-Method-Override", "PUT");
+    xhr.send(JSON.stringify(dataJson));
+};
+
 exports.saveAspect = function(allAspects, _callback) {
     var arrayIDAspetti = [];
     var deferredCall = _.after(allAspects.length, function() {

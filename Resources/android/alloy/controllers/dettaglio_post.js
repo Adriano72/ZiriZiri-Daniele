@@ -31,7 +31,6 @@ function Controller() {
         }
     }
     function editPost() {
-        Ti.API.info("CLICK");
         Alloy.createController("editPost", {
             existingPost: true,
             _callback: function() {
@@ -40,6 +39,13 @@ function Controller() {
                     silent: true
                 });
                 Alloy.Models.Post.trigger("change");
+                Alloy.Globals.loading.show();
+                net.editPost(Alloy.Models.Post, function(post_id) {
+                    Ti.API.info("ID POST UPDATATO: " + post_id);
+                    $.win.close();
+                    args(true);
+                    alert("Post updatato");
+                });
             }
         }).getView();
     }
@@ -349,8 +355,8 @@ function Controller() {
     var __alloyId119 = function() {
         $.postIcon.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["catImage"] : Alloy.Models.Post.get("catImage");
         $.postIcon.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["catImage"] : Alloy.Models.Post.get("catImage");
-        $.date.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["referenceTime"] : Alloy.Models.Post.get("referenceTime");
-        $.date.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["referenceTime"] : Alloy.Models.Post.get("referenceTime");
+        $.date.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["tmp_referenceTime"] : Alloy.Models.Post.get("tmp_referenceTime");
+        $.date.text = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["tmp_referenceTime"] : Alloy.Models.Post.get("tmp_referenceTime");
         $.rating_1.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["rating_1"] : Alloy.Models.Post.get("rating_1");
         $.rating_1.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["rating_1"] : Alloy.Models.Post.get("rating_1");
         $.rating_2.image = _.isFunction(Alloy.Models.Post.transform) ? Alloy.Models.Post.transform()["rating_2"] : Alloy.Models.Post.get("rating_2");
@@ -373,14 +379,15 @@ function Controller() {
         Alloy.Models.Post.off("fetch change destroy", __alloyId119);
     };
     _.extend($, $.__views);
-    arguments[0] || {};
+    var args = arguments[0] || {};
+    var net = require("net");
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     moment.lang("it");
     var modJson = Alloy.Models.Post.toJSON();
     Ti.API.info("MODEL: " + JSON.stringify(Alloy.Models.Post));
     Ti.API.info("NULL CATEG: " + _.isNull(Alloy.Models.Post.get("category")));
-    Alloy.Models.Post.set("referenceTime", moment(Alloy.Models.Post.get("referenceTime")).fromNow(), {
+    Alloy.Models.Post.set("tmp_referenceTime", moment(Alloy.Models.Post.get("referenceTime")).fromNow(), {
         silent: true
     });
     Alloy.Models.Post.set("categoria", _.isNull(modJson.category) ? "" : modJson.category.name, {
@@ -393,7 +400,6 @@ function Controller() {
     Alloy.Models.Post.set("rating_3", rating > 2 ? "/images/star-small.png" : "");
     Alloy.Models.Post.set("rating_4", rating > 3 ? "/images/star-small.png" : "");
     Alloy.Models.Post.set("rating_5", rating > 4 ? "/images/star-small.png" : "");
-    Alloy.Models.Post.set("tag", _.isNull(modJson.tags) ? "" : modJson.tags[0].name);
     var aspects = modJson.aspects;
     Ti.API.info("ASPETTI JSON: " + JSON.stringify(aspects));
     Alloy.Models.Post.trigger("change");

@@ -15,7 +15,11 @@ function Controller() {
         Alloy.Globals.shortcutMode = false;
     }
     function editPost() {
-        Alloy.createController("editPost").getView().open();
+        Alloy.createController("editPost", function() {
+            Alloy.Models.Post_template.trigger("change");
+            modJson = Alloy.Models.Post_template.toJSON();
+            $.category.text = _.isNull(modJson.category) ? "" : modJson.category.name;
+        }).getView();
     }
     function addEvent() {
         var randomKey = _.random(0, 99999);

@@ -36,7 +36,7 @@ function Controller() {
         calendarViewShown: false,
         id: "picker",
         type: Ti.UI.PICKER_TYPE_DATE,
-        selectionIndicator: true
+        selectionIndicator: "true"
     });
     $.__views.picker && $.addTopLevelView($.__views.picker);
     exports.destroy = function() {};

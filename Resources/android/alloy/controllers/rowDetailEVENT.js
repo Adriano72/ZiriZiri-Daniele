@@ -8,41 +8,68 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
-    function __alloyId238() {
-        $.__views.win.removeEventListener("open", __alloyId238);
-        if ($.__views.win.activity) $.__views.win.activity.onCreateOptionsMenu = function() {}; else {
+    function __alloyId239() {
+        $.__views.win.removeEventListener("open", __alloyId239);
+        if ($.__views.win.activity) $.__views.win.activity.onCreateOptionsMenu = function(e) {
+            var __alloyId238 = {
+                showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
+                icon: "/images/top-edit.png",
+                id: "mn_edit",
+                title: "Modifica"
+            };
+            $.__views.mn_edit = e.menu.add(_.pick(__alloyId238, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_edit.applyProperties(_.omit(__alloyId238, Alloy.Android.menuItemCreateArgs));
+            editAspect ? $.__views.mn_edit.addEventListener("click", editAspect) : __defers["$.__views.mn_edit!click!editAspect"] = true;
+            if ($.__views.win.activity.actionBar) {
+                $.__views.win.activity.actionBar.title = "Dettaglio Evento";
+                $.__views.win.activity.actionBar.displayHomeAsUp = true;
+                $.__views.win.activity.actionBar.icon = "/images/kernel-event-on.png";
+                $.__views.win.activity.actionBar.onHomeIconItemSelected = homeIconSelected;
+            }
+        }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
             Ti.API.warn("or other UI component which does not have an Android activity.");
             Ti.API.warn("Android Menus can only be opened on TabGroups and heavyweight Windows.");
         }
     }
-    function openEvent() {
-        theActionBar = $.win.activity.actionBar;
-        $.win.activity.invalidateOptionsMenu();
-        theActionBar = $.win.activity.actionBar;
-        if (void 0 != theActionBar) {
-            theActionBar.displayHomeAsUp = true;
-            theActionBar.setIcon("images/kernel-event-on.png");
-            theActionBar.onHomeIconItemSelected = function() {
-                $.win.close({
-                    animate: true
-                });
-            };
-        }
-        $.win.title = args.data.title;
-        updateDisplay();
+    function homeIconSelected() {
+        $.win.close({
+            animate: true
+        });
     }
-    function updateDisplay() {
+    function openEvent() {
+        editedFlag || updateDisplay();
+        editedFlag = false;
+    }
+    function editAspect() {
+        Alloy.createController("editEvent", {
+            _callback: function(aspettoEditato) {
+                editedFlag = true;
+                Ti.API.info("ASP EDITATO: " + JSON.stringify(aspettoEditato));
+                var aspettoToJSON = JSON.parse(aspettoEditato.data);
+                $.dataInizio.text = moment(aspettoToJSON.startTime.time).format("DD-MM-YYYY HH:MM");
+                $.dataFine.text = moment(aspettoToJSON.endTime.time).format("DD-MM-YYYY HH:MM");
+                $.location.text = aspettoEditato.location.name;
+                updateDisplay(aspettoEditato);
+                args._callback(aspettoEditato);
+            },
+            aspetto: selAspect
+        }).getView().open();
+        Ti.API.info("ID Aspetto: " + selAspect.id);
+    }
+    function updateDisplay(par_edited_aspect) {
+        var asp_obj;
+        asp_obj = _.isUndefined(par_edited_aspect) ? selAspect : par_edited_aspect;
         $.mapview.removeAllAnnotations();
         var eventMarker = Alloy.Globals.Map.createAnnotation({
-            latitude: args.location.latitude,
-            longitude: args.location.longitude,
-            title: args.location.name,
+            latitude: asp_obj.location.latitude,
+            longitude: asp_obj.location.longitude,
+            title: asp_obj.location.name,
             pincolor: Alloy.Globals.Map.ANNOTATION_RED
         });
         $.mapview.region = {
-            latitude: args.location.latitude,
-            longitude: args.location.longitude,
+            latitude: asp_obj.location.latitude,
+            longitude: asp_obj.location.longitude,
             latitudeDelta: .01,
             longitudeDelta: .01
         };
@@ -65,8 +92,8 @@ function Controller() {
         title: "Evento"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
-    openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
-    $.__views.win.addEventListener("open", __alloyId238);
+    openEvent ? $.__views.win.addEventListener("postlayout", openEvent) : __defers["$.__views.win!postlayout!openEvent"] = true;
+    $.__views.win.addEventListener("open", __alloyId239);
     $.__views.wrapper = Ti.UI.createView({
         left: 5,
         right: 5,
@@ -89,16 +116,16 @@ function Controller() {
         id: "mapview"
     });
     $.__views.wrapper.add($.__views.mapview);
-    $.__views.__alloyId239 = Ti.UI.createView({
+    $.__views.__alloyId240 = Ti.UI.createView({
         top: 5,
         bottom: 5,
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId239"
+        id: "__alloyId240"
     });
-    $.__views.wrapper.add($.__views.__alloyId239);
+    $.__views.wrapper.add($.__views.__alloyId240);
     $.__views.eventIcon = Ti.UI.createLabel({
         top: 5,
         left: 5,
@@ -107,23 +134,23 @@ function Controller() {
         backgroundImage: "/images/kernel-event-on.png",
         id: "eventIcon"
     });
-    $.__views.__alloyId239.add($.__views.eventIcon);
-    $.__views.__alloyId240 = Ti.UI.createView({
+    $.__views.__alloyId240.add($.__views.eventIcon);
+    $.__views.__alloyId241 = Ti.UI.createView({
         className: "itemRow",
         layout: "vertical",
         width: Ti.UI.FILL,
-        id: "__alloyId240"
+        id: "__alloyId241"
     });
-    $.__views.__alloyId239.add($.__views.__alloyId240);
-    $.__views.__alloyId241 = Ti.UI.createView({
+    $.__views.__alloyId240.add($.__views.__alloyId241);
+    $.__views.__alloyId242 = Ti.UI.createView({
         top: 2,
         left: 2,
         layout: "horizontal",
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
-        id: "__alloyId241"
+        id: "__alloyId242"
     });
-    $.__views.__alloyId240.add($.__views.__alloyId241);
+    $.__views.__alloyId241.add($.__views.__alloyId242);
     $.__views.dataInizio = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -137,7 +164,7 @@ function Controller() {
         left: 0,
         id: "dataInizio"
     });
-    $.__views.__alloyId241.add($.__views.dataInizio);
+    $.__views.__alloyId242.add($.__views.dataInizio);
     $.__views.dataFine = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -150,16 +177,16 @@ function Controller() {
         width: 140,
         id: "dataFine"
     });
-    $.__views.__alloyId241.add($.__views.dataFine);
-    $.__views.__alloyId242 = Ti.UI.createView({
+    $.__views.__alloyId242.add($.__views.dataFine);
+    $.__views.__alloyId243 = Ti.UI.createView({
         top: 2,
         left: 2,
         layout: "horizontal",
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
-        id: "__alloyId242"
+        id: "__alloyId243"
     });
-    $.__views.__alloyId240.add($.__views.__alloyId242);
+    $.__views.__alloyId241.add($.__views.__alloyId243);
     $.__views.location = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -175,15 +202,18 @@ function Controller() {
         ellipsize: true,
         id: "location"
     });
-    $.__views.__alloyId242.add($.__views.location);
+    $.__views.__alloyId243.add($.__views.location);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    $.dataInizio.text = moment(args.data.startTime.time).format("DD-MM-YYYY HH:MM");
-    $.dataFine.text = args.data.startTime.time !== args.data.endTime.time ? moment(args.data.endTime.time).format("DD-MM-YYYY HH:MM") : "";
-    $.location.text = args.location.name;
+    var selAspect = args.selectedAspect;
+    var editedFlag = false;
+    $.dataInizio.text = moment(selAspect.data.startTime.time).format("DD-MM-YYYY HH:MM");
+    $.dataFine.text = selAspect.data.startTime.time !== selAspect.data.endTime.time ? moment(selAspect.data.endTime.time).format("DD-MM-YYYY HH:MM") : "";
+    $.location.text = selAspect.location.name;
     $.win.open();
-    __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
+    __defers["$.__views.win!postlayout!openEvent"] && $.__views.win.addEventListener("postlayout", openEvent);
+    __defers["$.__views.mn_edit!click!editAspect"] && $.__views.mn_edit.addEventListener("click", editAspect);
     _.extend($, exports);
 }
 

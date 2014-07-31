@@ -87,6 +87,7 @@ function Controller() {
         $.__views.aspectEventTable.setData(rows);
     }
     function transformData(model) {
+        Ti.API.info("***MODEL***: " + JSON.stringify(model));
         var attrs = model.toJSON();
         attrs.dataDa = moment(attrs.data.startTime.time).format("DD-MM-YYYY HH:MM");
         attrs.dataA = attrs.data.startTime.time !== attrs.data.endTime.time ? moment(attrs.data.endTime.time).format("DD-MM-YYYY HH:MM") : "";
@@ -95,7 +96,17 @@ function Controller() {
     }
     function showDetail(e) {
         var selectedAspect = Alloy.Collections.aspettoEvento.at(e.index).attributes;
-        Alloy.createController("rowDetailEVENT", selectedAspect).getView();
+        Alloy.createController("rowDetailEVENT", {
+            _callback: function(updated_event) {
+                Ti.API.info("***SELECTED MODEL***: " + JSON.stringify(updated_event));
+                Alloy.Models.UpdatedEvent = new Backbone.Model();
+                Alloy.Models.UpdatedEvent.set(updated_event);
+                Alloy.Models.UpdatedEvent.set("data", JSON.parse(Alloy.Models.UpdatedEvent.get("data")));
+                Alloy.Collections.aspettoEvento.remove(Alloy.Collections.aspettoEvento.at(e.index));
+                Alloy.Collections.aspettoEvento.add(Alloy.Models.UpdatedEvent);
+            },
+            selectedAspect: selectedAspect
+        }).getView();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "briefEvento";
