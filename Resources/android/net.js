@@ -216,6 +216,32 @@ exports.saveAspect = function(allAspects, _callback) {
     });
 };
 
+exports.updateAspect = function(p_aspetto, _callback) {
+    var dataJson = {};
+    Ti.API.info("***UPDATING ASPECT***");
+    var xhr = Ti.Network.createHTTPClient();
+    xhr.onload = function() {
+        var json = JSON.parse(this.responseText);
+        if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
+            Ti.API.info("ID ASPETTO UPDATATO: " + json.data.id);
+            _callback();
+        } else {
+            Alloy.Globals.loading.hide();
+            Ti.API.info("ERRORE UPDATE ASPETTO: " + JSON.stringify(json));
+        }
+    };
+    xhr.onerror = function() {
+        Ti.API.error("ERRORE UPDATE ASPETTO: " + this.status + " - " + this.statusText);
+    };
+    xhr.open("PUT", Alloy.Globals.baseUrl + "/aspects/aspects/" + session + "?_type=JSON");
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("X-HTTP-Method-Override", "PUT");
+    Ti.API.info("JSON ASPETTO DA SALVARE: " + JSON.stringify(p_aspetto));
+    dataJson.data = p_aspetto;
+    xhr.send(JSON.stringify(dataJson));
+};
+
 exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
     Ti.API.info("ARRAY ****:" + JSON.stringify(p_array));
     var dataJson = {};

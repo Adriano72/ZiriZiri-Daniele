@@ -87,8 +87,7 @@ exports.getTipoMovimento = function(_callback) {
 
 	xhr.onerror = function(e) {
 		alert("Error getting Tipo Movimento " + JSON.stringify(e));
-	};
-	https://demo.ziriziri.com/zz/api/v0/financial/financial/tipomovimento/103?_type=json
+	}; https://demo.ziriziri.com/zz/api/v0/financial/financial/tipomovimento/103?_type=json
 	xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/tipomovimento/" + session + "?_type=JSON" + "&cached=true");
 	xhr.send();
 };
@@ -104,8 +103,7 @@ exports.getPagamentoIncasso = function(_callback) {
 
 	xhr.onerror = function(e) {
 		alert("Error getting Pagamento Incasso: " + JSON.stringify(e));
-	};
-	https://demo.ziriziri.com/zz/api/v0/financial/financial/tipomovimento/103?_type=json
+	}; https://demo.ziriziri.com/zz/api/v0/financial/financial/tipomovimento/103?_type=json
 	xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/aliasstrumentopagamentoincasso/" + session + "?_type=JSON" + "&cached=true");
 	xhr.send();
 };
@@ -121,8 +119,7 @@ exports.getVariabilita = function(_callback) {
 
 	xhr.onerror = function(e) {
 		alert("Error getting Variabilità: " + JSON.stringify(e));
-	};
-	https://demo.ziriziri.com/zz/api/v0/financial/financial/tipomovimento/103?_type=json
+	}; https://demo.ziriziri.com/zz/api/v0/financial/financial/tipomovimento/103?_type=json
 	xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/tipovariabilita/" + session + "?_type=JSON" + "&cached=true");
 	xhr.send();
 };
@@ -138,8 +135,7 @@ exports.getStatoMovimento = function(_callback) {
 
 	xhr.onerror = function(e) {
 		alert("Error getting Stato Movimento: " + JSON.stringify(e));
-	};
-	https://demo.ziriziri.com/zz/api/v0/financial/financial/tipomovimento/103?_type=json
+	}; https://demo.ziriziri.com/zz/api/v0/financial/financial/tipomovimento/103?_type=json
 	xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/statomovimento/" + session + "?_type=JSON" + "&cached=true");
 	xhr.send();
 };
@@ -207,40 +203,39 @@ exports.savePost = function(objPost, _callback) {
 };
 
 exports.editPost = function(objPost, _callback) {
-	
-	
+
 	objPost.unset('categoria', {
 		silent : true
 	});
-	
+
 	objPost.unset('tmp_referenceTime', {
 		silent : true
 	});
-	
+
 	objPost.unset('catImage', {
 		silent : true
 	});
-	
+
 	objPost.unset('rating_1', {
 		silent : true
 	});
-	
+
 	objPost.unset('rating_2', {
 		silent : true
 	});
-	
+
 	objPost.unset('rating_3', {
 		silent : true
 	});
-	
+
 	objPost.unset('rating_4', {
 		silent : true
 	});
-	
+
 	objPost.unset('rating_5', {
 		silent : true
 	});
-	
+
 	var dataJson = {};
 	dataJson.data = objPost;
 
@@ -346,6 +341,58 @@ exports.saveAspect = function(allAspects, _callback) {
 
 };
 
+exports.updateAspect = function(p_aspetto, _callback) {
+
+	var dataJson = {};
+
+	Ti.API.info("***UPDATING ASPECT***");
+
+	var xhr = Ti.Network.createHTTPClient();
+
+	//Ti.API.info("OGGETTO DA MANDARE IN POST: "+JSON.stringify(objPost));
+
+	xhr.onload = function() {
+		//Ti.API.info("RISPOSTA SERV SALVA ASPECT: " + this.responseText);
+
+		var json = JSON.parse(this.responseText);
+
+		if (JSON.stringify(json.type.code) == "\"SUCCESS\"") {
+
+			Ti.API.info("ID ASPETTO UPDATATO: " + json.data.id);
+
+			//alert("Aspetto salvato");
+			//_callback(json.data.id);
+			_callback();
+
+		} else {
+			//Ti.App.Properties.getList('unsavedAspects', []).push(objAspect);
+			Alloy.Globals.loading.hide();
+			Ti.API.info("ERRORE UPDATE ASPETTO: " + JSON.stringify(json));
+		};
+
+	};
+
+	xhr.onerror = function() {
+		Ti.API.error("ERRORE UPDATE ASPETTO: " + this.status + ' - ' + this.statusText);
+	};
+
+	//https://demo.ziriziri.com/zz/api/v01/actions/actions/106?_type=json
+	//xhr.open('POST', 'https://demo.ziriziri.com/cxf/session/session/login/' + user_name + '?_type=JSON');
+	//https://demo.ziriziri.com/zz/api/v01/actions/actions/103?_type=json
+	xhr.open('PUT', Alloy.Globals.baseUrl + '/aspects/aspects/' + session + '?_type=JSON');
+
+	xhr.setRequestHeader('Accept', 'application/json');
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.setRequestHeader('X-HTTP-Method-Override', 'PUT');
+
+	Ti.API.info("JSON ASPETTO DA SALVARE: " + JSON.stringify(p_aspetto));
+	
+	dataJson.data = p_aspetto;
+
+	xhr.send(JSON.stringify(dataJson));
+
+};
+
 exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
 
 	Ti.API.info("ARRAY ****:" + JSON.stringify(p_array));
@@ -402,4 +449,4 @@ exports.linkAspectsToPost = function(p_postId, p_array, _callback) {
 
 	xhr.send(JSON.stringify(dataJson));
 
-}; 
+};

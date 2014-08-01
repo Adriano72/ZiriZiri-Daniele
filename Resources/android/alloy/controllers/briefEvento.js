@@ -98,6 +98,9 @@ function Controller() {
         var selectedAspect = Alloy.Collections.aspettoEvento.at(e.index).attributes;
         Alloy.createController("rowDetailEVENT", {
             _callback: function(updated_event) {
+                net.updateAspect(updated_event, function() {
+                    Ti.API.info("ASPETO UPDATATO");
+                });
                 Ti.API.info("***SELECTED MODEL***: " + JSON.stringify(updated_event));
                 Alloy.Models.UpdatedEvent = new Backbone.Model();
                 Alloy.Models.UpdatedEvent.set(updated_event);
@@ -153,6 +156,7 @@ function Controller() {
     };
     _.extend($, $.__views);
     arguments[0] || {};
+    var net = require("net");
     Ti.API.info("COLLECTION EVENT: " + JSON.stringify(Alloy.Collections.aspettoEvento));
     syncAspects();
     $.briefEvento.addEventListener("close", function() {

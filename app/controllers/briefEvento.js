@@ -11,12 +11,14 @@ Alloy.Models.Aspetto.set("modalitaPagamento", aspectJson.data.modalitaPagamento.
 Alloy.Models.Aspetto.trigger('change');
 */
 
+var net = require('net');
+
 Ti.API.info("COLLECTION EVENT: "+JSON.stringify(Alloy.Collections.aspettoEvento));
 
 
 
 function transformData(model) {
-	Ti.API.info("***MODEL***: "+JSON.stringify(model));
+	//Ti.API.info("***MODEL***: "+JSON.stringify(model));
 	var attrs = model.toJSON();
 	//attrs.imageUrl = '/' + attrs.direction + '.png';
 	//attrs.titolo = attrs.data.importo+"€";
@@ -34,6 +36,9 @@ function showDetail(e){
 	//Ti.API.info("***SELECTED MODEL***: "+JSON.stringify(selectedAspect));
 	var riga = Alloy.createController('rowDetailEVENT', {
 		_callback: function(updated_event){
+			net.updateAspect(updated_event, function(){
+				Ti.API.info("ASPETO UPDATATO");
+			});
 			Ti.API.info("***SELECTED MODEL***: "+JSON.stringify(updated_event));
 			Alloy.Models.UpdatedEvent = new Backbone.Model;
 			Alloy.Models.UpdatedEvent.set(updated_event);
