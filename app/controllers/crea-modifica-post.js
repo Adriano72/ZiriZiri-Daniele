@@ -128,10 +128,6 @@ function addEvent() {
 
 		Ti.API.info("TEMP ARRAY ASPETTI: " + JSON.stringify(tempContainer));
 
-		var aspettoDataJson = JSON.parse(objRet.data);
-
-		Ti.API.info("DATA PARSATO: " + JSON.stringify(aspettoDataJson));
-
 		var riga = Alloy.createController('rowEvent', {
 
 		
@@ -183,10 +179,6 @@ function addCashflow() {
 		});
 
 		Ti.API.info("TEMP ARRAY ASPETTI: " + JSON.stringify(tempContainer));
-
-		var aspettoDataJson = JSON.parse(objRet.data);
-
-		Ti.API.info("DATA PARSATO: " + JSON.stringify(aspettoDataJson));
 
 		var riga = Alloy.createController('rowCASHFLOW', {
 

@@ -84,7 +84,20 @@ function Controller() {
     }
     function showDetail(e) {
         var selectedAspect = Alloy.Collections.aspettiCashflow.at(e.index).attributes;
-        Alloy.createController("rowDetailCASHFLOW", selectedAspect).getView();
+        Alloy.createController("rowDetailCASHFLOW", {
+            _callback: function(updated_cashflow) {
+                net.updateAspect(updated_cashflow, function() {
+                    Ti.API.info("ASPETO UPDATATO");
+                });
+                Ti.API.info("***SELECTED MODEL***: " + JSON.stringify(updated_cashflow));
+                Alloy.Models.UpdatedCashflow = new Backbone.Model();
+                Alloy.Models.UpdatedCashflow.set(updated_cashflow);
+                Alloy.Models.UpdatedCashflow.set("data", JSON.parse(Alloy.Models.UpdatedCashflow.get("data")));
+                Alloy.Collections.aspettiCashflow.remove(Alloy.Collections.aspettiCashflow.at(e.index));
+                Alloy.Collections.aspettiCashflow.add(Alloy.Models.UpdatedCashflow);
+            },
+            selectedAspect: selectedAspect
+        }).getView();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "briefCashflow";
@@ -131,6 +144,7 @@ function Controller() {
     };
     _.extend($, $.__views);
     arguments[0] || {};
+    var net = require("net");
     Ti.API.info("COLLECTION CASHFLOW: " + JSON.stringify(Alloy.Collections.aspettiCashflow));
     syncAspects();
     $.briefCashflow.addEventListener("close", function() {

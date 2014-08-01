@@ -2,7 +2,9 @@ var args = arguments[0] || {};
 
 var selAspect = args.selectedAspect;
 
+var parsedAspect = _.clone(selAspect);
 
+parsedAspect.data = JSON.stringify(parsedAspect.data);
 
 var editedFlag = false;
 
@@ -25,6 +27,7 @@ function openEvent() {
 function editAspect(){
 	
 	Alloy.createController("editEvent", {
+		
 		_callback : function(aspettoEditato) {
 			
 			editedFlag = true;
@@ -41,7 +44,8 @@ function editAspect(){
 			//args._editFunc(aspettoEditato, e.source.arrayKey);
 
 		},
-		aspetto : selAspect
+		aspetto : parsedAspect
+		
 	}).getView().open();
 	Ti.API.info("ID Aspetto: "+selAspect.id);
 	

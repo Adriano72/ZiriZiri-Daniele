@@ -1,15 +1,6 @@
 var args = arguments[0] || {};
 
-
-/*
-var aspectJson = Alloy.Models.Aspetto.toJSON();
-
-Alloy.Models.Aspetto.set("importo", aspectJson.data.importo+"€", {silent: true});
-Alloy.Models.Aspetto.set("tipoMovimento", aspectJson.data.tipoMovimento.codice, {silent: true});
-Alloy.Models.Aspetto.set("modalitaPagamento", aspectJson.data.modalitaPagamento.descrizioneBreve, {silent: true});
-
-Alloy.Models.Aspetto.trigger('change');
-*/
+var net = require('net');
 
 Ti.API.info("COLLECTION CASHFLOW: "+JSON.stringify(Alloy.Collections.aspettiCashflow));
 
@@ -29,9 +20,21 @@ function showDetail(e){
 	
 	var selectedAspect = Alloy.Collections.aspettiCashflow.at(e.index).attributes;
 	
-	//Ti.API.info("ATTRIBUTES DOCUMENT: "+JSON.stringify(selectedAspect));
+	var riga = Alloy.createController('rowDetailCASHFLOW', {
+		_callback: function(updated_cashflow){
+			net.updateAspect(updated_cashflow, function(){
+				Ti.API.info("ASPETO UPDATATO");
+			});
+			Ti.API.info("***SELECTED MODEL***: "+JSON.stringify(updated_cashflow));
+			Alloy.Models.UpdatedCashflow = new Backbone.Model;
+			Alloy.Models.UpdatedCashflow.set(updated_cashflow);
+			Alloy.Models.UpdatedCashflow.set('data', JSON.parse(Alloy.Models.UpdatedCashflow.get('data')));
 	
-	var riga = Alloy.createController('rowDetailCASHFLOW', selectedAspect).getView();
+			Alloy.Collections.aspettiCashflow.remove(Alloy.Collections.aspettiCashflow.at(e.index));
+			Alloy.Collections.aspettiCashflow.add(Alloy.Models.UpdatedCashflow);
+		},
+		selectedAspect: selectedAspect
+	}).getView();
 	
 }
 

@@ -89,8 +89,6 @@ function Controller() {
                 aspetto: objRet
             });
             Ti.API.info("TEMP ARRAY ASPETTI: " + JSON.stringify(tempContainer));
-            var aspettoDataJson = JSON.parse(objRet.data);
-            Ti.API.info("DATA PARSATO: " + JSON.stringify(aspettoDataJson));
             var riga = Alloy.createController("rowEvent", {
                 obj_aspetto: objRet,
                 keyIndex: randomKey,
@@ -114,8 +112,6 @@ function Controller() {
                 aspetto: objRet
             });
             Ti.API.info("TEMP ARRAY ASPETTI: " + JSON.stringify(tempContainer));
-            var aspettoDataJson = JSON.parse(objRet.data);
-            Ti.API.info("DATA PARSATO: " + JSON.stringify(aspettoDataJson));
             var riga = Alloy.createController("rowCASHFLOW", {
                 obj_aspetto: objRet,
                 keyIndex: randomKey,
