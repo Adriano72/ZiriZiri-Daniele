@@ -1,6 +1,6 @@
 <Alloy>
 
-	<Window id="win" title="{Post_template.name}" class="container" onOpen="openEvent" onClose="resetShortcut">
+	<Window id="win"  class="container" onOpen="openEvent" onClose="resetShortcut">
 
 		<!-- The Menu tag adds the Android menu. -->
 		<Menu id="menu" platform="android" onHomeIconItemSelected="homeIconSelected">
@@ -30,7 +30,7 @@
 									<ImageView id="rating_5" class="ratingstars"/>
 								</View>
 							</View>
-							<Label id = "name" text="{Post_template.name}"/>
+							<Label id = "name" text="TESTO DA AGGIORNARE"/>
 						</View>
 
 					</View>

@@ -91,7 +91,7 @@ function Controller() {
                     var a = Titanium.UI.createAlertDialog({
                         title: "Camera"
                     });
-                    error.code == Titanium.Media.NO_CAMERA ? a.setMessage("Impossibile attivare la funzione foto su questo dispositivo") : a.setMessage("Unexpected error: " + error.code);
+                    a.setMessage(error.code == Titanium.Media.NO_CAMERA ? "Impossibile attivare la funzione foto su questo dispositivo" : "Unexpected error: " + error.code);
                     a.show();
                 },
                 saveToPhotoGallery: true,
@@ -132,9 +132,15 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "addDocument";
     if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};

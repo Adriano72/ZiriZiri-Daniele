@@ -236,9 +236,15 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "crea-modifica-post";
     if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};
@@ -391,7 +397,8 @@ function Controller() {
         ellipsize: true,
         wordWrap: true,
         top: 0,
-        id: "name"
+        id: "name",
+        text: "TESTO DA AGGIORNARE"
     });
     $.__views.innerWrapper.add($.__views.name);
     $.__views.middleWrapper = Ti.UI.createView({
@@ -577,16 +584,7 @@ function Controller() {
         id: "__alloyId112"
     });
     $.__views.buttonsContainer.add($.__views.__alloyId112);
-    var __alloyId113 = function() {
-        $.win.title = _.isFunction(Alloy.Models.Post_template.transform) ? Alloy.Models.Post_template.transform()["name"] : Alloy.Models.Post_template.get("name");
-        $.win.title = _.isFunction(Alloy.Models.Post_template.transform) ? Alloy.Models.Post_template.transform()["name"] : Alloy.Models.Post_template.get("name");
-        $.name.text = _.isFunction(Alloy.Models.Post_template.transform) ? Alloy.Models.Post_template.transform()["name"] : Alloy.Models.Post_template.get("name");
-        $.name.text = _.isFunction(Alloy.Models.Post_template.transform) ? Alloy.Models.Post_template.transform()["name"] : Alloy.Models.Post_template.get("name");
-    };
-    Alloy.Models.Post_template.on("fetch change destroy", __alloyId113);
-    exports.destroy = function() {
-        Alloy.Models.Post_template.off("fetch change destroy", __alloyId113);
-    };
+    exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
     Ti.API.info("PARAMETRI: " + JSON.stringify(args));

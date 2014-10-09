@@ -29,6 +29,18 @@ exports.loadTabData = function() {
 	});
 
 	net.getPostTemplate(0, 1, function(p_postTemplate) {
+		
+		var template = p_postTemplate.data[0];
+		
+		
+		Ti.App.Properties.setObject("post_template",  _.omit(template, 'modules'));
+		
+		Ti.API.info("TEMPLATE POST ONLY ***: "+ JSON.stringify(Ti.App.Properties.getObject("post_template")));
+		
+		
+		
+		
+		
 
 		// ***** EXTRACT POST ONLY TEMPLATE *****************
 		Alloy.Models.Template.set(p_postTemplate.data[0]);

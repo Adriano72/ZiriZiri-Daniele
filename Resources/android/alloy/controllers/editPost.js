@@ -8,17 +8,17 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
-    function __alloyId178() {
-        $.__views.win.removeEventListener("open", __alloyId178);
+    function __alloyId176() {
+        $.__views.win.removeEventListener("open", __alloyId176);
         if ($.__views.win.activity) $.__views.win.activity.onCreateOptionsMenu = function(e) {
-            var __alloyId177 = {
+            var __alloyId175 = {
                 showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
                 icon: "/images/top-save2.png",
                 id: "mn_salva",
                 title: "Salva"
             };
-            $.__views.mn_salva = e.menu.add(_.pick(__alloyId177, Alloy.Android.menuItemCreateArgs));
-            $.__views.mn_salva.applyProperties(_.omit(__alloyId177, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_salva = e.menu.add(_.pick(__alloyId175, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_salva.applyProperties(_.omit(__alloyId175, Alloy.Android.menuItemCreateArgs));
             savePost ? $.__views.mn_salva.addEventListener("click", savePost) : __defers["$.__views.mn_salva!click!savePost"] = true;
             if ($.__views.win.activity.actionBar) {
                 $.__views.win.activity.actionBar.title = "Edit Post";
@@ -64,9 +64,15 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "editPost";
     if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};
@@ -78,18 +84,18 @@ function Controller() {
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
-    $.__views.win.addEventListener("open", __alloyId178);
-    var __alloyId179 = [];
-    $.__views.__alloyId180 = Ti.UI.createTableViewRow({
+    $.__views.win.addEventListener("open", __alloyId176);
+    var __alloyId177 = [];
+    $.__views.__alloyId178 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F9F9F9",
         className: "itemRow",
         layout: "horizontal",
         touchEnabled: false,
-        id: "__alloyId180"
+        id: "__alloyId178"
     });
-    __alloyId179.push($.__views.__alloyId180);
+    __alloyId177.push($.__views.__alloyId178);
     $.__views.titolo = Ti.UI.createTextField({
         color: "#999",
         font: {
@@ -107,30 +113,30 @@ function Controller() {
         backgroundColor: "#FFF",
         id: "titolo"
     });
-    $.__views.__alloyId180.add($.__views.titolo);
-    $.__views.__alloyId181 = Ti.UI.createTableViewRow({
-        id: "__alloyId181"
+    $.__views.__alloyId178.add($.__views.titolo);
+    $.__views.__alloyId179 = Ti.UI.createTableViewRow({
+        id: "__alloyId179"
     });
-    __alloyId179.push($.__views.__alloyId181);
+    __alloyId177.push($.__views.__alloyId179);
     $.__views.starwidget = Alloy.createWidget("starrating", "widget", {
         top: 10,
         bottom: 10,
         id: "starwidget",
         max: "5",
         initialRating: "0",
-        __parentSymbol: $.__views.__alloyId181
+        __parentSymbol: $.__views.__alloyId179
     });
-    $.__views.starwidget.setParent($.__views.__alloyId181);
-    $.__views.__alloyId182 = Ti.UI.createTableViewRow({
+    $.__views.starwidget.setParent($.__views.__alloyId179);
+    $.__views.__alloyId180 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F9F9F9",
         className: "itemRow",
         layout: "horizontal",
         touchEnabled: false,
-        id: "__alloyId182"
+        id: "__alloyId180"
     });
-    __alloyId179.push($.__views.__alloyId182);
+    __alloyId177.push($.__views.__alloyId180);
     $.__views.descrizione = Ti.UI.createTextField({
         color: "#999",
         font: {
@@ -148,8 +154,8 @@ function Controller() {
         backgroundColor: "#FFF",
         id: "descrizione"
     });
-    $.__views.__alloyId182.add($.__views.descrizione);
-    $.__views.__alloyId183 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId180.add($.__views.descrizione);
+    $.__views.__alloyId181 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F9F9F9",
@@ -157,9 +163,9 @@ function Controller() {
         layout: "horizontal",
         touchEnabled: false,
         hasDetail: "true",
-        id: "__alloyId183"
+        id: "__alloyId181"
     });
-    __alloyId179.push($.__views.__alloyId183);
+    __alloyId177.push($.__views.__alloyId181);
     $.__views.categoria = Ti.UI.createTextField({
         color: "#999",
         font: {
@@ -179,18 +185,18 @@ function Controller() {
         backgroundColor: "#FFF",
         id: "categoria"
     });
-    $.__views.__alloyId183.add($.__views.categoria);
+    $.__views.__alloyId181.add($.__views.categoria);
     openCategoryList ? $.__views.categoria.addEventListener("singletap", openCategoryList) : __defers["$.__views.categoria!singletap!openCategoryList"] = true;
-    $.__views.__alloyId184 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId182 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F9F9F9",
         className: "itemRow",
         layout: "horizontal",
         touchEnabled: false,
-        id: "__alloyId184"
+        id: "__alloyId182"
     });
-    __alloyId179.push($.__views.__alloyId184);
+    __alloyId177.push($.__views.__alloyId182);
     $.__views.tag = Ti.UI.createTextField({
         color: "#999",
         font: {
@@ -208,17 +214,17 @@ function Controller() {
         backgroundColor: "#FFF",
         id: "tag"
     });
-    $.__views.__alloyId184.add($.__views.tag);
-    $.__views.__alloyId185 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId182.add($.__views.tag);
+    $.__views.__alloyId183 = Ti.UI.createTableViewRow({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#F9F9F9",
         className: "itemRow",
         layout: "horizontal",
         touchEnabled: false,
-        id: "__alloyId185"
+        id: "__alloyId183"
     });
-    __alloyId179.push($.__views.__alloyId185);
+    __alloyId177.push($.__views.__alloyId183);
     $.__views.storie = Ti.UI.createTextField({
         color: "#999",
         font: {
@@ -236,11 +242,11 @@ function Controller() {
         backgroundColor: "#FFF",
         id: "storie"
     });
-    $.__views.__alloyId185.add($.__views.storie);
+    $.__views.__alloyId183.add($.__views.storie);
     $.__views.newPostTable = Ti.UI.createTableView({
         top: 5,
         separatorColor: "transparent",
-        data: __alloyId179,
+        data: __alloyId177,
         id: "newPostTable"
     });
     $.__views.win.add($.__views.newPostTable);

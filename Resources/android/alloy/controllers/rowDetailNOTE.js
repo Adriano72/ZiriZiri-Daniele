@@ -18,9 +18,15 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "rowDetailNOTE";
     if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};
@@ -69,6 +75,43 @@ function Controller() {
         id: "category"
     });
     $.__views.row.add($.__views.category);
+    $.__views.__alloyId251 = Ti.UI.createView({
+        height: Ti.UI.SIZE,
+        touchEnabled: false,
+        layout: "vertical",
+        backgroundColor: "#DEDEDE",
+        id: "__alloyId251"
+    });
+    $.__views.row.add($.__views.__alloyId251);
+    $.__views.__alloyId252 = Ti.UI.createLabel({
+        height: 20,
+        width: Ti.UI.FILL,
+        backgroundColor: "#787878",
+        top: 0,
+        font: {
+            fontSize: 14,
+            fontFamily: "Rosario-Regular"
+        },
+        touchEnabled: false,
+        color: "#FFFFFF",
+        text: " Timestamp",
+        id: "__alloyId252"
+    });
+    $.__views.__alloyId251.add($.__views.__alloyId252);
+    $.__views.timestamp = Ti.UI.createLabel({
+        height: Ti.UI.SIZE,
+        font: {
+            fontSize: 16
+        },
+        left: 20,
+        right: 5,
+        top: 5,
+        bottom: 5,
+        touchEnabled: false,
+        width: Ti.UI.FILL,
+        id: "timestamp"
+    });
+    $.__views.__alloyId251.add($.__views.timestamp);
     $.__views.__alloyId253 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         touchEnabled: false,
@@ -88,54 +131,17 @@ function Controller() {
         },
         touchEnabled: false,
         color: "#FFFFFF",
-        text: " Timestamp",
+        text: " Contenuto",
         id: "__alloyId254"
     });
     $.__views.__alloyId253.add($.__views.__alloyId254);
-    $.__views.timestamp = Ti.UI.createLabel({
-        height: Ti.UI.SIZE,
-        font: {
-            fontSize: 16
-        },
-        left: 20,
-        right: 5,
-        top: 5,
-        bottom: 5,
-        touchEnabled: false,
-        width: Ti.UI.FILL,
-        id: "timestamp"
-    });
-    $.__views.__alloyId253.add($.__views.timestamp);
-    $.__views.__alloyId255 = Ti.UI.createView({
-        height: Ti.UI.SIZE,
-        touchEnabled: false,
-        layout: "vertical",
-        backgroundColor: "#DEDEDE",
-        id: "__alloyId255"
-    });
-    $.__views.row.add($.__views.__alloyId255);
-    $.__views.__alloyId256 = Ti.UI.createLabel({
-        height: 20,
-        width: Ti.UI.FILL,
-        backgroundColor: "#787878",
-        top: 0,
-        font: {
-            fontSize: 14,
-            fontFamily: "Rosario-Regular"
-        },
-        touchEnabled: false,
-        color: "#FFFFFF",
-        text: " Contenuto",
-        id: "__alloyId256"
-    });
-    $.__views.__alloyId255.add($.__views.__alloyId256);
     $.__views.content = Ti.UI.createWebView({
         top: 5,
         width: "95%",
         height: 300,
         id: "content"
     });
-    $.__views.__alloyId255.add($.__views.content);
+    $.__views.__alloyId253.add($.__views.content);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

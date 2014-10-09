@@ -8,16 +8,16 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
-    function __alloyId187() {
-        $.__views.win.removeEventListener("open", __alloyId187);
+    function __alloyId185() {
+        $.__views.win.removeEventListener("open", __alloyId185);
         if ($.__views.win.activity) $.__views.win.activity.onCreateOptionsMenu = function(e) {
-            var __alloyId186 = {
+            var __alloyId184 = {
                 icon: "/images/top-save.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS,
                 id: "mn_salva"
             };
-            $.__views.mn_salva = e.menu.add(_.pick(__alloyId186, Alloy.Android.menuItemCreateArgs));
-            $.__views.mn_salva.applyProperties(_.omit(__alloyId186, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_salva = e.menu.add(_.pick(__alloyId184, Alloy.Android.menuItemCreateArgs));
+            $.__views.mn_salva.applyProperties(_.omit(__alloyId184, Alloy.Android.menuItemCreateArgs));
             storeLocation ? $.__views.mn_salva.addEventListener("click", storeLocation) : __defers["$.__views.mn_salva!click!storeLocation"] = true;
         }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
@@ -77,9 +77,15 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "getLocation";
     if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};
@@ -92,7 +98,7 @@ function Controller() {
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
-    $.__views.win.addEventListener("open", __alloyId187);
+    $.__views.win.addEventListener("open", __alloyId185);
     $.__views.mapview = Alloy.Globals.Map.createView({
         height: 130,
         top: 5,

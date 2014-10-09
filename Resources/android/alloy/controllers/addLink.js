@@ -28,8 +28,12 @@ function Controller() {
     }
     function createProtoObj() {
         if ("" != $.titolo.value && "" != $.descrizione.value && "" != $.content.value) {
-            $.titolo.value;
-            $.descrizione.value;
+            {
+                $.titolo.value;
+            }
+            {
+                $.descrizione.value;
+            }
             var objLink = {
                 name: $.titolo.value,
                 description: $.descrizione.value,
@@ -42,9 +46,15 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "addLink";
     if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};

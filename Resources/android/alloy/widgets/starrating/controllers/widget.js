@@ -38,7 +38,7 @@ function Controller() {
     var setRating = function(newRating) {
         newRating > max && (newRating = max);
         rating = newRating;
-        for (var i = 0, l = stars.length; l > i; i++) stars[i].image = i >= rating ? WPATH("star_off.png") : rating > i && i + 1 > rating ? WPATH("star_half.png") : WPATH("star.png");
+        for (var i = 0, l = stars.length; l > i; i++) stars[i].image = WPATH(i >= rating ? "star_off.png" : rating > i && i + 1 > rating ? "star_half.png" : "star.png");
     };
     exports.setRating = setRating;
     exports.getRating = function() {
@@ -47,13 +47,13 @@ function Controller() {
     var createStars = function(num, cb) {
         for (var i = 0; num > i; i++) {
             var star = Alloy.createWidget("starrating", "star").getView();
-            (function() {
+            !function() {
                 var index = i;
                 star.addEventListener("click", function() {
                     setRating(index + 1);
                     cb(index + 1);
                 });
-            })();
+            }();
             stars.push(star);
             $.starrating.add(star);
         }

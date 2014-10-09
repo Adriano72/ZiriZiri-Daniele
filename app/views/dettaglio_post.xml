@@ -15,30 +15,30 @@
 
 				<View id="topWrapper">
 
-					<ImageView id="postIcon" image="{Post.catImage}"/>
+					<ImageView id="postIcon" image="Post.catImage"/>
 					<View id="innerWrapper">
 						<View id="date_rating">
-							<Label id = "date" text="{Post.tmp_referenceTime}"/>
+							<Label id = "date" text="Post.tmp_referenceTime"/>
 							<View id = "ratingContainer">
-								<ImageView id="rating_1" class="ratingstars" image="{Post.rating_1}"/>
-								<ImageView id="rating_2" class="ratingstars" image="{Post.rating_2}"/>
-								<ImageView id="rating_3" class="ratingstars" image="{Post.rating_3}"/>
-								<ImageView id="rating_4" class="ratingstars" image="{Post.rating_4}"/>
-								<ImageView id="rating_5" class="ratingstars" image="{Post.rating_5}"/>
+								<ImageView id="rating_1" class="ratingstars" image="Post.rating_1"/>
+								<ImageView id="rating_2" class="ratingstars" image="Post.rating_2"/>
+								<ImageView id="rating_3" class="ratingstars" image="Post.rating_3"/>
+								<ImageView id="rating_4" class="ratingstars" image="Post.rating_4"/>
+								<ImageView id="rating_5" class="ratingstars" image="Post.rating_5"/>
 							</View>
 						</View>
-						<Label id = "name" text="{Post.name}"/>
+						<Label id = "name" text="Post.name"/>
 					</View>
 
 				</View>
 				<View id="middleWrapper">
 					<View class="post_icons_container first" >
 						<Label class="post_icon" id="cat_icon"/>
-						<Label class="btn_text" id="category" text ="{Post.categoria}"/>
+						<Label class="btn_text" id="category" text ="Post.categoria"/>
 					</View>
 					<View class="post_icons_container">
 						<Label class="post_icon" id="tag_icon"/>
-						<Label class="btn_text" id="tags" text="{Post.tag}"/>
+						<Label class="btn_text" id="tags" text="Post.tag"/>
 					</View>
 					<View class="post_icons_container">
 						<Label class="post_icon" id="stories_icon"/>
