@@ -23,9 +23,15 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "rowEvent";
     if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};
@@ -37,7 +43,7 @@ function Controller() {
     });
     $.__views.riga && $.addTopLevelView($.__views.riga);
     edit ? $.__views.riga.addEventListener("click", edit) : __defers["$.__views.riga!click!edit"] = true;
-    $.__views.__alloyId225 = Ti.UI.createView({
+    $.__views.__alloyId223 = Ti.UI.createView({
         left: 5,
         right: 5,
         top: 5,
@@ -49,9 +55,9 @@ function Controller() {
         height: 50,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId225"
+        id: "__alloyId223"
     });
-    $.__views.riga.add($.__views.__alloyId225);
+    $.__views.riga.add($.__views.__alloyId223);
     $.__views.eventIcon = Ti.UI.createLabel({
         touchEnabled: false,
         left: 5,
@@ -60,24 +66,24 @@ function Controller() {
         backgroundImage: "/images/kernel-event-on.png",
         id: "eventIcon"
     });
-    $.__views.__alloyId225.add($.__views.eventIcon);
-    $.__views.__alloyId226 = Ti.UI.createView({
+    $.__views.__alloyId223.add($.__views.eventIcon);
+    $.__views.__alloyId224 = Ti.UI.createView({
         touchEnabled: false,
         width: Ti.UI.SIZE,
         left: 10,
         layout: "vertical",
-        id: "__alloyId226"
+        id: "__alloyId224"
     });
-    $.__views.__alloyId225.add($.__views.__alloyId226);
-    $.__views.__alloyId227 = Ti.UI.createView({
+    $.__views.__alloyId223.add($.__views.__alloyId224);
+    $.__views.__alloyId225 = Ti.UI.createView({
         left: 2,
         touchEnabled: false,
         width: "85%",
         height: Ti.UI.SIZE,
         layout: "horizontal",
-        id: "__alloyId227"
+        id: "__alloyId225"
     });
-    $.__views.__alloyId226.add($.__views.__alloyId227);
+    $.__views.__alloyId224.add($.__views.__alloyId225);
     $.__views.startDate = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -90,7 +96,7 @@ function Controller() {
         left: 0,
         id: "startDate"
     });
-    $.__views.__alloyId227.add($.__views.startDate);
+    $.__views.__alloyId225.add($.__views.startDate);
     $.__views.endDate = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -102,16 +108,16 @@ function Controller() {
         width: 140,
         id: "endDate"
     });
-    $.__views.__alloyId227.add($.__views.endDate);
-    $.__views.__alloyId228 = Ti.UI.createView({
+    $.__views.__alloyId225.add($.__views.endDate);
+    $.__views.__alloyId226 = Ti.UI.createView({
         left: 2,
         touchEnabled: false,
         width: "85%",
         height: Ti.UI.SIZE,
         layout: "horizontal",
-        id: "__alloyId228"
+        id: "__alloyId226"
     });
-    $.__views.__alloyId226.add($.__views.__alloyId228);
+    $.__views.__alloyId224.add($.__views.__alloyId226);
     $.__views.location = Ti.UI.createLabel({
         color: "#999",
         width: Ti.UI.FILL,
@@ -120,7 +126,7 @@ function Controller() {
         ellipsize: true,
         id: "location"
     });
-    $.__views.__alloyId228.add($.__views.location);
+    $.__views.__alloyId226.add($.__views.location);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

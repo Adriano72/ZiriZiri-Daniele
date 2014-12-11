@@ -11,9 +11,15 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "rowNOTE";
     if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};
@@ -26,13 +32,13 @@ function Controller() {
         id: "row"
     });
     $.__views.row && $.addTopLevelView($.__views.row);
-    $.__views.__alloyId231 = Ti.UI.createView({
+    $.__views.__alloyId229 = Ti.UI.createView({
         height: 40,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId231"
+        id: "__alloyId229"
     });
-    $.__views.row.add($.__views.__alloyId231);
+    $.__views.row.add($.__views.__alloyId229);
     $.__views.description = Ti.UI.createLabel({
         height: 30,
         font: {
@@ -48,7 +54,7 @@ function Controller() {
         width: 55,
         id: "description"
     });
-    $.__views.__alloyId231.add($.__views.description);
+    $.__views.__alloyId229.add($.__views.description);
     $.__views.titolo = Ti.UI.createLabel({
         height: 40,
         font: {
@@ -60,7 +66,7 @@ function Controller() {
         width: Ti.UI.SIZE,
         id: "titolo"
     });
-    $.__views.__alloyId231.add($.__views.titolo);
+    $.__views.__alloyId229.add($.__views.titolo);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

@@ -95,14 +95,33 @@ function Controller() {
     }
     function showDetail(e) {
         var selectedAspect = Alloy.Collections.aspettoEvento.at(e.index).attributes;
-        Alloy.createController("rowDetailEVENT", selectedAspect).getView();
+        Alloy.createController("rowDetailEVENT", {
+            _callback: function(updated_event) {
+                net.updateAspect(updated_event, function() {
+                    Ti.API.info("ASPETO UPDATATO");
+                });
+                Ti.API.info("***SELECTED MODEL***: " + JSON.stringify(updated_event));
+                Alloy.Models.UpdatedEvent = new Backbone.Model();
+                Alloy.Models.UpdatedEvent.set(updated_event);
+                Alloy.Models.UpdatedEvent.set("data", JSON.parse(Alloy.Models.UpdatedEvent.get("data")));
+                Alloy.Collections.aspettoEvento.remove(Alloy.Collections.aspettoEvento.at(e.index));
+                Alloy.Collections.aspettoEvento.add(Alloy.Models.UpdatedEvent);
+            },
+            selectedAspect: selectedAspect
+        }).getView();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "briefEvento";
     if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};
@@ -142,6 +161,7 @@ function Controller() {
     };
     _.extend($, $.__views);
     arguments[0] || {};
+    var net = require("net");
     Ti.API.info("COLLECTION EVENT: " + JSON.stringify(Alloy.Collections.aspettoEvento));
     syncAspects();
     $.briefEvento.addEventListener("close", function() {

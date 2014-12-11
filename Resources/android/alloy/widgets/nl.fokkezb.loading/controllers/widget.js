@@ -19,17 +19,17 @@ function Controller() {
             ctrl.update(_message, _cancelable);
             return;
         }
-        var newCtrl = Widget.createController("window", {
+        var newCtrl = Widget.createController(true && $.progress ? "progress" : "window", {
             message: _message,
             cancelable: _cancelable
         });
-        newCtrl.open();
+        newCtrl.show();
         ctrl && hide();
         ctrl = newCtrl;
     }
     function hide() {
         if (ctrl) {
-            ctrl.close();
+            ctrl.hide();
             ctrl = null;
         }
         return;
@@ -48,7 +48,6 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var ctrl;
-    arguments[0] || {};
     Object.defineProperty($, "visible", {
         get: function() {
             return ctrl && ctrl.hasFocus;
@@ -57,8 +56,9 @@ function Controller() {
             return visible ? show() : hide();
         }
     });
-    exports.show = show;
-    exports.hide = hide;
+    $.show = show;
+    $.hide = hide;
+    $.progress = true;
     _.extend($, exports);
 }
 

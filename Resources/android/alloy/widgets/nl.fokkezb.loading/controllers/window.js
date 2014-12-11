@@ -14,64 +14,33 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
-    function init() {
-        if ($.loadingMask.images) {
-            useImages = true;
-            $.loadingInner.remove($.loadingIndicator);
-            $.loadingIndicator = null;
-        } else {
-            $.loadingInner.remove($.loadingImages);
-            $.loadingImages = null;
-        }
-        $.loadingMask.addEventListener("androidback", cancel);
-        update(args.message, args.cancelable);
-        $.loadingMask.addEventListener("open", function() {
-            isOpen = true;
-        });
-        args = null;
-    }
     function update(_message, _cancelable) {
-        $.loadingMessage.text = _message || L("loadingMessage", "Loading...");
+        $.view.update(_message, _cancelable);
+        message = _message;
         cancelable = _cancelable;
     }
-    function cancel(e) {
-        if (!cancelable) {
-            if (true && "androidback" === e.type) {
-                var intent = Ti.Android.createIntent({
-                    action: Ti.Android.ACTION_MAIN
-                });
-                intent.addCategory(Ti.Android.CATEGORY_HOME);
-                Ti.Android.currentActivity.startActivity(intent);
-            }
-            return;
-        }
-        close();
-        _.isFunction(cancelable) && cancelable();
-        return;
+    function show() {
+        $.view.show(message, cancelable);
+        $.win.open();
     }
-    function open() {
-        Ti.API.debug("window open " + $.loadingMask.n);
-        $.loadingMask.open();
-        useImages ? $.loadingImages.start() : $.loadingIndicator.show();
-    }
-    function close() {
-        if (false || isOpen) _close(); else var interval = setInterval(function() {
+    function hide() {
+        var close = function() {
+            $.view.hide();
+            $.win.close();
+            cancelable = null;
+        };
+        if (false || isOpen) close(); else var interval = setInterval(function() {
             if (isOpen) {
-                _close();
+                close();
                 clearInterval(interval);
             }
         }, 100);
     }
-    function _close() {
-        $.loadingMask.close();
-        useImages ? $.loadingImages.stop() : $.loadingIndicator.hide();
-        cancelable = null;
-    }
     function onFocus() {
-        $.hasFocus = true;
+        hasFocus = true;
     }
     function onBlur() {
-        $.hasFocus = false;
+        hasFocus = false;
     }
     new (require("alloy/widget"))("nl.fokkezb.loading");
     this.__widgetId = "nl.fokkezb.loading";
@@ -85,70 +54,64 @@ function Controller() {
     var $ = this;
     var exports = {};
     var __defers = {};
-    $.__views.loadingMask = Ti.UI.createWindow({
-        orientationModes: [ Ti.UI.PORTRAIT ],
-        backgroundColor: "#5000",
+    $.__views.win = Ti.UI.createWindow({
+        backgroundColor: "transparent",
         backgroundImage: null,
         opacity: 1,
+        navBarHidden: true,
         modal: false,
-        id: "loadingMask"
+        theme: "Theme.AppCompat.Translucent.NoTitleBar",
+        id: "win"
     });
-    $.__views.loadingMask && $.addTopLevelView($.__views.loadingMask);
-    cancel ? $.__views.loadingMask.addEventListener("click", cancel) : __defers["$.__views.loadingMask!click!cancel"] = true;
-    onFocus ? $.__views.loadingMask.addEventListener("focus", onFocus) : __defers["$.__views.loadingMask!focus!onFocus"] = true;
-    onBlur ? $.__views.loadingMask.addEventListener("blur", onBlur) : __defers["$.__views.loadingMask!blur!onBlur"] = true;
-    $.__views.loadingOuter = Ti.UI.createView({
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE,
-        borderRadius: 10,
-        backgroundColor: "#C000",
-        id: "loadingOuter"
+    $.__views.win && $.addTopLevelView($.__views.win);
+    onFocus ? $.__views.win.addEventListener("focus", onFocus) : __defers["$.__views.win!focus!onFocus"] = true;
+    onBlur ? $.__views.win.addEventListener("blur", onBlur) : __defers["$.__views.win!blur!onBlur"] = true;
+    $.__views.view = Alloy.createWidget("nl.fokkezb.loading", "view", {
+        id: "view",
+        __parentSymbol: $.__views.win
     });
-    $.__views.loadingMask.add($.__views.loadingOuter);
-    $.__views.loadingInner = Ti.UI.createView({
-        top: "20dp",
-        right: "20dp",
-        bottom: "20dp",
-        left: "20dp",
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE,
-        layout: "vertical",
-        id: "loadingInner"
-    });
-    $.__views.loadingOuter.add($.__views.loadingInner);
-    $.__views.loadingIndicator = Ti.UI.createActivityIndicator({
-        top: "0dp",
-        style: Ti.UI.ActivityIndicatorStyle.BIG,
-        id: "loadingIndicator"
-    });
-    $.__views.loadingInner.add($.__views.loadingIndicator);
-    $.__views.loadingImages = Ti.UI.createImageView({
-        top: "0dp",
-        images: [ "/images/nl.fokkezb.loading/00.png", "/images/nl.fokkezb.loading/01.png", "/images/nl.fokkezb.loading/02.png", "/images/nl.fokkezb.loading/03.png", "/images/nl.fokkezb.loading/04.png", "/images/nl.fokkezb.loading/05.png", "/images/nl.fokkezb.loading/06.png", "/images/nl.fokkezb.loading/07.png", "/images/nl.fokkezb.loading/08.png", "/images/nl.fokkezb.loading/09.png", "/images/nl.fokkezb.loading/10.png", "/images/nl.fokkezb.loading/11.png" ],
-        id: "loadingImages"
-    });
-    $.__views.loadingInner.add($.__views.loadingImages);
-    $.__views.loadingMessage = Ti.UI.createLabel({
-        top: "20dp",
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE,
-        text: L("loadingMessage", "Loading.."),
-        color: "#fff",
-        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-        id: "loadingMessage"
-    });
-    $.__views.loadingInner.add($.__views.loadingMessage);
+    $.__views.view.setParent($.__views.win);
+    hide ? $.__views.view.on("cancel", hide) : __defers["$.__views.view!cancel!hide"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var args = arguments[0] || {}, useImages = false, cancelable = false, isOpen = false;
-    init();
-    exports.hasFocus = true;
-    exports.open = open;
-    exports.update = update;
-    exports.close = close;
-    __defers["$.__views.loadingMask!click!cancel"] && $.__views.loadingMask.addEventListener("click", cancel);
-    __defers["$.__views.loadingMask!focus!onFocus"] && $.__views.loadingMask.addEventListener("focus", onFocus);
-    __defers["$.__views.loadingMask!blur!onBlur"] && $.__views.loadingMask.addEventListener("blur", onBlur);
+    $.update = update;
+    $.show = show;
+    $.hide = hide;
+    Object.defineProperty($, "visible", {
+        get: function() {
+            return isOpen && hasFocus;
+        },
+        set: function(visible) {
+            return visible ? show() : hide();
+        }
+    });
+    var message;
+    var cancelable;
+    var isOpen = false;
+    var hasFocus = false;
+    !function(args) {
+        $.loadingMask.addEventListener("androidback", function() {
+            if (!_.isFunction(cancelable)) {
+                if (true && "androidback" === e.type) {
+                    var intent = Ti.Android.createIntent({
+                        action: Ti.Android.ACTION_MAIN
+                    });
+                    intent.addCategory(Ti.Android.CATEGORY_HOME);
+                    Ti.Android.currentActivity.startActivity(intent);
+                }
+                return;
+            }
+            $.view.cancel();
+        });
+        update(args.message, args.cancelable);
+        $.win.addEventListener("open", function() {
+            isOpen = true;
+        });
+        args = null;
+    }(arguments[0] || {});
+    __defers["$.__views.win!focus!onFocus"] && $.__views.win.addEventListener("focus", onFocus);
+    __defers["$.__views.win!blur!onBlur"] && $.__views.win.addEventListener("blur", onBlur);
+    __defers["$.__views.view!cancel!hide"] && $.__views.view.on("cancel", hide);
     _.extend($, exports);
 }
 

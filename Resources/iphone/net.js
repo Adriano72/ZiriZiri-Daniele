@@ -34,7 +34,7 @@ exports.getPost = function(postId, _callback) {
     xhr.onerror = function(e) {
         alert("Error gettin Timeline: " + JSON.stringify(e));
     };
-    xhr.open("GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "/" + postId + "?_type=JSON" + "&cached=true");
+    xhr.open("GET", Alloy.Globals.baseUrl + "/actions/actions/" + session + "/" + postId + "?_type=JSON&cached=true");
     xhr.send();
 };
 
@@ -60,7 +60,7 @@ exports.getTipoMovimento = function(_callback) {
     xhr.onerror = function(e) {
         alert("Error getting Tipo Movimento " + JSON.stringify(e));
     };
-    xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/tipomovimento/" + session + "?_type=JSON" + "&cached=true");
+    xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/tipomovimento/" + session + "?_type=JSON&cached=true");
     xhr.send();
 };
 
@@ -72,7 +72,7 @@ exports.getPagamentoIncasso = function(_callback) {
     xhr.onerror = function(e) {
         alert("Error getting Pagamento Incasso: " + JSON.stringify(e));
     };
-    xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/aliasstrumentopagamentoincasso/" + session + "?_type=JSON" + "&cached=true");
+    xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/aliasstrumentopagamentoincasso/" + session + "?_type=JSON&cached=true");
     xhr.send();
 };
 
@@ -84,7 +84,7 @@ exports.getVariabilita = function(_callback) {
     xhr.onerror = function(e) {
         alert("Error getting Variabilità: " + JSON.stringify(e));
     };
-    xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/tipovariabilita/" + session + "?_type=JSON" + "&cached=true");
+    xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/tipovariabilita/" + session + "?_type=JSON&cached=true");
     xhr.send();
 };
 
@@ -96,7 +96,7 @@ exports.getStatoMovimento = function(_callback) {
     xhr.onerror = function(e) {
         alert("Error getting Stato Movimento: " + JSON.stringify(e));
     };
-    xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/statomovimento/" + session + "?_type=JSON" + "&cached=true");
+    xhr.open("GET", Alloy.Globals.baseUrl + "/financial/financial/statomovimento/" + session + "?_type=JSON&cached=true");
     xhr.send();
 };
 
@@ -109,7 +109,7 @@ exports.getCategories = function(_callback) {
     xhr.onerror = function(e) {
         alert("Error getting Categories " + JSON.stringify(e));
     };
-    xhr.open("GET", Alloy.Globals.baseUrl + "/categories/categories/getLeafs/" + session + "?_type=JSON" + "&cached=true");
+    xhr.open("GET", Alloy.Globals.baseUrl + "/categories/categories/getLeafs/" + session + "?_type=JSON&cached=true");
     xhr.send();
 };
 
@@ -214,6 +214,32 @@ exports.saveAspect = function(allAspects, _callback) {
         dataJson.data = value;
         xhr.send(JSON.stringify(dataJson));
     });
+};
+
+exports.updateAspect = function(p_aspetto, _callback) {
+    var dataJson = {};
+    Ti.API.info("***UPDATING ASPECT***");
+    var xhr = Ti.Network.createHTTPClient();
+    xhr.onload = function() {
+        var json = JSON.parse(this.responseText);
+        if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
+            Ti.API.info("ID ASPETTO UPDATATO: " + json.data.id);
+            _callback();
+        } else {
+            Alloy.Globals.loading.hide();
+            Ti.API.info("ERRORE UPDATE ASPETTO: " + JSON.stringify(json));
+        }
+    };
+    xhr.onerror = function() {
+        Ti.API.error("ERRORE UPDATE ASPETTO: " + this.status + " - " + this.statusText);
+    };
+    xhr.open("PUT", Alloy.Globals.baseUrl + "/aspects/aspects/" + session + "?_type=JSON");
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("X-HTTP-Method-Override", "PUT");
+    Ti.API.info("JSON ASPETTO DA SALVARE: " + JSON.stringify(p_aspetto));
+    dataJson.data = p_aspetto;
+    xhr.send(JSON.stringify(dataJson));
 };
 
 exports.linkAspectsToPost = function(p_postId, p_array, _callback) {

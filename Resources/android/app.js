@@ -8,6 +8,10 @@ Alloy.Globals.postSaved = false;
 
 Alloy.Globals.shortcutMode = false;
 
+var zzAPI = require("zz.api/zz.api");
+
+ZZ = zzAPI.ZZ;
+
 var icons = require("/icons");
 
 Alloy.Models.Post = new Backbone.Model();

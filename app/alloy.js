@@ -18,6 +18,9 @@ Alloy.Globals.postSaved = false;
 
 Alloy.Globals.shortcutMode = false;
 
+var zzAPI = require('zz.api/zz.api'); //require('zz.api');
+ZZ = zzAPI.ZZ;
+
 var icons = require('/icons');
 
 ////////////////////////////////// Gestio ne Collection e Cache //////////////////

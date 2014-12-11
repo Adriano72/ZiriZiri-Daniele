@@ -14,6 +14,9 @@ exports.loadTabData = function() {
         Ti.API.info("COLLECTION CATEGORIE: " + JSON.stringify(Alloy.Collections.categorie));
     });
     net.getPostTemplate(0, 1, function(p_postTemplate) {
+        var template = p_postTemplate.data[0];
+        Ti.App.Properties.setObject("post_template", _.omit(template, "modules"));
+        Ti.API.info("TEMPLATE POST ONLY ***: " + JSON.stringify(Ti.App.Properties.getObject("post_template")));
         Alloy.Models.Template.set(p_postTemplate.data[0]);
         Alloy.Models.Template.unset("id");
         var templateJson = Alloy.Models.Template.toJSON();

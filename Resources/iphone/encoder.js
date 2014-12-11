@@ -15,7 +15,7 @@ exports.encoder = function() {
         numEncode: function(s) {
             if (this.isEmpty(s)) return "";
             var e = "";
-            for (var i = 0; s.length > i; i++) {
+            for (var i = 0; i < s.length; i++) {
                 var c = s.charAt(i);
                 (" " > c || c > "~") && (c = "&#" + c.charCodeAt() + ";");
                 e += c;
@@ -27,7 +27,7 @@ exports.encoder = function() {
             if (this.isEmpty(d)) return "";
             d = this.HTML2Numerical(d);
             arr = d.match(/&#[0-9]{1,5};/g);
-            if (null != arr) for (var x = 0; arr.length > x; x++) {
+            if (null != arr) for (var x = 0; x < arr.length; x++) {
                 m = arr[x];
                 c = m.substring(2, m.length - 1);
                 d = c >= -32768 && 65535 >= c ? d.replace(m, String.fromCharCode(c)) : d.replace(m, "");

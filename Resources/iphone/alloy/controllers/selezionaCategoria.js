@@ -11,22 +11,22 @@ function Controller() {
     function syncCategorie(e) {
         if (e && e.fromAdapter) return;
         syncCategorie.opts || {};
-        var models = __alloyId235.models;
+        var models = __alloyId233.models;
         var len = models.length;
         var rows = [];
         for (var i = 0; len > i; i++) {
-            var __alloyId232 = models[i];
-            __alloyId232.__transform = {};
-            var __alloyId234 = Ti.UI.createTableViewRow({
+            var __alloyId230 = models[i];
+            __alloyId230.__transform = {};
+            var __alloyId232 = Ti.UI.createTableViewRow({
                 height: 45,
                 width: Ti.UI.FILL,
                 backgroundColor: "#F9F9F9",
                 className: "itemRow",
                 color: "#999",
-                title: "undefined" != typeof __alloyId232.__transform["name"] ? __alloyId232.__transform["name"] : __alloyId232.get("name")
+                title: "undefined" != typeof __alloyId230.__transform["name"] ? __alloyId230.__transform["name"] : __alloyId230.get("name")
             });
-            rows.push(__alloyId234);
-            selectCategory ? __alloyId234.addEventListener("click", selectCategory) : __defers["__alloyId234!click!selectCategory"] = true;
+            rows.push(__alloyId232);
+            selectCategory ? __alloyId232.addEventListener("click", selectCategory) : __defers["__alloyId232!click!selectCategory"] = true;
         }
         $.__views.categorieTable.setData(rows);
     }
@@ -50,9 +50,15 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "selezionaCategoria";
     if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};
@@ -72,10 +78,10 @@ function Controller() {
         id: "categorieTable"
     });
     $.__views.win.add($.__views.categorieTable);
-    var __alloyId235 = Alloy.Collections["categorie"] || categorie;
-    __alloyId235.on("fetch destroy change add remove reset", syncCategorie);
+    var __alloyId233 = Alloy.Collections["categorie"] || categorie;
+    __alloyId233.on("fetch destroy change add remove reset", syncCategorie);
     exports.destroy = function() {
-        __alloyId235.off("fetch destroy change add remove reset", syncCategorie);
+        __alloyId233.off("fetch destroy change add remove reset", syncCategorie);
     };
     _.extend($, $.__views);
     var args = arguments[0] || {};
@@ -84,7 +90,7 @@ function Controller() {
     syncCategorie();
     $.win.open();
     __defers["$.__views.win!open!hideActionBar"] && $.__views.win.addEventListener("open", hideActionBar);
-    __defers["__alloyId234!click!selectCategory"] && __alloyId234.addEventListener("click", selectCategory);
+    __defers["__alloyId232!click!selectCategory"] && __alloyId232.addEventListener("click", selectCategory);
     _.extend($, exports);
 }
 

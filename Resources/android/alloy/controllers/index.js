@@ -15,38 +15,15 @@ function Controller() {
         rememberMe = e.value;
     }
     function do_login() {
-        var user_name = $.username.value || "none";
-        var user_password = $.password.value || "none";
-        var dataJson = {};
-        Ti.API.info("Username: " + user_name);
-        Ti.API.info("Password: " + user_password);
-        var xhr = Ti.Network.createHTTPClient();
-        xhr.onload = function() {
-            var json = JSON.parse(this.responseText);
-            Ti.API.info("********** FRM XHR: " + JSON.stringify(json));
-            if ('"SUCCESS"' == JSON.stringify(json.type.code)) {
-                rememberMe && Ti.App.Properties.setBool("authenticated", true);
-                Ti.App.Properties.setString("sessionId", json.data.sessionId);
-                Ti.API.info("SESSIONE: " + Ti.App.Properties.getString("sessionId", 0));
-                var net = require("net");
-                var loadTabData = require("loadTabulatedData");
-                loadTabData.loadTabData();
-                Alloy.Globals.loading.show("Sincronizzazione...", false);
-                _.isNull(Ti.App.Properties.getObject("timelineProp")) ? net.getData(0, 25, function(timeline_obj) {
-                    Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
-                    Alloy.createController("timeline_win").getView();
-                }) : Alloy.createController("timeline_win").getView();
-            } else alert("Username o password errati");
-        };
-        xhr.onerror = function() {
-            Ti.API.error("ERRORE DO LOGIN: " + this.status + " - " + this.statusText);
-        };
-        xhr.open("POST", Alloy.Globals.baseUrl + "/session/login/" + user_name + "?_type=JSON");
-        xhr.setRequestHeader("Accept", "application/json");
-        xhr.setRequestHeader("Content-Type", "application/json");
-        dataJson.data = user_password;
-        Ti.API.info("DATA JSON: " + JSON.stringify(dataJson));
-        xhr.send(JSON.stringify(dataJson));
+        $.username.value || "none";
+        $.password.value || "none";
+        ZZ.API.Core.Session.logIn({
+            username: "rnduser_1418138154947",
+            password: "password"
+        }, _coreSessionLogInCallback, function(error) {
+            alert("Username o password errati");
+            Ti.API.error("ZZ.API.Core.Session.logIn error [error : " + error + "]");
+        });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "index";
@@ -181,19 +158,36 @@ function Controller() {
     Ti.API.info("PROP TIMELINE (Index CACHED): " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
     if (Ti.App.Properties.getBool("authenticated", false)) {
         Ti.API.info("Already Authenticated!");
-        var net = require("net");
+        {
+            require("net");
+        }
         var loadTabData = require("loadTabulatedData");
         loadTabData.loadTabData();
-        _.isNull(Ti.App.Properties.getObject("timelineProp")) ? net.getData(0, 25, function(timeline_obj) {
-            Ti.API.info("RETURN CODE: " + timeline_obj.type.code);
-            Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
-            Ti.API.info("PROP TIMELINE (Index): " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
+        _.isNull(Ti.App.Properties.getObject("timelineProp")) ? ZZ.API.Core.Posts.list(function(posts) {
+            Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
+            Ti.App.Properties.setObject("timelineProp", posts);
             Alloy.createController("timeline_win").getView();
+        }, function(error) {
+            Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
         }) : Alloy.createController("timeline_win").getView();
     } else {
         Ti.App.Properties.setObject("timelineProp", null);
         $.index.open();
     }
+    var _coreSessionLogInCallback = function(user) {
+        Ti.API.info("ZZ.API.Core.Session.logIn success [user : " + JSON.stringify(user) + "]");
+        rememberMe && Ti.App.Properties.setBool("authenticated", true);
+        require("net");
+        var loadTabData = require("loadTabulatedData");
+        loadTabData.loadTabData();
+        _.isNull(Ti.App.Properties.getObject("timelineProp")) ? ZZ.API.Core.Posts.list(function(posts) {
+            Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
+            Ti.App.Properties.setObject("timelineProp", posts);
+            Alloy.createController("timeline_win").getView();
+        }, function(error) {
+            Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
+        }) : Alloy.createController("timeline_win").getView();
+    };
     __defers["$.__views.index!open!hideActionBar"] && $.__views.index.addEventListener("open", hideActionBar);
     __defers["$.__views.btn_login!click!do_login"] && $.__views.btn_login.addEventListener("click", do_login);
     __defers["$.__views.remember!change!manageRememberMe"] && $.__views.remember.addEventListener("change", manageRememberMe);

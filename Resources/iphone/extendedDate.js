@@ -51,12 +51,12 @@ exports.extentedData = function() {
     Date.prototype.addMonthsTrunc = function(m) {
         var d = this.getDate();
         this.setMonth(this.getMonth() + m);
-        d > this.getDate() && this.setDate(0);
+        this.getDate() < d && this.setDate(0);
     };
     Date.prototype.addYears = function(y) {
         var m = this.getMonth();
         this.setFullYear(this.getFullYear() + y);
-        this.getMonth() > m && this.setDate(0);
+        m < this.getMonth() && this.setDate(0);
     };
     Date.prototype.copy = function() {
         return new Date(this.getTime());
@@ -129,7 +129,7 @@ exports.extentedData = function() {
                 adj = (sAdj + eAdj) / sLastDay;
             }
             months = Math.abs(d2 - d1) + (adj - 1);
-            0 != months % 1 ? months = (months * sign).toFixed(2) : months *= sign;
+            months % 1 != 0 ? months = (months * sign).toFixed(2) : months *= sign;
         }
         return months;
     };

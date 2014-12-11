@@ -1,1 +1,1 @@
-module.exports = [{"isClass":true,"priority":10000.0105,"key":"container","style":{backgroundColor:"#F2F2F2",}},{"isId":true,"priority":100000.0106,"key":"aspectsDetailTable","style":{top:5,bottom:5,separatorColor:"transparent",}}];
+module.exports = [{"isClass":true,"priority":10000.0111,"key":"container","style":{backgroundColor:"#F2F2F2",}},{"isId":true,"priority":100000.0112,"key":"aspectsDetailTable","style":{top:5,bottom:5,separatorColor:"transparent",}}];
