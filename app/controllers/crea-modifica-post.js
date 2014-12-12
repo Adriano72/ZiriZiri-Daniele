@@ -105,7 +105,7 @@ var _corePostsAddCallback = function(response) {
 
 	ZZ.API.Core.Post.commit(response, function(response) {
 		Ti.API.info("ZZ.API.Core.Post.commit success [response : " + JSON.stringify(response) + "]");
-		
+		Alloy.Collections.Timeline.add(response);
 		//Ti.API.info("ID POST SALVATO: " + post_id);
 		Alloy.Globals.loading.hide();
 		//Alloy.Collections.Timeline.add(postToAddToTimeline);

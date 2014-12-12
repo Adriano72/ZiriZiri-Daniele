@@ -107,13 +107,17 @@ lastNumberOfRecordsFetched = timeTemp.length;
 
 Ti.API.info("NUM RECORDS FETCHED AT START: " + lastNumberOfRecordsFetched);
 
-//Ti.API.info("OGGETTO PROPERTY TIMELINE; " + JSON.stringify(timeTemp));
-
 //timeTemp = timeTemp.slice(0,10), {silent: true};
 
 Alloy.Collections.Timeline.reset(timeTemp.slice(0, 10), {
 	silent : true
 });
+
+Alloy.Collections.Timeline.sort({
+	silent : true
+});
+
+Ti.API.info("§§§§§§§§§§§ OGGETTO TIMELINE; " + JSON.stringify(Alloy.Collections.Timeline));
 
 syncTimeline();
 

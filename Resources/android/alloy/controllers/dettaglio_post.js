@@ -385,7 +385,7 @@ function Controller() {
         silent: true
     });
     var rating = Alloy.Models.Post.get("rating");
-    Alloy.Models.Post.set("catImage", _.isNull(modJson.category.code) ? "/images/android-robot.jpg" : "/images/" + modJson.category.code.slice(0, 2) + ".png");
+    Alloy.Models.Post.set("catImage", _.isNull(modJson.category) ? "/images/android-robot.jpg" : "/images/" + modJson.category.code.slice(0, 2) + ".png");
     Alloy.Models.Post.set("rating_1", rating > 0 ? "/images/star-small.png" : "");
     Alloy.Models.Post.set("rating_2", rating > 1 ? "/images/star-small.png" : "");
     Alloy.Models.Post.set("rating_3", rating > 2 ? "/images/star-small.png" : "");

@@ -611,6 +611,7 @@ function Controller() {
         Ti.API.info("ZZ.API.Core.Posts.add success [response : " + JSON.stringify(response) + "]");
         ZZ.API.Core.Post.commit(response, function(response) {
             Ti.API.info("ZZ.API.Core.Post.commit success [response : " + JSON.stringify(response) + "]");
+            Alloy.Collections.Timeline.add(response);
             Alloy.Globals.loading.hide();
             $.win.close();
             args();

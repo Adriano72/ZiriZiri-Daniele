@@ -745,6 +745,10 @@ function Controller() {
     Alloy.Collections.Timeline.reset(timeTemp.slice(0, 10), {
         silent: true
     });
+    Alloy.Collections.Timeline.sort({
+        silent: true
+    });
+    Ti.API.info("§§§§§§§§§§§ OGGETTO TIMELINE; " + JSON.stringify(Alloy.Collections.Timeline));
     syncTimeline();
     Ti.API.info("LENGTH COLLECTION: " + Alloy.Collections.Timeline.length);
     Ti.API.info("TIMELINE LENGTH STORED PROPERTY: " + timeTemp.length);

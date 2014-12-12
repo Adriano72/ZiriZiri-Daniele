@@ -72,7 +72,8 @@ Alloy.Models.Post.set("categoria", (!_.isNull(modJson.category) ? modJson.catego
 });
 
 var rating = Alloy.Models.Post.get("rating");
-Alloy.Models.Post.set("catImage", (!_.isNull(modJson.category.code)) ? '/images/' + modJson.category.code.slice(0, 2) + ".png" : '/images/android-robot.jpg');
+//Alloy.Models.Post.set("catImage", (!_.isNull(modJson.category.code)) ? '/images/' + modJson.category.code.slice(0, 2) + ".png" : '/images/android-robot.jpg');
+Alloy.Models.Post.set("catImage", (!_.isNull(modJson.category)) ? '/images/' + modJson.category.code.slice(0, 2) + ".png" : '/images/android-robot.jpg');
 Alloy.Models.Post.set("rating_1", (rating > 0) ? "/images/star-small.png" : "");
 Alloy.Models.Post.set("rating_2", (rating > 1) ? "/images/star-small.png" : "");
 Alloy.Models.Post.set("rating_3", (rating > 2) ? "/images/star-small.png" : "");
