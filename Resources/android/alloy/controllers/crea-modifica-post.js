@@ -67,11 +67,8 @@ function Controller() {
         _.each(aspettiArray, function(value) {
             Ti.API.info("CONTENT: " + JSON.stringify(value.data));
         });
-        net.savePost(Alloy.Models.Post_template, function(post_id, postToAddToTimeline) {
-            Ti.API.info("ID POST SALVATO: " + post_id);
-            Alloy.Collections.Timeline.add(postToAddToTimeline);
-            $.win.close();
-            args();
+        ZZ.API.Core.Posts.add(Alloy.Models.Post_template, _corePostsAddCallback, function(error) {
+            Ti.API.error("ZZ.API.Core.Posts.add error [error : " + error + "]");
         });
     }
     function editPost() {
@@ -591,7 +588,7 @@ function Controller() {
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     moment.lang("it");
-    var net = require("net");
+    require("net");
     var timeNow = moment();
     var arrayAspetti = [];
     var tempContainer = [];
@@ -601,6 +598,7 @@ function Controller() {
     $.postIcon.image = _.isNull(modJson.category.code) ? "/images/android-robot.jpg" : "/images/" + modJson.category.code.slice(0, 2) + ".png";
     $.date.text = moment(Alloy.Models.Post_template.get("referenceTime")).fromNow();
     $.category.text = _.isNull(modJson.category) ? "" : modJson.category.name;
+    $.name.text = modJson.name;
     Ti.API.info("CATEGORIA: " + modJson.category.name);
     var rating = Alloy.Models.Post_template.get("rating");
     $.rating_1.image = rating > 0 ? "/images/star-small.png" : "";
@@ -609,6 +607,17 @@ function Controller() {
     $.rating_4.image = rating > 3 ? "/images/star-small.png" : "";
     $.rating_5.image = rating > 4 ? "/images/star-small.png" : "";
     Alloy.Models.Post_template.trigger("change");
+    var _corePostsAddCallback = function(response) {
+        Ti.API.info("ZZ.API.Core.Posts.add success [response : " + JSON.stringify(response) + "]");
+        ZZ.API.Core.Post.commit(response, function(response) {
+            Ti.API.info("ZZ.API.Core.Post.commit success [response : " + JSON.stringify(response) + "]");
+            Alloy.Globals.loading.hide();
+            $.win.close();
+            args();
+        }, function(error) {
+            Ti.API.error("ZZ.API.Core.Post.commit error [error : " + error + "]");
+        });
+    };
     $.win.open();
     $.win.addEventListener("close", function() {
         $.destroy();

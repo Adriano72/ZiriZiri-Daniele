@@ -431,16 +431,6 @@ function Controller() {
             theActionBar.displayHomeAsUp = false;
             theActionBar.setIcon("images/logo-test.png");
         }
-        setTimeout(function() {
-            net.getData(0, 25, function(timeline_obj) {
-                Ti.App.Properties.setObject("timelineProp", timeline_obj.data);
-                Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
-                    silent: true
-                });
-                Ti.API.info("Sync Executed by SILENT SERVICE");
-                syncTimeline();
-            });
-        }, 0);
     }
     function closeSpinner() {
         Alloy.Globals.loading.hide();

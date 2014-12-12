@@ -44,6 +44,8 @@ $.date.text = moment(Alloy.Models.Post_template.get("referenceTime")).fromNow();
 
 $.category.text = (!_.isNull(modJson.category) ? modJson.category.name : "");
 
+$.name.text = modJson.name;
+
 Ti.API.info("CATEGORIA: " + modJson.category.name);
 
 var rating = Alloy.Models.Post_template.get("rating");
@@ -78,6 +80,11 @@ function submitPost() {
 		Ti.API.info("CONTENT: " + JSON.stringify(value.data));
 	});
 
+	ZZ.API.Core.Posts.add(Alloy.Models.Post_template, _corePostsAddCallback, function(error) {
+		Ti.API.error("ZZ.API.Core.Posts.add error [error : " + error + "]");
+	});
+	
+	/*
 	net.savePost(Alloy.Models.Post_template, function(post_id, postToAddToTimeline) {
 
 		Ti.API.info("ID POST SALVATO: " + post_id);
@@ -89,11 +96,29 @@ function submitPost() {
 		//alert("Post salvato");
 
 	});
+	*/
 
 }
 
-function editPost(){
-	Alloy.createController("editPost", function(){
+var _corePostsAddCallback = function(response) {
+	Ti.API.info("ZZ.API.Core.Posts.add success [response : " + JSON.stringify(response) + "]");
+
+	ZZ.API.Core.Post.commit(response, function(response) {
+		Ti.API.info("ZZ.API.Core.Post.commit success [response : " + JSON.stringify(response) + "]");
+		
+		//Ti.API.info("ID POST SALVATO: " + post_id);
+		Alloy.Globals.loading.hide();
+		//Alloy.Collections.Timeline.add(postToAddToTimeline);
+		$.win.close();
+		args();
+		
+	}, function(error) {
+		Ti.API.error("ZZ.API.Core.Post.commit error [error : " + error + "]");
+	});
+};
+
+function editPost() {
+	Alloy.createController("editPost", function() {
 		Alloy.Models.Post_template.trigger('change');
 		modJson = Alloy.Models.Post_template.toJSON();
 		$.category.text = (!_.isNull(modJson.category) ? modJson.category.name : "");
@@ -130,11 +155,10 @@ function addEvent() {
 
 		var riga = Alloy.createController('rowEvent', {
 
-		
 			//startDate : moment(aspettoDataJson.startTime.time).format("DD-MM-YYYY HH:MM"),
 			//endDate : moment(aspettoDataJson.endTime.time).format("DD-MM-YYYY HH:MM"),
 			//location : objRet.location.name
-			
+
 			obj_aspetto : objRet,
 			keyIndex : randomKey,
 			_editFunc : function(updatedAspect, arrayKey) {
@@ -156,7 +180,6 @@ function addEvent() {
 				//.API.info("PLUCKED OBJ: "+JSON.stringify(_.pluck(tempContainer, 'aspetto')));
 
 			}
-
 		}).getView();
 		$.postTable.appendRow(riga);
 

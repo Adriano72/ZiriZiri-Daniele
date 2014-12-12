@@ -71,7 +71,7 @@ function openEvent() {
 		//theActionBar.setTitle(self.title);
 
 	};
-
+	/*
 	setTimeout(function() {
 
 		net.getData(0, 25, function(timeline_obj) {
@@ -86,6 +86,7 @@ function openEvent() {
 		});
 
 	}, 0);
+	*/
 
 };
 
