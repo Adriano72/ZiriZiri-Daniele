@@ -129,7 +129,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    var dataAspetto = JSON.parse(args.obj_aspetto.data);
+    var dataAspetto = args.obj_aspetto.data;
     Ti.API.info("VALORE PASSATO: " + JSON.stringify(dataAspetto.title));
     $.titolo.text = dataAspetto.title;
     $.riga.obj_aspect = args.obj_aspetto;

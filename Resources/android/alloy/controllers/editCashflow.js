@@ -795,7 +795,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    var dataCashflow = JSON.parse(args.aspetto.data);
+    var dataCashflow = args.aspetto.data;
     Ti.API.info("ARGS ****: " + JSON.stringify(dataCashflow));
     var dichRedditi = false;
     var staordinario = false;

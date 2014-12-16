@@ -402,10 +402,6 @@ function Controller() {
     var allAspettiCashflow = _.filter(aspects, function(item) {
         return "CASHFLOWDATATYPE_CODE" == item.kind.code;
     });
-    Ti.API.info("ALL ASPETTI CASHFLOW: " + JSON.stringify(allAspettiCashflow));
-    _.each(allAspettiCashflow, function(value) {
-        _.isUndefined(value.data[0]) || (value.data = JSON.parse(value.data));
-    });
     Alloy.Collections.aspettiCashflow.reset(allAspettiCashflow);
     allAspettiCashflow.length > 0 && $.aspectsCashflowWrapper.add(Alloy.createController("briefCashflow").getView());
     var allAspettiDocuments = _.filter(aspects, function(item) {

@@ -55,8 +55,6 @@ function Controller() {
             modDocumentJSON.data.name = fileName;
             modDocumentJSON.data.description = $.descrizione.value;
             modDocumentJSON.data.size = fileSize;
-            modDocumentJSON.data.content = imageContent;
-            modDocumentJSON.data = JSON.stringify(modDocumentJSON.data);
             Ti.API.info("ASPETTO DOCUMENT VALIDATO: " + JSON.stringify(modDocumentJSON));
             args(modDocumentJSON);
             $.win.close();
@@ -69,6 +67,7 @@ function Controller() {
                 success: function(event) {
                     event.cropRect;
                     var image = event.media;
+                    Alloy.Globals.blobImage = image;
                     newBlob = ImageFactory.compress(image, .2);
                     Ti.API.info("Our type was: " + event.mediaType);
                     $.preview.image = newBlob;
@@ -107,6 +106,7 @@ function Controller() {
             success: function(event) {
                 var cropRect = event.cropRect;
                 var image = event.media;
+                Alloy.Globals.blobImage = image;
                 Ti.API.info("Our type was: " + event.mediaType);
                 $.preview.image = image;
                 Ti.API.info("IMAGE MIME TYPE: " + image.getMimeType());

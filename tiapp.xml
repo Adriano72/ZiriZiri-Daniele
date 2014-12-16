@@ -81,8 +81,7 @@
     <modules>
         <module platform="iphone">ti.map</module>
         <module platform="android">ti.map</module>
-        <module platform="ti.imagefactory-stable">android</module>
-        <module platform="ti.imagefactory-stable">ios</module>
+        <module platform="android">ti.imagefactory</module>
     </modules>
     <deployment-targets>
         <target device="android">true</target>

@@ -27,7 +27,7 @@ function showDetail(e){
 			Ti.API.info("***SELECTED MODEL***: "+JSON.stringify(updated_cashflow));
 			Alloy.Models.UpdatedCashflow = new Backbone.Model;
 			Alloy.Models.UpdatedCashflow.set(updated_cashflow);
-			Alloy.Models.UpdatedCashflow.set('data', JSON.parse(Alloy.Models.UpdatedCashflow.get('data')));
+			Alloy.Models.UpdatedCashflow.set('data', Alloy.Models.UpdatedCashflow.get('data'));
 	
 			Alloy.Collections.aspettiCashflow.remove(Alloy.Collections.aspettiCashflow.at(e.index));
 			Alloy.Collections.aspettiCashflow.add(Alloy.Models.UpdatedCashflow);

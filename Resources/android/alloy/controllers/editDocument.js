@@ -349,7 +349,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    var dataDocument = JSON.parse(args.aspetto.data);
+    var dataDocument = args.aspetto.data;
     Ti.API.info("ARGS ****: " + JSON.stringify(dataDocument));
     $.titolo.value = dataDocument.title;
     $.descrizione.value = dataDocument.description;

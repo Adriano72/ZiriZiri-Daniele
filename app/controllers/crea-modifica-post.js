@@ -112,9 +112,24 @@ var _corePostsAddCallback = function(response) {
 
 		_.each(aspettiArray, function(value) {
 
+			Ti.API.info("************* TIPO ASPETTO; " + value.kind.code);
+
 			ZZ.API.Core.Post.Aspects.add(value, null, _corePostAspectsAddCallback, function(error) {
+
 				Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
 			});
+
+			if (value.kind.code == "FILEDOCUMENTDATATYPE_CODE") {
+
+				var blob = Alloy.Globals.blobImage;
+
+				ZZ.API.Files.Attachment.set(value, blob, function(response) {
+					Ti.API.info("ZZ.API.Files.Attachment.set success [response : " + response + "]");
+				}, function(error) {
+					Ti.API.error("ZZ.API.Files.Attachment.set error [error : " + error + "]");
+				});
+
+			}
 
 		});
 

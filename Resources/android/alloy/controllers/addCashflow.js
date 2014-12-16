@@ -99,8 +99,6 @@ function Controller() {
             modCashflowJSON.data.dataScadenza = $.dataScadenza.dataRaw;
             modCashflowJSON.data.dataPagamentoIncasso = $.dataPagamento.dataRaw;
             Ti.API.info("ASPETTO NON ANCORA STRINGIFIZZATO: " + JSON.stringify(modCashflowJSON));
-            modCashflowJSON.data = JSON.stringify(modCashflowJSON.data);
-            Ti.API.info("ASPETTO VALIDATO: " + JSON.stringify(modCashflowJSON));
             args(modCashflowJSON);
             $.win.close();
         } else alert("I campi Importo e Tipo Movimento sono obbligatori");

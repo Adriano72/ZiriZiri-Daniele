@@ -84,9 +84,9 @@ function saveDocument() {
 		//modDocumentJSON.data.format = "JPG"; //_.last(fileName, 3).toUpperCase();
 		modDocumentJSON.data.description = $.descrizione.value;
 		modDocumentJSON.data.size = fileSize;
-		modDocumentJSON.data.content = imageContent;
+		//modDocumentJSON.data.content = imageContent;
 
-		modDocumentJSON.data = JSON.stringify(modDocumentJSON.data);
+		//modDocumentJSON.data = JSON.stringify(modDocumentJSON.data);
 
 		Ti.API.info("ASPETTO DOCUMENT VALIDATO: " + JSON.stringify(modDocumentJSON));
 
@@ -136,6 +136,7 @@ function openCamera(shortcutMode) {
 
 				var cropRect = event.cropRect;
 				var image = event.media;
+				Alloy.Globals.blobImage = image;
 				newBlob = ImageFactory.compress(image, 0.20);
 
 				// called when media returned from the camera
@@ -196,6 +197,7 @@ function openGallery() {
 		success : function(event) {
 			var cropRect = event.cropRect;
 			var image = event.media;
+			Alloy.Globals.blobImage = image;
 
 			// set image view
 			Ti.API.info('Our type was: ' + event.mediaType);

@@ -1,6 +1,6 @@
 var args = arguments[0] || {};
 
-var dataCashflow = JSON.parse(args.aspetto.data);
+var dataCashflow = args.aspetto.data;
 Ti.API.info("ARGS ****: " + JSON.stringify(dataCashflow));
 
 var dichRedditi = false;

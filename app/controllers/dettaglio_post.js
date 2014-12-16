@@ -124,17 +124,6 @@ var allAspettiCashflow = _.filter(aspects, function(item) {
 	return item.kind.code == "CASHFLOWDATATYPE_CODE";
 });
 
-Ti.API.info("ALL ASPETTI CASHFLOW: " + JSON.stringify(allAspettiCashflow));
-
-_.each(allAspettiCashflow, function(value) {
-	
-	//Ti.API.info("IS JSON: "+IsJson(value.data[0][0]));
-	
-	if (!_.isUndefined(value.data[0])) {
-		value.data = JSON.parse(value.data);
-	};
-	
-});
 
 Alloy.Collections.aspettiCashflow.reset(allAspettiCashflow);
 

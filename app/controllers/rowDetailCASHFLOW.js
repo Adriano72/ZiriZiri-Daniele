@@ -24,7 +24,7 @@ function editAspect(){
 			editedFlag = true;
 			
 			Ti.API.info("ASP EDITATO: "+JSON.stringify(aspettoEditato));
-			var aspettoToJSON = JSON.parse(aspettoEditato.data);
+			var aspettoToJSON = aspettoEditato.data;
 			
 			
 			if (aspettoToJSON.tipoMovimento.descrizioneBreve == "Entrata") {

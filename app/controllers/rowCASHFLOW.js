@@ -2,7 +2,7 @@ var args = arguments[0] || {};
 
 
 
-var dataAspetto = JSON.parse(args.obj_aspetto.data);
+var dataAspetto = args.obj_aspetto.data;
 
 Ti.API.info("VALORE PASSATO: "+JSON.stringify(dataAspetto.title));
 

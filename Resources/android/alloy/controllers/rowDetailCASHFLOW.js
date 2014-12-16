@@ -43,7 +43,7 @@ function Controller() {
             _callback: function(aspettoEditato) {
                 editedFlag = true;
                 Ti.API.info("ASP EDITATO: " + JSON.stringify(aspettoEditato));
-                var aspettoToJSON = JSON.parse(aspettoEditato.data);
+                var aspettoToJSON = aspettoEditato.data;
                 if ("Entrata" == aspettoToJSON.tipoMovimento.descrizioneBreve) {
                     $.importo.text = "+" + aspettoToJSON.importo + "€";
                     $.importo.color = "#358A27";

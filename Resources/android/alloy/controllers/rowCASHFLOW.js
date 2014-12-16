@@ -130,7 +130,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    var dataAspetto = JSON.parse(args.obj_aspetto.data);
+    var dataAspetto = args.obj_aspetto.data;
     Ti.API.info("VALORE PASSATO: " + JSON.stringify(dataAspetto.title));
     $.importo.text = dataAspetto.importo + "€";
     $.tipoMovimento.text = dataAspetto.tipoMovimento.descrizioneBreve;

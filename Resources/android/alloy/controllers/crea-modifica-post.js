@@ -610,9 +610,18 @@ function Controller() {
                 Ti.API.info("ZZ.API.Core.Post.Aspects.add success [response : " + JSON.stringify(addedAspect) + "]");
             };
             _.each(aspettiArray, function(value) {
+                Ti.API.info("************* TIPO ASPETTO; " + value.kind.code);
                 ZZ.API.Core.Post.Aspects.add(value, null, _corePostAspectsAddCallback, function(error) {
                     Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
                 });
+                if ("FILEDOCUMENTDATATYPE_CODE" == value.kind.code) {
+                    var blob = Alloy.Globals.blobImage;
+                    ZZ.API.Files.Attachment.set(value, blob, function(response) {
+                        Ti.API.info("ZZ.API.Files.Attachment.set success [response : " + response + "]");
+                    }, function(error) {
+                        Ti.API.error("ZZ.API.Files.Attachment.set error [error : " + error + "]");
+                    });
+                }
             });
         }
         ZZ.API.Core.Post.commit(response, function(response) {
