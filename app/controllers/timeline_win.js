@@ -25,7 +25,7 @@ var theActionBar = null;
 
 var temp = [];
 
-if (OS_ANDROID) $.is.init($.timelineTable);
+//if (OS_ANDROID) $.is.init($.timelineTable);
 
 /*
  $.win.addEventListener('open', function() {
@@ -36,7 +36,7 @@ if (OS_ANDROID) $.is.init($.timelineTable);
  */
 
 function takePicture() {
-	
+
 	Alloy.Globals.shortcutMode = "camera";
 
 	createNewPost();
@@ -72,21 +72,21 @@ function openEvent() {
 
 	};
 	/*
-	setTimeout(function() {
+	 setTimeout(function() {
 
-		net.getData(0, 25, function(timeline_obj) {
+	 net.getData(0, 25, function(timeline_obj) {
 
-			Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
-			Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
-				silent : true
-			});
-			Ti.API.info("Sync Executed by SILENT SERVICE");
-			syncTimeline();
+	 Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
+	 Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
+	 silent : true
+	 });
+	 Ti.API.info("Sync Executed by SILENT SERVICE");
+	 syncTimeline();
 
-		});
+	 });
 
-	}, 0);
-	*/
+	 }, 0);
+	 */
 
 };
 
@@ -108,14 +108,15 @@ lastNumberOfRecordsFetched = timeTemp.length;
 Ti.API.info("NUM RECORDS FETCHED AT START: " + lastNumberOfRecordsFetched);
 
 //timeTemp = timeTemp.slice(0,10), {silent: true};
+/*
+ Alloy.Collections.Timeline.reset(timeTemp.slice(0, 10), {
+ silent : true
+ });
 
-Alloy.Collections.Timeline.reset(timeTemp.slice(0, 10), {
-	silent : true
-});
-
-Alloy.Collections.Timeline.sort({
-	silent : true
-});
+ Alloy.Collections.Timeline.sort({
+ silent : true
+ });
+ */
 
 Ti.API.info("§§§§§§§§§§§ OGGETTO TIMELINE; " + JSON.stringify(Alloy.Collections.Timeline));
 
@@ -135,51 +136,51 @@ function checkAspects(node, target) {
 
 		switch(target) {
 
-			case "EVENTDATATYPE_CODE":
-				return ('/images/kernel-event-off.png');
-				break;
-			case "CASHFLOWDATATYPE_CODE":
-				return ('/images/kernel-finance-off.png');
-				break;
-			case "FILEDOCUMENTDATATYPE_CODE":
-				return ('/images/kernel-document-off.png');
-				break;
-			case "NOTEDATATYPE_CODE":
-				return ('/images/kernel-note-off.png');
-				break;
-			case "FILELINKDATATYPE_CODE":
-				return ('/images/kernel-link-off.png');
-				break;
-			case "COMMUNICATIONDATATYPE_CODE":
-				return ('/images/kernel-comunicazioni-off.png');
-				break;
-			default:
-				return;
+		case "EVENTDATATYPE_CODE":
+			return ('/images/kernel-event-off.png');
+			break;
+		case "CASHFLOWDATATYPE_CODE":
+			return ('/images/kernel-finance-off.png');
+			break;
+		case "FILEDOCUMENTDATATYPE_CODE":
+			return ('/images/kernel-document-off.png');
+			break;
+		case "NOTEDATATYPE_CODE":
+			return ('/images/kernel-note-off.png');
+			break;
+		case "FILELINKDATATYPE_CODE":
+			return ('/images/kernel-link-off.png');
+			break;
+		case "COMMUNICATIONDATATYPE_CODE":
+			return ('/images/kernel-comunicazioni-off.png');
+			break;
+		default:
+			return;
 		}
 
 	} else {
 
 		switch(target) {
-			case "EVENTDATATYPE_CODE":
-				return ('/images/kernel-event-on.png');
-				break;
-			case "CASHFLOWDATATYPE_CODE":
-				return ('/images/kernel-finance-on.png');
-				break;
-			case "FILEDOCUMENTDATATYPE_CODE":
-				return ('/images/kernel-document-on.png');
-				break;
-			case "NOTEDATATYPE_CODE":
-				return ('/images/kernel-note-on.png');
-				break;
-			case "FILELINKDATATYPE_CODE":
-				return ('/images/kernel-link-on.png');
-				break;
-			case "COMMUNICATIONDATATYPE_CODE":
-				return ('/images/kernel-comunicazioni-on.png');
-				break;
-			default:
-				return;
+		case "EVENTDATATYPE_CODE":
+			return ('/images/kernel-event-on.png');
+			break;
+		case "CASHFLOWDATATYPE_CODE":
+			return ('/images/kernel-finance-on.png');
+			break;
+		case "FILEDOCUMENTDATATYPE_CODE":
+			return ('/images/kernel-document-on.png');
+			break;
+		case "NOTEDATATYPE_CODE":
+			return ('/images/kernel-note-on.png');
+			break;
+		case "FILELINKDATATYPE_CODE":
+			return ('/images/kernel-link-on.png');
+			break;
+		case "COMMUNICATIONDATATYPE_CODE":
+			return ('/images/kernel-comunicazioni-on.png');
+			break;
+		default:
+			return;
 		}
 	}
 
@@ -194,11 +195,11 @@ function transformData(model) {
 	 };
 	 Ti.API.info("CAT LETTA*****: "+JSON.stringify(attrs.category));
 	 */
-	
+
 	var diffTime = moment().diff(attrs.referenceTime, 'days');
-	
+
 	attrs.catImage = ((_.isNull(attrs.category)) || (_.isNull(attrs.category.code)) ) ? '/images/android-robot.jpg' : '/images/' + attrs.category.code.slice(0, 2) + ".png";
-	attrs.postDate = (diffTime > 1)?moment(attrs.referenceTime).format('LL'):moment(attrs.referenceTime).fromNow();
+	attrs.postDate = (diffTime > 1) ? moment(attrs.referenceTime).format('LL') : moment(attrs.referenceTime).fromNow();
 	attrs.categoria = (!_.isNull(attrs.category)) ? attrs.category.name : "";
 
 	//attrs.iconEvent = (_.find(node, function(value) {return value.kind.code == target;}))
@@ -209,7 +210,7 @@ function transformData(model) {
 	attrs.iconNote = checkAspects(attrs.aspects, "NOTEDATATYPE_CODE");
 	attrs.iconLink = checkAspects(attrs.aspects, "FILELINKDATATYPE_CODE");
 	attrs.iconCommunication = checkAspects(attrs.aspects, "COMMUNICATIONDATATYPE_CODE");
-	
+
 	//Ti.API.info("TIME DIFFERENCE IN DAYS: "+moment().diff(attrs.referenceTime, 'days'));
 
 	attrs.rating_1 = (attrs.rating > 0) ? "/images/star-small.png" : "";
@@ -223,26 +224,26 @@ function transformData(model) {
 	return attrs;
 }
 
-
-
 function refreshTable() {
 
 	Alloy.Globals.loading.show('Sincronizzazione...', false);
 
-	net.getData(0, 25, function(timeline_obj) {
-
-		Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
-		Alloy.Collections.Timeline.reset(Ti.App.Properties.getObject("timelineProp").slice(0, 10), {
-			silent : true
-		});
+	ZZ.API.Core.Posts.list(function(posts) {
+		Ti.API.info("______________RESPONSE LENGTH: "+posts.length);
+		Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
+		Alloy.Collections.Timeline.reset();
+		Alloy.Collections.Timeline.reset(posts);
 		Ti.API.info("COLLECTION LENGTH AFTER SYNC: " + Alloy.Collections.Timeline.length);
-		syncTimeline();
-		lastNumberOfRecordsFetched = timeTemp.length;
-		presentPage = 0;
-		Alloy.Globals.loading.hide();
 		
+		Alloy.Globals.loading.hide();
+
+	}, function(error) {
+
+		Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
 
 	});
+
+	
 
 }
 
@@ -353,9 +354,12 @@ function lazyload(_evt) {
 function mostraDettaglioEvento(e) {
 
 	Alloy.Models.Post.set(Alloy.Collections.Timeline.at(e.index));
+	
+	Ti.API.info("STATO POST: "+JSON.stringify(Alloy.Models.Post));
 
-	Alloy.createController("dettaglio_post", function(updated){
-		if(updated){
+	Alloy.createController("dettaglio_post", function(updated) {
+
+		if (updated) {
 			Ti.API.info("UPDATING COLLECTION");
 			Alloy.Collections.Timeline.remove(Alloy.Collections.Timeline.at(e.index));
 			Alloy.Collections.Timeline.add(Alloy.Models.Post);

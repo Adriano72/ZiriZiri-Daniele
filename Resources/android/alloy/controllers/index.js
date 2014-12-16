@@ -17,9 +17,10 @@ function Controller() {
     function do_login() {
         $.username.value || "none";
         $.password.value || "none";
+        Alloy.Globals.loading.show("Logging in...", false);
         ZZ.API.Core.Session.logIn({
-            username: "rnduser_1418138154947",
-            password: "password"
+            username: $.username.value,
+            password: $.password.value
         }, _coreSessionLogInCallback, function(error) {
             alert("Username o password errati");
             Ti.API.error("ZZ.API.Core.Session.logIn error [error : " + error + "]");
@@ -72,7 +73,8 @@ function Controller() {
         hintText: "Username or Email",
         borderRadius: 2,
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        id: "username"
+        id: "username",
+        value: "rnduser_1418138154947"
     });
     $.__views.index.add($.__views.username);
     $.__views.__alloyId186 = Ti.UI.createView({
@@ -98,7 +100,8 @@ function Controller() {
         passwordMask: true,
         borderRadius: 2,
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        id: "password"
+        id: "password",
+        value: "password"
     });
     $.__views.__alloyId186.add($.__views.password);
     $.__views.btn_login = Ti.UI.createLabel({
@@ -183,6 +186,7 @@ function Controller() {
         _.isNull(Ti.App.Properties.getObject("timelineProp")) ? ZZ.API.Core.Posts.list(function(posts) {
             Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
             Ti.App.Properties.setObject("timelineProp", posts);
+            Alloy.Collections.Timeline.reset(posts);
             Alloy.createController("timeline_win").getView();
         }, function(error) {
             Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");

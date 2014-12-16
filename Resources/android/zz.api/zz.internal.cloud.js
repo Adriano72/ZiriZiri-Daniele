@@ -170,7 +170,7 @@ zz.Internal.Cloud.Core.Categories.read = function(user, successCallback, errorCa
 zz.Internal.Cloud.Core.Stories.read = function(user, successCallback, errorCallback) {
     Ti.API.debug("ZZ.Internal.Cloud.Core.Stories.read");
     Ti.API.debug("ZZ.Internal.Cloud.Core.Stories.read [user : " + JSON.stringify(user) + "]");
-    var url = zzConfig.ZZ.Config.Cloud.baseURL + "/stories/stories/" + user.token + "?from=2010-01-01&to=2020-01-01";
+    var url = zzConfig.ZZ.Config.Cloud.baseURL + "/stories/stories/" + user.token + "?from=2010-01-01&to=2020-01-01&page=0&max=1";
     var _sendSuccessCallback = function(data) {
         Ti.API.debug("ZZ.Internal.Cloud.Core.Stories.read._sendSuccessCallback");
         Ti.API.debug("ZZ.Internal.Cloud.Core.Stories.read._sendSuccessCallback [data : " + JSON.stringify(data) + "]");

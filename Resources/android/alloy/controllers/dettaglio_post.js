@@ -109,8 +109,7 @@ function Controller() {
         width: 70,
         height: 70,
         borderRadius: 4,
-        id: "postIcon",
-        image: "Post.catImage"
+        id: "postIcon"
     });
     $.__views.topWrapper.add($.__views.postIcon);
     $.__views.innerWrapper = Ti.UI.createView({
@@ -144,8 +143,7 @@ function Controller() {
         wordWrap: false,
         left: 0,
         top: 0,
-        id: "date",
-        text: "Post.tmp_referenceTime"
+        id: "date"
     });
     $.__views.date_rating.add($.__views.date);
     $.__views.ratingContainer = Ti.UI.createView({
@@ -163,8 +161,7 @@ function Controller() {
         height: 15,
         left: 5,
         top: 0,
-        id: "rating_1",
-        image: "Post.rating_1"
+        id: "rating_1"
     });
     $.__views.ratingContainer.add($.__views.rating_1);
     $.__views.rating_2 = Ti.UI.createImageView({
@@ -172,8 +169,7 @@ function Controller() {
         height: 15,
         left: 5,
         top: 0,
-        id: "rating_2",
-        image: "Post.rating_2"
+        id: "rating_2"
     });
     $.__views.ratingContainer.add($.__views.rating_2);
     $.__views.rating_3 = Ti.UI.createImageView({
@@ -181,8 +177,7 @@ function Controller() {
         height: 15,
         left: 5,
         top: 0,
-        id: "rating_3",
-        image: "Post.rating_3"
+        id: "rating_3"
     });
     $.__views.ratingContainer.add($.__views.rating_3);
     $.__views.rating_4 = Ti.UI.createImageView({
@@ -190,8 +185,7 @@ function Controller() {
         height: 15,
         left: 5,
         top: 0,
-        id: "rating_4",
-        image: "Post.rating_4"
+        id: "rating_4"
     });
     $.__views.ratingContainer.add($.__views.rating_4);
     $.__views.rating_5 = Ti.UI.createImageView({
@@ -199,8 +193,7 @@ function Controller() {
         height: 15,
         left: 5,
         top: 0,
-        id: "rating_5",
-        image: "Post.rating_5"
+        id: "rating_5"
     });
     $.__views.ratingContainer.add($.__views.rating_5);
     $.__views.name = Ti.UI.createLabel({
@@ -216,8 +209,7 @@ function Controller() {
         ellipsize: true,
         wordWrap: true,
         top: 0,
-        id: "name",
-        text: "Post.name"
+        id: "name"
     });
     $.__views.innerWrapper.add($.__views.name);
     $.__views.middleWrapper = Ti.UI.createView({
@@ -258,8 +250,7 @@ function Controller() {
         height: 18,
         color: "#999",
         left: 5,
-        id: "category",
-        text: "Post.categoria"
+        id: "category"
     });
     $.__views.__alloyId115.add($.__views.category);
     $.__views.__alloyId116 = Ti.UI.createView({
@@ -290,8 +281,7 @@ function Controller() {
         width: Ti.UI.SIZE,
         color: "#999",
         left: 5,
-        id: "tags",
-        text: "Post.tag"
+        id: "tags"
     });
     $.__views.__alloyId116.add($.__views.tags);
     $.__views.__alloyId117 = Ti.UI.createView({
@@ -371,11 +361,21 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    var net = require("net");
+    Ti.API.info("CIAO");
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     moment.lang("it");
     var modJson = Alloy.Models.Post.toJSON();
+    $.postIcon.image = modJson.catImage;
+    $.date.text = modJson.tmp_referenceTime;
+    $.name.text = modJson.name;
+    $.category.text = modJson.categoria;
+    $.rating_1.image = modJson.rating_1;
+    $.rating_2.image = modJson.rating_2;
+    $.rating_3.image = modJson.rating_3;
+    $.rating_4.image = modJson.rating_4;
+    $.rating_5.image = modJson.rating_5;
+    $.tags.text = modJson.tag;
     Ti.API.info("MODEL: " + JSON.stringify(Alloy.Models.Post));
     Ti.API.info("NULL CATEG: " + _.isNull(Alloy.Models.Post.get("category")));
     Alloy.Models.Post.set("tmp_referenceTime", moment(Alloy.Models.Post.get("referenceTime")).fromNow(), {
@@ -401,6 +401,10 @@ function Controller() {
     aspettoEvento.length > 0 && $.aspectsEventsWrapper.add(Alloy.createController("briefEvento").getView());
     var allAspettiCashflow = _.filter(aspects, function(item) {
         return "CASHFLOWDATATYPE_CODE" == item.kind.code;
+    });
+    Ti.API.info("ALL ASPETTI CASHFLOW: " + JSON.stringify(allAspettiCashflow));
+    _.each(allAspettiCashflow, function(value) {
+        _.isUndefined(value.data[0]) || (value.data = JSON.parse(value.data));
     });
     Alloy.Collections.aspettiCashflow.reset(allAspettiCashflow);
     allAspettiCashflow.length > 0 && $.aspectsCashflowWrapper.add(Alloy.createController("briefCashflow").getView());

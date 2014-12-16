@@ -111,20 +111,15 @@ zz.Internal.API.Core.Posts.list = function(successCallback, errorCallback) {
         }, errorCallback);
         return;
     }
-    var storedDatas = zzLocalDB.ZZ.Internal.Local.DB.Datas.findByUserRefAndTypeAndAliasAndStatusAndAction(user.id, zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.TYPES.MODEL, zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.ALIASES.POST, null, zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.ACTIONS.TO_SYNC);
     var objs = [];
-    null != storedDatas && storedDatas.length > 0 && _.each(storedDatas, function(storedData) {
-        var obj = JSON.parse(storedData.serialized_data);
-        Ti.API.debug("ZZ.Internal.API.Core.Posts.list [post : " + JSON.stringify(obj) + "]");
-        objs.push(obj);
-    });
-    storedDatas = zzLocalDB.ZZ.Internal.Local.DB.Datas.findByUserRefAndTypeAndAliasAndStatusAndAction(user.id, zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.TYPES.COLLECTION, zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.ALIASES.POSTS, zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.STATUSES.CACHED, zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.ACTIONS.NONE);
+    var storedDatas = zzLocalDB.ZZ.Internal.Local.DB.Datas.findByUserRefAndTypeAndAliasAndStatusAndAction(user.id, zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.TYPES.COLLECTION, zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.ALIASES.POSTS, zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.STATUSES.CACHED, zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.ACTIONS.NONE);
     var storedDataPosts = null;
     if (null != storedDatas && storedDatas.length > 0) {
         storedDataPosts = storedDatas.pop();
         objs = objs.concat(JSON.parse(storedDataPosts.serialized_data));
     }
     Ti.API.debug("ZZ.Internal.API.Core.Posts.list [cached.length : " + objs.length + "]");
+    storedDatas = zzLocalDB.ZZ.Internal.Local.DB.Datas.findByUserRefAndTypeAndAliasAndStatusAndAction(user.id, zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.TYPES.MODEL, zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.ALIASES.POST, null, zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.ACTIONS.TO_SYNC);
     var online = zzGlobals.ZZ.Internal.Globals.isOnline();
     if (online) {
         var _readSuccessCallback = function(response) {
@@ -136,11 +131,6 @@ zz.Internal.API.Core.Posts.list = function(successCallback, errorCallback) {
             mergedObjs = mergedObjs.concat(_.reject(objs, function(item) {
                 return _.contains(fetchedIds, item.id);
             }));
-            mergedObjs = _.sortBy(mergedObjs, function(item) {
-                return -item.referenceTime;
-            });
-            Ti.API.debug("ZZ.Internal.API.Core.Posts.list._readSuccessCallback [merged.length : " + mergedObjs.length + "]");
-            null != successCallback && successCallback(mergedObjs);
             if (null == storedDataPosts) storedDataPosts = zzLocalDB.ZZ.Internal.Local.DB.Datas.add({
                 type: zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.TYPES.COLLECTION,
                 alias: zzLocalDB.ZZ.Internal.Local.DB.Data.CONSTANTS.ALIASES.POSTS,
@@ -163,6 +153,16 @@ zz.Internal.API.Core.Posts.list = function(successCallback, errorCallback) {
                 return;
             }
             Ti.API.debug("ZZ.Internal.API.Core.Posts.list._readSuccessCallback posts cached");
+            null != storedDatas && storedDatas.length > 0 && _.each(storedDatas, function(storedData) {
+                var obj = JSON.parse(storedData.serialized_data);
+                Ti.API.debug("ZZ.Internal.API.Core.Posts.list [post : " + JSON.stringify(obj) + "]");
+                mergedObjs.push(obj);
+            });
+            mergedObjs = _.sortBy(mergedObjs, function(item) {
+                return -item.referenceTime;
+            });
+            Ti.API.debug("ZZ.Internal.API.Core.Posts.list._readSuccessCallback [merged.length : " + mergedObjs.length + "]");
+            null != successCallback && successCallback(mergedObjs);
         };
         var _readErrorCallback = function(error) {
             Ti.API.debug("ZZ.Internal.API.Core.Posts.list._readErrorCallback");
@@ -175,6 +175,14 @@ zz.Internal.API.Core.Posts.list = function(successCallback, errorCallback) {
         zzCloud.ZZ.Internal.Cloud.Core.Posts.read(user, _readSuccessCallback, _readErrorCallback);
         return;
     }
+    null != storedDatas && storedDatas.length > 0 && _.each(storedDatas, function(storedData) {
+        var obj = JSON.parse(storedData.serialized_data);
+        Ti.API.debug("ZZ.Internal.API.Core.Posts.list [post : " + JSON.stringify(obj) + "]");
+        objs.push(obj);
+    });
+    objs = _.sortBy(objs, function(item) {
+        return -item.referenceTime;
+    });
     null != successCallback && successCallback(objs);
 };
 

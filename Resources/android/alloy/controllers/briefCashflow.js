@@ -150,7 +150,6 @@ function Controller() {
     };
     _.extend($, $.__views);
     arguments[0] || {};
-    var net = require("net");
     Ti.API.info("COLLECTION CASHFLOW: " + JSON.stringify(Alloy.Collections.aspettiCashflow));
     syncAspects();
     $.briefCashflow.addEventListener("close", function() {

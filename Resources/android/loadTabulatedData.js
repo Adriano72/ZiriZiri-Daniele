@@ -19,6 +19,7 @@ exports.loadTabData = function() {
                 return "CASHFLOWDATATYPE_CODE" == value.kind.code;
             });
             Alloy.Models.Cashflow_template.set(templateCashflow[0]);
+            Ti.API.info("_____||||||| TEMPLATE CASHFLOW: " + JSON.stringify(templateCashflow[0]));
             Alloy.Models.Cashflow_template.unset("id");
             var templateDocument = _.filter(templateJson.modules, function(value) {
                 return "FILEDOCUMENTDATATYPE_CODE" == value.kind.code;

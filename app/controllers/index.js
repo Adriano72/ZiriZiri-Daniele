@@ -105,6 +105,8 @@ var _coreSessionLogInCallback = function(user) {
 			Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
 
 			Ti.App.Properties.setObject('timelineProp', posts);
+			
+			Alloy.Collections.Timeline.reset(posts);
 
 			//Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
 
@@ -141,12 +143,14 @@ function do_login(e) {
 	var user_name = $.username.value || 'none';
 
 	var user_password = $.password.value || 'none';
-
+	
+	Alloy.Globals.loading.show('Logging in...', false);
+	
 	ZZ.API.Core.Session.logIn({
 
-		username : "rnduser_1418138154947", //"dummyuser",
+		username : $.username.value, //"rnduser_1418138154947", //"dummyuser",
 
-		password : "password",
+		password : $.password.value //"password",
 
 	}, _coreSessionLogInCallback, function(error) {
 

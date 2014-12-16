@@ -22,7 +22,7 @@ exports.test = function() {
         });
     };
     ZZ.API.Core.Session.logIn({
-        username: "rnduser_1414682922894",
+        username: "rnduser_1418138154947",
         password: "password"
     }, _coreSessionLogInCallback, function(error) {
         Ti.API.error("ZZ.API.Core.Session.logIn error [error : " + error + "]");

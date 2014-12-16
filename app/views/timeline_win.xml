@@ -89,7 +89,7 @@
 				<!--<Label id = "rowIcon"/>-->
 
 			</TableViewRow>
-			<Widget id="is" src="nl.fokkezb.infiniteScroll" onEnd="loadMoreRows" msgDone="Fine della lista" platform='android'/>
+			<!--<Widget id="is" src="nl.fokkezb.infiniteScroll" onEnd="loadMoreRows" msgDone="Fine della lista" platform='android'/>-->
 		</TableView>
 		<View id="bottomBar">
 			<!--<Label class="separator"/>-->

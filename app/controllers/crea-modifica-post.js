@@ -64,6 +64,34 @@ Alloy.Models.Post_template.trigger('change');
 
 function submitPost() {
 
+	//_.each(aspettiArray, function(value) {
+	//Ti.API.info("CONTENT: " + JSON.stringify(value.data));
+	//});
+
+	ZZ.API.Core.Posts.add(Alloy.Models.Post_template, _corePostsAddCallback, function(error) {
+		Ti.API.error("ZZ.API.Core.Posts.add error [error : " + error + "]");
+	});
+
+	/*
+	 net.savePost(Alloy.Models.Post_template, function(post_id, postToAddToTimeline) {
+
+	 Ti.API.info("ID POST SALVATO: " + post_id);
+
+	 Alloy.Collections.Timeline.add(postToAddToTimeline);
+	 $.win.close();
+	 args();
+
+	 //alert("Post salvato");
+
+	 });
+	 */
+
+}
+
+var _corePostsAddCallback = function(response) {
+
+	Ti.API.info("ZZ.API.Core.Posts.add success [response : " + JSON.stringify(response) + "]");
+
 	var aspettiArray = _.pluck(tempContainer, 'aspetto');
 
 	Alloy.Globals.loading.show('Salvataggio in corso...', false);
@@ -73,48 +101,52 @@ function submitPost() {
 	Ti.API.info("JSON POST CON ASPETTI: " + JSON.stringify(Alloy.Models.Post_template));
 
 	if (aspettiArray.length > 0) {
-		Alloy.Models.Post_template.set("aspects", aspettiArray);
+
+		//Ti.API.info("+++++++++++ ASPETTO: " + JSON.stringify(aspettiArray[0]));
+
+		var _corePostAspectsAddCallback = function(addedAspect) {
+
+			Ti.API.info("ZZ.API.Core.Post.Aspects.add success [response : " + JSON.stringify(addedAspect) + "]");
+
+		};
+
+		_.each(aspettiArray, function(value) {
+
+			ZZ.API.Core.Post.Aspects.add(value, null, _corePostAspectsAddCallback, function(error) {
+				Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
+			});
+
+		});
+
+		//Alloy.Models.Post_template.set("aspects", aspettiArray);
 	}
 
-	_.each(aspettiArray, function(value) {
-		Ti.API.info("CONTENT: " + JSON.stringify(value.data));
-	});
-
-	ZZ.API.Core.Posts.add(Alloy.Models.Post_template, _corePostsAddCallback, function(error) {
-		Ti.API.error("ZZ.API.Core.Posts.add error [error : " + error + "]");
-	});
-	
-	/*
-	net.savePost(Alloy.Models.Post_template, function(post_id, postToAddToTimeline) {
-
-		Ti.API.info("ID POST SALVATO: " + post_id);
-
-		Alloy.Collections.Timeline.add(postToAddToTimeline);
-		$.win.close();
-		args();
-
-		//alert("Post salvato");
-
-	});
-	*/
-
-}
-
-var _corePostsAddCallback = function(response) {
-	Ti.API.info("ZZ.API.Core.Posts.add success [response : " + JSON.stringify(response) + "]");
-
 	ZZ.API.Core.Post.commit(response, function(response) {
+
 		Ti.API.info("ZZ.API.Core.Post.commit success [response : " + JSON.stringify(response) + "]");
-		Alloy.Collections.Timeline.add(response);
+
+		ZZ.API.Core.Posts.list(function(posts) {
+
+			Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
+
+			Alloy.Collections.Timeline.reset(posts);
+			Alloy.Globals.loading.hide();
+
+		}, function(error) {
+
+			Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
+
+		});
 		//Ti.API.info("ID POST SALVATO: " + post_id);
-		Alloy.Globals.loading.hide();
+
 		//Alloy.Collections.Timeline.add(postToAddToTimeline);
 		$.win.close();
 		args();
-		
+
 	}, function(error) {
 		Ti.API.error("ZZ.API.Core.Post.commit error [error : " + error + "]");
 	});
+
 };
 
 function editPost() {

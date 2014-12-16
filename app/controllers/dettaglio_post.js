@@ -1,12 +1,31 @@
 var args = arguments[0] || {};
-
-var net = require('net');
+Ti.API.info("CIAO");
 
 var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
 moment.lang('it');
 
 var modJson = Alloy.Models.Post.toJSON();
+
+$.postIcon.image = modJson.catImage;
+$.date.text = modJson.tmp_referenceTime;
+$.name.text = modJson.name;
+$.category.text = modJson.categoria;
+$.rating_1.image = modJson.rating_1;
+$.rating_2.image = modJson.rating_2;
+$.rating_3.image = modJson.rating_3;
+$.rating_4.image = modJson.rating_4;
+$.rating_5.image = modJson.rating_5;
+$.tags.text = modJson.tag;
+
+function IsJson(str) {
+	try {
+		JSON.parse(str);
+	} catch (e) {
+		return false;
+	}
+	return true;
+};
 
 function openEvent() {
 	//Ti.API.info("WINDOW OPEN");
@@ -38,7 +57,7 @@ function editPost() {
 				silent : true
 			});
 			Alloy.Models.Post.trigger('change');
-			
+
 			Alloy.Globals.loading.show();
 
 			net.editPost(Alloy.Models.Post, function(post_id, postToAddToTimeline) {
@@ -103,6 +122,18 @@ if (aspettoEvento.length > 0) {
 // ASPETTI CASHFLOW *********
 var allAspettiCashflow = _.filter(aspects, function(item) {
 	return item.kind.code == "CASHFLOWDATATYPE_CODE";
+});
+
+Ti.API.info("ALL ASPETTI CASHFLOW: " + JSON.stringify(allAspettiCashflow));
+
+_.each(allAspettiCashflow, function(value) {
+	
+	//Ti.API.info("IS JSON: "+IsJson(value.data[0][0]));
+	
+	if (!_.isUndefined(value.data[0])) {
+		value.data = JSON.parse(value.data);
+	};
+	
 });
 
 Alloy.Collections.aspettiCashflow.reset(allAspettiCashflow);

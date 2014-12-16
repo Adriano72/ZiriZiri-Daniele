@@ -1,6 +1,5 @@
 var args = arguments[0] || {};
 
-var net = require('net');
 
 Ti.API.info("COLLECTION CASHFLOW: "+JSON.stringify(Alloy.Collections.aspettiCashflow));
 

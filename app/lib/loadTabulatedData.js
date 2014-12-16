@@ -43,12 +43,13 @@ exports.loadTabData = function() {
 			// ***** EXTRACT CASHFLOW TEMPLATE *****************
 
 			var templateCashflow = _.filter(templateJson.modules, function(value) {
-
+				
 				return value.kind.code == "CASHFLOWDATATYPE_CODE";
 
 			});
 
 			Alloy.Models.Cashflow_template.set(templateCashflow[0]);
+			Ti.API.info("_____||||||| TEMPLATE CASHFLOW: "+JSON.stringify(templateCashflow[0]));
 
 			Alloy.Models.Cashflow_template.unset("id");
 
