@@ -59,20 +59,18 @@ function Controller() {
                 name: "Foto"
             });
             Alloy.Models.Post_template.set("referenceTime", timeNow);
-            Alloy.createController("crea-modifica-post", function() {
-                $.win.close();
-                args();
-            }).getView();
+            ZZ.API.Core.Posts.add(Alloy.Models.Post_template, _corePostsAddCallback, function(error) {
+                Ti.API.error("ZZ.API.Core.Posts.add error [error : " + error + "]");
+            });
         } else if ("" === $.titolo.value || _.isUndefined(selectedCategory)) alert("Il campo Titolo e il campo Categoria sono obbligatori!"); else {
             Alloy.Models.Post_template.set("name", $.titolo.value);
             Alloy.Models.Post_template.set("rating", $.starwidget.getRating());
             Alloy.Models.Post_template.set("category", selectedCategory);
             Alloy.Models.Post_template.set("description", $.descrizione.value);
             Alloy.Models.Post_template.set("referenceTime", timeNow);
-            Alloy.createController("crea-modifica-post", function() {
-                $.win.close();
-                args();
-            }).getView();
+            ZZ.API.Core.Posts.add(Alloy.Models.Post_template, _corePostsAddCallback, function(error) {
+                Ti.API.error("ZZ.API.Core.Posts.add error [error : " + error + "]");
+            });
         }
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -276,6 +274,13 @@ function Controller() {
     var selectedCategory;
     Ti.API.info("**** timeNow: " + timeNow);
     $.starwidget.init();
+    var _corePostsAddCallback = function(post) {
+        Ti.API.info("ZZ.API.Core.Posts.add success [response : " + JSON.stringify(post) + "]");
+        Alloy.createController("crea-modifica-post", function() {
+            $.win.close();
+            args();
+        }).getView();
+    };
     $.win.open();
     __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
     __defers["$.__views.win!close!checkForSync"] && $.__views.win.addEventListener("close", checkForSync);

@@ -67,19 +67,9 @@ function Controller() {
                 success: function(event) {
                     event.cropRect;
                     var image = event.media;
-                    Alloy.Globals.blobImage = image;
-                    newBlob = ImageFactory.compress(image, .2);
-                    Ti.API.info("Our type was: " + event.mediaType);
+                    var newBlob = ImageFactory.compress(image, .2);
+                    Alloy.Globals.blobImage = newBlob;
                     $.preview.image = newBlob;
-                    var hashedImage = "data:image/jpeg;base64," + Ti.Utils.base64encode(newBlob).toString();
-                    var tempFile = Ti.Filesystem.createTempFile();
-                    tempFile.write(newBlob);
-                    Ti.API.info("HASHED IMAGE MIME TYPE: " + image.getMimeType());
-                    Ti.API.info("IMAGE FILE SIZE: " + tempFile.size);
-                    Ti.API.info("IMAGE FILE NAME: " + tempFile.name);
-                    imageContent.base64 = hashedImage;
-                    fileSize = tempFile.size;
-                    fileName = tempFile.name;
                     if (Alloy.Globals.shortcutMode) {
                         $.titolo.value = "Foto scattata il " + moment().format("DD-MM-YYYY HH:MM");
                         $.descrizione.value = "Foto scattata il " + moment().format("DD-MM-YYYY HH:MM");

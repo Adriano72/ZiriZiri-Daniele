@@ -50,4 +50,14 @@ var _coreAspectUpdateCallback = function(aspect) {
 
 var _coreAspectGetCallback = function(aspect) {
     Ti.API.info("ZZ.API.Core.Aspect.get success [response : " + JSON.stringify(aspect) + "]");
+    ZZ.API.Files.Attachment.set(aspect, "Simple Text Content", function(response) {
+        Ti.API.info("ZZ.API.Files.Attachment.set success [response : " + response + "]");
+        ZZ.API.Files.Attachment.get(aspect, function(response) {
+            Ti.API.info("ZZ.API.Files.Attachment.get success [response : " + JSON.stringify(response) + "]");
+        }, function(error) {
+            Ti.API.error("ZZ.API.Files.Attachment.get error [error : " + error + "]");
+        });
+    }, function(error) {
+        Ti.API.error("ZZ.API.Files.Attachment.set error [error : " + error + "]");
+    });
 };

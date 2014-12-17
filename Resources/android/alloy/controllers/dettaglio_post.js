@@ -29,6 +29,18 @@ function Controller() {
                 });
             };
         }
+        $.date.text = modJson.tmp_referenceTime;
+        $.name.text = modJson.name;
+        $.category.text = modJson.categoria;
+        $.rating_1.image = modJson.rating_1;
+        $.rating_2.image = modJson.rating_2;
+        $.rating_3.image = modJson.rating_3;
+        $.rating_4.image = modJson.rating_4;
+        $.rating_5.image = modJson.rating_5;
+        $.tags.text = modJson.tag;
+    }
+    function addPostImage() {
+        $.postIcon.setImage(modJson.catImage);
     }
     function editPost() {
         Alloy.createController("editPost", {
@@ -73,6 +85,7 @@ function Controller() {
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
+    addPostImage ? $.__views.win.addEventListener("postlayout", addPostImage) : __defers["$.__views.win!postlayout!addPostImage"] = true;
     $.__views.win.addEventListener("open", __alloyId113);
     $.__views.postTable = Ti.UI.createScrollView({
         layout: "vertical",
@@ -366,16 +379,6 @@ function Controller() {
     moment.lang("it", Alloy.Globals.Moment_IT);
     moment.lang("it");
     var modJson = Alloy.Models.Post.toJSON();
-    $.postIcon.image = modJson.catImage;
-    $.date.text = modJson.tmp_referenceTime;
-    $.name.text = modJson.name;
-    $.category.text = modJson.categoria;
-    $.rating_1.image = modJson.rating_1;
-    $.rating_2.image = modJson.rating_2;
-    $.rating_3.image = modJson.rating_3;
-    $.rating_4.image = modJson.rating_4;
-    $.rating_5.image = modJson.rating_5;
-    $.tags.text = modJson.tag;
     Ti.API.info("MODEL: " + JSON.stringify(Alloy.Models.Post));
     Ti.API.info("NULL CATEG: " + _.isNull(Alloy.Models.Post.get("category")));
     Alloy.Models.Post.set("tmp_referenceTime", moment(Alloy.Models.Post.get("referenceTime")).fromNow(), {
@@ -423,6 +426,7 @@ function Controller() {
         $.destroy();
     });
     __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
+    __defers["$.__views.win!postlayout!addPostImage"] && $.__views.win.addEventListener("postlayout", addPostImage);
     __defers["$.__views.__alloyId114!click!editPost"] && $.__views.__alloyId114.addEventListener("click", editPost);
     _.extend($, exports);
 }

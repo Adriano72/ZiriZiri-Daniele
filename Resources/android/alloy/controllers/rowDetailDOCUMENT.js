@@ -332,8 +332,12 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    var blobPreview = Ti.Utils.base64decode(args.data.preview.base64.substr(args.data.preview.base64.indexOf(",")));
-    $.img_preview.setImage(blobPreview);
+    ZZ.API.Files.Attachment.get(args, function(response) {
+        Ti.API.info("ZZ.API.Files.Attachment.get success [response : " + JSON.stringify(response) + "]");
+        $.img_preview.setImage(response);
+    }, function(error) {
+        Ti.API.error("ZZ.API.Files.Attachment.get error [error : " + error + "]");
+    });
     $.titolo.text = args.data.title;
     $.nomeFile.text = args.data.name;
     $.tipologia.text = args.data.format.type;

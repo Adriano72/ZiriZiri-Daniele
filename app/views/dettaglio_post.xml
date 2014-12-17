@@ -1,6 +1,6 @@
 <Alloy>
 
-	<Window id="win" title="Dettaglio Post" class="container" onOpen="openEvent">
+	<Window id="win" title="Dettaglio Post" class="container" onOpen="openEvent" onPostlayout="addPostImage">
 
 		<!-- The Menu tag adds the Android menu. -->
 		<Menu id="menu" platform="android">

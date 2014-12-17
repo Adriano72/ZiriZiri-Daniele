@@ -7,7 +7,8 @@ var net = require('net');
 
 var location = null;
 
-var dataFrom, dataTo = null;
+var dataFrom,
+    dataTo = null;
 
 var timeNow = moment();
 
@@ -27,15 +28,14 @@ function homeIconSelected() {
 
 function openEvent() {
 
-
 	if (Alloy.Globals.shortcutMode == "camera") {
 		savePost();
 	};
-	
+
 };
 
-function openCategoryList(){
-	Alloy.createController("selezionaCategoria", function(cat_obj){
+function openCategoryList() {
+	Alloy.createController("selezionaCategoria", function(cat_obj) {
 		$.categoria.value = cat_obj.name;
 		selectedCategory = cat_obj;
 	}).getView();
@@ -47,7 +47,6 @@ function checkForSync() {
 }
 
 $.starwidget.init();
-
 
 function takePicture() {
 
@@ -65,7 +64,15 @@ function openGallery() {
 
 }
 
-
+var _corePostsAddCallback = function(post) {
+	
+	Ti.API.info("ZZ.API.Core.Posts.add success [response : " + JSON.stringify(post) + "]");
+	
+	Alloy.createController("crea-modifica-post", function() {
+		$.win.close();
+		args();
+	}).getView();
+};
 
 function savePost() {
 
@@ -89,10 +96,9 @@ function savePost() {
 
 		Alloy.Models.Post_template.set("referenceTime", timeNow);
 
-		Alloy.createController("crea-modifica-post", function() {
-			$.win.close();
-			args();
-		}).getView();
+		ZZ.API.Core.Posts.add(Alloy.Models.Post_template, _corePostsAddCallback, function(error) {
+			Ti.API.error("ZZ.API.Core.Posts.add error [error : " + error + "]");
+		});
 
 	} else {
 
@@ -104,10 +110,9 @@ function savePost() {
 			Alloy.Models.Post_template.set("description", $.descrizione.value);
 			Alloy.Models.Post_template.set("referenceTime", timeNow);
 
-			Alloy.createController("crea-modifica-post", function() {
-				$.win.close();
-				args();
-			}).getView();
+			ZZ.API.Core.Posts.add(Alloy.Models.Post_template, _corePostsAddCallback, function(error) {
+				Ti.API.error("ZZ.API.Core.Posts.add error [error : " + error + "]");
+			});
 
 		} else {
 			alert("Il campo Titolo e il campo Categoria sono obbligatori!");
