@@ -25,7 +25,7 @@ var zz = {
 	}
 };
 
-zzLocalDB.ZZ.Internal.Local.DB.init();
+//zzLocalDB.ZZ.Internal.Local.DB.init();
 
 /* ---------- zz.Internal.API.Core.Session.logIn ---------- */
 zz.Internal.API.Core.Session.logIn = function(user, successCallback, errorCallback) {

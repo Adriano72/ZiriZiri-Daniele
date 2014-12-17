@@ -1,3 +1,5 @@
+var zzLocalDB = require('zz.internal.local.db');
+zzLocalDB.ZZ.Internal.Local.DB.init();
 
 var zzApiCore = require('zz.internal.api.core');
 var zzApiFinance = require('zz.internal.api.finance');

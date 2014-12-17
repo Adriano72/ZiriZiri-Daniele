@@ -58,8 +58,10 @@ function Controller() {
                 code: "09.04.01",
                 name: "Foto"
             });
-            Alloy.Models.Post_template.set("referenceTime", timeNow);
-            ZZ.API.Core.Posts.add(Alloy.Models.Post_template, _corePostsAddCallback, function(error) {
+            Ti.API.info("*** APPLIED PATCH 17122014 ***");
+            Alloy.Models.Post_template.set("referenceTime", timeNow.toDate().getTime());
+            Ti.API.info("*** APPLIED PATCH 17122014 ***");
+            ZZ.API.Core.Posts.add(Alloy.Models.Post_template.toJSON(), _corePostsAddCallback, function(error) {
                 Ti.API.error("ZZ.API.Core.Posts.add error [error : " + error + "]");
             });
         } else if ("" === $.titolo.value || _.isUndefined(selectedCategory)) alert("Il campo Titolo e il campo Categoria sono obbligatori!"); else {
@@ -67,8 +69,10 @@ function Controller() {
             Alloy.Models.Post_template.set("rating", $.starwidget.getRating());
             Alloy.Models.Post_template.set("category", selectedCategory);
             Alloy.Models.Post_template.set("description", $.descrizione.value);
-            Alloy.Models.Post_template.set("referenceTime", timeNow);
-            ZZ.API.Core.Posts.add(Alloy.Models.Post_template, _corePostsAddCallback, function(error) {
+            Ti.API.info("*** APPLIED PATCH 17122014 ***");
+            Alloy.Models.Post_template.set("referenceTime", timeNow.toDate().getTime());
+            Ti.API.info("*** APPLIED PATCH 17122014 ***");
+            ZZ.API.Core.Posts.add(Alloy.Models.Post_template.toJSON(), _corePostsAddCallback, function(error) {
                 Ti.API.error("ZZ.API.Core.Posts.add error [error : " + error + "]");
             });
         }
@@ -276,6 +280,10 @@ function Controller() {
     $.starwidget.init();
     var _corePostsAddCallback = function(post) {
         Ti.API.info("ZZ.API.Core.Posts.add success [response : " + JSON.stringify(post) + "]");
+        Ti.API.info("*** APPLIED PATCH 17122014 ***");
+        Alloy.Models.Post_template.set(post, {
+            silent: true
+        });
         Alloy.createController("crea-modifica-post", function() {
             $.win.close();
             args();

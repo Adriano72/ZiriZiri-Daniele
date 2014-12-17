@@ -79,8 +79,11 @@ function submitPost() {
 		//Alloy.Models.Post_template.set("aspects", aspettiArray);
 	}
 
-	ZZ.API.Core.Post.commit(Alloy.Models.Post_template, function(response) {
-
+/* BEGIN PATCH 17122014 */
+	//ZZ.API.Core.Post.commit(Alloy.Models.Post_template, function(response) {
+	Ti.API.info("*** APPLIED PATCH 17122014 ***");
+	ZZ.API.Core.Post.commit(Alloy.Models.Post_template.toJSON(), function(response) {	
+/* END PATCH 17122014 */	
 		Ti.API.info("ZZ.API.Core.Post.commit success [response : " + JSON.stringify(response) + "]");
 
 		ZZ.API.Core.Posts.list(function(posts) {

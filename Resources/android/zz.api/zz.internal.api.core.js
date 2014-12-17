@@ -29,8 +29,6 @@ var zz = {
     }
 };
 
-zzLocalDB.ZZ.Internal.Local.DB.init();
-
 zz.Internal.API.Core.Session.logIn = function(user, successCallback) {
     Ti.API.debug("ZZ.Internal.API.Core.Session.logIn");
     Ti.API.debug("ZZ.Internal.API.Core.Session.logIn [user : " + JSON.stringify(user) + "]");

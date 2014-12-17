@@ -64,7 +64,8 @@ function Controller() {
         Ti.API.info("JSON POST: " + JSON.stringify(Alloy.Models.Post_template));
         Ti.API.info("JSON POST CON ASPETTI: " + JSON.stringify(Alloy.Models.Post_template));
         aspettiArray.length > 0;
-        ZZ.API.Core.Post.commit(Alloy.Models.Post_template, function(response) {
+        Ti.API.info("*** APPLIED PATCH 17122014 ***");
+        ZZ.API.Core.Post.commit(Alloy.Models.Post_template.toJSON(), function(response) {
             Ti.API.info("ZZ.API.Core.Post.commit success [response : " + JSON.stringify(response) + "]");
             ZZ.API.Core.Posts.list(function(posts) {
                 Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");

@@ -67,6 +67,11 @@ function openGallery() {
 var _corePostsAddCallback = function(post) {
 	
 	Ti.API.info("ZZ.API.Core.Posts.add success [response : " + JSON.stringify(post) + "]");
+
+/* BEGIN PATCH 17122014 */
+	Ti.API.info("*** APPLIED PATCH 17122014 ***");
+	Alloy.Models.Post_template.set(post, {silent: true});
+/* END PATCH 17122014 */
 	
 	Alloy.createController("crea-modifica-post", function() {
 		$.win.close();
@@ -94,9 +99,17 @@ function savePost() {
 			name : "Foto",
 		});
 
-		Alloy.Models.Post_template.set("referenceTime", timeNow);
+/* BEGIN PATCH 17122014 */					
+		//Alloy.Models.Post_template.set("referenceTime", timeNow);
+		Ti.API.info("*** APPLIED PATCH 17122014 ***");
+		Alloy.Models.Post_template.set("referenceTime", timeNow.toDate().getTime());
+/* END PATCH 17122014 */
 
-		ZZ.API.Core.Posts.add(Alloy.Models.Post_template, _corePostsAddCallback, function(error) {
+/* BEGIN PATCH 17122014 */
+		//ZZ.API.Core.Posts.add(Alloy.Models.Post_template, _corePostsAddCallback, function(error) {
+		Ti.API.info("*** APPLIED PATCH 17122014 ***");
+		ZZ.API.Core.Posts.add(Alloy.Models.Post_template.toJSON(), _corePostsAddCallback, function(error) {
+/* END PATCH 17122014 */			
 			Ti.API.error("ZZ.API.Core.Posts.add error [error : " + error + "]");
 		});
 
@@ -108,9 +121,18 @@ function savePost() {
 			Alloy.Models.Post_template.set("rating", $.starwidget.getRating());
 			Alloy.Models.Post_template.set("category", selectedCategory);
 			Alloy.Models.Post_template.set("description", $.descrizione.value);
-			Alloy.Models.Post_template.set("referenceTime", timeNow);
+			
+/* BEGIN PATCH 17122014 */	
+			//Alloy.Models.Post_template.set("referenceTime", timeNow);	
+			Ti.API.info("*** APPLIED PATCH 17122014 ***");		
+			Alloy.Models.Post_template.set("referenceTime", timeNow.toDate().getTime());
+/* END PATCH 17122014 */
 
-			ZZ.API.Core.Posts.add(Alloy.Models.Post_template, _corePostsAddCallback, function(error) {
+/* BEGIN PATCH 17122014 */
+			//ZZ.API.Core.Posts.add(Alloy.Models.Post_template, _corePostsAddCallback, function(error) {
+			Ti.API.info("*** APPLIED PATCH 17122014 ***");
+			ZZ.API.Core.Posts.add(Alloy.Models.Post_template.toJSON(), _corePostsAddCallback, function(error) {		
+/* END PATCH 17122014 */					
 				Ti.API.error("ZZ.API.Core.Posts.add error [error : " + error + "]");
 			});
 
