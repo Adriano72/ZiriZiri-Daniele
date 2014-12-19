@@ -74,7 +74,7 @@ function Controller() {
         borderRadius: 2,
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "username",
-        value: "rnduser_1418138154947"
+        value: "rnduser_1418923442021"
     });
     $.__views.index.add($.__views.username);
     $.__views.__alloyId186 = Ti.UI.createView({

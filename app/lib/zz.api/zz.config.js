@@ -8,8 +8,10 @@ var zz = {
 			}
 		},
 		Cloud : {
-			baseURL : "http://172.30.113.10:10010/zz/api/v02",
-			cdnURL : "http://172.30.113.10:10011/zz/api/v02/cdn",
+			//baseURL : "http://172.30.113.10:10010/zz/api/v02",
+			baseURL : "https://beta.ziriziri.com/zz/api/v02",
+			//cdnURL : "http://172.30.113.10:10011/zz/api/v02/cdn",
+			cdnURL : "https://beta.ziriziri.com/zz/api/v02/cdn",
 			cached : false
 		}
 	}
