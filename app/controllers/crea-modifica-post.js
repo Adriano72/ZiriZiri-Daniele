@@ -79,11 +79,11 @@ function submitPost() {
 		//Alloy.Models.Post_template.set("aspects", aspettiArray);
 	}
 
-/* BEGIN PATCH 17122014 */
+	/* BEGIN PATCH 17122014 */
 	//ZZ.API.Core.Post.commit(Alloy.Models.Post_template, function(response) {
 	Ti.API.info("*** APPLIED PATCH 17122014 ***");
-	ZZ.API.Core.Post.commit(Alloy.Models.Post_template.toJSON(), function(response) {	
-/* END PATCH 17122014 */	
+	ZZ.API.Core.Post.commit(Alloy.Models.Post_template.toJSON(), function(response) {
+		/* END PATCH 17122014 */
 		Ti.API.info("ZZ.API.Core.Post.commit success [response : " + JSON.stringify(response) + "]");
 
 		ZZ.API.Core.Posts.list(function(posts) {
@@ -142,6 +142,17 @@ function addEvent() {
 		tempContainer.push({
 			key : randomKey,
 			aspetto : objRet
+		});
+
+		var _corePostAspectsAddCallback = function(addedAspect) {
+
+			Ti.API.info("ZZ.API.Core.Post.Aspects.add success [response : " + JSON.stringify(addedAspect) + "]");
+
+		};
+
+		ZZ.API.Core.Post.Aspects.add(objRet, null, _corePostAspectsAddCallback, function(error) {
+
+			Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
 		});
 
 		Ti.API.info("TEMP ARRAY ASPETTI: " + JSON.stringify(tempContainer));
@@ -251,11 +262,10 @@ function addDocument(p_shortcutMode) {
 
 		Ti.API.info("TEMP ARRAY ASPETTI: " + JSON.stringify(tempContainer));
 
-
 		var _allegaDocumento = function(addedAspect) {
-			
+
 			Ti.API.info("ZZ.API.Core.Post.Aspects.add success [response : " + JSON.stringify(addedAspect) + "]");
-			
+
 			var blob = Alloy.Globals.blobImage;
 
 			ZZ.API.Files.Attachment.set(addedAspect, blob, function(response) {
@@ -264,7 +274,7 @@ function addDocument(p_shortcutMode) {
 				Ti.API.error("ZZ.API.Files.Attachment.set error [error : " + error + "]");
 			});
 		};
-		
+
 		ZZ.API.Core.Post.Aspects.add(objRet, null, _allegaDocumento, function(error) {
 
 			Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
@@ -309,7 +319,7 @@ function editDocument(id_array) {
 
 		arrayAspetti.push(objRet);
 
-		var aspettoDataJson = JSON.parse(objRet.data);
+		var aspettoDataJson = objRet.data;
 
 		var riga = Alloy.createController('rowDOCUMENT', {
 

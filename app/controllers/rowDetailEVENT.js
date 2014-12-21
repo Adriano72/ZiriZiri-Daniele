@@ -33,7 +33,7 @@ function editAspect(){
 			editedFlag = true;
 			
 			Ti.API.info("ASP EDITATO: "+JSON.stringify(aspettoEditato));
-			var aspettoToJSON = JSON.parse(aspettoEditato.data);
+			var aspettoToJSON = aspettoEditato.data;
 
 			$.dataInizio.text = moment(aspettoToJSON.startTime.time).format("DD-MM-YYYY HH:MM");
 			$.dataFine.text = moment(aspettoToJSON.endTime.time).format("DD-MM-YYYY HH:MM");

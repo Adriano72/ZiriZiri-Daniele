@@ -56,8 +56,19 @@ var zz = {
 
 zz.Internal.Local.DB.init = function() {
     Ti.API.debug("ZZ.Internal.Local.DB.init");
-    var db = Ti.Database.install(zzConfig.ZZ.Config.Local.DB.schema, zzConfig.ZZ.Config.Local.DB.name);
-    db.close();
+    var db = Ti.Database.open(zzConfig.ZZ.Config.Local.DB.name);
+    try {
+        db.execute("BEGIN");
+        db.execute("CREATE TABLE IF NOT EXISTS 'users' ('id' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , 'username' TEXT NOT NULL  UNIQUE , 'password' TEXT NOT NULL , 'token' TEXT);");
+        db.execute("CREATE TABLE IF NOT EXISTS 'datas' ('id' INTEGER PRIMARY KEY  NOT NULL ,'user_ref' INTEGER NOT NULL ,'type' TEXT NOT NULL ,'alias' TEXT NOT NULL ,'status' TEXT NOT NULL ,'action' TEXT NOT NULL ,'timestamp' DATETIME NOT NULL  DEFAULT (CURRENT_TIMESTAMP) ,'local_data_ref' INTEGER,'remote_data_ref' INTEGER, 'serialized_data' BLOB, 'local_fs_ref' TEXT);");
+        db.execute("COMMIT");
+        Ti.API.trace("ZZ.Internal.Local.DB.init init performed");
+    } catch (ex) {
+        Ti.API.error("ZZ.Internal.Local.DB.init unable to perform init due to " + ex);
+        db.execute("ROLLBACK");
+    } finally {
+        db.close();
+    }
 };
 
 zz.Internal.Local.DB.Users.add = function(user, successCallback, errorCallback) {

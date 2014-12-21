@@ -29,18 +29,6 @@ function Controller() {
                 });
             };
         }
-        $.date.text = modJson.tmp_referenceTime;
-        $.name.text = modJson.name;
-        $.category.text = modJson.categoria;
-        $.rating_1.image = modJson.rating_1;
-        $.rating_2.image = modJson.rating_2;
-        $.rating_3.image = modJson.rating_3;
-        $.rating_4.image = modJson.rating_4;
-        $.rating_5.image = modJson.rating_5;
-        $.tags.text = modJson.tag;
-    }
-    function addPostImage() {
-        $.postIcon.setImage(modJson.catImage);
     }
     function editPost() {
         Alloy.createController("editPost", {
@@ -85,7 +73,6 @@ function Controller() {
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;
-    addPostImage ? $.__views.win.addEventListener("postlayout", addPostImage) : __defers["$.__views.win!postlayout!addPostImage"] = true;
     $.__views.win.addEventListener("open", __alloyId113);
     $.__views.postTable = Ti.UI.createScrollView({
         layout: "vertical",
@@ -120,8 +107,6 @@ function Controller() {
         top: 0,
         touchEnabled: false,
         width: 70,
-        height: 70,
-        borderRadius: 4,
         id: "postIcon"
     });
     $.__views.topWrapper.add($.__views.postIcon);
@@ -374,19 +359,12 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    Ti.API.info("CIAO");
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     moment.lang("it");
     var modJson = Alloy.Models.Post.toJSON();
-    Ti.API.info("MODEL: " + JSON.stringify(Alloy.Models.Post));
-    Ti.API.info("NULL CATEG: " + _.isNull(Alloy.Models.Post.get("category")));
-    Alloy.Models.Post.set("tmp_referenceTime", moment(Alloy.Models.Post.get("referenceTime")).fromNow(), {
-        silent: true
-    });
-    Alloy.Models.Post.set("categoria", _.isNull(modJson.category) ? "" : modJson.category.name, {
-        silent: true
-    });
+    Alloy.Models.Post.set("tmp_referenceTime", moment(Alloy.Models.Post.get("referenceTime")).fromNow());
+    Alloy.Models.Post.set("categoria", _.isNull(modJson.category) ? "" : modJson.category.name);
     var rating = Alloy.Models.Post.get("rating");
     Alloy.Models.Post.set("catImage", _.isNull(modJson.category) ? "/images/android-robot.jpg" : "/images/" + modJson.category.code.slice(0, 2) + ".png");
     Alloy.Models.Post.set("rating_1", rating > 0 ? "/images/star-small.png" : "");
@@ -394,9 +372,21 @@ function Controller() {
     Alloy.Models.Post.set("rating_3", rating > 2 ? "/images/star-small.png" : "");
     Alloy.Models.Post.set("rating_4", rating > 3 ? "/images/star-small.png" : "");
     Alloy.Models.Post.set("rating_5", rating > 4 ? "/images/star-small.png" : "");
+    modJson = Alloy.Models.Post.toJSON();
+    $.date.text = modJson.tmp_referenceTime;
+    $.name.text = modJson.name;
+    $.category.text = modJson.categoria;
+    $.rating_1.image = modJson.rating_1;
+    $.rating_2.image = modJson.rating_2;
+    $.rating_3.image = modJson.rating_3;
+    $.rating_4.image = modJson.rating_4;
+    $.rating_5.image = modJson.rating_5;
+    $.tags.text = modJson.tag;
+    $.postIcon.image = modJson.catImage;
+    Ti.API.info("MODEL: " + JSON.stringify(Alloy.Models.Post));
+    Ti.API.info("NULL CATEG: " + _.isNull(Alloy.Models.Post.get("category")));
     var aspects = modJson.aspects;
     Ti.API.info("ASPETTI JSON: " + JSON.stringify(aspects));
-    Alloy.Models.Post.trigger("change");
     var aspettoEvento = _.filter(aspects, function(item) {
         return "EVENTDATATYPE_CODE" == item.kind.code;
     });
@@ -426,7 +416,6 @@ function Controller() {
         $.destroy();
     });
     __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
-    __defers["$.__views.win!postlayout!addPostImage"] && $.__views.win.addEventListener("postlayout", addPostImage);
     __defers["$.__views.__alloyId114!click!editPost"] && $.__views.__alloyId114.addEventListener("click", editPost);
     _.extend($, exports);
 }

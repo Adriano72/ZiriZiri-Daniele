@@ -66,9 +66,13 @@ function openEvent() {
 
 	theActionBar = $.win.activity.actionBar;
 	if (theActionBar != undefined) {
-		theActionBar.displayHomeAsUp = false;
+		theActionBar.displayHomeAsUp = true;
 		theActionBar.setIcon('images/logo-test.png');
-		//theActionBar.setTitle(self.title);
+		theActionBar.onHomeIconItemSelected = function() {
+			$.win.close({
+				animate : true
+			});
+		};
 
 	};
 	/*
@@ -229,12 +233,12 @@ function refreshTable() {
 	Alloy.Globals.loading.show('Sincronizzazione...', false);
 
 	ZZ.API.Core.Posts.list(function(posts) {
-		Ti.API.info("______________RESPONSE LENGTH: "+posts.length);
+		Ti.API.info("______________RESPONSE LENGTH: " + posts.length);
 		Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
 		Alloy.Collections.Timeline.reset();
 		Alloy.Collections.Timeline.reset(posts);
 		Ti.API.info("COLLECTION LENGTH AFTER SYNC: " + Alloy.Collections.Timeline.length);
-		
+
 		Alloy.Globals.loading.hide();
 
 	}, function(error) {
@@ -242,8 +246,6 @@ function refreshTable() {
 		Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
 
 	});
-
-	
 
 }
 
@@ -354,8 +356,8 @@ function lazyload(_evt) {
 function mostraDettaglioEvento(e) {
 
 	Alloy.Models.Post.set(Alloy.Collections.Timeline.at(e.index));
-	
-	Ti.API.info("STATO POST: "+JSON.stringify(Alloy.Models.Post));
+
+	Ti.API.info("STATO POST: " + JSON.stringify(Alloy.Models.Post));
 
 	Alloy.createController("dettaglio_post", function(updated) {
 
@@ -383,8 +385,7 @@ function createNewPost() {
 
 $.win.open();
 
-/*
- $.win.addEventListener("close", function() {
- $.destroy();
- });
- */
+$.win.addEventListener("close", function() {
+	$.destroy();
+});
+

@@ -8,7 +8,7 @@ var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
 moment.lang('it');
 
-var dataAspetto = JSON.parse(args.obj_aspetto.data);
+var dataAspetto = args.obj_aspetto.data;
 
 //Ti.API.info("VALORE PASSATO: "+JSON.stringify(dataAspetto.title));
 

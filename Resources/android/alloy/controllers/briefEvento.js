@@ -103,7 +103,7 @@ function Controller() {
                 Ti.API.info("***SELECTED MODEL***: " + JSON.stringify(updated_event));
                 Alloy.Models.UpdatedEvent = new Backbone.Model();
                 Alloy.Models.UpdatedEvent.set(updated_event);
-                Alloy.Models.UpdatedEvent.set("data", JSON.parse(Alloy.Models.UpdatedEvent.get("data")));
+                Alloy.Models.UpdatedEvent.set("data", Alloy.Models.UpdatedEvent.get("data"));
                 Alloy.Collections.aspettoEvento.remove(Alloy.Collections.aspettoEvento.at(e.index));
                 Alloy.Collections.aspettoEvento.add(Alloy.Models.UpdatedEvent);
             },

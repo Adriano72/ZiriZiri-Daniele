@@ -94,6 +94,12 @@ function Controller() {
                 key: randomKey,
                 aspetto: objRet
             });
+            var _corePostAspectsAddCallback = function(addedAspect) {
+                Ti.API.info("ZZ.API.Core.Post.Aspects.add success [response : " + JSON.stringify(addedAspect) + "]");
+            };
+            ZZ.API.Core.Post.Aspects.add(objRet, null, _corePostAspectsAddCallback, function(error) {
+                Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
+            });
             Ti.API.info("TEMP ARRAY ASPETTI: " + JSON.stringify(tempContainer));
             var riga = Alloy.createController("rowEvent", {
                 obj_aspetto: objRet,

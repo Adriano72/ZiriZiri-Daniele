@@ -62,12 +62,12 @@
 	top:0,
 	//image: '/images/android-robot.jpg',
 	touchEnabled: false,
-	width: 70,
-	height: 70,
+	width: 70
+	//height: 70,
 	//left: 5,
 	//top: 5,
 
-	borderRadius: 4
+	//borderRadius: 4
 }
 
 "#date_rating": {

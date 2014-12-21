@@ -1,0 +1,70 @@
+
+".container": {
+	//height: "50%",
+	backgroundColor: "#fff",
+	top: 0
+}
+
+".shortcut": {
+	top:0,
+	height: Alloy.Globals.deviceHeightHalf,
+	width: Alloy.Globals.menuButtonsWidth
+}
+
+"#quickPhoto": {
+	left: 0,
+	backgroundGradient: {
+        type: 'linear',
+        startPoint: { x: '0%', y: '50%' },
+        endPoint: { x: '100%', y: '50%' },
+        colors: [ { color: '#295F95', offset: 0.0}, { color: '#23477D', offset: 1.0 }],
+    }
+}
+
+"#quickPost": {
+	right: 0,
+	backgroundGradient: {
+        type: 'linear',
+        startPoint: { x: '100%', y: '50%' },
+        endPoint: { x: '0%', y: '50%' },
+        colors: [ { color: '#295F95', offset: 0.0}, { color: '#23477D', offset: 1.0 }],
+    }
+}
+
+".shortcutIcon": {
+
+}
+
+"#cameraIcon": {
+	image: "/images/addpicture.png",
+	height: 40
+}
+
+"#postIcon": {
+	image: "/images/addpost.png",
+	height: 40
+}
+
+".mainTable": {
+	top: Alloy.Globals.deviceHeightHalf
+}
+
+"#timelineRow": {
+	color: "#000",
+	title: "Timeline",
+	height: 40
+}
+
+"#picturesRow": {
+	color: "#000",
+	title: "Pictures",
+	height: 40
+}
+
+"#settingsRow": {
+	color: "#000",
+	title: "Settings",
+	height: 40
+}
+
+

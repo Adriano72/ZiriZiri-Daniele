@@ -94,8 +94,6 @@ function Controller() {
             type: "NONE",
             id: null
         };
-        modEventJSON.data = JSON.stringify(modEventJSON.data);
-        Ti.API.info("ASPETTO EVENT VALIDATO: " + JSON.stringify(modEventJSON));
         args(modEventJSON);
         $.win.close();
     }

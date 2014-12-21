@@ -1,0 +1,17 @@
+<Alloy>
+	<Window class="container" id="shortcutsWin" onAndroid:back="manageClose">
+		<View id="quickPhoto" class="shortcut">
+			
+			<ImageView id="cameraIcon" class="shortcutIcon"/>
+		</View>
+		<View id = "quickPost" class ="shortcut">
+			
+			<ImageView id="postIcon" class="shortcutIcon"/>
+		</View>
+		<TableView class="mainTable">
+			<TableViewRow id="timelineRow" class="mainTableRow" onClick="goTimeline"/>
+			<TableViewRow id="picturesRow" class="mainTableRow"/>
+			<TableViewRow id="settingsRow" class="mainTableRow"/>
+		</TableView>
+	</Window>
+</Alloy>

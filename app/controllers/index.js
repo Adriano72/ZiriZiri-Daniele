@@ -40,7 +40,9 @@ if (Ti.App.Properties.getBool('authenticated', false)) {
 
 	} else {
 
-		Alloy.createController("timeline_win").getView();
+		//Alloy.createController("timeline_win").getView();
+		Alloy.createController("home").getView().open();
+
 
 	};
 
@@ -110,7 +112,9 @@ var _coreSessionLogInCallback = function(user) {
 
 			//Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
 
-			Alloy.createController("timeline_win").getView();
+			//Alloy.createController("timeline_win").getView();
+			Alloy.createController("home").getView().open();
+			
 
 		}, function(error) {
 
@@ -122,7 +126,8 @@ var _coreSessionLogInCallback = function(user) {
 
 		//$.index.close();
 
-		Alloy.createController("timeline_win").getView();
+		//Alloy.createController("timeline_win").getView();
+		Alloy.createController("home").getView().open();
 
 	};
 

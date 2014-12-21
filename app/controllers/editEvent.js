@@ -5,7 +5,7 @@ moment.lang('it', Alloy.Globals.Moment_IT);
 
 Ti.API.info("ARGS ****: " + JSON.stringify(args));
 
-var dataEvent = JSON.parse(args.aspetto.data);
+var dataEvent = args.aspetto.data;
 
 
 $.pkrDataInizioEvento.text = moment(dataEvent.startTime.time).format('LLL');

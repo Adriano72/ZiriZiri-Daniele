@@ -4,6 +4,18 @@ Alloy.Globals.winTop = 0;
 
 Alloy.Globals.screenWidth = Ti.Platform.displayCaps.platformWidth;
 
+Alloy.Globals.deviceWidth = parseInt(Ti.Platform.displayCaps.platformWidth / (Ti.Platform.displayCaps.logicalDensityFactor || 1), 10);
+
+Alloy.Globals.deviceWidthHalf = Alloy.Globals.deviceWidth / 2;
+
+Alloy.Globals.deviceHeight = parseInt(Ti.Platform.displayCaps.platformHeight / (Ti.Platform.displayCaps.logicalDensityFactor || 1), 10);
+
+Alloy.Globals.deviceHeightHalf = Alloy.Globals.deviceHeight / 2;
+
+Alloy.Globals.menuButtonsWidth = Alloy.Globals.deviceWidthHalf - .5;
+
+Alloy.Globals.menuButtonsHeight = Alloy.Globals.deviceHeight / 4 - 22;
+
 Alloy.Globals.postSaved = false;
 
 Alloy.Globals.shortcutMode = false;

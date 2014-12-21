@@ -101,9 +101,9 @@ function saveEvent() {
 		id : null
 	};
 
-	modEventJSON.data = JSON.stringify(modEventJSON.data);
+	//modEventJSON.data = JSON.stringify(modEventJSON.data);
 
-	Ti.API.info("ASPETTO EVENT VALIDATO: " + JSON.stringify(modEventJSON));
+	//Ti.API.info("ASPETTO EVENT VALIDATO: " + JSON.stringify(modEventJSON));
 
 	args(modEventJSON);
 	$.win.close();
