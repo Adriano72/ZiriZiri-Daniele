@@ -1,9 +1,11 @@
 var args = arguments[0] || {};
 
+/*
 if (!_.isNull(args.preview)) {
 	var blobPreview = Ti.Utils.base64decode(args.preview.substr(args.preview.indexOf(',')));
 	$.img_preview.setImage(blobPreview);
 };
+*/
 
 //$.row.id_code = args.id_code,
 $.description.text = '  ' + icons.link + "  " + args.name;

@@ -1,42 +1,41 @@
 var args = arguments[0] || {};
 
 //Ti.API.info("PARAMETRI: "+JSON.stringify(args));
+function homeIconSelected() {
+	$.win.close({
+		animate : true
+	});
+}
 
+function saveLink() {
 
-function createProtoObj() {
+	var modLinkJSON = Alloy.Models.Link_template.toJSON();
+	modLinkJSON = _.omit(modLinkJSON, "kind.id");
+	// questo mi sa che nn serve e nemmeno funziona
 
-	if ($.titolo.value != "" && $.descrizione.value != "" && $.content.value != "") {
+	if ($.titolo.value != "" && $.link.value != "") {
 
-		//Ti.API.info("TIPO MOVIM OBJ: "+JSON.stringify($.pkrTipoMovimento.getSelectedRow(0)));
-		//Ti.API.info("PAGAM INCASSO OBJ: "+JSON.stringify($.pkrPagamentoIncasso.getSelectedRow(0)));
-
-		var titolo = $.titolo.value;
-		var descrizione = $.descrizione.value;
-
-		var objLink = {
-
-			name : $.titolo.value,
-			description : $.descrizione.value,
-			content : $.content.value
-
+		if (Alloy.Globals.shortcutMode) {
+			Alloy.Models.Post_template.set("name", $.titolo.value);
 		};
 
-		args(objLink);
-		$.window.close();
+		modLinkJSON.name = Alloy.Models.Post_template.get("name");
+		modLinkJSON.description = Alloy.Models.Post_template.get("description");
+		modLinkJSON.referenceTime = Alloy.Models.Post_template.get("referenceTime");
+		modLinkJSON.category = Alloy.Models.Post_template.get("category");
 
-		//Ti.API.info("MOSTRO : "+objCashFlow);
-		/*
+		modLinkJSON.data.title = $.titolo.value;
 
-		 var objCashFlow = {
-		 "kind":{"code":"CASHFLOWDATATYPE_CODE"},
-		 "data" :  "{\"tipoMovimento\":{\"codice\":\"USC\",\"id\":1,\"version\":0},\"pagamentoIncasso\":null,\"dataOperazione\":1393066568000,\"descrizioneBreve\":\"\",\"importo\":55}"
-		 */
+		modLinkJSON.data.content.local = $.link.value;
+
+		Ti.API.info("ASPETTO LINK VALIDATO: " + JSON.stringify(modLinkJSON));
+
+		args(modLinkJSON);
+		$.win.close();
 
 	} else {
-		alert("I campi titolo, descrizione e link sono obbligatori");
+		alert("I campi titolo e link sono obbligatori");
 	}
 
 };
-
-
 

@@ -1,0 +1,22 @@
+<Alloy>
+
+	<View class="aspectLinkContainer">
+		
+		<!--<Label class="separator"/>-->
+		<Label id="linkIcon" class="aspectIcon"/>
+		
+		<TableView id="aspectTable" dataCollection="aspettiLink"  dataFunction="syncAspects" dataTransform="transformData">
+
+			<TableViewRow class="row" onClick="showDetail">
+				<View class="dataWrapper">
+					<Label class="dataDisplay first" id="nome" text="{temp_nome}"/>
+					<Label class="dataDisplay" id="link" text="{temp_link}"/>
+					<Label class="dataDisplay" id="visualizza" text="Visualizza"/>
+				</View>
+			</TableViewRow>
+
+		</TableView>
+
+	</View>
+
+</Alloy>

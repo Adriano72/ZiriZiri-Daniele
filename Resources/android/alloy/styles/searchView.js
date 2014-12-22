@@ -1,1 +1,1 @@
-module.exports = [{"isId":true,"priority":100000.0456,"key":"searchView","style":{top:0,color:"#fff",width:Ti.UI.FILL,barColor:"#F9F9F9",}}];
+module.exports = [{"isId":true,"priority":100000.0471,"key":"searchView","style":{top:0,color:"#fff",width:Ti.UI.FILL,barColor:"#F9F9F9",}}];

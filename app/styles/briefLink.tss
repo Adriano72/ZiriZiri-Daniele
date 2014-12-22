@@ -1,12 +1,4 @@
-".separator": {
-	height: 1,
-	top: 0,
-	touchEnabled: false,
-	backgroundColor: '#D6D6D6',
-	width: Ti.UI.FILL
-}
-
-"#aspectDocumentTable": {
+"#aspectTable": {
 	top: 5,
 	left: 5,
 	width: "90%",
@@ -21,7 +13,8 @@
 	width: Ti.UI.FILL
 }
 
-".aspectDocumentContainer": {
+
+".aspectLinkContainer": {
 	top:5,
 	borderRadius: 3,
 	borderWidth: 1,
@@ -35,14 +28,14 @@
 	touchEnabled: false
 }
 
-".aspectDocumentIcon": {
+".aspectIcon": {
 	top:5,
 	left: 5,
 	width: 25,
 	height: 25
 }
-"#documentIcon": {
-	backgroundImage: '/images/kernel-document-on.png'
+"#linkIcon": {
+	backgroundImage: '/images/kernel-link-on.png'
 }
 
 ".dataWrapper": {
@@ -66,7 +59,7 @@
 	
 }
 
-"#titolo": {
+"#nome": {
 	//backgroundColor: 'yellow',
 	color: "#444"
 }

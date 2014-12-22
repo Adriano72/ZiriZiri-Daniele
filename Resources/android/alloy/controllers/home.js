@@ -15,6 +15,11 @@ function Controller() {
         var activity = Titanium.Android.currentActivity;
         activity.finish();
     }
+    function createNewPost() {
+        Alloy.createController("newPost", function() {
+            Alloy.Globals.loading.hide();
+        }).getView();
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "home";
     if (arguments[0]) {
@@ -96,20 +101,21 @@ function Controller() {
         id: "quickPost"
     });
     $.__views.shortcutsWin.add($.__views.quickPost);
+    createNewPost ? $.__views.quickPost.addEventListener("click", createNewPost) : __defers["$.__views.quickPost!click!createNewPost"] = true;
     $.__views.postIcon = Ti.UI.createImageView({
         image: "/images/addpost.png",
         height: 40,
         id: "postIcon"
     });
     $.__views.quickPost.add($.__views.postIcon);
-    var __alloyId187 = [];
+    var __alloyId198 = [];
     $.__views.timelineRow = Ti.UI.createTableViewRow({
         color: "#000",
         title: "Timeline",
         height: 40,
         id: "timelineRow"
     });
-    __alloyId187.push($.__views.timelineRow);
+    __alloyId198.push($.__views.timelineRow);
     goTimeline ? $.__views.timelineRow.addEventListener("click", goTimeline) : __defers["$.__views.timelineRow!click!goTimeline"] = true;
     $.__views.picturesRow = Ti.UI.createTableViewRow({
         color: "#000",
@@ -117,24 +123,25 @@ function Controller() {
         height: 40,
         id: "picturesRow"
     });
-    __alloyId187.push($.__views.picturesRow);
+    __alloyId198.push($.__views.picturesRow);
     $.__views.settingsRow = Ti.UI.createTableViewRow({
         color: "#000",
         title: "Settings",
         height: 40,
         id: "settingsRow"
     });
-    __alloyId187.push($.__views.settingsRow);
-    $.__views.__alloyId186 = Ti.UI.createTableView({
+    __alloyId198.push($.__views.settingsRow);
+    $.__views.__alloyId197 = Ti.UI.createTableView({
         top: Alloy.Globals.deviceHeightHalf,
-        data: __alloyId187,
-        id: "__alloyId186"
+        data: __alloyId198,
+        id: "__alloyId197"
     });
-    $.__views.shortcutsWin.add($.__views.__alloyId186);
+    $.__views.shortcutsWin.add($.__views.__alloyId197);
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};
     __defers["$.__views.shortcutsWin!android:back!manageClose"] && $.__views.shortcutsWin.addEventListener("android:back", manageClose);
+    __defers["$.__views.quickPost!click!createNewPost"] && $.__views.quickPost.addEventListener("click", createNewPost);
     __defers["$.__views.timelineRow!click!goTimeline"] && $.__views.timelineRow.addEventListener("click", goTimeline);
     _.extend($, exports);
 }

@@ -66,6 +66,21 @@ exports.loadTabData = function() {
 			Alloy.Models.Document_template.unset("id");
 
 			Ti.API.info("DOCUMENT  TEMPLATE: " + JSON.stringify(Alloy.Models.Document_template));
+			
+			// ***** EXTRACT LINK TEMPLATE *****************
+
+			var templateLink = _.filter(templateJson.modules, function(value) {
+				
+				return value.kind.code == "FILELINKDATATYPE_CODE";
+
+			});
+
+			Alloy.Models.Link_template.set(templateLink[0]);		
+
+			Alloy.Models.Link_template.unset("id");
+			
+			Ti.API.info("_____||||||| TEMPLATE LINK: "+JSON.stringify(Alloy.Models.Link_template));
+			///////
 
 			_.defer(f2);
 

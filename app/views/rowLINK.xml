@@ -1,31 +1,19 @@
-<!--<Alloy>
-	<TableViewRow id="row">
-		<Label id="description"/>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Titolo: ">
-			<Label class="block_data" id="title"/>
-		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Tipo: ">
-			<Label class="block_data" id="type"/>
-		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_label" text="Contenuto: ">
-			<Label class="block_data" id="content"/>
-		</View>
-	</TableViewRow>
-</Alloy>-->
-
 <Alloy>
-	<TableViewRow id="row">
-		
-		<View class="block_container" layout="horizontal">
-			<Label id="description"/>
-			<Label class="block_data" id="titolo"/>
-			<Label class="block_data" id="descrizione"/>
+
+	<TableViewRow id="riga" class="row" onClick="edit">
+
+		<View class="aspectLinkContainer">
+			<Label id="linkIcon" class="aspectIcon"/>
+			<View class="aligningWrapper">
+				<View class="dataWrapper">
+					<Label class="dataDisplay first" id="titolo"/>
+					<Label class="dataDisplay" id="link"/>
+					<Label class="link" id="visualizza"/>
+				</View>
+			</View>
+
 		</View>
-		<View class="block_container" layout="horizontal">
-			<Label class="block_data" id="content"/>			
-		</View>
+
 	</TableViewRow>
+
 </Alloy>

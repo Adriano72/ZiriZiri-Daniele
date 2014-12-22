@@ -16,3 +16,10 @@ function manageClose() {
 	activity.finish();
 
 };
+
+
+function createNewPost() {
+	Alloy.createController("newPost", function() {
+		Alloy.Globals.loading.hide();
+	}).getView();
+};

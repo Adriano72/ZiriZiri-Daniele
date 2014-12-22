@@ -11,22 +11,22 @@ function Controller() {
     function syncCategorie(e) {
         if (e && e.fromAdapter) return;
         syncCategorie.opts || {};
-        var models = __alloyId267.models;
+        var models = __alloyId279.models;
         var len = models.length;
         var rows = [];
         for (var i = 0; len > i; i++) {
-            var __alloyId264 = models[i];
-            __alloyId264.__transform = {};
-            var __alloyId266 = Ti.UI.createTableViewRow({
+            var __alloyId276 = models[i];
+            __alloyId276.__transform = {};
+            var __alloyId278 = Ti.UI.createTableViewRow({
                 height: 45,
                 width: Ti.UI.FILL,
                 backgroundColor: "#F9F9F9",
                 className: "itemRow",
                 color: "#999",
-                title: "undefined" != typeof __alloyId264.__transform["name"] ? __alloyId264.__transform["name"] : __alloyId264.get("name")
+                title: "undefined" != typeof __alloyId276.__transform["name"] ? __alloyId276.__transform["name"] : __alloyId276.get("name")
             });
-            rows.push(__alloyId266);
-            selectCategory ? __alloyId266.addEventListener("click", selectCategory) : __defers["__alloyId266!click!selectCategory"] = true;
+            rows.push(__alloyId278);
+            selectCategory ? __alloyId278.addEventListener("click", selectCategory) : __defers["__alloyId278!click!selectCategory"] = true;
         }
         $.__views.categorieTable.setData(rows);
     }
@@ -78,10 +78,10 @@ function Controller() {
         id: "categorieTable"
     });
     $.__views.win.add($.__views.categorieTable);
-    var __alloyId267 = Alloy.Collections["categorie"] || categorie;
-    __alloyId267.on("fetch destroy change add remove reset", syncCategorie);
+    var __alloyId279 = Alloy.Collections["categorie"] || categorie;
+    __alloyId279.on("fetch destroy change add remove reset", syncCategorie);
     exports.destroy = function() {
-        __alloyId267.off("fetch destroy change add remove reset", syncCategorie);
+        __alloyId279.off("fetch destroy change add remove reset", syncCategorie);
     };
     _.extend($, $.__views);
     var args = arguments[0] || {};
@@ -90,7 +90,7 @@ function Controller() {
     syncCategorie();
     $.win.open();
     __defers["$.__views.win!open!hideActionBar"] && $.__views.win.addEventListener("open", hideActionBar);
-    __defers["__alloyId266!click!selectCategory"] && __alloyId266.addEventListener("click", selectCategory);
+    __defers["__alloyId278!click!selectCategory"] && __alloyId278.addEventListener("click", selectCategory);
     _.extend($, exports);
 }
 

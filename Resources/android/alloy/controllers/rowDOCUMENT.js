@@ -42,7 +42,7 @@ function Controller() {
     });
     $.__views.riga && $.addTopLevelView($.__views.riga);
     edit ? $.__views.riga.addEventListener("click", edit) : __defers["$.__views.riga!click!edit"] = true;
-    $.__views.__alloyId202 = Ti.UI.createView({
+    $.__views.__alloyId213 = Ti.UI.createView({
         left: 5,
         right: 5,
         top: 5,
@@ -54,9 +54,9 @@ function Controller() {
         height: 50,
         touchEnabled: false,
         layout: "horizontal",
-        id: "__alloyId202"
+        id: "__alloyId213"
     });
-    $.__views.riga.add($.__views.__alloyId202);
+    $.__views.riga.add($.__views.__alloyId213);
     $.__views.documentIcon = Ti.UI.createLabel({
         touchEnabled: false,
         left: 5,
@@ -65,23 +65,23 @@ function Controller() {
         backgroundImage: "/images/kernel-document-on.png",
         id: "documentIcon"
     });
-    $.__views.__alloyId202.add($.__views.documentIcon);
-    $.__views.__alloyId203 = Ti.UI.createView({
+    $.__views.__alloyId213.add($.__views.documentIcon);
+    $.__views.__alloyId214 = Ti.UI.createView({
         touchEnabled: false,
         width: Ti.UI.SIZE,
         left: 10,
-        id: "__alloyId203"
+        id: "__alloyId214"
     });
-    $.__views.__alloyId202.add($.__views.__alloyId203);
-    $.__views.__alloyId204 = Ti.UI.createView({
+    $.__views.__alloyId213.add($.__views.__alloyId214);
+    $.__views.__alloyId215 = Ti.UI.createView({
         left: 2,
         touchEnabled: false,
         width: "85%",
         height: Ti.UI.SIZE,
         layout: "horizontal",
-        id: "__alloyId204"
+        id: "__alloyId215"
     });
-    $.__views.__alloyId203.add($.__views.__alloyId204);
+    $.__views.__alloyId214.add($.__views.__alloyId215);
     $.__views.titolo = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -96,7 +96,7 @@ function Controller() {
         left: 0,
         id: "titolo"
     });
-    $.__views.__alloyId204.add($.__views.titolo);
+    $.__views.__alloyId215.add($.__views.titolo);
     $.__views.formato = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -110,7 +110,7 @@ function Controller() {
         ellipsize: true,
         id: "formato"
     });
-    $.__views.__alloyId204.add($.__views.formato);
+    $.__views.__alloyId215.add($.__views.formato);
     $.__views.visualizza = Ti.UI.createLabel({
         font: {
             fontFamily: "SourceSansPro-Regular",
@@ -125,7 +125,7 @@ function Controller() {
         ellipsize: true,
         id: "visualizza"
     });
-    $.__views.__alloyId204.add($.__views.visualizza);
+    $.__views.__alloyId215.add($.__views.visualizza);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

@@ -48,9 +48,8 @@
 				</View>
 
 			</View>
-			<View id="aspectsEventsWrapper"></View>
-			<View id="aspectsCashflowWrapper"></View>
-			<View id="aspectsDocumentWrapper"></View>
+			<View class="aspectsWrapper" id="aspettiDelPost"/>
+			
 
 		</ScrollView>
 

@@ -4,7 +4,7 @@
 			
 			<ImageView id="cameraIcon" class="shortcutIcon"/>
 		</View>
-		<View id = "quickPost" class ="shortcut">
+		<View id = "quickPost" class ="shortcut" onClick="createNewPost">
 			
 			<ImageView id="postIcon" class="shortcutIcon"/>
 		</View>

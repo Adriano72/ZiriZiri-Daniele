@@ -233,44 +233,15 @@
 	left: 5
 }
 
-"#aspectsEventsWrapper": {
-	top:5,
-	borderRadius: 3,
-	borderWidth: 1,
-	borderColor: "#CCCCCC",
-	backgroundColor: '#FFF',
-	left: 5,
-	right: 5,
+".aspectsWrapper": {
+	
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE,
+	layout: 'vertical',
 	touchEnabled: false
 }
 
-"#aspectsCashflowWrapper": {
-	top:5,
-	borderRadius: 3,
-	borderWidth: 1,
-	borderColor: "#CCCCCC",
-	backgroundColor: '#FFF',
-	left: 5,
-	right: 5,
-	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
-	touchEnabled: false
-}
 
-"#aspectsDocumentWrapper": {
-	top:5,
-	borderRadius: 3,
-	borderWidth: 1,
-	borderColor: "#CCCCCC",
-	backgroundColor: '#FFF',
-	left: 5,
-	right: 5,
-	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
-	touchEnabled: false
-}
 
 
 ".first": {

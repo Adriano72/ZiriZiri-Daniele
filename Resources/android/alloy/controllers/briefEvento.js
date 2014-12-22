@@ -11,28 +11,28 @@ function Controller() {
     function syncAspects(e) {
         if (e && e.fromAdapter) return;
         syncAspects.opts || {};
-        var models = __alloyId96.models;
+        var models = __alloyId98.models;
         var len = models.length;
         var rows = [];
         for (var i = 0; len > i; i++) {
-            var __alloyId86 = models[i];
-            __alloyId86.__transform = transformData(__alloyId86);
-            var __alloyId88 = Ti.UI.createTableViewRow({
+            var __alloyId88 = models[i];
+            __alloyId88.__transform = transformData(__alloyId88);
+            var __alloyId90 = Ti.UI.createTableViewRow({
                 className: "itemRow",
                 layout: "vertical",
                 width: Ti.UI.FILL
             });
-            rows.push(__alloyId88);
-            showDetail ? __alloyId88.addEventListener("click", showDetail) : __defers["__alloyId88!click!showDetail"] = true;
-            var __alloyId90 = Ti.UI.createView({
+            rows.push(__alloyId90);
+            showDetail ? __alloyId90.addEventListener("click", showDetail) : __defers["__alloyId90!click!showDetail"] = true;
+            var __alloyId92 = Ti.UI.createView({
                 top: 2,
                 left: 2,
                 layout: "horizontal",
                 height: Ti.UI.SIZE,
                 width: Ti.UI.FILL
             });
-            __alloyId88.add(__alloyId90);
-            var __alloyId91 = Ti.UI.createLabel({
+            __alloyId90.add(__alloyId92);
+            var __alloyId93 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -43,10 +43,10 @@ function Controller() {
                 height: Ti.UI.SIZE,
                 width: 140,
                 left: 0,
-                text: "undefined" != typeof __alloyId86.__transform["dataDa"] ? __alloyId86.__transform["dataDa"] : __alloyId86.get("dataDa")
+                text: "undefined" != typeof __alloyId88.__transform["dataDa"] ? __alloyId88.__transform["dataDa"] : __alloyId88.get("dataDa")
             });
-            __alloyId90.add(__alloyId91);
-            var __alloyId92 = Ti.UI.createLabel({
+            __alloyId92.add(__alloyId93);
+            var __alloyId94 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -56,18 +56,18 @@ function Controller() {
                 textAlign: "center",
                 height: Ti.UI.SIZE,
                 width: 140,
-                text: "undefined" != typeof __alloyId86.__transform["dataA"] ? __alloyId86.__transform["dataA"] : __alloyId86.get("dataA")
+                text: "undefined" != typeof __alloyId88.__transform["dataA"] ? __alloyId88.__transform["dataA"] : __alloyId88.get("dataA")
             });
-            __alloyId90.add(__alloyId92);
-            var __alloyId94 = Ti.UI.createView({
+            __alloyId92.add(__alloyId94);
+            var __alloyId96 = Ti.UI.createView({
                 top: 2,
                 left: 2,
                 layout: "horizontal",
                 height: Ti.UI.SIZE,
                 width: Ti.UI.FILL
             });
-            __alloyId88.add(__alloyId94);
-            var __alloyId95 = Ti.UI.createLabel({
+            __alloyId90.add(__alloyId96);
+            var __alloyId97 = Ti.UI.createLabel({
                 font: {
                     fontFamily: "SourceSansPro-Regular",
                     fontSize: 18
@@ -80,9 +80,9 @@ function Controller() {
                 left: 5,
                 wordWrap: false,
                 ellipsize: true,
-                text: "undefined" != typeof __alloyId86.__transform["posizione"] ? __alloyId86.__transform["posizione"] : __alloyId86.get("posizione")
+                text: "undefined" != typeof __alloyId88.__transform["posizione"] ? __alloyId88.__transform["posizione"] : __alloyId88.get("posizione")
             });
-            __alloyId94.add(__alloyId95);
+            __alloyId96.add(__alloyId97);
         }
         $.__views.aspectEventTable.setData(rows);
     }
@@ -128,7 +128,12 @@ function Controller() {
     var __defers = {};
     $.__views.briefEvento = Ti.UI.createView({
         top: 5,
-        bottom: 5,
+        borderRadius: 3,
+        borderWidth: 1,
+        borderColor: "#CCCCCC",
+        backgroundColor: "#FFF",
+        left: 5,
+        right: 5,
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         touchEnabled: false,
@@ -136,6 +141,15 @@ function Controller() {
         id: "briefEvento"
     });
     $.__views.briefEvento && $.addTopLevelView($.__views.briefEvento);
+    $.__views.__alloyId87 = Ti.UI.createView({
+        height: 1,
+        top: 0,
+        touchEnabled: false,
+        backgroundColor: "#D6D6D6",
+        width: Ti.UI.FILL,
+        id: "__alloyId87"
+    });
+    $.__views.briefEvento.add($.__views.__alloyId87);
     $.__views.eventIcon = Ti.UI.createLabel({
         top: 5,
         left: 5,
@@ -154,10 +168,10 @@ function Controller() {
         id: "aspectEventTable"
     });
     $.__views.briefEvento.add($.__views.aspectEventTable);
-    var __alloyId96 = Alloy.Collections["aspettoEvento"] || aspettoEvento;
-    __alloyId96.on("fetch destroy change add remove reset", syncAspects);
+    var __alloyId98 = Alloy.Collections["aspettoEvento"] || aspettoEvento;
+    __alloyId98.on("fetch destroy change add remove reset", syncAspects);
     exports.destroy = function() {
-        __alloyId96.off("fetch destroy change add remove reset", syncAspects);
+        __alloyId98.off("fetch destroy change add remove reset", syncAspects);
     };
     _.extend($, $.__views);
     arguments[0] || {};
@@ -167,7 +181,7 @@ function Controller() {
     $.briefEvento.addEventListener("close", function() {
         $.briefEvento.destroy();
     });
-    __defers["__alloyId88!click!showDetail"] && __alloyId88.addEventListener("click", showDetail);
+    __defers["__alloyId90!click!showDetail"] && __alloyId90.addEventListener("click", showDetail);
     _.extend($, exports);
 }
 

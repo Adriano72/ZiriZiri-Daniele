@@ -1,1 +1,1 @@
-module.exports = [{"isId":true,"priority":100000.0177,"key":"picker","style":{right:5,left:5,width:Ti.UI.FILL,height:Ti.UI.SIZE,}}];
+module.exports = [{"isId":true,"priority":100000.0188,"key":"picker","style":{right:5,left:5,width:Ti.UI.FILL,height:Ti.UI.SIZE,}}];

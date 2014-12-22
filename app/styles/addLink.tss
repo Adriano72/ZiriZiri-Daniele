@@ -1,71 +1,81 @@
 ".container": {
-  	backgroundColor: '#F2F2F2'
+  	backgroundColor: '#F9F9F9',
+  	orientationModes: [Ti.UI.PORTRAIT]
 	//layout: "vertical",
 }
 
+"MenuItem": {
+    showAsAction: Ti.Android.SHOW_AS_ACTION_ALWAYS
+}
+
+"#mn_salva": {
+	icon: "/images/top-save2.png"
+}
+
+"#menu": {
+    icon: "images/logo-test.png",
+    displayHomeAsUp: true
+}
+
 "#newLinkTable":{
-	top: 5 ,
-	left: 20,
-	right: 20,
+	top: 5,
 	separatorColor: 'transparent'
 } 
-
 ".row": {
 	
 	height: Ti.UI.SIZE,
 	width: Ti.UI.FILL,
-	backgroundColor: '#F2F2F2',
+	backgroundColor: '#F9F9F9',
     className: 'itemRow',
-    layout: 'horizontal',
-    left: 5,
-    right: 5
+    top:5
     
 } 
 
+".rowWrapper": {
+	//height: 40,
+	width: Ti.UI.FILL,
+	left: 5,
+	top:5,
+	right: 5,
+	borderRadius: 3,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF'
+}
+
+
 "#titolo": {
 	
-	borderColor: "#000000",
-	color: "#336699",
-	top: 5,
-	right: 5,
-	left: 5,
-	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
+	color: "#666",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	left:5,
+	height: 40,
+	backgroundColor: "#fff",
+	width: Ti.UI.FILL,	
+	//height: Ti.UI.SIZE,
+	wordWrap: false,
 	//backgroundColor: '#C8DDE8',
-	hintText: "Titolo",
-	borderRadius: 5,
-	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
+	hintText: "Titolo"
 
 }
 
-"#descrizione": {
-	
-	borderColor: "#000000",
-	color: "#336699",
-	top: 5,
-	right: 5,
-	left: 5,
-	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
-	//backgroundColor: '#C8DDE8',
-	hintText: "Descrizione",
-	borderRadius: 5,
-	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
 
-}
-
-"#content": {
+"#link": {
 	
-	borderColor: "#000000",
-	color: "#336699",
-	top: 5,
-	right: 5,
-	left: 5,
-	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
+	color: "#666",
+	font: {
+		fontFamily: 'SourceSansPro-Regular',
+		fontSize: 16
+	},
+	left:5,
+	backgroundColor: "#fff",
+	width: Ti.UI.FILL,	
+	height: 100,
+	wordWrap: false,
 	//backgroundColor: '#C8DDE8',
-	hintText: "Link",
-	borderRadius: 5,
-	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED
+	hintText: "Link"
 
 }

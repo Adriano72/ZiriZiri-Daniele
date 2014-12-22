@@ -27,6 +27,12 @@ exports.loadTabData = function() {
             Alloy.Models.Document_template.set(templateDocument[0]);
             Alloy.Models.Document_template.unset("id");
             Ti.API.info("DOCUMENT  TEMPLATE: " + JSON.stringify(Alloy.Models.Document_template));
+            var templateLink = _.filter(templateJson.modules, function(value) {
+                return "FILELINKDATATYPE_CODE" == value.kind.code;
+            });
+            Alloy.Models.Link_template.set(templateLink[0]);
+            Alloy.Models.Link_template.unset("id");
+            Ti.API.info("_____||||||| TEMPLATE LINK: " + JSON.stringify(Alloy.Models.Link_template));
             _.defer(f2);
         }, function(error) {
             Ti.API.error("ZZ.API.Core.Post.Templates.list error [error : " + error + "]");

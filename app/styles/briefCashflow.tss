@@ -1,11 +1,3 @@
-".separator": {
-	height: 1,
-	top: 0,
-	touchEnabled: false,
-	backgroundColor: '#D6D6D6',
-	width: Ti.UI.FILL
-}
-
 "#aspectTable": {
 	top: 5,
 	left: 5,
@@ -22,15 +14,17 @@
 }
 
 ".aspectCashflowContainer": {
-	//width: '100%',
-	//borderRadius: 5,
-	//backgroundColor: 'lime',
-	top: 5,
-	bottom:5,
+	top:5,
+	borderRadius: 3,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF',
+	left: 5,
+	right: 5,
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE,
-	touchEnabled: false,
-	layout: 'horizontal'
+	layout: 'horizontal',
+	touchEnabled: false
 }
 
 ".aspectIcon": {
@@ -58,6 +52,7 @@
 	backgroundColor: 'white',
 	textAlign: 'center',
 	width: 95,
+	height: 35,
 	wordWrap: false,
 	ellipsize: true
 	

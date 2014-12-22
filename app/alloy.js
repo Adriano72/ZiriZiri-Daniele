@@ -51,6 +51,8 @@ Alloy.Collections.categorie = new Backbone.Collection;
 Alloy.Collections.aspettoEvento = new Backbone.Collection;
 Alloy.Collections.aspettiCashflow = new Backbone.Collection;
 Alloy.Collections.aspettiDocument = new Backbone.Collection;
+Alloy.Collections.aspettiLink = new Backbone.Collection;
+Alloy.Collections.aspettiNote = new Backbone.Collection;
 
 Alloy.Models.Template = new Backbone.Model;
 Alloy.Models.Post_template = new Backbone.Model;

@@ -115,7 +115,7 @@ var aspettoEvento = _.filter(aspects, function(item) {
 Alloy.Collections.aspettoEvento.reset(aspettoEvento);
 
 if (aspettoEvento.length > 0) {
-	$.aspectsEventsWrapper.add(Alloy.createController('briefEvento').getView());
+	$.aspettiDelPost.add(Alloy.createController('briefEvento').getView());
 }
 
 // ASPETTI CASHFLOW *********
@@ -126,7 +126,7 @@ var allAspettiCashflow = _.filter(aspects, function(item) {
 Alloy.Collections.aspettiCashflow.reset(allAspettiCashflow);
 
 if (allAspettiCashflow.length > 0) {
-	$.aspectsCashflowWrapper.add(Alloy.createController('briefCashflow').getView());
+	$.aspettiDelPost.add(Alloy.createController('briefCashflow').getView());
 }
 
 // ASPETTI DOCUMENT *********
@@ -137,7 +137,18 @@ var allAspettiDocuments = _.filter(aspects, function(item) {
 Alloy.Collections.aspettiDocument.reset(allAspettiDocuments);
 
 if (allAspettiDocuments.length > 0) {
-	$.aspectsDocumentWrapper.add(Alloy.createController('briefDocument').getView());
+	$.aspettiDelPost.add(Alloy.createController('briefDocument').getView());
+}
+
+// ASPETTI LINK *********
+var allAspettiLinks = _.filter(aspects, function(item) {
+	return item.kind.code == "FILELINKDATATYPE_CODE";
+});
+
+Alloy.Collections.aspettiLink.reset(allAspettiLinks);
+
+if (allAspettiLinks.length > 0) {
+	$.aspettiDelPost.add(Alloy.createController('briefLink').getView());
 }
 
 // ASPETTI NOTES *********

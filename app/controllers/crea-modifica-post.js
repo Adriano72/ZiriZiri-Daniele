@@ -339,77 +339,55 @@ function editDocument(id_array) {
 function addLink() {
 	//Ti.API.info("**** INSERT CASHFLOW!");
 
-	if ($.titolo.value == "" && $.pkrCategoria.getSelectedRow(0).id == 9999) {
-
-		alert("Prima di inserire il dettaglio dell'evento è necessario specificare titolo e categoria");
-		return;
-
-	};
+	var randomKey = _.random(0, 99999);
 
 	Alloy.createController("addLink", function(objRet) {
 
-		var objAspect = {
+		//arrayAspetti.push(objRet);
 
-			kind : {
-				code : "LINKDATATYPE_CODE",
-				name : "LINKDATATYPE_NAME",
-				description : "LINKDATATYPE_DESCRIPTION"
+		tempContainer.push({
+			key : randomKey,
+			aspetto : objRet
+		});
 
-			},
-			data : {}
+		var _corePostAspectsAddCallback = function(addedAspect) {
+
+			Ti.API.info("ZZ.API.Core.Post.Aspects.add success [response : " + JSON.stringify(addedAspect) + "]");
 
 		};
 
-		objAspect.name = objRet.name;
-		objAspect.description = objRet.description;
-		objAspect.referenceTime = timeNow;
-		objAspect.category = {
-			id : $.pkrCategoria.getSelectedRow(0).id,
-			version : $.pkrCategoria.getSelectedRow(0).version
-		};
+		ZZ.API.Core.Post.Aspects.add(objRet, null, _corePostAspectsAddCallback, function(error) {
 
-		/*
-		 objAspect.tags = [{
-		 name : "ARTICOLO",
-		 description : "ARTICOLO",
-		 }];
-		 */
+			Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
+		});
 
-		objAspect.data.format = {
-			name : "LINK",
-			description : "HTML LINK",
-			type : "LINK"
-		};
-
-		objAspect.data.title = objRet.name;
-		objAspect.data.name = objRet.name;
-		objAspect.data.description = objRet.description;
-		objAspect.data.content = (objRet.content.indexOf("http://") == -1) ? "http://" + objRet.content : objRet.content;
-		objAspect.data.preview = null;
-
-		/*
-		 "kind":{"code":"CASHFLOWDATATYPE_CODE"},
-		 "data": "{\"tipoMovimento\":{\"codice\":\""+tipoMovCodice+"\",\"id\":"+tipoMovId+",\"version\":"+tipoMovVersion+"},\"pagamentoIncasso\":{\"descrizioneBreve\":\""+pagamIncDescBreve+"\",\"id\":"+tipoMovId+",\"version\":"+tipoMovVersion+"},\"dataOperazione\":1393066568000,\"descrizioneBreve\":\"\",\"importo\":"+$.importo.value+"}"
-		 */
-
-		Ti.API.info("OBJ ASPECT: " + JSON.stringify(objAspect));
-
-		var tempObj = _.clone(objAspect);
-		objAspect.data = JSON.stringify(objAspect.data);
-
-		arrayAspetti.push(objAspect);
-
-		Ti.API.info("OGGETTO ALL'INDICE: " + JSON.stringify(arrayAspetti[arrayAspetti.length - 1]));
+		Ti.API.info("TEMP ARRAY ASPETTI: " + JSON.stringify(tempContainer));
 
 		var riga = Alloy.createController('rowLINK', {
 
-			id_code : arrayAspetti.length - 1,
-			titolo : tempObj.name,
-			descrizione : tempObj.description,
-			content : tempObj.data.content
+			obj_aspetto : objRet,
+			keyIndex : randomKey,
+			_editFunc : function(updatedAspect, arrayKey) {
 
+				//rowToUpdate[0].aspetto = updatedAspect;
+
+				var recordToUpdate = _.find(tempContainer, function(value) {
+					return value.key === arrayKey;
+				});
+
+				Ti.API.info("ASPETTO PRIMA: " + JSON.stringify(recordToUpdate.aspetto));
+
+				if (recordToUpdate) {
+					recordToUpdate.aspetto = updatedAspect;
+				}
+
+				Ti.API.info("ASPETTO DOPO: " + JSON.stringify(recordToUpdate.aspetto));
+
+				//.API.info("PLUCKED OBJ: "+JSON.stringify(_.pluck(tempContainer, 'aspetto')));
+
+			}
 		}).getView();
-		$.newPostTable.appendRow(riga);
+		$.postTable.appendRow(riga);
 
 		//Ti.API.info("FINISHED ASPECT OBJ: "+JSON.stringify(objAspect));
 	}).getView().open();

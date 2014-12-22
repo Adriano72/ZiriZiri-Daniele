@@ -22,12 +22,16 @@
 	width: Ti.UI.FILL
 }
 
+
+
 ".aspectEventContainer": {
-	//width: '100%',
-	//borderRadius: 5,
-	//backgroundColor: 'lime',
-	top: 5,
-	bottom:5,
+	top:5,
+	borderRadius: 3,
+	borderWidth: 1,
+	borderColor: "#CCCCCC",
+	backgroundColor: '#FFF',
+	left: 5,
+	right: 5,
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE,
 	touchEnabled: false,
