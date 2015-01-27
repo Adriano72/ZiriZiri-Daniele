@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="window" class="container" title = "Nuova Nota">
+	<Window id="window" windowSoftInputMode="Ti.UI.Android.SOFT_INPUT_ADJUST_PAN" class="container" title = "Nuova Nota">
 		<Menu id="menu" platform="android">
 			
 			<MenuItem id="salva" title="Scrivi" icon="/images/785-floppy-disk.png"  onClick="createProtoObj" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />

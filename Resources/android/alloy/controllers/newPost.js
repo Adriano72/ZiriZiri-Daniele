@@ -38,7 +38,7 @@ function Controller() {
         });
     }
     function openEvent() {
-        "camera" == Alloy.Globals.shortcutMode && savePost();
+        $.win.activity.invalidateOptionsMenu();
     }
     function openCategoryList() {
         Alloy.createController("selezionaCategoria", function(cat_obj) {
@@ -47,16 +47,20 @@ function Controller() {
         }).getView();
     }
     function checkForSync() {
-        args();
+        args._callback();
     }
     function savePost() {
-        if ("camera" == Alloy.Globals.shortcutMode || "gallery" == Alloy.Globals.shortcutMode) {
-            Alloy.Models.Post_template.set("name", "");
+        if (true == args.photoShortcut) {
+            Alloy.Models.Post_template.set("name", "Foto scattata il " + moment().format("DD-MM-YYYY HH:MM"));
             Alloy.Models.Post_template.set("rating", 0);
             Alloy.Models.Post_template.set("category", {
-                id: "5529",
+                id: "624187",
                 code: "09.04.01",
-                name: "Foto"
+                name: "Foto",
+                description: "Foto",
+                children: null,
+                group: false,
+                root: false
             });
             Ti.API.info("*** APPLIED PATCH 17122014 ***");
             Alloy.Models.Post_template.set("referenceTime", timeNow.toDate().getTime());
@@ -97,6 +101,7 @@ function Controller() {
         backgroundColor: "#F9F9F9",
         orientationModes: [ Ti.UI.PORTRAIT ],
         id: "win",
+        windowSoftInputMode: Ti.UI.Android.SOFT_INPUT_ADJUST_PAN,
         title: "Nuovo Post"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
@@ -271,6 +276,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
+    Ti.API.info("SHORTCUT: " + JSON.stringify(args));
     var moment = require("alloy/moment");
     moment.lang("it", Alloy.Globals.Moment_IT);
     require("net");
@@ -284,12 +290,17 @@ function Controller() {
         Alloy.Models.Post_template.set(post, {
             silent: true
         });
-        Alloy.createController("crea-modifica-post", function() {
-            $.win.close();
-            args();
+        Alloy.createController("crea-modifica-post", {
+            p_callback: function() {
+                Ti.API.info("********************************************** heRE *************");
+                $.win.close();
+                args._callback();
+            },
+            shortcut: args.photoShortcut
         }).getView();
     };
     $.win.open();
+    true == args.photoShortcut && savePost();
     __defers["$.__views.win!open!openEvent"] && $.__views.win.addEventListener("open", openEvent);
     __defers["$.__views.win!close!checkForSync"] && $.__views.win.addEventListener("close", checkForSync);
     __defers["$.__views.mn_salva!click!savePost"] && $.__views.mn_salva.addEventListener("click", savePost);

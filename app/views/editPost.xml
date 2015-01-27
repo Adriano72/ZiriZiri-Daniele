@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="win" class="container" onOpen="openEvent">
+	<Window id="win" windowSoftInputMode="Ti.UI.Android.SOFT_INPUT_ADJUST_PAN" class="container" onOpen="openEvent">
 		<Menu id="menu" title="Edit Post" platform="android" onHomeIconItemSelected="homeIconSelected">
 
 			<MenuItem id="mn_salva" title="Salva" onClick="savePost"/>

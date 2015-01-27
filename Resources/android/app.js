@@ -20,7 +20,7 @@ Alloy.Globals.postSaved = false;
 
 Alloy.Globals.shortcutMode = false;
 
-var zzAPI = require("zz.api/zz.api");
+var zzAPI = require("ti.zz.api");
 
 ZZ = zzAPI.ZZ;
 

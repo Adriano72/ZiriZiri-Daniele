@@ -71,6 +71,7 @@ function Controller() {
         backgroundColor: "#F9F9F9",
         orientationModes: [ Ti.UI.PORTRAIT ],
         id: "win",
+        windowSoftInputMode: Ti.UI.Android.SOFT_INPUT_ADJUST_PAN,
         title: "Nuovo Link"
     });
     $.__views.win && $.addTopLevelView($.__views.win);

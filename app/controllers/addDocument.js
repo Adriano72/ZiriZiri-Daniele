@@ -16,17 +16,18 @@ function homeIconSelected() {
 function openEvent() {
 	//Ti.API.info("win OPEN");
 	
-	if(Alloy.Globals.shortcutMode == "camera"){
+	if(args.shortcut == true){
 		
 		//Alloy.Globals.shortcutMode = null;
 		openCamera(true);
 	};
-	
+	/*
 	if(Alloy.Globals.shortcutMode == "gallery"){
 		
 		//Alloy.Globals.shortcutMode = null;
 		openGallery(true);
 	}
+	*/
 
 };
 /*
@@ -90,7 +91,7 @@ function saveDocument() {
 
 		Ti.API.info("ASPETTO DOCUMENT VALIDATO: " + JSON.stringify(modDocumentJSON));
 
-		args(modDocumentJSON);
+		args._callback(modDocumentJSON);
 		$.win.close();
 
 		//Ti.API.info("TIPO MOVIM OBJ: "+JSON.stringify($.pkrTipoMovimento.getSelectedRow(0)));
@@ -127,7 +128,7 @@ function saveDocument() {
 
 function openCamera(shortcutMode) {
 	
-	Ti.API.info("SHORTCUT MODE: "+ Alloy.Globals.shortcutMode);
+	
 
 	try {
 
@@ -162,7 +163,7 @@ function openCamera(shortcutMode) {
 				fileName = tempFile.name;
 				*/
 				
-				if(Alloy.Globals.shortcutMode){
+				if(args.shortcut){
 								
 					$.titolo.value = "Foto scattata il "+moment().format("DD-MM-YYYY HH:MM");
 					$.descrizione.value = "Foto scattata il "+moment().format("DD-MM-YYYY HH:MM");

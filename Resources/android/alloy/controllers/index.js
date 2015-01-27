@@ -11,6 +11,19 @@ function Controller() {
     function hideActionBar() {
         $.index.activity.actionBar.hide();
     }
+    function _loadTimelineAlreadyLoggedIn(utente) {
+        Ti.API.info("**** WELCOME BACK: " + utente.username);
+        var loadTabData = require("loadTabulatedData");
+        loadTabData.loadTabData();
+        ZZ.API.Core.Posts.list(function(posts) {
+            Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
+            Ti.App.Properties.setObject("timelineProp", posts);
+            Alloy.Collections.Timeline.reset(posts);
+            Alloy.createController("home").getView().open();
+        }, function(error) {
+            Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
+        });
+    }
     function manageRememberMe(e) {
         rememberMe = e.value;
     }
@@ -160,26 +173,25 @@ function Controller() {
     var rememberMe = false;
     Ti.API.info("PROP TIMELINE (Index CACHED): " + JSON.stringify(Ti.App.Properties.getObject("timelineProp")));
     if (Ti.App.Properties.getBool("authenticated", false)) {
-        Ti.API.info("Already Authenticated!");
-        {
-            require("net");
-        }
-        var loadTabData = require("loadTabulatedData");
-        loadTabData.loadTabData();
-        _.isNull(Ti.App.Properties.getObject("timelineProp")) ? ZZ.API.Core.Posts.list(function(posts) {
-            Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
-            Ti.App.Properties.setObject("timelineProp", posts);
-            Alloy.createController("timeline_win").getView();
-        }, function(error) {
-            Ti.API.error("ZZ.API.Core.Posts.list error [error : " + error + "]");
-        }) : Alloy.createController("home").getView().open();
+        Alloy.Globals.loading.show("Logging in...", false);
+        ZZ.API.Core.Session.logIn({
+            username: Ti.App.Properties.getString("user_username"),
+            password: Ti.App.Properties.getString("user_password")
+        }, _loadTimelineAlreadyLoggedIn, function(error) {
+            alert("Username o password errati");
+            Ti.API.error("ZZ.API.Core.Session.logIn error [error : " + error + "]");
+        });
     } else {
         Ti.App.Properties.setObject("timelineProp", null);
         $.index.open();
     }
     var _coreSessionLogInCallback = function(user) {
         Ti.API.info("ZZ.API.Core.Session.logIn success [user : " + JSON.stringify(user) + "]");
-        rememberMe && Ti.App.Properties.setBool("authenticated", true);
+        if (rememberMe) {
+            Ti.App.Properties.setBool("authenticated", true);
+            Ti.App.Properties.setString("user_username", $.username.value);
+            Ti.App.Properties.setString("user_password", $.password.value);
+        }
         require("net");
         var loadTabData = require("loadTabulatedData");
         loadTabData.loadTabData();

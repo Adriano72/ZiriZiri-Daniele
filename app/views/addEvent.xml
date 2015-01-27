@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="win" class="container" title = "Nuovo Evento">
+	<Window id="win" class="container" windowSoftInputMode="Ti.UI.Android.SOFT_INPUT_ADJUST_PAN" title = "Nuovo Evento">
 
 		<Menu id="menu" platform="android" onHomeIconItemSelected="homeIconSelected">
 

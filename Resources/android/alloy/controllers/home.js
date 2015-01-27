@@ -16,8 +16,19 @@ function Controller() {
         activity.finish();
     }
     function createNewPost() {
-        Alloy.createController("newPost", function() {
-            Alloy.Globals.loading.hide();
+        Alloy.createController("newPost", {
+            _callback: function() {
+                Alloy.Globals.loading.hide();
+            },
+            photoShortcut: false
+        }).getView();
+    }
+    function createNewPostWithPhoto() {
+        Alloy.createController("newPost", {
+            _callback: function() {
+                Alloy.Globals.loading.hide();
+            },
+            photoShortcut: true
         }).getView();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -69,6 +80,7 @@ function Controller() {
         id: "quickPhoto"
     });
     $.__views.shortcutsWin.add($.__views.quickPhoto);
+    createNewPostWithPhoto ? $.__views.quickPhoto.addEventListener("click", createNewPostWithPhoto) : __defers["$.__views.quickPhoto!click!createNewPostWithPhoto"] = true;
     $.__views.cameraIcon = Ti.UI.createImageView({
         image: "/images/addpicture.png",
         height: 40,
@@ -141,6 +153,7 @@ function Controller() {
     _.extend($, $.__views);
     arguments[0] || {};
     __defers["$.__views.shortcutsWin!android:back!manageClose"] && $.__views.shortcutsWin.addEventListener("android:back", manageClose);
+    __defers["$.__views.quickPhoto!click!createNewPostWithPhoto"] && $.__views.quickPhoto.addEventListener("click", createNewPostWithPhoto);
     __defers["$.__views.quickPost!click!createNewPost"] && $.__views.quickPost.addEventListener("click", createNewPost);
     __defers["$.__views.timelineRow!click!goTimeline"] && $.__views.timelineRow.addEventListener("click", goTimeline);
     _.extend($, exports);

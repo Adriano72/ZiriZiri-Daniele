@@ -80,7 +80,8 @@ function Controller() {
     $.__views.win = Ti.UI.createWindow({
         backgroundColor: "#F9F9F9",
         orientationModes: [ Ti.UI.PORTRAIT ],
-        id: "win"
+        id: "win",
+        windowSoftInputMode: Ti.UI.Android.SOFT_INPUT_ADJUST_PAN
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     openEvent ? $.__views.win.addEventListener("open", openEvent) : __defers["$.__views.win!open!openEvent"] = true;

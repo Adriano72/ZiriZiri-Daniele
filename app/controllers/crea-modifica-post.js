@@ -1,6 +1,6 @@
 var args = arguments[0] || {};
 
-Ti.API.info("PARAMETRI: " + JSON.stringify(args));
+Ti.API.info("ARGS FUNC***: " + JSON.stringify(args));
 
 var moment = require('alloy/moment');
 moment.lang('it', Alloy.Globals.Moment_IT);
@@ -21,11 +21,6 @@ function homeIconSelected() {
 }
 
 function openEvent() {
-
-	if (Alloy.Globals.shortcutMode == "camera" || Alloy.Globals.shortcutMode == "gallery") {
-
-		addDocument();
-	}
 
 };
 
@@ -92,6 +87,8 @@ function submitPost() {
 
 			Alloy.Collections.Timeline.reset(posts);
 			Alloy.Globals.loading.hide();
+			$.win.close();
+			args.p_callback();
 
 		}, function(error) {
 
@@ -101,8 +98,6 @@ function submitPost() {
 		//Ti.API.info("ID POST SALVATO: " + post_id);
 
 		//Alloy.Collections.Timeline.add(postToAddToTimeline);
-		$.win.close();
-		args();
 
 	}, function(error) {
 		Ti.API.error("ZZ.API.Core.Post.commit error [error : " + error + "]");
@@ -248,67 +243,71 @@ function addCashflow() {
 	}).getView().open();
 };
 
-function addDocument(p_shortcutMode) {
+function addDocument() {
 	//Ti.API.info("**** INSERT CASHFLOW!");
 
 	var randomKey = _.random(0, 99999);
 
-	Alloy.createController("addDocument", function(objRet) {
+	Alloy.createController("addDocument", {
 
-		tempContainer.push({
-			key : randomKey,
-			aspetto : objRet
-		});
+		_callback : function(objRet) {
 
-		Ti.API.info("TEMP ARRAY ASPETTI: " + JSON.stringify(tempContainer));
-
-		var _allegaDocumento = function(addedAspect) {
-
-			Ti.API.info("ZZ.API.Core.Post.Aspects.add success [response : " + JSON.stringify(addedAspect) + "]");
-
-			var blob = Alloy.Globals.blobImage;
-
-			ZZ.API.Files.Attachment.set(addedAspect, blob, function(response) {
-				Ti.API.info("ZZ.API.Files.Attachment.set success [response : " + response + "]");
-			}, function(error) {
-				Ti.API.error("ZZ.API.Files.Attachment.set error [error : " + error + "]");
+			tempContainer.push({
+				key : randomKey,
+				aspetto : objRet
 			});
-		};
 
-		ZZ.API.Core.Post.Aspects.add(objRet, null, _allegaDocumento, function(error) {
+			Ti.API.info("TEMP ARRAY ASPETTI: " + JSON.stringify(tempContainer));
 
-			Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
-		});
+			var _allegaDocumento = function(addedAspect) {
 
-		//arrayAspetti.push(objRet);
+				Ti.API.info("ZZ.API.Core.Post.Aspects.add success [response : " + JSON.stringify(addedAspect) + "]");
 
-		var riga = Alloy.createController('rowDOCUMENT', {
+				var blob = Alloy.Globals.blobImage;
 
-			obj_aspetto : objRet,
-			keyIndex : randomKey,
-			_editFunc : function(updatedAspect, arrayKey) {
-
-				//rowToUpdate[0].aspetto = updatedAspect;
-
-				var recordToUpdate = _.find(tempContainer, function(value) {
-					return value.key === arrayKey;
+				ZZ.API.Files.Attachment.set(addedAspect, blob, function(response) {
+					Ti.API.info("ZZ.API.Files.Attachment.set success [response : " + response + "]");
+				}, function(error) {
+					Ti.API.error("ZZ.API.Files.Attachment.set error [error : " + error + "]");
 				});
+			};
 
-				Ti.API.info("ASPETTO PRIMA: " + JSON.stringify(recordToUpdate.aspetto));
+			ZZ.API.Core.Post.Aspects.add(objRet, null, _allegaDocumento, function(error) {
 
-				if (recordToUpdate) {
-					recordToUpdate.aspetto = updatedAspect;
+				Ti.API.error("ZZ.API.Core.Post.Aspects.add error [error : " + error + "]");
+			});
+
+			//arrayAspetti.push(objRet);
+
+			var riga = Alloy.createController('rowDOCUMENT', {
+
+				obj_aspetto : objRet,
+				keyIndex : randomKey,
+				_editFunc : function(updatedAspect, arrayKey) {
+
+					//rowToUpdate[0].aspetto = updatedAspect;
+
+					var recordToUpdate = _.find(tempContainer, function(value) {
+						return value.key === arrayKey;
+					});
+
+					Ti.API.info("ASPETTO PRIMA: " + JSON.stringify(recordToUpdate.aspetto));
+
+					if (recordToUpdate) {
+						recordToUpdate.aspetto = updatedAspect;
+					}
+
+					Ti.API.info("ASPETTO DOPO: " + JSON.stringify(recordToUpdate.aspetto));
+
+					//.API.info("PLUCKED OBJ: "+JSON.stringify(_.pluck(tempContainer, 'aspetto')));
+
 				}
+			}).getView();
 
-				Ti.API.info("ASPETTO DOPO: " + JSON.stringify(recordToUpdate.aspetto));
+			$.postTable.appendRow(riga);
 
-				//.API.info("PLUCKED OBJ: "+JSON.stringify(_.pluck(tempContainer, 'aspetto')));
-
-			}
-		}).getView();
-
-		$.postTable.appendRow(riga);
-
+		},
+		shortcut : args.shortcut
 	}).getView().open();
 };
 
@@ -465,6 +464,8 @@ function addNote() {
 
 $.win.open();
 
-$.win.addEventListener("close", function() {
-	$.destroy();
-});
+if (args.shortcut == true) {
+
+	addDocument();
+}
+

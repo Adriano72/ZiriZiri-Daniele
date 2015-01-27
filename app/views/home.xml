@@ -1,6 +1,7 @@
 <Alloy>
 	<Window class="container" id="shortcutsWin" onAndroid:back="manageClose">
-		<View id="quickPhoto" class="shortcut">
+		
+		<View id="quickPhoto" class="shortcut" onClick="createNewPostWithPhoto">
 			
 			<ImageView id="cameraIcon" class="shortcutIcon"/>
 		</View>

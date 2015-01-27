@@ -12,17 +12,29 @@ Ti.API.info("PROP TIMELINE (Index CACHED): " + JSON.stringify(Ti.App.Properties.
 
 if (Ti.App.Properties.getBool('authenticated', false)) {
 
-	//$.index.open();
+	Alloy.Globals.loading.show('Logging in...', false);
 
-	Ti.API.info("Already Authenticated!");
+	ZZ.API.Core.Session.logIn({
 
-	var net = require('net');
+		username : Ti.App.Properties.getString("user_username"),
 
-	var loadTabData = require("loadTabulatedData");
+		password : Ti.App.Properties.getString("user_password")
 
-	loadTabData.loadTabData();
+	}, _loadTimelineAlreadyLoggedIn, function(error) {
 
-	if (_.isNull(Ti.App.Properties.getObject('timelineProp'))) {
+		alert("Username o password errati");
+
+		Ti.API.error("ZZ.API.Core.Session.logIn error [error : " + error + "]");
+
+	});
+
+	function _loadTimelineAlreadyLoggedIn(utente) {
+
+		Ti.API.info("**** WELCOME BACK: " + utente.username);
+
+		var loadTabData = require("loadTabulatedData");
+
+		loadTabData.loadTabData();
 
 		ZZ.API.Core.Posts.list(function(posts) {
 
@@ -30,7 +42,12 @@ if (Ti.App.Properties.getBool('authenticated', false)) {
 
 			Ti.App.Properties.setObject('timelineProp', posts);
 
-			Alloy.createController("timeline_win").getView();
+			Alloy.Collections.Timeline.reset(posts);
+
+			//Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
+
+			//Alloy.createController("timeline_win").getView();
+			Alloy.createController("home").getView().open();
 
 		}, function(error) {
 
@@ -38,13 +55,7 @@ if (Ti.App.Properties.getBool('authenticated', false)) {
 
 		});
 
-	} else {
-
-		//Alloy.createController("timeline_win").getView();
-		Alloy.createController("home").getView().open();
-
-
-	};
+	}
 
 } else {
 
@@ -74,14 +85,6 @@ function manageRememberMe(e) {
 
 };
 
-var _loginSuccess = function(e) {
-
-};
-
-var _loginFailure = function(e) {
-
-};
-
 var _coreSessionLogInCallback = function(user) {
 
 	Ti.API.info("ZZ.API.Core.Session.logIn success [user : " + JSON.stringify(user) + "]");
@@ -89,6 +92,8 @@ var _coreSessionLogInCallback = function(user) {
 	if (rememberMe) {
 
 		Ti.App.Properties.setBool('authenticated', true);
+		Ti.App.Properties.setString("user_username", $.username.value);
+		Ti.App.Properties.setString("user_password", $.password.value);
 
 	};
 
@@ -107,14 +112,13 @@ var _coreSessionLogInCallback = function(user) {
 			Ti.API.info("ZZ.API.Core.Posts.list success [response : " + JSON.stringify(posts) + "]");
 
 			Ti.App.Properties.setObject('timelineProp', posts);
-			
+
 			Alloy.Collections.Timeline.reset(posts);
 
 			//Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
 
 			//Alloy.createController("timeline_win").getView();
 			Alloy.createController("home").getView().open();
-			
 
 		}, function(error) {
 
@@ -148,9 +152,9 @@ function do_login(e) {
 	var user_name = $.username.value || 'none';
 
 	var user_password = $.password.value || 'none';
-	
+
 	Alloy.Globals.loading.show('Logging in...', false);
-	
+
 	ZZ.API.Core.Session.logIn({
 
 		username : $.username.value, //"rnduser_1418138154947", //"dummyuser",
@@ -167,102 +171,3 @@ function do_login(e) {
 
 };
 
-function do_login_old(e) {
-
-	var user_name = $.username.value || 'none';
-
-	var user_password = $.password.value || 'none';
-
-	var dataJson = {};
-
-	Ti.API.info("Username: " + user_name);
-
-	Ti.API.info("Password: " + user_password);
-
-	var xhr = Ti.Network.createHTTPClient();
-
-	xhr.onload = function() {
-
-		//Ti.API.info(this.responseText);
-
-		var json = JSON.parse(this.responseText);
-
-		Ti.API.info("********** FRM XHR: " + JSON.stringify(json));
-
-		if (JSON.stringify(json.type.code) == "\"SUCCESS\"") {
-
-			if (rememberMe) {
-
-				Ti.App.Properties.setBool('authenticated', true);
-
-			};
-
-			Ti.App.Properties.setString('sessionId', json.data.sessionId);
-
-			Ti.API.info("SESSIONE: " + Ti.App.Properties.getString('sessionId', 0));
-
-			var net = require('net');
-
-			var loadTabData = require("loadTabulatedData");
-
-			loadTabData.loadTabData();
-
-			Alloy.Globals.loading.show('Sincronizzazione...', false);
-
-			if (_.isNull(Ti.App.Properties.getObject('timelineProp'))) {
-
-				//$.index.close();
-
-				net.getData(0, 25, function(timeline_obj) {
-
-					Ti.App.Properties.setObject('timelineProp', timeline_obj.data);
-
-					//Ti.API.info("PROP TIMELINE: " + JSON.stringify(Ti.App.Properties.getObject('timelineProp')));
-
-					Alloy.createController("timeline_win").getView();
-
-					//Alloy.createController("timeline_win").getView();
-
-				});
-
-			} else {
-
-				//$.index.close();
-
-				Alloy.createController("timeline_win").getView();
-
-			};
-
-			//$.index.close();
-
-			//$.index.open();
-
-		} else {
-
-			alert("Username o password errati");
-
-		}
-
-	};
-
-	xhr.onerror = function() {
-
-		Ti.API.error("ERRORE DO LOGIN: " + this.status + ' - ' + this.statusText);
-
-	};
-
-	//xhr.open('POST', 'https://demo.ziriziri.com/cxf/session/session/login/' + user_name + '?_type=JSON');
-
-	xhr.open('POST', Alloy.Globals.baseUrl + '/session/login/' + user_name + '?_type=JSON');
-
-	xhr.setRequestHeader('Accept', 'application/json');
-
-	xhr.setRequestHeader('Content-Type', 'application/json');
-
-	dataJson.data = user_password;
-
-	Ti.API.info("DATA JSON: " + JSON.stringify(dataJson));
-
-	xhr.send(JSON.stringify(dataJson));
-
-}

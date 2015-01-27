@@ -503,8 +503,11 @@ function Controller() {
         }).getView();
     }
     function createNewPost() {
-        Alloy.createController("newPost", function() {
-            Alloy.Globals.loading.hide();
+        Alloy.createController("newPost", {
+            _callback: function() {
+                Alloy.Globals.loading.hide();
+            },
+            photoShortcut: false
         }).getView();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));

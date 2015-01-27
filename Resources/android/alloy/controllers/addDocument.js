@@ -36,8 +36,7 @@ function Controller() {
         });
     }
     function openEvent() {
-        "camera" == Alloy.Globals.shortcutMode && openCamera(true);
-        "gallery" == Alloy.Globals.shortcutMode && openGallery(true);
+        true == args.shortcut && openCamera(true);
     }
     function resetGlobals() {
         Alloy.Globals.shortcutMode = null;
@@ -56,12 +55,11 @@ function Controller() {
             modDocumentJSON.data.description = $.descrizione.value;
             modDocumentJSON.data.size = fileSize;
             Ti.API.info("ASPETTO DOCUMENT VALIDATO: " + JSON.stringify(modDocumentJSON));
-            args(modDocumentJSON);
+            args._callback(modDocumentJSON);
             $.win.close();
         } else alert("E' necessario scattare una foto o selezionarla dalla galleria, i campi titolo e descrizione sono obbligatori");
     }
     function openCamera() {
-        Ti.API.info("SHORTCUT MODE: " + Alloy.Globals.shortcutMode);
         try {
             Ti.Media.showCamera({
                 success: function(event) {
@@ -70,7 +68,7 @@ function Controller() {
                     var newBlob = ImageFactory.compress(image, .2);
                     Alloy.Globals.blobImage = newBlob;
                     $.preview.image = newBlob;
-                    if (Alloy.Globals.shortcutMode) {
+                    if (args.shortcut) {
                         $.titolo.value = "Foto scattata il " + moment().format("DD-MM-YYYY HH:MM");
                         $.descrizione.value = "Foto scattata il " + moment().format("DD-MM-YYYY HH:MM");
                     }
@@ -139,6 +137,7 @@ function Controller() {
         backgroundColor: "#F9F9F9",
         orientationModes: [ Ti.UI.PORTRAIT ],
         id: "win",
+        windowSoftInputMode: Ti.UI.Android.SOFT_INPUT_ADJUST_PAN,
         title: "Nuovo Documento"
     });
     $.__views.win && $.addTopLevelView($.__views.win);

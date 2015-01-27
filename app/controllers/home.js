@@ -6,7 +6,7 @@ function hideActionBar() {
 
 }
 
-function goTimeline(){
+function goTimeline() {
 	Alloy.createController("timeline_win").getView();
 }
 
@@ -17,9 +17,20 @@ function manageClose() {
 
 };
 
-
 function createNewPost() {
-	Alloy.createController("newPost", function() {
-		Alloy.Globals.loading.hide();
+	Alloy.createController("newPost", {
+		_callback : function(o) {
+			Alloy.Globals.loading.hide();
+		},
+		photoShortcut : false
+	}).getView();
+};
+
+function createNewPostWithPhoto() {
+	Alloy.createController("newPost", {
+		_callback : function(o) {
+			Alloy.Globals.loading.hide();
+		},
+		photoShortcut : true
 	}).getView();
 };

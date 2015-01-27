@@ -57,6 +57,7 @@ function Controller() {
     $.__views.window = Ti.UI.createWindow({
         backgroundColor: "#F2F2F2",
         id: "window",
+        windowSoftInputMode: Ti.UI.Android.SOFT_INPUT_ADJUST_PAN,
         title: "Nuova Nota"
     });
     $.__views.window && $.addTopLevelView($.__views.window);
